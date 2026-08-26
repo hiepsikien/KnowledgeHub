@@ -26,7 +26,7 @@ On the curator machine:
 
 ```bash
 # Think repo `.env`
-KNOWLEDGEHUB_CORPUS=/Users/andynguyen/Downloads/KnowledgeHub/corpus
+KNOWLEDGEHUB_CORPUS=/Users/andynguyen/projects/KnowledgeHub/corpus
 ```
 
 Then `python3 scripts/ingest_pd.py --brain <id>` reads `works.json` + `raw/` **from this tree** and writes `chunks.jsonl` into Think.
