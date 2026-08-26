@@ -1,0 +1,50 @@
+[
+  {
+    "file": "nam_duoc_tri_nam_nhan.txt",
+    "work": "Nam dược thần hiệu (khung — Nam trị Nam)",
+    "year": 1380,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Nam_dược_thần_hiệu",
+    "translator": "Khung curator quốc ngữ — tư tưởng PD; không phải NXB Y học / không bộ phương",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["thuoc nam", "nam duoc", "dat nuoc hop", "chua ke don"]
+  },
+  {
+    "file": "phong_tho_sach_de_than.txt",
+    "work": "Nam dược thần hiệu (khung — phong thổ / sách đè thân)",
+    "year": 1380,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Nam_dược_thần_hiệu",
+    "translator": "Khung curator quốc ngữ — tư tưởng PD; không bộ phương",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["phong tho", "sach de than", "thuoc bac", "khong than hieu"]
+  },
+  {
+    "file": "cay_quen_cua_nha.txt",
+    "work": "Nam dược / Hồng Nghĩa (khung — cây quen, không toa)",
+    "year": 1380,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Hồng_Nghĩa_giác_tư_y_thư",
+    "translator": "Khung curator — danh cây như sử đất, không thang",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["cay quen", "hong nghia", "vuon nha", "khong toa"]
+  },
+  {
+    "file": "hong_nghia_khung.txt",
+    "work": "Hồng Nghĩa giác tư y thư (khung — cửa nhớ, cắt phương)",
+    "year": 1380,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Hồng_Nghĩa_giác_tư_y_thư",
+    "translator": "Khung curator — không thập tam phương, không đơn",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["hong nghia", "phu quoc am", "khong bo phuong", "gioi han"]
+  }
+]

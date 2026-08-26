@@ -1,0 +1,35 @@
+[
+  {
+    "file": "inventions_researches_writings.txt",
+    "work": "The Inventions, Researches and Writings of Nikola Tesla",
+    "year": 1894,
+    "gutenberg_id": "39272",
+    "source_url": "https://www.gutenberg.org/ebooks/39272",
+    "translator": "Thomas Commerford Martin (editor)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "alternating_current",
+      "polyphase",
+      "motor",
+      "wireless",
+      "high_frequency",
+      "resonance"
+    ]
+  },
+  {
+    "file": "experiments_alternate_currents.txt",
+    "work": "Experiments with Alternate Currents of High Potential and High Frequency",
+    "year": 1904,
+    "gutenberg_id": "13476",
+    "source_url": "https://www.gutenberg.org/ebooks/13476",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "high_frequency",
+      "high_potential",
+      "experiment",
+      "wireless",
+      "resonance"
+    ]
+  }
+]

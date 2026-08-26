@@ -1,0 +1,18 @@
+[
+  {
+    "file": "pride_and_prejudice.txt",
+    "work": "Pride and Prejudice",
+    "year": 1813,
+    "gutenberg_id": "1342",
+    "source_url": "https://www.gutenberg.org/ebooks/1342",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "pride",
+      "prejudice",
+      "marriage",
+      "judgment",
+      "manners"
+    ]
+  }
+]

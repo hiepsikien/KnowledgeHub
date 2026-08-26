@@ -1,0 +1,18 @@
+[
+  {
+    "file": "art_of_war.txt",
+    "work": "The Art of War",
+    "year": 1910,
+    "gutenberg_id": "132",
+    "source_url": "https://www.gutenberg.org/ebooks/132",
+    "translator": "Lionel Giles (EN; classical Chinese original)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "strategy",
+      "deception",
+      "terrain",
+      "knowing",
+      "victory"
+    ]
+  }
+]

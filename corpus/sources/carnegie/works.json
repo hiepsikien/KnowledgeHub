@@ -1,0 +1,35 @@
+[
+  {
+    "file": "autobiography.txt",
+    "work": "Autobiography of Andrew Carnegie",
+    "year": 1920,
+    "gutenberg_id": "17976",
+    "source_url": "https://www.gutenberg.org/ebooks/17976",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "steel",
+      "philanthropy",
+      "labor",
+      "homestead",
+      "partnership",
+      "libraries"
+    ]
+  },
+  {
+    "file": "gospel_of_wealth.txt",
+    "work": "The Gospel of Wealth",
+    "year": 1889,
+    "gutenberg_id": "10253",
+    "source_url": "https://www.gutenberg.org/ebooks/10253",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "wealth",
+      "trustee",
+      "philanthropy",
+      "charity",
+      "inequality"
+    ]
+  }
+]

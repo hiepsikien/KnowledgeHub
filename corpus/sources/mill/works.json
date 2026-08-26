@@ -1,0 +1,32 @@
+[
+  {
+    "file": "on_liberty.txt",
+    "work": "On Liberty",
+    "year": 1859,
+    "gutenberg_id": "34901",
+    "source_url": "https://www.gutenberg.org/ebooks/34901",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liberty",
+      "harm_principle",
+      "individuality",
+      "tyranny_of_majority"
+    ]
+  },
+  {
+    "file": "utilitarianism.txt",
+    "work": "Utilitarianism",
+    "year": 1863,
+    "gutenberg_id": "11224",
+    "source_url": "https://www.gutenberg.org/ebooks/11224",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "utility",
+      "greatest_happiness",
+      "higher_pleasures",
+      "justice"
+    ]
+  }
+]

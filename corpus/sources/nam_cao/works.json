@@ -1,0 +1,62 @@
+[
+  {
+    "file": "chi_pheo.txt",
+    "work": "Chí Phèo (1941)",
+    "year": 1941,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Chí_Phèo",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["no nan", "thien luong", "bao luc", "lang thang"]
+  },
+  {
+    "file": "lao_hac.txt",
+    "work": "Lão Hạc (1943)",
+    "year": 1943,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Lão_Hạc",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["hieu", "no", "cau vong", "lang que"]
+  },
+  {
+    "file": "nhung_tre_khon_nan.txt",
+    "work": "Những trẻ khốn nạn (1944)",
+    "year": 1944,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Những_trẻ_khốn_nạn",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["tre con", "ngheo", "lang thang", "xa hoi"]
+  },
+  {
+    "file": "doi_mat.txt",
+    "work": "Đôi mắt (1940)",
+    "year": 1940,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đôi_mắt",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["mat", "ngheo", "tu te", "lang que"]
+  },
+  {
+    "file": "song_mon.txt",
+    "work": "Sống mòn (1944)",
+    "year": 1944,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Sống_mòn",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["song mon", "ngheo", "hon nhan", "lang que"]
+  }
+]

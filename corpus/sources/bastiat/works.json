@@ -1,0 +1,32 @@
+[
+  {
+    "file": "the_law.txt",
+    "work": "The Law",
+    "year": 1850,
+    "gutenberg_id": "44800",
+    "source_url": "https://www.gutenberg.org/ebooks/44800",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "law",
+      "plunder",
+      "liberty",
+      "justice"
+    ]
+  },
+  {
+    "file": "economic_sophisms.txt",
+    "work": "Economic Sophisms",
+    "year": 1845,
+    "gutenberg_id": "44145",
+    "source_url": "https://www.gutenberg.org/ebooks/44145",
+    "translator": "Patrick James Stirling",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "seen_unseen",
+      "protectionism",
+      "free_trade",
+      "sophism"
+    ]
+  }
+]

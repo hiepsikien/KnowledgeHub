@@ -1,0 +1,32 @@
+[
+  {
+    "file": "principles_maritime_strategy.txt",
+    "work": "Some Principles of Maritime Strategy",
+    "year": 1911,
+    "gutenberg_id": "15076",
+    "source_url": "https://www.gutenberg.org/ebooks/15076",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "maritime_strategy",
+      "limited_war",
+      "sea_control",
+      "joint"
+    ]
+  },
+  {
+    "file": "seven_years_war_vol2.txt",
+    "work": "England in the Seven Years' War, Volume II",
+    "year": 1907,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/englandinsevenye00corbuoft",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "combined_strategy",
+      "limited_war",
+      "joint",
+      "seven_years_war"
+    ]
+  }
+]

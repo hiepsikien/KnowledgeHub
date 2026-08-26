@@ -1,0 +1,86 @@
+[
+  {
+    "file": "ideal_jeunesse_annamite.txt",
+    "work": "L'idéal de la jeunesse annamite (La Cloche fêlée, 1923–1924)",
+    "year": 1923,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/bwb_S0-BPX-252 (Léon Werth, Cochinchine, 1926 — citation La Cloche fêlée)",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["jeunesse", "culture", "imitation", "servitude", "civilisation", "education"]
+  },
+  {
+    "file": "la_cloche_felee_1924.txt",
+    "work": "La Cloche fêlée — extraits (1924)",
+    "year": 1924,
+    "gutenberg_id": null,
+    "source_url": "http://rousseaustudies.free.fr/ArticleNgoVan.htm (citation La Cloche fêlée, 21 avril 1924)",
+    "translator": null,
+    "license": "public_domain_primary_excerpt",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["esclave", "servitude", "jeunesse", "France", "Indochine"]
+  },
+  {
+    "file": "la_france_en_indochine.txt",
+    "work": "La France en Indochine (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "http://rousseaustudies.free.fr/ArticleNgoVan.htm (citation brochure La France en Indochine, 1925)",
+    "translator": null,
+    "license": "public_domain_primary_excerpt",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["Indochine", "libertes", "1789", "coloniaux", "democratie"]
+  },
+  {
+    "file": "tradition_confucienne_1923.txt",
+    "work": "L'idéal de la jeunesse annamite — tradition confucéenne (1923)",
+    "year": 1923,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/bwb_S0-BPX-252 (Léon Werth, Cochinchine, 1926 — citation La Cloche fêlée)",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["confucianisme", "jeunesse", "ecole", "servitude", "graine", "patrie"]
+  },
+  {
+    "file": "entretiens_werth_saigon.txt",
+    "work": "Entretiens avec Léon Werth — Saigon (1926)",
+    "year": 1926,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/bwb_S0-BPX-252 (Léon Werth, Cochinchine, 1926 — paroles de Ninh)",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["heritage", "violence", "culture", "Indochine", "France"]
+  },
+  {
+    "file": "la_cloche_presse_indochine.txt",
+    "work": "La Cloche fêlée — presse et nation indochinoise (1924)",
+    "year": 1924,
+    "gutenberg_id": null,
+    "source_url": "http://rousseaustudies.free.fr/ArticleNgoVan.htm (citation La Cloche fêlée, 1924–1926)",
+    "translator": null,
+    "license": "public_domain_primary_excerpt",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["presse", "nation", "dong bao", "1789", "violence"]
+  },
+  {
+    "file": "la_france_en_indochine_suite.txt",
+    "work": "La France en Indochine — suite (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "http://rousseaustudies.free.fr/ArticleNgoVan.htm (citation brochure La France en Indochine, 1925)",
+    "translator": null,
+    "license": "public_domain_primary_excerpt",
+    "lang": "fr",
+    "chunking": "prose",
+    "concepts": ["1789", "libertes", "Voltaire", "culture", "social"]
+  }
+]

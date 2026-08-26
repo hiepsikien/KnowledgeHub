@@ -1,0 +1,64 @@
+[
+  {
+    "file": "socialism_utopian_scientific.txt",
+    "work": "Socialism: Utopian and Scientific",
+    "year": 1880,
+    "gutenberg_id": "39257",
+    "source_url": "https://www.gutenberg.org/ebooks/39257",
+    "translator": "Edward Aveling",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "utopian_socialism",
+      "scientific_socialism",
+      "dialectics",
+      "class_struggle"
+    ]
+  },
+  {
+    "file": "feuerbach.txt",
+    "work": "Feuerbach: The Roots of the Socialist Philosophy",
+    "year": 1888,
+    "gutenberg_id": "27814",
+    "source_url": "https://www.gutenberg.org/ebooks/27814",
+    "translator": "Austin Lewis (editor; Gutenberg #27814)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "materialism",
+      "feuerbach",
+      "ideology",
+      "historical_materialism"
+    ]
+  },
+  {
+    "file": "origin_family.txt",
+    "work": "The Origin of the Family, Private Property and the State",
+    "year": 1884,
+    "gutenberg_id": "33111",
+    "source_url": "https://www.gutenberg.org/ebooks/33111",
+    "translator": "Ernest Untermann",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "family",
+      "private_property",
+      "state",
+      "class",
+      "historical_materialism"
+    ]
+  },
+  {
+    "file": "condition_working_class.txt",
+    "work": "The Condition of the Working Class in England in 1844",
+    "year": 1845,
+    "gutenberg_id": "17306",
+    "source_url": "https://www.gutenberg.org/ebooks/17306",
+    "translator": "Florence Kelley Wischnewetzky (1887)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "working_class",
+      "industrialisation",
+      "poverty",
+      "proletariat",
+      "factory"
+    ]
+  }
+]

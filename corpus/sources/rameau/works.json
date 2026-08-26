@@ -1,0 +1,18 @@
+[
+  {
+    "file": "treatise_of_music.txt",
+    "work": "A Treatise of Music, containing the Principles of Composition",
+    "year": 1722,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/treatiseofmusicc00rame",
+    "translator": "Anonymous English (1779)",
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "harmony",
+      "fundamental_bass",
+      "cadence",
+      "inversion",
+      "composition"
+    ]
+  }
+]

@@ -2,3 +2,7 @@
 *.swp
 .env
 .env.*
+
+# Canonical manuscripts — local only; public GitHub is metadata + docs
+corpus/sources/*/raw/
+corpus/sources/*/chunks/

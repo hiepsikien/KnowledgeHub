@@ -1,0 +1,18 @@
+[
+  {
+    "file": "oedipus_rex.txt",
+    "work": "The Oedipus Trilogy",
+    "year": -429,
+    "gutenberg_id": "31",
+    "source_url": "https://www.gutenberg.org/ebooks/31",
+    "translator": "F. Storr",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "tragedy",
+      "fate",
+      "knowledge",
+      "hubris",
+      "responsibility"
+    ]
+  }
+]

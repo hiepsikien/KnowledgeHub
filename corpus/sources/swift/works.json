@@ -1,0 +1,32 @@
+[
+  {
+    "file": "gulliver.txt",
+    "work": "Gulliver's Travels",
+    "year": 1726,
+    "gutenberg_id": "829",
+    "source_url": "https://www.gutenberg.org/ebooks/829",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "satire",
+      "reason",
+      "society",
+      "travel",
+      "power"
+    ]
+  },
+  {
+    "file": "modest_proposal.txt",
+    "work": "A Modest Proposal",
+    "year": 1729,
+    "gutenberg_id": "1080",
+    "source_url": "https://www.gutenberg.org/ebooks/1080",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "irony",
+      "poverty",
+      "ireland",
+      "policy",
+      "satire"
+    ]
+  }
+]

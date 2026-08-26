@@ -1,0 +1,17 @@
+[
+  {
+    "file": "poems_and_songs.txt",
+    "work": "Poems and Songs of Robert Burns",
+    "year": 1796,
+    "gutenberg_id": "1279",
+    "source_url": "https://www.gutenberg.org/ebooks/1279",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "folk",
+      "love",
+      "equality",
+      "scotland"
+    ]
+  }
+]

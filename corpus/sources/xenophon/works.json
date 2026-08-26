@@ -1,0 +1,62 @@
+[
+  {
+    "file": "anabasis.txt",
+    "work": "Anabasis",
+    "year": 370,
+    "gutenberg_id": "1170",
+    "source_url": "https://www.gutenberg.org/ebooks/1170",
+    "translator": "H. G. Dakyns",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "retreat",
+      "leadership",
+      "cohesion",
+      "crisis"
+    ]
+  },
+  {
+    "file": "cavalry_general.txt",
+    "work": "The Cavalry General",
+    "year": 365,
+    "gutenberg_id": "1172",
+    "source_url": "https://www.gutenberg.org/ebooks/1172",
+    "translator": "H. G. Dakyns",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "cavalry",
+      "training",
+      "command",
+      "readiness"
+    ]
+  },
+  {
+    "file": "cyropaedia.txt",
+    "work": "Cyropaedia: The Education of Cyrus",
+    "year": 370,
+    "gutenberg_id": "2085",
+    "source_url": "https://www.gutenberg.org/ebooks/2085",
+    "translator": "H. G. Dakyns",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "leadership",
+      "education",
+      "empire",
+      "command"
+    ]
+  },
+  {
+    "file": "hellenica.txt",
+    "work": "Hellenica",
+    "year": 360,
+    "gutenberg_id": "1174",
+    "source_url": "https://www.gutenberg.org/ebooks/1174",
+    "translator": "H. G. Dakyns",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "history",
+      "war",
+      "greece",
+      "politics"
+    ]
+  }
+]

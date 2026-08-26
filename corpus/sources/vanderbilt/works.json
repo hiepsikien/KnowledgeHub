@@ -1,0 +1,19 @@
+[
+  {
+    "file": "vanderbilts_and_their_fortune.txt",
+    "work": "The Vanderbilts and the Story of Their Fortune",
+    "year": 1886,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/vanderbiltsands02crofgoog",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "vanderbilt",
+      "steam",
+      "railroad",
+      "new_york_central",
+      "harlem",
+      "fortune"
+    ]
+  }
+]

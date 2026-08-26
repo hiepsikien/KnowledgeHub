@@ -1,0 +1,34 @@
+[
+  {
+    "file": "traumatic_infective_diseases.txt",
+    "work": "Investigations into the Etiology of Traumatic Infective Diseases",
+    "year": 1880,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/b21303058",
+    "translator": "W. Watson Cheyne (New Sydenham Society, 1880)",
+    "license": "public_domain_usa_archive_1880",
+    "concepts": [
+      "microorganism",
+      "wound_infection",
+      "septicaemia",
+      "pyaemia",
+      "etiology"
+    ]
+  },
+  {
+    "file": "cholera_duncan.txt",
+    "work": "Professor Koch on the Bacteriological Diagnosis of Cholera",
+    "year": 1895,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/professorkochonb00koch",
+    "translator": "George Duncan (1894/95)",
+    "license": "public_domain_usa_archive_1895",
+    "concepts": [
+      "cholera",
+      "bacteriological_diagnosis",
+      "water_filtration",
+      "comma_bacillus",
+      "epidemic"
+    ]
+  }
+]

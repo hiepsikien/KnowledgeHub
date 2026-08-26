@@ -1,0 +1,18 @@
+[
+  {
+    "file": "treatise_on_painting.txt",
+    "work": "A Treatise on Painting",
+    "year": 1651,
+    "gutenberg_id": "46915",
+    "source_url": "https://www.gutenberg.org/ebooks/46915",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "observation",
+      "figure",
+      "light",
+      "shadow",
+      "nature"
+    ]
+  }
+]

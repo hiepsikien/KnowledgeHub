@@ -1,0 +1,18 @@
+[
+  {
+    "file": "lives.txt",
+    "work": "Plutarch's Lives",
+    "year": 100,
+    "gutenberg_id": "674",
+    "source_url": "https://www.gutenberg.org/ebooks/674",
+    "translator": "John Dryden (editor)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "virtue",
+      "character",
+      "leadership",
+      "comparison",
+      "citizenship"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "file": "art_of_war.txt",
+    "work": "The Art of War",
+    "year": 1838,
+    "gutenberg_id": "13549",
+    "source_url": "https://www.gutenberg.org/ebooks/13549",
+    "translator": "G. H. Mendell and W. P. Craighill",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "principles",
+      "lines_of_operation",
+      "decisive_points",
+      "strategy"
+    ]
+  }
+]

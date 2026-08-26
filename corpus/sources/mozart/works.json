@@ -1,0 +1,78 @@
+[
+  {
+    "file": "letters_vol1.txt",
+    "work": "The Letters of Wolfgang Amadeus Mozart — Volume 01",
+    "year": 1791,
+    "gutenberg_id": "5307",
+    "source_url": "https://www.gutenberg.org/ebooks/5307",
+    "translator": "Lady Grace Wallace",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mozart",
+      "letters",
+      "salzburg",
+      "vienna",
+      "music"
+    ]
+  },
+  {
+    "file": "letters_vol2.txt",
+    "work": "The Letters of Wolfgang Amadeus Mozart — Volume 02",
+    "year": 1791,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/lettersofwolfgan02moza",
+    "translator": "Lady Grace Wallace",
+    "license": "public_domain_usa_archive_1866",
+    "concepts": [
+      "mozart",
+      "letters",
+      "vienna",
+      "music"
+    ]
+  },
+  {
+    "file": "jahn_vol1.txt",
+    "work": "Life of Mozart, Vol. 1",
+    "year": 1882,
+    "gutenberg_id": "43411",
+    "source_url": "https://www.gutenberg.org/ebooks/43411",
+    "translator": "Pauline D. Townsend",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mozart",
+      "biography",
+      "salzburg",
+      "vienna"
+    ]
+  },
+  {
+    "file": "jahn_vol2.txt",
+    "work": "Life of Mozart, Vol. 2",
+    "year": 1882,
+    "gutenberg_id": "43412",
+    "source_url": "https://www.gutenberg.org/ebooks/43412",
+    "translator": "Pauline D. Townsend",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mozart",
+      "biography",
+      "paris",
+      "vienna"
+    ]
+  },
+  {
+    "file": "jahn_vol3.txt",
+    "work": "Life of Mozart, Vol. 3",
+    "year": 1882,
+    "gutenberg_id": "43413",
+    "source_url": "https://www.gutenberg.org/ebooks/43413",
+    "translator": "Pauline D. Townsend",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mozart",
+      "biography",
+      "opera",
+      "vienna"
+    ]
+  }
+]

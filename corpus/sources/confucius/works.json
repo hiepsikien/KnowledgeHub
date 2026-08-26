@@ -1,0 +1,53 @@
+[
+  {
+    "file": "analects.txt",
+    "work": "The Analects of Confucius",
+    "year": 1893,
+    "gutenberg_id": "3330",
+    "source_url": "https://www.gutenberg.org/ebooks/3330",
+    "translator": "James Legge (EN; classical Chinese original)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "ren",
+      "li",
+      "virtue",
+      "learning",
+      "government",
+      "gentleman"
+    ]
+  },
+  {
+    "file": "great_learning.txt",
+    "work": "The Great Learning",
+    "year": 1893,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_1/The_Great_Learning",
+    "translator": "James Legge",
+    "license": "public_domain_usa_wikisource_legge",
+    "concepts": [
+      "cultivation",
+      "investigation",
+      "sincerity",
+      "family",
+      "state",
+      "root_and_branch"
+    ]
+  },
+  {
+    "file": "doctrine_of_the_mean.txt",
+    "work": "The Doctrine of the Mean",
+    "year": 1893,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/The_Chinese_Classics/Volume_1/The_Doctrine_of_the_Mean",
+    "translator": "James Legge",
+    "license": "public_domain_usa_wikisource_legge",
+    "concepts": [
+      "mean",
+      "equilibrium",
+      "sincerity",
+      "nature",
+      "path",
+      "watchfulness"
+    ]
+  }
+]

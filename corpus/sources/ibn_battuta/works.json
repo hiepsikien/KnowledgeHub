@@ -1,0 +1,19 @@
+[
+  {
+    "file": "travels_lee.txt",
+    "work": "The Travels of Ibn Batuta",
+    "year": 1829,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/b28406084",
+    "translator": "Samuel Lee",
+    "license": "public_domain_usa",
+    "concepts": [
+      "travel",
+      "rihla",
+      "indian ocean",
+      "hajj",
+      "cities",
+      "courts"
+    ]
+  }
+]

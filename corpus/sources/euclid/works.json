@@ -1,0 +1,18 @@
+[
+  {
+    "file": "first_six_books.txt",
+    "work": "The First Six Books of the Elements of Euclid",
+    "year": 1885,
+    "gutenberg_id": "21076",
+    "source_url": "https://www.gutenberg.org/ebooks/21076",
+    "translator": "John Casey (editor)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "axiom",
+      "postulate",
+      "proof",
+      "geometry",
+      "elements"
+    ]
+  }
+]

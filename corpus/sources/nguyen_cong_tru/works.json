@@ -1,0 +1,62 @@
+[
+  {
+    "file": "hat_noi.txt",
+    "work": "Hát nói Nguyễn Công Trứ (quốc ngữ PD)",
+    "year": 1840,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Văn_đàn_bảo_giám/Quyển_thứ_nhất/Hát_nói",
+    "translator": "Quốc ngữ PD — Văn đàn bảo giám",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["chi nam nhi", "ngat nguong", "xuat xu", "hanh lac"]
+  },
+  {
+    "file": "cong_danh_tu_thuat.txt",
+    "work": "Công-danh và Tự thuật (quốc ngữ PD)",
+    "year": 1840,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/59",
+    "translator": "Dương Quảng Hàm, Quốc văn trích diễm / Tự thuật Wikisource — VN+US PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["cong danh", "tang bong", "tu thuat", "xuat xu"]
+  },
+  {
+    "file": "quoc_van_trich_diem.txt",
+    "work": "Quốc văn trích diễm — Nguyễn Công Trứ (lát PD)",
+    "year": 1840,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/Nguyễn_Công_Trứ",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["ngat nguong", "chi nam nhi", "hat noi"]
+  },
+  {
+    "file": "ca_tu_biet.txt",
+    "work": "Ca tự biệt (quốc ngữ PD)",
+    "year": 1840,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Ca_tự_biệt",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu biet", "ngat nguong"]
+  },
+  {
+    "file": "no_cong_danh.txt",
+    "work": "Nợ công danh (quốc ngữ PD)",
+    "year": 1840,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Nợ_công_danh",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["cong danh", "no nan", "tang bong"]
+  }
+]

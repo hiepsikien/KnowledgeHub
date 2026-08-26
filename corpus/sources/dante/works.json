@@ -1,0 +1,18 @@
+[
+  {
+    "file": "divine_comedy.txt",
+    "work": "The Divine Comedy",
+    "year": 1320,
+    "gutenberg_id": "8800",
+    "source_url": "https://www.gutenberg.org/ebooks/8800",
+    "translator": "Henry Francis Cary",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "journey",
+      "sin",
+      "love",
+      "justice",
+      "hope"
+    ]
+  }
+]

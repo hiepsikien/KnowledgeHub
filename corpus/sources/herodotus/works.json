@@ -1,0 +1,34 @@
+[
+  {
+    "file": "histories_vol1.txt",
+    "work": "The History of Herodotus, Volume 1",
+    "year": -440,
+    "gutenberg_id": "2707",
+    "source_url": "https://www.gutenberg.org/ebooks/2707",
+    "translator": "G. C. Macaulay",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "inquiry",
+      "evidence",
+      "war",
+      "culture",
+      "story"
+    ]
+  },
+  {
+    "file": "histories_vol2.txt",
+    "work": "The History of Herodotus, Volume 2",
+    "year": -440,
+    "gutenberg_id": "2456",
+    "source_url": "https://www.gutenberg.org/ebooks/2456",
+    "translator": "G. C. Macaulay",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "inquiry",
+      "evidence",
+      "war",
+      "persian_wars",
+      "story"
+    ]
+  }
+]

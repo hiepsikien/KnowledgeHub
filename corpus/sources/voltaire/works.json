@@ -1,0 +1,51 @@
+[
+  {
+    "file": "candide.txt",
+    "work": "Candide",
+    "year": 1759,
+    "gutenberg_id": "19942",
+    "source_url": "https://www.gutenberg.org/ebooks/19942",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "optimism",
+      "reason",
+      "religion",
+      "satire",
+      "experience"
+    ]
+  },
+  {
+    "file": "letters_on_england.txt",
+    "work": "Letters on England",
+    "year": 1733,
+    "gutenberg_id": "2445",
+    "source_url": "https://www.gutenberg.org/ebooks/2445",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "toleration",
+      "liberty",
+      "science",
+      "newton",
+      "locke",
+      "religion"
+    ]
+  },
+  {
+    "file": "philosophical_dictionary.txt",
+    "work": "Philosophical Dictionary",
+    "year": 1764,
+    "gutenberg_id": "18569",
+    "source_url": "https://www.gutenberg.org/ebooks/18569",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "toleration",
+      "reason",
+      "religion",
+      "fanaticism",
+      "liberty"
+    ]
+  }
+]

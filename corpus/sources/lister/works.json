@@ -1,0 +1,34 @@
+[
+  {
+    "file": "antiseptic_principle.txt",
+    "work": "On the Antiseptic Principle of the Practice of Surgery",
+    "year": 1867,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/On_the_Antiseptic_Principle_of_the_Practice_of_Surgery",
+    "translator": null,
+    "license": "public_domain_usa_wikisource",
+    "concepts": [
+      "antiseptic",
+      "carbolic_acid",
+      "wound",
+      "pasteur",
+      "hospital"
+    ]
+  },
+  {
+    "file": "collected_papers_vol2.txt",
+    "work": "The Collected Papers of Joseph, Baron Lister, vol. 2",
+    "year": 1909,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/collectedpaperso02listuoft",
+    "translator": null,
+    "license": "public_domain_usa_archive_1909",
+    "concepts": [
+      "antiseptic",
+      "carbolic_acid",
+      "compound_fracture",
+      "suppuration",
+      "surgery"
+    ]
+  }
+]

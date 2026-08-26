@@ -1,0 +1,22 @@
+[
+  {
+    "file": "misanthrope_en.txt",
+    "work": "The Misanthrope",
+    "year": 1666,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/dramaticworksofm06moliiala (Van Laun EN trans., vol. 6)",
+    "translator": "Henri Van Laun",
+    "license": "public_domain_usa_archive",
+    "concepts": ["hypocrisy", "honesty", "society", "love", "comedy"]
+  },
+  {
+    "file": "tartuffe.txt",
+    "work": "Tartuffe; Or, The Hypocrite",
+    "year": 1664,
+    "gutenberg_id": "28488",
+    "source_url": "https://www.gutenberg.org/ebooks/28488",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": ["religion", "hypocrisy", "family", "comedy", "mask"]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "laocoon.txt",
+    "work": "Laocoon: An Essay on the Limits of Painting and Poetry",
+    "year": 1766,
+    "gutenberg_id": "73078",
+    "source_url": "https://www.gutenberg.org/ebooks/73078",
+    "translator": "Ellen Frothingham",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "limits",
+      "painting",
+      "poetry",
+      "expression",
+      "time"
+    ]
+  }
+]

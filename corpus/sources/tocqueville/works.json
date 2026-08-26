@@ -1,0 +1,33 @@
+[
+  {
+    "file": "democracy_in_america_vol1.txt",
+    "work": "Democracy in America — Volume 1",
+    "year": 1835,
+    "gutenberg_id": "815",
+    "source_url": "https://www.gutenberg.org/ebooks/815",
+    "translator": "Henry Reeve",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "democracy",
+      "equality",
+      "majority",
+      "associations",
+      "liberty"
+    ]
+  },
+  {
+    "file": "democracy_in_america_vol2.txt",
+    "work": "Democracy in America — Volume 2",
+    "year": 1840,
+    "gutenberg_id": "816",
+    "source_url": "https://www.gutenberg.org/ebooks/816",
+    "translator": "Henry Reeve",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "soft_despotism",
+      "individualism",
+      "mores",
+      "equality"
+    ]
+  }
+]

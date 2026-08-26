@@ -1,0 +1,48 @@
+[
+  {
+    "file": "world_as_will_vol1.txt",
+    "work": "The World as Will and Idea (Vol. 1 of 3)",
+    "year": 1819,
+    "gutenberg_id": "38427",
+    "source_url": "https://www.gutenberg.org/ebooks/38427",
+    "translator": "R. B. Haldane and J. Kemp",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "will",
+      "representation",
+      "phenomenon",
+      "art",
+      "music"
+    ]
+  },
+  {
+    "file": "world_as_will_vol2.txt",
+    "work": "The World as Will and Idea (Vol. 2 of 3)",
+    "year": 1819,
+    "gutenberg_id": "40097",
+    "source_url": "https://www.gutenberg.org/ebooks/40097",
+    "translator": "R. B. Haldane and J. Kemp",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "will",
+      "representation",
+      "nature",
+      "knowledge"
+    ]
+  },
+  {
+    "file": "world_as_will_vol3.txt",
+    "work": "The World as Will and Idea (Vol. 3 of 3)",
+    "year": 1819,
+    "gutenberg_id": "40868",
+    "source_url": "https://www.gutenberg.org/ebooks/40868",
+    "translator": "R. B. Haldane and J. Kemp",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "will",
+      "asceticism",
+      "art",
+      "ethics"
+    ]
+  }
+]

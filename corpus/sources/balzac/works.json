@@ -1,0 +1,50 @@
+[
+  {
+    "file": "father_goriot.txt",
+    "work": "Father Goriot",
+    "year": 1835,
+    "gutenberg_id": "1237",
+    "source_url": "https://www.gutenberg.org/ebooks/1237",
+    "translator": "Ellen Marriage",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "society",
+      "ambition",
+      "money",
+      "family",
+      "type"
+    ]
+  },
+  {
+    "file": "eugenie_grandet.txt",
+    "work": "Eugenie Grandet",
+    "year": 1833,
+    "gutenberg_id": "1715",
+    "source_url": "https://www.gutenberg.org/ebooks/1715",
+    "translator": "Katharine Prescott Wormeley",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "miser",
+      "family",
+      "money",
+      "inheritance",
+      "province"
+    ]
+  },
+  {
+    "file": "lost_illusions.txt",
+    "work": "Lost Illusions",
+    "year": 1843,
+    "gutenberg_id": "13159",
+    "source_url": "https://www.gutenberg.org/ebooks/13159",
+    "translator": "Ellen Marriage",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "ambition",
+      "press",
+      "illusion",
+      "provinces",
+      "paris"
+    ]
+  }
+]

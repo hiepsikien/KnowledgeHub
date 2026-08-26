@@ -1,0 +1,33 @@
+[
+  {
+    "file": "de_officiis.txt",
+    "work": "De Officiis",
+    "year": 1913,
+    "gutenberg_id": "47001",
+    "source_url": "https://www.gutenberg.org/ebooks/47001",
+    "translator": "Walter Miller (EN; classical Latin original)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "duty",
+      "honor",
+      "republic",
+      "justice",
+      "expediency"
+    ]
+  },
+  {
+    "file": "friendship_old_age.txt",
+    "work": "Treatises on Friendship and Old Age",
+    "year": 1900,
+    "gutenberg_id": "2808",
+    "source_url": "https://www.gutenberg.org/ebooks/2808",
+    "translator": "E. S. Shuckburgh (EN; classical Latin original)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "friendship",
+      "old_age",
+      "virtue",
+      "civic_life"
+    ]
+  }
+]

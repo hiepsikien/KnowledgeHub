@@ -1,0 +1,19 @@
+[
+  {
+    "file": "transfinite_numbers.txt",
+    "work": "Contributions to the Founding of the Theory of Transfinite Numbers",
+    "year": 1915,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/contributionstof00cantrich",
+    "translator": "Philip E. B. Jourdain",
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "set",
+      "cardinal",
+      "ordinal",
+      "transfinite",
+      "continuum",
+      "infinity"
+    ]
+  }
+]

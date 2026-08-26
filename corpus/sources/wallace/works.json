@@ -1,0 +1,33 @@
+[
+  {
+    "file": "darwinism.txt",
+    "work": "Darwinism",
+    "year": 1889,
+    "gutenberg_id": "14558",
+    "source_url": "https://www.gutenberg.org/ebooks/14558",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_selection",
+      "variation",
+      "struggle",
+      "species",
+      "sexual_selection"
+    ]
+  },
+  {
+    "file": "contributions_natural_selection.txt",
+    "work": "Contributions to the Theory of Natural Selection",
+    "year": 1870,
+    "gutenberg_id": "22428",
+    "source_url": "https://www.gutenberg.org/ebooks/22428",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_selection",
+      "distribution",
+      "mimicry",
+      "origin_of_species"
+    ]
+  }
+]

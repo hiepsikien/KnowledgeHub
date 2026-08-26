@@ -1,0 +1,50 @@
+[
+  {
+    "file": "imperialism.txt",
+    "work": "Imperialism, the Highest Stage of Capitalism",
+    "year": 1917,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/imperialismhighe00leni_0",
+    "translator": "Foreign Languages Publishing House (Moscow; Archive scan)",
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "imperialism",
+      "monopoly",
+      "finance_capital",
+      "colonialism",
+      "export_of_capital"
+    ]
+  },
+  {
+    "file": "left_wing_communism.txt",
+    "work": "Left-Wing Communism: An Infantile Disorder",
+    "year": 1920,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/stream/leftwingcommuni00lenigoog/leftwingcommuni00lenigoog_djvu.txt",
+    "translator": "Authorized translation (Marxian Educational Society, Detroit, 1921)",
+    "license": "public_domain_usa_archive_1921",
+    "concepts": [
+      "party",
+      "strategy",
+      "tactics",
+      "compromise",
+      "trade_unions",
+      "parliament"
+    ]
+  },
+  {
+    "file": "letter_american_workingmen.txt",
+    "work": "A Letter to American Workingmen",
+    "year": 1919,
+    "gutenberg_id": "35232",
+    "source_url": "https://www.gutenberg.org/ebooks/35232",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "internationalism",
+      "imperialism",
+      "revolution",
+      "working_class"
+    ]
+  }
+]

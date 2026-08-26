@@ -1,0 +1,49 @@
+[
+  {
+    "file": "origin_of_species.txt",
+    "work": "On the Origin of Species",
+    "year": 1859,
+    "gutenberg_id": "1228",
+    "source_url": "https://www.gutenberg.org/ebooks/1228",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_selection",
+      "variation",
+      "struggle",
+      "species",
+      "descent"
+    ]
+  },
+  {
+    "file": "expression_of_emotions.txt",
+    "work": "The Expression of the Emotions in Man and Animals",
+    "year": 1872,
+    "gutenberg_id": "1227",
+    "source_url": "https://www.gutenberg.org/ebooks/1227",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "expression",
+      "emotion",
+      "instinct",
+      "continuity"
+    ]
+  },
+  {
+    "file": "autobiography.txt",
+    "work": "The Autobiography of Charles Darwin",
+    "year": 1887,
+    "gutenberg_id": "2010",
+    "source_url": "https://www.gutenberg.org/ebooks/2010",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "autobiography",
+      "beagle",
+      "method",
+      "doubt",
+      "religion"
+    ]
+  }
+]

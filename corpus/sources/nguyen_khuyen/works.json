@@ -1,0 +1,86 @@
+[
+  {
+    "file": "tho_nom.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Thu_điếu",
+    "translator": "Quốc ngữ PD — Wikisource (áng Nôm đã PD)",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["thu", "cao quan", "lang", "khoa cu"]
+  },
+  {
+    "file": "vinh_tien_si_giay.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Vịnh_tiến_sĩ_giấy",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tien si giay", "khoa cu", "do choi"]
+  },
+  {
+    "file": "ban_den_choi_nha.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Bạn_đến_chơi_nhà",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["ban den choi", "trau", "ta voi ta"]
+  },
+  {
+    "file": "de_anh.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đề_ảnh_(Nguyễn_Khuyến)",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["de anh", "tu thu"]
+  },
+  {
+    "file": "tu_trao.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_trào_(Nguyễn_Khuyến)",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu trao", "cao quan"]
+  },
+  {
+    "file": "canh_gia.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Cảnh_già_(Nguyễn_Khuyến)",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["canh gia", "tu gia"]
+  },
+  {
+    "file": "quoc_van_trich_diem.txt",
+    "work": "Thơ Nôm Nguyễn Khuyến (quốc ngữ PD)",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/Nguyễn_Khuyến",
+    "translator": "Quốc văn trích diễm — PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["quoc van trich diem", "tho nom"]
+  }
+]

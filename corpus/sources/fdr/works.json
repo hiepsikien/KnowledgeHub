@@ -1,0 +1,19 @@
+[
+  {
+    "file": "fireside_chats.txt",
+    "work": "The Fireside Chats of Franklin Delano Roosevelt",
+    "year": 1933,
+    "gutenberg_id": "5767",
+    "source_url": "https://www.gutenberg.org/ebooks/5767",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "fireside_chat",
+      "crisis",
+      "radio",
+      "new_deal",
+      "leadership",
+      "public_trust"
+    ]
+  }
+]

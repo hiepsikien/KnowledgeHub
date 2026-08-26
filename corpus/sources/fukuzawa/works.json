@@ -1,0 +1,31 @@
+[
+  {
+    "file": "gakumon_no_susume.txt",
+    "work": "Gakumon no Susume",
+    "year": 1872,
+    "gutenberg_id": null,
+    "aozora_card": "47061",
+    "aozora_zip": "https://www.aozora.gr.jp/cards/000296/files/47061_ruby_28378.zip",
+    "source_url": "https://www.aozora.gr.jp/cards/000296/card47061.html",
+    "translator": null,
+    "license": "public_domain_jp_aozora",
+    "lang": "ja",
+    "authorDeathYear": 1901,
+    "concepts": ["gakumon", "independence", "equality", "jitsugaku"]
+  },
+  {
+    "file": "fukuou_jiden.txt",
+    "work": "Fukuou Jiden",
+    "year": 1899,
+    "gutenberg_id": null,
+    "aozora_card": "1864",
+    "aozora_zip": "https://www.aozora.gr.jp/cards/000296/files/1864_ruby_61551.zip",
+    "source_url": "https://www.aozora.gr.jp/cards/000296/card1864.html",
+    "translator": null,
+    "license": "public_domain_jp_aozora",
+    "lang": "ja",
+    "authorDeathYear": 1901,
+    "skipUntil": "福澤諭吉の父は",
+    "concepts": ["memoir", "osaka", "nakatsu", "keio"]
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "early_poems.txt",
+    "work": "Early Poems",
+    "year": 1897,
+    "gutenberg_id": "8601",
+    "source_url": "https://www.gutenberg.org/ebooks/8601",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "doubt",
+      "faith",
+      "loss",
+      "memory"
+    ]
+  },
+  {
+    "file": "idylls_of_the_king.txt",
+    "work": "Idylls of the King",
+    "year": 1859,
+    "gutenberg_id": "610",
+    "source_url": "https://www.gutenberg.org/ebooks/610",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "arthur",
+      "duty",
+      "decline",
+      "leadership"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "experimental_medicine.txt",
+    "work": "An Introduction to the Study of Experimental Medicine",
+    "year": 1865,
+    "gutenberg_id": null,
+    "source_url": "https://www.fadedpage.com/books/20170491/html.php",
+    "translator": "Henry Copley Greene (Macmillan, 1927)",
+    "license": "public_domain_usa_1927",
+    "concepts": [
+      "experiment",
+      "observation",
+      "physiology",
+      "determinism",
+      "method"
+    ]
+  }
+]

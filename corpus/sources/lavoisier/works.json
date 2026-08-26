@@ -1,0 +1,18 @@
+[
+  {
+    "file": "elements_of_chemistry.txt",
+    "work": "Elements of Chemistry",
+    "year": 1789,
+    "gutenberg_id": "30775",
+    "source_url": "https://www.gutenberg.org/ebooks/30775",
+    "translator": "Robert Kerr",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "oxygen",
+      "nomenclature",
+      "conservation",
+      "experiment",
+      "phlogiston"
+    ]
+  }
+]

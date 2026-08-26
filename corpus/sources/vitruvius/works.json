@@ -1,0 +1,18 @@
+[
+  {
+    "file": "ten_books_architecture.txt",
+    "work": "The Ten Books on Architecture",
+    "year": -20,
+    "gutenberg_id": "20239",
+    "source_url": "https://www.gutenberg.org/ebooks/20239",
+    "translator": "Morris Hicky Morgan",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "architecture",
+      "proportion",
+      "utility",
+      "firmness",
+      "beauty"
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "file": "letters_and_reminiscences.txt",
+    "work": "Antonín Dvořák: Letters and Reminiscences",
+    "year": 1954,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/antonindvoraklet001860mbp",
+    "translator": "Roberta Finlayson Samsour (from Otakar Sourek ed.)",
+    "license": "public_domain_usa_archive_1954",
+    "concepts": [
+      "dvorak",
+      "letters",
+      "prague",
+      "america",
+      "symphony",
+      "folk_music"
+    ]
+  },
+  {
+    "file": "hadow_dvorak_chapter.txt",
+    "work": "Studies in Modern Music, Second Series — Dvořák",
+    "year": 1895,
+    "gutenberg_id": "39771",
+    "source_url": "https://www.gutenberg.org/ebooks/39771",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "dvorak",
+      "biography",
+      "bohemia",
+      "symphony",
+      "folk_music"
+    ]
+  }
+]

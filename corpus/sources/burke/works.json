@@ -1,0 +1,33 @@
+[
+  {
+    "file": "selections_speeches_writings.txt",
+    "work": "Selections from the Speeches and Writings of Edmund Burke",
+    "year": 1790,
+    "gutenberg_id": "3286",
+    "source_url": "https://www.gutenberg.org/ebooks/3286",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "tradition",
+      "reform",
+      "revolution",
+      "prejudice",
+      "prescription"
+    ]
+  },
+  {
+    "file": "conciliation_with_america.txt",
+    "work": "Speech on Conciliation with America",
+    "year": 1775,
+    "gutenberg_id": "5655",
+    "source_url": "https://www.gutenberg.org/ebooks/5655",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "empire",
+      "conciliation",
+      "liberty",
+      "prudence"
+    ]
+  }
+]

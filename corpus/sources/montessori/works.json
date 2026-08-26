@@ -1,0 +1,50 @@
+[
+  {
+    "file": "montessori_method.txt",
+    "work": "The Montessori Method",
+    "year": 1912,
+    "gutenberg_id": "39863",
+    "source_url": "https://www.gutenberg.org/ebooks/39863",
+    "translator": "Anne E. George",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "self_education",
+      "environment",
+      "development",
+      "movement",
+      "child"
+    ]
+  },
+  {
+    "file": "own_handbook.txt",
+    "work": "Dr. Montessori's Own Handbook",
+    "year": 1914,
+    "gutenberg_id": "29635",
+    "source_url": "https://www.gutenberg.org/ebooks/29635",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "self_education",
+      "environment",
+      "movement",
+      "senses",
+      "child"
+    ]
+  },
+  {
+    "file": "spontaneous_activity.txt",
+    "work": "Spontaneous Activity in Education",
+    "year": 1917,
+    "gutenberg_id": "24727",
+    "source_url": "https://www.gutenberg.org/ebooks/24727",
+    "translator": "Florence Simmonds",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "activity",
+      "liberty",
+      "observation",
+      "development",
+      "child"
+    ]
+  }
+]

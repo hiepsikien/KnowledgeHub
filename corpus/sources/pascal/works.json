@@ -1,0 +1,35 @@
+[
+  {
+    "file": "pensees.txt",
+    "work": "Pascal's Pensées",
+    "year": 1670,
+    "gutenberg_id": "18269",
+    "source_url": "https://www.gutenberg.org/ebooks/18269",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "wager",
+      "heart",
+      "reason",
+      "grace",
+      "vanity",
+      "diversion"
+    ]
+  },
+  {
+    "file": "provincial_letters.txt",
+    "work": "The Provincial Letters",
+    "year": 1656,
+    "gutenberg_id": "73959",
+    "source_url": "https://www.gutenberg.org/ebooks/73959",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "jesuits",
+      "grace",
+      "morals",
+      "religion",
+      "reason"
+    ]
+  }
+]

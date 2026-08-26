@@ -1,0 +1,67 @@
+[
+  {
+    "file": "foundations_of_geometry.txt",
+    "work": "An Essay on the Foundations of Geometry",
+    "year": 1897,
+    "gutenberg_id": "52091",
+    "source_url": "https://www.gutenberg.org/ebooks/52091",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "geometry",
+      "axiom",
+      "space",
+      "order",
+      "continuity"
+    ]
+  },
+  {
+    "file": "mysticism_and_logic.txt",
+    "work": "Mysticism and Logic and Other Essays",
+    "year": 1918,
+    "gutenberg_id": "25447",
+    "source_url": "https://www.gutenberg.org/ebooks/25447",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mathematics",
+      "logic",
+      "metaphysics",
+      "study_of_mathematics"
+    ]
+  },
+  {
+    "file": "problems_of_philosophy.txt",
+    "work": "The Problems of Philosophy",
+    "year": 1912,
+    "gutenberg_id": "5827",
+    "source_url": "https://www.gutenberg.org/ebooks/5827",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "appearance",
+      "acquaintance",
+      "description",
+      "induction",
+      "knowledge",
+      "universals"
+    ]
+  },
+  {
+    "file": "analysis_of_mind.txt",
+    "work": "The Analysis of Mind",
+    "year": 1921,
+    "gutenberg_id": "2529",
+    "source_url": "https://www.gutenberg.org/ebooks/2529",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mind",
+      "consciousness",
+      "perception",
+      "belief",
+      "memory",
+      "neutral_monism"
+    ]
+  }
+]

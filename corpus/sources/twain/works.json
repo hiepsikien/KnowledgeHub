@@ -1,0 +1,33 @@
+[
+  {
+    "file": "huckleberry_finn.txt",
+    "work": "Adventures of Huckleberry Finn",
+    "year": 1884,
+    "gutenberg_id": "76",
+    "source_url": "https://www.gutenberg.org/ebooks/76",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "conscience",
+      "civilization",
+      "river",
+      "freedom",
+      "race"
+    ]
+  },
+  {
+    "file": "what_is_man.txt",
+    "work": "What Is Man? and Other Essays",
+    "year": 1906,
+    "gutenberg_id": "70",
+    "source_url": "https://www.gutenberg.org/ebooks/70",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "human_nature",
+      "determinism",
+      "training",
+      "selfishness"
+    ]
+  }
+]

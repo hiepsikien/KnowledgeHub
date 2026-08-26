@@ -1,0 +1,50 @@
+[
+  {
+    "file": "essays_first_series.txt",
+    "work": "Essays — First Series",
+    "year": 1841,
+    "gutenberg_id": "2944",
+    "source_url": "https://www.gutenberg.org/ebooks/2944",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "self-reliance",
+      "nature",
+      "compensation",
+      "oversoul",
+      "individual"
+    ]
+  },
+  {
+    "file": "nature.txt",
+    "work": "Nature",
+    "year": 1836,
+    "gutenberg_id": "29433",
+    "source_url": "https://www.gutenberg.org/ebooks/29433",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "nature",
+      "spirit",
+      "commodity",
+      "language",
+      "idealism"
+    ]
+  },
+  {
+    "file": "essays_second_series.txt",
+    "work": "Essays — Second Series",
+    "year": 1844,
+    "gutenberg_id": "2945",
+    "source_url": "https://www.gutenberg.org/ebooks/2945",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "poet",
+      "experience",
+      "politics",
+      "character",
+      "nature"
+    ]
+  }
+]

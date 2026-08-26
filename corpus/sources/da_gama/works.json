@@ -1,0 +1,19 @@
+[
+  {
+    "file": "first_voyage.txt",
+    "work": "A Journal of the First Voyage of Vasco da Gama 1497-1499",
+    "year": 1898,
+    "gutenberg_id": "46440",
+    "source_url": "https://www.gutenberg.org/ebooks/46440",
+    "translator": "E. G. Ravenstein",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "india",
+      "calicut",
+      "cape",
+      "voyage",
+      "spice",
+      "navigation"
+    ]
+  }
+]

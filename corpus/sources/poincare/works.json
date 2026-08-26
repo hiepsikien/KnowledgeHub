@@ -1,0 +1,19 @@
+[
+  {
+    "file": "foundations_of_science.txt",
+    "work": "The Foundations of Science: Science and Hypothesis, The Value of Science, Science and Method",
+    "year": 1913,
+    "gutenberg_id": "39713",
+    "source_url": "https://www.gutenberg.org/ebooks/39713",
+    "translator": "George Bruce Halsted",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "convention",
+      "geometry",
+      "space",
+      "probability",
+      "hypothesis",
+      "method"
+    ]
+  }
+]

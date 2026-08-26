@@ -1,0 +1,18 @@
+[
+  {
+    "file": "sketch_analytical_engine.txt",
+    "work": "Sketch of the Analytical Engine",
+    "year": 1843,
+    "gutenberg_id": null,
+    "source_url": "https://www.fourmilab.ch/babbage/sketch.html",
+    "translator": "Ada Augusta, Countess of Lovelace (from Menabrea)",
+    "license": "public_domain_usa_1843",
+    "concepts": [
+      "analytical_engine",
+      "operation",
+      "symbol",
+      "note_g",
+      "originate"
+    ]
+  }
+]

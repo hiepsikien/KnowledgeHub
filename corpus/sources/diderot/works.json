@@ -1,0 +1,57 @@
+[
+  {
+    "file": "rameau_nephew.txt",
+    "work": "Le Neveu de Rameau",
+    "year": 1761,
+    "gutenberg_id": "13862",
+    "source_url": "https://www.gutenberg.org/ebooks/13862",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "fr",
+    "concepts": ["hypocrisy", "society", "music", "dialogue", "morals"]
+  },
+  {
+    "file": "jacques_fatalist.txt",
+    "work": "Jacques le fataliste et son maître",
+    "year": 1773,
+    "gutenberg_id": "39976",
+    "source_url": "https://www.gutenberg.org/ebooks/39976",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "fr",
+    "concepts": ["fate", "narrative", "servant", "freedom", "irony"]
+  },
+  {
+    "file": "supplement_bougainville.txt",
+    "work": "Supplément au Voyage de Bougainville",
+    "year": 1772,
+    "gutenberg_id": "6501",
+    "source_url": "https://www.gutenberg.org/ebooks/6501",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "fr",
+    "concepts": ["nature", "liberty", "colony", "morals", "tahiti"]
+  },
+  {
+    "file": "entretien_pere_enfants.txt",
+    "work": "Entretien d'un père avec ses enfants",
+    "year": 1771,
+    "gutenberg_id": "28604",
+    "source_url": "https://www.gutenberg.org/ebooks/28604",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "fr",
+    "concepts": ["religion", "morals", "family", "reason", "society"]
+  },
+  {
+    "file": "la_religieuse.txt",
+    "work": "La Religieuse",
+    "year": 1796,
+    "gutenberg_id": "28827",
+    "source_url": "https://www.gutenberg.org/ebooks/28827",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "fr",
+    "concepts": ["convent", "oppression", "freedom", "hypocrisy", "religion"]
+  }
+]

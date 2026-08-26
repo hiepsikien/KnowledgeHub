@@ -1,0 +1,17 @@
+[
+  {
+    "file": "heart_of_darkness.txt",
+    "work": "Heart of Darkness",
+    "year": 1899,
+    "gutenberg_id": "219",
+    "source_url": "https://www.gutenberg.org/ebooks/219",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "empire",
+      "horror",
+      "civilization",
+      "narration"
+    ]
+  }
+]

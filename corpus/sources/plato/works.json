@@ -1,0 +1,33 @@
+[
+  {
+    "file": "republic.txt",
+    "work": "The Republic",
+    "year": -380,
+    "gutenberg_id": "1497",
+    "source_url": "https://www.gutenberg.org/ebooks/1497",
+    "translator": "Benjamin Jowett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "forms",
+      "cave",
+      "justice",
+      "philosopher_king",
+      "soul"
+    ]
+  },
+  {
+    "file": "symposium.txt",
+    "work": "Symposium",
+    "year": -385,
+    "gutenberg_id": "1600",
+    "source_url": "https://www.gutenberg.org/ebooks/1600",
+    "translator": "Benjamin Jowett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "love",
+      "beauty",
+      "eros",
+      "forms"
+    ]
+  }
+]

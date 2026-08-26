@@ -1,0 +1,18 @@
+[
+  {
+    "file": "relativity.txt",
+    "work": "Relativity: The Special and General Theory",
+    "year": 1916,
+    "gutenberg_id": "30155",
+    "source_url": "https://www.gutenberg.org/ebooks/30155",
+    "translator": "Robert W. Lawson",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "relativity",
+      "space",
+      "time",
+      "gravity",
+      "simultaneity"
+    ]
+  }
+]

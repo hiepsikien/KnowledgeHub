@@ -1,0 +1,34 @@
+[
+  {
+    "file": "wealth_of_nations.txt",
+    "work": "An Inquiry into the Nature and Causes of the Wealth of Nations",
+    "year": 1776,
+    "gutenberg_id": "3300",
+    "source_url": "https://www.gutenberg.org/ebooks/3300",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "division_of_labor",
+      "invisible_hand",
+      "markets",
+      "self_interest",
+      "value",
+      "capital"
+    ]
+  },
+  {
+    "file": "theory_moral_sentiments.txt",
+    "work": "The Theory of Moral Sentiments",
+    "year": 1759,
+    "gutenberg_id": "67363",
+    "source_url": "https://www.gutenberg.org/ebooks/67363",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "sympathy",
+      "impartial_spectator",
+      "moral_sentiments",
+      "propriety"
+    ]
+  }
+]

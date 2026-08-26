@@ -1,0 +1,65 @@
+[
+  {
+    "file": "second_treatise.txt",
+    "work": "Second Treatise of Government",
+    "year": 1689,
+    "gutenberg_id": "7370",
+    "source_url": "https://www.gutenberg.org/ebooks/7370",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "property",
+      "consent",
+      "government",
+      "tyranny"
+    ]
+  },
+  {
+    "file": "essay_human_understanding_vol1.txt",
+    "work": "An Essay Concerning Humane Understanding, Volume 1",
+    "year": 1690,
+    "gutenberg_id": "10615",
+    "source_url": "https://www.gutenberg.org/ebooks/10615",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "tabula_rasa",
+      "ideas",
+      "experience",
+      "sensation",
+      "reflection"
+    ]
+  },
+  {
+    "file": "essay_human_understanding_vol2.txt",
+    "work": "An Essay Concerning Humane Understanding, Volume 2",
+    "year": 1690,
+    "gutenberg_id": "10616",
+    "source_url": "https://www.gutenberg.org/ebooks/10616",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "knowledge",
+      "ideas",
+      "identity",
+      "language"
+    ]
+  },
+  {
+    "file": "some_thoughts_concerning_education.txt",
+    "work": "Some Thoughts Concerning Education",
+    "year": 1693,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/bim_eighteenth-century_some-thoughts-concerning_locke-john_1705",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "education",
+      "children",
+      "discipline",
+      "habit",
+      "virtue"
+    ]
+  }
+]

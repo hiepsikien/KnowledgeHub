@@ -1,0 +1,35 @@
+[
+  {
+    "file": "foundations_of_geometry.txt",
+    "work": "The Foundations of Geometry",
+    "year": 1899,
+    "gutenberg_id": "17384",
+    "source_url": "https://www.gutenberg.org/ebooks/17384",
+    "translator": "E. J. Townsend",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "axiom",
+      "geometry",
+      "incidence",
+      "congruence",
+      "continuity",
+      "rigor"
+    ]
+  },
+  {
+    "file": "mathematical_problems.txt",
+    "work": "Mathematical Problems",
+    "year": 1900,
+    "gutenberg_id": "71655",
+    "source_url": "https://www.gutenberg.org/ebooks/71655",
+    "translator": "Mary Frances Winston Newson",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "problems",
+      "axiom",
+      "program",
+      "rigor",
+      "congress"
+    ]
+  }
+]

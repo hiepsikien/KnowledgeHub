@@ -1,0 +1,62 @@
+[
+  {
+    "file": "banh_troi_nuoc.txt",
+    "work": "Thơ Nôm Hồ Xuân Hương (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Bánh_trôi_nước",
+    "translator": "Quốc ngữ PD — Wikisource; truyền tụng, tác giả tranh cãi",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["than", "nan", "long son", "nom"]
+  },
+  {
+    "file": "tu_tinh_i.txt",
+    "work": "Thơ Nôm Hồ Xuân Hương (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_tình_I",
+    "translator": "Quốc ngữ PD — Wikisource; truyền tụng, tác giả tranh cãi",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu tinh", "oan han", "duyen", "nom"]
+  },
+  {
+    "file": "tu_tinh_ii.txt",
+    "work": "Thơ Nôm Hồ Xuân Hương (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_tình_II",
+    "translator": "Quốc ngữ PD — Wikisource; truyền tụng, tác giả tranh cãi",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu tinh", "hong nhan", "xuan", "nom"]
+  },
+  {
+    "file": "tu_tinh_iii.txt",
+    "work": "Thơ Nôm Hồ Xuân Hương (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_tình_III",
+    "translator": "Quốc ngữ PD — Wikisource; truyền tụng, tác giả tranh cãi",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu tinh", "lenh denh", "thuyen", "nom"]
+  },
+  {
+    "file": "qua_deo_ngang.txt",
+    "work": "Thơ Nôm Hồ Xuân Hương (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Qua_đèo_Ngang_(Bà_Huyện_Thanh_Quan)",
+    "translator": "Quốc ngữ PD — Bà Huyện Thanh Quan truyền tụng gán HXH",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["deo ngang", "buon", "co don", "nom"]
+  }
+]

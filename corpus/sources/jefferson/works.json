@@ -1,0 +1,164 @@
+[
+  {
+    "file": "writings_vol1.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 1 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "45847",
+    "source_url": "https://www.gutenberg.org/ebooks/45847",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "revolution",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol2.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 2 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "50046",
+    "source_url": "https://www.gutenberg.org/ebooks/50046",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol3.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 3 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "52878",
+    "source_url": "https://www.gutenberg.org/ebooks/52878",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol4.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 4 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "53603",
+    "source_url": "https://www.gutenberg.org/ebooks/53603",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol5.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 5 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "53767",
+    "source_url": "https://www.gutenberg.org/ebooks/53767",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol6.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 6 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "55075",
+    "source_url": "https://www.gutenberg.org/ebooks/55075",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol7.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 7 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "56035",
+    "source_url": "https://www.gutenberg.org/ebooks/56035",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol8.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 8 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "56313",
+    "source_url": "https://www.gutenberg.org/ebooks/56313",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "writings_vol9.txt",
+    "work": "The Writings of Thomas Jefferson, Vol. 9 (of 9)",
+    "year": 1903,
+    "gutenberg_id": "56578",
+    "source_url": "https://www.gutenberg.org/ebooks/56578",
+    "translator": "Andrew A. Lipscomb and Albert Ellery Bergh (eds.)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "republic",
+      "federalism",
+      "liberty",
+      "correspondence"
+    ]
+  },
+  {
+    "file": "notes_on_virginia.txt",
+    "work": "Notes on the State of Virginia",
+    "year": 1785,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/notesonstateofvirg00jeff",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "liberty",
+      "education",
+      "agriculture",
+      "religion",
+      "republic",
+      "virginia"
+    ]
+  }
+]

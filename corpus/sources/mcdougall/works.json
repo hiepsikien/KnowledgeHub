@@ -1,0 +1,35 @@
+[
+  {
+    "file": "introduction_social_psychology.txt",
+    "work": "An Introduction to Social Psychology",
+    "year": 1908,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/introductiontos00mcdo",
+    "translator": null,
+    "license": "public_domain_usa_archive_1908",
+    "concepts": [
+      "instinct",
+      "emotion",
+      "sentiment",
+      "suggestion",
+      "imitation",
+      "social_psychology"
+    ]
+  },
+  {
+    "file": "group_mind.txt",
+    "work": "The Group Mind: A Sketch of the Principles of Collective Psychology",
+    "year": 1920,
+    "gutenberg_id": "40826",
+    "source_url": "https://www.gutenberg.org/ebooks/40826",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "group",
+      "instinct",
+      "sentiment",
+      "collective",
+      "organization"
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "file": "youth.txt",
+    "work": "Youth: Its Education, Regimen, and Hygiene",
+    "year": 1906,
+    "gutenberg_id": "9173",
+    "source_url": "https://www.gutenberg.org/ebooks/9173",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "adolescence",
+      "education",
+      "development",
+      "youth",
+      "growth"
+    ]
+  },
+  {
+    "file": "senescence.txt",
+    "work": "Senescence: The Last Half of Life",
+    "year": 1922,
+    "gutenberg_id": "66534",
+    "source_url": "https://www.gutenberg.org/ebooks/66534",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "aging",
+      "senescence",
+      "development",
+      "life_stage",
+      "psychology"
+    ]
+  },
+  {
+    "file": "educational_problems_vol1.txt",
+    "work": "Educational Problems",
+    "year": 1911,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/educationalprobl01halliala",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "education",
+      "pedagogy",
+      "school",
+      "development",
+      "child"
+    ]
+  },
+  {
+    "file": "educational_problems_vol2.txt",
+    "work": "Educational Problems",
+    "year": 1911,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/educationalprobl02halliala",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "education",
+      "pedagogy",
+      "school",
+      "morals",
+      "adolescence"
+    ]
+  },
+  {
+    "file": "founders_modern_psychology.txt",
+    "work": "Founders of Modern Psychology",
+    "year": 1912,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/foundersofmodern00hall",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "psychology",
+      "wundt",
+      "method",
+      "consciousness",
+      "history"
+    ]
+  }
+]

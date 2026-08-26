@@ -1,0 +1,44 @@
+[
+  {
+    "file": "kosei_e_no_saidai_ibutsu.txt",
+    "work": "Kosei e no Saidai Ibutsu",
+    "year": 1894,
+    "gutenberg_id": null,
+    "aozora_card": "519",
+    "aozora_zip": "https://www.aozora.gr.jp/cards/000034/files/519_ruby_2965.zip",
+    "source_url": "https://www.aozora.gr.jp/cards/000034/card519.html",
+    "translator": null,
+    "license": "public_domain_jp_aozora",
+    "lang": "ja",
+    "authorDeathYear": 1930,
+    "concepts": ["legacy", "faith", "character", "education"]
+  },
+  {
+    "file": "denmark_koku_no_hanashi.txt",
+    "work": "Denmark Koku no Hanashi",
+    "year": 1911,
+    "gutenberg_id": null,
+    "aozora_card": "233",
+    "aozora_zip": "https://www.aozora.gr.jp/cards/000034/files/233_ruby_2990.zip",
+    "source_url": "https://www.aozora.gr.jp/cards/000034/card233.html",
+    "translator": null,
+    "license": "public_domain_jp_aozora",
+    "lang": "ja",
+    "authorDeathYear": 1930,
+    "concepts": ["faith", "trees", "nation", "work"]
+  },
+  {
+    "file": "kirisuto_shinto_no_nagusame.txt",
+    "work": "Kirisuto Shinto no Nagusame",
+    "year": 1893,
+    "gutenberg_id": null,
+    "aozora_card": "55507",
+    "aozora_zip": "https://www.aozora.gr.jp/cards/000034/files/55507_ruby_72607.zip",
+    "source_url": "https://www.aozora.gr.jp/cards/000034/card55507.html",
+    "translator": null,
+    "license": "public_domain_jp_aozora",
+    "lang": "ja",
+    "authorDeathYear": 1930,
+    "concepts": ["faith", "comfort", "mukyokai", "conscience"]
+  }
+]

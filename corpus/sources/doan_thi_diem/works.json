@@ -1,0 +1,14 @@
+[
+  {
+    "file": "chinh_phu_ngam.txt",
+    "work": "Chinh phụ ngâm (Nôm / quốc ngữ PD)",
+    "year": 1740,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Chinh_phụ_ngâm_(Đoàn_Thị_Điểm_dịch)",
+    "translator": "Nôm Đoàn Thị Điểm — quốc ngữ PD; Hán gốc Đặng Trần Côn",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["chinh phu", "cho", "chien tranh nha", "ma hong"]
+  }
+]

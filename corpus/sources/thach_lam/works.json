@@ -1,0 +1,62 @@
+[
+  {
+    "file": "buoi_som.txt",
+    "work": "Buổi sớm (1934)",
+    "year": 1934,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Buổi_sớm",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["lang que", "sang som", "tu te", "nong thon"]
+  },
+  {
+    "file": "dem_sang_trang.txt",
+    "work": "Đêm sáng trăng (1937)",
+    "year": 1937,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đêm_sáng_trăng",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["trang", "lang que", "tu te", "dem"]
+  },
+  {
+    "file": "co_hang_xen.txt",
+    "work": "Cô hàng xén (1937)",
+    "year": 1937,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Cô_hàng_xén",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["hang xen", "ngheo", "tu te", "lang que"]
+  },
+  {
+    "file": "doi.txt",
+    "work": "Đói (1936)",
+    "year": 1936,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đói",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["doi", "ngheo", "lang que", "no nan"]
+  },
+  {
+    "file": "duyen_so.txt",
+    "work": "Duyên số (1940)",
+    "year": 1940,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Duyên_số",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["duyen so", "hon nhan", "lang que", "tu te"]
+  }
+]

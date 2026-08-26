@@ -1,0 +1,14 @@
+[
+  {
+    "file": "tat_den.txt",
+    "work": "Tắt đèn (1937)",
+    "year": 1937,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tắt_đèn",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["ngheo", "phong tuc", "dan ba", "lang que", "thue"]
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "file": "confessions.txt",
+    "work": "The Confessions of St. Augustine",
+    "year": 397,
+    "gutenberg_id": "3296",
+    "source_url": "https://www.gutenberg.org/ebooks/3296",
+    "translator": "Edward Bouverie Pusey",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "confession",
+      "grace",
+      "sin",
+      "memory",
+      "conversion"
+    ]
+  },
+  {
+    "file": "city_of_god_vol1.txt",
+    "work": "The City of God — Volume I",
+    "year": 426,
+    "gutenberg_id": "45304",
+    "source_url": "https://www.gutenberg.org/ebooks/45304",
+    "translator": "Marcus Dods; George Wilson; J. J. Smith",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "city_of_god",
+      "earthly_city",
+      "providence",
+      "paganism",
+      "rome",
+      "evil"
+    ]
+  },
+  {
+    "file": "city_of_god_vol2.txt",
+    "work": "The City of God — Volume II",
+    "year": 426,
+    "gutenberg_id": "45305",
+    "source_url": "https://www.gutenberg.org/ebooks/45305",
+    "translator": "Marcus Dods; George Wilson; J. J. Smith",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "city_of_god",
+      "earthly_city",
+      "creation",
+      "angels",
+      "last_things",
+      "peace"
+    ]
+  }
+]

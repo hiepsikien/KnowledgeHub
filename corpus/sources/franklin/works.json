@@ -1,0 +1,35 @@
+[
+  {
+    "file": "autobiography.txt",
+    "work": "Autobiography of Benjamin Franklin",
+    "year": 1791,
+    "gutenberg_id": "20203",
+    "source_url": "https://www.gutenberg.org/ebooks/20203",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "virtue",
+      "self_improvement",
+      "citizenship",
+      "association",
+      "industry",
+      "practicality"
+    ]
+  },
+  {
+    "file": "way_to_wealth.txt",
+    "work": "Franklin's Way to Wealth; or, \"Poor Richard Improved\"",
+    "year": 1758,
+    "gutenberg_id": "43855",
+    "source_url": "https://www.gutenberg.org/ebooks/43855",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "thrift",
+      "industry",
+      "time",
+      "prudence",
+      "poor_richard"
+    ]
+  }
+]

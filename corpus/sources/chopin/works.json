@@ -1,0 +1,64 @@
+[
+  {
+    "file": "life_of_chopin_liszt.txt",
+    "work": "Life of Chopin",
+    "year": 1863,
+    "gutenberg_id": "4386",
+    "source_url": "https://www.gutenberg.org/ebooks/4386",
+    "translator": "Martha Walker Cook",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "chopin",
+      "liszt",
+      "piano",
+      "poland",
+      "romantic"
+    ]
+  },
+  {
+    "file": "niecks_vol2.txt",
+    "work": "Frederick Chopin as a Man and Musician (Complete)",
+    "year": 1902,
+    "gutenberg_id": "4973",
+    "source_url": "https://www.gutenberg.org/ebooks/4973",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "chopin",
+      "letters",
+      "piano",
+      "paris",
+      "poland"
+    ]
+  },
+  {
+    "file": "karasowski_vol1.txt",
+    "work": "Frederic Chopin: His Life, Letters, and Works, Vol. 1",
+    "year": 1879,
+    "gutenberg_id": "46577",
+    "source_url": "https://www.gutenberg.org/ebooks/46577",
+    "translator": "Emily Hill",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "chopin",
+      "letters",
+      "warsaw",
+      "youth"
+    ]
+  },
+  {
+    "file": "karasowski_vol2.txt",
+    "work": "Frederic Chopin: His Life, Letters, and Works, Vol. 2",
+    "year": 1879,
+    "gutenberg_id": "46573",
+    "source_url": "https://www.gutenberg.org/ebooks/46573",
+    "translator": "Emily Hill",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "chopin",
+      "letters",
+      "paris",
+      "poland"
+    ]
+  }
+]

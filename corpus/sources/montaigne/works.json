@@ -1,0 +1,18 @@
+[
+  {
+    "file": "essays.txt",
+    "work": "Essays of Michel de Montaigne",
+    "year": 1580,
+    "gutenberg_id": "3600",
+    "source_url": "https://www.gutenberg.org/ebooks/3600",
+    "translator": "Charles Cotton",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "self",
+      "essay",
+      "skepticism",
+      "custom",
+      "judgment"
+    ]
+  }
+]

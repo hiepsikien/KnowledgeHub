@@ -1,0 +1,18 @@
+[
+  {
+    "file": "middlemarch.txt",
+    "work": "Middlemarch",
+    "year": 1871,
+    "gutenberg_id": "145",
+    "source_url": "https://www.gutenberg.org/ebooks/145",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "vocation",
+      "illusion",
+      "sympathy",
+      "ordinary_life",
+      "marriage"
+    ]
+  }
+]

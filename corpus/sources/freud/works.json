@@ -1,0 +1,34 @@
+[
+  {
+    "file": "interpretation_of_dreams.txt",
+    "work": "The Interpretation of Dreams",
+    "year": 1900,
+    "gutenberg_id": "66048",
+    "source_url": "https://www.gutenberg.org/ebooks/66048",
+    "translator": "A. A. Brill",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "dream",
+      "unconscious",
+      "wish_fulfillment",
+      "censorship",
+      "latent_content"
+    ]
+  },
+  {
+    "file": "general_introduction_psychoanalysis.txt",
+    "work": "A General Introduction to Psychoanalysis",
+    "year": 1917,
+    "gutenberg_id": "38219",
+    "source_url": "https://www.gutenberg.org/ebooks/38219",
+    "translator": "G. Stanley Hall (intro; Gutenberg #38219)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "psychoanalysis",
+      "repression",
+      "resistance",
+      "transference",
+      "libido"
+    ]
+  }
+]

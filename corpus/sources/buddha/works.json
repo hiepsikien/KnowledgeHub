@@ -1,0 +1,18 @@
+[
+  {
+    "file": "dhammapada.txt",
+    "work": "The Dhammapada: A Collection of Verses",
+    "year": 1881,
+    "gutenberg_id": "2017",
+    "source_url": "https://www.gutenberg.org/ebooks/2017",
+    "translator": "F. Max Müller et al.",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "dhammapada",
+      "ethics",
+      "mind",
+      "suffering",
+      "path"
+    ]
+  }
+]

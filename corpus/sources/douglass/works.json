@@ -1,0 +1,32 @@
+[
+  {
+    "file": "narrative.txt",
+    "work": "Narrative of the Life of Frederick Douglass, an American Slave",
+    "year": 1845,
+    "gutenberg_id": "23",
+    "source_url": "https://www.gutenberg.org/ebooks/23",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "slavery",
+      "freedom",
+      "literacy",
+      "resistance"
+    ]
+  },
+  {
+    "file": "my_bondage_and_my_freedom.txt",
+    "work": "My Bondage and My Freedom",
+    "year": 1855,
+    "gutenberg_id": "202",
+    "source_url": "https://www.gutenberg.org/ebooks/202",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "slavery",
+      "freedom",
+      "self_making",
+      "rhetoric"
+    ]
+  }
+]

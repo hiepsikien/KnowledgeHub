@@ -1,0 +1,34 @@
+[
+  {
+    "file": "social_contract_discourses.txt",
+    "work": "The Social Contract and Discourses",
+    "year": 1762,
+    "gutenberg_id": "46333",
+    "source_url": "https://www.gutenberg.org/ebooks/46333",
+    "translator": "G. D. H. Cole",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "general_will",
+      "social_contract",
+      "freedom",
+      "sovereignty",
+      "inequality"
+    ]
+  },
+  {
+    "file": "emile.txt",
+    "work": "Emile",
+    "year": 1762,
+    "gutenberg_id": "5427",
+    "source_url": "https://www.gutenberg.org/ebooks/5427",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "education",
+      "nature",
+      "childhood",
+      "freedom",
+      "moral"
+    ]
+  }
+]

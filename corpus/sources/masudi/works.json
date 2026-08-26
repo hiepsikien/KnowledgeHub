@@ -1,0 +1,19 @@
+[
+  {
+    "file": "masudi_pd_extracts.txt",
+    "work": "Masudi English PD Extracts",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Mas%27%C5%ABd%C4%AB",
+    "translator": "Guy Le Strange; G. W. Thatcher",
+    "license": "public_domain_usa",
+    "concepts": [
+      "travel",
+      "seas",
+      "history",
+      "geography",
+      "meadows of gold",
+      "indian ocean"
+    ]
+  }
+]

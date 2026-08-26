@@ -1,0 +1,34 @@
+[
+  {
+    "file": "highways_of_progress.txt",
+    "work": "Highways of Progress",
+    "year": 1910,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/cu31924018866198",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "railroad",
+      "conservation",
+      "agriculture",
+      "northwest",
+      "commerce",
+      "consolidation"
+    ]
+  },
+  {
+    "file": "railway_terminals.txt",
+    "work": "The Country's Need of Greater Railway Facilities and Terminals",
+    "year": 1912,
+    "gutenberg_id": "47536",
+    "source_url": "https://www.gutenberg.org/ebooks/47536",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "terminals",
+      "railroad",
+      "commerce",
+      "congestion"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "business_biography_wanamaker.txt",
+    "work": "The Business Biography of John Wanamaker",
+    "year": 1930,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/businessbiograph011556mbp",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "retail",
+      "advertising",
+      "department_store",
+      "philadelphia",
+      "customer_service"
+    ]
+  }
+]

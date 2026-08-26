@@ -1,0 +1,19 @@
+[
+  {
+    "file": "letters.txt",
+    "work": "Select Letters of Christopher Columbus",
+    "year": 1870,
+    "gutenberg_id": "77820",
+    "source_url": "https://www.gutenberg.org/ebooks/77820",
+    "translator": "R. H. Major",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "voyage",
+      "islands",
+      "possession",
+      "india",
+      "navigation",
+      "discovery"
+    ]
+  }
+]

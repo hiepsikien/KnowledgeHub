@@ -1,0 +1,50 @@
+[
+  {
+    "file": "quoc_van_trich_diem.txt",
+    "work": "Bạch Vân quốc ngữ thi (thuật hoài / nhàn)",
+    "year": 1560,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/Nguyễn_Bỉnh_Khiêm",
+    "translator": "Quốc ngữ PD — nguyên tác Nôm Nguyễn Bỉnh Khiêm; không ingest sấm truyền tụng như sấm thật",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["nhan", "dai kho", "vang ve", "xuat xu"]
+  },
+  {
+    "file": "bach_van_gia_huan_mo_dau.txt",
+    "work": "Bạch Vân gia huấn (lát PD)",
+    "year": 1560,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Bạch_Vân_gia_huấn/Mở_đầu",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["gia huấn", "nhan", "dan toc"]
+  },
+  {
+    "file": "tu_thuat.txt",
+    "work": "Tự thuật (Nguyễn Bỉnh Khiêm)",
+    "year": 1560,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_thuật_(Nguyễn_Bỉnh_Khiêm)",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["tu thuat", "nhan", "si phong"]
+  },
+  {
+    "file": "tho_vo_de_29.txt",
+    "work": "Thơ vô đề Nguyễn Bỉnh Khiêm (lát PD)",
+    "year": 1560,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Thơ_vô_đề_của_Nguyễn_Bỉnh_Khiêm/29",
+    "translator": "Quốc ngữ PD — Wikisource",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tho vo de", "nhan", "vang ve"]
+  }
+]

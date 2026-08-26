@@ -1,0 +1,18 @@
+[
+  {
+    "file": "life_of_brunel.txt",
+    "work": "The Life of Isambard Kingdom Brunel, Civil Engineer",
+    "year": 1870,
+    "gutenberg_id": "41210",
+    "source_url": "https://www.gutenberg.org/ebooks/41210",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "civil_engineering",
+      "railway",
+      "bridge",
+      "ship",
+      "tunnel"
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "file": "discourse_on_method.txt",
+    "work": "Discourse on the Method",
+    "year": 1637,
+    "gutenberg_id": "59",
+    "source_url": "https://www.gutenberg.org/ebooks/59",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "method",
+      "cogito",
+      "doubt",
+      "reason"
+    ]
+  },
+  {
+    "file": "meditations.txt",
+    "work": "Six Metaphysical Meditations",
+    "year": 1641,
+    "gutenberg_id": "70091",
+    "source_url": "https://www.gutenberg.org/ebooks/70091",
+    "translator": "William Molyneux",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "cogito",
+      "dualism",
+      "clear_and_distinct",
+      "god",
+      "doubt"
+    ]
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "file": "memoirs_letters_vol1.txt",
+    "work": "Beethoven's Letters 1790-1826, Volume 1",
+    "year": 1827,
+    "gutenberg_id": "13065",
+    "source_url": "https://www.gutenberg.org/ebooks/13065",
+    "translator": "Lady Grace Wallace",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "letters",
+      "deafness",
+      "music",
+      "vienna"
+    ]
+  },
+  {
+    "file": "memoirs_letters_vol2.txt",
+    "work": "Beethoven's Letters 1790-1826, Volume 2",
+    "year": 1827,
+    "gutenberg_id": "13272",
+    "source_url": "https://www.gutenberg.org/ebooks/13272",
+    "translator": "Lady Grace Wallace",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "letters",
+      "deafness",
+      "music",
+      "vienna"
+    ]
+  },
+  {
+    "file": "kalischer_vol1.txt",
+    "work": "Beethoven's Letters (Kalischer/Shedlock), Volume 1",
+    "year": 1909,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/beethovensletter01beet",
+    "translator": "J. S. Shedlock",
+    "license": "public_domain_usa_archive_1909",
+    "concepts": [
+      "beethoven",
+      "letters",
+      "vienna"
+    ]
+  },
+  {
+    "file": "kalischer_vol2.txt",
+    "work": "Beethoven's Letters (Kalischer/Shedlock), Volume 2",
+    "year": 1909,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/beethovensletter02beet",
+    "translator": "J. S. Shedlock",
+    "license": "public_domain_usa_archive_1909",
+    "concepts": [
+      "beethoven",
+      "letters",
+      "vienna"
+    ]
+  },
+  {
+    "file": "moscheles_life.txt",
+    "work": "The Life of Beethoven (Moscheles)",
+    "year": 1841,
+    "gutenberg_id": "39093",
+    "source_url": "https://www.gutenberg.org/ebooks/39093",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "biography",
+      "vienna"
+    ]
+  },
+  {
+    "file": "thayer_vol1.txt",
+    "work": "The Life of Ludwig van Beethoven, Volume I",
+    "year": 1921,
+    "gutenberg_id": "43591",
+    "source_url": "https://www.gutenberg.org/ebooks/43591",
+    "translator": "Henry Edward Krehbiel",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "biography",
+      "bonn",
+      "vienna"
+    ]
+  },
+  {
+    "file": "thayer_vol2.txt",
+    "work": "The Life of Ludwig van Beethoven, Volume II",
+    "year": 1921,
+    "gutenberg_id": "43592",
+    "source_url": "https://www.gutenberg.org/ebooks/43592",
+    "translator": "Henry Edward Krehbiel",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "biography",
+      "vienna",
+      "fidelio"
+    ]
+  },
+  {
+    "file": "thayer_vol3.txt",
+    "work": "The Life of Ludwig van Beethoven, Volume III",
+    "year": 1921,
+    "gutenberg_id": "43593",
+    "source_url": "https://www.gutenberg.org/ebooks/43593",
+    "translator": "Henry Edward Krehbiel",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beethoven",
+      "biography",
+      "vienna",
+      "nephew"
+    ]
+  }
+]

@@ -1,0 +1,95 @@
+[
+  {
+    "file": "pragmatism.txt",
+    "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
+    "year": 1907,
+    "gutenberg_id": "5116",
+    "source_url": "https://www.gutenberg.org/ebooks/5116",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "pragmatism",
+      "truth",
+      "cash_value",
+      "pluralism"
+    ]
+  },
+  {
+    "file": "varieties_religious_experience.txt",
+    "work": "The Varieties of Religious Experience",
+    "year": 1902,
+    "gutenberg_id": "621",
+    "source_url": "https://www.gutenberg.org/ebooks/621",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "religious_experience",
+      "conversion",
+      "healthy_minded",
+      "sick_soul"
+    ]
+  },
+  {
+    "file": "will_to_believe.txt",
+    "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+    "year": 1897,
+    "gutenberg_id": "26659",
+    "source_url": "https://www.gutenberg.org/ebooks/26659",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "will_to_believe",
+      "faith",
+      "hypothesis",
+      "risk"
+    ]
+  },
+  {
+    "file": "psychology_briefer_course.txt",
+    "work": "Psychology: Briefer Course",
+    "year": 1892,
+    "gutenberg_id": "55262",
+    "source_url": "https://www.gutenberg.org/ebooks/55262",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "consciousness",
+      "habit",
+      "emotion",
+      "attention",
+      "stream_of_thought"
+    ]
+  },
+  {
+    "file": "principles_psychology_vol1.txt",
+    "work": "The Principles of Psychology, Volume 1",
+    "year": 1890,
+    "gutenberg_id": "57628",
+    "source_url": "https://www.gutenberg.org/ebooks/57628",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "stream_of_thought",
+      "habit",
+      "self",
+      "emotion",
+      "will"
+    ]
+  },
+  {
+    "file": "talks_to_teachers.txt",
+    "work": "Talks to Teachers on Psychology; and to Students on Some of Life's Ideals",
+    "year": 1899,
+    "gutenberg_id": "16287",
+    "source_url": "https://www.gutenberg.org/ebooks/16287",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "education",
+      "attention",
+      "habit",
+      "will",
+      "youth"
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "complete_poetical_works.txt",
+    "work": "The Complete Poetical Works of Percy Bysshe Shelley",
+    "year": 1904,
+    "gutenberg_id": "4800",
+    "source_url": "https://www.gutenberg.org/ebooks/4800",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liberty",
+      "imagination",
+      "revolution",
+      "nature"
+    ]
+  },
+  {
+    "file": "adonais.txt",
+    "work": "Adonais",
+    "year": 1821,
+    "gutenberg_id": "10119",
+    "source_url": "https://www.gutenberg.org/ebooks/10119",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "elegy",
+      "hope",
+      "death",
+      "immortality"
+    ]
+  }
+]

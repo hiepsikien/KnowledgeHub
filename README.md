@@ -152,19 +152,21 @@ Service tokens authenticate Read sync and automation — separate from human adm
 
 - Author deduplication, review queue, bulk publish.
 
-## Repository layout (future)
+## Repository layout
 
-This repo may hold cross-cutting docs, OpenAPI specs, and shared schemas. Runtime implementation initially lives in **Think monorepo** (`apps/cms` → Hub) until the API stabilizes enough to extract.
+Canonical manuscripts live in this repo (`corpus/`). Think stores derived RAG chunks and salon forests. Runtime Hub APIs still run in Think until the HTTP contract is stable.
 
 ```
-KnowledgeHub/          ← this repo (docs + contracts)
-Think/                 ← CMS + corpus + Hub implementation
+KnowledgeHub/corpus/   ← works.json + licenses; raw/*.txt gitignored
+Think/                 ← CMS + forests + chunks + salon
 Read/                  ← sync adapter + reader
 ```
 
+See [corpus/README.md](./corpus/README.md).
+
 ## Status
 
-**Planning / documentation.** Implementation starts after Think corpus and CMS audit.
+**Planning.** Phase 0 audit of Think CMS + corpus is in [docs/hub-evolution.md](./docs/hub-evolution.md). Implementation of Hub APIs still starts in the Think monorepo.
 
 ## Links
 

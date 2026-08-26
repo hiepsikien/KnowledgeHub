@@ -1,0 +1,92 @@
+[
+  {
+    "file": "forkel_life.txt",
+    "work": "Johann Sebastian Bach: His Life, Art, and Work",
+    "year": 1802,
+    "gutenberg_id": "35041",
+    "source_url": "https://www.gutenberg.org/ebooks/35041",
+    "translator": "Charles Sanford Terry",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "bach",
+      "baroque",
+      "counterpoint",
+      "leipzig",
+      "music"
+    ]
+  },
+  {
+    "file": "abdy_williams.txt",
+    "work": "Bach (Abdy Williams)",
+    "year": 1900,
+    "gutenberg_id": "43650",
+    "source_url": "https://www.gutenberg.org/ebooks/43650",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "bach",
+      "baroque",
+      "leipzig",
+      "biography"
+    ]
+  },
+  {
+    "file": "poole.txt",
+    "work": "John Sebastian Bach (Poole)",
+    "year": 1882,
+    "gutenberg_id": "46076",
+    "source_url": "https://www.gutenberg.org/ebooks/46076",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "bach",
+      "baroque",
+      "biography"
+    ]
+  },
+  {
+    "file": "spitta_vol1.txt",
+    "work": "Johann Sebastian Bach: His Work and Influence, Vol. 1",
+    "year": 1899,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/johannsebastian01maigoog",
+    "translator": "Clara Bell and J. A. Fuller-Maitland",
+    "license": "public_domain_usa_archive_1899",
+    "concepts": [
+      "bach",
+      "leipzig",
+      "weimar",
+      "counterpoint"
+    ]
+  },
+  {
+    "file": "spitta_vol2.txt",
+    "work": "Johann Sebastian Bach: His Work and Influence, Vol. 2",
+    "year": 1899,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/johannsebastian02maigoog",
+    "translator": "Clara Bell and J. A. Fuller-Maitland",
+    "license": "public_domain_usa_archive_1899",
+    "concepts": [
+      "bach",
+      "cothen",
+      "clavier",
+      "cantata"
+    ]
+  },
+  {
+    "file": "spitta_vol3.txt",
+    "work": "Johann Sebastian Bach: His Work and Influence, Vol. 3",
+    "year": 1899,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/johannsebastian03maigoog",
+    "translator": "Clara Bell and J. A. Fuller-Maitland",
+    "license": "public_domain_usa_archive_1899",
+    "concepts": [
+      "bach",
+      "leipzig",
+      "passion",
+      "cantata"
+    ]
+  }
+]

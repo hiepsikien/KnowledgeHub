@@ -1,0 +1,34 @@
+[
+  {
+    "file": "penicillium_1929.txt",
+    "work": "On the Antibacterial Action of Cultures of a Penicillium",
+    "year": 1929,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/Author:Alexander_Fleming",
+    "translator": null,
+    "license": "public_domain_usa_1929",
+    "concepts": [
+      "penicillin",
+      "mould",
+      "staphylococcus",
+      "antiseptic",
+      "inhibition"
+    ]
+  },
+  {
+    "file": "lysozyme_1922.txt",
+    "work": "On a Remarkable Bacteriolytic Element found in Tissues and Secretions",
+    "year": 1922,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/philtrans00877782",
+    "translator": null,
+    "license": "public_domain_usa_archive_1922",
+    "concepts": [
+      "lysozyme",
+      "bacteriolysis",
+      "tears",
+      "micrococcus_lysodeikticus",
+      "secretions"
+    ]
+  }
+]

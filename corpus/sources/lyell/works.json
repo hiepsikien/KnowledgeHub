@@ -1,0 +1,18 @@
+[
+  {
+    "file": "principles_of_geology.txt",
+    "work": "Principles of Geology",
+    "year": 1854,
+    "gutenberg_id": "33224",
+    "source_url": "https://www.gutenberg.org/ebooks/33224",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "uniformity",
+      "deep_time",
+      "gradualism",
+      "earth_history",
+      "causes"
+    ]
+  }
+]

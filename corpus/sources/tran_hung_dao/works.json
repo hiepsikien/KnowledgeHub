@@ -1,0 +1,36 @@
+[
+  {
+    "file": "hich_tuong_si.txt",
+    "work": "Hịch tướng sĩ (quốc ngữ truyền thống)",
+    "year": 1284,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Hịch_tướng_sĩ",
+    "translator": "Quốc ngữ truyền thống — không dùng bản dịch Ngô Tất Tố",
+    "license": "public_domain_original",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": [
+      "tuong si",
+      "si khi",
+      "giac",
+      "nuoc"
+    ]
+  },
+  {
+    "file": "hich_phan_ke_binh_1914.txt",
+    "work": "Hịch tướng sĩ (Phan Kế Bính dịch, 1914)",
+    "year": 1914,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Hịch_tướng_sĩ_(Phan_Kế_Bính_dịch)",
+    "translator": "Phan Kế Bính (1914) — PD; không dùng Ngô Tất Tố",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": [
+      "tuong si",
+      "si khi",
+      "giac",
+      "nuoc"
+    ]
+  }
+]

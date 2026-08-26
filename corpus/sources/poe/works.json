@@ -1,0 +1,18 @@
+[
+  {
+    "file": "complete_poetical_works.txt",
+    "work": "The Complete Poetical Works of Edgar Allan Poe",
+    "year": 1902,
+    "gutenberg_id": "10031",
+    "source_url": "https://www.gutenberg.org/ebooks/10031",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "gothic",
+      "melancholy",
+      "sound",
+      "loss",
+      "reason"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "george_westinghouse_leupp.txt",
+    "work": "George Westinghouse: His Life and Achievements",
+    "year": 1919,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/georgewestinghou00leuprich",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "air_brake",
+      "alternating_current",
+      "edison",
+      "patents",
+      "railroad"
+    ]
+  }
+]

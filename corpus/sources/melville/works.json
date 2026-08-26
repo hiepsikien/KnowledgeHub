@@ -1,0 +1,18 @@
+[
+  {
+    "file": "moby_dick.txt",
+    "work": "Moby-Dick; or, The Whale",
+    "year": 1851,
+    "gutenberg_id": "2701",
+    "source_url": "https://www.gutenberg.org/ebooks/2701",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "obsession",
+      "whale",
+      "nature",
+      "monomania",
+      "crew"
+    ]
+  }
+]

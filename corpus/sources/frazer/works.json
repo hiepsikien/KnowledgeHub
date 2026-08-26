@@ -1,0 +1,17 @@
+[
+  {
+    "file": "golden_bough.txt",
+    "work": "The Golden Bough: A Study of Magic and Religion",
+    "year": 1890,
+    "gutenberg_id": "3623",
+    "source_url": "https://www.gutenberg.org/ebooks/3623",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "magic",
+      "religion",
+      "ritual",
+      "myth",
+      "comparison"
+    ]
+  }
+]

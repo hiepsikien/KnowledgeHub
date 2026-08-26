@@ -1,0 +1,18 @@
+[
+  {
+    "file": "aeneid.txt",
+    "work": "The Aeneid",
+    "year": -19,
+    "gutenberg_id": "228",
+    "source_url": "https://www.gutenberg.org/ebooks/228",
+    "translator": "John Dryden",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "duty",
+      "empire",
+      "fate",
+      "piety",
+      "epic"
+    ]
+  }
+]

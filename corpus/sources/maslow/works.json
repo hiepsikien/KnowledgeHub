@@ -1,0 +1,62 @@
+[
+  {
+    "file": "dominance_part2_1936.txt",
+    "work": "The Role of Dominance in the Social and Sexual Behavior of Infra-Human Primates: II. An Experimental Determination of the Behavior Syndrome of Dominance",
+    "year": 1936,
+    "source_url": "https://archive.org/download/maslow1939/maslow1936_djvu.txt",
+    "translator": null,
+    "license": "public_domain_usa_journal",
+    "concepts": [
+      "dominance",
+      "primates",
+      "behavior",
+      "social",
+      "experimental"
+    ]
+  },
+  {
+    "file": "dominance_part3_1936.txt",
+    "work": "The Role of Dominance in the Social and Sexual Behavior of Infra-Human Primates: III. A Theory of Sexual Behavior of Infra-Human Primates",
+    "year": 1936,
+    "source_url": "https://archive.org/download/maslow1939/maslow1936_3_djvu.txt",
+    "translator": null,
+    "license": "public_domain_usa_journal",
+    "concepts": [
+      "dominance",
+      "sexual behavior",
+      "primates",
+      "motivation",
+      "theory"
+    ]
+  },
+  {
+    "file": "dominance_part4_1936.txt",
+    "work": "The Role of Dominance in the Social and Sexual Behavior of Infra-Human Primates: IV. The Determination of Hierarchy in Pairs and in a Group",
+    "year": 1936,
+    "source_url": "https://archive.org/download/maslow1939/maslow1936_4_djvu.txt",
+    "translator": null,
+    "license": "public_domain_usa_journal",
+    "concepts": [
+      "dominance",
+      "hierarchy",
+      "primates",
+      "social",
+      "status"
+    ]
+  },
+  {
+    "file": "theory_of_human_motivation_1943.txt",
+    "work": "A Theory of Human Motivation",
+    "year": 1943,
+    "source_url": "https://psychclassics.yorku.ca/Maslow/motivation.htm",
+    "translator": null,
+    "license": "public_domain_usa_journal",
+    "concepts": [
+      "motivation",
+      "hierarchy",
+      "needs",
+      "self-actualization",
+      "psychology"
+    ]
+  }
+]

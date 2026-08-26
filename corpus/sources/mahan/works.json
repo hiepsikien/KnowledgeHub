@@ -1,0 +1,47 @@
+[
+  {
+    "file": "influence_of_sea_power.txt",
+    "work": "The Influence of Sea Power Upon History, 1660-1783",
+    "year": 1890,
+    "gutenberg_id": "13529",
+    "source_url": "https://www.gutenberg.org/ebooks/13529",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "sea_power",
+      "commerce",
+      "command_of_the_sea",
+      "bases"
+    ]
+  },
+  {
+    "file": "sea_power_french_rev_vol1.txt",
+    "work": "The Influence of Sea Power upon the French Revolution and Empire 1793-1812, vol 1",
+    "year": 1892,
+    "gutenberg_id": "52588",
+    "source_url": "https://www.gutenberg.org/ebooks/52588",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "sea_power",
+      "napoleonic_wars",
+      "blockade",
+      "commerce"
+    ]
+  },
+  {
+    "file": "sea_power_french_rev_vol2.txt",
+    "work": "The Influence of Sea Power upon the French Revolution and Empire 1793-1812, vol 2",
+    "year": 1892,
+    "gutenberg_id": "52589",
+    "source_url": "https://www.gutenberg.org/ebooks/52589",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "sea_power",
+      "napoleonic_wars",
+      "blockade",
+      "empire"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "file": "boys_life_of_edison.txt",
+    "work": "The Boys' Life of Edison",
+    "year": 1911,
+    "gutenberg_id": "50523",
+    "source_url": "https://www.gutenberg.org/ebooks/50523",
+    "translator": "Francis Arthur Jones (Meadowcroft)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "invention",
+      "electricity",
+      "menlo_park",
+      "incandescent",
+      "self_education",
+      "perspiration"
+    ]
+  }
+]

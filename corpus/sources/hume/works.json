@@ -1,0 +1,64 @@
+[
+  {
+    "file": "enquiry_human_understanding.txt",
+    "work": "An Enquiry Concerning Human Understanding",
+    "year": 1748,
+    "gutenberg_id": "9662",
+    "source_url": "https://www.gutenberg.org/ebooks/9662",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "impressions",
+      "ideas",
+      "causation",
+      "custom",
+      "belief",
+      "necessity"
+    ]
+  },
+  {
+    "file": "enquiry_morals.txt",
+    "work": "An Enquiry Concerning the Principles of Morals",
+    "year": 1751,
+    "gutenberg_id": "4320",
+    "source_url": "https://www.gutenberg.org/ebooks/4320",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "moral_sentiment",
+      "sympathy",
+      "virtue",
+      "utility"
+    ]
+  },
+  {
+    "file": "history_england_vol1_part_a.txt",
+    "work": "The History of England, Vol. I, Part A",
+    "year": 1754,
+    "gutenberg_id": "19211",
+    "source_url": "https://www.gutenberg.org/ebooks/19211",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "history",
+      "constitution",
+      "evidence",
+      "politics"
+    ]
+  },
+  {
+    "file": "history_england_vol1_part_b.txt",
+    "work": "The History of England, Vol. I, Part B",
+    "year": 1754,
+    "gutenberg_id": "19212",
+    "source_url": "https://www.gutenberg.org/ebooks/19212",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "history",
+      "constitution",
+      "evidence",
+      "politics"
+    ]
+  }
+]

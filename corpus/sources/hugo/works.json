@@ -1,0 +1,33 @@
+[
+  {
+    "file": "notre_dame_de_paris.txt",
+    "work": "Notre-Dame de Paris",
+    "year": 1831,
+    "gutenberg_id": "2610",
+    "source_url": "https://www.gutenberg.org/ebooks/2610",
+    "translator": "Isabel F. Hapgood",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "architecture",
+      "fate",
+      "compassion",
+      "crowd"
+    ]
+  },
+  {
+    "file": "les_miserables.txt",
+    "work": "Les Misérables",
+    "year": 1862,
+    "gutenberg_id": "135",
+    "source_url": "https://www.gutenberg.org/ebooks/135",
+    "translator": "Isabel F. Hapgood",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "justice",
+      "mercy",
+      "poverty",
+      "redemption",
+      "law"
+    ]
+  }
+]

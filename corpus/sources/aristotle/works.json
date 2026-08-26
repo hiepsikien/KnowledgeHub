@@ -1,0 +1,50 @@
+[
+  {
+    "file": "nicomachean_ethics.txt",
+    "work": "The Nicomachean Ethics of Aristotle",
+    "year": -350,
+    "gutenberg_id": "8438",
+    "source_url": "https://www.gutenberg.org/ebooks/8438",
+    "translator": "F. H. Peters",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "eudaimonia",
+      "virtue",
+      "mean",
+      "ethics",
+      "friendship"
+    ]
+  },
+  {
+    "file": "politics.txt",
+    "work": "Politics: A Treatise on Government",
+    "year": -350,
+    "gutenberg_id": "6762",
+    "source_url": "https://www.gutenberg.org/ebooks/6762",
+    "translator": "William Ellis",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "polis",
+      "constitution",
+      "citizen",
+      "slavery",
+      "household"
+    ]
+  },
+  {
+    "file": "poetics.txt",
+    "work": "The Poetics of Aristotle",
+    "year": -335,
+    "gutenberg_id": "1974",
+    "source_url": "https://www.gutenberg.org/ebooks/1974",
+    "translator": "Samuel Henry Butcher",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "tragedy",
+      "mimesis",
+      "catharsis",
+      "plot",
+      "drama"
+    ]
+  }
+]

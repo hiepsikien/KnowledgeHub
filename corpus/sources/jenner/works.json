@@ -1,0 +1,50 @@
+[
+  {
+    "file": "inquiry_variolae_vaccinae.txt",
+    "work": "An Inquiry into the Causes and Effects of the Variolae Vaccinae",
+    "year": 1798,
+    "gutenberg_id": "29414",
+    "source_url": "https://www.gutenberg.org/ebooks/29414",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "vaccination",
+      "cowpox",
+      "smallpox",
+      "variolae_vaccinae",
+      "inoculation"
+    ]
+  },
+  {
+    "file": "further_observations_1799.txt",
+    "work": "Further Observations on the Variolae Vaccinae",
+    "year": 1799,
+    "gutenberg_id": "5694",
+    "source_url": "https://www.gutenberg.org/ebooks/5694",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "cowpox",
+      "spurious_cowpox",
+      "vaccination",
+      "smallpox",
+      "inoculation"
+    ]
+  },
+  {
+    "file": "continuation_facts_1800.txt",
+    "work": "A Continuation of Facts and Observations Relative to the Variolae Vaccinae",
+    "year": 1800,
+    "gutenberg_id": "5694",
+    "source_url": "https://www.gutenberg.org/ebooks/5694",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "cowpox",
+      "vaccination",
+      "smallpox",
+      "inoculation",
+      "evidence"
+    ]
+  }
+]

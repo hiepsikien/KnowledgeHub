@@ -1,0 +1,17 @@
+[
+  {
+    "file": "madame_bovary.txt",
+    "work": "Madame Bovary",
+    "year": 1857,
+    "gutenberg_id": "2413",
+    "source_url": "https://www.gutenberg.org/ebooks/2413",
+    "translator": "Eleanor Marx-Aveling",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "romantic_illusion",
+      "boredom",
+      "adultery",
+      "style"
+    ]
+  }
+]

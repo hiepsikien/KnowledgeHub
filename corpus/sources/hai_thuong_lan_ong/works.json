@@ -1,0 +1,38 @@
+[
+  {
+    "file": "gia_nha_len_kinh.txt",
+    "work": "Thượng kinh ký sự (khung — lên kinh / vào phủ)",
+    "year": 1782,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Thượng_kinh_ký_sự",
+    "translator": "Khung curator theo cốt Hán PD Lê Hữu Trác; không Phan Võ 1959, không toa",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["thuong kinh", "len kinh", "phu chua", "khong ninh"]
+  },
+  {
+    "file": "y_duc_khong_ninh.txt",
+    "work": "Thượng kinh ký sự (khung — y đức / ý cũng)",
+    "year": 1782,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Thượng_kinh_ký_sự",
+    "translator": "Khung curator — y đức, không Y tông tâm lĩnh",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["y duc", "y cung", "khong ninh", "khong hua khoi"]
+  },
+  {
+    "file": "huong_son_lan_danh.txt",
+    "work": "Thượng kinh ký sự (khung — Hương Sơn / lãn danh)",
+    "year": 1782,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikipedia.org/wiki/Thượng_kinh_ký_sự",
+    "translator": "Khung curator — muốn về, không mũ áo",
+    "license": "public_domain_vn_curator_khung",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["huong son", "lan ong", "lan danh", "xin ve"]
+  }
+]

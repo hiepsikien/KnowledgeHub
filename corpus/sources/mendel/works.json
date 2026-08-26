@@ -1,0 +1,18 @@
+[
+  {
+    "file": "mendel_principles_heredity.txt",
+    "work": "Mendel's Principles of Heredity: A Defence",
+    "year": 1902,
+    "gutenberg_id": "69362",
+    "source_url": "https://www.gutenberg.org/ebooks/69362",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "heredity",
+      "segregation",
+      "peas",
+      "genetics",
+      "statistics"
+    ]
+  }
+]

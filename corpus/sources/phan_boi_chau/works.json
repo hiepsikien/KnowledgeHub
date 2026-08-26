@@ -1,0 +1,74 @@
+[
+  {
+    "file": "hai_ngoai_huyet_thu.txt",
+    "work": "Hải ngoại huyết thư (quốc ngữ Lê Đại PD)",
+    "year": 1906,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Hải_ngoại_huyết_thư",
+    "translator": "Lê Đại — song thất lục bát quốc ngữ PD (Đông Kinh Nghĩa Thục; nguyên Hán Phan Bội Châu 1906)",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["vong quoc", "dong du", "tu cuong", "huyet thu", "bao ho"]
+  },
+  {
+    "file": "tien_quoc_keu.txt",
+    "work": "Tiếng quốc kêu (1906)",
+    "year": 1906,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tiếng_quốc_kêu/Tiếng_quốc_kêu",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["quoc keu", "vong quoc", "tu cuong", "dong du"]
+  },
+  {
+    "file": "phap_viet_de_hue.txt",
+    "work": "Pháp-Việt đề huề chính kiến thư (1914)",
+    "year": 1914,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Pháp-Việt_đề_huề_chính_kiến_thư",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["de hue", "bao ho", "doc lap", "doi giọng"]
+  },
+  {
+    "file": "van_te_phan_chau_trinh.txt",
+    "work": "Văn tế Phan Châu Trinh (1926)",
+    "year": 1926,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Văn_tế_Phan_Châu_Trinh",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["van te", "duy tan", "phan chau trinh", "doc lap"]
+  },
+  {
+    "file": "xuat_duong_luu_biet.txt",
+    "work": "Xuất dương lưu biệt (phiên âm Hán Việt PD)",
+    "year": 1905,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Xuất_dương_lưu_biệt",
+    "translator": "Phiên âm Hán Việt — không bản dịch nghĩa SGK, không thơ Đào Trinh Nhất",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["xuat duong", "dong du", "nam tu", "giang son"]
+  },
+  {
+    "file": "vao_nha_nguc_quang_dong.txt",
+    "work": "Vào nhà ngục Quảng Đông cảm tác (1914)",
+    "year": 1914,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Vào_nhà_ngục_Quảng_Đông_cảm_tác",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["nguc", "hao kiet", "su nghiep"]
+  }
+]

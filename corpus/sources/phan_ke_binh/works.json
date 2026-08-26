@@ -1,0 +1,26 @@
+[
+  {
+    "file": "viet_nam_phong_tuc.txt",
+    "work": "Việt Nam phong tục",
+    "year": 1915,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_phong_tục",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["phong tuc", "gia dinh", "huong dang", "hon nhan", "khao"]
+  },
+  {
+    "file": "viet_han_van_khao.txt",
+    "work": "Việt Hán văn khảo",
+    "year": 1918,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Hán_văn_khảo",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["van chuong", "the van", "han hoc", "quoc van"]
+  }
+]

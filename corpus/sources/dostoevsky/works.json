@@ -1,0 +1,78 @@
+[
+  {
+    "file": "notes_from_underground.txt",
+    "work": "Notes from the Underground",
+    "year": 1864,
+    "gutenberg_id": "600",
+    "source_url": "https://www.gutenberg.org/ebooks/600",
+    "translator": "Constance Garnett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "underground",
+      "resentment",
+      "freedom",
+      "spite"
+    ]
+  },
+  {
+    "file": "crime_and_punishment.txt",
+    "work": "Crime and Punishment",
+    "year": 1866,
+    "gutenberg_id": "2554",
+    "source_url": "https://www.gutenberg.org/ebooks/2554",
+    "translator": "Constance Garnett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "guilt",
+      "conscience",
+      "crime",
+      "redemption"
+    ]
+  },
+  {
+    "file": "idiot.txt",
+    "work": "The Idiot",
+    "year": 1869,
+    "gutenberg_id": "2638",
+    "source_url": "https://www.gutenberg.org/ebooks/2638",
+    "translator": "Eva Martin",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "beauty",
+      "innocence",
+      "compassion",
+      "idiot"
+    ]
+  },
+  {
+    "file": "possessed.txt",
+    "work": "The Possessed",
+    "year": 1872,
+    "gutenberg_id": "8117",
+    "source_url": "https://www.gutenberg.org/ebooks/8117",
+    "translator": "Constance Garnett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "possession",
+      "nihilism",
+      "ideology",
+      "demons"
+    ]
+  },
+  {
+    "file": "brothers_karamazov.txt",
+    "work": "The Brothers Karamazov",
+    "year": 1880,
+    "gutenberg_id": "28054",
+    "source_url": "https://www.gutenberg.org/ebooks/28054",
+    "translator": "Constance Garnett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "freedom",
+      "theodicy",
+      "faith",
+      "inquisitor",
+      "god"
+    ]
+  }
+]

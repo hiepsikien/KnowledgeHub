@@ -1,0 +1,18 @@
+[
+  {
+    "file": "geography_vol1.txt",
+    "work": "The Geography of Strabo, Volume 1",
+    "year": 20,
+    "gutenberg_id": "44884",
+    "source_url": "https://www.gutenberg.org/ebooks/44884",
+    "translator": "W. Falconer",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "geography",
+      "empire",
+      "travel",
+      "climate",
+      "peoples"
+    ]
+  }
+]

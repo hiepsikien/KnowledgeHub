@@ -1,0 +1,48 @@
+[
+  {
+    "file": "hard_times.txt",
+    "work": "Hard Times",
+    "year": 1854,
+    "gutenberg_id": "786",
+    "source_url": "https://www.gutenberg.org/ebooks/786",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "facts",
+      "industry",
+      "sympathy",
+      "education"
+    ]
+  },
+  {
+    "file": "tale_of_two_cities.txt",
+    "work": "A Tale of Two Cities",
+    "year": 1859,
+    "gutenberg_id": "98",
+    "source_url": "https://www.gutenberg.org/ebooks/98",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "revolution",
+      "sacrifice",
+      "justice",
+      "terror"
+    ]
+  },
+  {
+    "file": "oliver_twist.txt",
+    "work": "Oliver Twist",
+    "year": 1838,
+    "gutenberg_id": "730",
+    "source_url": "https://www.gutenberg.org/ebooks/730",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "workhouse",
+      "poverty",
+      "parish",
+      "crime",
+      "sympathy"
+    ]
+  }
+]

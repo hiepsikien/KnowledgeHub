@@ -1,0 +1,18 @@
+[
+  {
+    "file": "two_new_sciences.txt",
+    "work": "Dialogues Concerning Two New Sciences",
+    "year": 1638,
+    "gutenberg_id": null,
+    "source_url": "https://oll.libertyfund.org/titles/galilei-dialogues-concerning-two-new-sciences",
+    "translator": "Henry Crew and Alfonso de Salvio (Macmillan, 1914)",
+    "license": "public_domain_usa_1914",
+    "concepts": [
+      "motion",
+      "acceleration",
+      "mechanics",
+      "experiment",
+      "geometry"
+    ]
+  }
+]

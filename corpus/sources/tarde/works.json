@@ -1,0 +1,36 @@
+[
+  {
+    "file": "laws_of_imitation.txt",
+    "work": "The Laws of Imitation",
+    "year": 1903,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/lawsofimitation00tard",
+    "translator": "Elsie Clews Parsons",
+    "license": "public_domain_usa_archive_1903",
+    "concepts": [
+      "imitation",
+      "invention",
+      "suggestion",
+      "custom",
+      "social_diffusion",
+      "society"
+    ]
+  },
+  {
+    "file": "social_laws.txt",
+    "work": "Social Laws: An Outline of Sociology",
+    "year": 1899,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/sociallawsoutlin00tarduoft",
+    "translator": "Howard C. Warren",
+    "license": "public_domain_usa_archive_1899",
+    "concepts": [
+      "repetition",
+      "opposition",
+      "adaptation",
+      "imitation",
+      "invention",
+      "sociology"
+    ]
+  }
+]

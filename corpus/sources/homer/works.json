@@ -1,0 +1,18 @@
+[
+  {
+    "file": "odyssey.txt",
+    "work": "The Odyssey",
+    "year": -700,
+    "gutenberg_id": "1727",
+    "source_url": "https://www.gutenberg.org/ebooks/1727",
+    "translator": "Samuel Butler",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "homecoming",
+      "cunning",
+      "hospitality",
+      "identity",
+      "endurance"
+    ]
+  }
+]

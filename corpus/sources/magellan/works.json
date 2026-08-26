@@ -1,0 +1,19 @@
+[
+  {
+    "file": "first_voyage_pigafetta.txt",
+    "work": "The First Voyage Round the World, by Magellan",
+    "year": 1874,
+    "gutenberg_id": "74723",
+    "source_url": "https://www.gutenberg.org/ebooks/74723",
+    "translator": "Lord Stanley of Alderley",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "circumnavigation",
+      "strait",
+      "spice",
+      "pacific",
+      "voyage",
+      "navigation"
+    ]
+  }
+]

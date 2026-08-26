@@ -1,0 +1,40 @@
+[
+  {
+    "file": "binh_ngo_dai_cao.txt",
+    "work": "Bình Ngô đại cáo (quốc ngữ truyền thống)",
+    "year": 1428,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Bình_Ngô_đại_cáo",
+    "translator": "Quốc ngữ truyền thống — không ingest bản chú giải / dịch văn học hiện đại",
+    "license": "public_domain_original",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["nhan nghia", "an dan", "dai viet", "binh ngo"]
+  },
+  {
+    "file": "tai_du_vuong_thong.txt",
+    "work": "Tái dụ Vương Thông thư (Quân trung từ mệnh)",
+    "year": 1427,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tái_dụ_Vương_Thông_thư",
+    "translator": "Trúc Khê (Ngô Văn Triện, 1901–1947) — VN+US PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["thoi the", "tam cong", "du hang", "quan trung"]
+  },
+  {
+    "file": "quoc_am_thi_tap_dda.txt",
+    "work": "Quốc âm thi tập (Đào Duy Anh, 1976)",
+    "year": 1976,
+    "authorDeathYear": 1974,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/NguyenTraiToanTap",
+    "translator": "Đào Duy Anh (1904–1974) — phiên âm/chú giải thơ Nôm",
+    "license": "vn_translation_pd",
+    "textLayer": "quoc_ngu_pd",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["quoc am", "nom", "uc trai", "luc bat"]
+  }
+]

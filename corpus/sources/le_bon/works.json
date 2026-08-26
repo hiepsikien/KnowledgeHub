@@ -1,0 +1,54 @@
+[
+  {
+    "file": "the_crowd.txt",
+    "work": "The Crowd: A Study of the Popular Mind",
+    "year": 1895,
+    "gutenberg_id": "445",
+    "source_url": "https://www.gutenberg.org/ebooks/445",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "crowd",
+      "contagion",
+      "suggestion",
+      "anonymity",
+      "mass_psychology",
+      "images",
+      "leaders"
+    ]
+  },
+  {
+    "file": "psychology_of_revolution.txt",
+    "work": "The Psychology of Revolution",
+    "year": 1912,
+    "gutenberg_id": "448",
+    "source_url": "https://www.gutenberg.org/ebooks/448",
+    "translator": "Bernard Miall",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "revolution",
+      "belief",
+      "crowd",
+      "french_revolution",
+      "mysticism",
+      "political_psychology"
+    ]
+  },
+  {
+    "file": "psychology_of_socialism.txt",
+    "work": "The Psychology of Socialism",
+    "year": 1899,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/cu31924030349587",
+    "translator": null,
+    "license": "public_domain_usa_archive_1899",
+    "concepts": [
+      "socialism",
+      "belief",
+      "religion",
+      "propagation",
+      "institutions",
+      "crowd"
+    ]
+  }
+]

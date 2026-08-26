@@ -1,0 +1,18 @@
+[
+  {
+    "file": "novum_organum.txt",
+    "work": "Novum Organum",
+    "year": 1620,
+    "gutenberg_id": "45988",
+    "source_url": "https://www.gutenberg.org/ebooks/45988",
+    "translator": "Joseph Devey (editor)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "induction",
+      "idols",
+      "method",
+      "nature",
+      "experiment"
+    ]
+  }
+]

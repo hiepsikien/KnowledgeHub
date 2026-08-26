@@ -1,0 +1,82 @@
+[
+  {
+    "file": "psychology_of_emotions.txt",
+    "work": "The Psychology of the Emotions",
+    "year": 1897,
+    "gutenberg_id": "67585",
+    "source_url": "https://www.gutenberg.org/ebooks/67585",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "emotion",
+      "expression",
+      "feeling",
+      "physiology",
+      "pathology"
+    ]
+  },
+  {
+    "file": "creative_imagination.txt",
+    "work": "Essay on the Creative Imagination",
+    "year": 1906,
+    "gutenberg_id": "26430",
+    "source_url": "https://www.gutenberg.org/ebooks/26430",
+    "translator": "Albert Heyem Nachmen Baron",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "imagination",
+      "creation",
+      "invention",
+      "aesthetic",
+      "genius"
+    ]
+  },
+  {
+    "file": "psychology_of_attention.txt",
+    "work": "The Psychology of Attention",
+    "year": 1890,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/psychologyofatte00ribo",
+    "translator": null,
+    "license": "public_domain_usa_archive_1890",
+    "concepts": [
+      "attention",
+      "spontaneous_attention",
+      "voluntary_attention",
+      "mechanism",
+      "association"
+    ]
+  },
+  {
+    "file": "diseases_of_memory.txt",
+    "work": "Diseases of Memory: An Essay in the Positive Psychology",
+    "year": 1882,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/diseasesofmemory00ribouoft",
+    "translator": "William Huntington Smith",
+    "license": "public_domain_usa_archive_1882",
+    "concepts": [
+      "memory",
+      "amnesia",
+      "pathology",
+      "dissolution",
+      "organic_memory"
+    ]
+  },
+  {
+    "file": "diseases_of_the_will.txt",
+    "work": "Diseases of the Will",
+    "year": 1894,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/diseasesofwill00riboiala",
+    "translator": "Merwin-Marie Snell",
+    "license": "public_domain_usa_archive_1894",
+    "concepts": [
+      "will",
+      "volition",
+      "inhibition",
+      "dissolution",
+      "pathology"
+    ]
+  }
+]

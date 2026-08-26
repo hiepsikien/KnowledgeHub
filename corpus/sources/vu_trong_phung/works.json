@@ -1,0 +1,74 @@
+[
+  {
+    "file": "lam_di_chuong_1.txt",
+    "work": "Làm đĩ — Chương 1",
+    "year": 1936,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Làm_đĩ/Chương_1",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["dao duc gia", "su thuc", "mo pham", "xa hoi"]
+  },
+  {
+    "file": "lam_di_chuong_2.txt",
+    "work": "Làm đĩ — Chương 2",
+    "year": 1936,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Làm_đĩ/Chương_2",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["dao duc gia", "su thuc", "mo pham", "xa hoi"]
+  },
+  {
+    "file": "luc_si.txt",
+    "work": "Lục sì (1937)",
+    "year": 1937,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Lục_sì",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["phong su", "tien hoa", "mai dam", "ha noi"]
+  },
+  {
+    "file": "dam_hay_khong.txt",
+    "work": "Dâm hay là không dâm? (1937)",
+    "year": 1937,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Để_đáp_lời_báo_Ngày_nay_:_Dâm_hay_là_không_dâm_?",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["su thuc", "gia doi", "ta thuc", "dam"]
+  },
+  {
+    "file": "bung_tre_con.txt",
+    "work": "Bụng trẻ con (1934)",
+    "year": 1934,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Bụng_trẻ_con",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["tre con", "that tha", "gia dinh"]
+  },
+  {
+    "file": "chong_nang.txt",
+    "work": "Chống nạng lên đường (1930)",
+    "year": 1930,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Chống_nạng_lên_đường",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["ngheo", "ngua nguoi", "xe keo"]
+  }
+]

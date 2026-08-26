@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "licenses": [
+    {
+      "id": "public_domain_usa_gutenberg",
+      "label": "Gutenberg (Mỹ)",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "Project Gutenberg — thường PD Mỹ, kiểm renewal nếu sau 1928."
+    },
+    {
+      "id": "public_domain_usa_archive",
+      "label": "Internet Archive (Mỹ)",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "Internet Archive — ghi rõ năm xuất bản trên Archive."
+    },
+    {
+      "id": "public_domain_usa_archive_1889",
+      "label": "Archive 1889",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "Bản Archive xuất bản 1889 — PD Mỹ chắc chắn."
+    },
+    {
+      "id": "public_domain_usa_archive_1903",
+      "label": "Archive 1903",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "Bản Archive xuất bản 1903 — PD Mỹ chắc chắn."
+    },
+    {
+      "id": "public_domain_usa_archive_1909",
+      "label": "Archive 1909",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "Bản Archive xuất bản 1909 — PD Mỹ chắc chắn."
+    },
+    {
+      "id": "public_domain_usa_oll",
+      "label": "Online Library of Liberty",
+      "region": "us",
+      "jurisdiction": ["us"],
+      "description": "OLL — kiểm năm bản dịch / bản gốc."
+    },
+    {
+      "id": "public_domain_vn_wikisource",
+      "label": "Wikisource VN",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "vi.wikisource.org — áp dụng quy tắc PD Việt Nam (đời+50, gia hạn TRIPS nếu có)."
+    },
+    {
+      "id": "vn_nom_pd",
+      "label": "VN — Nôm/Hán gốc PD",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "Nguyên tác Nôm hoặc Hán — tác giả đã mất >50 năm."
+    },
+    {
+      "id": "vn_quoc_ngu_pd",
+      "label": "VN — Quốc ngữ PD (phiên âm)",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "Lớp quốc ngữ PD trên Wikisource — không phải bản dịch hiện đại còn ©."
+    },
+    {
+      "id": "vn_han_viet_pd",
+      "label": "VN — Hán–Việt PD",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "Văn bản Hán–Việt cổ (Phan Bội Châu, Phan Châu Trinh…)."
+    },
+    {
+      "id": "vn_translation_pd",
+      "label": "VN — Bản dịch cũ PD",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "Bản dịch quốc ngữ cũ đã PD (vd. Phan Kế Bính 1915) — PD theo người dịch."
+    },
+    {
+      "id": "public_domain_eu",
+      "label": "EU PD",
+      "region": "eu",
+      "jurisdiction": ["eu"],
+      "description": "Public domain tại EU (life+70 hoặc xuất bản+70)."
+    },
+    {
+      "id": "cc0",
+      "label": "CC0",
+      "region": "global",
+      "jurisdiction": ["global"],
+      "description": "Creative Commons Zero — từ bỏ quyền."
+    },
+    {
+      "id": "cc_by",
+      "label": "CC BY",
+      "region": "global",
+      "jurisdiction": ["global"],
+      "description": "Creative Commons Attribution — ghi nguồn bắt buộc."
+    },
+    {
+      "id": "public_domain_jp_aozora",
+      "label": "Aozora Bunko (Nhật)",
+      "region": "jp",
+      "jurisdiction": ["jp", "us"],
+      "description": "Nguyên tác Nhật trên Aozora — tác giả PD Nhật (chết ≤1967) và xuất bản lần đầu ≤1930 (PD Mỹ). Không ingest bản dịch / chú giải hiện đại."
+    }
+  ]
+}

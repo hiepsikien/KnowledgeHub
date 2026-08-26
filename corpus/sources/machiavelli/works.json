@@ -1,0 +1,48 @@
+[
+  {
+    "file": "the_prince.txt",
+    "work": "The Prince",
+    "year": 1532,
+    "gutenberg_id": "1232",
+    "source_url": "https://www.gutenberg.org/ebooks/1232",
+    "translator": "W. K. Marriott",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "virtu",
+      "fortuna",
+      "power",
+      "principality"
+    ]
+  },
+  {
+    "file": "discourses.txt",
+    "work": "Discourses on the First Decade of Titus Livius",
+    "year": 1531,
+    "gutenberg_id": "10827",
+    "source_url": "https://www.gutenberg.org/ebooks/10827",
+    "translator": "Ninian Hill Thomson",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "republic",
+      "liberty",
+      "corruption",
+      "virtu"
+    ]
+  },
+  {
+    "file": "art_of_war.txt",
+    "work": "The Art of War",
+    "year": 1521,
+    "gutenberg_id": "15772",
+    "source_url": "https://www.gutenberg.org/ebooks/15772",
+    "translator": "Peter Whitehorne",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "militia",
+      "mercenaries",
+      "discipline",
+      "fortification",
+      "citizen_army"
+    ]
+  }
+]

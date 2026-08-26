@@ -1,0 +1,47 @@
+[
+  {
+    "file": "critique_pure_reason_meiklejohn.txt",
+    "work": "The Critique of Pure Reason",
+    "year": 1781,
+    "gutenberg_id": "4280",
+    "source_url": "https://www.gutenberg.org/ebooks/4280",
+    "translator": "J. M. D. Meiklejohn",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "a_priori",
+      "categories",
+      "causality",
+      "phenomena",
+      "limits_of_reason"
+    ]
+  },
+  {
+    "file": "prolegomena.txt",
+    "work": "Prolegomena to Any Future Metaphysics",
+    "year": 1783,
+    "gutenberg_id": "52821",
+    "source_url": "https://www.gutenberg.org/ebooks/52821",
+    "translator": "Paul Carus (editor; Gutenberg #52821)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "a_priori",
+      "causality",
+      "hume",
+      "metaphysics"
+    ]
+  },
+  {
+    "file": "groundwork_metaphysic_morals.txt",
+    "work": "Fundamental Principles of the Metaphysic of Morals",
+    "year": 1785,
+    "gutenberg_id": "5682",
+    "source_url": "https://www.gutenberg.org/ebooks/5682",
+    "translator": "Thomas Kingsmill Abbott",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "duty",
+      "good_will",
+      "categorical_imperative"
+    ]
+  }
+]

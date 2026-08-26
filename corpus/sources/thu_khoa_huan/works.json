@@ -1,0 +1,122 @@
+[
+  {
+    "file": "tu_thuat.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tự_thuật_(Nguyễn_Hữu_Huân)",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tu thuat", "anh hung", "no doi", "co quoc"]
+  },
+  {
+    "file": "thuat_hoai.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Thuật_hoài_(Nguyễn_Hữu_Huân)",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["thuat hoai", "co quoc", "pha lo", "nui song"]
+  },
+  {
+    "file": "cam_hoai.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Cảm_hoài_(Nguyễn_Hữu_Huân)",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["cam hoai", "anh hung", "phuc quoc", "thang tram"]
+  },
+  {
+    "file": "tang_vo.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tặng_vợ",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tang vo", "vo", "hong nhan", "tiet khi"]
+  },
+  {
+    "file": "khi_duoc_tha_ve.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Khi_được_tha_về",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tha ve", "que huong", "non song", "gia thuc"]
+  },
+  {
+    "file": "di_day.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đi_đày",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["di day", "dao", "no doi", "co quoc"]
+  },
+  {
+    "file": "tha_bang_cam_tac.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Tha_bang_cảm_tác",
+    "translator": "Quốc ngữ PD — Wikisource; tên bài do sách đặt, dị bản có thể",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["tha bang", "cam tac", "tri ky", "phong luu"]
+  },
+  {
+    "file": "bua_cui.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://www.thivien.net/Nguy%E1%BB%85n-H%E1%BB%AFu-Hu%C3%A2n/B%E1%BB%ADa-c%E1%BB%A7i/poem-ZnPyPpvXV8iMGbwg6CKhgg",
+    "translator": "Quốc ngữ PD — Thi Viện (sách truyền thống); Wikisource liệt kê nhưng chưa có trang",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["bua cui", "lao dich", "khi tiet", "dao"]
+  },
+  {
+    "file": "ho_khoan_ca.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://www.thivien.net/Nguy%E1%BB%85n-H%E1%BB%AFu-Hu%C3%A2n/H%E1%BB%93-khoan-ca/poem-Wwo1_e0j0hDPEO103HhCIg",
+    "translator": "Hán–Việt PD — Thi Viện (sách truyền thống); Wikisource liệt kê nhưng chưa có trang",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["ho khoan ca", "han viet", "dan gian", "khoan ho"]
+  },
+  {
+    "file": "van_te_cho.txt",
+    "work": "Thơ Thủ Khoa Huân (quốc ngữ PD)",
+    "year": 1870,
+    "gutenberg_id": null,
+    "source_url": "https://www.thivien.net/Nguy%E1%BB%85n-H%E1%BB%AFu-Hu%C3%A2n/V%C4%83n-t%E1%BA%BF-ch%C3%B3/poem-M5mDvKZMIwW9-TUdBNeFWw",
+    "translator": "Quốc ngữ PD — Thi Viện (sách truyền thống); Wikisource liệt kê nhưng chưa có trang",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["van te cho", "te", "doi thuong", "van xuoi"]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "my_life_and_work.txt",
+    "work": "My Life and Work",
+    "year": 1922,
+    "gutenberg_id": "7213",
+    "source_url": "https://www.gutenberg.org/ebooks/7213",
+    "translator": "Samuel Crowther (collaborator)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "mass_production",
+      "assembly_line",
+      "wages",
+      "efficiency",
+      "automobile"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "introduction_to_psychology.txt",
+    "work": "An Introduction to Psychology",
+    "year": 1912,
+    "gutenberg_id": "46677",
+    "source_url": "https://www.gutenberg.org/ebooks/46677",
+    "translator": "Rudolf Pintner",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "experiment",
+      "consciousness",
+      "sensation",
+      "attention",
+      "volition"
+    ]
+  }
+]

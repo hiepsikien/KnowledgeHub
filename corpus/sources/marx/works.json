@@ -1,0 +1,48 @@
+[
+  {
+    "file": "communist_manifesto.txt",
+    "work": "The Communist Manifesto",
+    "year": 1848,
+    "gutenberg_id": "61",
+    "source_url": "https://www.gutenberg.org/ebooks/61",
+    "translator": "Samuel Moore (with Engels)",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "class_struggle",
+      "bourgeoisie",
+      "proletariat",
+      "communism"
+    ]
+  },
+  {
+    "file": "wage_labour_and_capital.txt",
+    "work": "Wage-Labor and Capital",
+    "year": 1847,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/wagelaborcapital00marx_0",
+    "translator": "J. L. Joynes",
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "wage",
+      "capital",
+      "labour",
+      "commodity"
+    ]
+  },
+  {
+    "file": "capital_vol1.txt",
+    "work": "Capital: A Critical Analysis of Capitalist Production",
+    "year": 1867,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/capitalcriticala00marx",
+    "translator": "Samuel Moore and Edward Aveling (1889 Appleton)",
+    "license": "public_domain_usa_archive_1889",
+    "concepts": [
+      "commodity",
+      "value",
+      "surplus_value",
+      "capital",
+      "labour"
+    ]
+  }
+]

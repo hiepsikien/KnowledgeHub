@@ -1,0 +1,18 @@
+[
+  {
+    "file": "micrographia.txt",
+    "work": "Micrographia",
+    "year": 1665,
+    "gutenberg_id": "15491",
+    "source_url": "https://www.gutenberg.org/ebooks/15491",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "observation",
+      "microscope",
+      "instrument",
+      "hypothesis",
+      "cells"
+    ]
+  }
+]

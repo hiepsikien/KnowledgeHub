@@ -1,0 +1,50 @@
+[
+  {
+    "file": "culture_and_anarchy.txt",
+    "work": "Culture and Anarchy",
+    "year": 1869,
+    "gutenberg_id": "4212",
+    "source_url": "https://www.gutenberg.org/ebooks/4212",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "culture",
+      "anarchy",
+      "standards",
+      "education",
+      "society"
+    ]
+  },
+  {
+    "file": "essays_in_criticism.txt",
+    "work": "Essays in Criticism",
+    "year": 1865,
+    "gutenberg_id": "77244",
+    "source_url": "https://www.gutenberg.org/ebooks/77244",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "criticism",
+      "poetry",
+      "culture",
+      "disinterestedness",
+      "literature"
+    ]
+  },
+  {
+    "file": "discourses_in_america.txt",
+    "work": "Discourses in America",
+    "year": 1885,
+    "gutenberg_id": "44919",
+    "source_url": "https://www.gutenberg.org/ebooks/44919",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "literature",
+      "science",
+      "education",
+      "culture",
+      "majority"
+    ]
+  }
+]

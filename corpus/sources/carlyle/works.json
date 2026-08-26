@@ -1,0 +1,18 @@
+[
+  {
+    "file": "french_revolution.txt",
+    "work": "The French Revolution: A History",
+    "year": 1837,
+    "gutenberg_id": "1301",
+    "source_url": "https://www.gutenberg.org/ebooks/1301",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "revolution",
+      "history",
+      "hero",
+      "violence",
+      "narrative"
+    ]
+  }
+]

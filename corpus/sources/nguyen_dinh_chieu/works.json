@@ -1,0 +1,38 @@
+[
+  {
+    "file": "luc_van_tien.txt",
+    "work": "Lục Vân Tiên (quốc ngữ PD)",
+    "year": 1851,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Lục_Vân_Tiên_(bản_Quốc_ngữ_2082_câu)",
+    "translator": "Quốc ngữ PD — Wikisource bản 2082 câu (I–IV), bỏ chú thích wiki; nguyên tác Nôm Nguyễn Đình Chiểu",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["nhan nghia", "trung hieu", "tiet hanh", "do chieu", "van tien"]
+  },
+  {
+    "file": "van_te.txt",
+    "work": "Văn tế nghĩa sĩ (Cần Giuộc, Lục tỉnh, Trương Định)",
+    "year": 1861,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Văn_tế_nghĩa_sĩ_Cần_Giuộc",
+    "translator": "Quốc ngữ PD — thân bài truyền thống, bỏ chú thích wiki",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["nghia si", "van te", "can giuoc", "truong dinh"]
+  },
+  {
+    "file": "duong_tu_ha_mau.txt",
+    "work": "Dương Từ – Hà Mậu (quốc ngữ PD)",
+    "year": 1864,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Dương_Từ_Hà_Mậu",
+    "translator": "Quốc ngữ PD — nguyên tác Nôm Nguyễn Đình Chiểu",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["dao hoc", "di doan", "duong tu", "ha mau"]
+  }
+]

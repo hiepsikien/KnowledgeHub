@@ -1,0 +1,19 @@
+[
+  {
+    "file": "life_and_works_mencius.txt",
+    "work": "The Life and Works of Mencius",
+    "year": 1875,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/thelifeandworkso00meniuoft",
+    "translator": "James Legge (EN; classical Chinese original)",
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "human_nature",
+      "righteousness",
+      "benevolence",
+      "government",
+      "people",
+      "qi"
+    ]
+  }
+]

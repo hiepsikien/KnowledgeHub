@@ -1,0 +1,18 @@
+[
+  {
+    "file": "fragments_of_science.txt",
+    "work": "Fragments of Science",
+    "year": 1879,
+    "gutenberg_id": "24527",
+    "source_url": "https://www.gutenberg.org/ebooks/24527",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "heat",
+      "radiation",
+      "aqueous_vapour",
+      "experiment",
+      "glacier"
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "file": "peyser_life.txt",
+    "work": "George Frideric Handel",
+    "year": 1951,
+    "gutenberg_id": "49226",
+    "source_url": "https://www.gutenberg.org/ebooks/49226",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "handel",
+      "baroque",
+      "oratorio",
+      "london",
+      "opera"
+    ]
+  },
+  {
+    "file": "dent_handel.txt",
+    "work": "Handel (Dent)",
+    "year": 1934,
+    "gutenberg_id": "9089",
+    "source_url": "https://www.gutenberg.org/ebooks/9089",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "handel",
+      "baroque",
+      "oratorio",
+      "london",
+      "opera"
+    ]
+  },
+  {
+    "file": "rolland_handel.txt",
+    "work": "Handel (Rolland)",
+    "year": 1916,
+    "gutenberg_id": "39671",
+    "source_url": "https://www.gutenberg.org/ebooks/39671",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "handel",
+      "baroque",
+      "oratorio",
+      "london",
+      "opera"
+    ]
+  },
+  {
+    "file": "mainwaring.txt",
+    "work": "Memoirs of the Life of the Late George Frederic Handel",
+    "year": 1760,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/memoirsoflifeofl00main",
+    "translator": null,
+    "license": "public_domain_usa_archive_1760",
+    "concepts": [
+      "handel",
+      "baroque",
+      "oratorio",
+      "london",
+      "opera"
+    ]
+  },
+  {
+    "file": "rockstro.txt",
+    "work": "The Life of George Frederick Handel",
+    "year": 1883,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/lifeofgeorgefred00rock",
+    "translator": null,
+    "license": "public_domain_usa_archive_1883",
+    "concepts": [
+      "handel",
+      "baroque",
+      "oratorio",
+      "london",
+      "opera"
+    ]
+  }
+]

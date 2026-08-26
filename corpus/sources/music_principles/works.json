@@ -1,0 +1,34 @@
+[
+  {
+    "file": "lessons_in_music_form.txt",
+    "work": "Lessons in Music Form",
+    "year": 1904,
+    "gutenberg_id": "19354",
+    "source_url": "https://www.gutenberg.org/ebooks/19354",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "form",
+      "motif",
+      "phrase",
+      "period",
+      "sonata",
+      "theme"
+    ]
+  },
+  {
+    "file": "simple_counterpoint.txt",
+    "work": "A Treatise on Simple Counterpoint in Forty Lessons",
+    "year": 1907,
+    "gutenberg_id": "16342",
+    "source_url": "https://www.gutenberg.org/ebooks/16342",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "counterpoint",
+      "voice_leading",
+      "species",
+      "harmony"
+    ]
+  }
+]

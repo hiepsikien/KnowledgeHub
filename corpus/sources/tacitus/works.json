@@ -1,0 +1,50 @@
+[
+  {
+    "file": "annals_tiberius.txt",
+    "work": "The Reign of Tiberius, Out of the First Six Annals of Tacitus",
+    "year": 109,
+    "gutenberg_id": "7959",
+    "source_url": "https://www.gutenberg.org/ebooks/7959",
+    "translator": "Thomas Gordon",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "empire",
+      "tyranny",
+      "corruption",
+      "morals",
+      "power"
+    ]
+  },
+  {
+    "file": "germany_agricola.txt",
+    "work": "The Germany and the Agricola of Tacitus",
+    "year": 98,
+    "gutenberg_id": "7524",
+    "source_url": "https://www.gutenberg.org/ebooks/7524",
+    "translator": "Oxford Translation",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "empire",
+      "conquest",
+      "peace",
+      "province",
+      "character"
+    ]
+  },
+  {
+    "file": "histories.txt",
+    "work": "Tacitus: The Histories, Volumes I and II",
+    "year": 109,
+    "gutenberg_id": "16927",
+    "source_url": "https://www.gutenberg.org/ebooks/16927",
+    "translator": "W. Hamilton Fyfe",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "civil_war",
+      "empire",
+      "power",
+      "year_of_four_emperors",
+      "army"
+    ]
+  }
+]

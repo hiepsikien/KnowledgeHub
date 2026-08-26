@@ -1,0 +1,37 @@
+[
+  {
+    "file": "freedom_of_the_seas.txt",
+    "work": "The Freedom of the Seas",
+    "year": 1609,
+    "gutenberg_id": "75962",
+    "source_url": "https://www.gutenberg.org/ebooks/75962",
+    "translator": "Ralph Van Deman Magoffin",
+    "license": "public_domain_usa_gutenberg",
+    "note": "PG bilingual Latin/English. After fetch, keep English Grotius chapters only (drop Scott intro, Latin pages, appendix letters).",
+    "concepts": [
+      "mare_liberum",
+      "freedom_of_the_seas",
+      "navigation",
+      "trade",
+      "natural_law",
+      "portuguese_monopoly"
+    ]
+  },
+  {
+    "file": "rights_of_war_and_peace.txt",
+    "work": "The Rights of War and Peace",
+    "year": 1625,
+    "gutenberg_id": "46564",
+    "source_url": "https://www.gutenberg.org/ebooks/46564",
+    "translator": "A. C. Campbell",
+    "license": "public_domain_usa_gutenberg",
+    "note": "After fetch, drop David J. Hill introduction; ingest Campbell treatise from Book I.",
+    "concepts": [
+      "law_of_nations",
+      "just_war",
+      "natural_law",
+      "sovereignty",
+      "peace"
+    ]
+  }
+]

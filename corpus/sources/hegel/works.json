@@ -1,0 +1,52 @@
+[
+  {
+    "file": "logic_of_hegel.txt",
+    "work": "The Logic of Hegel",
+    "year": 1830,
+    "gutenberg_id": "55108",
+    "source_url": "https://www.gutenberg.org/ebooks/55108",
+    "translator": "William Wallace",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "dialectic",
+      "opposition",
+      "contradiction",
+      "being",
+      "nothing",
+      "becoming",
+      "concept",
+      "aufhebung"
+    ]
+  },
+  {
+    "file": "philosophy_of_mind.txt",
+    "work": "Hegel's Philosophy of Mind",
+    "year": 1830,
+    "gutenberg_id": "39064",
+    "source_url": "https://www.gutenberg.org/ebooks/39064",
+    "translator": "William Wallace",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "spirit",
+      "freedom",
+      "mind",
+      "ethics",
+      "absolute_spirit"
+    ]
+  },
+  {
+    "file": "intro_philosophy_fine_arts.txt",
+    "work": "The Introduction to Hegel's Philosophy of Fine Arts",
+    "year": 1886,
+    "gutenberg_id": "46330",
+    "source_url": "https://www.gutenberg.org/ebooks/46330",
+    "translator": "Bernard Bosanquet",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "aesthetics",
+      "beauty",
+      "art",
+      "spirit"
+    ]
+  }
+]

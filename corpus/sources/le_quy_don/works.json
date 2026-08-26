@@ -1,0 +1,122 @@
+[
+  {
+    "file": "kien_van_cao_si.txt",
+    "work": "Kiến văn tiểu lục — Các bực cao-sĩ nước Nam ta",
+    "year": 1777,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/107",
+    "translator": "Nguyễn Hữu Tiến (Đông Châu, 1875–1941), Nam Phong số 32 — VN+US PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["cao si", "si phong", "kien van", "danh tiet"]
+  },
+  {
+    "file": "kien_van_108.txt",
+    "work": "Kiến văn tiểu lục (lát Nam Phong PD)",
+    "year": 1777,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/108",
+    "translator": "Nguyễn Hữu Tiến — Nam Phong PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["kien van", "si phong", "danh tiet"]
+  },
+  {
+    "file": "kien_van_109.txt",
+    "work": "Kiến văn tiểu lục (lát Nam Phong PD)",
+    "year": 1777,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/109",
+    "translator": "Nguyễn Hữu Tiến — Nam Phong PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["kien van", "si phong", "danh tiet"]
+  },
+  {
+    "file": "kien_van_110.txt",
+    "work": "Kiến văn tiểu lục (lát Nam Phong PD)",
+    "year": 1777,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/110",
+    "translator": "Nguyễn Hữu Tiến — Nam Phong PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["kien van", "si phong", "danh tiet"]
+  },
+  {
+    "file": "kien_van_111.txt",
+    "work": "Kiến văn tiểu lục (lát Nam Phong PD)",
+    "year": 1777,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quốc_văn_trích_diễm/111",
+    "translator": "Nguyễn Hữu Tiến — Nam Phong PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["kien van", "si phong", "danh tiet"]
+  },
+  {
+    "file": "van_dai_lat_phong_tuc.txt",
+    "work": "Vân đài loại ngữ (lát quốc ngữ qua Phan 1915)",
+    "year": 1773,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_phong_tục/I.1",
+    "translator": "Phan Kế Bính thuật lời Vân đài trong Việt Nam phong tục (1915) — không phải mục lục sách",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["van dai loai ngu", "phong tuc", "khao"]
+  },
+  {
+    "file": "van_dai_i2.txt",
+    "work": "Vân đài loại ngữ (lát quốc ngữ qua Phan 1915)",
+    "year": 1773,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_phong_tục/I.2",
+    "translator": "Phan Kế Bính thuật lời Vân đài — I.2",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["van dai loai ngu", "phong tuc", "khao"]
+  },
+  {
+    "file": "van_dai_i3.txt",
+    "work": "Vân đài loại ngữ (lát quốc ngữ qua Phan 1915)",
+    "year": 1773,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_phong_tục/I.3",
+    "translator": "Phan Kế Bính thuật lời Vân đài — I.3",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["van dai loai ngu", "phong tuc", "khao"]
+  },
+  {
+    "file": "viet_han_van_khao_van_dai.txt",
+    "work": "Việt Hán văn khảo (Phan Kế Bính) — chín mục Vân đài",
+    "year": 1918,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Hán_văn_khảo/VIII",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["van dai loai ngu", "ly khi", "bac hoc"]
+  },
+  {
+    "file": "viet_han_van_khao_vii.txt",
+    "work": "Việt Hán văn khảo (Phan Kế Bính) — mục VII",
+    "year": 1918,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Hán_văn_khảo/VII",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["viet han van khao", "ly khi", "bac hoc"]
+  }
+]

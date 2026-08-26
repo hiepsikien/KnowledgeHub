@@ -1,0 +1,19 @@
+[
+  {
+    "file": "physical_geography_of_the_sea.txt",
+    "work": "The Physical Geography of the Sea and its Meteorology",
+    "year": 1864,
+    "gutenberg_id": null,
+    "source_url": "https://en.wikisource.org/wiki/Physical_Geography_of_the_Sea_and_its_Meteorology",
+    "translator": null,
+    "license": "public_domain_usa_wikisource",
+    "concepts": [
+      "gulf stream",
+      "currents",
+      "winds",
+      "ocean",
+      "atmosphere",
+      "navigation"
+    ]
+  }
+]

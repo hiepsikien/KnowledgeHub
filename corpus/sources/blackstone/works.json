@@ -1,0 +1,18 @@
+[
+  {
+    "file": "commentaries_book1.txt",
+    "work": "Commentaries on the Laws of England, Book the First",
+    "year": 1765,
+    "gutenberg_id": "30802",
+    "source_url": "https://www.gutenberg.org/ebooks/30802",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "common_law",
+      "rights",
+      "property",
+      "constitution",
+      "jurisprudence"
+    ]
+  }
+]

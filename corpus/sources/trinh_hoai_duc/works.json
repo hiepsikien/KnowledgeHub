@@ -1,0 +1,26 @@
+[
+  {
+    "file": "di_su_cam_tac.txt",
+    "work": "Đi sứ cảm tác (quốc ngữ PD)",
+    "year": 1802,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đi_sứ_cảm_tác",
+    "translator": "Quốc ngữ PD — Wikisource / Thi pháp nhập môn (Trương Minh Ký, 1898)",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["di su", "trung nghia", "non nuoc", "su gia"]
+  },
+  {
+    "file": "gdttc_quyen_iii_cuong_vuc.txt",
+    "work": "Gia Định thành thông chí — Quyển III Cương vực chí (Nguyễn Tạo 1972 PD)",
+    "year": 1820,
+    "gutenberg_id": null,
+    "source_url": "http://ndclnh-mytho-usa.org/KhoSachCu/Gia%20Dinh%20Thanh%20Thong%20Chi%20Tap%20Trung%20(Trinh%20Hoai%20Duc).pdf",
+    "translator": "Tu Trai Nguyễn Tạo — Nha Văn hóa, Phủ Quốc-vụ-khanh, 1972 (Tập Trung; OCR)",
+    "license": "public_domain_vn_nguyen_tao_1972",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["cuong vuc", "dia ly", "bien gioi", "hanh chinh", "nam ky"]
+  }
+]

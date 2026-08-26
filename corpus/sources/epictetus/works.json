@@ -1,0 +1,18 @@
+[
+  {
+    "file": "enchiridion.txt",
+    "work": "The Enchiridion",
+    "year": 125,
+    "gutenberg_id": "45109",
+    "source_url": "https://www.gutenberg.org/ebooks/45109",
+    "translator": "Thomas Wentworth Higginson",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "stoicism",
+      "control",
+      "impressions",
+      "freedom",
+      "practice"
+    ]
+  }
+]

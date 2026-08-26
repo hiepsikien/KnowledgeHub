@@ -1,0 +1,32 @@
+[
+  {
+    "file": "jacobs_room.txt",
+    "work": "Jacob's Room",
+    "year": 1922,
+    "gutenberg_id": "5670",
+    "source_url": "https://www.gutenberg.org/ebooks/5670",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "consciousness",
+      "traces",
+      "time",
+      "absence"
+    ]
+  },
+  {
+    "file": "voyage_out.txt",
+    "work": "The Voyage Out",
+    "year": 1915,
+    "gutenberg_id": "144",
+    "source_url": "https://www.gutenberg.org/ebooks/144",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "voyage",
+      "gender",
+      "coming_of_age",
+      "society"
+    ]
+  }
+]

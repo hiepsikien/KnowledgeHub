@@ -1,0 +1,62 @@
+[
+  {
+    "file": "zarathustra.txt",
+    "work": "Thus Spake Zarathustra",
+    "year": 1883,
+    "gutenberg_id": "1998",
+    "source_url": "https://www.gutenberg.org/ebooks/1998",
+    "translator": "Thomas Common",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "ubermensch",
+      "eternal_recurrence",
+      "nihilism",
+      "self_overcoming"
+    ]
+  },
+  {
+    "file": "beyond_good_and_evil.txt",
+    "work": "Beyond Good and Evil",
+    "year": 1886,
+    "gutenberg_id": "4363",
+    "source_url": "https://www.gutenberg.org/ebooks/4363",
+    "translator": "Helen Zimmern",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "morality",
+      "will_to_power",
+      "perspectivism",
+      "prejudices_of_philosophers"
+    ]
+  },
+  {
+    "file": "genealogy_of_morals.txt",
+    "work": "The Genealogy of Morals",
+    "year": 1887,
+    "gutenberg_id": "52319",
+    "source_url": "https://www.gutenberg.org/ebooks/52319",
+    "translator": "Horace B. Samuel",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "genealogy",
+      "ressentiment",
+      "slave_morality",
+      "ascetic_ideal"
+    ]
+  },
+  {
+    "file": "birth_of_tragedy.txt",
+    "work": "The Birth of Tragedy",
+    "year": 1872,
+    "gutenberg_id": "51356",
+    "source_url": "https://www.gutenberg.org/ebooks/51356",
+    "translator": "William A. Haussmann",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "apollo",
+      "dionysus",
+      "tragedy",
+      "art"
+    ]
+  }
+]

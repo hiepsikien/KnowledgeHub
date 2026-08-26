@@ -1,0 +1,34 @@
+[
+  {
+    "file": "poems.txt",
+    "work": "Poems of William Blake",
+    "year": 1794,
+    "gutenberg_id": "574",
+    "source_url": "https://www.gutenberg.org/ebooks/574",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "innocence",
+      "experience",
+      "imagination",
+      "contrary",
+      "energy"
+    ]
+  },
+  {
+    "file": "marriage_heaven_hell.txt",
+    "work": "The Marriage of Heaven and Hell",
+    "year": 1790,
+    "gutenberg_id": "45315",
+    "source_url": "https://www.gutenberg.org/ebooks/45315",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "contrary",
+      "energy",
+      "desire",
+      "proverb",
+      "imagination"
+    ]
+  }
+]

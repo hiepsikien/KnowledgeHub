@@ -1,0 +1,32 @@
+[
+  {
+    "file": "chemical_history_of_a_candle.txt",
+    "work": "The Chemical History of a Candle",
+    "year": 1861,
+    "gutenberg_id": "14474",
+    "source_url": "https://www.gutenberg.org/ebooks/14474",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "experiment",
+      "combustion",
+      "observation",
+      "public_science"
+    ]
+  },
+  {
+    "file": "experimental_researches_electricity_vol1.txt",
+    "work": "Experimental Researches in Electricity, Volume 1",
+    "year": 1839,
+    "gutenberg_id": "14986",
+    "source_url": "https://www.gutenberg.org/ebooks/14986",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "electricity",
+      "induction",
+      "force",
+      "experiment"
+    ]
+  }
+]

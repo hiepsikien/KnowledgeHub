@@ -1,0 +1,13 @@
+[
+  {
+    "file": "the_book_of_tea.txt",
+    "work": "The Book of Tea",
+    "year": 1906,
+    "gutenberg_id": "769",
+    "source_url": "https://www.gutenberg.org/ebooks/769",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "lang": "en",
+    "concepts": ["teaism", "art", "empty", "east_west"]
+  }
+]

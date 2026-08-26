@@ -1,0 +1,18 @@
+[
+  {
+    "file": "federalist_papers.txt",
+    "work": "The Federalist Papers",
+    "year": 1788,
+    "gutenberg_id": "1404",
+    "source_url": "https://www.gutenberg.org/ebooks/1404",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "faction",
+      "separation_of_powers",
+      "republic",
+      "federalism",
+      "checks"
+    ]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "file": "dau_phap_chinh_phu_thu.txt",
+    "work": "Đầu Pháp chính phủ thư (quốc ngữ PD)",
+    "year": 1906,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đầu_Pháp_Chính_phủ_thư",
+    "translator": "Ngô Đức Kế — quốc ngữ PD (in sớm; nguyên Hán Phan Châu Trinh 1906)",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["khai dan tri", "quan lai", "suu thue", "bao ho", "dan quyen"]
+  },
+  {
+    "file": "quan_tri_dan_tri.txt",
+    "work": "Quân trị chủ nghĩa và Dân trị chủ nghĩa (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Quân_trị_chủ_nghĩa_và_Dân_trị_chủ_nghĩa",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["quan tri", "dan tri", "nhan tri", "phap tri", "duy tan"]
+  },
+  {
+    "file": "dao_duc_luan_ly_dong_tay.txt",
+    "work": "Đạo đức, luân lý Đông Tây (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Đạo_đức,_luân_lý_Đông_Tây/Đạo_đức_và_luân_lý_Đông_Tây",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["dao duc", "luan ly", "dan tri", "tu do", "khai dan"]
+  },
+  {
+    "file": "thu_cam_on_sarraut.txt",
+    "work": "Thư cảm ơn Toàn quyền Sarraut (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Thư_cảm_ơn_Toàn_quyền_Sarraut_đã_cho_ở_thêm_một_năm",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["thu", "dan tri", "an xa", "bao ho"]
+  },
+  {
+    "file": "cac_kien_nghi_roux.txt",
+    "work": "Các kiến nghị vắn tắt (1925, Roux dịch)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Các_kiến_nghị_vắn_tắt_của_Phan_Châu_Trinh_do_Roux_dịch_chuyển_cho_bộ_trưởng_thuộc_địa_và_Sarraut",
+    "translator": "Roux dịch chuyển — quốc ngữ PD",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["kien nghi", "dan tri", "phap tri", "bao ho"]
+  },
+  {
+    "file": "hang_luong_dan.txt",
+    "work": "Hạng \"lương dân\" của Phan Châu Trinh (1925)",
+    "year": 1925,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Hạng_\"lương_dân\"_của_Phan_Châu_Trinh_hay_là:_từ_Nguyễn_Thuật,_Hồ_Lệ,_đến_ông_Bùi_Đằng_Đoàn",
+    "translator": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "concepts": ["luong dan", "dan tri", "duy tan"]
+  }
+]

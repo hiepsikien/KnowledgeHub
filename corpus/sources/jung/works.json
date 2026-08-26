@@ -1,0 +1,33 @@
+[
+  {
+    "file": "psychology_of_the_unconscious.txt",
+    "work": "Psychology of the Unconscious",
+    "year": 1916,
+    "gutenberg_id": "65903",
+    "source_url": "https://www.gutenberg.org/ebooks/65903",
+    "translator": "Beatrice M. Hinkle",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "libido",
+      "symbol",
+      "myth",
+      "unconscious",
+      "transformation"
+    ]
+  },
+  {
+    "file": "theory_of_psychoanalysis.txt",
+    "work": "The Theory of Psychoanalysis",
+    "year": 1915,
+    "gutenberg_id": "66041",
+    "source_url": "https://www.gutenberg.org/ebooks/66041",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "psychoanalysis",
+      "complex",
+      "neurosis",
+      "types"
+    ]
+  }
+]

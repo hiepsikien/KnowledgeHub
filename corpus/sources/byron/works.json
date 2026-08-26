@@ -1,0 +1,32 @@
+[
+  {
+    "file": "childe_harold.txt",
+    "work": "Childe Harold's Pilgrimage",
+    "year": 1812,
+    "gutenberg_id": "5131",
+    "source_url": "https://www.gutenberg.org/ebooks/5131",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "rebellion",
+      "travel",
+      "history",
+      "romantic"
+    ]
+  },
+  {
+    "file": "don_juan.txt",
+    "work": "Don Juan",
+    "year": 1819,
+    "gutenberg_id": "21700",
+    "source_url": "https://www.gutenberg.org/ebooks/21700",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "satire",
+      "love",
+      "liberty",
+      "comedy"
+    ]
+  }
+]

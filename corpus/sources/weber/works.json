@@ -1,0 +1,18 @@
+[
+  {
+    "file": "protestant_ethic.txt",
+    "work": "The Protestant Ethic and the Spirit of Capitalism",
+    "year": 1905,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/protestantethics00webe",
+    "translator": "Talcott Parsons",
+    "license": "public_domain_usa_archive_1930",
+    "concepts": [
+      "protestant_ethic",
+      "capitalism",
+      "asceticism",
+      "rationalization",
+      "religion"
+    ]
+  }
+]

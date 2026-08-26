@@ -1,0 +1,50 @@
+[
+  {
+    "file": "hamlet.txt",
+    "work": "Hamlet",
+    "year": 1601,
+    "gutenberg_id": "1524",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "conscience",
+      "revenge",
+      "delay",
+      "appearance",
+      "tragedy"
+    ]
+  },
+  {
+    "file": "macbeth.txt",
+    "work": "Macbeth",
+    "year": 1606,
+    "gutenberg_id": "1533",
+    "source_url": "https://www.gutenberg.org/ebooks/1533",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "ambition",
+      "guilt",
+      "power",
+      "prophecy",
+      "tragedy"
+    ]
+  },
+  {
+    "file": "king_lear.txt",
+    "work": "King Lear",
+    "year": 1606,
+    "gutenberg_id": "1532",
+    "source_url": "https://www.gutenberg.org/ebooks/1532",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "filial",
+      "nothing",
+      "ingratitude",
+      "storm",
+      "authority"
+    ]
+  }
+]

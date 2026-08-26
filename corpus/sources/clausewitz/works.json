@@ -1,0 +1,34 @@
+[
+  {
+    "file": "on_war.txt",
+    "work": "On War",
+    "year": 1832,
+    "gutenberg_id": "1946",
+    "source_url": "https://www.gutenberg.org/ebooks/1946",
+    "translator": "J. J. Graham",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "politics",
+      "friction",
+      "center_of_gravity",
+      "fog",
+      "will"
+    ]
+  },
+  {
+    "file": "campaign_1812.txt",
+    "work": "The Campaign of 1812 in Russia",
+    "year": 1835,
+    "gutenberg_id": null,
+    "source_url": "https://www.clausewitzstudies.org/readings/1812/Clausewitz-CampaignOf1812inRussia-EllesmereTranslation.pdf",
+    "translator": "Francis Egerton, Lord Ellesmere",
+    "license": "public_domain_usa",
+    "concepts": [
+      "campaign",
+      "russia",
+      "friction",
+      "retreat",
+      "policy"
+    ]
+  }
+]

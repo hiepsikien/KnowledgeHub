@@ -1,0 +1,14 @@
+[
+  {
+    "file": "cung_oan_ngam_khuc.txt",
+    "work": "Cung oán ngâm khúc (quốc ngữ PD)",
+    "year": 1800,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Cung_oán_ngâm_khúc_(bản_phổ_biến)",
+    "translator": "Quốc ngữ PD — bản phổ biến, thân khúc; bỏ chú thích wiki",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": ["cung oan", "phan bac", "ma hong", "cung cam"]
+  }
+]

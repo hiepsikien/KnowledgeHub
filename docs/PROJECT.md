@@ -5,7 +5,7 @@
 - **Repo (dự kiến):** https://github.com/hiepsikien/KnowledgeHub  
 - **Triển khai ban đầu:** evolve từ CMS trong [Think](https://github.com/hiepsikien/Think) (`apps/`)  
 - **Consumer:** [Think](https://github.com/hiepsikien/Think) · [Read](https://github.com/hiepsikien/Read)  
-- **Trạng thái:** Planning — chờ audit corpus + CMS Think  
+- **Trạng thái:** Planning — Phase 0 audit xong (`docs/hub-evolution.md`); Phase 1 chưa implement  
 
 ---
 
@@ -54,16 +54,21 @@ Knowledge Hub cho phép:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              Knowledge Hub (evolve từ Think CMS)         │
-│  corpus .txt · authors · license · publish workflow      │
+│  KnowledgeHub/corpus  (canonical .txt + works.json)     │
+│  licenses · sources/<brain>/works.json · raw/*.txt      │
 └──────────────────────────┬──────────────────────────────┘
-                           │ Hub API + export
+                           │ ingest đọc file (Think CMS)
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  Think  — forests, chunks RAG, salon API, CMS UI        │
+└──────────────────────────┬──────────────────────────────┘
+                           │ Hub API (sau Phase 1) + export
            ┌───────────────┴───────────────┐
            ▼                               ▼
     ┌─────────────┐                 ┌─────────────┐
     │  Think app  │                 │  Read app   │
     │  (consumer) │                 │  (consumer) │
-    │  API realtime│                 │  sync-copy  │
+    │  chunks/RAG │                 │  sync-copy  │
     └─────────────┘                 └─────────────┘
 ```
 
@@ -71,11 +76,11 @@ Knowledge Hub cho phép:
 
 | Thành phần | Vai trò |
 |------------|---------|
-| **Knowledge Hub** | Source of truth — sở hữu text gốc, metadata, license, version |
-| **Think app** | Consumer nội bộ — đọc corpus qua Hub API (không đọc file trực tiếp) |
+| **Knowledge Hub** | Source of truth — **repo này** giữ text gốc + `works.json` + license |
+| **Think app** | Consumer — ingest từ Hub filesystem, runtime RAG trên chunks (không sở hữu `.txt`) |
 | **Read** | Consumer đọc sách — **sync bản copy** (full text + chapters) vào DB Read |
-| **Repo KnowledgeHub** | Docs, schema, hợp đồng API (cross-cutting) |
-| **Repo Think** | CMS + corpus + implementation Hub |
+| **Repo KnowledgeHub** | Docs, schema, **canonical corpus** (`corpus/`) |
+| **Repo Think** | CMS UI + Hub API runtime + forests + chunks (derived) |
 | **Repo Read** | Sync job + reader + TTS |
 
 ---
@@ -257,22 +262,22 @@ Read sync job (sync_from_hub)
 
 | Repo | Nội dung |
 |------|----------|
-| **KnowledgeHub** | Docs (file này), JSON Schema, OpenAPI, roadmap |
-| **Think** | CMS implementation, corpus storage, Hub API runtime |
+| **KnowledgeHub** | Docs, JSON Schema, **canonical `corpus/`** (works.json; raw gitignored) |
+| **Think** | CMS, forests, RAG chunks, Hub API runtime |
 | **Read** | `sync_from_hub`, `hub_work_id` migration, reader |
 
-Implementation **không** tách repo ngay — evolve trong Think cho đến khi API ổn định.
+Think **ingest bắt buộc đọc** `KNOWLEDGEHUB_CORPUS` (thư mục `corpus/` của repo này). Implementation API vẫn evolve trong Think cho đến khi HTTP Hub ổn định.
 
 ---
 
 ## 9. Roadmap
 
-### Phase 0 — Audit Think *(chờ quyền repo)*
+### Phase 0 — Audit Think
 
-- [ ] Map `apps/cms` — stack, models, license fields
-- [ ] Inventory corpus `.txt` — naming, metadata hiện có
-- [ ] Tìm chỗ Think app đọc corpus trực tiếp
-- [ ] Output: `docs/hub-evolution.md`
+- [x] Map `apps/cms` — stack, models, license fields
+- [x] Inventory corpus `.txt` — naming, metadata hiện có
+- [x] Tìm chỗ Think app đọc corpus trực tiếp
+- [x] Output: [`docs/hub-evolution.md`](./hub-evolution.md) (2026-08-27, local Think clone)
 
 ### Phase 1 — Platform layer trên CMS
 
@@ -305,13 +310,14 @@ Implementation **không** tách repo ngay — evolve trong Think cho đến khi 
 
 | Hạng mục | Quyết định |
 |----------|------------|
-| Source of truth | Knowledge Hub (evolve Think CMS) |
+| Source of truth | KnowledgeHub `corpus/` (text + works.json); Think CMS duyệt / ingest |
 | Định dạng corpus | `.txt` |
 | Series / glossary | Không ở v1 |
 | Read lưu fulltext? | **Có** — sync-copy, không proxy realtime |
-| Think đọc fulltext? | Qua Hub API |
+| Think đọc fulltext? | Ingest từ `KnowledgeHub/corpus`; salon dùng chunks, không đọc `.txt` lúc gọi |
 | Publisher logic | Hub publish → consumer sync |
-| Repo docs | KnowledgeHub (repo riêng) |
+| Corpus `.txt` | **KnowledgeHub/corpus** (filesystem). Think không còn là nơi lưu canonical raw. |
+| Repo docs | KnowledgeHub (repo riêng) + `corpus/` |
 
 ## 11. Quyết định còn mở
 
@@ -320,7 +326,7 @@ Implementation **không** tách repo ngay — evolve trong Think cho đến khi 
 | 1 | Read auto-publish sau Hub publish, hay `pending_review`? |
 | 2 | Pricing mặc định work Hub trên Read? |
 | 3 | Think cần export **raw** hay **chunks** cho embedding? |
-| 4 | Corpus `.txt` lưu filesystem hay DB trong CMS hiện tại? |
+| 4 | Corpus `.txt` lưu filesystem hay DB? | **Chốt:** canonical filesystem dưới **KnowledgeHub/corpus**. Think chỉ giữ chunks derived + mirror `works.json` cho GCS. SQLite không chứa corpus. |
 
 ---
 

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "paradise_lost.txt",
+    "work": "Paradise Lost",
+    "year": 1667,
+    "gutenberg_id": "26",
+    "source_url": "https://www.gutenberg.org/ebooks/26",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "free_will",
+      "fall",
+      "epic",
+      "rebellion",
+      "good_evil"
+    ]
+  }
+]

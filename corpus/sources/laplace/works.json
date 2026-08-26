@@ -1,0 +1,18 @@
+[
+  {
+    "file": "philosophical_essay_probabilities.txt",
+    "work": "A Philosophical Essay on Probabilities",
+    "year": 1814,
+    "gutenberg_id": "58881",
+    "source_url": "https://www.gutenberg.org/ebooks/58881",
+    "translator": "Frederick Wilson Truscott and Frederick Lincoln Emory",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "probability",
+      "chance",
+      "expectation",
+      "induction",
+      "certainty"
+    ]
+  }
+]

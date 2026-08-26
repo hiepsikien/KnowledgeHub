@@ -1,0 +1,18 @@
+[
+  {
+    "file": "story_of_the_pullman_car.txt",
+    "work": "The Story of the Pullman Car",
+    "year": 1917,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/storypullmancar01husbgoog",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "sleeping_car",
+      "company_town",
+      "strike",
+      "railroad",
+      "labor"
+    ]
+  }
+]

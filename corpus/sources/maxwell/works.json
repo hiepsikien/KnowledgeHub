@@ -1,0 +1,18 @@
+[
+  {
+    "file": "maxwell_modern_physics.txt",
+    "work": "James Clerk Maxwell and Modern Physics",
+    "year": 1896,
+    "gutenberg_id": "65359",
+    "source_url": "https://www.gutenberg.org/ebooks/65359",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "electromagnetism",
+      "field",
+      "light",
+      "kinetic_theory",
+      "unification"
+    ]
+  }
+]

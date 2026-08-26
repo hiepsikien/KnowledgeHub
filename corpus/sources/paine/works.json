@@ -1,0 +1,32 @@
+[
+  {
+    "file": "common_sense.txt",
+    "work": "Common Sense",
+    "year": 1776,
+    "gutenberg_id": "147",
+    "source_url": "https://www.gutenberg.org/ebooks/147",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "independence",
+      "monarchy",
+      "republic",
+      "common_sense"
+    ]
+  },
+  {
+    "file": "rights_of_man.txt",
+    "work": "The Rights of Man",
+    "year": 1791,
+    "gutenberg_id": "3742",
+    "source_url": "https://www.gutenberg.org/ebooks/3742",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "natural_rights",
+      "revolution",
+      "hereditary",
+      "government"
+    ]
+  }
+]

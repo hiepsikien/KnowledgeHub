@@ -1,0 +1,33 @@
+[
+  {
+    "file": "laws_of_thought.txt",
+    "work": "An Investigation of the Laws of Thought",
+    "year": 1854,
+    "gutenberg_id": "15114",
+    "source_url": "https://www.gutenberg.org/ebooks/15114",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "logic",
+      "algebra",
+      "probability",
+      "deduction",
+      "boolean"
+    ]
+  },
+  {
+    "file": "mathematical_analysis_of_logic.txt",
+    "work": "The Mathematical Analysis of Logic",
+    "year": 1847,
+    "gutenberg_id": "36884",
+    "source_url": "https://www.gutenberg.org/ebooks/36884",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "logic",
+      "deduction",
+      "calculus",
+      "classes"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "meditations.txt",
+    "work": "Meditations",
+    "year": 180,
+    "gutenberg_id": "2680",
+    "source_url": "https://www.gutenberg.org/ebooks/2680",
+    "translator": "George Long",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "stoicism",
+      "duty",
+      "impressions",
+      "mortality",
+      "nature"
+    ]
+  }
+]

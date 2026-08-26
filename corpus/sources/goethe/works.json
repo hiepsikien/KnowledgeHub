@@ -1,0 +1,32 @@
+[
+  {
+    "file": "sorrows_of_young_werther.txt",
+    "work": "The Sorrows of Young Werther",
+    "year": 1774,
+    "gutenberg_id": "2527",
+    "source_url": "https://www.gutenberg.org/ebooks/2527",
+    "translator": "R. D. Boylan",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "feeling",
+      "passion",
+      "nature",
+      "suicide"
+    ]
+  },
+  {
+    "file": "faust_part1.txt",
+    "work": "Faust — Part 1",
+    "year": 1808,
+    "gutenberg_id": "3023",
+    "source_url": "https://www.gutenberg.org/ebooks/3023",
+    "translator": "Bayard Taylor",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "striving",
+      "pact",
+      "knowledge",
+      "desire"
+    ]
+  }
+]

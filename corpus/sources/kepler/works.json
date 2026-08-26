@@ -1,0 +1,18 @@
+[
+  {
+    "file": "kepler_bryant.txt",
+    "work": "Kepler",
+    "year": 1920,
+    "gutenberg_id": "12406",
+    "source_url": "https://www.gutenberg.org/ebooks/12406",
+    "translator": "Walter W. Bryant",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "orbits",
+      "ellipses",
+      "observation",
+      "laws",
+      "astronomy"
+    ]
+  }
+]

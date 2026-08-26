@@ -1,0 +1,32 @@
+[
+  {
+    "file": "song_of_hiawatha.txt",
+    "work": "The Song of Hiawatha",
+    "year": 1855,
+    "gutenberg_id": "19",
+    "source_url": "https://www.gutenberg.org/ebooks/19",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "narrative",
+      "myth",
+      "nature",
+      "community"
+    ]
+  },
+  {
+    "file": "evangeline.txt",
+    "work": "Evangeline",
+    "year": 1847,
+    "gutenberg_id": "15390",
+    "source_url": "https://www.gutenberg.org/ebooks/15390",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "exile",
+      "patience",
+      "loss",
+      "love"
+    ]
+  }
+]

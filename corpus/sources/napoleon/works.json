@@ -1,0 +1,93 @@
+[
+  {
+    "file": "memoirs_bourrienne.txt",
+    "work": "Memoirs of Napoleon Bonaparte — Complete",
+    "year": 1830,
+    "gutenberg_id": "3567",
+    "source_url": "https://www.gutenberg.org/ebooks/3567",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "napoleon",
+      "revolution",
+      "empire",
+      "war",
+      "memoir"
+    ]
+  },
+  {
+    "file": "maxims_of_war.txt",
+    "work": "The Officer's Manual: Napoleon's Maxims of War",
+    "year": 1862,
+    "gutenberg_id": "50750",
+    "source_url": "https://www.gutenberg.org/ebooks/50750",
+    "translator": "Sir G. C. D'Aguilar",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "maxims",
+      "concentration",
+      "campaigns",
+      "principles"
+    ]
+  },
+  {
+    "file": "las_cases_vol1.txt",
+    "work": "Memoirs of the life, exile, and conversations of the Emperor Napoleon. (Vol. I)",
+    "year": 1823,
+    "gutenberg_id": "53967",
+    "source_url": "https://www.gutenberg.org/ebooks/53967",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "napoleon",
+      "exile",
+      "conversation",
+      "saint_helena"
+    ]
+  },
+  {
+    "file": "las_cases_vol2.txt",
+    "work": "Memoirs of the life, exile, and conversations of the Emperor Napoleon. (Vol. II)",
+    "year": 1823,
+    "gutenberg_id": "53968",
+    "source_url": "https://www.gutenberg.org/ebooks/53968",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "napoleon",
+      "exile",
+      "conversation",
+      "saint_helena"
+    ]
+  },
+  {
+    "file": "las_cases_vol3.txt",
+    "work": "Memoirs of the life, exile, and conversations of the Emperor Napoleon. (Vol. III)",
+    "year": 1823,
+    "gutenberg_id": "53969",
+    "source_url": "https://www.gutenberg.org/ebooks/53969",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "napoleon",
+      "exile",
+      "conversation",
+      "saint_helena"
+    ]
+  },
+  {
+    "file": "las_cases_vol4.txt",
+    "work": "Memoirs of the life, exile, and conversations of the Emperor Napoleon. (Vol. IV)",
+    "year": 1823,
+    "gutenberg_id": "53970",
+    "source_url": "https://www.gutenberg.org/ebooks/53970",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "napoleon",
+      "exile",
+      "conversation",
+      "saint_helena"
+    ]
+  }
+]

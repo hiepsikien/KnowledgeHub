@@ -1,0 +1,94 @@
+[
+  {
+    "file": "letters_vol1.txt",
+    "work": "Letters of Franz Liszt -- Volume 1",
+    "year": 1886,
+    "gutenberg_id": "3689",
+    "source_url": "https://www.gutenberg.org/ebooks/3689",
+    "translator": "Constance Bache",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liszt",
+      "letters",
+      "virtuoso",
+      "romantic",
+      "music"
+    ]
+  },
+  {
+    "file": "letters_vol2.txt",
+    "work": "Letters of Franz Liszt -- Volume 2",
+    "year": 1886,
+    "gutenberg_id": "3750",
+    "source_url": "https://www.gutenberg.org/ebooks/3750",
+    "translator": "Constance Bache",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liszt",
+      "letters",
+      "virtuoso",
+      "romantic",
+      "music"
+    ]
+  },
+  {
+    "file": "wagner_liszt_vol1.txt",
+    "work": "Correspondence of Wagner and Liszt — Volume 1",
+    "year": 1889,
+    "gutenberg_id": "3835",
+    "source_url": "https://www.gutenberg.org/ebooks/3835",
+    "translator": "Francis Hueffer",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liszt",
+      "wagner",
+      "letters",
+      "weimar"
+    ]
+  },
+  {
+    "file": "wagner_liszt_vol2.txt",
+    "work": "Correspondence of Wagner and Liszt — Volume 2",
+    "year": 1889,
+    "gutenberg_id": "4234",
+    "source_url": "https://www.gutenberg.org/ebooks/4234",
+    "translator": "Francis Hueffer",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "liszt",
+      "wagner",
+      "letters",
+      "weimar"
+    ]
+  },
+  {
+    "file": "ramann_vol1.txt",
+    "work": "Franz Liszt, Artist and Man, Vol. 1",
+    "year": 1882,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/franzlisztartist01rama_0",
+    "translator": "E. Cowdery",
+    "license": "public_domain_usa_archive_1882",
+    "concepts": [
+      "liszt",
+      "biography",
+      "paris",
+      "virtuoso"
+    ]
+  },
+  {
+    "file": "ramann_vol2.txt",
+    "work": "Franz Liszt, Artist and Man, Vol. 2",
+    "year": 1882,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/franzlisztartist02rama_0",
+    "translator": "E. Cowdery",
+    "license": "public_domain_usa_archive_1882",
+    "concepts": [
+      "liszt",
+      "biography",
+      "paris",
+      "virtuoso"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "file": "personal_narrative_vol1.txt",
+    "work": "Personal Narrative of Travels to the Equinoctial Regions of America, Volume 1",
+    "year": 1852,
+    "gutenberg_id": "6322",
+    "source_url": "https://www.gutenberg.org/ebooks/6322",
+    "translator": "Thomasina Ross",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "travel",
+      "tropics",
+      "observation",
+      "nature",
+      "voyage",
+      "climate"
+    ]
+  },
+  {
+    "file": "views_of_nature.txt",
+    "work": "Views of Nature: or Contemplations on the Sublime Phenomena of Creation",
+    "year": 1850,
+    "gutenberg_id": "67684",
+    "source_url": "https://www.gutenberg.org/ebooks/67684",
+    "translator": "E. C. Otté",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "nature",
+      "landscape",
+      "unity",
+      "climate",
+      "ocean",
+      "observation"
+    ]
+  }
+]

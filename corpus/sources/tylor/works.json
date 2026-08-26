@@ -1,0 +1,32 @@
+[
+  {
+    "file": "primitive_culture_vol1.txt",
+    "work": "Primitive Culture, vol. 1",
+    "year": 1871,
+    "gutenberg_id": "70458",
+    "source_url": "https://www.gutenberg.org/ebooks/70458",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "animism",
+      "culture",
+      "custom",
+      "mythology",
+      "evolution"
+    ]
+  },
+  {
+    "file": "primitive_culture_vol2.txt",
+    "work": "Primitive Culture, vol. 2",
+    "year": 1871,
+    "gutenberg_id": "70484",
+    "source_url": "https://www.gutenberg.org/ebooks/70484",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "language",
+      "art",
+      "philosophy",
+      "religion",
+      "culture"
+    ]
+  }
+]

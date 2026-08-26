@@ -1,0 +1,20 @@
+[
+  {
+    "file": "truyen_kieu.txt",
+    "work": "Truyện Kiều (quốc ngữ PD)",
+    "year": 1820,
+    "gutenberg_id": null,
+    "source_url": "https://vi.wikisource.org/wiki/Truyện_Kiều",
+    "translator": "Quốc ngữ PD (Wikisource — áng Nôm Nguyễn Du)",
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "concepts": [
+      "tai menh",
+      "hieu",
+      "than phan",
+      "bac no",
+      "duyen"
+    ]
+  }
+]

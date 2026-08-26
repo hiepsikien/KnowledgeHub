@@ -1,0 +1,50 @@
+[
+  {
+    "file": "dolls_house.txt",
+    "work": "A Doll's House",
+    "year": 1879,
+    "gutenberg_id": "2542",
+    "source_url": "https://www.gutenberg.org/ebooks/2542",
+    "translator": "R. Farquharson Sharp",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "marriage",
+      "duty",
+      "independence",
+      "doll",
+      "truth"
+    ]
+  },
+  {
+    "file": "enemy_of_the_people.txt",
+    "work": "An Enemy of the People",
+    "year": 1882,
+    "gutenberg_id": "2446",
+    "source_url": "https://www.gutenberg.org/ebooks/2446",
+    "translator": "R. Farquharson Sharp",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "majority",
+      "truth",
+      "public",
+      "conscience",
+      "corruption"
+    ]
+  },
+  {
+    "file": "ghosts.txt",
+    "work": "Ghosts",
+    "year": 1881,
+    "gutenberg_id": "8121",
+    "source_url": "https://www.gutenberg.org/ebooks/8121",
+    "translator": "William Archer",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "inheritance",
+      "duty",
+      "secret",
+      "respectability",
+      "ghosts"
+    ]
+  }
+]

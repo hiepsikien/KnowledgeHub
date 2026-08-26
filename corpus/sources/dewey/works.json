@@ -1,0 +1,50 @@
+[
+  {
+    "file": "democracy_and_education.txt",
+    "work": "Democracy and Education",
+    "year": 1916,
+    "gutenberg_id": "852",
+    "source_url": "https://www.gutenberg.org/ebooks/852",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "democracy",
+      "school",
+      "experience",
+      "growth",
+      "education"
+    ]
+  },
+  {
+    "file": "how_we_think.txt",
+    "work": "How We Think",
+    "year": 1910,
+    "gutenberg_id": "37423",
+    "source_url": "https://www.gutenberg.org/ebooks/37423",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "reflection",
+      "inquiry",
+      "thinking",
+      "problem",
+      "learning"
+    ]
+  },
+  {
+    "file": "school_and_society.txt",
+    "work": "The School and Society",
+    "year": 1899,
+    "gutenberg_id": "53910",
+    "source_url": "https://www.gutenberg.org/ebooks/53910",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "school",
+      "community",
+      "activity",
+      "child",
+      "social"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "essays_theory_numbers.txt",
+    "work": "Essays on the Theory of Numbers",
+    "year": 1901,
+    "gutenberg_id": "21016",
+    "source_url": "https://www.gutenberg.org/ebooks/21016",
+    "translator": "Wooster Woodruff Beman",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "continuity",
+      "irrational",
+      "natural_numbers",
+      "arithmetic",
+      "cut"
+    ]
+  }
+]

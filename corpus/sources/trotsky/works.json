@@ -1,0 +1,66 @@
+[
+  {
+    "file": "october_to_brest_litovsk.txt",
+    "work": "From October to Brest-Litovsk",
+    "year": 1918,
+    "gutenberg_id": "6413",
+    "source_url": "https://www.gutenberg.org/ebooks/6413",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "october_revolution",
+      "soviets",
+      "peace",
+      "civil_war",
+      "bolshevism"
+    ]
+  },
+  {
+    "file": "our_revolution.txt",
+    "work": "Our Revolution: Essays on Working-Class and International Revolution, 1904-1917",
+    "year": 1917,
+    "gutenberg_id": "36303",
+    "source_url": "https://www.gutenberg.org/ebooks/36303",
+    "translator": "Moissaye J. Olgin",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "revolution",
+      "permanent_revolution",
+      "internationalism",
+      "party",
+      "1905"
+    ]
+  },
+  {
+    "file": "dictatorship_vs_democracy.txt",
+    "work": "Dictatorship vs. Democracy (Terrorism and Communism)",
+    "year": 1920,
+    "gutenberg_id": "38982",
+    "source_url": "https://www.gutenberg.org/ebooks/38982",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "dictatorship",
+      "democracy",
+      "kautsky",
+      "terrorism",
+      "proletariat"
+    ]
+  },
+  {
+    "file": "bolsheviki_and_world_peace.txt",
+    "work": "The Bolsheviki and World Peace",
+    "year": 1917,
+    "gutenberg_id": "40273",
+    "source_url": "https://www.gutenberg.org/ebooks/40273",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "imperialism",
+      "world_war",
+      "peace",
+      "internationalism",
+      "bolshevism"
+    ]
+  }
+]

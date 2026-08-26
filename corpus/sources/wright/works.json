@@ -1,0 +1,18 @@
+[
+  {
+    "file": "wright_brothers.txt",
+    "work": "The Wright Brothers",
+    "year": 1943,
+    "gutenberg_id": "67672",
+    "source_url": "https://www.gutenberg.org/ebooks/67672",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "flight",
+      "airplane",
+      "wind_tunnel",
+      "kitty_hawk",
+      "experiment"
+    ]
+  }
+]

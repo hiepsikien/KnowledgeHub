@@ -1,0 +1,34 @@
+[
+  {
+    "file": "harriman_vol1.txt",
+    "work": "E. H. Harriman: A Biography, Vol. I",
+    "year": 1922,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/ehharrimanbiogra01kennuoft",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "harriman",
+      "union_pacific",
+      "southern_pacific",
+      "reorganization",
+      "railroad"
+    ]
+  },
+  {
+    "file": "harriman_vol2.txt",
+    "work": "E. H. Harriman: A Biography, Vol. II",
+    "year": 1922,
+    "gutenberg_id": null,
+    "source_url": "https://archive.org/details/ehharrimanbiogra02kennuoft",
+    "translator": null,
+    "license": "public_domain_usa_archive",
+    "concepts": [
+      "harriman",
+      "northern_pacific",
+      "hill",
+      "roosevelt",
+      "railroad"
+    ]
+  }
+]

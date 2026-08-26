@@ -1,0 +1,33 @@
+[
+  {
+    "file": "anna_karenina.txt",
+    "work": "Anna Karenina",
+    "year": 1877,
+    "gutenberg_id": "1399",
+    "source_url": "https://www.gutenberg.org/ebooks/1399",
+    "translator": "Constance Garnett",
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "family",
+      "happiness",
+      "society",
+      "love",
+      "authenticity"
+    ]
+  },
+  {
+    "file": "my_religion.txt",
+    "work": "My Religion",
+    "year": 1884,
+    "gutenberg_id": "43794",
+    "source_url": "https://www.gutenberg.org/ebooks/43794",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "religion",
+      "moral_life",
+      "gospel",
+      "nonresistance"
+    ]
+  }
+]

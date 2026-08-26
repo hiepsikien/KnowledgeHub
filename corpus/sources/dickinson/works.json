@@ -1,0 +1,18 @@
+[
+  {
+    "file": "poems_complete.txt",
+    "work": "Poems",
+    "year": 1890,
+    "gutenberg_id": "12242",
+    "source_url": "https://www.gutenberg.org/ebooks/12242",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "death",
+      "immortality",
+      "interiority",
+      "nature",
+      "faith"
+    ]
+  }
+]

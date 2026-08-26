@@ -1,0 +1,50 @@
+[
+  {
+    "file": "idea_of_university.txt",
+    "work": "The Idea of a University Defined and Illustrated",
+    "year": 1852,
+    "gutenberg_id": "24526",
+    "source_url": "https://www.gutenberg.org/ebooks/24526",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "university",
+      "liberal_education",
+      "reason",
+      "faith",
+      "knowledge"
+    ]
+  },
+  {
+    "file": "apologia.txt",
+    "work": "Apologia Pro Vita Sua",
+    "year": 1864,
+    "gutenberg_id": "19690",
+    "source_url": "https://www.gutenberg.org/ebooks/19690",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "conscience",
+      "conversion",
+      "faith",
+      "liberalism",
+      "reason"
+    ]
+  },
+  {
+    "file": "grammar_of_assent.txt",
+    "work": "An Essay in Aid of a Grammar of Assent",
+    "year": 1870,
+    "gutenberg_id": "34022",
+    "source_url": "https://www.gutenberg.org/ebooks/34022",
+    "translator": null,
+    "license": "public_domain_usa_gutenberg",
+    "concepts": [
+      "assent",
+      "illative_sense",
+      "faith",
+      "certitude",
+      "inference"
+    ]
+  }
+]
