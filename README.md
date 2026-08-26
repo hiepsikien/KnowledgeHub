@@ -2,6 +2,8 @@
 
 Central catalog and distribution layer for literary corpora. **Knowledge Hub** is the single source of truth for works (plain-text manuscripts, authors, licenses, and publication state). Consumer apps subscribe to published snapshots — they do not own the canonical corpus.
 
+> **Tài liệu đầy đủ (Tiếng Việt):** [docs/PROJECT.md](./docs/PROJECT.md)
+
 ## Related projects
 
 | Project | Role |
