@@ -29,9 +29,13 @@ Translation project files live under `corpus/translations/{source_work_id}/`:
 - **normal** — cân bằng (default after sample selection)
 - **loose** — dễ hiểu, thoát ý có kiểm soát
 
-Run AI draft ×3 on `segments/chi-sample.json`, choose mode in Curator (UI TBD), then lock `translation_mode` in `project.json`.
+Run AI draft ×3 on `segments/chi-sample.json`, choose mode, then lock:
 
-Sample status (pilot): all three modes drafted for Chapter I (~891 words) in `segments/chi-sample.json`. `translation_mode` stays `null` until curator picks.
+```bash
+knowledgehub translate select-mode --work grotius--freedom_of_the_seas --mode tight
+```
+
+Pilot: **tight** selected for Grotius (legal treatise — fidelity over fluency).
 
 ## Model roles (configured in project.json)
 

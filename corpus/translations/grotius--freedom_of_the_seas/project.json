@@ -2,15 +2,15 @@
   "source_work_id": "grotius--freedom_of_the_seas",
   "translation_work_id": "grotius--freedom_of_the_seas--vi",
   "target_language": "vi",
-  "translation_mode": null,
+  "translation_mode": "tight",
   "translation_modes_available": [
     "tight",
     "normal",
     "loose"
   ],
-  "status": "sample_ready",
+  "status": "mode_locked",
   "created_at": "2026-08-27T16:13:38+00:00",
-  "updated_at": "2026-08-27T16:46:35+00:00",
+  "updated_at": "2026-08-27T16:57:06+00:00",
   "models": {
     "draft": "deepseek-chat",
     "polish": "gemini-3.5-flash",

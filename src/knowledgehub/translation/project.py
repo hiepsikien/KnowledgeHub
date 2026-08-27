@@ -177,3 +177,56 @@ def load_project(source_work_id: str) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(f"No translation project: {path}")
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def select_translation_mode(source_work_id: str, mode: str) -> dict[str, Any]:
+    project = load_project(source_work_id)
+    available = project.get("translation_modes_available") or []
+    if mode not in available:
+        raise ValueError(f"Unknown mode {mode!r}; expected one of {available}")
+
+    sample_rel = project.get("sample_segment", {}).get("file")
+    if not sample_rel:
+        raise ValueError("Project has no sample_segment")
+    sample_path = segments_dir(source_work_id) / Path(sample_rel).name
+    if not sample_path.is_file():
+        raise FileNotFoundError(f"Sample segment not found: {sample_path}")
+
+    segment = json.loads(sample_path.read_text(encoding="utf-8"))
+    chosen = (segment.get("drafts") or {}).get(mode)
+    if not chosen:
+        raise ValueError(
+            f"No {mode} draft in sample. Run: knowledgehub translate draft-sample "
+            f"--work {source_work_id} --mode {mode}"
+        )
+
+    segment["final"] = chosen
+    segment["status"] = "approved"
+    sample_path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    chapter = str(segment.get("chapter") or "").lower()
+    chapter_path = segments_dir(source_work_id) / f"ch{chapter}.json"
+    if chapter_path.is_file():
+        chapter_seg = json.loads(chapter_path.read_text(encoding="utf-8"))
+        chapter_seg["final"] = chosen
+        chapter_seg.setdefault("drafts", {})[mode] = chosen
+        if segment.get("draft_raw", {}).get(mode):
+            chapter_seg.setdefault("draft_raw", {})[mode] = segment["draft_raw"][mode]
+        chapter_seg["status"] = "draft_ready"
+        chapter_path.write_text(json.dumps(chapter_seg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    project["translation_mode"] = mode
+    project["status"] = "mode_locked"
+    project["updated_at"] = _now()
+    project_file(source_work_id).write_text(
+        json.dumps(project, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    return {
+        "work_id": source_work_id,
+        "translation_mode": mode,
+        "status": project["status"],
+        "sample": str(sample_path.relative_to(corpus_root())),
+        "chapter_segment": str(chapter_path.relative_to(corpus_root())) if chapter_path.is_file() else None,
+    }

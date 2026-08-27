@@ -9,7 +9,7 @@ from .hash import refresh_hashes
 from .read_publish import PublishError, publish_to_read
 from .translation.fetch import FetchError, fetch_raw
 from .translation.draft import draft_sample
-from .translation.project import init_translation_project
+from .translation.project import init_translation_project, select_translation_mode
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
@@ -47,6 +47,9 @@ def main(argv: list[str] | None = None) -> int:
     tr_draft.add_argument("--work", required=True, help="Source work id")
     tr_draft.add_argument("--mode", default="normal", choices=["tight", "normal", "loose"])
     tr_draft.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
+    tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
+    tr_mode.add_argument("--work", required=True, help="Source work id")
+    tr_mode.add_argument("--mode", required=True, choices=["tight", "normal", "loose"])
 
     serve = sub.add_parser("serve", help="Open curator UI (FastAPI + static SPA)")
     serve.add_argument("--host", default="127.0.0.1")
@@ -118,6 +121,14 @@ def main(argv: list[str] | None = None) -> int:
                     skip_polish=args.skip_polish,
                 )
             except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "select-mode":
+            try:
+                result = select_translation_mode(args.work, args.mode)
+            except (FileNotFoundError, KeyError, ValueError) as exc:
                 print(str(exc), file=sys.stderr)
                 return 1
             print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from knowledgehub.translation.fetch import fetch_grotius_freedom_of_seas
-from knowledgehub.translation.project import init_translation_project
+from knowledgehub.translation.project import init_translation_project, select_translation_mode
 
 
 @pytest.fixture
@@ -43,6 +43,21 @@ def test_init_translation_project(corpus: Path):
     payload = json.loads(sample.read_text(encoding="utf-8"))
     assert payload["chapter"] == "I"
     assert "English paragraph one" in payload["source_text"]
+
+
+def test_select_translation_mode(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    result = select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    assert result["translation_mode"] == "tight"
+    project = json.loads((corpus / "translations/grotius--freedom_of_the_seas/project.json").read_text())
+    assert project["translation_mode"] == "tight"
+    assert project["status"] == "mode_locked"
+    chi = json.loads((corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json").read_text())
+    assert chi["final"] == "Bản dịch tight."
 
 
 def test_fetch_grotius_writes_english_raw(corpus: Path, monkeypatch: pytest.MonkeyPatch):

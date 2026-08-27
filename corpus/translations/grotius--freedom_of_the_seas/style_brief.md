@@ -4,4 +4,4 @@
 - **Voice:** formal, argumentative, citations from Roman law/classical authors.
 - **Audience:** Vietnamese readers without legal training — clarity without flattening the argument.
 - **Terms:** lock Latin legal terms on first use; prefer consistency (*Law of Nations* → *luật các dân tộc* / *luật quốc tế* — pick one in glossary).
-- **Modes:** produce Tight / Normal / Loose variants for Chapter I sample before locking project mode.
+- **Mode:** **Tight** — sát cấu trúc & thuật ngữ pháp lý; giữ giọng luận văn tranh biện.
