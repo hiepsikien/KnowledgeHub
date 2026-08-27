@@ -23,7 +23,7 @@ DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
 - **Voice:** formal, argumentative, citations from Roman law/classical authors.
 - **Audience:** Vietnamese readers without legal training — clarity without flattening the argument.
 - **Terms:** lock Latin legal terms on first use; prefer consistency (*Law of Nations* → *luật các dân tộc* / *luật quốc tế* — pick one in glossary).
-- **Modes:** produce Tight / Normal / Loose variants for Chapter I sample before locking project mode.
+- **Mode (pilot):** Normal — balanced fidelity and readability.
 """
 
 DEFAULT_GLOSSARY = {
@@ -98,9 +98,9 @@ def init_translation_project(
         "created_at": _now(),
         "updated_at": _now(),
         "models": {
-            "draft": "claude-sonnet-4-20250514",
+            "draft": "deepseek-chat",
             "polish": "gemini-2.5-pro",
-            "qa": "claude-sonnet-4-20250514",
+            "qa": "deepseek-reasoner",
             "annotations": "gemini-2.5-pro",
         },
         "source": {

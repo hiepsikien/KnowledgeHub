@@ -33,12 +33,27 @@ Run AI draft ×3 on `segments/chi-sample.json`, choose mode in Curator (UI TBD),
 
 ## Model roles (configured in project.json)
 
-| Pass | Default model slot |
-|------|-------------------|
-| Draft ×3 | `models.draft` (Claude) |
-| Polish | `models.polish` (Gemini) |
-| QA | `models.qa` (Claude) |
-| Annotations | `models.annotations` (Gemini) |
+| Pass | Model slot | Default |
+|------|------------|---------|
+| Draft | `models.draft` | `deepseek-chat` |
+| Polish | `models.polish` | `gemini-2.5-pro` |
+| QA | `models.qa` | `deepseek-reasoner` |
+| Annotations | `models.annotations` | `gemini-2.5-pro` |
+
+### Secrets (Cursor Cloud Agents dashboard)
+
+| Env var | Provider |
+|---------|----------|
+| `DEEPSEEK_API_KEY` | Draft + QA |
+| `GEMINI_API_KEY` or `GOOGLE_API_KEY` | Polish + annotations |
+
+### Draft sample (Normal mode)
+
+```bash
+knowledgehub translate draft-sample --work grotius--freedom_of_the_seas --mode normal
+```
+
+Pipeline: DeepSeek draft → Gemini polish → writes `segments/chi-sample.json`.
 
 ## Read integration (next)
 

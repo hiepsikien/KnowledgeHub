@@ -8,7 +8,9 @@ from .catalog import build_catalog, get_work, set_read_consumer
 from .hash import refresh_hashes
 from .read_publish import PublishError, publish_to_read
 from .translation.fetch import FetchError, fetch_raw
+from .translation.draft import draft_sample
 from .translation.project import init_translation_project
+from .translation.providers import ProviderError
 from .validate import validate_catalog
 
 
@@ -41,6 +43,10 @@ def main(argv: list[str] | None = None) -> int:
     tr_init.add_argument("--work", required=True, help="Source work id")
     tr_init.add_argument("--lang", default="vi", help="Target language (default: vi)")
     tr_init.add_argument("--overwrite", action="store_true", help="Recreate existing project")
+    tr_draft = tr_sub.add_parser("draft-sample", help="AI draft the sample segment (default: normal)")
+    tr_draft.add_argument("--work", required=True, help="Source work id")
+    tr_draft.add_argument("--mode", default="normal", choices=["tight", "normal", "loose"])
+    tr_draft.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
 
     serve = sub.add_parser("serve", help="Open curator UI (FastAPI + static SPA)")
     serve.add_argument("--host", default="127.0.0.1")
@@ -100,6 +106,18 @@ def main(argv: list[str] | None = None) -> int:
                     overwrite=args.overwrite,
                 )
             except (FileExistsError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "draft-sample":
+            try:
+                result = draft_sample(
+                    args.work,
+                    mode=args.mode,
+                    skip_polish=args.skip_polish,
+                )
+            except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
                 print(str(exc), file=sys.stderr)
                 return 1
             print(json.dumps(result, ensure_ascii=False, indent=2))

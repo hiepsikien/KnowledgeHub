@@ -12,9 +12,9 @@
   "created_at": "2026-08-27T16:13:38+00:00",
   "updated_at": "2026-08-27T16:13:38+00:00",
   "models": {
-    "draft": "claude-sonnet-4-20250514",
+    "draft": "deepseek-chat",
     "polish": "gemini-2.5-pro",
-    "qa": "claude-sonnet-4-20250514",
+    "qa": "deepseek-reasoner",
     "annotations": "gemini-2.5-pro"
   },
   "source": {
