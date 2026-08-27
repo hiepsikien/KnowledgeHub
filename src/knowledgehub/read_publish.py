@@ -7,9 +7,10 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from .catalog import get_work, resolve_content_path
+from .catalog import get_work, resolve_content_path, update_read_publication
 from .normalize import normalize_manuscript
 from .paths import corpus_root
+from .read_options import validate_category_slug, validate_split_length
 
 
 class PublishError(RuntimeError):
@@ -41,8 +42,31 @@ def _payload(work: dict[str, Any], text: str) -> dict[str, Any]:
     }
 
 
-def prepare_publish(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+def prepare_publish(
+    work_id: str,
+    *,
+    corpus: Path | None = None,
+    title: str | None = None,
+    description: str | None = None,
+    category_slug: str | None = None,
+    price_cents: int | None = None,
+    split_length: str | None = None,
+    persist: bool = False,
+) -> dict[str, Any]:
     root = corpus or corpus_root()
+    if persist:
+        try:
+            update_read_publication(
+                work_id,
+                title=title,
+                description=description,
+                category_slug=category_slug,
+                price_cents=price_cents,
+                split_length=split_length,
+                corpus=root,
+            )
+        except ValueError as exc:
+            raise PublishError(str(exc)) from exc
     work = get_work(work_id, corpus=root)
     consumers = ((work.get("rights") or {}).get("consumers") or {})
     if consumers.get("read") != "allowed":
@@ -60,6 +84,22 @@ def prepare_publish(work_id: str, *, corpus: Path | None = None) -> dict[str, An
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
     payload = _payload(work, text)
+    if title and title.strip():
+        payload["title"] = title.strip()
+    if description is not None:
+        payload["description"] = description.strip() or payload["title"]
+    if category_slug is not None:
+        try:
+            payload["category_slug"] = validate_category_slug(category_slug)
+        except ValueError as exc:
+            raise PublishError(str(exc)) from exc
+    if price_cents is not None:
+        payload["price_cents"] = max(0, int(price_cents))
+    if split_length is not None:
+        try:
+            payload["split_length"] = validate_split_length(split_length)
+        except ValueError as exc:
+            raise PublishError(str(exc)) from exc
     payload["_normalize"] = report
     return payload
 
@@ -108,8 +148,23 @@ def publish_to_read(
     api_url: str | None = None,
     token: str | None = None,
     dry_run: bool = True,
+    title: str | None = None,
+    description: str | None = None,
+    category_slug: str | None = None,
+    price_cents: int | None = None,
+    split_length: str | None = None,
+    persist: bool = False,
 ) -> dict[str, Any]:
-    payload = prepare_publish(work_id, corpus=corpus)
+    payload = prepare_publish(
+        work_id,
+        corpus=corpus,
+        title=title,
+        description=description,
+        category_slug=category_slug,
+        price_cents=price_cents,
+        split_length=split_length,
+        persist=persist,
+    )
     report = payload.get("_normalize") or {}
     body = _read_body(payload)
     if dry_run:

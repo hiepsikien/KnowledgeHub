@@ -45,6 +45,7 @@ Local admin for the catalog — search works, toggle Read rights, dry-run then p
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
 .venv/bin/knowledgehub serve          # http://127.0.0.1:8787
+# Publish to Read: /publish/{work_id} — category, split length, price, blurb (Read presets)
 ```
 
 If `KNOWLEDGEHUB_OPS_SECRET` is unset, the UI is open on localhost. Set the secret to require login.

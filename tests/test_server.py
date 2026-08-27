@@ -36,6 +36,9 @@ def test_preview_normalized_without_allow(client):
     assert data["truncated"] is False
     assert data["text"].startswith("Of civil government")
     assert data["normalize"]["source_chars"] > 0
+
+
+def test_allow_and_dry_publish(client):
     wid = "locke--second_treatise"
     blocked = client.post(f"/api/works/{wid}/publish-read", json={"apply": False})
     assert blocked.status_code == 400
@@ -46,6 +49,35 @@ def test_preview_normalized_without_allow(client):
     assert dry.status_code == 200
     assert dry.json()["dry_run"] is True
     assert dry.json()["payload"]["hub_work_id"] == wid
+
+
+def test_publish_page_and_overrides(client):
+    wid = "locke--second_treatise"
+    page = client.get(f"/publish/{wid}")
+    assert page.status_code == 200
+    assert "Publish to Read" in page.text
+    opts = client.get("/api/read-options").json()
+    assert any(c["slug"] == "essays" for c in opts["categories"])
+    assert {row["value"] for row in opts["split_lengths"]} == {"short", "standard", "long"}
+    client.post(f"/api/works/{wid}/allow-read", json={"allowed": True})
+    dry = client.post(
+        f"/api/works/{wid}/publish-read",
+        json={
+            "apply": False,
+            "persist": True,
+            "title": "Second Treatise",
+            "description": "Property and government.",
+            "category_slug": "essays",
+            "price_cents": 0,
+            "split_length": "long",
+        },
+    )
+    assert dry.status_code == 200
+    payload = dry.json()["payload"]
+    assert payload["split_length"] == "long"
+    assert payload["description"] == "Property and government."
+    stored = client.get(f"/api/works/{wid}").json()
+    assert stored["work"]["read"]["split_length"] == "long"
 
 
 def test_ops_secret_blocks(tmp_path, monkeypatch):

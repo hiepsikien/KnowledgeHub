@@ -132,10 +132,9 @@ async function selectWork(id) {
         <button class="btn" id="toggle-read" type="button">${
           summary.read_allowed ? "Block Read" : "Allow Read"
         }</button>
-        <button class="btn ghost" id="dry-run" type="button" ${ready ? "" : "disabled"}>Dry-run</button>
-        <button class="btn primary" id="apply" type="button" ${ready ? "" : "disabled"}>Publish to Read</button>
+        <a class="btn primary" id="apply" href="/publish/${encodeURIComponent(id)}">Publish to Read</a>
       </div>
-      ${ready ? "" : `<p class="err">Cần allow Read + file raw + content_hash trước khi publish.</p>`}
+      ${ready ? "" : `<p class="err">Publish cần allow Read + file raw + content_hash. Mở trang để điền category / split trước.</p>`}
       <pre class="err" id="pub-out"></pre>
     `;
     $("toggle-read").onclick = async () => {
@@ -147,10 +146,6 @@ async function selectWork(id) {
       await selectWork(id);
     };
     $("btn-preview").onclick = () => openPreview(id, false);
-    $("dry-run").onclick = () => publish(id, false);
-    $("apply").onclick = () => {
-      if (confirm(`Publish ${work.title} lên Read (pending_review)?`)) publish(id, true);
-    };
   } catch (err) {
     box.innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
   }
@@ -208,6 +203,7 @@ async function openPreview(id, full) {
 
 async function publish(id, apply) {
   const out = $("pub-out");
+  if (!out) return;
   out.textContent = "Đang gửi…";
   try {
     const result = await api(`/api/works/${encodeURIComponent(id)}/publish-read`, {
@@ -221,23 +217,150 @@ async function publish(id, apply) {
   }
 }
 
-async function refresh() {
-  const [stats, works] = await Promise.all([api("/api/stats"), api("/api/works")]);
-  state.works = works.works;
-  renderStats(stats);
-  renderRows();
+function publishWorkIdFromPath() {
+  const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+  if (parts[0] === "publish" && parts[1]) return decodeURIComponent(parts.slice(1).join("/"));
+  return null;
+}
+
+function collectPublishPayload(apply) {
+  const paid = document.querySelector("input[name=pricing]:checked")?.value === "paid";
+  const dollars = Number($("pub-price").value || 0);
+  return {
+    apply,
+    persist: $("pub-persist").checked,
+    title: $("pub-title").value.trim(),
+    description: $("pub-description").value,
+    category_slug: $("pub-category").value,
+    price_cents: paid ? Math.max(0, Math.round(dollars * 100)) : 0,
+    split_length: state.splitLength || "standard",
+  };
+}
+
+async function sendPublish(apply) {
+  const id = state.publishId;
+  const out = $("pub-result");
+  out.textContent = "Đang gửi…";
+  try {
+    const result = await api(`/api/works/${encodeURIComponent(id)}/publish-read`, {
+      method: "POST",
+      body: collectPublishPayload(apply),
+    });
+    out.textContent = JSON.stringify(result, null, 2);
+    toast(apply ? "Đã gửi sang Read (pending_review)" : "Dry-run xong — chưa gọi Read");
+  } catch (err) {
+    out.textContent = err.message;
+  }
+}
+
+async function loadPublishPage(id) {
+  state.publishId = id;
+  $("view-works").hidden = true;
+  $("view-licenses").hidden = true;
+  $("view-publish").hidden = false;
+  document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
+  $("pub-heading").textContent = "Đang tải…";
+  $("pub-form").hidden = true;
+  $("pub-gate").hidden = true;
+  const [data, options] = await Promise.all([
+    api(`/api/works/${encodeURIComponent(id)}`),
+    api("/api/read-options"),
+  ]);
+  const { work, summary } = data;
+  $("pub-heading").textContent = work.title;
+  $("pub-title").value = work.title || "";
+  $("pub-description").value = work.description || work.title || "";
+  $("pub-author").textContent = work.author_id || "";
+  $("pub-lang").textContent = `${work.language || "en"} · ${work.year ?? "—"}`;
+  $("pub-license").textContent = work.license || "—";
+  $("pub-split-note").textContent = options.split_note || "";
+  const cat = $("pub-category");
+  const currentCat = summary.category_slug || "essays";
+  cat.innerHTML = (options.categories || [])
+    .map(
+      (c) =>
+        `<option value="${escapeHtml(c.slug)}" ${c.slug === currentCat ? "selected" : ""}>${escapeHtml(c.label)}</option>`,
+    )
+    .join("");
+  state.splitLength = summary.split_length || "standard";
+  $("pub-split").innerHTML = (options.split_lengths || [])
+    .map((opt) => {
+      const on = opt.value === state.splitLength ? "on" : "";
+      return `<button type="button" class="split-opt ${on}" data-split="${escapeHtml(opt.value)}">
+        <strong>${escapeHtml(opt.label)}</strong>
+        <small>${escapeHtml(opt.hint)} · ~${opt.target_words} từ</small>
+      </button>`;
+    })
+    .join("");
+  const cents = Number(summary.price_cents || 0);
+  const paid = cents > 0;
+  document.querySelector(`input[name=pricing][value=${paid ? "paid" : "free"}]`).checked = true;
+  $("pub-price").disabled = !paid;
+  if (paid) $("pub-price").value = (cents / 100).toFixed(2);
+  const ready = summary.read_allowed && summary.has_raw && summary.has_hash;
+  $("pub-form").hidden = false;
+  $("pub-dry").disabled = !ready;
+  $("pub-apply").disabled = !ready;
+  if (!ready) {
+    $("pub-gate").hidden = false;
+    $("pub-gate").textContent =
+      "Cần Allow Read + file raw + content_hash (Hash raw trên trang tác phẩm) trước khi gửi Read. Vẫn sửa được category / split rồi lưu khi publish.";
+  }
+  if (!state.health?.read_token_set) {
+    $("pub-gate").hidden = false;
+    $("pub-gate").textContent =
+      ($("pub-gate").textContent ? `${$("pub-gate").textContent}\n` : "") +
+      `Set READ_HUB_TOKEN (trùng HUB_SYNC_TOKEN) và READ_API_URL=${state.health?.read_api || ""}.`;
+  }
+}
+
+function wirePublishForm() {
+  $("pub-split").onclick = (e) => {
+    const btn = e.target.closest("[data-split]");
+    if (!btn) return;
+    state.splitLength = btn.dataset.split;
+    $("pub-split").querySelectorAll(".split-opt").forEach((el) => el.classList.toggle("on", el === btn));
+  };
+  document.querySelectorAll("input[name=pricing]").forEach((el) => {
+    el.addEventListener("change", () => {
+      const paid = document.querySelector("input[name=pricing]:checked")?.value === "paid";
+      $("pub-price").disabled = !paid;
+    });
+  });
+  $("pub-preview").onclick = () => {
+    if (state.publishId) openPreview(state.publishId, false);
+  };
+  $("pub-dry").onclick = () => sendPublish(false);
+  $("pub-form").onsubmit = (e) => {
+    e.preventDefault();
+    const title = $("pub-title").value.trim();
+    if (!title) return;
+    if (confirm(`Gửi “${title}” lên Read (pending_review)?`)) sendPublish(true);
+  };
 }
 
 function wireNav() {
   document.querySelectorAll(".nav-link").forEach((btn) => {
     btn.onclick = () => {
+      if (publishWorkIdFromPath()) {
+        location.href = "/";
+        return;
+      }
       document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       const view = btn.dataset.view;
       $("view-works").hidden = view !== "works";
       $("view-licenses").hidden = view !== "licenses";
+      $("view-publish").hidden = true;
     };
   });
+}
+
+async function refresh() {
+  const [stats, works] = await Promise.all([api("/api/stats"), api("/api/works")]);
+  state.works = works.works;
+  renderStats(stats);
+  renderRows();
 }
 
 async function loadLicenses() {
@@ -254,6 +377,7 @@ async function loadLicenses() {
 
 async function boot() {
   wireNav();
+  wirePublishForm();
   $("preview-close").onclick = closePreview;
   $("preview").onclick = (e) => {
     if (e.target.id === "preview") closePreview();
@@ -287,7 +411,7 @@ async function boot() {
     try {
       await api("/api/login", { method: "POST", body: { secret: $("login-secret").value } });
       $("login").hidden = true;
-      await loadDesk();
+      await afterAuth();
     } catch (err) {
       $("login-err").textContent = err.message;
     }
@@ -305,10 +429,19 @@ async function boot() {
         return;
       }
     }
-    await loadDesk();
+    await afterAuth();
   } catch (err) {
     toast(err.message);
   }
+}
+
+async function afterAuth() {
+  const pubId = publishWorkIdFromPath();
+  if (pubId) {
+    await loadPublishPage(pubId);
+    return;
+  }
+  await loadDesk();
 }
 
 async function loadDesk() {

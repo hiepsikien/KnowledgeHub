@@ -20,6 +20,7 @@ from .catalog import (
 from .hash import refresh_hashes
 from .licenses import load_license_catalog
 from .paths import corpus_root
+from .read_options import read_publisher_options
 from .read_publish import PublishError, preview_normalized, publish_to_read
 from .validate import validate_catalog
 
@@ -37,6 +38,12 @@ class AllowBody(BaseModel):
 
 class PublishBody(BaseModel):
     apply: bool = False
+    persist: bool = False
+    title: str | None = None
+    description: str | None = None
+    category_slug: str | None = None
+    price_cents: int | None = None
+    split_length: str | None = None
 
 
 def _ops_secret() -> str:
@@ -117,10 +124,23 @@ def create_app() -> FastAPI:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         return {"work": work, "summary": work_summary(work)}
 
+    @app.get("/api/read-options", dependencies=guard)
+    def read_options() -> dict[str, Any]:
+        return read_publisher_options()
+
     @app.post("/api/works/{work_id}/publish-read", dependencies=guard)
     def publish_read(work_id: str, payload: PublishBody) -> dict[str, Any]:
         try:
-            result = publish_to_read(work_id, dry_run=not payload.apply)
+            result = publish_to_read(
+                work_id,
+                dry_run=not payload.apply,
+                persist=payload.persist,
+                title=payload.title,
+                description=payload.description,
+                category_slug=payload.category_slug,
+                price_cents=payload.price_cents,
+                split_length=payload.split_length,
+            )
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except PublishError as exc:

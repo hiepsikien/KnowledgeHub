@@ -69,6 +69,51 @@
             </aside>
           </div>
         </section>
+        <section id="view-publish" hidden>
+          <p class="crumb"><a href="/">← Tác phẩm</a></p>
+          <header class="page-head">
+            <div>
+              <h1 id="pub-heading">Publish to Read</h1>
+              <p class="lead">Prefill từ catalog Hub. Read sẽ tách chapter theo preset (cùng engine publisher).</p>
+            </div>
+          </header>
+          <p class="err" id="pub-gate" hidden></p>
+          <form id="pub-form" class="pub-form" hidden>
+            <label>Title
+              <input id="pub-title" name="title" required />
+            </label>
+            <label>Description / blurb
+              <textarea id="pub-description" name="description" rows="4"></textarea>
+            </label>
+            <div class="pub-grid">
+              <p><span class="muted">Tác giả</span><br /><strong id="pub-author"></strong></p>
+              <p><span class="muted">Ngôn ngữ · năm</span><br /><strong id="pub-lang"></strong></p>
+              <p><span class="muted">License</span><br /><strong id="pub-license"></strong></p>
+              <p><span class="muted">Status trên Read</span><br /><strong>pending_review</strong></p>
+            </div>
+            <label>Category
+              <select id="pub-category" name="category_slug" required></select>
+            </label>
+            <fieldset class="split-set">
+              <legend>Độ dài đoạn đọc</legend>
+              <p class="muted" id="pub-split-note"></p>
+              <div class="split-opts" id="pub-split"></div>
+            </fieldset>
+            <fieldset>
+              <legend>Giá</legend>
+              <label class="inline"><input type="radio" name="pricing" value="free" checked /> Free</label>
+              <label class="inline"><input type="radio" name="pricing" value="paid" /> Paid (USD)</label>
+              <input id="pub-price" type="number" min="0.01" step="0.01" value="4.99" disabled />
+            </fieldset>
+            <label class="inline"><input id="pub-persist" type="checkbox" checked /> Lưu category / split / giá / blurb vào catalog Hub</label>
+            <div class="row">
+              <button type="button" class="btn ghost" id="pub-preview">Preview chữ</button>
+              <button type="button" class="btn ghost" id="pub-dry">Dry-run</button>
+              <button type="submit" class="btn primary" id="pub-apply">Gửi lên Read</button>
+            </div>
+            <pre class="err" id="pub-result"></pre>
+          </form>
+        </section>
         <section id="view-licenses" hidden>
           <h1>License catalog</h1>
           <p class="lead">Id canonical dùng trên work.license. Bản gốc Think nằm ở license_source.</p>

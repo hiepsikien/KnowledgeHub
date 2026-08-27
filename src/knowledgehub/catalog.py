@@ -184,6 +184,9 @@ def work_summary(work: dict[str, Any], *, root: Path | None = None) -> dict[str,
         "has_hash": bool(digest),
         "content_hash": digest,
         "category_slug": (work.get("read") or {}).get("category_slug") or "essays",
+        "price_cents": int((work.get("read") or {}).get("price_cents") or 0),
+        "split_length": (work.get("read") or {}).get("split_length") or "standard",
+        "description": work.get("description") or "",
         "source_url": work.get("source_url") or "",
     }
 
@@ -214,6 +217,45 @@ def set_read_consumer(work_id_value: str, allowed: bool, *, corpus: Path | None 
             rights = row.setdefault("rights", {})
             consumers = rights.setdefault("consumers", {})
             consumers["read"] = "allowed" if allowed else "blocked"
+            found = row
+            break
+    if found is None:
+        raise KeyError(work_id_value)
+    path.write_text(json.dumps(works, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return found
+
+
+def update_read_publication(
+    work_id_value: str,
+    *,
+    title: str | None = None,
+    description: str | None = None,
+    category_slug: str | None = None,
+    price_cents: int | None = None,
+    split_length: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    from .read_options import validate_category_slug, validate_split_length
+
+    root = corpus or corpus_root()
+    path = root / "catalog" / "works.json"
+    works = load_works(path)
+    found = None
+    for row in works:
+        if row.get("id") == work_id_value:
+            if title is not None:
+                cleaned = title.strip()
+                if cleaned:
+                    row["title"] = cleaned
+            if description is not None:
+                row["description"] = description.strip()
+            read = row.setdefault("read", {})
+            if category_slug is not None:
+                read["category_slug"] = validate_category_slug(category_slug)
+            if price_cents is not None:
+                read["price_cents"] = max(0, int(price_cents))
+            if split_length is not None:
+                read["split_length"] = validate_split_length(split_length)
             found = row
             break
     if found is None:
