@@ -16,8 +16,9 @@
     <div class="shell">
       <aside class="nav">
         <p class="brand">Knowledge <span>Hub</span></p>
-        <p class="tagline">Catalog corpus · publish Read</p>
+        <p class="tagline">Catalog corpus · dịch thuật · publish Read</p>
         <button class="nav-link active" data-view="works" type="button">Tác phẩm</button>
+        <button class="nav-link" data-view="translation" type="button">Dịch thuật</button>
         <button class="nav-link" data-view="licenses" type="button">License</button>
         <div class="nav-foot" id="health"></div>
       </aside>
@@ -118,6 +119,56 @@
           <h1>License catalog</h1>
           <p class="lead">Id canonical dùng trên work.license. Bản gốc Think nằm ở license_source.</p>
           <ul class="license-list" id="licenses"></ul>
+        </section>
+        <section id="view-translation" hidden>
+          <header class="page-head">
+            <div>
+              <h1>Dịch thuật</h1>
+              <p class="lead">QA, chú thích và đối chiếu EN ↔ VI theo chương. Pilot: Grotius — <em>The Freedom of the Seas</em>.</p>
+            </div>
+          </header>
+          <div class="stats" id="tr-stats"></div>
+          <div class="toolbar">
+            <select id="tr-project"></select>
+          </div>
+          <div class="layout tr-layout">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Chương</th>
+                    <th>Trạng thái</th>
+                    <th>QA</th>
+                    <th>Chú thích</th>
+                  </tr>
+                </thead>
+                <tbody id="tr-rows"></tbody>
+              </table>
+            </div>
+            <aside class="detail" id="tr-detail">
+              <p class="muted">Chọn một chương để xem QA và chú thích.</p>
+            </aside>
+          </div>
+          <div class="tr-segment" id="tr-segment" hidden>
+            <header class="tr-segment-head">
+              <h2 id="tr-segment-title">Đoạn dịch</h2>
+              <button type="button" class="btn ghost" id="tr-segment-close">Thu gọn</button>
+            </header>
+            <div class="tr-dual">
+              <article class="tr-col">
+                <h3>English</h3>
+                <div class="tr-text" id="tr-source"></div>
+              </article>
+              <article class="tr-col">
+                <h3>Tiếng Việt</h3>
+                <div class="tr-text" id="tr-translation"></div>
+              </article>
+            </div>
+            <div class="tr-annotations-block">
+              <h3>Chú thích (<span id="tr-ann-count">0</span>)</h3>
+              <div class="tr-annotations" id="tr-annotations"></div>
+            </div>
+          </div>
         </section>
       </main>
     </div>

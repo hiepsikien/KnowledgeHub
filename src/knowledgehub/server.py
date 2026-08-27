@@ -22,6 +22,14 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_publish import PublishError, preview_normalized, publish_to_read
+from .translation.api import (
+    get_segment_detail,
+    get_translation_project,
+    list_annotations,
+    list_translation_projects,
+    run_annotate,
+    run_qa,
+)
 from .validate import validate_catalog
 
 WEB_DIR = Path(__file__).resolve().parent / "web"
@@ -163,6 +171,58 @@ def create_app() -> FastAPI:
     @app.get("/api/licenses", dependencies=guard)
     def licenses() -> dict[str, Any]:
         return load_license_catalog()
+
+    @app.get("/api/translations", dependencies=guard)
+    def translations_list() -> dict[str, Any]:
+        return list_translation_projects()
+
+    @app.get("/api/translations/{source_work_id}", dependencies=guard)
+    def translation_project(source_work_id: str) -> dict[str, Any]:
+        try:
+            return get_translation_project(source_work_id)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+
+    @app.get("/api/translations/{source_work_id}/segments/{chapter}", dependencies=guard)
+    def translation_segment(
+        source_work_id: str,
+        chapter: str,
+        include_drafts: bool = Query(default=False),
+    ) -> dict[str, Any]:
+        try:
+            return get_segment_detail(source_work_id, chapter, include_drafts=include_drafts)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/translations/{source_work_id}/annotations", dependencies=guard)
+    def translation_annotations(
+        source_work_id: str,
+        chapter: str | None = Query(default=None),
+    ) -> dict[str, Any]:
+        try:
+            return list_annotations(source_work_id, chapter)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/qa/{chapter}", dependencies=guard)
+    def translation_qa(source_work_id: str, chapter: str) -> dict[str, Any]:
+        try:
+            return run_qa(source_work_id, chapter)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/annotate/{chapter}", dependencies=guard)
+    def translation_annotate(source_work_id: str, chapter: str) -> dict[str, Any]:
+        try:
+            return run_annotate(source_work_id, chapter)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/")
     def index() -> FileResponse:

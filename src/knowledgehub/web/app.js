@@ -4,6 +4,16 @@ const state = {
   works: [],
   selected: null,
   health: null,
+  translation: {
+    projects: [],
+    projectId: null,
+    project: null,
+    chapters: [],
+    selectedChapter: null,
+    segment: null,
+    annotations: [],
+    busy: false,
+  },
 };
 
 async function api(path, { method = "GET", body } = {}) {
@@ -223,6 +233,316 @@ function publishWorkIdFromPath() {
   return null;
 }
 
+function translationFromPath() {
+  const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+  if (parts[0] !== "translation" || !parts[1]) return null;
+  return {
+    workId: decodeURIComponent(parts[1]),
+    chapter: parts[2] ? decodeURIComponent(parts[2]) : null,
+  };
+}
+
+function scoreBar(label, value) {
+  const n = Number(value) || 0;
+  const pct = Math.max(0, Math.min(100, n * 10));
+  return `<div class="tr-score">
+    <span>${escapeHtml(label)}</span>
+    <div class="tr-score-bar"><span style="width:${pct}%"></span></div>
+    <span class="tr-score-val">${n || "—"}</span>
+  </div>`;
+}
+
+function statusBadge(status, hasFinal) {
+  if (status === "draft_ready" && hasFinal) return `<span class="badge ok">draft_ready</span>`;
+  if (status === "approved") return `<span class="badge ok">approved</span>`;
+  if (hasFinal) return `<span class="badge ok">${escapeHtml(status || "có bản dịch")}</span>`;
+  return `<span class="badge">${escapeHtml(status || "chưa dịch")}</span>`;
+}
+
+function kindBadge(kind) {
+  const map = {
+    footnote: ["kind-footnote", "footnote"],
+    glossary: ["kind-glossary", "glossary"],
+    context: ["kind-context", "context"],
+  };
+  const [cls, label] = map[kind] || ["", kind || "note"];
+  return `<span class="badge ${cls}">${escapeHtml(label)}</span>`;
+}
+
+function renderTranslationStats() {
+  const p = state.translation.project;
+  const chapters = state.translation.chapters || [];
+  if (!p) {
+    $("tr-stats").innerHTML = "";
+    return;
+  }
+  const withFinal = chapters.filter((c) => c.has_final).length;
+  const withQa = chapters.filter((c) => c.qa_overall != null).length;
+  const withAnn = chapters.filter((c) => c.annotations_generated_at).length;
+  const items = [
+    [chapters.length, "Chương"],
+    [withFinal, "Có bản dịch"],
+    [withQa, "Đã QA"],
+    [withAnn, "Đã chú thích"],
+    [p.project?.translation_mode || "—", "Mode"],
+  ];
+  $("tr-stats").innerHTML = items
+    .map(([n, label]) => `<div class="stat"><b>${escapeHtml(String(n))}</b><span>${escapeHtml(label)}</span></div>`)
+    .join("");
+}
+
+function renderTranslationRows() {
+  const chapters = state.translation.chapters || [];
+  const selected = state.translation.selectedChapter;
+  $("tr-rows").innerHTML = chapters
+    .map((c) => {
+      const on = selected === c.chapter ? "on" : "";
+      const qa = c.qa_overall != null ? `${c.qa_overall}/10` : "—";
+      const ann = c.annotations_generated_at ? "✓" : "—";
+      return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
+        <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ</div></td>
+        <td>${statusBadge(c.status, c.has_final)}</td>
+        <td>${escapeHtml(qa)}${c.issue_count ? `<div class="sub">${c.issue_count} vấn đề</div>` : ""}</td>
+        <td>${escapeHtml(ann)}</td>
+      </tr>`;
+    })
+    .join("");
+}
+
+function renderTranslationDetail() {
+  const box = $("tr-detail");
+  const chapter = state.translation.selectedChapter;
+  const seg = state.translation.segment;
+  if (!chapter) {
+    box.innerHTML = `<p class="muted">Chọn một chương để xem QA và chú thích.</p>`;
+    return;
+  }
+  if (!seg) {
+    box.innerHTML = `<p class="muted">Đang tải chương ${escapeHtml(chapter)}…</p>`;
+    return;
+  }
+  const qa = seg.qa || {};
+  const scores = qa.scores || {};
+  const issues = qa.issues || [];
+  const hasTranslation = Boolean((seg.translation || "").trim());
+  const scoreHtml = qa.scores
+    ? `<div class="tr-score-grid">
+        ${scoreBar("Trung thực", scores.fidelity)}
+        ${scoreBar("Mạch lạc", scores.fluency)}
+        ${scoreBar("Thuật ngữ", scores.terminology)}
+        ${scoreBar("Đầy đủ", scores.completeness)}
+        ${scoreBar("Tổng thể", scores.overall)}
+      </div>`
+    : `<p class="muted">Chưa chạy QA cho chương này.</p>`;
+  box.innerHTML = `
+    <h2>Chương ${escapeHtml(chapter)}</h2>
+    <p class="sub">${escapeHtml(seg.status || "")} · ${escapeHtml(String(seg.words || "—"))} từ</p>
+    ${scoreHtml}
+    ${qa.summary_vi ? `<div class="tr-summary">${escapeHtml(qa.summary_vi)}</div>` : ""}
+    ${
+      issues.length
+        ? `<ul class="tr-issues">${issues
+            .map(
+              (issue) => `<li>
+                <div class="meta">
+                  <span class="badge ${issue.severity === "major" ? "major" : "minor"}">${escapeHtml(issue.severity || "minor")}</span>
+                  <span class="badge">${escapeHtml(issue.category || "other")}</span>
+                </div>
+                <div>${escapeHtml(issue.note_vi || "")}</div>
+                ${
+                  issue.source_excerpt || issue.translation_excerpt
+                    ? `<div class="excerpt">
+                        ${issue.source_excerpt ? `EN: ${escapeHtml(issue.source_excerpt)}<br />` : ""}
+                        ${issue.translation_excerpt ? `VI: ${escapeHtml(issue.translation_excerpt)}` : ""}
+                      </div>`
+                    : ""
+                }
+              </li>`,
+            )
+            .join("")}</ul>`
+        : qa.scores
+          ? `<p class="muted">Không có vấn đề được ghi nhận.</p>`
+          : ""
+    }
+    <div class="row">
+      <button class="btn ghost" id="tr-btn-segment" type="button" ${hasTranslation ? "" : "disabled"}>Xem đoạn EN ↔ VI</button>
+      <button class="btn ghost" id="tr-btn-qa" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
+      <button class="btn" id="tr-btn-annotate" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${seg.annotations_generated_at ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
+    </div>
+    <pre class="err" id="tr-action-out"></pre>
+  `;
+  $("tr-btn-segment").onclick = () => showTranslationSegment(true);
+  $("tr-btn-qa").onclick = () => runTranslationQA();
+  $("tr-btn-annotate").onclick = () => runTranslationAnnotate();
+}
+
+function renderTranslationAnnotations() {
+  const items = state.translation.annotations || [];
+  $("tr-ann-count").textContent = String(items.length);
+  $("tr-annotations").innerHTML = items.length
+    ? items
+        .map(
+          (a) => `<article class="tr-ann">
+            <div class="tr-ann-head">
+              ${kindBadge(a.kind)}
+              ${a.marker ? `<strong>${escapeHtml(a.title_vi || a.marker)}</strong>` : `<strong>${escapeHtml(a.title_vi || "Chú thích")}</strong>`}
+              ${a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
+            </div>
+            <p>${escapeHtml(a.body_vi || "")}</p>
+          </article>`,
+        )
+        .join("")
+    : `<p class="muted">Chưa có chú thích. Bấm “Tạo chú thích” ở panel bên phải.</p>`;
+}
+
+function showTranslationSegment(show) {
+  const seg = state.translation.segment;
+  const block = $("tr-segment");
+  if (!show || !seg) {
+    block.hidden = true;
+    return;
+  }
+  $("tr-segment-title").textContent = `Chương ${seg.chapter}`;
+  $("tr-source").textContent = seg.source_text || "";
+  $("tr-translation").textContent = seg.translation || "";
+  renderTranslationAnnotations();
+  block.hidden = false;
+  block.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+async function loadTranslationProjects() {
+  const data = await api("/api/translations");
+  state.translation.projects = data.projects || [];
+  const select = $("tr-project");
+  select.innerHTML = (data.projects || [])
+    .map(
+      (p) =>
+        `<option value="${escapeHtml(p.source_work_id)}" ${p.source_work_id === state.translation.projectId ? "selected" : ""}>${escapeHtml(p.source_title || p.source_work_id)} (${escapeHtml(p.target_language || "vi")})</option>`,
+    )
+    .join("");
+  if (!state.translation.projectId && data.projects?.length) {
+    state.translation.projectId = data.projects[0].source_work_id;
+    select.value = state.translation.projectId;
+  }
+}
+
+async function loadTranslationProject(workId, chapterHint) {
+  state.translation.projectId = workId;
+  const data = await api(`/api/translations/${encodeURIComponent(workId)}`);
+  state.translation.project = data;
+  state.translation.chapters = data.chapters || [];
+  renderTranslationStats();
+  renderTranslationRows();
+  const pick =
+    chapterHint && data.chapters.some((c) => c.chapter === chapterHint)
+      ? chapterHint
+      : data.chapters.find((c) => c.has_final)?.chapter || data.chapters[0]?.chapter || null;
+  if (pick) await selectTranslationChapter(pick, false);
+  else {
+    state.translation.selectedChapter = null;
+    state.translation.segment = null;
+    renderTranslationDetail();
+    showTranslationSegment(false);
+  }
+}
+
+async function selectTranslationChapter(chapter, showSegment) {
+  const workId = state.translation.projectId;
+  if (!workId || !chapter) return;
+  state.translation.selectedChapter = chapter;
+  state.translation.segment = null;
+  renderTranslationRows();
+  renderTranslationDetail();
+  try {
+    const [seg, ann] = await Promise.all([
+      api(`/api/translations/${encodeURIComponent(workId)}/segments/${encodeURIComponent(chapter)}`),
+      api(`/api/translations/${encodeURIComponent(workId)}/annotations?chapter=${encodeURIComponent(chapter)}`),
+    ]);
+    state.translation.segment = seg;
+    state.translation.annotations = ann.annotations || [];
+    renderTranslationDetail();
+    if (showSegment) showTranslationSegment(true);
+    else renderTranslationAnnotations();
+  } catch (err) {
+    $("tr-detail").innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
+  }
+}
+
+async function runTranslationQA() {
+  const workId = state.translation.projectId;
+  const chapter = state.translation.selectedChapter;
+  const out = $("tr-action-out");
+  if (!workId || !chapter) return;
+  state.translation.busy = true;
+  renderTranslationDetail();
+  out.textContent = "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.";
+  try {
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}`, {
+      method: "POST",
+    });
+    toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10`);
+    await loadTranslationProject(workId, chapter);
+    showTranslationSegment(true);
+  } catch (err) {
+    out.textContent = err.message;
+  } finally {
+    state.translation.busy = false;
+    renderTranslationDetail();
+  }
+}
+
+async function runTranslationAnnotate() {
+  const workId = state.translation.projectId;
+  const chapter = state.translation.selectedChapter;
+  const out = $("tr-action-out");
+  if (!workId || !chapter) return;
+  state.translation.busy = true;
+  renderTranslationDetail();
+  out.textContent = "Đang tạo chú thích (Gemini)…";
+  try {
+    const result = await api(
+      `/api/translations/${encodeURIComponent(workId)}/annotate/${encodeURIComponent(chapter)}`,
+      { method: "POST" },
+    );
+    toast(`Đã cập nhật ${result.added_or_updated} chú thích (tổng ${result.total})`);
+    await loadTranslationProject(workId, chapter);
+    showTranslationSegment(true);
+  } catch (err) {
+    out.textContent = err.message;
+  } finally {
+    state.translation.busy = false;
+    renderTranslationDetail();
+  }
+}
+
+async function loadTranslationView(workId, chapter) {
+  document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
+  document.querySelector('.nav-link[data-view="translation"]')?.classList.add("active");
+  $("view-works").hidden = true;
+  $("view-licenses").hidden = true;
+  $("view-publish").hidden = true;
+  $("view-translation").hidden = false;
+  await loadTranslationProjects();
+  if (workId) {
+    $("tr-project").value = workId;
+    await loadTranslationProject(workId, chapter);
+  } else if (state.translation.projectId) {
+    await loadTranslationProject(state.translation.projectId, chapter);
+  }
+}
+
+function wireTranslation() {
+  $("tr-project").onchange = async () => {
+    const workId = $("tr-project").value;
+    if (workId) await loadTranslationProject(workId, null);
+  };
+  $("tr-rows").onclick = (e) => {
+    const tr = e.target.closest("tr[data-chapter]");
+    if (tr) selectTranslationChapter(tr.dataset.chapter, false);
+  };
+  $("tr-segment-close").onclick = () => showTranslationSegment(false);
+}
+
 function collectPublishPayload(apply) {
   const paid = document.querySelector("input[name=pricing]:checked")?.value === "paid";
   const dollars = Number($("pub-price").value || 0);
@@ -346,12 +666,18 @@ function wireNav() {
         location.href = "/";
         return;
       }
+      if (translationFromPath()) {
+        location.href = "/";
+        return;
+      }
       document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       const view = btn.dataset.view;
       $("view-works").hidden = view !== "works";
       $("view-licenses").hidden = view !== "licenses";
       $("view-publish").hidden = true;
+      $("view-translation").hidden = view !== "translation";
+      if (view === "translation") loadTranslationView(null, null);
     };
   });
 }
@@ -378,6 +704,7 @@ async function loadLicenses() {
 async function boot() {
   wireNav();
   wirePublishForm();
+  wireTranslation();
   $("preview-close").onclick = closePreview;
   $("preview").onclick = (e) => {
     if (e.target.id === "preview") closePreview();
@@ -439,6 +766,11 @@ async function afterAuth() {
   const pubId = publishWorkIdFromPath();
   if (pubId) {
     await loadPublishPage(pubId);
+    return;
+  }
+  const tr = translationFromPath();
+  if (tr) {
+    await loadTranslationView(tr.workId, tr.chapter);
     return;
   }
   await loadDesk();
