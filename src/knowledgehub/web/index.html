@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Knowledge Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="nav">
+        <p class="brand">Knowledge <span>Hub</span></p>
+        <p class="tagline">Catalog corpus · publish Read</p>
+        <button class="nav-link active" data-view="works" type="button">Tác phẩm</button>
+        <button class="nav-link" data-view="licenses" type="button">License</button>
+        <div class="nav-foot" id="health"></div>
+      </aside>
+      <main class="main">
+        <section id="view-works">
+          <header class="page-head">
+            <div>
+              <h1>Kho tác phẩm</h1>
+              <p class="lead">Chuẩn hoá metadata, cho phép Read, rồi đẩy bản copy sang thư viện.</p>
+            </div>
+            <div class="page-actions">
+              <button type="button" id="btn-validate" class="btn ghost">Validate</button>
+              <button type="button" id="btn-hash" class="btn ghost">Hash raw</button>
+            </div>
+          </header>
+          <div class="stats" id="stats"></div>
+          <div class="toolbar">
+            <input id="q" type="search" placeholder="Tìm title, id, author…" />
+            <select id="filter">
+              <option value="all">Tất cả</option>
+              <option value="ready">Sẵn sàng publish</option>
+              <option value="allowed">Đã allow Read</option>
+              <option value="blocked">Chưa allow Read</option>
+              <option value="raw">Có file raw</option>
+              <option value="missing">Thiếu raw</option>
+            </select>
+            <select id="lang">
+              <option value="">Mọi ngôn ngữ</option>
+            </select>
+          </div>
+          <p class="count" id="count"></p>
+          <div class="layout">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tác phẩm</th>
+                    <th>Author</th>
+                    <th>Lang</th>
+                    <th>Read</th>
+                    <th>Raw</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+            <aside class="detail" id="detail">
+              <p class="muted">Chọn một tác phẩm để xem và publish.</p>
+            </aside>
+          </div>
+        </section>
+        <section id="view-licenses" hidden>
+          <h1>License catalog</h1>
+          <p class="lead">Id canonical dùng trên work.license. Bản gốc Think nằm ở license_source.</p>
+          <ul class="license-list" id="licenses"></ul>
+        </section>
+      </main>
+    </div>
+    <div id="login" class="login" hidden>
+      <form id="login-form" class="login-card">
+        <h2>Ops secret</h2>
+        <p class="lead">Set <code>KNOWLEDGEHUB_OPS_SECRET</code> để khoá curator.</p>
+        <input id="login-secret" type="password" autocomplete="current-password" />
+        <button class="btn primary" type="submit">Vào Hub</button>
+        <p class="err" id="login-err"></p>
+      </form>
+    </div>
+    <div id="preview" class="preview" hidden>
+      <div class="preview-sheet">
+        <header class="preview-bar">
+          <div>
+            <h2 id="preview-title">Preview</h2>
+            <p class="sub" id="preview-meta"></p>
+          </div>
+          <div class="row">
+            <button type="button" class="btn ghost" id="preview-full">Toàn văn</button>
+            <button type="button" class="btn" id="preview-close">Đóng</button>
+          </div>
+        </header>
+        <article class="preview-body" id="preview-body"></article>
+      </div>
+    </div>
+    <div id="toast" class="toast" hidden></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

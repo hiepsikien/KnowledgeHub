@@ -8,8 +8,8 @@ Central catalog and distribution layer for literary corpora. **Knowledge Hub** i
 
 | Project | Role |
 |---------|------|
-| [Think](https://github.com/hiepsikien/Think) | Origin CMS (in `apps/`) — evolves into Hub admin + ingest |
-| [Read](https://github.com/hiepsikien/Read) | Reading platform — syncs materialized copies for in-app reading |
+| [Think](https://github.com/hiepsikien/Think) | Consumer — salon RAG (chunks). Does not own the Hub catalog |
+| [Read](https://github.com/hiepsikien/Read) | Consumer — library + reader + TTS; Hub posts plain text to `/api/internal/hub/works` |
 
 ## Problem
 
@@ -24,19 +24,42 @@ Building a separate greenfield CMS would duplicate corpus and license work alrea
 
 ## Solution
 
-Evolve **Think CMS** into **Knowledge Hub**:
+**Knowledge Hub** (this repo) owns manuscripts, authors, licenses, and publish state.
 
-1. **Hub owns** canonical text + metadata + license + publish workflow.
-2. **Think app** consumes Hub via API (internal consumer).
-3. **Read** syncs **materialized copies** (metadata + full text + split chapters) — not live proxy on every page turn.
+1. Catalog: `corpus/catalog/works.json` + `authors.json` (stable work ids).
+2. Files: `corpus/sources/<brain>/raw/*.txt` (gitignored).
+3. **Read** receives a materialized copy via `knowledgehub publish-read`.
+4. **Think** may still chunk from `sources/` for RAG — it is not the catalog admin.
 
 ```
-Think CMS (apps/)  ──evolve──▶  Knowledge Hub
-                                      │
-                    ┌─────────────────┴─────────────────┐
-                    ▼                                   ▼
-              Think app                           Read sync job
-           (study / AI / corpus)              (library + reader + TTS)
+KnowledgeHub catalog + raw txt
+        │
+        ├── knowledgehub publish-read ──▶ Read books (hub_work_id)
+        └── optional Think ingest ─────▶ salon chunks
+```
+
+## Curator UI
+
+Local admin for the catalog — search works, toggle Read rights, dry-run then publish.
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+.venv/bin/knowledgehub serve          # http://127.0.0.1:8787
+```
+
+If `KNOWLEDGEHUB_OPS_SECRET` is unset, the UI is open on localhost. Set the secret to require login.
+
+Publish still needs `READ_API_URL` (default `http://127.0.0.1:8000`) and `READ_HUB_TOKEN` (same as Read `HUB_SYNC_TOKEN`). Default Read status is `pending_review`. `publish-read` sends a **normalized** edition (Gutenberg wrappers, eBook notes, front TOC dumps stripped, hard-wrap lines joined into paragraphs). Source `raw/*.txt` is unchanged; `content_hash` still hashes the file on disk.
+
+## CLI
+
+```bash
+.venv/bin/knowledgehub build-catalog   # from sources/*/works.json
+.venv/bin/knowledgehub validate
+.venv/bin/knowledgehub hash            # SHA-256 of local raw files
+.venv/bin/knowledgehub allow-read --work locke--second_treatise
+.venv/bin/knowledgehub publish-read --work locke--second_treatise
+.venv/bin/knowledgehub publish-read --work locke--second_treatise --apply
 ```
 
 ## Core concepts
@@ -154,19 +177,20 @@ Service tokens authenticate Read sync and automation — separate from human adm
 
 ## Repository layout
 
-Canonical manuscripts live in this repo (`corpus/`). Think stores derived RAG chunks and salon forests. Runtime Hub APIs still run in Think until the HTTP contract is stable.
-
 ```
-KnowledgeHub/corpus/   ← works.json + licenses; raw/*.txt gitignored
-Think/                 ← CMS + forests + chunks + salon
-Read/                  ← sync adapter + reader
+KnowledgeHub/
+  corpus/catalog/     ← authors.json + works.json (managed here)
+  corpus/sources/     ← Think-shaped works.json + raw/*.txt
+  src/knowledgehub/   ← CLI, curator UI, publish-read
+Think/                ← salon + derived chunks
+Read/                 ← reader; POST /api/internal/hub/works
 ```
 
 See [corpus/README.md](./corpus/README.md).
 
 ## Status
 
-**Planning.** Phase 0 audit of Think CMS + corpus is in [docs/hub-evolution.md](./docs/hub-evolution.md). Implementation of Hub APIs still starts in the Think monorepo.
+Catalog, curator UI (`knowledgehub serve`), and Read publisher are in this repo. Phase 0 Think audit: [docs/hub-evolution.md](./docs/hub-evolution.md).
 
 ## Links
 

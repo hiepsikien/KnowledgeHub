@@ -3,9 +3,9 @@
 > **Knowledge Hub** là lớp quản lý và phân phối corpus văn học tập trung — nguồn sự thật duy nhất cho tác phẩm, tác giả, license và trạng thái xuất bản. **Think** và **Read** là hai ứng dụng tiêu thụ (consumer), không sở hữu corpus gốc.
 
 - **Repo (dự kiến):** https://github.com/hiepsikien/KnowledgeHub  
-- **Triển khai ban đầu:** evolve từ CMS trong [Think](https://github.com/hiepsikien/Think) (`apps/`)  
+- **Triển khai:** catalog + CLI trên repo này; Think chỉ còn consumer RAG; Read nhận sync-copy  
 - **Consumer:** [Think](https://github.com/hiepsikien/Think) · [Read](https://github.com/hiepsikien/Read)  
-- **Trạng thái:** Planning — Phase 0 audit xong (`docs/hub-evolution.md`); Phase 1 chưa implement  
+- **Trạng thái:** Catalog Hub v1 + curator UI (`knowledgehub serve`) + `publish-read`; Think CMS không còn là nơi quản lý tài liệu Hub 
 
 ---
 
@@ -31,10 +31,11 @@
 
 ### Quyết định kiến trúc
 
-> **Evolve CMS Think thành Knowledge Hub** — không greenfield.
+> **KnowledgeHub quản lý tài liệu.** Think không còn là CMS corpus.  
+> Think ingest `.txt` từ `corpus/sources/` nếu cần RAG. Read nhận bản copy qua `knowledgehub publish-read`.
 
 Product name: **Knowledge Hub**.  
-Implementation giai đoạn đầu: module CMS trong monorepo Think → thêm API phân phối + chuẩn metadata.
+Implementation: Python package `knowledgehub` trong repo này (`src/knowledgehub`).
 
 ---
 
@@ -54,34 +55,27 @@ Knowledge Hub cho phép:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  KnowledgeHub/corpus  (canonical .txt + works.json)     │
-│  licenses · sources/<brain>/works.json · raw/*.txt      │
+│  KnowledgeHub                                           │
+│  catalog/works.json · authors.json · licenses           │
+│  sources/<brain>/raw/*.txt (canonical manuscripts)      │
+│  CLI + UI: serve · allow-read · publish-read            │
 └──────────────────────────┬──────────────────────────────┘
-                           │ ingest đọc file (Think CMS)
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│  Think  — forests, chunks RAG, salon API, CMS UI        │
-└──────────────────────────┬──────────────────────────────┘
-                           │ Hub API (sau Phase 1) + export
            ┌───────────────┴───────────────┐
            ▼                               ▼
-    ┌─────────────┐                 ┌─────────────┐
-    │  Think app  │                 │  Read app   │
-    │  (consumer) │                 │  (consumer) │
-    │  chunks/RAG │                 │  sync-copy  │
-    └─────────────┘                 └─────────────┘
+    Think (optional ingest)         Read POST /api/internal/hub/works
+    chunks / salon                  books.hub_work_id + split chapters
 ```
 
 ### Vai trò từng thành phần
 
 | Thành phần | Vai trò |
 |------------|---------|
-| **Knowledge Hub** | Source of truth — **repo này** giữ text gốc + `works.json` + license |
-| **Think app** | Consumer — ingest từ Hub filesystem, runtime RAG trên chunks (không sở hữu `.txt`) |
-| **Read** | Consumer đọc sách — **sync bản copy** (full text + chapters) vào DB Read |
-| **Repo KnowledgeHub** | Docs, schema, **canonical corpus** (`corpus/`) |
-| **Repo Think** | CMS UI + Hub API runtime + forests + chunks (derived) |
-| **Repo Read** | Sync job + reader + TTS |
+| **Knowledge Hub** | Source of truth — catalog Work/Author/license + raw `.txt` + publish CLI |
+| **Think app** | Consumer RAG — có thể đọc `sources/` để chunk; không sở hữu catalog |
+| **Read** | Consumer đọc sách — `POST /api/internal/hub/works` → `raw_text` + chapters |
+| **Repo KnowledgeHub** | Docs, schema, catalog, CLI `knowledgehub` |
+| **Repo Think** | Salon, forests, chunks derived |
+| **Repo Read** | Reader + TTS + cửa ingest Hub (`HUB_SYNC_TOKEN`) |
 
 ---
 
@@ -262,11 +256,11 @@ Read sync job (sync_from_hub)
 
 | Repo | Nội dung |
 |------|----------|
-| **KnowledgeHub** | Docs, JSON Schema, **canonical `corpus/`** (works.json; raw gitignored) |
-| **Think** | CMS, forests, RAG chunks, Hub API runtime |
-| **Read** | `sync_from_hub`, `hub_work_id` migration, reader |
+| **KnowledgeHub** | Catalog, curator UI, licenses, CLI validate/hash/publish-read |
+| **Think** | Forests + RAG chunks (derived) |
+| **Read** | `hub_work_id` trên `books`, `POST /api/internal/hub/works` |
 
-Think **ingest bắt buộc đọc** `KNOWLEDGEHUB_CORPUS` (thư mục `corpus/` của repo này). Implementation API vẫn evolve trong Think cho đến khi HTTP Hub ổn định.
+Think **không** quản lý catalog Hub. `sources/*/works.json` còn lại là bản Think-shaped để ingest RAG; nguồn sự thật quản trị là `corpus/catalog/`.
 
 ---
 
@@ -279,12 +273,15 @@ Think **ingest bắt buộc đọc** `KNOWLEDGEHUB_CORPUS` (thư mục `corpus/`
 - [x] Tìm chỗ Think app đọc corpus trực tiếp
 - [x] Output: [`docs/hub-evolution.md`](./hub-evolution.md) (2026-08-27, local Think clone)
 
-### Phase 1 — Platform layer trên CMS
+### Phase 1 — Catalog + publish Read
 
-- [ ] `content_version`, `content_hash`, `publications`
-- [ ] License consumer flags (`think`, `read`)
-- [ ] Hub read API v1
-- [ ] UI: Publications (publish to Think / Read)
+- [x] Work `id` ổn định (`{brain}--{file_stem}`) + `author_id`
+- [x] `content_hash` SHA-256 (`knowledgehub hash`)
+- [x] Chuẩn hóa license (canonical + aliases)
+- [x] Module `knowledgehub publish-read` → Read `pending_review`
+- [x] Curator UI (`knowledgehub serve`) — list, allow-read, dry-run / apply
+- [x] Normalize lúc `publish-read` (cắt Gutenberg / note eBook / TOC; unwrap hard-wrap; không ghi đè `raw/`)
+- [ ] Consumer flags hàng loạt / bulk allow-read
 
 ### Phase 2 — Think app refactor
 
@@ -310,14 +307,13 @@ Think **ingest bắt buộc đọc** `KNOWLEDGEHUB_CORPUS` (thư mục `corpus/`
 
 | Hạng mục | Quyết định |
 |----------|------------|
-| Source of truth | KnowledgeHub `corpus/` (text + works.json); Think CMS duyệt / ingest |
+| Source of truth | KnowledgeHub `corpus/catalog` + `sources/*/raw` |
 | Định dạng corpus | `.txt` |
 | Series / glossary | Không ở v1 |
-| Read lưu fulltext? | **Có** — sync-copy, không proxy realtime |
-| Think đọc fulltext? | Ingest từ `KnowledgeHub/corpus`; salon dùng chunks, không đọc `.txt` lúc gọi |
-| Publisher logic | Hub publish → consumer sync |
-| Corpus `.txt` | **KnowledgeHub/corpus** (filesystem). Think không còn là nơi lưu canonical raw. |
-| Repo docs | KnowledgeHub (repo riêng) + `corpus/` |
+| Read lưu fulltext? | **Có** — sync-copy qua Hub ingest |
+| Think đọc fulltext? | Optional ingest từ `sources/`; salon dùng chunks |
+| Publisher logic | Hub `allow-read` rồi `publish-read --apply` |
+| Catalog Work id | `{think_brain}--{file_stem}` |
 
 ## 11. Quyết định còn mở
 

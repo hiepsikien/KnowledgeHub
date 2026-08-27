@@ -2,6 +2,11 @@
 *.swp
 .env
 .env.*
+__pycache__/
+*.pyc
+.venv/
+src/*.egg-info/
+*.egg-info/
 
 # Canonical manuscripts — local only; public GitHub is metadata + docs
 corpus/sources/*/raw/

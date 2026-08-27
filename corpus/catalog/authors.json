@@ -1,0 +1,1432 @@
+[
+  {
+    "id": "aquinas",
+    "name": "Aquinas",
+    "think_brain": "aquinas"
+  },
+  {
+    "id": "aristotle",
+    "name": "Aristotle",
+    "think_brain": "aristotle"
+  },
+  {
+    "id": "armour",
+    "name": "Armour",
+    "think_brain": "armour"
+  },
+  {
+    "id": "arnold",
+    "name": "Arnold",
+    "think_brain": "arnold"
+  },
+  {
+    "id": "astor",
+    "name": "Astor",
+    "think_brain": "astor"
+  },
+  {
+    "id": "augustine",
+    "name": "Augustine",
+    "think_brain": "augustine"
+  },
+  {
+    "id": "austen",
+    "name": "Austen",
+    "think_brain": "austen"
+  },
+  {
+    "id": "bach",
+    "name": "Bach",
+    "think_brain": "bach"
+  },
+  {
+    "id": "bacon",
+    "name": "Bacon",
+    "think_brain": "bacon"
+  },
+  {
+    "id": "balzac",
+    "name": "Balzac",
+    "think_brain": "balzac"
+  },
+  {
+    "id": "barnum",
+    "name": "Barnum",
+    "think_brain": "barnum"
+  },
+  {
+    "id": "bastiat",
+    "name": "Bastiat",
+    "think_brain": "bastiat"
+  },
+  {
+    "id": "beethoven",
+    "name": "Beethoven",
+    "think_brain": "beethoven"
+  },
+  {
+    "id": "bell",
+    "name": "Bell",
+    "think_brain": "bell"
+  },
+  {
+    "id": "bentham",
+    "name": "Bentham",
+    "think_brain": "bentham"
+  },
+  {
+    "id": "bergson",
+    "name": "Bergson",
+    "think_brain": "bergson"
+  },
+  {
+    "id": "berkeley",
+    "name": "Berkeley",
+    "think_brain": "berkeley"
+  },
+  {
+    "id": "bismarck",
+    "name": "Bismarck",
+    "think_brain": "bismarck"
+  },
+  {
+    "id": "blackstone",
+    "name": "Blackstone",
+    "think_brain": "blackstone"
+  },
+  {
+    "id": "blackwell",
+    "name": "Blackwell",
+    "think_brain": "blackwell"
+  },
+  {
+    "id": "blake",
+    "name": "Blake",
+    "think_brain": "blake"
+  },
+  {
+    "id": "boole",
+    "name": "Boole",
+    "think_brain": "boole"
+  },
+  {
+    "id": "brahms",
+    "name": "Brahms",
+    "think_brain": "brahms"
+  },
+  {
+    "id": "browning",
+    "name": "Browning",
+    "think_brain": "browning"
+  },
+  {
+    "id": "brunel",
+    "name": "Brunel",
+    "think_brain": "brunel"
+  },
+  {
+    "id": "buddha",
+    "name": "Buddha",
+    "think_brain": "buddha"
+  },
+  {
+    "id": "burckhardt",
+    "name": "Burckhardt",
+    "think_brain": "burckhardt"
+  },
+  {
+    "id": "burke",
+    "name": "Burke",
+    "think_brain": "burke"
+  },
+  {
+    "id": "burns",
+    "name": "Burns",
+    "think_brain": "burns"
+  },
+  {
+    "id": "busoni",
+    "name": "Busoni",
+    "think_brain": "busoni"
+  },
+  {
+    "id": "byron",
+    "name": "Byron",
+    "think_brain": "byron"
+  },
+  {
+    "id": "caesar",
+    "name": "Caesar",
+    "think_brain": "caesar"
+  },
+  {
+    "id": "camoes",
+    "name": "Camoes",
+    "think_brain": "camoes"
+  },
+  {
+    "id": "cantor",
+    "name": "Cantor",
+    "think_brain": "cantor"
+  },
+  {
+    "id": "carlyle",
+    "name": "Carlyle",
+    "think_brain": "carlyle"
+  },
+  {
+    "id": "carnegie",
+    "name": "Carnegie",
+    "think_brain": "carnegie"
+  },
+  {
+    "id": "catherine",
+    "name": "Catherine",
+    "think_brain": "catherine"
+  },
+  {
+    "id": "cervantes",
+    "name": "Cervantes",
+    "think_brain": "cervantes"
+  },
+  {
+    "id": "chopin",
+    "name": "Chopin",
+    "think_brain": "chopin"
+  },
+  {
+    "id": "cicero",
+    "name": "Cicero",
+    "think_brain": "cicero"
+  },
+  {
+    "id": "claude_bernard",
+    "name": "Claude Bernard",
+    "think_brain": "claude_bernard"
+  },
+  {
+    "id": "clausewitz",
+    "name": "Clausewitz",
+    "think_brain": "clausewitz"
+  },
+  {
+    "id": "clews",
+    "name": "Clews",
+    "think_brain": "clews"
+  },
+  {
+    "id": "columbus",
+    "name": "Columbus",
+    "think_brain": "columbus"
+  },
+  {
+    "id": "comte",
+    "name": "Comte",
+    "think_brain": "comte"
+  },
+  {
+    "id": "condorcet",
+    "name": "Condorcet",
+    "think_brain": "condorcet"
+  },
+  {
+    "id": "confucius",
+    "name": "Confucius",
+    "think_brain": "confucius"
+  },
+  {
+    "id": "conrad",
+    "name": "Conrad",
+    "think_brain": "conrad"
+  },
+  {
+    "id": "cook",
+    "name": "Cook",
+    "think_brain": "cook"
+  },
+  {
+    "id": "cooke",
+    "name": "Cooke",
+    "think_brain": "cooke"
+  },
+  {
+    "id": "copernicus",
+    "name": "Copernicus",
+    "think_brain": "copernicus"
+  },
+  {
+    "id": "corbett",
+    "name": "Corbett",
+    "think_brain": "corbett"
+  },
+  {
+    "id": "curie",
+    "name": "Curie",
+    "think_brain": "curie"
+  },
+  {
+    "id": "da_gama",
+    "name": "Da Gama",
+    "think_brain": "da_gama"
+  },
+  {
+    "id": "dante",
+    "name": "Dante",
+    "think_brain": "dante"
+  },
+  {
+    "id": "darwin",
+    "name": "Darwin",
+    "think_brain": "darwin"
+  },
+  {
+    "id": "dedekind",
+    "name": "Dedekind",
+    "think_brain": "dedekind"
+  },
+  {
+    "id": "descartes",
+    "name": "Descartes",
+    "think_brain": "descartes"
+  },
+  {
+    "id": "dewey",
+    "name": "Dewey",
+    "think_brain": "dewey"
+  },
+  {
+    "id": "dickens",
+    "name": "Dickens",
+    "think_brain": "dickens"
+  },
+  {
+    "id": "dickinson",
+    "name": "Dickinson",
+    "think_brain": "dickinson"
+  },
+  {
+    "id": "diderot",
+    "name": "Diderot",
+    "think_brain": "diderot"
+  },
+  {
+    "id": "doan_thi_diem",
+    "name": "Doan Thi Diem",
+    "think_brain": "doan_thi_diem"
+  },
+  {
+    "id": "dostoevsky",
+    "name": "Dostoevsky",
+    "think_brain": "dostoevsky"
+  },
+  {
+    "id": "douglass",
+    "name": "Douglass",
+    "think_brain": "douglass"
+  },
+  {
+    "id": "du_picq",
+    "name": "Du Picq",
+    "think_brain": "du_picq"
+  },
+  {
+    "id": "durkheim",
+    "name": "Durkheim",
+    "think_brain": "durkheim"
+  },
+  {
+    "id": "dvorak",
+    "name": "Dvorak",
+    "think_brain": "dvorak"
+  },
+  {
+    "id": "edison",
+    "name": "Edison",
+    "think_brain": "edison"
+  },
+  {
+    "id": "einstein",
+    "name": "Einstein",
+    "think_brain": "einstein"
+  },
+  {
+    "id": "eliot",
+    "name": "Eliot",
+    "think_brain": "eliot"
+  },
+  {
+    "id": "emerson",
+    "name": "Emerson",
+    "think_brain": "emerson"
+  },
+  {
+    "id": "engels",
+    "name": "Engels",
+    "think_brain": "engels"
+  },
+  {
+    "id": "epictetus",
+    "name": "Epictetus",
+    "think_brain": "epictetus"
+  },
+  {
+    "id": "euclid",
+    "name": "Euclid",
+    "think_brain": "euclid"
+  },
+  {
+    "id": "euler",
+    "name": "Euler",
+    "think_brain": "euler"
+  },
+  {
+    "id": "faraday",
+    "name": "Faraday",
+    "think_brain": "faraday"
+  },
+  {
+    "id": "fdr",
+    "name": "Fdr",
+    "think_brain": "fdr"
+  },
+  {
+    "id": "federalist",
+    "name": "Federalist",
+    "think_brain": "federalist"
+  },
+  {
+    "id": "flagler",
+    "name": "Flagler",
+    "think_brain": "flagler"
+  },
+  {
+    "id": "flaubert",
+    "name": "Flaubert",
+    "think_brain": "flaubert"
+  },
+  {
+    "id": "fleming",
+    "name": "Fleming",
+    "think_brain": "fleming"
+  },
+  {
+    "id": "ford",
+    "name": "Ford",
+    "think_brain": "ford"
+  },
+  {
+    "id": "franklin",
+    "name": "Franklin",
+    "think_brain": "franklin"
+  },
+  {
+    "id": "frazer",
+    "name": "Frazer",
+    "think_brain": "frazer"
+  },
+  {
+    "id": "freud",
+    "name": "Freud",
+    "think_brain": "freud"
+  },
+  {
+    "id": "frick",
+    "name": "Frick",
+    "think_brain": "frick"
+  },
+  {
+    "id": "fukuzawa",
+    "name": "Fukuzawa",
+    "think_brain": "fukuzawa"
+  },
+  {
+    "id": "galileo",
+    "name": "Galileo",
+    "think_brain": "galileo"
+  },
+  {
+    "id": "gandhi",
+    "name": "Gandhi",
+    "think_brain": "gandhi"
+  },
+  {
+    "id": "george",
+    "name": "George",
+    "think_brain": "george"
+  },
+  {
+    "id": "ghazali",
+    "name": "Ghazali",
+    "think_brain": "ghazali"
+  },
+  {
+    "id": "gibbon",
+    "name": "Gibbon",
+    "think_brain": "gibbon"
+  },
+  {
+    "id": "gita",
+    "name": "Gita",
+    "think_brain": "gita"
+  },
+  {
+    "id": "goethe",
+    "name": "Goethe",
+    "think_brain": "goethe"
+  },
+  {
+    "id": "gould",
+    "name": "Gould",
+    "think_brain": "gould"
+  },
+  {
+    "id": "grotius",
+    "name": "Grotius",
+    "think_brain": "grotius"
+  },
+  {
+    "id": "hai_thuong_lan_ong",
+    "name": "Hai Thuong Lan Ong",
+    "think_brain": "hai_thuong_lan_ong"
+  },
+  {
+    "id": "hall",
+    "name": "Hall",
+    "think_brain": "hall"
+  },
+  {
+    "id": "handel",
+    "name": "Handel",
+    "think_brain": "handel"
+  },
+  {
+    "id": "hanslick",
+    "name": "Hanslick",
+    "think_brain": "hanslick"
+  },
+  {
+    "id": "harriman",
+    "name": "Harriman",
+    "think_brain": "harriman"
+  },
+  {
+    "id": "harvey",
+    "name": "Harvey",
+    "think_brain": "harvey"
+  },
+  {
+    "id": "haydn",
+    "name": "Haydn",
+    "think_brain": "haydn"
+  },
+  {
+    "id": "hegel",
+    "name": "Hegel",
+    "think_brain": "hegel"
+  },
+  {
+    "id": "helmholtz",
+    "name": "Helmholtz",
+    "think_brain": "helmholtz"
+  },
+  {
+    "id": "herder",
+    "name": "Herder",
+    "think_brain": "herder"
+  },
+  {
+    "id": "herodotus",
+    "name": "Herodotus",
+    "think_brain": "herodotus"
+  },
+  {
+    "id": "hilbert",
+    "name": "Hilbert",
+    "think_brain": "hilbert"
+  },
+  {
+    "id": "hill",
+    "name": "Hill",
+    "think_brain": "hill"
+  },
+  {
+    "id": "ho_xuan_huong",
+    "name": "Ho Xuan Huong",
+    "think_brain": "ho_xuan_huong"
+  },
+  {
+    "id": "hobbes",
+    "name": "Hobbes",
+    "think_brain": "hobbes"
+  },
+  {
+    "id": "homer",
+    "name": "Homer",
+    "think_brain": "homer"
+  },
+  {
+    "id": "hooke",
+    "name": "Hooke",
+    "think_brain": "hooke"
+  },
+  {
+    "id": "hugo",
+    "name": "Hugo",
+    "think_brain": "hugo"
+  },
+  {
+    "id": "humboldt",
+    "name": "Humboldt",
+    "think_brain": "humboldt"
+  },
+  {
+    "id": "hume",
+    "name": "Hume",
+    "think_brain": "hume"
+  },
+  {
+    "id": "huntington",
+    "name": "Huntington",
+    "think_brain": "huntington"
+  },
+  {
+    "id": "ibn_battuta",
+    "name": "Ibn Battuta",
+    "think_brain": "ibn_battuta"
+  },
+  {
+    "id": "ibn_majid",
+    "name": "Ibn Majid",
+    "think_brain": "ibn_majid"
+  },
+  {
+    "id": "ibsen",
+    "name": "Ibsen",
+    "think_brain": "ibsen"
+  },
+  {
+    "id": "james",
+    "name": "James",
+    "think_brain": "james"
+  },
+  {
+    "id": "jefferson",
+    "name": "Jefferson",
+    "think_brain": "jefferson"
+  },
+  {
+    "id": "jenner",
+    "name": "Jenner",
+    "think_brain": "jenner"
+  },
+  {
+    "id": "john_snow",
+    "name": "John Snow",
+    "think_brain": "john_snow"
+  },
+  {
+    "id": "jomini",
+    "name": "Jomini",
+    "think_brain": "jomini"
+  },
+  {
+    "id": "jung",
+    "name": "Jung",
+    "think_brain": "jung"
+  },
+  {
+    "id": "kabir",
+    "name": "Kabir",
+    "think_brain": "kabir"
+  },
+  {
+    "id": "kandinsky",
+    "name": "Kandinsky",
+    "think_brain": "kandinsky"
+  },
+  {
+    "id": "kant",
+    "name": "Kant",
+    "think_brain": "kant"
+  },
+  {
+    "id": "keats",
+    "name": "Keats",
+    "think_brain": "keats"
+  },
+  {
+    "id": "kepler",
+    "name": "Kepler",
+    "think_brain": "kepler"
+  },
+  {
+    "id": "kierkegaard",
+    "name": "Kierkegaard",
+    "think_brain": "kierkegaard"
+  },
+  {
+    "id": "koch",
+    "name": "Koch",
+    "think_brain": "koch"
+  },
+  {
+    "id": "laozi",
+    "name": "Laozi",
+    "think_brain": "laozi"
+  },
+  {
+    "id": "laplace",
+    "name": "Laplace",
+    "think_brain": "laplace"
+  },
+  {
+    "id": "las_casas",
+    "name": "Las Casas",
+    "think_brain": "las_casas"
+  },
+  {
+    "id": "lavoisier",
+    "name": "Lavoisier",
+    "think_brain": "lavoisier"
+  },
+  {
+    "id": "le_bon",
+    "name": "Le Bon",
+    "think_brain": "le_bon"
+  },
+  {
+    "id": "le_quy_don",
+    "name": "Le Quy Don",
+    "think_brain": "le_quy_don"
+  },
+  {
+    "id": "leibniz",
+    "name": "Leibniz",
+    "think_brain": "leibniz"
+  },
+  {
+    "id": "lenin",
+    "name": "Lenin",
+    "think_brain": "lenin"
+  },
+  {
+    "id": "leonardo",
+    "name": "Leonardo",
+    "think_brain": "leonardo"
+  },
+  {
+    "id": "lessing",
+    "name": "Lessing",
+    "think_brain": "lessing"
+  },
+  {
+    "id": "lewis_morgan",
+    "name": "Lewis Morgan",
+    "think_brain": "lewis_morgan"
+  },
+  {
+    "id": "lister",
+    "name": "Lister",
+    "think_brain": "lister"
+  },
+  {
+    "id": "liszt",
+    "name": "Liszt",
+    "think_brain": "liszt"
+  },
+  {
+    "id": "locke",
+    "name": "Locke",
+    "think_brain": "locke"
+  },
+  {
+    "id": "longfellow",
+    "name": "Longfellow",
+    "think_brain": "longfellow"
+  },
+  {
+    "id": "lovelace",
+    "name": "Lovelace",
+    "think_brain": "lovelace"
+  },
+  {
+    "id": "lyell",
+    "name": "Lyell",
+    "think_brain": "lyell"
+  },
+  {
+    "id": "macaulay",
+    "name": "Macaulay",
+    "think_brain": "macaulay"
+  },
+  {
+    "id": "machiavelli",
+    "name": "Machiavelli",
+    "think_brain": "machiavelli"
+  },
+  {
+    "id": "magellan",
+    "name": "Magellan",
+    "think_brain": "magellan"
+  },
+  {
+    "id": "mahan",
+    "name": "Mahan",
+    "think_brain": "mahan"
+  },
+  {
+    "id": "maimonides",
+    "name": "Maimonides",
+    "think_brain": "maimonides"
+  },
+  {
+    "id": "marco_polo",
+    "name": "Marco Polo",
+    "think_brain": "marco_polo"
+  },
+  {
+    "id": "marcus_aurelius",
+    "name": "Marcus Aurelius",
+    "think_brain": "marcus_aurelius"
+  },
+  {
+    "id": "marx",
+    "name": "Marx",
+    "think_brain": "marx"
+  },
+  {
+    "id": "maslow",
+    "name": "Maslow",
+    "think_brain": "maslow"
+  },
+  {
+    "id": "masudi",
+    "name": "Masudi",
+    "think_brain": "masudi"
+  },
+  {
+    "id": "maury",
+    "name": "Maury",
+    "think_brain": "maury"
+  },
+  {
+    "id": "maxwell",
+    "name": "Maxwell",
+    "think_brain": "maxwell"
+  },
+  {
+    "id": "mcdougall",
+    "name": "Mcdougall",
+    "think_brain": "mcdougall"
+  },
+  {
+    "id": "mellon",
+    "name": "Mellon",
+    "think_brain": "mellon"
+  },
+  {
+    "id": "melville",
+    "name": "Melville",
+    "think_brain": "melville"
+  },
+  {
+    "id": "mencius",
+    "name": "Mencius",
+    "think_brain": "mencius"
+  },
+  {
+    "id": "mendel",
+    "name": "Mendel",
+    "think_brain": "mendel"
+  },
+  {
+    "id": "mill",
+    "name": "Mill",
+    "think_brain": "mill"
+  },
+  {
+    "id": "milton",
+    "name": "Milton",
+    "think_brain": "milton"
+  },
+  {
+    "id": "moliere",
+    "name": "Moliere",
+    "think_brain": "moliere"
+  },
+  {
+    "id": "montaigne",
+    "name": "Montaigne",
+    "think_brain": "montaigne"
+  },
+  {
+    "id": "montesquieu",
+    "name": "Montesquieu",
+    "think_brain": "montesquieu"
+  },
+  {
+    "id": "montessori",
+    "name": "Montessori",
+    "think_brain": "montessori"
+  },
+  {
+    "id": "morgan",
+    "name": "Morgan",
+    "think_brain": "morgan"
+  },
+  {
+    "id": "mozart",
+    "name": "Mozart",
+    "think_brain": "mozart"
+  },
+  {
+    "id": "mozi",
+    "name": "Mozi",
+    "think_brain": "mozi"
+  },
+  {
+    "id": "music_principles",
+    "name": "Music Principles",
+    "think_brain": "music_principles"
+  },
+  {
+    "id": "nam_cao",
+    "name": "Nam Cao",
+    "think_brain": "nam_cao"
+  },
+  {
+    "id": "napoleon",
+    "name": "Napoleon",
+    "think_brain": "napoleon"
+  },
+  {
+    "id": "newman",
+    "name": "Newman",
+    "think_brain": "newman"
+  },
+  {
+    "id": "newton",
+    "name": "Newton",
+    "think_brain": "newton"
+  },
+  {
+    "id": "ngo_tat_to",
+    "name": "Ngo Tat To",
+    "think_brain": "ngo_tat_to"
+  },
+  {
+    "id": "nguyen_an_ninh",
+    "name": "Nguyen An Ninh",
+    "think_brain": "nguyen_an_ninh"
+  },
+  {
+    "id": "nguyen_binh_khiem",
+    "name": "Nguyen Binh Khiem",
+    "think_brain": "nguyen_binh_khiem"
+  },
+  {
+    "id": "nguyen_cong_tru",
+    "name": "Nguyen Cong Tru",
+    "think_brain": "nguyen_cong_tru"
+  },
+  {
+    "id": "nguyen_dinh_chieu",
+    "name": "Nguyen Dinh Chieu",
+    "think_brain": "nguyen_dinh_chieu"
+  },
+  {
+    "id": "nguyen_du",
+    "name": "Nguyen Du",
+    "think_brain": "nguyen_du"
+  },
+  {
+    "id": "nguyen_gia_thieu",
+    "name": "Nguyen Gia Thieu",
+    "think_brain": "nguyen_gia_thieu"
+  },
+  {
+    "id": "nguyen_khuyen",
+    "name": "Nguyen Khuyen",
+    "think_brain": "nguyen_khuyen"
+  },
+  {
+    "id": "nguyen_trai",
+    "name": "Nguyen Trai",
+    "think_brain": "nguyen_trai"
+  },
+  {
+    "id": "nietzsche",
+    "name": "Nietzsche",
+    "think_brain": "nietzsche"
+  },
+  {
+    "id": "nishida",
+    "name": "Nishida",
+    "think_brain": "nishida"
+  },
+  {
+    "id": "nitobe",
+    "name": "Nitobe",
+    "think_brain": "nitobe"
+  },
+  {
+    "id": "okakura",
+    "name": "Okakura",
+    "think_brain": "okakura"
+  },
+  {
+    "id": "paine",
+    "name": "Paine",
+    "think_brain": "paine"
+  },
+  {
+    "id": "pascal",
+    "name": "Pascal",
+    "think_brain": "pascal"
+  },
+  {
+    "id": "pasteur",
+    "name": "Pasteur",
+    "think_brain": "pasteur"
+  },
+  {
+    "id": "pater",
+    "name": "Pater",
+    "think_brain": "pater"
+  },
+  {
+    "id": "peirce",
+    "name": "Peirce",
+    "think_brain": "peirce"
+  },
+  {
+    "id": "phan_boi_chau",
+    "name": "Phan Boi Chau",
+    "think_brain": "phan_boi_chau"
+  },
+  {
+    "id": "phan_chau_trinh",
+    "name": "Phan Chau Trinh",
+    "think_brain": "phan_chau_trinh"
+  },
+  {
+    "id": "phan_ke_binh",
+    "name": "Phan Ke Binh",
+    "think_brain": "phan_ke_binh"
+  },
+  {
+    "id": "piri_reis",
+    "name": "Piri Reis",
+    "think_brain": "piri_reis"
+  },
+  {
+    "id": "plato",
+    "name": "Plato",
+    "think_brain": "plato"
+  },
+  {
+    "id": "plutarch",
+    "name": "Plutarch",
+    "think_brain": "plutarch"
+  },
+  {
+    "id": "poe",
+    "name": "Poe",
+    "think_brain": "poe"
+  },
+  {
+    "id": "poincare",
+    "name": "Poincare",
+    "think_brain": "poincare"
+  },
+  {
+    "id": "proudhon",
+    "name": "Proudhon",
+    "think_brain": "proudhon"
+  },
+  {
+    "id": "pullman",
+    "name": "Pullman",
+    "think_brain": "pullman"
+  },
+  {
+    "id": "pushkin",
+    "name": "Pushkin",
+    "think_brain": "pushkin"
+  },
+  {
+    "id": "ramakrishna",
+    "name": "Ramakrishna",
+    "think_brain": "ramakrishna"
+  },
+  {
+    "id": "rameau",
+    "name": "Rameau",
+    "think_brain": "rameau"
+  },
+  {
+    "id": "rank",
+    "name": "Rank",
+    "think_brain": "rank"
+  },
+  {
+    "id": "reynolds",
+    "name": "Reynolds",
+    "think_brain": "reynolds"
+  },
+  {
+    "id": "ribot",
+    "name": "Ribot",
+    "think_brain": "ribot"
+  },
+  {
+    "id": "ricardo",
+    "name": "Ricardo",
+    "think_brain": "ricardo"
+  },
+  {
+    "id": "riemann",
+    "name": "Riemann",
+    "think_brain": "riemann"
+  },
+  {
+    "id": "rockefeller",
+    "name": "Rockefeller",
+    "think_brain": "rockefeller"
+  },
+  {
+    "id": "rousseau",
+    "name": "Rousseau",
+    "think_brain": "rousseau"
+  },
+  {
+    "id": "rumi",
+    "name": "Rumi",
+    "think_brain": "rumi"
+  },
+  {
+    "id": "ruskin",
+    "name": "Ruskin",
+    "think_brain": "ruskin"
+  },
+  {
+    "id": "russell",
+    "name": "Russell",
+    "think_brain": "russell"
+  },
+  {
+    "id": "sandow",
+    "name": "Sandow",
+    "think_brain": "sandow"
+  },
+  {
+    "id": "schopenhauer",
+    "name": "Schopenhauer",
+    "think_brain": "schopenhauer"
+  },
+  {
+    "id": "seneca",
+    "name": "Seneca",
+    "think_brain": "seneca"
+  },
+  {
+    "id": "shakespeare",
+    "name": "Shakespeare",
+    "think_brain": "shakespeare"
+  },
+  {
+    "id": "shankara",
+    "name": "Shankara",
+    "think_brain": "shankara"
+  },
+  {
+    "id": "shelley",
+    "name": "Shelley",
+    "think_brain": "shelley"
+  },
+  {
+    "id": "smith",
+    "name": "Smith",
+    "think_brain": "smith"
+  },
+  {
+    "id": "sophocles",
+    "name": "Sophocles",
+    "think_brain": "sophocles"
+  },
+  {
+    "id": "soseki",
+    "name": "Soseki",
+    "think_brain": "soseki"
+  },
+  {
+    "id": "spencer",
+    "name": "Spencer",
+    "think_brain": "spencer"
+  },
+  {
+    "id": "spinoza",
+    "name": "Spinoza",
+    "think_brain": "spinoza"
+  },
+  {
+    "id": "stanford",
+    "name": "Stanford",
+    "think_brain": "stanford"
+  },
+  {
+    "id": "stendhal",
+    "name": "Stendhal",
+    "think_brain": "stendhal"
+  },
+  {
+    "id": "strabo",
+    "name": "Strabo",
+    "think_brain": "strabo"
+  },
+  {
+    "id": "sunzi",
+    "name": "Sunzi",
+    "think_brain": "sunzi"
+  },
+  {
+    "id": "suzuki",
+    "name": "Suzuki",
+    "think_brain": "suzuki"
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "think_brain": "swift"
+  },
+  {
+    "id": "tacitus",
+    "name": "Tacitus",
+    "think_brain": "tacitus"
+  },
+  {
+    "id": "tagore",
+    "name": "Tagore",
+    "think_brain": "tagore"
+  },
+  {
+    "id": "tan_da",
+    "name": "Tan Da",
+    "think_brain": "tan_da"
+  },
+  {
+    "id": "tarde",
+    "name": "Tarde",
+    "think_brain": "tarde"
+  },
+  {
+    "id": "taylor",
+    "name": "Taylor",
+    "think_brain": "taylor"
+  },
+  {
+    "id": "tchaikovsky",
+    "name": "Tchaikovsky",
+    "think_brain": "tchaikovsky"
+  },
+  {
+    "id": "tennyson",
+    "name": "Tennyson",
+    "think_brain": "tennyson"
+  },
+  {
+    "id": "tesla",
+    "name": "Tesla",
+    "think_brain": "tesla"
+  },
+  {
+    "id": "thach_lam",
+    "name": "Thach Lam",
+    "think_brain": "thach_lam"
+  },
+  {
+    "id": "thoreau",
+    "name": "Thoreau",
+    "think_brain": "thoreau"
+  },
+  {
+    "id": "thu_khoa_huan",
+    "name": "Thu Khoa Huan",
+    "think_brain": "thu_khoa_huan"
+  },
+  {
+    "id": "thucydides",
+    "name": "Thucydides",
+    "think_brain": "thucydides"
+  },
+  {
+    "id": "tocqueville",
+    "name": "Tocqueville",
+    "think_brain": "tocqueville"
+  },
+  {
+    "id": "tolstoy",
+    "name": "Tolstoy",
+    "think_brain": "tolstoy"
+  },
+  {
+    "id": "tran_hung_dao",
+    "name": "Tran Hung Dao",
+    "think_brain": "tran_hung_dao"
+  },
+  {
+    "id": "trinh_hoai_duc",
+    "name": "Trinh Hoai Duc",
+    "think_brain": "trinh_hoai_duc"
+  },
+  {
+    "id": "trotsky",
+    "name": "Trotsky",
+    "think_brain": "trotsky"
+  },
+  {
+    "id": "tue_tinh",
+    "name": "Tue Tinh",
+    "think_brain": "tue_tinh"
+  },
+  {
+    "id": "twain",
+    "name": "Twain",
+    "think_brain": "twain"
+  },
+  {
+    "id": "tylor",
+    "name": "Tylor",
+    "think_brain": "tylor"
+  },
+  {
+    "id": "tyndall",
+    "name": "Tyndall",
+    "think_brain": "tyndall"
+  },
+  {
+    "id": "uchimura",
+    "name": "Uchimura",
+    "think_brain": "uchimura"
+  },
+  {
+    "id": "vanderbilt",
+    "name": "Vanderbilt",
+    "think_brain": "vanderbilt"
+  },
+  {
+    "id": "vasari",
+    "name": "Vasari",
+    "think_brain": "vasari"
+  },
+  {
+    "id": "virgil",
+    "name": "Virgil",
+    "think_brain": "virgil"
+  },
+  {
+    "id": "vitruvius",
+    "name": "Vitruvius",
+    "think_brain": "vitruvius"
+  },
+  {
+    "id": "vivekananda",
+    "name": "Vivekananda",
+    "think_brain": "vivekananda"
+  },
+  {
+    "id": "voltaire",
+    "name": "Voltaire",
+    "think_brain": "voltaire"
+  },
+  {
+    "id": "vu_trong_phung",
+    "name": "Vu Trong Phung",
+    "think_brain": "vu_trong_phung"
+  },
+  {
+    "id": "wagner",
+    "name": "Wagner",
+    "think_brain": "wagner"
+  },
+  {
+    "id": "wallace",
+    "name": "Wallace",
+    "think_brain": "wallace"
+  },
+  {
+    "id": "wanamaker",
+    "name": "Wanamaker",
+    "think_brain": "wanamaker"
+  },
+  {
+    "id": "weber",
+    "name": "Weber",
+    "think_brain": "weber"
+  },
+  {
+    "id": "westinghouse",
+    "name": "Westinghouse",
+    "think_brain": "westinghouse"
+  },
+  {
+    "id": "whewell",
+    "name": "Whewell",
+    "think_brain": "whewell"
+  },
+  {
+    "id": "whistler",
+    "name": "Whistler",
+    "think_brain": "whistler"
+  },
+  {
+    "id": "whitman",
+    "name": "Whitman",
+    "think_brain": "whitman"
+  },
+  {
+    "id": "winckelmann",
+    "name": "Winckelmann",
+    "think_brain": "winckelmann"
+  },
+  {
+    "id": "wollstonecraft",
+    "name": "Wollstonecraft",
+    "think_brain": "wollstonecraft"
+  },
+  {
+    "id": "woolf",
+    "name": "Woolf",
+    "think_brain": "woolf"
+  },
+  {
+    "id": "wright",
+    "name": "Wright",
+    "think_brain": "wright"
+  },
+  {
+    "id": "wundt",
+    "name": "Wundt",
+    "think_brain": "wundt"
+  },
+  {
+    "id": "xenophon",
+    "name": "Xenophon",
+    "think_brain": "xenophon"
+  },
+  {
+    "id": "xunzi",
+    "name": "Xunzi",
+    "think_brain": "xunzi"
+  },
+  {
+    "id": "zhuangzi",
+    "name": "Zhuangzi",
+    "think_brain": "zhuangzi"
+  },
+  {
+    "id": "zola",
+    "name": "Zola",
+    "think_brain": "zola"
+  }
+]

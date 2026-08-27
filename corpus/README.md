@@ -1,40 +1,38 @@
 # Canonical corpus (Knowledge Hub)
 
-This directory is the **source of truth** for manuscripts and ingest metadata. Think and Read consume it; they do not own the original `.txt` files.
+Hub **manages** works here. Think and Read consume; they do not own the catalog.
 
 ```
 corpus/
-  licenses.json              # license catalog (ids used in works.json)
+  licenses.json
+  catalog/
+    authors.json             # first-class authors (id = Think brain for now)
+    works.json               # Hub Work records — stable ids
   sources/<brain>/
-    works.json               # one row per .txt (title, year, license, source_url, file)
-    raw/<file>.txt           # full text — gitignored, not on public GitHub
+    works.json               # Think-shaped ingest list (legacy layout)
+    raw/<file>.txt           # manuscripts — gitignored
 ```
 
-`<brain>` is still Think’s thinker id (Phase 1 keeps this layout so ingest is a path swap). Work-level UUIDs come later.
+Work id: `{brain}--{file_stem}` e.g. `locke--second_treatise`. Never reuse an id.
 
-## What stays in Think
-
-| Think `corpus/` | Why |
-|-----------------|-----|
-| `forests/`, `profiles/`, `registry/` | Salon compass + shelf — Think product |
-| `sources/<brain>/chunks/` | Derived RAG windows — regenerate via ingest |
-| GCS runtime tree | Forests + chunks + a **mirror** of `works.json` |
-
-## Think ingest
-
-On the curator machine:
+`rights.consumers.read` defaults to `blocked`. Allow then publish (CLI or curator UI):
 
 ```bash
-# Think repo `.env`
-KNOWLEDGEHUB_CORPUS=/Users/andynguyen/projects/KnowledgeHub/corpus
+knowledgehub serve   # http://127.0.0.1:8787
+knowledgehub allow-read --work locke--second_treatise
+knowledgehub publish-read --work locke--second_treatise --apply
 ```
 
-Then `python3 scripts/ingest_pd.py --brain <id>` reads `works.json` + `raw/` **from this tree** and writes `chunks.jsonl` into Think.
+Rebuild catalog after editing Think-shaped `sources/*/works.json`:
 
-`scripts/fetch_raw_pd.py` downloads into `corpus/sources/<brain>/raw/` here, not into Think.
+```bash
+knowledgehub build-catalog && knowledgehub validate
+```
 
-Cloud Run does **not** set `KNOWLEDGEHUB_CORPUS`. Runtime retrieve uses Think/GCS chunks plus the mirrored `works.json`.
+## Think
+
+Think may still set `KNOWLEDGEHUB_CORPUS` and ingest `sources/` into RAG chunks. That does not update `catalog/`.
 
 ## Do not commit `raw/`
 
-Public repo = metadata only. Keep manuscripts on disk (or a private bucket) and gitignore `corpus/sources/*/raw/`.
+Public GitHub = metadata only.

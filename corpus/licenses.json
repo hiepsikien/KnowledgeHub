@@ -106,5 +106,12 @@
       "jurisdiction": ["jp", "us"],
       "description": "Nguyên tác Nhật trên Aozora — tác giả PD Nhật (chết ≤1967) và xuất bản lần đầu ≤1930 (PD Mỹ). Không ingest bản dịch / chú giải hiện đại."
     }
-  ]
+  ],
+  "aliases": {
+    "public_domain_usa_archive_1889": "public_domain_usa_archive",
+    "public_domain_usa_archive_1903": "public_domain_usa_archive",
+    "public_domain_usa_archive_1909": "public_domain_usa_archive",
+    "public_domain_vn_curator_khung": "public_domain_vn_wikisource",
+    "public_domain_vn_nguyen_tao_1972": "vn_translation_pd"
+  }
 }
