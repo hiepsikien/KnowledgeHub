@@ -1,0 +1,26 @@
+{
+  "terms": [
+    {
+      "id": "term-law-of-nations",
+      "source": "Law of Nations",
+      "target": null,
+      "locked": false,
+      "notes": "Primary term — decide in review"
+    },
+    {
+      "id": "term-mare-liberum",
+      "source": "freedom of the seas",
+      "target": null,
+      "locked": false,
+      "notes": "Latin title Mare Liberum; may keep as proper phrase"
+    },
+    {
+      "id": "term-voc",
+      "source": "Dutch East India Company",
+      "target": "VOC",
+      "locked": true,
+      "notes": "Use VOC with expand-on-first-mention annotation"
+    }
+  ],
+  "entities": []
+}

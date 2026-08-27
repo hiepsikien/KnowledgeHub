@@ -29,6 +29,8 @@ Rebuild catalog after editing Think-shaped `sources/*/works.json`:
 knowledgehub build-catalog && knowledgehub validate
 ```
 
+Translation projects (pilot): `corpus/translations/<source_work_id>/` — see [docs/translation.md](../docs/translation.md).
+
 ## Think
 
 Think may still set `KNOWLEDGEHUB_CORPUS` and ingest `sources/` into RAG chunks. That does not update `catalog/`.

@@ -1,0 +1,32 @@
+{
+  "source_work_id": "grotius--freedom_of_the_seas",
+  "translation_work_id": "grotius--freedom_of_the_seas--vi",
+  "target_language": "vi",
+  "translation_mode": null,
+  "translation_modes_available": [
+    "tight",
+    "normal",
+    "loose"
+  ],
+  "status": "sample_pending",
+  "created_at": "2026-08-27T16:13:38+00:00",
+  "updated_at": "2026-08-27T16:13:38+00:00",
+  "models": {
+    "draft": "claude-sonnet-4-20250514",
+    "polish": "gemini-2.5-pro",
+    "qa": "claude-sonnet-4-20250514",
+    "annotations": "gemini-2.5-pro"
+  },
+  "source": {
+    "title": "The Freedom of the Seas",
+    "language": "en",
+    "words": 19903,
+    "chapters": 13
+  },
+  "sample_segment": {
+    "chapter": "I",
+    "words": 891,
+    "file": "segments/chi-sample.json"
+  },
+  "segments_total": 13
+}

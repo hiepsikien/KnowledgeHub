@@ -7,6 +7,8 @@ import sys
 from .catalog import build_catalog, get_work, set_read_consumer
 from .hash import refresh_hashes
 from .read_publish import PublishError, publish_to_read
+from .translation.fetch import FetchError, fetch_raw
+from .translation.project import init_translation_project
 from .validate import validate_catalog
 
 
@@ -29,6 +31,16 @@ def main(argv: list[str] | None = None) -> int:
 
     show = sub.add_parser("show", help="Print one catalog work")
     show.add_argument("--work", required=True)
+
+    fetch = sub.add_parser("fetch-raw", help="Download and prepare manuscript for a work")
+    fetch.add_argument("--work", required=True, help="Work id, e.g. grotius--freedom_of_the_seas")
+
+    tr = sub.add_parser("translate", help="Translation project commands")
+    tr_sub = tr.add_subparsers(dest="translate_cmd", required=True)
+    tr_init = tr_sub.add_parser("init", help="Create translation project from local raw text")
+    tr_init.add_argument("--work", required=True, help="Source work id")
+    tr_init.add_argument("--lang", default="vi", help="Target language (default: vi)")
+    tr_init.add_argument("--overwrite", action="store_true", help="Recreate existing project")
 
     serve = sub.add_parser("serve", help="Open curator UI (FastAPI + static SPA)")
     serve.add_argument("--host", default="127.0.0.1")
@@ -71,6 +83,28 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
+    if args.cmd == "fetch-raw":
+        try:
+            result = fetch_raw(args.work)
+        except (FetchError, FileNotFoundError, KeyError, ValueError) as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if args.cmd == "translate":
+        if args.translate_cmd == "init":
+            try:
+                result = init_translation_project(
+                    args.work,
+                    target_language=args.lang,
+                    overwrite=args.overwrite,
+                )
+            except (FileExistsError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        return 2
     if args.cmd == "serve":
         try:
             import uvicorn
