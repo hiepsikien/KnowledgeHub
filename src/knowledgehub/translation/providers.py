@@ -8,6 +8,7 @@ from typing import Any
 
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
+DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
 
 
 class ProviderError(Exception):
@@ -79,7 +80,7 @@ def gemini_generate(
     prompt: str,
     *,
     system: str | None = None,
-    model: str = "gemini-2.5-pro",
+    model: str = DEFAULT_GEMINI_MODEL,
     temperature: float = 0.4,
 ) -> str:
     key = gemini_api_key()

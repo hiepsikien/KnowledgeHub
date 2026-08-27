@@ -3,9 +3,9 @@
     {
       "id": "term-law-of-nations",
       "source": "Law of Nations",
-      "target": null,
-      "locked": false,
-      "notes": "Primary term — decide in review"
+      "target": "Luật các dân tộc",
+      "locked": true,
+      "notes": "Consistent across all three sample modes"
     },
     {
       "id": "term-mare-liberum",

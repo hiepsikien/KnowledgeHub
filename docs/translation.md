@@ -31,14 +31,16 @@ Translation project files live under `corpus/translations/{source_work_id}/`:
 
 Run AI draft ×3 on `segments/chi-sample.json`, choose mode in Curator (UI TBD), then lock `translation_mode` in `project.json`.
 
+Sample status (pilot): all three modes drafted for Chapter I (~891 words) in `segments/chi-sample.json`. `translation_mode` stays `null` until curator picks.
+
 ## Model roles (configured in project.json)
 
 | Pass | Model slot | Default |
 |------|------------|---------|
 | Draft | `models.draft` | `deepseek-chat` |
-| Polish | `models.polish` | `gemini-2.5-pro` |
+| Polish | `models.polish` | `gemini-3.5-flash` |
 | QA | `models.qa` | `deepseek-reasoner` |
-| Annotations | `models.annotations` | `gemini-2.5-pro` |
+| Annotations | `models.annotations` | `gemini-3.5-flash` |
 
 ### Secrets (Cursor Cloud Agents dashboard)
 

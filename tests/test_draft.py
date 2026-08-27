@@ -36,7 +36,8 @@ def corpus(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     return tmp_path
 
 
-def test_deepseek_missing_key():
+def test_deepseek_missing_key(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     with pytest.raises(ProviderError, match="DEEPSEEK_API_KEY"):
         deepseek_chat([{"role": "user", "content": "hi"}])
 
@@ -55,5 +56,5 @@ def test_draft_sample_writes_normal(corpus: Path):
     assert payload["draft_raw"]["normal"] == "Bản dịch thô."
     assert payload["final"] == "Bản dịch đã chỉnh."
     project = json.loads((corpus / "translations/grotius--freedom_of_the_seas/project.json").read_text())
-    assert project["translation_mode"] == "normal"
+    assert project["translation_mode"] is None
     assert project["status"] == "sample_ready"

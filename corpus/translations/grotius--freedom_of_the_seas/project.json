@@ -8,14 +8,14 @@
     "normal",
     "loose"
   ],
-  "status": "sample_pending",
+  "status": "sample_ready",
   "created_at": "2026-08-27T16:13:38+00:00",
-  "updated_at": "2026-08-27T16:13:38+00:00",
+  "updated_at": "2026-08-27T16:46:35+00:00",
   "models": {
     "draft": "deepseek-chat",
-    "polish": "gemini-2.5-pro",
+    "polish": "gemini-3.5-flash",
     "qa": "deepseek-reasoner",
-    "annotations": "gemini-2.5-pro"
+    "annotations": "gemini-3.5-flash"
   },
   "source": {
     "title": "The Freedom of the Seas",

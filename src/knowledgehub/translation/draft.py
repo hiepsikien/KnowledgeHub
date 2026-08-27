@@ -8,7 +8,7 @@ from typing import Any
 from ..paths import corpus_root
 from .paths import glossary_file, project_file, segments_dir, style_brief_file
 from .project import load_project
-from .providers import ProviderError, deepseek_chat, gemini_generate
+from .providers import DEFAULT_GEMINI_MODEL, ProviderError, deepseek_chat, gemini_generate
 
 MODE_INSTRUCTIONS = {
     "tight": (
@@ -132,7 +132,7 @@ def draft_sample(
 
     models = project.get("models") or {}
     draft_model = models.get("draft", "deepseek-chat")
-    polish_model = models.get("polish", "gemini-2.5-pro")
+    polish_model = models.get("polish", DEFAULT_GEMINI_MODEL)
     target_language = project.get("target_language", "vi")
 
     messages = _build_draft_messages(
@@ -165,7 +165,6 @@ def draft_sample(
     }
     sample_path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    project["translation_mode"] = mode
     project["status"] = "sample_ready"
     project["updated_at"] = _now()
     project_file(source_work_id).write_text(

@@ -15,6 +15,7 @@ from .paths import (
     style_brief_file,
     translation_dir,
 )
+from .providers import DEFAULT_GEMINI_MODEL
 from .segment import sample_segment, split_chapters
 
 DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
@@ -99,9 +100,9 @@ def init_translation_project(
         "updated_at": _now(),
         "models": {
             "draft": "deepseek-chat",
-            "polish": "gemini-2.5-pro",
+            "polish": DEFAULT_GEMINI_MODEL,
             "qa": "deepseek-reasoner",
-            "annotations": "gemini-2.5-pro",
+            "annotations": DEFAULT_GEMINI_MODEL,
         },
         "source": {
             "title": work.get("title"),
