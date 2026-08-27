@@ -7,10 +7,12 @@ import sys
 from .catalog import build_catalog, get_work, set_read_consumer
 from .hash import refresh_hashes
 from .read_publish import PublishError, publish_to_read
+from .translation.annotate import annotate_segment
 from .translation.fetch import FetchError, fetch_raw
 from .translation.draft import draft_sample
 from .translation.project import init_translation_project, select_translation_mode
 from .translation.providers import ProviderError
+from .translation.qa import qa_segment
 from .validate import validate_catalog
 
 
@@ -50,6 +52,12 @@ def main(argv: list[str] | None = None) -> int:
     tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
     tr_mode.add_argument("--work", required=True, help="Source work id")
     tr_mode.add_argument("--mode", required=True, choices=["tight", "normal", "loose"])
+    tr_qa = tr_sub.add_parser("qa", help="Run QA scoring on a chapter translation")
+    tr_qa.add_argument("--work", required=True, help="Source work id")
+    tr_qa.add_argument("--chapter", required=True, help="Chapter label, e.g. I")
+    tr_ann = tr_sub.add_parser("annotate", help="Generate reader annotations for a chapter")
+    tr_ann.add_argument("--work", required=True, help="Source work id")
+    tr_ann.add_argument("--chapter", required=True, help="Chapter label, e.g. I")
 
     serve = sub.add_parser("serve", help="Open curator UI (FastAPI + static SPA)")
     serve.add_argument("--host", default="127.0.0.1")
@@ -129,6 +137,22 @@ def main(argv: list[str] | None = None) -> int:
             try:
                 result = select_translation_mode(args.work, args.mode)
             except (FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "qa":
+            try:
+                result = qa_segment(args.work, args.chapter)
+            except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "annotate":
+            try:
+                result = annotate_segment(args.work, args.chapter)
+            except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
                 print(str(exc), file=sys.stderr)
                 return 1
             print(json.dumps(result, ensure_ascii=False, indent=2))

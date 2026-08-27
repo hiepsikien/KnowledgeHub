@@ -61,6 +61,24 @@ knowledgehub translate draft-sample --work grotius--freedom_of_the_seas --mode n
 
 Pipeline: DeepSeek draft → Gemini polish → writes `segments/chi-sample.json`.
 
+### QA scoring
+
+After mode is locked and `final` is set on a chapter segment:
+
+```bash
+knowledgehub translate qa --work grotius--freedom_of_the_seas --chapter I
+```
+
+Writes `segment["qa"]` with scores (fidelity, fluency, terminology, completeness, overall), Vietnamese summary, and issues list.
+
+### Annotations
+
+```bash
+knowledgehub translate annotate --work grotius--freedom_of_the_seas --chapter I
+```
+
+Generates footnote/glossary/context notes into `annotations.json` (merged by `id`).
+
 ## Read integration (next)
 
 Publish payload will include `annotations` + `edition_meta`. Read repo: inline tap-to-expand notes.

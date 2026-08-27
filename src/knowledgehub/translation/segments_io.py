@@ -1,0 +1,36 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+from .paths import segments_dir
+from .project import load_project
+
+
+def segment_path(source_work_id: str, chapter: str) -> Path:
+    ch = str(chapter).strip().lower()
+    return segments_dir(source_work_id) / f"ch{ch}.json"
+
+
+def load_segment(source_work_id: str, chapter: str) -> tuple[Path, dict[str, Any]]:
+    path = segment_path(source_work_id, chapter)
+    if not path.is_file():
+        raise FileNotFoundError(f"Segment not found: {path}")
+    return path, json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_segment(path: Path, segment: dict[str, Any]) -> None:
+    path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def final_text(segment: dict[str, Any], project: dict[str, Any]) -> str:
+    text = segment.get("final")
+    if text:
+        return str(text)
+    mode = project.get("translation_mode")
+    if mode:
+        draft = (segment.get("drafts") or {}).get(mode)
+        if draft:
+            return str(draft)
+    raise ValueError("Segment has no final translation")

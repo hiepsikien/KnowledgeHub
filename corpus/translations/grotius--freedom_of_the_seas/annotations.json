@@ -1,3 +1,211 @@
 {
-  "annotations": []
+  "annotations": [
+    {
+      "id": "grotius--freedom_of_the_seas--chi--context-1",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "kind": "context",
+      "anchor_text": "lối đi vô hại",
+      "title_vi": "Bối cảnh pháp lý",
+      "body_vi": "Khái niệm pháp lý cổ xưa (tiếng Latin: *transitus innoxius*), tiền thân của quyền 'lối đi qua vô hại' trong Luật Biển hiện đại, cho phép tàu thuyền đi qua lãnh hải của quốc gia khác mà không gây hại.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--context-2",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "kind": "context",
+      "anchor_text": "quy tắc cơ bản hay nguyên lý đầu tiên",
+      "title_vi": "Bối cảnh triết học",
+      "body_vi": "Trong triết học pháp lý của Grotius, đây là các nguyên lý của Luật Tự nhiên (Natural Law), được coi là hiển nhiên, không thể thay đổi và là nền tảng cho mọi luật lệ của con người.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--glossary-law-of-nations",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "kind": "glossary",
+      "anchor_text": "Luật các dân tộc",
+      "title_vi": "Luật các dân tộc",
+      "body_vi": "Luật các dân tộc (tiếng Latin: *jus gentium*) là hệ thống các nguyên tắc pháp lý chung được thừa nhận bởi toàn nhân loại, đóng vai trò là nền tảng cho luật quốc tế hiện đại.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-10",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[10]",
+      "kind": "footnote",
+      "anchor_text": "Victoria",
+      "title_vi": "Chú thích [10]",
+      "body_vi": "Francisco de Vitoria (khoảng 1483–1546), nhà thần học và luật gia Tây Ban Nha, người sáng lập trường phái Salamanca. Ông nổi tiếng với lập luận rằng người bản địa châu Mỹ có quyền sở hữu đất đai và người Tây Ban Nha chỉ có quyền giao thương ôn hòa.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-11",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[11]",
+      "kind": "footnote",
+      "anchor_text": "Moses",
+      "title_vi": "Chú thích [11]",
+      "body_vi": "Sự kiện được chép trong Kinh Thánh (Sách Dân số 20 và 21), khi người Israel xin đi qua đất của người Amorite một cách hòa bình nhưng bị từ chối, dẫn đến chiến tranh.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-12",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[12]",
+      "kind": "footnote",
+      "anchor_text": "Augustine",
+      "title_vi": "Chú thích [12]",
+      "body_vi": "Thánh Augustine thành Hippo (354–430). Trong tác phẩm *Quaestiones in Heptateuchum*, ông lập luận rằng việc từ chối một lối đi vô hại (innocent passage) là lý do chính đáng để tiến hành chiến tranh.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-13",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[13]",
+      "kind": "footnote",
+      "anchor_text": "vua xứ Mysia",
+      "title_vi": "Chú thích [13]",
+      "body_vi": "Các điển tích trong thần thoại Hy Lạp. Hercules tấn công Orchomenus và Agamemnon tấn công Mysia đều vì lý do các vị vua ở đây ngăn cản lối đi hợp pháp của quân đội họ.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-14",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[14]",
+      "kind": "footnote",
+      "anchor_text": "Baldus",
+      "title_vi": "Chú thích [14]",
+      "body_vi": "Baldus de Ubaldis (1327–1400), một trong những luật gia người Ý có ảnh hưởng nhất thời Trung cổ, nổi tiếng với các bình luận về Luật Dân sự La Mã.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-15",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[15]",
+      "kind": "footnote",
+      "anchor_text": "Tacitus",
+      "title_vi": "Chú thích [15]",
+      "body_vi": "Publius Cornelius Tacitus, nhà sử học La Mã. Grotius trích dẫn tác phẩm *Histories* (Quyển IV, Chương 64), thuật lại lời phàn nàn của bộ tộc Tencteri chống lại sự phong tỏa của La Mã.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-16",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[16]",
+      "kind": "footnote",
+      "anchor_text": "quyền tự do tiếp cận Đất Thánh",
+      "title_vi": "Chú thích [16]",
+      "body_vi": "Các cuộc Thập tự chinh thời Trung cổ thường được các học giả châu Âu biện minh bằng việc người Hồi giáo (Saracen) cản trở người hành hương Kitô giáo đến Jerusalem.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-1",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[1]",
+      "kind": "footnote",
+      "anchor_text": "Pliny",
+      "title_vi": "Chú thích [1]",
+      "body_vi": "Grotius trích dẫn tác phẩm *Naturalis Historia* (Lịch sử Tự nhiên), Quyển XII, Chương 1 của Pliny Người Già (Pliny the Elder), học giả và triết gia tự nhiên La Mã.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-2",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[2]",
+      "kind": "footnote",
+      "anchor_text": "Chẳng phải loài cây nào cũng mọc được trên mọi mảnh đất",
+      "title_vi": "Chú thích [2]",
+      "body_vi": "Trích từ tác phẩm thơ ca về nông nghiệp *Georgics* (Quyển II, dòng 109) của thi sĩ La Mã lừng danh Virgil (Vergil).",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-3",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[3]",
+      "kind": "footnote",
+      "anchor_text": "Hãy để kẻ khác đúc khuôn khéo hơn những khối kim loại đang nóng chảy",
+      "title_vi": "Chú thích [3]",
+      "body_vi": "Trích từ sử thi *Aeneid* (Quyển VI, dòng 847-848) của Virgil, nói về thế mạnh nghệ thuật và khoa học của các dân tộc khác so với tài cai trị của người La Mã.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-4",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[4]",
+      "kind": "footnote",
+      "anchor_text": "Seneca",
+      "title_vi": "Chú thích [4]",
+      "body_vi": "Lucius Annaeus Seneca (Seneca Trẻ), triết gia khắc kỷ La Mã. Grotius trích dẫn tác phẩm *Naturales Quaestiones* (Quyển V, Chương 18) bàn về vai trò của gió trong việc kết nối nhân loại.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-5",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[5]",
+      "kind": "footnote",
+      "anchor_text": "các luật gia lừng lẫy nhất",
+      "title_vi": "Chú thích [5]",
+      "body_vi": "Chỉ các luật gia La Mã cổ đại (như Ulpian, Pomponius) được ghi chép trong bộ luật *Digest* của Hoàng đế Justinianus, khẳng định quyền tự do thương mại và tiếp cận công cộng.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-6",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[6]",
+      "kind": "footnote",
+      "anchor_text": "Người phương nào, quái vật phương nào",
+      "title_vi": "Chú thích [6]",
+      "body_vi": "Trích từ sử thi *Aeneid* (Quyển I, dòng 539-540) của Virgil, lời than vãn của những người lính Carthage khi bị từ chối cho cập bờ.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-7",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[7]",
+      "kind": "footnote",
+      "anchor_text": "Nguồn nước chung, và bầu không khí chung",
+      "title_vi": "Chú thích [7]",
+      "body_vi": "Trích từ sử thi *Aeneid* (Quyển VII, dòng 229-230) của Virgil, khẳng định các tài nguyên tự nhiên cơ bản như nước và không khí phải được chia sẻ chung cho mọi người.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-8",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[8]",
+      "kind": "footnote",
+      "anchor_text": "cuộc chiến của người Megara chống lại người Athena",
+      "title_vi": "Chú thích [8]",
+      "body_vi": "Nhắc đến Sắc lệnh Megara (khoảng năm 432 TCN) do Athens ban hành nhằm cấm người Megara tiếp cận các bến cảng của đế chế Athens, một trong những nguyên nhân trực tiếp dẫn đến Chiến tranh Peloponnese.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chi--fn-9",
+      "segment_id": "grotius--freedom_of_the_seas--chi",
+      "chapter": "I",
+      "marker": "[9]",
+      "kind": "footnote",
+      "anchor_text": "cuộc chiến của người Bologna chống lại người Venice",
+      "title_vi": "Chú thích [9]",
+      "body_vi": "Xung đột thương mại vào thế kỷ 13 giữa hai thành bang Bologna và Venice của Ý liên quan đến quyền tự do định hướng và thu thuế trên sông Po.",
+      "generated_at": "2026-08-27T17:05:23+00:00"
+    }
+  ],
+  "updated_at": "2026-08-27T17:05:23+00:00"
 }
