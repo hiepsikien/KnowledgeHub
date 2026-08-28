@@ -614,56 +614,41 @@
       "id": "grotius--freedom_of_the_seas--chv--ctx-1",
       "segment_id": "grotius--freedom_of_the_seas--chv",
       "chapter": "V",
-      "marker": null,
       "kind": "context",
-      "anchor_text": "tài sản vô chủ (_res nullius_), tài sản chung (_res communis_), hoặc công sản (_res publica_)",
-      "title_vi": "Phân loại tài sản trong Luật La Mã",
-      "body_vi": "Sự phân loại tài sản này trong luật La Mã đóng vai trò cốt lõi trong lập luận của Grotius nhằm chứng minh biển cả không thể bị tư hữu hóa.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "anchor_text": "res nullius",
+      "title_vi": "Phân biệt Res nullius, Res communis và Res publica",
+      "body_vi": "Trong Luật La Mã, 'res nullius' là vật chưa thuộc về ai (có thể bị chiếm hữu); 'res communis' là vật thuộc về chung toàn nhân loại (biển cả, không khí); còn 'res publica' là tài sản công thuộc sở hữu của một quốc gia cụ thể.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--ctx-2",
       "segment_id": "grotius--freedom_of_the_seas--chv",
       "chapter": "V",
-      "marker": null,
       "kind": "context",
-      "anchor_text": "quyền địa dịch",
-      "title_vi": "Quyền địa dịch (Servitus)",
-      "body_vi": "Quyền địa dịch trong luật La Mã là quyền hạn chế đối với tài sản của người khác. Grotius lập luận rằng biển cả không thể bị áp đặt quyền địa dịch vì không ai có thể sở hữu nó.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "anchor_text": "chiếm hữu",
+      "title_vi": "Danh nghĩa chiếm hữu (Occupatio)",
+      "body_vi": "Phương thức xác lập quyền sở hữu bằng cách làm chủ thực thể một vật vô chủ. Grotius lập luận rằng đại dương không thể bị 'occupatio' vì không ai có thể làm chủ hay bao bọc toàn bộ biển cả.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--ctx-3",
       "segment_id": "grotius--freedom_of_the_seas--chv",
       "chapter": "V",
-      "marker": null,
       "kind": "context",
-      "anchor_text": "đường ranh giới tưởng tượng",
-      "title_vi": "Đường phân định Tordesillas",
-      "body_vi": "Ám chỉ Hiệp ước Tordesillas (1494) và các sắc chỉ của Giáo hoàng phân chia thế giới bằng một đường kinh tuyến tưởng tượng giữa Tây Ban Nha và Bồ Đào Nha.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "anchor_text": "uti possidetis",
+      "title_vi": "Quy tắc Uti possidetis",
+      "body_vi": "Một biện pháp tư pháp bảo vệ trạng thái chiếm hữu thực tế giữa các bên trong tranh chấp tư pháp. Grotius khẳng định quy tắc này không thể áp dụng để tuyên bố chủ quyền quốc gia đối với biển cả.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
-      "id": "grotius--freedom_of_the_seas--chv--glossary-law-of-nations",
+      "id": "grotius--freedom_of_the_seas--chv--term-law-of-nations",
       "segment_id": "grotius--freedom_of_the_seas--chv",
       "chapter": "V",
-      "marker": null,
       "kind": "glossary",
       "anchor_text": "Luật các dân tộc",
-      "title_vi": "Luật các dân tộc",
-      "body_vi": "Luật các dân tộc (Jus Gentium) là hệ thống pháp lý điều chỉnh quan hệ giữa các quốc gia hoặc các cộng đồng người khác nhau, dựa trên lý trí tự nhiên và sự đồng thuận chung.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
-    },
-    {
-      "id": "grotius--freedom_of_the_seas--chv--glossary-voc",
-      "segment_id": "grotius--freedom_of_the_seas--chv",
-      "chapter": "V",
-      "marker": null,
-      "kind": "glossary",
-      "anchor_text": "người Hà Lan",
-      "title_vi": "Công ty Đông Ấn Hà Lan (VOC)",
-      "body_vi": "VOC (Vereenigde Oostindische Compagnie) được thành lập năm 1602, là công ty cổ phần đa quốc gia đầu tiên trên thế giới và đóng vai trò trung tâm trong các tranh chấp hàng hải với Bồ Đào Nha.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "title_vi": "Luật các dân tộc (Jus Gentium)",
+      "body_vi": "Khái niệm trong Luật La Mã chỉ tập hợp các quy tắc pháp lý điều chỉnh quan hệ giữa các cộng đồng người hoặc các nguyên tắc pháp lý chung được toàn thể nhân loại thừa nhận.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-100",
@@ -671,10 +656,10 @@
       "chapter": "V",
       "marker": "[100]",
       "kind": "footnote",
-      "anchor_text": "người cho?[100]",
+      "anchor_text": "không gây tổn hại cho người cho",
       "title_vi": "Chú thích [100]",
-      "body_vi": "Khái niệm 'sử dụng vô hại' (utilitas sine damno) trong luật tự nhiên: được phép sử dụng tài sản của người khác nếu việc đó mang lại lợi ích cho mình mà không gây hại cho họ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên Cicero (De Officiis I.16.52) về nguyên tắc đạo đức nhân loại trong việc chia sẻ tài nguyên công cộng.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-101",
@@ -682,10 +667,10 @@
       "chapter": "V",
       "marker": "[101]",
       "kind": "footnote",
-      "anchor_text": "triết gia cổ đại[101]",
+      "anchor_text": "triết gia cổ đại",
       "title_vi": "Chú thích [101]",
-      "body_vi": "Các triết gia như Cicero và Seneca luôn nhấn mạnh nghĩa vụ nhân đạo trong việc chỉ đường, cho lửa và nước cho người lạ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu Seneca (De Beneficiis IV.28) về việc thực thi sự giúp đỡ và lòng nhân ái đối với mọi người.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-102",
@@ -693,10 +678,10 @@
       "chapter": "V",
       "marker": "[102]",
       "kind": "footnote",
-      "anchor_text": "tuyên bố, đó là:[102]",
+      "anchor_text": "luật gia uyên bác",
       "title_vi": "Chú thích [102]",
-      "body_vi": "Vì biển cả không có ranh giới vật lý cố định và không thể bị kiểm soát liên tục, nên nó không thể là đối tượng của sự chiếm hữu thực tế.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Chỉ các luật gia Hugo Donellus và Fernando Vázquez de Menchaca, những người khẳng định biển cả và không khí không thể bị chiếm giữ thực thể.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-103",
@@ -704,10 +689,10 @@
       "chapter": "V",
       "marker": "[103]",
       "kind": "footnote",
-      "anchor_text": "kể lại cho chúng ta.[103]",
+      "anchor_text": "Pliny và Mela",
       "title_vi": "Chú thích [103]",
-      "body_vi": "Gaius Plinius Secundus (Pliny Già) và Pomponius Mela là các nhà địa lý, tự nhiên học La Mã nổi tiếng thế kỷ 1 SCN.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu Pliny the Elder (Naturalis Historia VI.23) và Pomponius Mela (De Chorographia) về lịch sử hải hành thời Alexandros Đại đế.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-104",
@@ -715,10 +700,10 @@
       "chapter": "V",
       "marker": "[104]",
       "kind": "footnote",
-      "anchor_text": "tuyến đường đến phương Đông,[104]",
+      "anchor_text": "Pliny",
       "title_vi": "Chú thích [104]",
-      "body_vi": "Pliny Già trong bộ 'Naturalis Historia' đã mô tả chi tiết các tuyến đường thương mại hàng hải từ Ai Cập thuộc La Mã đến Ấn Độ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Naturalis Historia (VI.26) của Pliny mô tả chi tiết tuyến hàng hải phương Đông từ vịnh Ả Rập sang Ấn Độ thời La Mã.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-105",
@@ -726,10 +711,10 @@
       "chapter": "V",
       "marker": "[105]",
       "kind": "footnote",
-      "anchor_text": "Strabo nói[105]",
+      "anchor_text": "Strabo",
       "title_vi": "Chú thích [105]",
-      "body_vi": "Strabo là nhà địa lý và triết gia Hy Lạp cổ đại, tác giả bộ sách 'Geographica' gồm 17 tập mô tả thế giới thời kỳ sơ kỳ Đế chế La Mã.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Geography (II.5.12) của nhà địa lý Hy Lạp Strabo về hạm đội thương thuyền Alexandria đi Ấn Độ.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-106",
@@ -737,10 +722,65 @@
       "chapter": "V",
       "marker": "[106]",
       "kind": "footnote",
-      "anchor_text": "Pliny nói[106]",
+      "anchor_text": "Pliny nói",
       "title_vi": "Chú thích [106]",
-      "body_vi": "Pliny ghi nhận lượng vàng bạc khổng lồ mà La Mã phải chi trả hàng năm để nhập khẩu xa xỉ phẩm từ Ấn Độ, Ả Rập và Trung Hoa.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Naturalis Historia (VI.26) của Pliny về quy mô tài chính khổng lồ của thương mại hàng hải La Mã với Ấn Độ và Trung Hoa.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chv--fn-107",
+      "segment_id": "grotius--freedom_of_the_seas--chv",
+      "chapter": "V",
+      "marker": "[107]",
+      "kind": "footnote",
+      "anchor_text": "bờ biển xung quanh",
+      "title_vi": "Chú thích [107]",
+      "body_vi": "Tham chiếu học thuyết của Bartolus và Baldus về giới hạn tài phán ven biển (thường là 100 dặm), điều mà người Bồ Đào Nha không có ở đại dương.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chv--fn-108",
+      "segment_id": "grotius--freedom_of_the_seas--chv",
+      "chapter": "V",
+      "marker": "[108]",
+      "kind": "footnote",
+      "anchor_text": "Luật các dân tộc cho phép",
+      "title_vi": "Chú thích [108]",
+      "body_vi": "Dựa trên Digest 1.8.4: ngay cả trên bờ biển thuộc quốc gia, các quyền tự do theo Luật các dân tộc vẫn không được phép bị cấm đoán.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chv--fn-109",
+      "segment_id": "grotius--freedom_of_the_seas--chv",
+      "chapter": "V",
+      "marker": "[109]",
+      "kind": "footnote",
+      "anchor_text": "Ulpian đã nói",
+      "title_vi": "Chú thích [109]",
+      "body_vi": "Dẫn Digest 47.10.13.7 về nghĩa vụ bồi thường thiệt hại đối với hành vi cản trở trái phép quyền tự do hàng hải của người khác.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chv--fn-110",
+      "segment_id": "grotius--freedom_of_the_seas--chv",
+      "chapter": "V",
+      "marker": "[110]",
+      "kind": "footnote",
+      "anchor_text": "utile prohibito",
+      "title_vi": "Chú thích [110]",
+      "body_vi": "Lệnh hành chính bổ trợ (interdictum utile) của tư pháp La Mã dùng để vô hiệu hóa các hành vi ngăn cấm tự do đi lại trên biển.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chv--fn-111",
+      "segment_id": "grotius--freedom_of_the_seas--chv",
+      "chapter": "V",
+      "marker": "[111]",
+      "kind": "footnote",
+      "anchor_text": "luật pháp Tây Ban Nha",
+      "title_vi": "Chú thích [111]",
+      "body_vi": "Tham chiếu bộ luật Las Siete Partidas (Partida III, Título 28, Ley 3) của Castile, công nhận không khí, nước mưa, biển và bờ biển là tài sản chung của mọi sinh linh.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-44",
@@ -748,10 +788,10 @@
       "chapter": "V",
       "marker": "[44]",
       "kind": "footnote",
-      "anchor_text": "ngày nay.[44]",
+      "anchor_text": "mang ý nghĩa khác hẳn với ý nghĩa ngày nay",
       "title_vi": "Chú thích [44]",
-      "body_vi": "Grotius phân biệt giữa khái niệm sở hữu thời sơ khai (khi mọi thứ được dùng chung) và khái niệm sở hữu hiện đại (mang tính loại trừ và tư hữu).",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Grotius tham chiếu các thảo luận của các luật gia và thần học gia như Covarruvias về sự biến đổi khái niệm quyền sở hữu từ thời kỳ nguyên thủy sang thời hiện đại.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-45",
@@ -759,10 +799,10 @@
       "chapter": "V",
       "marker": "[45]",
       "kind": "footnote",
-      "anchor_text": "nhà Kinh viện,[45]",
+      "anchor_text": "nhà Kinh viện",
       "title_vi": "Chú thích [45]",
-      "body_vi": "Các nhà Kinh viện (Scholastics) là các triết gia và nhà thần học Kitô giáo thời Trung cổ, tiêu biểu là Thomas Aquinas, người đã hệ thống hóa luật tự nhiên.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Chỉ các nhà tư tưởng triết học-pháp lý thuộc trường phái Kinh viện Tây Ban Nha, đặc biệt là Fernando Vázquez de Menchaca (Vasquius), người phản đối việc coi biển cả là tư hữu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-46",
@@ -770,10 +810,10 @@
       "chapter": "V",
       "marker": "[46]",
       "kind": "footnote",
-      "anchor_text": "Horace:[46]",
+      "anchor_text": "Horace",
       "title_vi": "Chú thích [46]",
-      "body_vi": "Dẫn từ tác phẩm Satires (Sát ký) của nhà thơ La Mã Horace, nhấn mạnh rằng đất đai vốn không có chủ sở hữu tự nhiên vĩnh viễn.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ tác phẩm Satires (Thơ trào phúng, Quyển II.2) của thi sĩ La Mã Horace, nhấn mạnh tự nhiên không ban quyền sở hữu vĩnh viễn đất đai cho riêng ai.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-47",
@@ -781,10 +821,10 @@
       "chapter": "V",
       "marker": "[47]",
       "kind": "footnote",
-      "anchor_text": "Avienus nói]:[47]",
+      "anchor_text": "Avienus đã nói",
       "title_vi": "Chú thích [47]",
-      "body_vi": "Rufus Festus Avienus là một nhà thơ La Mã thế kỷ 4 SCN, nổi tiếng với các tác phẩm dịch thuật và địa lý bằng thơ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ nhà thơ La Mã Rufius Festus Avienus trong tác phẩm Descriptio Orbis Terrae, miêu tả việc dùng chung tài sản thời sơ khai.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-48",
@@ -792,10 +832,10 @@
       "chapter": "V",
       "marker": "[48]",
       "kind": "footnote",
-      "anchor_text": "Seneca:[48]",
+      "anchor_text": "Seneca",
       "title_vi": "Chú thích [48]",
-      "body_vi": "Trích từ các tác phẩm triết học của Seneca, mô tả thời kỳ sơ khai khi con người sống hòa hợp với tự nhiên và không có tư hữu.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ kịch thơ của Seneca, mô tả Thời đại Hoàng kim khi mọi ngả đường và tài nguyên tự nhiên đều được con người tự do dùng chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-49",
@@ -803,10 +843,10 @@
       "chapter": "V",
       "marker": "[49]",
       "kind": "footnote",
-      "anchor_text": "Avienus đã nói rất xác đáng:[49]",
+      "anchor_text": "Avienus đã nói rất xác đáng",
       "title_vi": "Chú thích [49]",
-      "body_vi": "Ý nói trong thời đại nguyên thủy, quyền sở hữu chỉ đơn thuần là việc chiếm giữ vật chất để sử dụng trực tiếp, chứ không phải quyền sở hữu pháp lý lâu dài.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu câu thơ của Avienus về việc trong thời thái cổ, việc nắm giữ thực tế chính là cơ sở duy nhất cho quyền sử dụng.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-50",
@@ -814,10 +854,10 @@
       "chapter": "V",
       "marker": "[50]",
       "kind": "footnote",
-      "anchor_text": "không thể tách rời khỏi việc sử dụng.[50]",
+      "anchor_text": "không thể tách rời khỏi việc sử dụng",
       "title_vi": "Chú thích [50]",
-      "body_vi": "Grotius lập luận rằng đối với những nhu yếu phẩm như thức ăn và đồ uống, việc tiêu dùng chúng đồng nghĩa với việc xác lập quyền sở hữu tuyệt đối vì người khác không thể dùng lại.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên nguyên lý Luật La Mã (Digest 7.5) về vật tiêu hao: việc sử dụng thức ăn, nước uống làm tiêu huỷ vật đó nên tự nhiên gắn liền với quyền sở hữu cá nhân.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-51",
@@ -825,10 +865,10 @@
       "chapter": "V",
       "marker": "[51]",
       "kind": "footnote",
-      "anchor_text": "Tội ác ở giữa chúng ta, để một kẻ chiếm đoạt._”[51]",
+      "anchor_text": "Thyestes",
       "title_vi": "Chú thích [51]",
-      "body_vi": "Trích từ vở bi kịch Thyestes của Seneca, ám chỉ lòng tham và sự tranh giành quyền lực, tài sản giữa các cá nhân khi thời kỳ hoàng kim kết thúc.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ bi kịch Thyestes (dòng 203) của Seneca, minh họa sự xuất hiện của hành vi tranh đoạt tư hữu giữa con người.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-52",
@@ -836,10 +876,10 @@
       "chapter": "V",
       "marker": "[52]",
       "kind": "footnote",
-      "anchor_text": "ông cũng nói:[52]",
+      "anchor_text": "luận văn triết học",
       "title_vi": "Chú thích [52]",
-      "body_vi": "Trích từ tác phẩm 'De Beneficiis' (Về các ân huệ) của Seneca, dùng hình ảnh rạp hát để giải thích cách một không gian chung trở thành không gian riêng khi có người chiếm chỗ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ tác phẩm De Beneficiis (VII.12.1) của Seneca, dùng hình ảnh chỗ ngồi trong nhà hát để giải thích quyền sử dụng cá nhân trên một không gian chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-53",
@@ -847,10 +887,10 @@
       "chapter": "V",
       "marker": "[53]",
       "kind": "footnote",
-      "anchor_text": "Quintilian nhận xét[53]",
+      "anchor_text": "Quintilian nhận xét",
       "title_vi": "Chú thích [53]",
-      "body_vi": "Marcus Fabius Quintilianus là nhà hùng biện La Mã nổi tiếng; ông cho rằng những gì tự nhiên ban tặng cho tất cả sẽ thuộc về người có công sức lao động và khai thác.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu tác phẩm Declamationes của nhà hùng biện La Mã Quintilian về thành quả lao động biến vật thuộc về cộng đồng thành tài sản cá nhân.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-54",
@@ -858,10 +898,10 @@
       "chapter": "V",
       "marker": "[54]",
       "kind": "footnote",
-      "anchor_text": "Cicero nói[54]",
+      "anchor_text": "Cicero nói",
       "title_vi": "Chú thích [54]",
-      "body_vi": "Trích từ tác phẩm 'De Officiis' (Về nghĩa vụ) của Cicero, giải thích rằng tài sản tư hữu được hình thành qua quá trình chiếm hữu lâu dài các vùng đất vốn vô chủ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Officiis (Về nghĩa vụ, I.7.21) của Cicero, giải thích quá trình chiếm hữu lâu dài chuyển hóa vật vô chủ thành tư hữu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-55",
@@ -869,10 +909,10 @@
       "chapter": "V",
       "marker": "[55]",
       "kind": "footnote",
-      "anchor_text": "trên đó.[55]",
+      "anchor_text": "Hermogenianus",
       "title_vi": "Chú thích [55]",
-      "body_vi": "Hermogenianus là một luật gia La Mã thế kỷ 4 SCN, tác giả của tập sách tóm tắt luật pháp mà sau này được đưa vào Bộ dân luật Corpus Juris Civilis.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn theo Digest 1.1.5 của luật gia La Mã Hermogenianus về sự phân định ranh giới đất đai và việc xây dựng nhà cửa trong sự phát triển của Luật các dân tộc.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-56",
@@ -880,10 +920,10 @@
       "chapter": "V",
       "marker": "[56]",
       "kind": "footnote",
-      "anchor_text": "nhựa bẫy chim,_”[56]",
+      "anchor_text": "Vergil",
       "title_vi": "Chú thích [56]",
-      "body_vi": "Trích từ tác phẩm Georgics (Nông nghiệp thi) của thi hào Vergil, mô tả sự phát triển của các kỹ nghệ sinh tồn khi con người rời bỏ thời kỳ cộng sản nguyên thủy.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ thi phẩm Georgics (Quyển I, dòng 139) của Vergil, miêu tả việc con người phát minh ra công cụ săn bắt để chiếm hữu tài nguyên.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-57",
@@ -891,10 +931,10 @@
       "chapter": "V",
       "marker": "[57]",
       "kind": "footnote",
-      "anchor_text": "như ánh sáng._”[57]",
+      "anchor_text": "ánh sáng",
       "title_vi": "Chú thích [57]",
-      "body_vi": "Trích từ tác phẩm Metamorphoses (Biến hình) của Ovid, mô tả việc phân chia đất đai và thiết lập ranh giới tư hữu ở thời kỳ Đồng và Sắt.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Metamorphoses (Biến hình, Quyển I, dòng 135-136) của Ovid, mô tả giai đoạn đất đai bắt đầu được cắm cọc phân định ranh giới tư hữu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-58",
@@ -902,10 +942,10 @@
       "chapter": "V",
       "marker": "[58]",
       "kind": "footnote",
-      "anchor_text": "Ovid ca ngợi thương mại vì những lợi ích của nó:[58]",
+      "anchor_text": "Ovid ca ngợi thương mại",
       "title_vi": "Chú thích [58]",
-      "body_vi": "Ovid ca ngợi việc đóng tàu và hàng hải đã kết nối các vùng đất xa xôi, thúc đẩy giao thương quốc tế.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Metamorphoses (Quyển I, dòng 134) của Ovid, miêu tả sự xuất hiện của thương mại và các chuyến hải hành xuyên đại dương.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-59",
@@ -913,10 +953,10 @@
       "chapter": "V",
       "marker": "[59]",
       "kind": "footnote",
-      "anchor_text": "Seneca nói:[59]",
+      "anchor_text": "Seneca nói",
       "title_vi": "Chú thích [59]",
-      "body_vi": "Trích từ 'De Beneficiis', giải thích sự khác biệt giữa lãnh thổ chung của một quốc gia (như Athens) và các thửa đất tư nhân bên trong lãnh thổ đó.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Beneficiis (VII.4.3) của Seneca, phân biệt giữa lãnh thổ thuộc về một cộng đồng/đô thị và phần đất thuộc tư hữu cá nhân trong đó.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-60",
@@ -924,10 +964,10 @@
       "chapter": "V",
       "marker": "[60]",
       "kind": "footnote",
-      "anchor_text": "những thành phố mới'.[60]",
+      "anchor_text": "Seneca viết ở một nơi khác",
       "title_vi": "Chú thích [60]",
-      "body_vi": "Seneca mô tả quá trình hình thành các quốc gia cổ đại khi các nhóm người phân chia ranh giới lãnh thổ và xây dựng thành trì riêng.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Beneficiis (VII.4.2) của Seneca về việc các quốc gia thiết lập ranh giới lãnh thổ và xây dựng thành thị.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-61",
@@ -935,10 +975,10 @@
       "chapter": "V",
       "marker": "[61]",
       "kind": "footnote",
-      "anchor_text": "đã thuộc về mình.'[61]",
+      "anchor_text": "Cicero nói",
       "title_vi": "Chú thích [61]",
-      "body_vi": "Trích từ 'De Officiis' của Cicero, nhấn mạnh tầm quan trọng của việc tôn trọng hiện trạng sở hữu đất đai sau khi đã được phân chia hợp pháp.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Officiis (I.7.21) của Cicero, nêu ví dụ các vùng đất Arpinum và Tusculum thành tài sản công của đô thị rồi chia cho tư nhân.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-62",
@@ -946,10 +986,10 @@
       "chapter": "V",
       "marker": "[62]",
       "kind": "footnote",
-      "anchor_text": "Thucydides[62]",
+      "anchor_text": "Thucydides",
       "title_vi": "Chú thích [62]",
-      "body_vi": "Thucydides là sử gia Hy Lạp nổi tiếng với tác phẩm 'Lịch sử cuộc chiến tranh Peloponnese', ở đây được viện dẫn để chỉ vùng đất chưa phân định.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu tác phẩm Lịch sử cuộc chiến Peloponnese của sử gia Hy Lạp Thucydides.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-63",
@@ -957,10 +997,10 @@
       "chapter": "V",
       "marker": "[63]",
       "kind": "footnote",
-      "anchor_text": "ranh giới.[63]",
+      "anchor_text": "ἀόριστος",
       "title_vi": "Chú thích [63]",
-      "body_vi": "Thuật ngữ Hy Lạp 'aoristos' chỉ những vùng đất hoang dã, biên thùy chưa thuộc về bất kỳ quốc gia hay bộ tộc nào.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Từ tiếng Hy Lạp cổ ἀόριστος (aoristos) nghĩa là vô định, chưa được cắm cọc ranh giới hay thuộc về một quốc gia nào.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-64",
@@ -968,10 +1008,10 @@
       "chapter": "V",
       "marker": "[64]",
       "kind": "footnote",
-      "anchor_text": "phải được duy trì.'[64]",
+      "anchor_text": "ngụ ý khi viết",
       "title_vi": "Chú thích [64]",
-      "body_vi": "Trích từ 'De Officiis' của Cicero, khẳng định nghĩa vụ đạo đức của con người trong việc chia sẻ những tài nguyên mà tự nhiên tạo ra cho mục đích sử dụng chung.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Officiis (I.16.51) của Cicero về tính cộng đồng của các tài nguyên tự nhiên do thiên nhiên tạo ra cho loài người.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-65",
@@ -979,10 +1019,10 @@
       "chapter": "V",
       "marker": "[65]",
       "kind": "footnote",
-      "anchor_text": "xuất phát điều cấm nổi tiếng:[65]",
+      "anchor_text": "điều cấm đoán nổi tiếng",
       "title_vi": "Chú thích [65]",
-      "body_vi": "Cicero đề cập đến luật tục cấm ngăn cản người khác tiếp cận các nguồn tài nguyên cơ bản như nước chảy hay ánh sáng mặt trời.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ De Officiis (I.16.52) của Cicero, nhấn mạnh nghĩa vụ không được ngăn cản người khác sử dụng những thứ không gây tổn hại cho mình.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-66",
@@ -990,10 +1030,10 @@
       "chapter": "V",
       "marker": "[66]",
       "kind": "footnote",
-      "anchor_text": "Ovid cũng đã viết:[66]",
+      "anchor_text": "Ovid cũng khẳng định",
       "title_vi": "Chú thích [66]",
-      "body_vi": "Trích từ câu chuyện về Latona trong tác phẩm Metamorphoses của Ovid, khi bà cầu xin nước uống từ những người nông dân Lycia.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Metamorphoses (Quyển VI, dòng 349-351) của Ovid trong câu chuyện về nữ thần Latona, khẳng định mặt trời, không khí và sóng biển là quà tặng chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-67",
@@ -1001,10 +1041,10 @@
       "chapter": "V",
       "marker": "[67]",
       "kind": "footnote",
-      "anchor_text": "Ulpian khẳng định,[67]",
+      "anchor_text": "Ulpian khẳng định",
       "title_vi": "Chú thích [67]",
-      "body_vi": "Domitius Ulpianus là một trong những luật gia La Mã vĩ đại nhất, các ý kiến của ông chiếm phần lớn trong bộ Digesta của Hoàng đế Justinian.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn theo Digest 8.4.13 của luật gia La Mã Ulpian về việc các tài nguyên tự nhiên như biển cả luôn mở rộng cho sự sử dụng chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-68",
@@ -1012,10 +1052,10 @@
       "chapter": "V",
       "marker": "[68]",
       "kind": "footnote",
-      "anchor_text": "Neratius nói;[68]",
+      "anchor_text": "Neratius nói",
       "title_vi": "Chú thích [68]",
-      "body_vi": "Neratius Priscus là luật gia La Mã thời Hoàng đế Trajan và Hadrian, nổi tiếng với các quan điểm thực tế về luật tài sản.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn theo Digest 41.1.14 của luật gia Neratius về các vật tự nhiên chưa từng nằm dưới chủ quyền hay sự chiếm hữu của bất kỳ ai.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-69",
@@ -1023,10 +1063,10 @@
       "chapter": "V",
       "marker": "[69]",
       "kind": "footnote",
-      "anchor_text": "bờ biển.[69]",
+      "anchor_text": "bờ biển hay dải bờ",
       "title_vi": "Chú thích [69]",
-      "body_vi": "Theo luật La Mã, bờ biển (littus maris) được định nghĩa là phần đất mà sóng biển dâng cao nhất có thể chạm tới trong mùa đông.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Định nghĩa bờ biển trong Luật La Mã (Digest 50.16.96 và Institutes 2.1.5): dải đất đến tận mức sóng biển tràn tới cao nhất vào mùa đông.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-70",
@@ -1034,10 +1074,10 @@
       "chapter": "V",
       "marker": "[70]",
       "kind": "footnote",
-      "anchor_text": "lập luận một cách chính xác:[70]",
+      "anchor_text": "Cicero lập luận",
       "title_vi": "Chú thích [70]",
-      "body_vi": "Trích từ diễn văn 'Pro Roscio Amerino' của Cicero, nhấn mạnh tính chất công cộng và phổ quát của biển cả và bờ biển.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ bài diễn văn Pro Roscio Amerino (26, 72) của Cicero về tính chất dùng chung tuyệt đối của biển và bờ biển.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-71",
@@ -1045,10 +1085,10 @@
       "chapter": "V",
       "marker": "[71]",
       "kind": "footnote",
-      "anchor_text": "luật tự nhiên,[71]",
+      "anchor_text": "luật tự nhiên",
       "title_vi": "Chú thích [71]",
-      "body_vi": "Luật tự nhiên (Jus Naturale) là hệ thống các nguyên tắc đạo đức và pháp lý vĩnh cửu, được cho là hiển nhiên đối với lý trí con người.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn theo Institutes 2.1.1 của Justinianus: theo luật tự nhiên, không khí, nước chảy, biển và bờ biển thuộc về toàn thể loài người.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-72",
@@ -1056,10 +1096,10 @@
       "chapter": "V",
       "marker": "[72]",
       "kind": "footnote",
-      "anchor_text": "nói:[72]",
+      "anchor_text": "Rudens",
       "title_vi": "Chú thích [72]",
-      "body_vi": "Trích từ vở hài kịch 'Rudens' (Sợi dây thừng) của Plautus, minh họa sinh động sự phân biệt giữa biển cả (của chung) và cá đánh bắt được (của riêng).",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ hài kịch Rudens của Plautus (Màn IV, Cảnh 3), phân biệt giữa biển cả là tài sản chung và con cá đánh bắt được là tư hữu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-73",
@@ -1067,10 +1107,10 @@
       "chapter": "V",
       "marker": "[73]",
       "kind": "footnote",
-      "anchor_text": "việc sử dụng chung của nó.[73]",
+      "anchor_text": "đòi hỏi việc sử dụng chung đối với biển",
       "title_vi": "Chú thích [73]",
-      "body_vi": "Vì biển cả không thể bị chiếm hữu vật chất một cách trọn vẹn và việc sử dụng nó không làm hao mòn tài nguyên, nên nó phải luôn mở ra cho tất cả.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên Digest 47.10.13.7 khẳng định biển cả tự bản chất chống lại việc xác lập quyền tư hữu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-74",
@@ -1078,10 +1118,10 @@
       "chapter": "V",
       "marker": "[74]",
       "kind": "footnote",
-      "anchor_text": "bất tiện cho người khác;[74]",
+      "anchor_text": "Pomponius",
       "title_vi": "Chú thích [74]",
-      "body_vi": "Sextus Pomponius là luật gia La Mã thế kỷ 2 SCN. Ý ông là việc xây dựng trên bờ biển được phép nhưng không được cản trở quyền tiếp cận chung.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn theo Digest 39.2.24 và 41.1.50 của luật gia Pomponius về việc xây dựng công trình trên bờ biển nếu không gây trở ngại cho người khác.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-75",
@@ -1089,10 +1129,10 @@
       "chapter": "V",
       "marker": "[75]",
       "kind": "footnote",
-      "anchor_text": "toàn thể một dân tộc.[75]",
+      "anchor_text": "tài sản tư của toàn thể một dân tộc",
       "title_vi": "Chú thích [75]",
-      "body_vi": "Grotius lập luận rằng các quốc gia có thể tuyên bố chủ quyền đối với bờ biển của họ, nhưng chủ quyền này vẫn bị giới hạn bởi luật quốc tế.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 43.8.3 về tài sản công cộng (res publica) thuộc sở hữu của quốc gia nhưng vẫn phải tôn trọng quyền của toàn thể nhân loại.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-76",
@@ -1100,10 +1140,10 @@
       "chapter": "V",
       "marker": "[76]",
       "kind": "footnote",
-      "anchor_text": "tiếp cận bờ biển,[76]",
+      "anchor_text": "tiếp cận bờ biển",
       "title_vi": "Chú thích [76]",
-      "body_vi": "Luật La Mã bảo vệ quyền tự do đi lại và đánh cá của mọi người trên bờ biển, cấm các hành vi độc chiếm hoặc ngăn cản.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên Digest 1.8.4 quy định mọi người đều có quyền tự do đến bờ biển, phơi lưới đánh cá và trú ẩn.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-77",
@@ -1111,10 +1151,10 @@
       "chapter": "V",
       "marker": "[77]",
       "kind": "footnote",
-      "anchor_text": "lòng sâu của chúng”.[77]",
+      "anchor_text": "Horace",
       "title_vi": "Chú thích [77]",
-      "body_vi": "Trích từ tập Thơ ca (Odes) của Horace, phê phán thói xa hoa của giới nhà giàu La Mã khi xây dựng các biệt thự lấn biển.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Odes (Thi ca, Quyển III.1, dòng 33-34) của Horace, mô tả phóng đại việc lấn biển xây nền móng đá của các đại gia La Mã.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-78",
@@ -1122,10 +1162,10 @@
       "chapter": "V",
       "marker": "[78]",
       "kind": "footnote",
-      "anchor_text": "thuộc về người đã đóng chúng.[78]",
+      "anchor_text": "Celsus",
       "title_vi": "Chú thích [78]",
-      "body_vi": "Juventius Celsus là luật gia La Mã nổi tiếng với định nghĩa 'luật pháp là nghệ thuật của cái tốt và cái công bằng'.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 43.8.3 của luật gia Celsus về quyền sở hữu đối với các cọc móng do cá nhân đóng xuống lòng biển.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-79",
@@ -1133,10 +1173,10 @@
       "chapter": "V",
       "marker": "[79]",
       "kind": "footnote",
-      "anchor_text": "cho hoạt động hàng hải'.[79]",
+      "anchor_text": "Labeo",
       "title_vi": "Chú thích [79]",
-      "body_vi": "Marcus Antistius Labeo là luật gia thời sơ kỳ Đế chế La Mã, người sáng lập trường phái luật Proculian, nổi tiếng với tư duy độc lập.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 43.12.1 về ý kiến của Labeo cấm mọi công trình xây dựng trên biển làm cản trở sự an toàn của bến cảng và luồng lạch.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-80",
@@ -1144,10 +1184,10 @@
       "chapter": "V",
       "marker": "[80]",
       "kind": "footnote",
-      "anchor_text": "gần Naples.[80]",
+      "anchor_text": "Naples",
       "title_vi": "Chú thích [80]",
-      "body_vi": "Lucius Licinius Lucullus là chính trị gia La Mã nổi tiếng với lối sống cực kỳ xa hoa; ông đã cho đào núi để dẫn nước biển vào ao cá tư nhân.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu Pliny (Naturalis Historia, IX.170) và Varro về việc chính khách Lucullus đào núi dẫn nước biển vào biệt thự làm ao nuôi cá.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-81",
@@ -1155,10 +1195,10 @@
       "chapter": "V",
       "marker": "[81]",
       "kind": "footnote",
-      "anchor_text": "Apollinaris:[81]",
+      "anchor_text": "Martial",
       "title_vi": "Chú thích [81]",
-      "body_vi": "Trích từ thơ của Martial, ca ngợi sự tiện nghi của biệt thự vùng Formiae, nơi chủ nhân có thể đánh cá ngay tại ao nhà bất kể thời tiết.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ Epigrams (Thơ trào phúng, Quyển X.30) của Martial miêu tả biệt thự ven biển Formiae có ao cá biệt lập.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-82",
@@ -1166,10 +1206,10 @@
       "chapter": "V",
       "marker": "[82]",
       "kind": "footnote",
-      "anchor_text": "chủ đề:[82]",
+      "anchor_text": "Ambrose",
       "title_vi": "Chú thích [82]",
-      "body_vi": "Thánh Ambrose (Giám mục Milan thế kỷ 4) trong tác phẩm 'De Nabuthe' đã lên án những kẻ giàu có xây dựng ao cá lấn biển, tước đoạt không gian chung.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ tác phẩm De Nabuthe (Chương 3) của Thánh Ambrose, lên án thói xa hoa chiếm biển làm ao tư của giới nhà giàu.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-83",
@@ -1177,10 +1217,10 @@
       "chapter": "V",
       "marker": "[83]",
       "kind": "footnote",
-      "anchor_text": "nói[83]",
+      "anchor_text": "Paulus",
       "title_vi": "Chú thích [83]",
-      "body_vi": "Julius Paulus là một trong những luật gia La Mã có ảnh hưởng nhất, các văn bản của ông đóng vai trò nền tảng cho luật dân sự châu Âu.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 47.10.14 của luật gia Paulus về việc áp dụng quy tắc uti possidetis trong tố tụng tư pháp.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-84",
@@ -1188,10 +1228,10 @@
       "chapter": "V",
       "marker": "[84]",
       "kind": "footnote",
-      "anchor_text": "có thể bị chiếm hữu[84]",
+      "anchor_text": "Marcianus",
       "title_vi": "Chú thích [84]",
-      "body_vi": "Aelius Marcianus là luật gia La Mã thế kỷ 3 SCN, tác giả của bộ sách Institutiones được trích dẫn nhiều trong Digesta.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 1.8.5 của Marcianus về các phần vật thể đã bị chiếm hữu hợp pháp không còn thuộc chế độ sử dụng chung của Luật các dân tộc.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-85",
@@ -1199,10 +1239,10 @@
       "chapter": "V",
       "marker": "[85]",
       "kind": "footnote",
-      "anchor_text": "sở hữu tư nhân.[85]",
+      "anchor_text": "kiện đòi bồi thường thiệt hại",
       "title_vi": "Chú thích [85]",
-      "body_vi": "Lệnh cấm (interdictum) là một biện pháp khẩn cấp của Pháp quan La Mã nhằm bảo vệ quyền sở hữu hoặc chiếm hữu thực tế trước khi xét xử chính thức.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên Digest 47.10.13.7 về biện pháp bảo vệ pháp lý đối với ao cá riêng do cá nhân đầu tư xây dựng.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-86",
@@ -1210,10 +1250,10 @@
       "chapter": "V",
       "marker": "[86]",
       "kind": "footnote",
-      "anchor_text": "bị cản trở.[86]",
+      "anchor_text": "cản trở",
       "title_vi": "Chú thích [86]",
-      "body_vi": "Việc thiết lập ao cá tư nhân chỉ được chấp nhận ở các vũng, vịnh nhỏ sát bờ, không được mở rộng ra ngoài khơi xa gây cản trở giao thông hàng hải.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 44.3.7: việc vây rào riêng chỉ có hiệu lực ở vũng biển kín, không thể áp dụng ở biển mở gây ảnh hưởng tới quyền chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-87",
@@ -1221,10 +1261,10 @@
       "chapter": "V",
       "marker": "[87]",
       "kind": "footnote",
-      "anchor_text": "bồi thường thiệt hại.[87]",
+      "anchor_text": "Ulpian",
       "title_vi": "Chú thích [87]",
-      "body_vi": "Ulpian cho rằng hành vi ngăn cản người khác đánh cá ở vùng biển khơi là bất hợp pháp và nạn nhân có thể kiện đòi bồi thường danh dự hoặc thiệt hại.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 47.10.13.7 về việc cản trở người khác đánh cá trái phép ngoài biển mở có thể bị kiện đòi bồi thường vi phạm (actio injuriarum).",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-88",
@@ -1232,10 +1272,10 @@
       "chapter": "V",
       "marker": "[88]",
       "kind": "footnote",
-      "anchor_text": "đánh cá ở đó.[88]",
+      "anchor_text": "Hoàng đế Leo",
       "title_vi": "Chú thích [88]",
-      "body_vi": "Hoàng đế Leo VI (trị vì 886–912) của Đế chế Byzantine đã ban hành các đạo luật mới (Novellae), cho phép chủ đất ven biển có đặc quyền đánh cá trước nhà họ.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu Sắc lệnh Novellae (102, 103, 104) của Hoàng đế Byzantine Leo VI (866–912) trao quyền đánh cá ven bờ cho cư dân sở hữu đất.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-89",
@@ -1243,10 +1283,10 @@
       "chapter": "V",
       "marker": "[89]",
       "kind": "footnote",
-      "anchor_text": "Đấng Thánh[89]",
+      "anchor_text": "Bậc Thánh Giả",
       "title_vi": "Chú thích [89]",
-      "body_vi": "Chỉ Thánh Ambrose, người đã viết những lời phê phán mạnh mẽ chống lại việc tư hữu hóa biển cả và các nguồn tài nguyên thiên nhiên.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Chỉ Thánh Ambrose trong tác phẩm De Nabuthe (Chương 3) chỉ trích gay gắt việc giới lãnh chúa chia nhau chủ quyền trên biển cả.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-90",
@@ -1254,10 +1294,10 @@
       "chapter": "V",
       "marker": "[90]",
       "kind": "footnote",
-      "anchor_text": "thương phẩm,[90]",
+      "anchor_text": "hàng hóa",
       "title_vi": "Chú thích [90]",
-      "body_vi": "Trong luật La Mã, những thứ thuộc về cộng đồng hoặc tự nhiên (res extra commercium) không thể là đối tượng của các giao dịch mua bán tư nhân.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dựa trên Digest 18.1.6: biển cả nằm ngoài vòng thương mại (res extra commercium), không thể giao dịch mua bán.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-91",
@@ -1265,10 +1305,10 @@
       "chapter": "V",
       "marker": "[91]",
       "kind": "footnote",
-      "anchor_text": "Johannes Faber[91]",
+      "anchor_text": "Johannes Faber",
       "title_vi": "Chú thích [91]",
-      "body_vi": "Johannes Faber (Jean Faure) là một luật gia người Pháp thế kỷ 14, nổi tiếng với các bài bình luận về luật La Mã và luật Giáo hội.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Johannes Faber, nhà bình luận pháp lý người Pháp thế kỷ XIV, khẳng định biển cả tự bản chất duy trì vị thế sui juris (tự chủ) và dùng chung.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-92",
@@ -1276,10 +1316,10 @@
       "chapter": "V",
       "marker": "[92]",
       "kind": "footnote",
-      "anchor_text": "bờ biển[92]",
+      "anchor_text": "Celsus",
       "title_vi": "Chú thích [92]",
-      "body_vi": "Celsus phân biệt rõ ràng giữa bờ biển (có thể thuộc quyền quản lý của quốc gia) và biển khơi (hoàn toàn tự do và không thể bị chiếm hữu).",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 43.8.3 về sự phân biệt giữa bờ biển có thể bị kiểm soát công cộng và đại dương giữ nguyên bản tính tự do.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-93",
@@ -1287,10 +1327,10 @@
       "chapter": "V",
       "marker": "[93]",
       "kind": "footnote",
-      "anchor_text": "trái ngược.[93]",
+      "anchor_text": "văn bản luật",
       "title_vi": "Chú thích [93]",
-      "body_vi": "Grotius khẳng định các văn bản luật La Mã không hề ủng hộ việc tuyên bố chủ quyền tuyệt đối đối với biển khơi.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu Digest 1.8.2 và 1.8.4 khẳng định không có đạo luật La Mã nào thừa nhận quyền sở hữu trên đại dương.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-94",
@@ -1298,10 +1338,10 @@
       "chapter": "V",
       "marker": "[94]",
       "kind": "footnote",
-      "anchor_text": "ràng buộc những bên tham gia,[94]",
+      "anchor_text": "ràng buộc những bên tham gia",
       "title_vi": "Chú thích [94]",
-      "body_vi": "Các hiệp ước phân chia biển cả chỉ có hiệu lực ràng buộc (pacta sunt servanda) đối với các quốc gia ký kết, không thể áp đặt lên bên thứ ba.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Nguyên tắc luật quốc tế: ước định phân định quyền tài phán hoặc chống cướp biển chỉ có hiệu lực đối nhân (inter partes) giữa các bên ký kết.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-95",
@@ -1309,10 +1349,10 @@
       "chapter": "V",
       "marker": "[95]",
       "kind": "footnote",
-      "anchor_text": "đánh bắt.[95]",
+      "anchor_text": "Vương quyền",
       "title_vi": "Chú thích [95]",
-      "body_vi": "Thuế đánh cá chỉ là thuế đánh vào hoạt động của con người (thần dân của nhà vua), chứ không phải là sự xác lập quyền sở hữu đối với bản thân vùng biển đó.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tham chiếu quy định phong kiến về việc nhà vua chỉ có quyền thu thuế đối với thần dân làm nghề cá chứ không sở hữu biển cả.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-96",
@@ -1320,10 +1360,10 @@
       "chapter": "V",
       "marker": "[96]",
       "kind": "footnote",
-      "anchor_text": "sông,[96]",
+      "anchor_text": "một con sông",
       "title_vi": "Chú thích [96]",
-      "body_vi": "Sông ngòi nằm hoàn toàn trong lãnh thổ một quốc gia nên có thể thuộc sở hữu công cộng của quốc gia đó, khác với biển cả bao la.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Dẫn Digest 43.14.1 phân biệt sông ngòi thuộc tài sản công của quốc gia với biển cả không thuộc về quốc gia nào.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-97",
@@ -1331,10 +1371,10 @@
       "chapter": "V",
       "marker": "[97]",
       "kind": "footnote",
-      "anchor_text": "độc quyền'.[97]",
+      "anchor_text": "de loco publico fruendo",
       "title_vi": "Chú thích [97]",
-      "body_vi": "Lệnh cấm bảo vệ quyền hưởng dụng công sản (interdictum de loco publico fruendo) được áp dụng để bảo vệ quyền lợi của người thuê mướn hợp pháp từ nhà nước.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Lệnh hành chính La Mã (interdictum de loco publico fruendo) bảo vệ người thuê quyền khai thác tài sản công cộng từ nhà nước.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-98",
@@ -1342,10 +1382,10 @@
       "chapter": "V",
       "marker": "[98]",
       "kind": "footnote",
-      "anchor_text": "được chứng minh[98]",
+      "anchor_text": "đã chứng minh được rằng",
       "title_vi": "Chú thích [98]",
-      "body_vi": "Grotius đúc kết rằng cả luật tự nhiên và luật các dân tộc đều không cho phép bất kỳ quốc gia nào tuyên bố sở hữu biển khơi.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Tóm tắt luận điểm pháp lý của Grotius bác bỏ mọi yêu sách sở hữu tư nhân hay quốc gia đối với đại dương.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chv--fn-99",
@@ -1353,10 +1393,10 @@
       "chapter": "V",
       "marker": "[99]",
       "kind": "footnote",
-      "anchor_text": "ngọn đuốc của bạn mình._”[99]",
+      "anchor_text": "Ennius",
       "title_vi": "Chú thích [99]",
-      "body_vi": "Trích dẫn từ nhà thơ cổ đại Quintus Ennius, thể hiện triết lý chia sẻ tài nguyên: việc giúp đỡ người khác không làm giảm đi giá trị của bản thân.",
-      "generated_at": "2026-08-28T11:17:15+00:00"
+      "body_vi": "Trích từ nhà thơ Ennius (Cicero dẫn lại trong De Officiis I.16.51), minh họa việc chia sẻ lợi ích mà không gây tổn hại cho mình.",
+      "generated_at": "2026-08-28T16:58:59+00:00"
     },
     {
       "id": "grotius--freedom_of_the_seas--chvi--ctx-jurisdiction",
@@ -2124,7 +2164,205 @@
       "title_vi": "Chú thích [177]",
       "body_vi": "Thánh Gregory thành Nazianzus (329–390), một trong những Giáo phụ vĩ đại của Giáo hội phương Đông, nổi tiếng với các bài giảng lên án sự thờ ơ trước người nghèo và việc đầu cơ tích trữ nhu yếu phẩm trong nạn đói.",
       "generated_at": "2026-08-28T10:53:38+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--term-voc",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "VOC",
+      "kind": "term",
+      "anchor_text": "Người Hà Lan",
+      "title_vi": "Thuật ngữ: Công ty Đông Ấn Hà Lan (VOC)",
+      "body_vi": "Công ty Đông Ấn Hà Lan (Vereenigde Oostindische Compagnie - VOC) thành lập năm 1602. Đây chính là tổ chức đặt hàng Hugo Grotius soạn thảo tác phẩm nhằm bảo vệ quyền tự do giao thương hải ngoại của Hà Lan.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-178",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[178]",
+      "kind": "footnote",
+      "anchor_text": "Người Hy Lạp[178]",
+      "title_vi": "Chú thích [178]: Phân biệt hiệp ước theo truyền thống Hy Lạp",
+      "body_vi": "Tác giả đề cập đến sự phân biệt trong chính trị Hy Lạp cổ đại giữa thỏa ước bình đẳng (foedus aequum) và đình chiến áp đặt (foedus iniquum). Hiệp ước bị cưỡng ép bị xem như một hình thức nô dịch hóa đối với quốc gia yếu hơn.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-179",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[179]",
+      "kind": "footnote",
+      "anchor_text": "người Rhodes[179]",
+      "title_vi": "Chú thích [179]: Bài diễn văn của Demosthenes",
+      "body_vi": "Trích dẫn từ bài diễn văn 'Bảo vệ tự do cho người Rhodes' (De Rhodiorum Libertate) của nhà hùng biện Demosthenes. Ông cảnh báo rằng các quốc gia tự do không nên chấp nhận những điều khoản hòa bình do cường quốc áp đặt.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-180",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[180]",
+      "kind": "footnote",
+      "anchor_text": "Isocrates.[180]",
+      "title_vi": "Chú thích [180]: Quan điểm của Isocrates",
+      "body_vi": "Tham chiếu đến nhà hùng biện Hy Lạp Isocrates, người định nghĩa các điều khoản áp đặt là những thỏa thuận bất bình đẳng làm suy giảm quyền tự quyết tối cao của một bên.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-181",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[181]",
+      "kind": "footnote",
+      "anchor_text": "Cicero đã nói,[181]",
+      "title_vi": "Chú thích [181]: Tư tưởng chiến tranh và hòa bình của Cicero",
+      "body_vi": "Trích từ tác phẩm 'Bàn về nghĩa vụ' (De Officiis, I.11.35) của Cicero. Ông khẳng định mục đích duy nhất của chiến tranh chính đáng là để sống trong hòa bình tự do mà không bị xâm hại.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-182",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[182]",
+      "kind": "footnote",
+      "anchor_text": "thần học gia,[182]",
+      "title_vi": "Chú thích [182]: Hòa bình và công lý trong triết học truyền thống",
+      "body_vi": "Các triết gia và nhà thần học Công giáo cho rằng hòa bình thực sự không đơn thuần là sự vắng mặt của xung đột, mà là trật tự dựa trên công lý và luật pháp.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-183",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[183]",
+      "kind": "footnote",
+      "anchor_text": "không như thế.”[183]",
+      "title_vi": "Chú thích [183]: Động lực chiến đấu theo Demosthenes",
+      "body_vi": "Trích từ diễn văn của Demosthenes, nhấn mạnh rằng bên chiến đấu để khôi phục quyền lợi bị chiếm đoạt luôn có ý chí mạnh mẽ hơn kẻ mưu cầu lợi ích bằng cách xâm phạm quyền của người khác.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-184",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[184]",
+      "kind": "footnote",
+      "anchor_text": "người ấy.”[184]",
+      "title_vi": "Chú thích [184]: Trích thơ Propertius",
+      "body_vi": "Trích từ tập thơ 'Elegies' (IV.6) của nhà thơ La Mã Propertius mô tả Trận Actium. Bài thơ khẳng định chính nghĩa mới là nguồn gốc sức mạnh thật sự của quân sĩ.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-185",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[185]",
+      "kind": "footnote",
+      "anchor_text": " chính Augustine,[185]",
+      "title_vi": "Chú thích [185]: Thánh Augustine về quyền đi lại vô hại",
+      "body_vi": "Thánh Augustine trong tác phẩm 'Locutiones in Heptateuchum' nhận định rằng hành vi từ chối quyền đi lại vô hại (innocent passage) là lý do chính đáng để tiến hành chiến tranh.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-186",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[186]",
+      "kind": "footnote",
+      "anchor_text": "Luật của pháp quan quy định:[186]",
+      "title_vi": "Chú thích [186]: Lệnh cấm của Pháp quan La Mã trên sông công cộng",
+      "body_vi": "Trích Luật Dân sự La Mã (Digest 43.12.1.pr). Pháp quan ban hành mệnh lệnh nghiêm cấm cản trở hoạt động đi lại hoặc bốc dỡ hàng hóa trên các dòng sông công cộng.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-187",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[187]",
+      "kind": "footnote",
+      "anchor_text": "sắc lệnh của pháp quan,[187]",
+      "title_vi": "Chú thích [187]: Giải thích luật của Labeo",
+      "body_vi": "Marcus Antistius Labeo, nhà luật học thời sơ kỳ Đế chế La Mã, bình chú rằng quy định bảo vệ đường thủy công cộng cũng được mở rộng áp dụng cho hàng hải trên biển.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-188",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[188]",
+      "kind": "footnote",
+      "anchor_text": "cụ thể là:[188]",
+      "title_vi": "Chú thích [188]: Bảo vệ luồng hàng hải trên biển",
+      "body_vi": "Trích Digest 43.8.2.8 về mệnh lệnh pháp quan cấm bất kỳ hành vi nào làm cản trở bến cảng hoặc luồng tàu thuyền lưu thông trên biển và bờ biển.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-189",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[189]",
+      "kind": "footnote",
+      "anchor_text": "căn cứ ấy.[189]",
+      "title_vi": "Chú thích [189]: Khởi kiện bồi thường theo Ulpian",
+      "body_vi": "Nhà luật học Ulpian (Digest 47.10.13.7) cho rằng người bị cản trở giao thương hoặc bị ngăn dùng tài sản chung có quyền khởi kiện yêu cầu bồi thường thiệt hại.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-190",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[190]",
+      "kind": "footnote",
+      "anchor_text": "Augustine[190]",
+      "title_vi": "Chú thích [190]: Nguyên nhân chiến tranh chính nghĩa",
+      "body_vi": "Trích tác phẩm 'Nước Thiên Chúa' (De Civitate Dei, IV.15) của Thánh Augustine, khẳng định hành vi bất công của đối phương là nguyên nhân khởi đầu cho một cuộc chiến chính nghĩa.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-191",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[191]",
+      "kind": "footnote",
+      "anchor_text": "Cicero cũng phán:[191]",
+      "title_vi": "Chú thích [191]: Phương thức giải quyết tranh chấp",
+      "body_vi": "Trích Cicero (De Officiis, I.11.34), nguyên tắc quy định việc dùng vũ lực chỉ hợp pháp khi các biện pháp thương thảo hòa bình không còn hiệu lực.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--fn-192",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "[192]",
+      "kind": "footnote",
+      "anchor_text": "lập luận của chúng ta[192]",
+      "title_vi": "Chú thích [192]: Nguyên tắc của Pomponius về tài sản chung",
+      "body_vi": "Nhà luật học Pomponius (Digest 41.1.50) tuyên bố rằng kẻ nào vô lý chiếm đoạt vật thuộc về cộng đồng chung thì có thể bị cưỡng chế ngăn chặn bằng lực lượng.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--ctx-uti-possidetis",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "uti possidetis",
+      "kind": "context",
+      "anchor_text": "uti possidetis",
+      "title_vi": "Bối cảnh pháp lý: Nguyên tắc Uti Possidetis",
+      "body_vi": "Nguyên tắc pháp lý quốc tế có nguồn gốc từ luật La Mã, quy định các bên tạm thời giữ nguyên trạng quyền kiểm soát tài sản hoặc vùng lãnh thổ như lúc bắt đầu thỏa thuận đình chiến.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chxiii--ctx-via-facti",
+      "segment_id": "grotius--freedom_of_the_seas--chxiii",
+      "chapter": "XIII",
+      "marker": "via facti",
+      "kind": "context",
+      "anchor_text": "via facti",
+      "title_vi": "Bối cảnh pháp lý: Biện pháp thực tế (Via Facti)",
+      "body_vi": "Thuật ngữ chỉ hành động tự vệ hoặc dùng lực lượng thực tế để khắc phục vi phạm quyền lợi mà không cần chờ đợi thủ tục phán quyết chính thức từ cơ quan tài phán.",
+      "generated_at": "2026-08-28T17:16:02+00:00"
     }
   ],
-  "updated_at": "2026-08-28T12:38:38+00:00"
+  "updated_at": "2026-08-28T17:16:02+00:00"
 }
