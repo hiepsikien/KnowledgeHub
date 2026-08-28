@@ -42,11 +42,21 @@ from .translation.api import (
     run_qa,
 )
 from .translation.assemble import IncompleteTranslation
-from .translation.jobs import list_jobs as list_translation_jobs, start_worker, stop_worker, worker_alive, worker_status
+from .translation.jobs import (
+    configure_job_logging,
+    job_log_event,
+    list_jobs as list_translation_jobs,
+    recent_job_log,
+    start_worker,
+    stop_worker,
+    worker_alive,
+    worker_status,
+)
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
 WEB_DIR = Path(__file__).resolve().parent / "web"
+WEB_NO_STORE = {"Cache-Control": "no-store"}
 COOKIE = "kh_ops"
 
 load_dotenv()
@@ -101,6 +111,8 @@ class TranslationSettingsBody(BaseModel):
     max_workers: int | None = None
     max_attempts: int | None = None
     job_timeout_sec: int | None = None
+    max_part_words: int | None = None
+    hard_max_part_words: int | None = None
 
 
 class SettingsBody(BaseModel):
@@ -128,6 +140,7 @@ def require_ops(request: Request) -> None:
 
 @asynccontextmanager
 async def _lifespan(_app: FastAPI):
+    configure_job_logging()
     start_worker()
     yield
     stop_worker()
@@ -368,6 +381,7 @@ def create_app() -> FastAPI:
         try:
             return {
                 "jobs": list_translation_jobs(source_work_id),
+                "log": recent_job_log(),
                 "worker_alive": worker_alive(),
                 "workers": worker_status(),
             }
@@ -376,8 +390,15 @@ def create_app() -> FastAPI:
 
     @app.post("/api/translations/{source_work_id}/jobs", dependencies=guard)
     def translation_enqueue(source_work_id: str, payload: TranslationJobBody) -> dict[str, Any]:
+        job_log_event(
+            "api_enqueue",
+            work_id=source_work_id,
+            kind=payload.kind,
+            chapter=payload.chapter,
+            missing=payload.missing,
+        )
         try:
-            return enqueue_translation_job(
+            result = enqueue_translation_job(
                 source_work_id,
                 kind=payload.kind,
                 chapter=payload.chapter,
@@ -387,6 +408,15 @@ def create_app() -> FastAPI:
             raise HTTPException(404, str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
+        job_log_event(
+            "api_enqueue_ok",
+            work_id=source_work_id,
+            enqueued=result.get("enqueued"),
+            missing_count=len(result.get("missing") or []),
+            workers=(result.get("workers") or {}).get("alive"),
+        )
+        result["log"] = recent_job_log()
+        return result
 
     @app.post("/api/translations/{source_work_id}/jobs/cancel", dependencies=guard)
     def translation_cancel(source_work_id: str, payload: TranslationCancelBody | None = None) -> dict[str, Any]:
@@ -411,7 +441,7 @@ def create_app() -> FastAPI:
 
     @app.get("/")
     def index() -> FileResponse:
-        return FileResponse(WEB_DIR / "index.html")
+        return FileResponse(WEB_DIR / "index.html", headers=WEB_NO_STORE)
 
     @app.get("/{path:path}")
     def static_or_spa(path: str) -> FileResponse:
@@ -422,8 +452,8 @@ def create_app() -> FastAPI:
         if not candidate.is_relative_to(web_root):
             raise HTTPException(404, "not found")
         if candidate.is_file():
-            return FileResponse(candidate)
-        return FileResponse(WEB_DIR / "index.html")
+            return FileResponse(candidate, headers=WEB_NO_STORE)
+        return FileResponse(WEB_DIR / "index.html", headers=WEB_NO_STORE)
 
     return app
 

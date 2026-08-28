@@ -8,6 +8,13 @@ from typing import Any
 from ..paths import corpus_root
 from .paths import glossary_file, project_file, segments_dir, style_brief_file
 from ..settings import resolve_models
+from .parts import (
+    ensure_parts,
+    join_parts,
+    looks_cut_off,
+    part_limits,
+    previous_context,
+)
 from .project import load_project
 from .providers import ProviderError, complete_chat, complete_prompt
 from .segments_io import load_segment, save_segment
@@ -55,6 +62,7 @@ def _build_draft_messages(
     glossary: dict[str, Any],
     style_brief: str,
     target_language: str,
+    continuation: str = "",
 ) -> list[dict[str, str]]:
     mode_line = MODE_INSTRUCTIONS.get(mode, MODE_INSTRUCTIONS["normal"])
     system = f"""You are a scholarly literary translator for Knowledge Hub.
@@ -77,10 +85,11 @@ Style brief:
 Glossary:
 {_glossary_block(glossary)}
 """
+    extra = f"\n{continuation}\n" if continuation.strip() else ""
     user = f"""Translate the following English source text to Vietnamese.
 
 Return ONLY the Vietnamese translation — no commentary, no preface.
-
+{extra}
 --- SOURCE ---
 {source_text}
 --- END SOURCE ---
@@ -99,8 +108,7 @@ Glossary:
 {_glossary_block(glossary)}
 
 --- ENGLISH SOURCE (reference only) ---
-{source_text[:4000]}
-{"..." if len(source_text) > 4000 else ""}
+{source_text}
 --- END SOURCE ---
 
 --- VIETNAMESE DRAFT ---
@@ -109,14 +117,6 @@ Glossary:
 
 Return ONLY the polished Vietnamese text.
 """
-
-
-def looks_cut_off(text: str) -> bool:
-    """True when the text ends mid-word / mid-sentence instead of punctuation."""
-    stripped = (text or "").rstrip()
-    if len(stripped) < 20:
-        return False
-    return stripped[-1].isalnum()
 
 
 def _require_complete(text: str, *, stage: str) -> str:
@@ -256,6 +256,110 @@ def _run_draft(
     return draft_vi, polished, reused
 
 
+def _part_raw(part: dict[str, Any], mode: str) -> str:
+    return str((part.get("draft_raw") or {}).get(mode) or "").strip()
+
+
+def _run_parts(
+    *,
+    path: Path,
+    segment: dict[str, Any],
+    parts: list[dict[str, Any]],
+    mode: str,
+    glossary: dict[str, Any],
+    style_brief: str,
+    target_language: str,
+    draft_model: str,
+    polish_model: str,
+    skip_polish: bool,
+    force_draft: bool,
+) -> tuple[str, str, bool]:
+    from .jobs import raise_if_stopped, report_progress
+
+    total = len(parts)
+    reused_all = True
+    prev_en = ""
+    prev_vi = ""
+    for index, part in enumerate(parts, start=1):
+        source = str(part.get("source_text") or "")
+        raw = _part_raw(part, mode)
+        polished_part = str(part.get("final") or "").strip()
+        skip_done = (
+            not force_draft
+            and polished_part
+            and not looks_cut_off(polished_part)
+            and not skip_polish
+        )
+        reuse_raw = (
+            not force_draft
+            and not skip_done
+            and bool(raw)
+            and not looks_cut_off(raw)
+        )
+        if skip_done:
+            report_progress("drafted", f"Phần {index}/{total} đã có bản chỉnh")
+            prev_en, prev_vi = source, polished_part
+            continue
+        if reuse_raw:
+            report_progress("drafted", f"Dùng lại nháp phần {index}/{total}")
+            draft_vi = raw
+        else:
+            reused_all = False
+            continuation = previous_context(prev_en, prev_vi) if prev_en and prev_vi else ""
+            messages = _build_draft_messages(
+                source_text=source,
+                mode=mode,
+                glossary=glossary,
+                style_brief=style_brief,
+                target_language=target_language,
+                continuation=continuation,
+            )
+            raise_if_stopped()
+            report_progress("drafting", f"Đang nháp phần {index}/{total}…")
+            draft_vi = _require_complete(
+                complete_chat(messages, model=draft_model, temperature=0.3),
+                stage=f"DeepSeek draft part {index}",
+            )
+            part.setdefault("draft_raw", {})[mode] = draft_vi
+            segment["parts"] = parts
+            _checkpoint_draft(
+                path,
+                segment,
+                mode=mode,
+                draft_vi=join_parts(parts, mode=mode, field="draft_raw"),
+                draft_model=draft_model,
+                polish_model=None if skip_polish else polish_model,
+            )
+            report_progress("drafted", f"Đã lưu nháp phần {index}/{total}")
+        if skip_polish:
+            part.setdefault("drafts", {})[mode] = draft_vi
+            part["final"] = draft_vi
+            prev_en, prev_vi = source, draft_vi
+            continue
+        raise_if_stopped()
+        report_progress("polishing", f"Đang chỉnh phần {index}/{total}…")
+        polished_part = _require_complete(
+            complete_prompt(
+                _polish_prompt(draft_vi=draft_vi, source_text=source, glossary=glossary),
+                system="You polish Vietnamese literary translations. Never change meaning.",
+                model=polish_model,
+                temperature=0.35,
+            ),
+            stage=f"Gemini polish part {index}",
+        )
+        part.setdefault("draft_raw", {})[mode] = draft_vi
+        part.setdefault("drafts", {})[mode] = polished_part
+        part["final"] = polished_part
+        segment["parts"] = parts
+        save_segment(path, segment)
+        prev_en, prev_vi = source, polished_part
+    joined_raw = join_parts(parts, mode=mode, field="draft_raw")
+    joined_final = join_parts(parts, mode=mode, field="final")
+    if looks_cut_off(joined_final):
+        raise ProviderError("Joined chapter output looks truncated")
+    return joined_raw, joined_final, reused_all
+
+
 def draft_sample(
     source_work_id: str,
     *,
@@ -347,20 +451,37 @@ def draft_chapter(
     draft_model = models["draft"]
     polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
-
-    draft_vi, polished, reused = _run_draft(
-        path=path,
-        segment=segment,
-        source_text=source_text,
-        mode=mode,
-        glossary=glossary,
-        style_brief=style_brief,
-        target_language=target_language,
-        draft_model=draft_model,
-        polish_model=polish_model,
-        skip_polish=skip_polish,
-        force_draft=force_draft,
-    )
+    target, hard = part_limits()
+    parts = ensure_parts(segment, target=target, hard=hard)
+    if parts:
+        save_segment(path, segment)
+        draft_vi, polished, reused = _run_parts(
+            path=path,
+            segment=segment,
+            parts=parts,
+            mode=mode,
+            glossary=glossary,
+            style_brief=style_brief,
+            target_language=target_language,
+            draft_model=draft_model,
+            polish_model=polish_model,
+            skip_polish=skip_polish,
+            force_draft=force_draft,
+        )
+    else:
+        draft_vi, polished, reused = _run_draft(
+            path=path,
+            segment=segment,
+            source_text=source_text,
+            mode=mode,
+            glossary=glossary,
+            style_brief=style_brief,
+            target_language=target_language,
+            draft_model=draft_model,
+            polish_model=polish_model,
+            skip_polish=skip_polish,
+            force_draft=force_draft,
+        )
 
     _finish_draft(
         path,

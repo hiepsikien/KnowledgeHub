@@ -55,6 +55,8 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "max_workers": 2,
         "max_attempts": 2,
         "job_timeout_sec": 600,
+        "max_part_words": 1200,
+        "hard_max_part_words": 1500,
     }
 }
 
@@ -136,6 +138,22 @@ def _merge_translation(raw: dict[str, Any] | None) -> dict[str, Any]:
                 default=600,
             )),
         )
+        base["max_part_words"] = max(
+            400,
+            min(4000, _coerce_worker_int(
+                incoming["max_part_words"] if "max_part_words" in incoming else base["max_part_words"],
+                name="max_part_words",
+                default=1200,
+            )),
+        )
+        base["hard_max_part_words"] = max(
+            base["max_part_words"],
+            min(5000, _coerce_worker_int(
+                incoming["hard_max_part_words"] if "hard_max_part_words" in incoming else base["hard_max_part_words"],
+                name="hard_max_part_words",
+                default=1500,
+            )),
+        )
     except ValueError:
         pass
     return base
@@ -187,6 +205,14 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
         60,
         min(3600, _coerce_worker_int(translation.get("job_timeout_sec"), name="job_timeout_sec", default=600)),
     )
+    max_part_words = max(
+        400,
+        min(4000, _coerce_worker_int(translation.get("max_part_words"), name="max_part_words", default=1200)),
+    )
+    hard_max_part_words = max(
+        max_part_words,
+        min(5000, _coerce_worker_int(translation.get("hard_max_part_words"), name="hard_max_part_words", default=1500)),
+    )
     return {
         "models": models,
         "auto_annotate": bool(translation.get("auto_annotate")),
@@ -196,6 +222,8 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
         "max_workers": max_workers,
         "max_attempts": max_attempts,
         "job_timeout_sec": job_timeout_sec,
+        "max_part_words": max_part_words,
+        "hard_max_part_words": hard_max_part_words,
     }
 
 
@@ -292,6 +320,8 @@ def translation_pipeline() -> dict[str, Any]:
         "max_workers": max_workers,
         "max_attempts": max_attempts,
         "job_timeout_sec": job_timeout_sec,
+        "max_part_words": int(tr.get("max_part_words") or 1200),
+        "hard_max_part_words": int(tr.get("hard_max_part_words") or 1500),
     }
 
 

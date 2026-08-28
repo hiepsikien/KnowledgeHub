@@ -3,12 +3,14 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
 from .catalog import build_catalog, get_work, resolve_content_path, set_read_consumer
 from .dotenv import load_dotenv
 from .hash import refresh_hashes
 from .normalize import normalize_manuscript
 from .read_publish import PublishError, publish_to_read
+from .translation.api import split_translation_parts
 from .translation.annotate import annotate_segment
 from .translation.fetch import FetchError, fetch_raw
 from .translation.draft import draft_chapter, draft_sample
@@ -68,6 +70,16 @@ def main(argv: list[str] | None = None) -> int:
         "--force-draft",
         action="store_true",
         help="Ignore saved DeepSeek draft and translate from English again",
+    )
+    tr_split = tr_sub.add_parser(
+        "split-parts",
+        help="Split long/truncated chapters into paragraph parts and requeue drafts",
+    )
+    tr_split.add_argument("--work", required=True, help="Source work id")
+    tr_split.add_argument(
+        "--no-enqueue",
+        action="store_true",
+        help="Rewrite segments only; do not queue draft jobs",
     )
     tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
     tr_mode.add_argument("--work", required=True, help="Source work id")
@@ -212,6 +224,14 @@ def main(argv: list[str] | None = None) -> int:
                 return 1
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
+        if args.translate_cmd == "split-parts":
+            try:
+                result = split_translation_parts(args.work, enqueue=not args.no_enqueue)
+            except (FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
         if args.translate_cmd == "select-mode":
             try:
                 result = select_translation_mode(args.work, args.mode)
@@ -252,12 +272,15 @@ def main(argv: list[str] | None = None) -> int:
             print("Install UI extras: pip install -e '.[ui]'", file=sys.stderr)
             return 1
         print(f"Knowledge Hub UI → http://{args.host}:{args.port}")
-        uvicorn.run(
-            "knowledgehub.server:app",
-            host=args.host,
-            port=args.port,
-            reload=args.reload,
-        )
+        run_kw: dict = {
+            "app": "knowledgehub.server:app",
+            "host": args.host,
+            "port": args.port,
+            "reload": args.reload,
+        }
+        if args.reload:
+            run_kw["reload_dirs"] = [str(Path(__file__).resolve().parent.parent)]
+        uvicorn.run(**run_kw)
         return 0
     return 2
 

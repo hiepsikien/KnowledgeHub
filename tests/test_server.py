@@ -112,3 +112,4 @@ def test_static_rejects_path_traversal(client):
     js = client.get("/app.js")
     assert js.status_code == 200
     assert "boot()" in js.text
+    assert js.headers.get("cache-control") == "no-store"

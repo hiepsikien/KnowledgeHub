@@ -244,3 +244,41 @@ def test_draft_does_not_reuse_truncated_raw(corpus: Path):
     chii = json.loads(chii_path.read_text(encoding="utf-8"))
     assert chii["draft_raw"]["tight"] == "Nháp mới đủ câu."
     assert chii["final"] == "Đã chỉnh đủ câu."
+
+
+def test_draft_chapter_translates_each_part(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    chii_path = corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json"
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    paras = [" ".join(["alpha", str(i)] + ["word"] * 25) for i in range(8)]
+    chii["source_text"] = "\n\n".join(paras)
+    from knowledgehub.translation.segment import chapter_word_count
+
+    chii["words"] = chapter_word_count(chii["source_text"])
+    chii_path.write_text(json.dumps(chii, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    calls: list = []
+
+    def fake_chat(messages, **_kwargs):
+        calls.append(messages)
+        return f"Bản dịch phần số {len(calls)} được viết thành một câu hoàn chỉnh."
+
+    def fake_polish(*_args, **_kwargs):
+        return f"Bản chỉnh phần số {len(calls)} được viết thành một câu hoàn chỉnh."
+
+    with (
+        patch("knowledgehub.translation.draft.part_limits", return_value=(40, 70)),
+        patch("knowledgehub.translation.draft.complete_chat", side_effect=fake_chat),
+        patch("knowledgehub.translation.draft.complete_prompt", side_effect=fake_polish),
+    ):
+        result = draft_chapter("grotius--freedom_of_the_seas", chapter="II")
+    assert len(calls) > 1
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    assert len(chii["parts"]) == len(calls)
+    assert result["reused_draft"] is False
+    assert str(chii.get("final") or "").strip()
+    assert all(str(part.get("final") or "").strip() for part in chii["parts"])

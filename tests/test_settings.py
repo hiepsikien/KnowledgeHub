@@ -84,6 +84,11 @@ def test_settings_page(client: TestClient):
     assert "max_workers" in page.text
     assert "max_attempts" in page.text
     assert "job_timeout_sec" in page.text
+    assert "max_part_words" in page.text
+    assert 'id="set-max-part-words"' in page.text
+    assert 'value="1200"' in page.text
+    assert 'id="set-hard-max-part-words"' in page.text
+    assert 'value="1500"' in page.text
 
 
 def test_settings_get_defaults(client: TestClient):
@@ -95,6 +100,8 @@ def test_settings_get_defaults(client: TestClient):
     assert tr["max_workers"] == 2
     assert tr["max_attempts"] == 2
     assert tr["job_timeout_sec"] == 600
+    assert tr["max_part_words"] == 1200
+    assert tr["hard_max_part_words"] == 1500
     assert tr["models"]["draft"] == "deepseek-v4-flash"
     assert tr["models"]["qa"] == "deepseek-v4-pro"
     ids = {m["id"] for m in data["model_catalog"]}
@@ -147,6 +154,23 @@ def test_settings_save_models_and_pipeline(client: TestClient, tmp_path: Path):
     assert pipeline["models"]["polish"] == "gemini-2.5-pro"
     assert pipeline["min_workers"] == 1
     assert pipeline["max_workers"] == 3
+
+
+def test_settings_saves_part_word_limits(client: TestClient, tmp_path: Path):
+    res = client.post(
+        "/api/settings",
+        json={"translation": {"max_part_words": 900, "hard_max_part_words": 1100}},
+    )
+    assert res.status_code == 200, res.text
+    tr = res.json()["settings"]["translation"]
+    assert tr["max_part_words"] == 900
+    assert tr["hard_max_part_words"] == 1100
+    again = client.get("/api/settings").json()["settings"]["translation"]
+    assert again["max_part_words"] == 900
+    assert again["hard_max_part_words"] == 1100
+    stored = json.loads((tmp_path / "hub-settings.json").read_text(encoding="utf-8"))
+    assert stored["translation"]["max_part_words"] == 900
+    assert stored["translation"]["hard_max_part_words"] == 1100
 
 
 def test_settings_clamps_worker_limits(client: TestClient):

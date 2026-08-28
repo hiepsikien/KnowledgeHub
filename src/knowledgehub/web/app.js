@@ -14,6 +14,7 @@ const state = {
     annotations: [],
     qaFixes: {},
     jobs: [],
+    jobLog: [],
     workers: null,
     pollTimer: null,
     busy: false,
@@ -298,6 +299,9 @@ function annotationIssueLabel(issue) {
 }
 
 function chapterStatusLabel(chapter) {
+  if (chapter?.completeness === "truncated") return "bản dịch cụt";
+  if (chapter?.completeness === "incomplete_parts") return "thiếu phần";
+  if (chapter?.completeness === "polish_pending") return "chờ chỉnh văn";
   if (chapter?.has_final) return chapter.status === "approved" ? "đã duyệt" : "có bản dịch";
   if (chapter?.has_draft_raw || chapter?.polish_pending) return "có nháp";
   return "chưa dịch";
@@ -326,7 +330,8 @@ function lastErrorBadgeLabel(kind, status) {
 
 function statusBadge(chapter) {
   const ok = Boolean(chapter?.has_final);
-  return `<span class="badge ${ok ? "ok" : ""}">${escapeHtml(chapterStatusLabel(chapter))}</span>`;
+  const bad = chapter?.completeness === "truncated" || chapter?.completeness === "incomplete_parts";
+  return `<span class="badge ${ok ? "ok" : ""} ${bad ? "bad" : ""}">${escapeHtml(chapterStatusLabel(chapter))}</span>`;
 }
 
 function kindBadge(kind) {
@@ -409,6 +414,28 @@ function renderJobQueue() {
   el.textContent = parts.join(" · ");
 }
 
+function renderJobLog() {
+  const el = $("tr-job-log");
+  if (!el) return;
+  const rows = (state.translation.jobLog || []).slice(-12);
+  if (!rows.length) {
+    el.hidden = true;
+    el.textContent = "";
+    return;
+  }
+  el.hidden = false;
+  el.textContent = rows
+    .map((row) => {
+      const at = String(row.at || "").replace("T", " ").replace("+00:00", "Z");
+      const rest = Object.entries(row)
+        .filter(([key]) => key !== "at" && key !== "event")
+        .map(([key, value]) => `${key}=${value}`)
+        .join(" ");
+      return `${at} ${row.event}${rest ? ` ${rest}` : ""}`;
+    })
+    .join("\n");
+}
+
 function pipelineSettings() {
   return state.translation.project?.pipeline || state.settings?.settings?.translation || {};
 }
@@ -451,7 +478,7 @@ function notifyJobChanges(prev, next) {
       toast(`Xong ${jobKindLabel(job.kind)} chương ${job.chapter}`);
     }
     if (old.status !== "error" && job.status === "error") {
-      toast(`${jobKindLabel(job.kind)} chương ${job.chapter}: ${job.error || "lỗi"}`);
+      toast(`${jobKindLabel(job.kind)} chương ${job.chapter}: ${shortJobError(job.error) || "lỗi"}`);
     }
     if (old.status !== "cancelled" && job.status === "cancelled") {
       toast(`Đã hủy ${jobKindLabel(job.kind)} chương ${job.chapter}`);
@@ -483,12 +510,14 @@ async function refreshTranslationJobs() {
     const next = data.jobs || [];
     notifyJobChanges(prev, next);
     state.translation.jobs = next;
+    state.translation.jobLog = data.log || [];
     state.translation.workers = data.workers || state.translation.workers;
     state.translation.project = data;
     state.translation.chapters = data.chapters || [];
     renderTranslationStats();
     renderTranslationRows();
     renderJobQueue();
+    renderJobLog();
     renderPipelineNote();
     const selected = state.translation.selectedChapter;
     const justDone = next.filter(
@@ -567,11 +596,14 @@ function renderTranslationRows() {
               lastErrorBadgeLabel(c.last_error_kind, c.last_error_status),
             )}</span>`
           : "";
-      const errSub = c.last_error
-        ? `<div class="sub">${escapeHtml(shortJobError(c.last_error))}</div>`
-        : "";
+      const errSub =
+        c.last_error && !job
+          ? `<div class="sub">${escapeHtml(shortJobError(c.last_error))}</div>`
+          : "";
       return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
-        <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ</div></td>
+        <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ${
+          c.part_count ? ` · ${c.parts_ready || 0}/${c.part_count} phần` : ""
+        }</div></td>
         <td><div class="tr-status">${statusBadge(c)}${jobBadge}${errBadge}${errSub}</div></td>
         <td>${escapeHtml(qa)}${qaSub}</td>
         <td>${escapeHtml(String(ann))}</td>
@@ -605,7 +637,10 @@ function renderTranslationDetail() {
   const draftJob = chapterActiveJob(chapterRow, "draft");
   const qaJob = chapterActiveJob(chapterRow, "qa");
   const annJob = chapterActiveJob(chapterRow, "annotate");
-  const lastError = chapterRow?.last_error ? shortJobError(chapterRow.last_error) : "";
+  const lastError =
+    chapterRow?.last_error && !draftJob && !qaJob && !annJob
+      ? shortJobError(chapterRow.last_error)
+      : "";
   const longNote =
     Number(seg.words) >= 3000
       ? `<p class="muted">Chương dài (${escapeHtml(String(seg.words))} từ) — dịch có thể mất vài phút, hoặc Gemini trả 503 khi quá tải.</p>`
@@ -697,11 +732,9 @@ function renderTranslationDetail() {
     ${
       lastError
         ? `<p class="err">${escapeHtml(
-            draftJob
-              ? "Lần trước lỗi: "
-              : chapterRow?.last_error_status === "interrupted"
-                ? "Job bị ngắt khi server reload: "
-                : hasTranslation && chapterRow?.last_error_kind === "annotate"
+            chapterRow?.last_error_status === "interrupted"
+              ? "Job bị ngắt khi server reload: "
+              : hasTranslation && chapterRow?.last_error_kind === "annotate"
                 ? "Bản dịch đã có. Lỗi chú thích: "
                 : hasTranslation && chapterRow?.last_error_kind === "qa"
                   ? "Bản dịch đã có. Lỗi QA: "
@@ -715,7 +748,7 @@ function renderTranslationDetail() {
     ${issueHtml}
     ${annHtml}
     <div class="row">
-      <button class="btn ghost" id="tr-btn-segment" type="button">Xem đoạn EN ↔ VI</button>
+      <button class="btn ghost" id="tr-btn-segment" type="button">Xem EN / nháp / chỉnh</button>
       <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button">${draftJob ? (draftJob.status === "running" ? draftJob.detail || "Đang dịch…" : "Đã xếp hàng dịch") : hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
       <button class="btn ghost" id="tr-btn-qa" type="button" ${!hasTranslation ? "disabled" : ""}>${qaJob ? (qaJob.status === "running" ? "Đang QA…" : "Đã xếp hàng QA") : qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
       <button class="btn" id="tr-btn-annotate" type="button" ${!hasTranslation ? "disabled" : ""}>${annJob ? (annJob.status === "running" ? "Đang tạo chú thích…" : "Đã xếp hàng chú thích") : seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
@@ -763,6 +796,29 @@ function renderTranslationAnnotations() {
     : `<p class="muted">Chưa có chú thích. Bấm “Tạo chú thích” ở panel bên phải.</p>`;
 }
 
+function compareSlice() {
+  const seg = state.translation.segment || {};
+  const parts = seg.parts || [];
+  const pick = state.translation.comparePart;
+  if (pick && pick !== "all") {
+    const part = parts.find((row) => String(row.id) === String(pick));
+    if (part) {
+      return {
+        title: `Chương ${seg.chapter} · phần ${part.id}`,
+        source: part.source_text || "",
+        draft: part.draft_raw_text || "",
+        polish: part.translation || "",
+      };
+    }
+  }
+  return {
+    title: `Chương ${seg.chapter || ""}`,
+    source: seg.source_text || "",
+    draft: seg.draft_raw_text || "",
+    polish: seg.translation || "",
+  };
+}
+
 function showTranslationSegment(show) {
   const seg = state.translation.segment;
   const block = $("tr-segment");
@@ -770,18 +826,41 @@ function showTranslationSegment(show) {
     block.hidden = true;
     return;
   }
-  $("tr-segment-title").textContent = `Chương ${seg.chapter}`;
-  $("tr-source").textContent = seg.source_text || "";
-  if (seg.translation) {
-    $("tr-translation").textContent = seg.translation;
-  } else if (seg.draft_raw_text) {
-    $("tr-translation").textContent = `Nháp DeepSeek (chưa chỉnh văn)\n\n${seg.draft_raw_text}`;
-  } else {
-    $("tr-translation").textContent = "Chưa có bản dịch cho chương này.";
+  const slice = compareSlice();
+  $("tr-segment-title").textContent = slice.title;
+  $("tr-source").textContent = slice.source || "";
+  $("tr-draft").textContent = slice.draft || "Chưa có nháp DeepSeek.";
+  $("tr-translation").textContent = slice.polish || "Chưa có bản Gemini.";
+  const parts = seg.parts || [];
+  const wrap = $("tr-part-wrap");
+  const select = $("tr-part-select");
+  if (wrap && select) {
+    wrap.hidden = parts.length === 0;
+    if (parts.length) {
+      const current = state.translation.comparePart || "all";
+      select.innerHTML =
+        `<option value="all">Cả chương</option>` +
+        parts
+          .map(
+            (part) =>
+              `<option value="${escapeHtml(String(part.id))}" ${String(part.id) === String(current) ? "selected" : ""}>Phần ${escapeHtml(String(part.id))} (${escapeHtml(String(part.words || "—"))} từ)</option>`,
+          )
+          .join("");
+    }
   }
+  const tabs = $("tr-compare-tabs");
+  if (tabs) tabs.hidden = false;
   renderTranslationAnnotations();
   block.hidden = false;
-  block.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function setCompareTab(name) {
+  document.querySelectorAll("[data-compare-tab]").forEach((btn) => {
+    btn.classList.toggle("on", btn.dataset.compareTab === name);
+  });
+  document.querySelectorAll("[data-compare-col]").forEach((col) => {
+    col.classList.toggle("on", col.dataset.compareCol === name);
+  });
 }
 
 async function loadTranslationProjects() {
@@ -806,17 +885,19 @@ async function loadTranslationProject(workId, chapterHint) {
   state.translation.project = data;
   state.translation.chapters = data.chapters || [];
   state.translation.jobs = data.jobs || [];
+  state.translation.jobLog = data.log || [];
   state.translation.workers = data.workers || null;
   renderTranslationStats();
   renderTranslationRows();
   renderJobQueue();
+  renderJobLog();
   renderPipelineNote();
   if (activeJobs(state.translation.jobs).length) startJobPoll();
   const pick =
     chapterHint && data.chapters.some((c) => c.chapter === chapterHint)
       ? chapterHint
       : data.chapters.find((c) => c.has_final)?.chapter || data.chapters[0]?.chapter || null;
-  if (pick) await selectTranslationChapter(pick, false);
+  if (pick) await selectTranslationChapter(pick, true);
   else {
     state.translation.selectedChapter = null;
     state.translation.segment = null;
@@ -830,6 +911,7 @@ async function selectTranslationChapter(chapter, showSegment) {
   if (!workId || !chapter) return;
   if (state.translation.selectedChapter !== chapter) {
     state.translation.qaFixes = {};
+    state.translation.comparePart = "all";
   }
   const gen = (state.translation.selectGen = (state.translation.selectGen || 0) + 1);
   const keepPanel =
@@ -1064,9 +1146,19 @@ function wireTranslation() {
   };
   $("tr-rows").onclick = (e) => {
     const tr = e.target.closest("tr[data-chapter]");
-    if (tr) selectTranslationChapter(tr.dataset.chapter, false);
+    if (tr) selectTranslationChapter(tr.dataset.chapter, true);
   };
   $("tr-segment-close").onclick = () => showTranslationSegment(false);
+  const partSelect = $("tr-part-select");
+  if (partSelect) {
+    partSelect.onchange = () => {
+      state.translation.comparePart = partSelect.value || "all";
+      showTranslationSegment(true);
+    };
+  }
+  document.querySelectorAll("[data-compare-tab]").forEach((btn) => {
+    btn.onclick = () => setCompareTab(btn.dataset.compareTab);
+  });
   $("tr-promote").onclick = () => void runTranslationPromote();
   $("tr-draft-missing").onclick = () => void enqueueMissingDrafts();
   $("tr-cancel-jobs").onclick = () => void cancelActiveJobs();
@@ -1135,6 +1227,20 @@ function renderSettingsKeys(secrets) {
     .join("");
 }
 
+function fillNumberInput(id, value, fallback) {
+  const el = $(id);
+  if (!el) return;
+  const n = Number(value);
+  const text = String(Number.isFinite(n) ? n : fallback);
+  el.value = text;
+  el.defaultValue = text;
+}
+
+function readNumberInput(id, fallback) {
+  const n = Number($(id)?.value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
 function renderSettingsForm(data) {
   state.settings = data;
   const tr = data.settings?.translation || {};
@@ -1151,10 +1257,12 @@ function renderSettingsForm(data) {
     .join("");
   $("set-auto-annotate").checked = Boolean(tr.auto_annotate);
   $("set-auto-qa").checked = Boolean(tr.auto_qa);
-  $("set-min-workers").value = String(tr.min_workers ?? 1);
-  $("set-max-workers").value = String(tr.max_workers ?? 2);
-  $("set-max-attempts").value = String(tr.max_attempts ?? 2);
-  $("set-job-timeout").value = String(tr.job_timeout_sec ?? 600);
+  fillNumberInput("set-min-workers", tr.min_workers, 1);
+  fillNumberInput("set-max-workers", tr.max_workers, 2);
+  fillNumberInput("set-max-attempts", tr.max_attempts, 2);
+  fillNumberInput("set-job-timeout", tr.job_timeout_sec, 600);
+  fillNumberInput("set-max-part-words", tr.max_part_words, 1200);
+  fillNumberInput("set-hard-max-part-words", tr.hard_max_part_words, 1500);
   $("set-default-mode").value = tr.default_mode || "normal";
   renderSettingsKeys(data.secrets);
   renderModelCatalogStatus(data);
@@ -1228,10 +1336,12 @@ async function saveSettings(e) {
           models,
           auto_annotate: $("set-auto-annotate").checked,
           auto_qa: $("set-auto-qa").checked,
-          min_workers: Number($("set-min-workers").value),
-          max_workers: Number($("set-max-workers").value),
-          max_attempts: Number($("set-max-attempts").value),
-          job_timeout_sec: Number($("set-job-timeout").value),
+          min_workers: readNumberInput("set-min-workers", 1),
+          max_workers: readNumberInput("set-max-workers", 2),
+          max_attempts: readNumberInput("set-max-attempts", 2),
+          job_timeout_sec: readNumberInput("set-job-timeout", 600),
+          max_part_words: readNumberInput("set-max-part-words", 1200),
+          hard_max_part_words: readNumberInput("set-hard-max-part-words", 1500),
           default_mode: $("set-default-mode").value,
         },
       },

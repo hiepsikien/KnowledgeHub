@@ -93,6 +93,7 @@ def test_translation_list_and_project(client: TestClient):
 def test_translation_segment_and_annotations(client: TestClient):
     seg = client.get("/api/translations/grotius--freedom_of_the_seas/segments/I").json()
     assert seg["translation"] == "Bản dịch tight."
+    assert "draft_raw_text" in seg
     assert seg["qa"]["scores"]["overall"] == 8
     ann = client.get("/api/translations/grotius--freedom_of_the_seas/annotations?chapter=I").json()
     assert ann["total"] == 1
@@ -250,6 +251,24 @@ def test_promote_rejects_incomplete(client: TestClient):
     assert "Missing final" in res.json()["detail"]
 
 
+def test_truncated_final_is_not_ready(client: TestClient):
+    from knowledgehub.paths import corpus_root
+
+    path = corpus_root() / "translations/grotius--freedom_of_the_seas/segments/chii.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["final"] = "Đây là một bản dịch bị cắt giữa câu và thiếu phần còn lại r"
+    payload["status"] = "draft_ready"
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert ch_ii["completeness"] == "truncated"
+    assert ch_ii["has_final"] is False
+    assert "II" in project["missing_chapters"]
+    seg = client.get("/api/translations/grotius--freedom_of_the_seas/segments/II").json()
+    assert "bị cắt" in seg["translation"]
+    assert "draft_raw_text" in seg
+
+
 def test_chapter_last_error_from_failed_job(client: TestClient):
     from knowledgehub.translation.jobs import complete_job, enqueue_job
 
@@ -275,6 +294,18 @@ def test_last_error_clears_after_later_success(client: TestClient):
     ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
     assert "last_error" not in ch_ii
     assert ch_ii["jobs"][0]["id"] == follow["id"]
+
+
+def test_last_error_hidden_when_newer_job_queued(client: TestClient):
+    from knowledgehub.translation.jobs import complete_job, enqueue_job
+
+    failed = enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
+    complete_job(failed["id"], error="HTTP 429: RESOURCE_EXHAUSTED generate_content_free_tier_requests")
+    later = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "last_error" not in ch_ii
+    assert ch_ii["jobs"][0]["id"] == later["id"]
 
 
 def test_last_error_kind_follows_failed_annotate(client: TestClient):
@@ -361,6 +392,11 @@ def test_enqueue_missing_drafts(client: TestClient):
     body = res.json()
     assert "II" in body["missing"]
     assert body["enqueued"] >= 1
+    assert body["log"]
+    assert any(row["event"] == "enqueue_missing" for row in body["log"])
+    listed = client.get("/api/translations/grotius--freedom_of_the_seas/jobs").json()
+    assert listed["log"]
+    assert "workers" in listed
 
 
 def test_process_next_job_runs_draft(client: TestClient, tmp_path: Path):

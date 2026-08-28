@@ -9,7 +9,16 @@ from ..settings import translation_pipeline
 from .annotate import annotate_segment
 from .assemble import chapter_sort_key, segment_files, translation_status
 from .draft import draft_chapter
-from .jobs import cancel_jobs, enqueue_job, enqueue_missing_drafts, list_jobs, worker_alive, worker_status
+from .jobs import (
+    cancel_jobs,
+    enqueue_job,
+    enqueue_missing_drafts,
+    list_jobs,
+    recent_job_log,
+    worker_alive,
+    worker_status,
+)
+from .parts import completeness_status
 from .paths import annotations_file, translation_catalog_id
 from .project import load_project
 from .promote import promote_translation
@@ -35,7 +44,6 @@ def _segment_files(source_work_id: str) -> list[Path]:
 def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -> dict[str, Any]:
     segment = json.loads(path.read_text(encoding="utf-8"))
     chapter = str(segment.get("chapter") or path.stem.removeprefix("ch").upper())
-    final = segment.get("final") or ""
     qa = segment.get("qa") or {}
     scores = qa.get("scores") or {}
     issues = qa.get("issues") or []
@@ -45,15 +53,19 @@ def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -
         raw = str((segment.get("draft_raw") or {}).get(mode) or "").strip()
     elif isinstance(segment.get("draft_raw"), dict):
         raw = next((str(v).strip() for v in segment["draft_raw"].values() if str(v or "").strip()), "")
-    pipeline = segment.get("pipeline") if isinstance(segment.get("pipeline"), dict) else {}
+    completeness = completeness_status(segment, mode=mode)
+    parts = segment.get("parts") if isinstance(segment.get("parts"), list) else []
     return {
         "chapter": chapter,
         "file": str(path.relative_to(corpus_root())),
         "status": segment.get("status"),
         "words": segment.get("words"),
-        "has_final": bool(str(final).strip()),
+        "has_final": completeness == "ok",
         "has_draft_raw": bool(raw),
-        "polish_pending": bool(pipeline.get("polish_pending")) and not str(final).strip(),
+        "polish_pending": completeness == "polish_pending",
+        "completeness": completeness,
+        "part_count": len(parts),
+        "parts_ready": sum(1 for part in parts if str(part.get("final") or "").strip()),
         "qa_overall": scores.get("overall"),
         "qa_completed_at": qa.get("completed_at"),
         "issue_count": len(issues),
@@ -90,7 +102,7 @@ def list_translation_projects() -> dict[str, Any]:
         with_qa = 0
         for path in chapters:
             seg = json.loads(path.read_text(encoding="utf-8"))
-            if str(seg.get("final") or "").strip():
+            if completeness_status(seg, mode=str(project.get("translation_mode") or "")) == "ok":
                 with_final += 1
             if (seg.get("qa") or {}).get("scores"):
                 with_qa += 1
@@ -134,36 +146,45 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
             row["annotation_count"] = by_chapter.get(str(row["chapter"]).upper(), 0)
     jobs = list_jobs(source_work_id)
     active: dict[str, list[dict[str, Any]]] = {}
-    latest_terminal: dict[str, dict[str, Any]] = {}
+    latest: dict[str, dict[str, Any]] = {}
     for job in jobs:
         key = str(job.get("chapter") or "").upper()
         if not key:
             continue
-        status = job.get("status")
+        status = str(job.get("status") or "")
         if status in {"queued", "running"}:
             active.setdefault(key, []).append(job)
-            continue
-        if status not in {"done", "cancelled", "error", "interrupted"}:
-            continue
+            recency = 2
+        elif status in {"done", "cancelled"}:
+            recency = 1
+        else:
+            recency = 0
         stamp = (
-            str(job.get("finished_at") or ""),
             str(job.get("created_at") or ""),
-            1 if status in {"done", "cancelled"} else 0,
+            recency,
+            str(job.get("finished_at") or job.get("heartbeat_at") or ""),
             str(job.get("id") or ""),
         )
-        current = latest_terminal.get(key)
+        current = latest.get(key)
+        current_status = str((current or {}).get("status") or "")
+        if current_status in {"queued", "running"}:
+            current_recency = 2
+        elif current_status in {"done", "cancelled"}:
+            current_recency = 1
+        else:
+            current_recency = 0
         current_stamp = (
-            str((current or {}).get("finished_at") or ""),
             str((current or {}).get("created_at") or ""),
-            1 if (current or {}).get("status") in {"done", "cancelled"} else 0,
+            current_recency,
+            str((current or {}).get("finished_at") or (current or {}).get("heartbeat_at") or ""),
             str((current or {}).get("id") or ""),
         )
         if current is None or stamp >= current_stamp:
-            latest_terminal[key] = job
+            latest[key] = job
     last_error: dict[str, str] = {}
     last_error_kind: dict[str, str] = {}
     last_error_status: dict[str, str] = {}
-    for key, job in latest_terminal.items():
+    for key, job in latest.items():
         if job.get("status") not in {"error", "interrupted"}:
             continue
         last_error[key] = str(job.get("error") or "")
@@ -172,7 +193,7 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
     for row in chapters:
         chapter = str(row["chapter"]).upper()
         row["jobs"] = active.get(chapter, [])
-        job = latest_terminal.get(chapter)
+        job = latest.get(chapter)
         if last_error.get(chapter) and job and not _artifact_clears_job_error(row, job):
             row["last_error"] = last_error[chapter]
             if last_error_kind.get(chapter):
@@ -190,6 +211,7 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
         "ready_to_promote": status["complete"],
         "missing_chapters": status["missing"],
         "jobs": jobs,
+        "log": recent_job_log(),
         "worker_alive": worker_alive(),
         "workers": worker_status(),
         "pipeline": translation_pipeline(),
@@ -205,6 +227,21 @@ def get_segment_detail(source_work_id: str, chapter: str, *, include_drafts: boo
         translation = ""
     mode = str(project.get("translation_mode") or "")
     raw = str((segment.get("draft_raw") or {}).get(mode) or "").strip() if mode else ""
+    completeness = completeness_status(segment, mode=mode)
+    part_rows = []
+    for part in segment.get("parts") or []:
+        if not isinstance(part, dict):
+            continue
+        part_mode_raw = str((part.get("draft_raw") or {}).get(mode) or "").strip() if mode else ""
+        part_rows.append(
+            {
+                "id": part.get("id"),
+                "words": part.get("words"),
+                "source_text": part.get("source_text") or "",
+                "draft_raw_text": part_mode_raw,
+                "translation": str(part.get("final") or "").strip(),
+            }
+        )
     payload: dict[str, Any] = {
         "source_work_id": source_work_id,
         "chapter": str(segment.get("chapter") or chapter),
@@ -214,10 +251,15 @@ def get_segment_detail(source_work_id: str, chapter: str, *, include_drafts: boo
         "source_text": segment.get("source_text") or "",
         "translation": translation,
         "has_draft_raw": bool(raw),
-        "draft_raw_text": "" if translation else raw,
+        "draft_raw_text": raw,
         "translation_mode": project.get("translation_mode"),
         "qa": segment.get("qa"),
         "annotations_generated_at": segment.get("annotations_generated_at"),
+        "completeness": completeness,
+        "has_final": completeness == "ok",
+        "parts": part_rows,
+        "legacy_final": str(segment.get("legacy_final") or "").strip() or None,
+        "legacy_draft_raw": str(segment.get("legacy_draft_raw") or "").strip() or None,
         "file": str(path.relative_to(corpus_root())),
     }
     if include_drafts:
@@ -281,6 +323,19 @@ def run_draft(source_work_id: str, chapter: str) -> dict[str, Any]:
     return draft_chapter(source_work_id, chapter=chapter)
 
 
+def split_translation_parts(source_work_id: str, *, enqueue: bool = True) -> dict[str, Any]:
+    from .parts import split_long_chapters
+
+    result = split_long_chapters(source_work_id)
+    jobs: list[dict[str, Any]] = []
+    if enqueue:
+        for row in result.get("chapters") or []:
+            jobs.append(enqueue_job(source_work_id, str(row["chapter"]), "draft"))
+    result["jobs"] = jobs
+    result["enqueued"] = sum(1 for job in jobs if job.get("created"))
+    return result
+
+
 def run_promote(source_work_id: str, *, title: str | None = None) -> dict[str, Any]:
     return promote_translation(source_work_id, title=title)
 
@@ -295,11 +350,19 @@ def enqueue_translation_job(
     if missing:
         if kind != "draft":
             raise ValueError("missing=true is only valid for kind=draft")
-        return enqueue_missing_drafts(source_work_id)
+        result = enqueue_missing_drafts(source_work_id)
+        result["log"] = recent_job_log()
+        result["workers"] = worker_status()
+        return result
     if not chapter:
         raise ValueError("Provide chapter or missing=true")
     job = enqueue_job(source_work_id, chapter, kind)
-    return {"job": job, "enqueued": 1 if job.get("created") else 0}
+    return {
+        "job": job,
+        "enqueued": 1 if job.get("created") else 0,
+        "log": recent_job_log(),
+        "workers": worker_status(),
+    }
 
 
 def cancel_translation_jobs(
@@ -308,4 +371,7 @@ def cancel_translation_jobs(
     job_id: str | None = None,
     chapter: str | None = None,
 ) -> dict[str, Any]:
-    return cancel_jobs(source_work_id=source_work_id, chapter=chapter, job_id=job_id)
+    result = cancel_jobs(source_work_id=source_work_id, chapter=chapter, job_id=job_id)
+    result["log"] = recent_job_log()
+    result["workers"] = worker_status()
+    return result

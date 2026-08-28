@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import secrets
 import threading
+from collections import deque
 from contextvars import ContextVar
 from datetime import UTC, datetime
 from pathlib import Path
@@ -29,6 +31,32 @@ _next_worker = 0
 _requeued = False
 _cancel_flags: set[str] = set()
 _current_job_id: ContextVar[str | None] = ContextVar("kh_job_id", default=None)
+_events: deque[dict[str, Any]] = deque(maxlen=80)
+log = logging.getLogger("knowledgehub.jobs")
+
+
+def configure_job_logging() -> None:
+    root = logging.getLogger("knowledgehub")
+    root.setLevel(logging.INFO)
+    if not root.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s [kh] %(message)s"))
+        root.addHandler(handler)
+        root.propagate = False
+
+
+def job_log_event(event: str, **fields: Any) -> None:
+    row: dict[str, Any] = {"at": _now(), "event": event}
+    for key, value in fields.items():
+        if value is not None:
+            row[key] = value
+    _events.append(row)
+    extra = " ".join(f"{key}={value}" for key, value in row.items() if key not in {"at", "event"})
+    log.info("%s %s", event, extra)
+
+
+def recent_job_log() -> list[dict[str, Any]]:
+    return list(_events)
 
 
 class JobCancelled(Exception):
@@ -171,6 +199,14 @@ def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
         if existing:
             payload = _public(existing)
             payload["created"] = False
+            job_log_event(
+                "enqueue_duplicate",
+                job_id=existing.get("id"),
+                work_id=work_id,
+                chapter=ch,
+                kind=kind,
+                status=existing.get("status"),
+            )
             return payload
         job = {
             "id": secrets.token_hex(8),
@@ -191,6 +227,17 @@ def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
     scale_workers()
     payload = _public(job)
     payload["created"] = True
+    job_log_event(
+        "enqueue",
+        job_id=job["id"],
+        work_id=work_id,
+        chapter=ch,
+        kind=kind,
+        created=True,
+        queued=_queue_depth()[0],
+        running=_queue_depth()[1],
+        workers=worker_status()["alive"],
+    )
     return payload
 
 
@@ -200,12 +247,23 @@ def enqueue_missing_drafts(source_work_id: str) -> dict[str, Any]:
     work_id = safe_work_id(source_work_id)
     missing = translation_status(work_id)["missing"]
     jobs: list[dict[str, Any]] = []
+    job_log_event("enqueue_missing", work_id=work_id, missing=",".join(missing) or "-", count=len(missing))
     for chapter in missing:
         jobs.append(enqueue_job(work_id, chapter, "draft"))
+    created = sum(1 for job in jobs if job.get("created"))
+    job_log_event(
+        "enqueue_missing_done",
+        work_id=work_id,
+        enqueued=created,
+        total=len(jobs),
+        queued=_queue_depth()[0],
+        running=_queue_depth()[1],
+        workers=worker_status()["alive"],
+    )
     return {
         "work_id": work_id,
         "kind": "draft",
-        "enqueued": sum(1 for job in jobs if job.get("created")),
+        "enqueued": created,
         "jobs": jobs,
         "missing": missing,
     }
@@ -233,6 +291,7 @@ def interrupt_stale_running() -> int:
         if n:
             store["jobs"] = jobs
             _write_store(store)
+            job_log_event("interrupt_stale", count=n)
     return n
 
 
@@ -268,6 +327,15 @@ def cancel_jobs(
         if cancelled:
             store["jobs"] = jobs
             _write_store(store)
+    if cancelled:
+        job_log_event(
+            "cancel",
+            count=len(cancelled),
+            work_id=work_id,
+            chapter=ch,
+            job_id=job_id,
+            ids=",".join(str(job.get("id") or "") for job in cancelled),
+        )
     return {"cancelled": len(cancelled), "jobs": cancelled}
 
 
@@ -373,6 +441,15 @@ def claim_next() -> dict[str, Any] | None:
         chosen["heartbeat_at"] = _now()
         store["jobs"] = jobs
         _write_store(store)
+        job_log_event(
+            "claim",
+            job_id=chosen.get("id"),
+            work_id=chosen.get("work_id"),
+            chapter=chosen.get("chapter"),
+            kind=chosen.get("kind"),
+            attempts=chosen.get("attempts"),
+            thread=threading.current_thread().name,
+        )
         return dict(chosen)
 
 
@@ -463,19 +540,59 @@ def process_next_job() -> dict[str, Any] | None:
         job["status"] = "done"
         job["phase"] = "done"
         job["result"] = result
+        job_log_event(
+            "done",
+            job_id=job["id"],
+            work_id=job.get("work_id"),
+            chapter=job.get("chapter"),
+            kind=job.get("kind"),
+            thread=threading.current_thread().name,
+        )
         _enqueue_followups(job)
     except JobCancelled:
         complete_job(job["id"], status="cancelled")
         job["status"] = "cancelled"
         job["phase"] = "cancelled"
         job["detail"] = "Đã hủy"
+        job_log_event(
+            "cancelled",
+            job_id=job["id"],
+            work_id=job.get("work_id"),
+            chapter=job.get("chapter"),
+            kind=job.get("kind"),
+        )
     except JobGuardError as exc:
+        job_log_event(
+            "guard",
+            job_id=job["id"],
+            work_id=job.get("work_id"),
+            chapter=job.get("chapter"),
+            kind=job.get("kind"),
+            error=str(exc)[:180],
+        )
         _fail_job(job, str(exc))
     except Exception as exc:
         if job["id"] in _cancel_flags:
             complete_job(job["id"], status="cancelled")
             job["status"] = "cancelled"
+            job_log_event(
+                "cancelled",
+                job_id=job["id"],
+                work_id=job.get("work_id"),
+                chapter=job.get("chapter"),
+                kind=job.get("kind"),
+                error=str(exc)[:180],
+            )
         else:
+            job_log_event(
+                "error",
+                job_id=job["id"],
+                work_id=job.get("work_id"),
+                chapter=job.get("chapter"),
+                kind=job.get("kind"),
+                error=str(exc)[:180],
+                thread=threading.current_thread().name,
+            )
             _fail_job(job, str(exc))
     finally:
         _current_job_id.reset(token)
@@ -505,6 +622,14 @@ def _idle_thread_should_exit() -> bool:
         if len(alive) <= desired:
             return False
         _threads[:] = [thread for thread in alive if thread is not current]
+        job_log_event(
+            "worker_exit",
+            name=current.name,
+            desired=desired,
+            alive=len(_threads),
+            queued=queued,
+            running=running,
+        )
         return True
 
 
@@ -528,6 +653,16 @@ def _scale_workers_locked() -> None:
         )
         _threads.append(thread)
         thread.start()
+        job_log_event(
+            "worker_start",
+            name=thread.name,
+            desired=desired,
+            alive=len(_threads),
+            queued=queued,
+            running=running,
+            min_workers=min_workers,
+            max_workers=max_workers,
+        )
     if desired:
         _wake.set()
 
@@ -547,7 +682,8 @@ def start_worker() -> None:
         first = not _requeued
         _requeued = True
     if first:
-        interrupt_stale_running()
+        n = interrupt_stale_running()
+        job_log_event("worker_boot", interrupted=n, enabled=True)
     scale_workers()
 
 
@@ -560,6 +696,7 @@ def stop_worker() -> None:
     for thread in threads:
         if thread.is_alive():
             thread.join(timeout=2.0)
+    job_log_event("worker_stop", alive=sum(1 for thread in threads if thread.is_alive()))
     _threads = []
     _stop = None
     _requeued = False

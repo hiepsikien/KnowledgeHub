@@ -10,12 +10,12 @@
   ],
   "status": "mode_locked",
   "created_at": "2026-08-27T16:13:38+00:00",
-  "updated_at": "2026-08-28T10:54:08+00:00",
+  "updated_at": "2026-08-28T16:37:46+00:00",
   "models": {
     "draft": "deepseek-v4-flash",
-    "polish": "gemini-3.5-flash",
+    "polish": "gemini-3.6-flash",
     "qa": "deepseek-v4-pro",
-    "annotations": "gemini-3.5-flash"
+    "annotations": "gemini-3.6-flash"
   },
   "source": {
     "title": "The Freedom of the Seas",

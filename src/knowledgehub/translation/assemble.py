@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .parts import completeness_status
 from .paths import segments_dir
 from .project import load_project
 from .segments_io import final_text
@@ -64,7 +65,7 @@ def translation_status(source_work_id: str) -> dict[str, Any]:
     for path in files:
         segment = json.loads(path.read_text(encoding="utf-8"))
         chapter = str(segment.get("chapter") or path.stem.removeprefix("ch").upper())
-        if str(segment.get("final") or "").strip():
+        if completeness_status(segment) == "ok":
             ready.append(chapter)
         else:
             missing.append(chapter)
@@ -90,6 +91,9 @@ def assemble_finals(
     for path in files:
         segment = json.loads(path.read_text(encoding="utf-8"))
         chapter = str(segment.get("chapter") or path.stem.removeprefix("ch").upper())
+        if completeness_status(segment) != "ok":
+            missing.append(chapter)
+            continue
         try:
             parts.append(final_text(segment, project).strip())
         except ValueError:

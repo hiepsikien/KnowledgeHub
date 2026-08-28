@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=job-log" />
   </head>
   <body>
     <div class="shell">
@@ -128,7 +128,7 @@
               <p class="lead">Chọn mô hình cho từng khâu dịch, số worker, và mặc định có chạy chú thích cùng QA sau khi dịch chương hay không.</p>
             </div>
           </header>
-          <form id="settings-form" class="settings-form">
+          <form id="settings-form" class="settings-form" autocomplete="off">
             <fieldset>
               <legend>Mô hình dịch</legend>
               <p class="muted">Danh sách lấy trực tiếp từ API DeepSeek và Gemini (key trong <code>.env</code>). Đổi xong áp dụng cho job tiếp theo và ghi vào các dự án đang có.</p>
@@ -161,8 +161,22 @@
                   <span>Một job không được claim lại quá số lần này (chống loop).</span>
                 </label>
                 <label>job_timeout_sec
-                  <input id="set-job-timeout" type="number" min="60" max="3600" step="30" required />
+                  <input id="set-job-timeout" name="job_timeout_sec" type="number" min="60" max="3600" step="1" required />
                   <span>Hủy bước LLM tiếp theo nếu job đã chạy quá lâu (giây).</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Tách chương dài</legend>
+              <p class="muted">Chương dài hơn mục tiêu sẽ được tách theo đoạn văn trước khi dịch. Đổi xong chỉ áp dụng khi dịch lại.</p>
+              <div class="settings-grid">
+                <label>Số từ mỗi phần
+                  <input id="set-max-part-words" name="max_part_words" type="number" min="400" max="4000" step="1" value="1200" required />
+                  <span>Mục tiêu khi gộp đoạn vào một phần.</span>
+                </label>
+                <label>Trần cứng mỗi phần
+                  <input id="set-hard-max-part-words" name="hard_max_part_words" type="number" min="400" max="5000" step="1" value="1500" required />
+                  <span>Không gộp thêm đoạn nếu vượt mức này.</span>
                 </label>
               </div>
             </fieldset>
@@ -203,6 +217,7 @@
             <button type="button" class="btn" id="tr-promote">Đưa vào catalog</button>
           </div>
           <p class="muted" id="tr-jobs"></p>
+          <pre class="tr-job-log" id="tr-job-log" hidden></pre>
           <p class="muted" id="tr-pipeline-note"></p>
           <p class="muted" id="tr-promote-note"></p>
           <div class="layout tr-layout">
@@ -226,15 +241,30 @@
           <div class="tr-segment" id="tr-segment" hidden>
             <header class="tr-segment-head">
               <h2 id="tr-segment-title">Đoạn dịch</h2>
-              <button type="button" class="btn ghost" id="tr-segment-close">Thu gọn</button>
+              <div class="row">
+                <label class="tr-part-pick" id="tr-part-wrap" hidden>
+                  Phần
+                  <select id="tr-part-select"></select>
+                </label>
+                <button type="button" class="btn ghost" id="tr-segment-close">Thu gọn</button>
+              </div>
             </header>
-            <div class="tr-dual">
-              <article class="tr-col">
+            <div class="tr-compare-tabs" id="tr-compare-tabs" hidden>
+              <button type="button" class="btn ghost on" data-compare-tab="source">English</button>
+              <button type="button" class="btn ghost" data-compare-tab="draft">Nháp DeepSeek</button>
+              <button type="button" class="btn ghost" data-compare-tab="polish">Gemini</button>
+            </div>
+            <div class="tr-triple" id="tr-triple">
+              <article class="tr-col on" data-compare-col="source">
                 <h3>English</h3>
                 <div class="tr-text" id="tr-source"></div>
               </article>
-              <article class="tr-col">
-                <h3>Tiếng Việt</h3>
+              <article class="tr-col" data-compare-col="draft">
+                <h3>Nháp DeepSeek</h3>
+                <div class="tr-text" id="tr-draft"></div>
+              </article>
+              <article class="tr-col" data-compare-col="polish">
+                <h3>Gemini chỉnh</h3>
                 <div class="tr-text" id="tr-translation"></div>
               </article>
             </div>
@@ -271,6 +301,6 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js"></script>
+    <script src="/app.js?v=job-log"></script>
   </body>
 </html>
