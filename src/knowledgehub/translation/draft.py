@@ -13,6 +13,7 @@ from .parts import (
     join_parts,
     part_limits,
     previous_context,
+    project_split_version,
     translation_looks_truncated,
 )
 from .project import load_project
@@ -457,7 +458,9 @@ def draft_chapter(
     polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
     target, hard = part_limits()
-    parts = ensure_parts(segment, target=target, hard=hard)
+    parts = ensure_parts(
+        segment, target=target, hard=hard, version=project_split_version(project)
+    )
     if parts:
         save_segment(path, segment)
         draft_vi, polished, reused = _run_parts(

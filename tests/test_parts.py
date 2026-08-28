@@ -4,8 +4,11 @@ from knowledgehub.translation.parts import (
     completeness_status,
     looks_cut_off,
     pack_paragraphs,
+    project_split_version,
+    repair_paragraphs,
     translation_looks_truncated,
 )
+from knowledgehub.translation.segment import chapter_word_count
 
 
 def test_pack_paragraphs_does_not_split_a_paragraph():
@@ -37,6 +40,72 @@ def test_pack_paragraphs_respects_hard_cap():
     assert len(parts) > 1
     for part in parts:
         assert chapter_word_count(part) <= 80
+
+
+def test_repair_paragraphs_rejoins_a_sentence_split_by_a_blank_line():
+    blocks = [
+        "CHAPTER VII",
+        "_Neither the Sea nor the right of navigation thereon belongs to the\nPortuguese_",
+        "For so far as the merely\nmunicipal laws of any place are concerned, they do not",
+        "apply to the question at issue. On this point",
+        "Papinian has said that prescription fails.",
+    ]
+    assert repair_paragraphs(blocks) == [
+        "CHAPTER VII",
+        "_Neither the Sea nor the right of navigation thereon belongs to the\nPortuguese_",
+        "For so far as the merely\nmunicipal laws of any place are concerned, they do not\n"
+        "apply to the question at issue. On this point\n"
+        "Papinian has said that prescription fails.",
+    ]
+
+
+def test_repair_keeps_headings_and_properly_ended_paragraphs_apart():
+    blocks = ["CHAPTER VII", "The first paragraph ends cleanly.", "So does the second one."]
+    assert repair_paragraphs(blocks) == blocks
+
+
+def test_repair_reads_trailing_dashes_correctly():
+    # "]--" closes an editor's note; a bare "-" is a word hyphenated across a break.
+    closed = ["[Note: he was never rewarded for it]--", "The narrative resumes here."]
+    assert repair_paragraphs(closed) == closed
+    hyphenated = ["The argument rests on a single consid-", "eration that follows below."]
+    assert repair_paragraphs(hyphenated) == [
+        "The argument rests on a single consid-\neration that follows below."
+    ]
+
+
+def test_version_2_parts_all_end_at_a_sentence_boundary():
+    text = (
+        "First paragraph runs to a proper stop.\n\n"
+        "The second one breaks off and they do not\n\n"
+        "apply to anything here, which is the rest of the sentence.\n\n"
+        "A third paragraph closes the chapter."
+    )
+    old = pack_paragraphs(text, target=8, hard=12)
+    new = pack_paragraphs(text, target=8, hard=12, version=2)
+    assert any(part.rstrip().endswith("they do not") for part in old)
+    assert all(part.rstrip().endswith(".") for part in new)
+
+
+def test_version_2_cuts_a_giant_paragraph_at_sentence_boundaries():
+    paragraph = " ".join(f"Sentence number {i} says something about the sea." for i in range(60))
+    parts = pack_paragraphs(paragraph, target=100, hard=120, version=2)
+    assert len(parts) > 1
+    assert all(part.rstrip().endswith(".") for part in parts)
+    assert all(chapter_word_count(part) <= 120 for part in parts)
+    assert " ".join(" ".join(parts).split()) == " ".join(paragraph.split())
+
+
+def test_version_1_leaves_a_giant_paragraph_whole():
+    paragraph = " ".join(f"Sentence number {i} says something about the sea." for i in range(60))
+    assert pack_paragraphs(paragraph, target=100, hard=120) == [paragraph]
+
+
+def test_project_split_version_defaults_to_one():
+    assert project_split_version(None) == 1
+    assert project_split_version({}) == 1
+    assert project_split_version({"split_version": "oops"}) == 1
+    assert project_split_version({"split_version": 2}) == 2
 
 
 def test_completeness_truncated_final():

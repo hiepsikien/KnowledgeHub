@@ -11,6 +11,15 @@ from .segment import chapter_word_count
 _MARKER = re.compile(r"\[\d+\]")
 _HEADING_MAX_CHARS = 80
 
+# Bump when the splitting rules change. Projects created before a bump keep
+# their old boundaries, so parts already translated still match by source text.
+SPLIT_VERSION = 2
+
+# Characters a real paragraph may end on: sentence punctuation, a closing quote
+# or bracket, a footnote asterisk, or the underscore that marks italics.
+_PARAGRAPH_END = set(".!?…:;\"'”’»)]}*_")
+_SENTENCE_BREAK = re.compile(r"[.!?…][\"'”’»)\]]*\s+")
+
 
 def _is_heading(line: str) -> bool:
     """A heading such as ``CHƯƠNG VII`` legitimately ends on a letter."""
@@ -44,10 +53,83 @@ def split_paragraphs(text: str) -> list[str]:
     return [part.strip() for part in re.split(r"\n\s*\n", text or "") if part.strip()]
 
 
-def pack_paragraphs(text: str, *, target: int = 1200, hard: int = 1500) -> list[str]:
+def _ends_open(block: str) -> bool:
+    """True when a block breaks off mid-sentence, so the next block continues it.
+
+    Trailing dashes are dropped first: editions close an editor's note with
+    ``]--``, while a word hyphenated across a line break ends on a bare ``-``
+    and does need the block that follows it.
+    """
+    stripped = block.rstrip().rstrip("-–—")
+    if not stripped:
+        return False
+    if _is_heading(stripped.rsplit("\n", 1)[-1].strip()):
+        return False
+    return stripped[-1] not in _PARAGRAPH_END
+
+
+def repair_paragraphs(blocks: list[str]) -> list[str]:
+    """Rejoin blocks a blank line split in mid-sentence.
+
+    Scanned sources put blank lines at page breaks and around footnotes, so a
+    single sentence often arrives as two blocks. Left alone, those fake breaks
+    become part boundaries and hand the model a sentence fragment to translate.
+    """
+    repaired: list[str] = []
+    for block in blocks:
+        if repaired and _ends_open(repaired[-1]):
+            repaired[-1] = f"{repaired[-1]}\n{block}"
+        else:
+            repaired.append(block)
+    return repaired
+
+
+def _sentence_spans(text: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    start = 0
+    for match in _SENTENCE_BREAK.finditer(text):
+        spans.append((start, match.end()))
+        start = match.end()
+    if start < len(text):
+        spans.append((start, len(text)))
+    return spans
+
+
+def split_oversized(paragraph: str, hard: int) -> list[str]:
+    """Cut a paragraph that alone exceeds `hard` at sentence boundaries."""
+    if chapter_word_count(paragraph) <= hard:
+        return [paragraph]
+    chunks: list[str] = []
+    start: int | None = None
+    end = 0
+    words = 0
+    for span_start, span_end in _sentence_spans(paragraph):
+        count = chapter_word_count(paragraph[span_start:span_end])
+        if start is not None and words + count > hard:
+            chunks.append(paragraph[start:end].strip())
+            start, end, words = span_start, span_end, count
+            continue
+        if start is None:
+            start = span_start
+        end = span_end
+        words += count
+    if start is not None:
+        chunks.append(paragraph[start:end].strip())
+    return [chunk for chunk in chunks if chunk]
+
+
+def pack_paragraphs(
+    text: str,
+    *,
+    target: int = 1200,
+    hard: int = 1500,
+    version: int = 1,
+) -> list[str]:
     """Pack paragraphs into parts near `target` words, never splitting a paragraph.
 
-    A single paragraph longer than `hard` becomes its own part.
+    From version 2 on, fake paragraph breaks are repaired first, and a paragraph
+    that still exceeds `hard` on its own is cut at sentence boundaries so every
+    part ends where a sentence does.
     """
     target = max(1, int(target))
     hard = max(target, int(hard))
@@ -55,6 +137,12 @@ def pack_paragraphs(text: str, *, target: int = 1200, hard: int = 1500) -> list[
     if not paras:
         stripped = (text or "").strip()
         return [stripped] if stripped else []
+    if version >= 2:
+        paras = [
+            chunk
+            for para in repair_paragraphs(paras)
+            for chunk in split_oversized(para, hard)
+        ]
     parts: list[list[str]] = []
     current: list[str] = []
     words = 0
@@ -102,16 +190,25 @@ def _part_final(part: dict[str, Any], mode: str) -> str:
     return _mode_raw(part.get("drafts") if isinstance(part.get("drafts"), dict) else None, mode)
 
 
+def project_split_version(project: dict[str, Any] | None) -> int:
+    """Projects without the field predate versioned splitting and keep version 1."""
+    try:
+        return max(1, int((project or {}).get("split_version") or 1))
+    except (TypeError, ValueError):
+        return 1
+
+
 def ensure_parts(
     segment: dict[str, Any],
     *,
     target: int | None = None,
     hard: int | None = None,
+    version: int = 1,
 ) -> list[dict[str, Any]]:
     if target is None or hard is None:
         target, hard = part_limits()
     source = str(segment.get("source_text") or "")
-    packed = pack_paragraphs(source, target=target, hard=hard)
+    packed = pack_paragraphs(source, target=target, hard=hard, version=version)
     if len(packed) <= 1:
         segment.pop("parts", None)
         return []
@@ -199,7 +296,9 @@ def usable_final(segment: dict[str, Any], *, mode: str = "") -> bool:
     return completeness_status(segment, mode=mode) == "ok"
 
 
-def prepare_chapter_for_resplit(segment: dict[str, Any], *, mode: str = "") -> dict[str, Any]:
+def prepare_chapter_for_resplit(
+    segment: dict[str, Any], *, mode: str = "", version: int = 1
+) -> dict[str, Any]:
     """Archive old translations and rebuild empty parts for a long/truncated chapter."""
     final = str(segment.get("final") or "").strip()
     raw = _mode_raw(segment.get("draft_raw") if isinstance(segment.get("draft_raw"), dict) else None, mode)
@@ -216,7 +315,7 @@ def prepare_chapter_for_resplit(segment: dict[str, Any], *, mode: str = "") -> d
     pipeline["polish_pending"] = False
     pipeline.pop("completed_at", None)
     segment["pipeline"] = pipeline
-    parts = ensure_parts(segment)
+    parts = ensure_parts(segment, version=version)
     for part in parts:
         part.pop("final", None)
         part["drafts"] = {}
@@ -232,16 +331,19 @@ def split_long_chapters(source_work_id: str) -> dict[str, Any]:
 
     project = load_project(source_work_id)
     mode = str(project.get("translation_mode") or "")
+    version = project_split_version(project)
     target, hard = part_limits()
     split: list[dict[str, Any]] = []
     for path in segment_files(source_work_id):
         payload = json.loads(path.read_text(encoding="utf-8"))
         words = int(payload.get("words") or chapter_word_count(str(payload.get("source_text") or "")))
         status = completeness_status(payload, mode=mode)
-        packed = pack_paragraphs(str(payload.get("source_text") or ""), target=target, hard=hard)
+        packed = pack_paragraphs(
+            str(payload.get("source_text") or ""), target=target, hard=hard, version=version
+        )
         if len(packed) <= 1 and status != "truncated":
             continue
-        prepare_chapter_for_resplit(payload, mode=mode)
+        prepare_chapter_for_resplit(payload, mode=mode, version=version)
         save_segment(path, payload)
         split.append(
             {
@@ -251,4 +353,9 @@ def split_long_chapters(source_work_id: str) -> dict[str, Any]:
                 "completeness": completeness_status(payload, mode=mode),
             }
         )
-    return {"work_id": source_work_id, "max_part_words": target, "chapters": split}
+    return {
+        "work_id": source_work_id,
+        "max_part_words": target,
+        "split_version": version,
+        "chapters": split,
+    }

@@ -17,6 +17,7 @@ from .paths import (
     translation_catalog_id,
     translation_dir,
 )
+from .parts import SPLIT_VERSION
 from .segment import sample_segment, split_chapters
 
 DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
@@ -105,6 +106,7 @@ def init_translation_project(
         "status": "sample_pending",
         "created_at": _now(),
         "updated_at": _now(),
+        "split_version": SPLIT_VERSION,
         "models": resolve_models(),
         "source": {
             "title": work.get("title"),

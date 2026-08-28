@@ -255,7 +255,7 @@ def test_draft_chapter_translates_each_part(corpus: Path):
     select_translation_mode("grotius--freedom_of_the_seas", "tight")
     chii_path = corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json"
     chii = json.loads(chii_path.read_text(encoding="utf-8"))
-    paras = [" ".join(["alpha", str(i)] + ["word"] * 25) for i in range(8)]
+    paras = [" ".join(["alpha", str(i)] + ["word"] * 25) + "." for i in range(8)]
     chii["source_text"] = "\n\n".join(paras)
     from knowledgehub.translation.segment import chapter_word_count
 
