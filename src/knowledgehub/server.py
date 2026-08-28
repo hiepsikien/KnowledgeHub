@@ -31,9 +31,13 @@ from .translation.api import (
     list_annotations,
     list_translation_projects,
     run_annotate,
+    run_approve_qa,
     run_draft,
+    run_reopen_qa,
+    run_promote,
     run_qa,
 )
+from .translation.assemble import IncompleteTranslation
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
@@ -59,6 +63,17 @@ class PublishBody(BaseModel):
     category_slug: str | None = None
     price_cents: int | None = None
     split_length: str | None = None
+
+
+class PromoteBody(BaseModel):
+    title: str | None = None
+
+
+class ApproveQaBody(BaseModel):
+    index: int | None = None
+    all: bool = False
+    replacement: str | None = None
+    replacements: dict[str, str] | None = None
 
 
 def _ops_secret() -> str:
@@ -235,6 +250,55 @@ def create_app() -> FastAPI:
         except (ProviderError, ValueError) as exc:
             raise HTTPException(400, str(exc)) from exc
 
+    @app.post("/api/translations/{source_work_id}/qa/{chapter}/approve", dependencies=guard)
+    def translation_qa_approve(
+        source_work_id: str, chapter: str, payload: ApproveQaBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or ApproveQaBody()
+        if body.all:
+            index = None
+        elif body.index is not None:
+            index = body.index
+        else:
+            raise HTTPException(400, "Provide index or all=true.")
+        raw_map = body.replacements or {}
+        replacements: dict[int, str] = {}
+        for key, value in raw_map.items():
+            try:
+                replacements[int(key)] = value
+            except (TypeError, ValueError) as exc:
+                raise HTTPException(400, f"Invalid replacement index: {key}") from exc
+        try:
+            return run_approve_qa(
+                source_work_id,
+                chapter,
+                index=index,
+                replacement=body.replacement,
+                replacements=replacements or None,
+            )
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/qa/{chapter}/reopen", dependencies=guard)
+    def translation_qa_reopen(
+        source_work_id: str, chapter: str, payload: ApproveQaBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or ApproveQaBody()
+        if body.all:
+            index = None
+        elif body.index is not None:
+            index = body.index
+        else:
+            raise HTTPException(400, "Provide index or all=true.")
+        try:
+            return run_reopen_qa(source_work_id, chapter, index=index)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
     @app.post("/api/translations/{source_work_id}/annotate/{chapter}", dependencies=guard)
     def translation_annotate(source_work_id: str, chapter: str) -> dict[str, Any]:
         try:
@@ -242,6 +306,15 @@ def create_app() -> FastAPI:
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
         except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/promote", dependencies=guard)
+    def translation_promote(source_work_id: str, payload: PromoteBody | None = None) -> dict[str, Any]:
+        try:
+            return run_promote(source_work_id, title=(payload.title if payload else None))
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except (IncompleteTranslation, KeyError, ValueError) as exc:
             raise HTTPException(400, str(exc)) from exc
 
     @app.get("/")

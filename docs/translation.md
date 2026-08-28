@@ -77,7 +77,7 @@ After mode is locked and `final` is set on a chapter segment:
 knowledgehub translate qa --work grotius--freedom_of_the_seas --chapter I
 ```
 
-Writes `segment["qa"]` with scores (fidelity, fluency, terminology, completeness, overall), Vietnamese summary, and issues list.
+Writes `segment["qa"]` with scores (fidelity, fluency, terminology, completeness, overall), Vietnamese summary, and issues list. If the chapter already has notes in `annotations.json`, that pass also reviews them (`scores.annotations`, issues with `annotation_id`). Duyệt can rewrite `body_vi` the same way it rewrites `final`.
 
 ### Annotations
 
@@ -87,10 +87,28 @@ knowledgehub translate annotate --work grotius--freedom_of_the_seas --chapter I
 
 Generates footnote/glossary/context notes into `annotations.json` (merged by `id`).
 
-## Read integration (next)
+## Publish to Read
 
-Publish payload will include `annotations` + `edition_meta`. Read repo: inline tap-to-expand notes.
+Hub keeps **two Works**, Read gets **two books** (`hub_work_id` is unique).
+
+| | English source | Vietnamese edition |
+|---|---|---|
+| Catalog id | `grotius--freedom_of_the_seas` | `grotius--freedom_of_the_seas_vi` |
+| `rights.basis` | `public_domain` | `editorial_derivative` |
+| `license` | source PD id | `hub_editorial_vi` |
+| Body | edition from `raw/` | `segments/*/final` assembled at publish |
+| Glossary | numbered `FOOTNOTES:` | `annotations.json` |
+
+Do not write the translation into `sources/*/raw/`. Promote after every chapter has `final`:
+
+```bash
+knowledgehub translate promote --work grotius--freedom_of_the_seas
+knowledgehub allow-read --work grotius--freedom_of_the_seas_vi
+knowledgehub publish-read --work grotius--freedom_of_the_seas_vi
+```
+
+`build-catalog` preserves `origin: hub_translation` rows.
 
 ## License
 
-Translated work id: `grotius--freedom_of_the_seas--vi` with `rights.basis: editorial_derivative`.
+Translated work id: `grotius--freedom_of_the_seas_vi` with `rights.basis: editorial_derivative`.

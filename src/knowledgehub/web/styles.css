@@ -322,6 +322,36 @@ tr.pick.on { background: var(--accent-soft); }
   padding-left: 10px;
   border-left: 2px solid var(--line);
 }
+.tr-issues li.approved { opacity: 0.72; background: #f3f7f4; }
+.tr-issues li .btn { margin-top: 8px; }
+.tr-fix {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.tr-fix textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  resize: vertical;
+  min-height: 3.2em;
+}
+.tr-ann-side {
+  margin: 16px 0 4px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.tr-ann-side h3 {
+  font-family: var(--serif);
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+.tr-ann-side .tr-annotations { max-height: 360px; overflow: auto; }
 .badge.minor { background: var(--warn-soft); color: var(--warn); }
 .badge.major { background: #f8e4e4; color: var(--bad); }
 .badge.kind-footnote { background: #e8eef8; color: #2a4a7a; }

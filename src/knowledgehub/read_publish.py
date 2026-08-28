@@ -7,11 +7,13 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from .catalog import get_work, resolve_content_path, update_read_publication
-from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, merge_glossary
+from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication
+from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes
 from .normalize import normalize_manuscript
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
+from .translation.assemble import IncompleteTranslation, assemble_finals
+from .translation.paths import annotations_file
 
 
 class PublishError(RuntimeError):
@@ -74,6 +76,16 @@ def prepare_publish(
         raise PublishError(
             f"{work_id} is not allowed for Read (rights.consumers.read != allowed)"
         )
+    if is_hub_translation(work):
+        return _prepare_translation_publish(
+            work,
+            root=root,
+            title=title,
+            description=description,
+            category_slug=category_slug,
+            price_cents=price_cents,
+            split_length=split_length,
+        )
     path = resolve_content_path(work, root=root)
     if not path.is_file():
         raise PublishError(f"missing manuscript: {path}")
@@ -91,21 +103,82 @@ def prepare_publish(
     reading_text, footnote_glossary = glossary_from_footnotes(text)
     if not footnote_glossary:
         _, footnote_glossary = glossary_from_footnotes(raw)
-    annotation_glossary: list[dict[str, Any]] = []
-    ann_path = root / "translations" / str(work["id"]) / "annotations.json"
+    payload = _payload(work, reading_text)
+    if footnote_glossary:
+        payload["glossary"] = footnote_glossary
+    report = dict(report)
+    report["glossary_count"] = len(footnote_glossary)
+    report["stripped_footnotes"] = reading_text != text
+    _apply_publish_overrides(
+        payload,
+        title=title,
+        description=description,
+        category_slug=category_slug,
+        price_cents=price_cents,
+        split_length=split_length,
+    )
+    payload["_normalize"] = report
+    return payload
+
+
+def _prepare_translation_publish(
+    work: dict[str, Any],
+    *,
+    root: Path,
+    title: str | None,
+    description: str | None,
+    category_slug: str | None,
+    price_cents: int | None,
+    split_length: str | None,
+) -> dict[str, Any]:
+    source_id = str(work.get("derived_from") or "")
+    try:
+        text, meta = assemble_finals(source_id, require_complete=True)
+    except IncompleteTranslation as exc:
+        raise PublishError(str(exc)) from exc
+    except (FileNotFoundError, ValueError) as exc:
+        raise PublishError(str(exc)) from exc
+    payload = _payload(work, text)
+    payload["hub_content_hash"] = meta["content_hash"]
+    payload["language"] = work.get("language") or "vi"
+    glossary: list[dict[str, Any]] = []
+    ann_path = annotations_file(source_id)
     if ann_path.is_file():
         try:
             store = json.loads(ann_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             store = {}
-        annotation_glossary = glossary_from_annotations(list(store.get("annotations") or []))
-    glossary = merge_glossary(footnote_glossary, annotation_glossary)
-    payload = _payload(work, reading_text)
+        glossary = glossary_from_annotations(list(store.get("annotations") or []))
     if glossary:
         payload["glossary"] = glossary
-    report = dict(report)
-    report["glossary_count"] = len(glossary)
-    report["stripped_footnotes"] = reading_text != text
+    _apply_publish_overrides(
+        payload,
+        title=title,
+        description=description,
+        category_slug=category_slug,
+        price_cents=price_cents,
+        split_length=split_length,
+    )
+    payload["_normalize"] = {
+        "origin": "hub_translation",
+        "source_work_id": source_id,
+        "chapters": meta["chapters"],
+        "assembled_chars": meta["chars"],
+        "glossary_count": len(glossary),
+        "stripped_footnotes": False,
+    }
+    return payload
+
+
+def _apply_publish_overrides(
+    payload: dict[str, Any],
+    *,
+    title: str | None,
+    description: str | None,
+    category_slug: str | None,
+    price_cents: int | None,
+    split_length: str | None,
+) -> None:
     if title and title.strip():
         payload["title"] = title.strip()
     if description is not None:
@@ -122,8 +195,6 @@ def prepare_publish(
             payload["split_length"] = validate_split_length(split_length)
         except ValueError as exc:
             raise PublishError(str(exc)) from exc
-    payload["_normalize"] = report
-    return payload
 
 
 def preview_normalized(
@@ -136,6 +207,32 @@ def preview_normalized(
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
+    if is_hub_translation(work):
+        source_id = str(work.get("derived_from") or "")
+        try:
+            text, meta = assemble_finals(source_id, require_complete=True)
+        except IncompleteTranslation as exc:
+            raise PublishError(str(exc)) from exc
+        except (FileNotFoundError, ValueError) as exc:
+            raise PublishError(str(exc)) from exc
+        truncated = (not full) and len(text) > head_chars + tail_chars
+        out: dict[str, Any] = {
+            "id": work["id"],
+            "title": work.get("title"),
+            "normalize": {
+                "origin": "hub_translation",
+                "source_work_id": source_id,
+                "chapters": meta["chapters"],
+                "assembled_chars": meta["chars"],
+            },
+            "truncated": truncated,
+        }
+        if truncated:
+            out["head"] = text[:head_chars]
+            out["tail"] = text[-tail_chars:]
+        else:
+            out["text"] = text
+        return out
     path = resolve_content_path(work, root=root)
     if not path.is_file():
         raise PublishError(f"missing manuscript: {path}")
@@ -149,7 +246,7 @@ def preview_normalized(
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
     truncated = (not full) and len(text) > head_chars + tail_chars
-    out: dict[str, Any] = {
+    out = {
         "id": work["id"],
         "title": work.get("title"),
         "normalize": report,

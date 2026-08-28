@@ -38,6 +38,7 @@ def corpus(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
 def test_init_translation_project(corpus: Path):
     result = init_translation_project("grotius--freedom_of_the_seas")
     assert result["project"]["source"]["chapters"] == 2
+    assert result["project"]["translation_work_id"] == "grotius--freedom_of_the_seas_vi"
     sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
     assert sample.is_file()
     payload = json.loads(sample.read_text(encoding="utf-8"))

@@ -12,6 +12,7 @@ const state = {
     selectedChapter: null,
     segment: null,
     annotations: [],
+    qaFixes: {},
     busy: false,
     lastError: "",
   },
@@ -269,6 +270,14 @@ function scoreBar(label, value) {
   </div>`;
 }
 
+function annotationIssueLabel(issue) {
+  const found = (state.translation.annotations || []).find((a) => a.id === issue.annotation_id);
+  if (found?.title_vi) return `chú thích: ${found.title_vi}`;
+  if (found?.marker) return `chú thích ${found.marker}`;
+  const tail = String(issue.annotation_id || "").split("--").pop();
+  return tail ? `chú thích: ${tail}` : "chú thích";
+}
+
 function statusBadge(status, hasFinal) {
   if (status === "draft_ready" && hasFinal) return `<span class="badge ok">draft_ready</span>`;
   if (status === "approved") return `<span class="badge ok">approved</span>`;
@@ -306,6 +315,19 @@ function renderTranslationStats() {
   $("tr-stats").innerHTML = items
     .map(([n, label]) => `<div class="stat"><b>${escapeHtml(String(n))}</b><span>${escapeHtml(label)}</span></div>`)
     .join("");
+  const note = $("tr-promote-note");
+  const btn = $("tr-promote");
+  const catalogId = p.translation_work_id || "";
+  if (note) {
+    if (!p.ready_to_promote) {
+      const missing = (p.missing_chapters || []).join(", ") || "—";
+      note.textContent = `Chưa đủ chương final — còn ${missing}. Catalog: ${catalogId}`;
+      if (btn) btn.disabled = true;
+    } else {
+      note.textContent = `Đủ bản dịch. Đưa vào catalog rồi allow-read / publish-read trên ${catalogId}.`;
+      if (btn) btn.disabled = false;
+    }
+  }
 }
 
 function renderTranslationRows() {
@@ -314,13 +336,18 @@ function renderTranslationRows() {
   $("tr-rows").innerHTML = chapters
     .map((c) => {
       const on = selected === c.chapter ? "on" : "";
+      const open = c.open_issue_count != null ? c.open_issue_count : c.issue_count;
       const qa = c.qa_overall != null ? `${c.qa_overall}/10` : "—";
-      const ann = c.annotations_generated_at ? "✓" : "—";
+      const qaSub = c.issue_count
+        ? `<div class="sub">${open ? `${open}/${c.issue_count} còn mở` : `${c.issue_count} đã duyệt`}</div>`
+        : "";
+      const annCount = c.annotation_count || 0;
+      const ann = annCount ? `${annCount}` : c.annotations_generated_at ? "✓" : "—";
       return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
         <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ</div></td>
         <td>${statusBadge(c.status, c.has_final)}</td>
-        <td>${escapeHtml(qa)}${c.issue_count ? `<div class="sub">${c.issue_count} vấn đề</div>` : ""}</td>
-        <td>${escapeHtml(ann)}</td>
+        <td>${escapeHtml(qa)}${qaSub}</td>
+        <td>${escapeHtml(String(ann))}</td>
       </tr>`;
     })
     .join("");
@@ -341,6 +368,9 @@ function renderTranslationDetail() {
   const qa = seg.qa || {};
   const scores = qa.scores || {};
   const issues = qa.issues || [];
+  const openIssues = issues.filter((issue) => !issue.approved);
+  const annotations = state.translation.annotations || [];
+  const approvedIssues = issues.filter((issue) => issue.approved);
   const hasTranslation = Boolean((seg.translation || "").trim());
   const scoreHtml = qa.scores
     ? `<div class="tr-score-grid">
@@ -349,43 +379,92 @@ function renderTranslationDetail() {
         ${scoreBar("Thuật ngữ", scores.terminology)}
         ${scoreBar("Đầy đủ", scores.completeness)}
         ${scoreBar("Tổng thể", scores.overall)}
+        ${scores.annotations != null ? scoreBar("Chú thích", scores.annotations) : ""}
       </div>`
     : `<p class="muted">Chưa chạy QA cho chương này.</p>`;
+  const issueHtml = issues.length
+    ? `<ul class="tr-issues">${issues
+        .map((issue, index) => {
+          const done = Boolean(issue.approved);
+          return `<li class="${done ? "approved" : ""}">
+            <div class="meta">
+              <span class="badge ${issue.severity === "major" ? "major" : "minor"}">${escapeHtml(issue.severity || "minor")}</span>
+              <span class="badge">${escapeHtml(issue.category || "other")}</span>
+              ${issue.annotation_id ? `<span class="badge">${escapeHtml(annotationIssueLabel(issue))}</span>` : ""}
+              ${done ? `<span class="badge ok">đã duyệt</span>` : ""}
+            </div>
+            <div>${escapeHtml(issue.note_vi || "")}</div>
+            ${
+              issue.source_excerpt || issue.translation_excerpt
+                ? `<div class="excerpt">
+                    ${issue.source_excerpt ? `EN: ${escapeHtml(issue.source_excerpt)}<br />` : ""}
+                    ${issue.translation_excerpt ? `VI: ${escapeHtml(issue.translation_excerpt)}` : ""}
+                  </div>`
+                : ""
+            }
+            ${
+              done && issue.applied_replacement
+                ? `<div class="excerpt">Đã sửa thành: ${escapeHtml(issue.applied_replacement)}</div>`
+                : ""
+            }
+            ${
+              done
+                ? `<button class="btn ghost" type="button" data-reopen-index="${index}" ${state.translation.busy ? "disabled" : ""}>Mở lại</button>`
+                : `<label class="tr-fix">Sửa thành
+                    <textarea data-fix-index="${index}" rows="2">${escapeHtml(
+                      state.translation.qaFixes?.[String(index)] ??
+                        issue.applied_replacement ??
+                        issue.translation_excerpt ??
+                        "",
+                    )}</textarea>
+                  </label>
+                  <button class="btn ghost" type="button" data-approve-index="${index}" ${state.translation.busy ? "disabled" : ""}>Duyệt</button>`
+            }
+          </li>`;
+        })
+        .join("")}</ul>
+      ${
+        openIssues.length || approvedIssues.length
+          ? `<div class="row">
+              ${openIssues.length ? `<button class="btn" type="button" id="tr-btn-approve-all" ${state.translation.busy ? "disabled" : ""}>Duyệt hết ${openIssues.length} nhận xét</button>` : ""}
+              ${approvedIssues.length ? `<button class="btn ghost" type="button" id="tr-btn-reopen-all" ${state.translation.busy ? "disabled" : ""}>Mở lại ${approvedIssues.length} nhận xét</button>` : ""}
+            </div>`
+          : ""
+      }`
+    : qa.scores
+      ? `<p class="muted">Không có vấn đề được ghi nhận.</p>`
+      : "";
+  const annHtml = `<div class="tr-ann-side">
+      <h3>Chú thích (${annotations.length})</h3>
+      ${
+        annotations.length
+          ? `<div class="tr-annotations">${annotations
+              .map(
+                (a) => `<article class="tr-ann">
+                  <div class="tr-ann-head">
+                    ${kindBadge(a.kind)}
+                    ${a.marker ? `<strong>${escapeHtml(a.title_vi || a.marker)}</strong>` : `<strong>${escapeHtml(a.title_vi || "Chú thích")}</strong>`}
+                    ${a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
+                  </div>
+                  <p>${escapeHtml(a.body_vi || "")}</p>
+                </article>`,
+              )
+              .join("")}</div>`
+          : `<p class="muted">${seg.annotations_generated_at ? "File chú thích trống cho chương này." : "Chưa tạo chú thích."}</p>`
+      }
+    </div>`;
   box.innerHTML = `
     <h2>Chương ${escapeHtml(chapter)}</h2>
     <p class="sub">${escapeHtml(seg.status || "")} · ${escapeHtml(String(seg.words || "—"))} từ</p>
     ${scoreHtml}
     ${qa.summary_vi ? `<div class="tr-summary">${escapeHtml(qa.summary_vi)}</div>` : ""}
-    ${
-      issues.length
-        ? `<ul class="tr-issues">${issues
-            .map(
-              (issue) => `<li>
-                <div class="meta">
-                  <span class="badge ${issue.severity === "major" ? "major" : "minor"}">${escapeHtml(issue.severity || "minor")}</span>
-                  <span class="badge">${escapeHtml(issue.category || "other")}</span>
-                </div>
-                <div>${escapeHtml(issue.note_vi || "")}</div>
-                ${
-                  issue.source_excerpt || issue.translation_excerpt
-                    ? `<div class="excerpt">
-                        ${issue.source_excerpt ? `EN: ${escapeHtml(issue.source_excerpt)}<br />` : ""}
-                        ${issue.translation_excerpt ? `VI: ${escapeHtml(issue.translation_excerpt)}` : ""}
-                      </div>`
-                    : ""
-                }
-              </li>`,
-            )
-            .join("")}</ul>`
-        : qa.scores
-          ? `<p class="muted">Không có vấn đề được ghi nhận.</p>`
-          : ""
-    }
+    ${issueHtml}
+    ${annHtml}
     <div class="row">
       <button class="btn ghost" id="tr-btn-segment" type="button" ${hasTranslation ? "" : "disabled"}>Xem đoạn EN ↔ VI</button>
       <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button" ${state.translation.busy ? "disabled" : ""}>${hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
       <button class="btn ghost" id="tr-btn-qa" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
-      <button class="btn" id="tr-btn-annotate" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${seg.annotations_generated_at ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
+      <button class="btn" id="tr-btn-annotate" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
     </div>
     <pre class="err" id="tr-action-out">${escapeHtml(state.translation.lastError || "")}</pre>
   `;
@@ -393,6 +472,22 @@ function renderTranslationDetail() {
   $("tr-btn-draft").onclick = () => runTranslationDraft();
   $("tr-btn-qa").onclick = () => runTranslationQA();
   $("tr-btn-annotate").onclick = () => runTranslationAnnotate();
+  box.querySelectorAll("[data-fix-index]").forEach((input) => {
+    input.oninput = () => {
+      state.translation.qaFixes = state.translation.qaFixes || {};
+      state.translation.qaFixes[input.dataset.fixIndex] = input.value;
+    };
+  });
+  box.querySelectorAll("[data-approve-index]").forEach((btn) => {
+    btn.onclick = () => void approveQaIssue(Number(btn.dataset.approveIndex));
+  });
+  const approveAll = $("tr-btn-approve-all");
+  if (approveAll) approveAll.onclick = () => void approveQaIssue(null);
+  box.querySelectorAll("[data-reopen-index]").forEach((btn) => {
+    btn.onclick = () => void reopenQaIssue(Number(btn.dataset.reopenIndex));
+  });
+  const reopenAll = $("tr-btn-reopen-all");
+  if (reopenAll) reopenAll.onclick = () => void reopenQaIssue(null);
 }
 
 function renderTranslationAnnotations() {
@@ -468,8 +563,12 @@ async function loadTranslationProject(workId, chapterHint) {
 async function selectTranslationChapter(chapter, showSegment) {
   const workId = state.translation.projectId;
   if (!workId || !chapter) return;
+  if (state.translation.selectedChapter !== chapter) {
+    state.translation.qaFixes = {};
+  }
   state.translation.selectedChapter = chapter;
   state.translation.segment = null;
+  state.translation.annotations = [];
   state.translation.lastError = "";
   renderTranslationRows();
   renderTranslationDetail();
@@ -495,7 +594,9 @@ async function runTranslationAction(kind) {
   if (!workId || !chapter) return;
   const labels = {
     draft: "Đang dịch (DeepSeek → Gemini)… có thể mất vài phút.",
-    qa: "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.",
+    qa: state.translation.annotations?.length
+      ? "Đang chấm QA bản dịch và chú thích (DeepSeek)… có thể mất 1–2 phút."
+      : "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.",
     annotate: "Đang tạo chú thích (Gemini)…",
   };
   const paths = {
@@ -510,7 +611,12 @@ async function runTranslationAction(kind) {
   if (out) out.textContent = labels[kind];
   try {
     const result = await api(paths[kind], { method: "POST" });
-    if (kind === "qa") toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10`);
+    if (kind === "qa") {
+      const extra = result.annotations_reviewed
+        ? ` · ${result.annotations_reviewed} chú thích`
+        : "";
+      toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10${extra}`);
+    }
     if (kind === "annotate") toast(`Đã cập nhật ${result.added_or_updated} chú thích (tổng ${result.total})`);
     if (kind === "draft") toast(`Đã dịch chương ${chapter} (${result.final_chars || "?"} chữ)`);
     await loadTranslationProject(workId, chapter);
@@ -535,6 +641,80 @@ async function runTranslationAnnotate() {
   await runTranslationAction("annotate");
 }
 
+function collectQaFixes() {
+  const fixes = { ...(state.translation.qaFixes || {}) };
+  document.querySelectorAll("[data-fix-index]").forEach((input) => {
+    fixes[input.dataset.fixIndex] = input.value;
+  });
+  state.translation.qaFixes = fixes;
+  return fixes;
+}
+
+async function approveQaIssue(index) {
+  const workId = state.translation.projectId;
+  const chapter = state.translation.selectedChapter;
+  if (!workId || !chapter) return;
+  const fixes = collectQaFixes();
+  const segmentOpen = !$("tr-segment").hidden;
+  const body =
+    index == null
+      ? { all: true, replacements: fixes }
+      : { index, replacement: fixes[String(index)] ?? "" };
+  state.translation.lastError = "";
+  state.translation.busy = true;
+  renderTranslationDetail();
+  try {
+    const result = await api(
+      `/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}/approve`,
+      { method: "POST", body },
+    );
+    const applied = Number(result.applied_count || 0);
+    toast(
+      applied
+        ? index == null
+          ? `Đã duyệt hết và sửa ${applied} chỗ trong bản dịch`
+          : "Đã duyệt và sửa bản dịch"
+        : index == null
+          ? "Đã duyệt hết nhận xét QA"
+          : "Đã duyệt nhận xét",
+    );
+    if (index == null) state.translation.qaFixes = {};
+    else delete state.translation.qaFixes[String(index)];
+    await loadTranslationProject(workId, chapter);
+    if (segmentOpen) showTranslationSegment(true);
+  } catch (err) {
+    state.translation.lastError = err.message;
+  } finally {
+    state.translation.busy = false;
+    renderTranslationDetail();
+  }
+}
+
+async function reopenQaIssue(index) {
+  const workId = state.translation.projectId;
+  const chapter = state.translation.selectedChapter;
+  if (!workId || !chapter) return;
+  const segmentOpen = !$("tr-segment").hidden;
+  const body = index == null ? { all: true } : { index };
+  state.translation.lastError = "";
+  state.translation.busy = true;
+  renderTranslationDetail();
+  try {
+    await api(
+      `/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}/reopen`,
+      { method: "POST", body },
+    );
+    toast(index == null ? "Đã mở lại mọi nhận xét QA" : "Đã mở lại nhận xét");
+    await loadTranslationProject(workId, chapter);
+    if (segmentOpen) showTranslationSegment(true);
+  } catch (err) {
+    state.translation.lastError = err.message;
+  } finally {
+    state.translation.busy = false;
+    renderTranslationDetail();
+  }
+}
+
 async function loadTranslationView(workId, chapter) {
   document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
   document.querySelector('.nav-link[data-view="translation"]')?.classList.add("active");
@@ -554,6 +734,25 @@ async function loadTranslationView(workId, chapter) {
   }
 }
 
+async function runTranslationPromote() {
+  const workId = state.translation.projectId;
+  if (!workId) return;
+  const btn = $("tr-promote");
+  const note = $("tr-promote-note");
+  if (btn) btn.disabled = true;
+  if (note) note.textContent = "Đang đưa vào catalog…";
+  try {
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/promote`, {
+      method: "POST",
+      body: {},
+    });
+    toast(`Catalog: ${result.work?.id || ""}`);
+    await loadTranslationProject(workId, state.translation.selectedChapter);
+  } catch (err) {
+    if (note) note.textContent = err.message;
+  }
+}
+
 function wireTranslation() {
   $("tr-project").onchange = async () => {
     const workId = $("tr-project").value;
@@ -564,6 +763,7 @@ function wireTranslation() {
     if (tr) selectTranslationChapter(tr.dataset.chapter, false);
   };
   $("tr-segment-close").onclick = () => showTranslationSegment(false);
+  $("tr-promote").onclick = () => void runTranslationPromote();
 }
 
 function collectPublishPayload(apply) {

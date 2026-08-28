@@ -6,34 +6,13 @@ from typing import Any
 
 from ..paths import corpus_root
 from .annotate import annotate_segment
+from .assemble import chapter_sort_key, segment_files, translation_status
 from .draft import draft_chapter
-from .paths import annotations_file, segments_dir
+from .paths import annotations_file, translation_catalog_id
 from .project import load_project
-from .qa import qa_segment
+from .promote import promote_translation
+from .qa import qa_segment, approve_qa_issues, reopen_qa_issues
 from .segments_io import final_text, load_segment
-
-_ROMAN = {
-    "i": 1,
-    "ii": 2,
-    "iii": 3,
-    "iv": 4,
-    "v": 5,
-    "vi": 6,
-    "vii": 7,
-    "viii": 8,
-    "ix": 9,
-    "x": 10,
-    "xi": 11,
-    "xii": 12,
-    "xiii": 13,
-    "xiv": 14,
-    "xv": 15,
-}
-
-
-def _chapter_sort_key(chapter: str) -> tuple[int, str]:
-    key = chapter.strip().lower()
-    return (_ROMAN.get(key, 999), chapter)
 
 
 def _list_project_ids() -> list[str]:
@@ -48,13 +27,7 @@ def _list_project_ids() -> list[str]:
 
 
 def _segment_files(source_work_id: str) -> list[Path]:
-    seg_dir = segments_dir(source_work_id)
-    if not seg_dir.is_dir():
-        return []
-    return sorted(
-        (p for p in seg_dir.glob("ch*.json") if not p.name.endswith("-sample.json")),
-        key=lambda p: _chapter_sort_key(p.stem.removeprefix("ch")),
-    )
+    return segment_files(source_work_id)
 
 
 def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -> dict[str, Any]:
@@ -63,6 +36,7 @@ def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -
     final = segment.get("final") or ""
     qa = segment.get("qa") or {}
     scores = qa.get("scores") or {}
+    issues = qa.get("issues") or []
     return {
         "chapter": chapter,
         "file": str(path.relative_to(corpus_root())),
@@ -71,7 +45,9 @@ def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -
         "has_final": bool(str(final).strip()),
         "qa_overall": scores.get("overall"),
         "qa_completed_at": qa.get("completed_at"),
-        "issue_count": len(qa.get("issues") or []),
+        "issue_count": len(issues),
+        "open_issue_count": sum(1 for issue in issues if not issue.get("approved")),
+        "annotation_count": 0,
         "annotations_generated_at": segment.get("annotations_generated_at"),
     }
 
@@ -95,7 +71,9 @@ def list_translation_projects() -> dict[str, Any]:
         rows.append(
             {
                 "source_work_id": work_id,
-                "translation_work_id": project.get("translation_work_id"),
+                "translation_work_id": translation_catalog_id(
+                    work_id, str(project.get("target_language") or "vi")
+                ),
                 "target_language": project.get("target_language"),
                 "translation_mode": project.get("translation_mode"),
                 "status": project.get("status"),
@@ -103,6 +81,7 @@ def list_translation_projects() -> dict[str, Any]:
                 "chapters_total": len(chapters),
                 "chapters_with_final": with_final,
                 "chapters_with_qa": with_qa,
+                "ready_to_promote": bool(chapters) and with_final == len(chapters),
                 "updated_at": project.get("updated_at"),
             }
         )
@@ -116,13 +95,27 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
     ]
     ann_path = annotations_file(source_work_id)
     ann_count = 0
+    by_chapter: dict[str, int] = {}
     if ann_path.is_file():
         store = json.loads(ann_path.read_text(encoding="utf-8"))
-        ann_count = len(store.get("annotations") or [])
+        items = store.get("annotations") or []
+        ann_count = len(items)
+        for item in items:
+            key = str(item.get("chapter") or "").upper()
+            if key:
+                by_chapter[key] = by_chapter.get(key, 0) + 1
+        for row in chapters:
+            row["annotation_count"] = by_chapter.get(str(row["chapter"]).upper(), 0)
+    status = translation_status(source_work_id)
     return {
         "project": project,
         "chapters": chapters,
         "annotations_total": ann_count,
+        "translation_work_id": translation_catalog_id(
+            source_work_id, str(project.get("target_language") or "vi")
+        ),
+        "ready_to_promote": status["complete"],
+        "missing_chapters": status["missing"],
     }
 
 
@@ -161,10 +154,10 @@ def list_annotations(source_work_id: str, chapter: str | None = None) -> dict[st
     if chapter:
         ch = chapter.strip().upper()
         items = [a for a in items if str(a.get("chapter", "")).upper() == ch]
-    items = sorted(
+        items = sorted(
         items,
         key=lambda a: (
-            _chapter_sort_key(str(a.get("chapter", ""))),
+            chapter_sort_key(str(a.get("chapter", ""))),
             str(a.get("marker") or ""),
             str(a.get("id") or ""),
         ),
@@ -176,9 +169,36 @@ def run_qa(source_work_id: str, chapter: str) -> dict[str, Any]:
     return qa_segment(source_work_id, chapter)
 
 
+def run_approve_qa(
+    source_work_id: str,
+    chapter: str,
+    *,
+    index: int | None = None,
+    replacement: str | None = None,
+    replacements: dict[int, str] | None = None,
+) -> dict[str, Any]:
+    return approve_qa_issues(
+        source_work_id,
+        chapter,
+        index=index,
+        replacement=replacement,
+        replacements=replacements,
+    )
+
+
+def run_reopen_qa(
+    source_work_id: str, chapter: str, *, index: int | None = None
+) -> dict[str, Any]:
+    return reopen_qa_issues(source_work_id, chapter, index=index)
+
+
 def run_annotate(source_work_id: str, chapter: str) -> dict[str, Any]:
     return annotate_segment(source_work_id, chapter)
 
 
 def run_draft(source_work_id: str, chapter: str) -> dict[str, Any]:
     return draft_chapter(source_work_id, chapter=chapter)
+
+
+def run_promote(source_work_id: str, *, title: str | None = None) -> dict[str, Any]:
+    return promote_translation(source_work_id, title=title)

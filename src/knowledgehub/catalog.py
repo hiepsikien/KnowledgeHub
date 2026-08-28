@@ -51,6 +51,20 @@ def _guess_read_category(brain: str, row: dict[str, Any]) -> str:
     return "essays"
 
 
+def is_hub_translation(work: dict[str, Any]) -> bool:
+    return work.get("origin") == "hub_translation"
+
+
+def _preserved_translations(path: Path) -> list[dict[str, Any]]:
+    if not path.is_file():
+        return []
+    try:
+        rows = load_works(path)
+    except ValueError:
+        return []
+    return [row for row in rows if is_hub_translation(row) and row.get("id")]
+
+
 def load_think_sources(src: Path | None = None) -> list[tuple[str, dict[str, Any]]]:
     root = src or sources_root()
     out: list[tuple[str, dict[str, Any]]] = []
@@ -123,6 +137,14 @@ def build_catalog(*, src: Path | None = None, dest: Path | None = None) -> dict[
         )
 
     out_dir = dest or catalog_dir()
+    dest_works = out_dir / "works.json"
+    for row in _preserved_translations(dest_works):
+        wid = str(row["id"])
+        if wid in seen:
+            continue
+        seen.add(wid)
+        works.append(row)
+
     out_dir.mkdir(parents=True, exist_ok=True)
     authors_list = sorted(authors.values(), key=lambda a: a["id"])
     (out_dir / "authors.json").write_text(
@@ -160,7 +182,39 @@ def get_work(work_id_value: str, *, corpus: Path | None = None) -> dict[str, Any
 
 def resolve_content_path(work: dict[str, Any], *, root: Path | None = None) -> Path:
     base = root or corpus_root()
-    return (base / str(work["content_file"])).resolve()
+    rel = work.get("content_file")
+    if not rel:
+        raise ValueError(f"{work.get('id')}: no content_file")
+    return (base / str(rel)).resolve()
+
+
+def work_has_manuscript(work: dict[str, Any], *, root: Path | None = None) -> bool:
+    if is_hub_translation(work):
+        from .translation.assemble import translation_status
+
+        source_id = str(work.get("derived_from") or "")
+        return bool(source_id) and translation_status(source_id)["complete"]
+    try:
+        return resolve_content_path(work, root=root).is_file()
+    except ValueError:
+        return False
+
+
+def upsert_work(work: dict[str, Any], *, corpus: Path | None = None) -> dict[str, Any]:
+    root = corpus or corpus_root()
+    path = root / "catalog" / "works.json"
+    works = load_works(path)
+    wid = str(work["id"])
+    replaced = False
+    for index, row in enumerate(works):
+        if row.get("id") == wid:
+            works[index] = work
+            replaced = True
+            break
+    if not replaced:
+        works.append(work)
+    path.write_text(json.dumps(works, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return work
 
 
 def read_allowed(work: dict[str, Any]) -> bool:
@@ -168,7 +222,6 @@ def read_allowed(work: dict[str, Any]) -> bool:
 
 
 def work_summary(work: dict[str, Any], *, root: Path | None = None) -> dict[str, Any]:
-    path = resolve_content_path(work, root=root)
     digest = work.get("content_hash")
     return {
         "id": work.get("id"),
@@ -180,9 +233,11 @@ def work_summary(work: dict[str, Any], *, root: Path | None = None) -> dict[str,
         "status": work.get("status") or "draft",
         "version": work.get("version") or 1,
         "read_allowed": read_allowed(work),
-        "has_raw": path.is_file(),
+        "has_raw": work_has_manuscript(work, root=root),
         "has_hash": bool(digest),
         "content_hash": digest,
+        "origin": work.get("origin"),
+        "derived_from": work.get("derived_from"),
         "category_slug": (work.get("read") or {}).get("category_slug") or "essays",
         "price_cents": int((work.get("read") or {}).get("price_cents") or 0),
         "split_length": (work.get("read") or {}).get("split_length") or "standard",

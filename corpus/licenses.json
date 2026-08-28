@@ -86,6 +86,13 @@
       "description": "Public domain tại EU (life+70 hoặc xuất bản+70)."
     },
     {
+      "id": "hub_editorial_vi",
+      "label": "Hub — Bản dịch biên tập (VI)",
+      "region": "vn",
+      "jurisdiction": ["vn"],
+      "description": "Bản dịch và chú thích do Knowledge Hub biên tập trên nguyên tác PD. Lớp biên tập, không độc quyền văn bản gốc."
+    },
+    {
       "id": "cc0",
       "label": "CC0",
       "region": "global",

@@ -359,7 +359,227 @@
       "title_vi": "Chú thích [28]",
       "body_vi": "Chỉ các học giả thuộc Trường phái Salamanca (như Vitoria, Covarruvias, và Suarez), những người đã kịch liệt phản đối việc dùng chiêu bài 'khai hóa văn minh' hoặc truyền giáo để biện minh cho các cuộc chiến tranh xâm lược.",
       "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--ctx-1",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "Sắc phong của Giáo hoàng",
+      "title_vi": "Bối cảnh lịch sử",
+      "body_vi": "Chỉ Sắc chỉ Inter Caetera do Giáo hoàng Alexander VI ban hành năm 1493, phân chia các vùng đất mới khám phá ở phía Tây và Nam cho Tây Ban Nha và Bồ Đào Nha.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--ctx-2",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "thiên luật hay nhân luật",
+      "title_vi": "Khái niệm pháp lý",
+      "body_vi": "Trong triết học pháp lý thời kỳ này, thiên luật (luật của Chúa) và nhân luật (luật do con người đặt ra) là hai nguồn luật tối cao để đánh giá tính hợp pháp của các hành vi chính trị và sở hữu tài sản.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-29",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[29]",
+      "kind": "footnote",
+      "anchor_text": "chính vấn đề này.[29]",
+      "title_vi": "Chú thích [29]",
+      "body_vi": "Đề cập đến các hiệp ước song phương giữa Tây Ban Nha và Bồ Đào Nha, tiêu biểu là Hiệp ước Alcaçovas (1479) và Hiệp ước Tordesillas (1494), nhằm phân chia ranh giới ảnh hưởng ở các vùng đất mới khám phá.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-30",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[30]",
+      "kind": "footnote",
+      "anchor_text": "bàn giao vật thể theo sau đó[30]",
+      "title_vi": "Chú thích [30]",
+      "body_vi": "Nguyên tắc pháp lý La Mã cổ đại (traditio): quyền sở hữu tài sản không được chuyển giao chỉ bằng thỏa thuận hay tặng cho đơn thuần, mà đòi hỏi phải có sự bàn giao vật chất thực tế và chiếm hữu sau đó.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-31",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[31]",
+      "kind": "footnote",
+      "anchor_text": "quyền lực trần thế,[31]",
+      "title_vi": "Chú thích [31]",
+      "body_vi": "Trích dẫn Phúc âm Giăng (John) 18:36. Grotius lập luận rằng vì Chúa Giê-su khước từ vương quyền trần thế, Giáo hoàng với tư cách là đại diện của Người cũng không thể có quyền lực chính trị hay thế tục đối với thế giới.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-32",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[32]",
+      "kind": "footnote",
+      "anchor_text": "không được kế thừa,[32]",
+      "title_vi": "Chú thích [32]",
+      "body_vi": "Luận điểm thần học cho rằng Giáo hoàng chỉ kế thừa sứ mệnh tâm linh của Thánh Phê-rô, chứ không kế thừa toàn bộ quyền năng thần thánh hay quyền thống trị tuyệt đối của Chúa Ki-tô.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-33",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[33]",
+      "kind": "footnote",
+      "anchor_text": "toàn thế giới.[33]",
+      "title_vi": "Chú thích [33]",
+      "body_vi": "Grotius trích dẫn quan điểm của các nhà thần học và luật gia Công giáo nổi tiếng (như Francisco de Vitoria), khẳng định Giáo hoàng không phải là vị chúa tể thế tục tối cao đối với toàn bộ thế giới.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-34",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[34]",
+      "kind": "footnote",
+      "anchor_text": "tâm linh mà thôi.[34]",
+      "title_vi": "Chú thích [34]",
+      "body_vi": "Học thuyết về quyền lực gián tiếp (potestas indirecta) của Giáo hoàng, giới hạn thẩm quyền của ngài trong các vấn đề đức tin và tâm linh, không có giá trị pháp lý đối với việc cai trị hành chính hay chính trị.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-35",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[35]",
+      "kind": "footnote",
+      "anchor_text": "thuộc về Giáo hội.[35]",
+      "title_vi": "Chú thích [35]",
+      "body_vi": "Dựa trên Thư thứ nhất gửi tín hữu Cô-rinh-tô (1 Cor 5:12). Người ngoại đạo nằm ngoài ranh giới của Giáo hội Công giáo, do đó Giáo hoàng không có quyền tài phán hay tước đoạt tài sản của họ.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiii--fn-36",
+      "segment_id": "grotius--freedom_of_the_seas--chiii",
+      "chapter": "III",
+      "marker": "[36]",
+      "kind": "footnote",
+      "anchor_text": "Giáo luật,[36]",
+      "title_vi": "Chú thích [36]",
+      "body_vi": "Nhắc đến các học giả trường phái Salamanca như Francisco de Vitoria. Họ là những người tiên phong bảo vệ quyền tự nhiên của người bản địa không theo Kitô giáo trước sự xâm lược của các đế quốc châu Âu.",
+      "generated_at": "2026-08-28T05:48:49+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--ctx-innocent-passage",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "quyền đi qua vô hại",
+      "title_vi": "Quyền đi qua vô hại",
+      "body_vi": "Đây là một nguyên tắc nền tảng của luật quốc tế sơ khởi, cho phép người nước ngoài đi qua lãnh thổ hoặc lãnh hải của một quốc gia khác một cách hòa bình mà không gây phương hại đến an ninh hay trật tự của quốc gia sở tại.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--ctx-res-nullius",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "res nullius",
+      "title_vi": "Khái niệm Res Nullius",
+      "body_vi": "Trong luật La Mã, 'res nullius' nghĩa là vật vô chủ, tức là những thứ chưa thuộc quyền sở hữu của ai và có thể thuộc về người đầu tiên chiếm hữu nó một cách hợp pháp. Grotius nhấn mạnh Đông Ấn đã có chủ quyền lâu đời nên không thể coi là đất vô chủ.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--ctx-sui-juris",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "sui juris",
+      "title_vi": "Khái niệm Sui Juris",
+      "body_vi": "Thuật ngữ Latin có nghĩa là 'tự trị' hoặc 'có tư cách pháp lý độc lập'. Trong bối cảnh này, Grotius khẳng định các quốc gia Đông Ấn có đầy đủ chủ quyền tự quyết và không phụ thuộc vào bất kỳ thế lực phong kiến hay tôn giáo nào của châu Âu.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-37",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[37]",
+      "kind": "footnote",
+      "anchor_text": "Victoria cũng nói",
+      "title_vi": "Chú thích [37]",
+      "body_vi": "Francisco de Vitoria (khoảng 1483–1546) là một nhà thần học và luật gia lỗi lạc người Tây Ban Nha, người sáng lập trường phái Salamanca. Ông nổi tiếng với các lập luận bảo vệ quyền tự nhiên và quyền sở hữu của người bản địa châu Mỹ chống lại sự xâm lược của thực dân Tây Ban Nha.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-38",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[38]",
+      "kind": "footnote",
+      "anchor_text": "quyền giao thương từ người Đông Ấn",
+      "title_vi": "Chú thích [38]",
+      "body_vi": "Grotius lập luận rằng vì người Bồ Đào Nha đã được người bản địa Đông Ấn cho phép buôn bán một cách hòa bình, họ không thể lấy cớ bị từ chối thương mại để phát động chiến tranh xâm lược.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-39",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[39]",
+      "kind": "footnote",
+      "anchor_text": "Boëthius đã ám chỉ",
+      "title_vi": "Chú thích [39]",
+      "body_vi": "Anicius Manlius Severinus Boethius (khoảng 477–524) là một triết gia La Mã thời Hậu cổ đại. Đoạn thơ này được trích từ tác phẩm nổi tiếng nhất của ông, 'De Consolatione Philosophiae' (Sự an ủi của triết học), phê phán sự phi lý và tàn bạo của chiến tranh.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-40",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[40]",
+      "kind": "footnote",
+      "anchor_text": "phán quyết của Thomas Aquinas",
+      "title_vi": "Chú thích [40]",
+      "body_vi": "Các thẩm quyền tôn giáo lớn được Grotius viện dẫn ở đây bao gồm Thánh Thomas Aquinas (nhà thần học vĩ đại nhất của Giáo hội Công giáo), Công đồng Toledo (Tây Ban Nha), và Giáo hoàng Gregory I (Gregory Cả). Tất cả đều thống nhất rằng không được dùng bạo lực để ép buộc người ngoại đạo cải đạo.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-41",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[41]",
+      "kind": "footnote",
+      "anchor_text": "tước đoạt tài sản của họ",
+      "title_vi": "Chú thích [41]",
+      "body_vi": "Nguyên tắc pháp lý thời trung cổ quy định rằng quyền sở hữu tài sản và quyền tự trị chính trị dựa trên luật tự nhiên và luật thực định, chứ không dựa trên đức tin tôn giáo. Do đó, việc không tin vào Chúa Kitô không phải là căn cứ hợp pháp để tước đoạt tài sản của một người.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-42",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[42]",
+      "kind": "footnote",
+      "anchor_text": "lời của Cajetan",
+      "title_vi": "Chú thích [42]",
+      "body_vi": "Thomas Cajetan (1469–1534) là một hồng y, nhà thần học người Ý và là người bình luận xuất sắc về các tác phẩm của Thomas Aquinas. Ông cực lực phản đối việc sử dụng chiến tranh như một công cụ để truyền bá Kitô giáo sang Tân Thế giới.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chiv--fn-43",
+      "segment_id": "grotius--freedom_of_the_seas--chiv",
+      "chapter": "IV",
+      "marker": "[43]",
+      "kind": "footnote",
+      "anchor_text": "chính các luật gia Tây Ban Nha",
+      "title_vi": "Chú thích [43]",
+      "body_vi": "Ám chỉ các luật gia thuộc Trường phái Salamanca của Tây Ban Nha, những người đã dũng cảm thừa nhận rằng các quốc gia bản địa ở châu Mỹ và châu Á có chủ quyền hợp pháp đối với lãnh thổ của họ, bất chấp sự khác biệt về tôn giáo.",
+      "generated_at": "2026-08-28T05:33:37+00:00"
     }
   ],
-  "updated_at": "2026-08-28T04:24:10+00:00"
+  "updated_at": "2026-08-28T05:53:51+00:00"
 }

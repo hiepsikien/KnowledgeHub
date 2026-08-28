@@ -29,7 +29,7 @@ Rebuild catalog after editing Think-shaped `sources/*/works.json`:
 knowledgehub build-catalog && knowledgehub validate
 ```
 
-Translation projects (pilot): `corpus/translations/<source_work_id>/` — see [docs/translation.md](../docs/translation.md).
+Translation projects (pilot): `corpus/translations/<source_work_id>/`. Promote a complete VI edition into catalog as `{source}_vi` (not into `raw/`) — see [docs/translation.md](../docs/translation.md).
 
 ## Think
 

@@ -13,6 +13,7 @@ from .paths import (
     project_file,
     segments_dir,
     style_brief_file,
+    translation_catalog_id,
     translation_dir,
 )
 from .providers import DEFAULT_GEMINI_MODEL
@@ -92,7 +93,9 @@ def init_translation_project(
     chapters = split_chapters(text)
     ch1 = sample_segment(chapters, chapter="I")
 
-    translation_work_id = translation_work_id or f"{source_work_id}--{target_language}"
+    translation_work_id = translation_work_id or translation_catalog_id(
+        source_work_id, target_language
+    )
     project: dict[str, Any] = {
         "source_work_id": source_work_id,
         "translation_work_id": translation_work_id,
