@@ -193,7 +193,7 @@ def test_draft_chapter_force_draft_reruns_deepseek(corpus: Path):
 
 
 def test_looks_cut_off():
-    from knowledgehub.translation.draft import looks_cut_off
+    from knowledgehub.translation.parts import looks_cut_off
 
     assert looks_cut_off("Ngược lại, nếu họ đã đặt trọng tâm vào sự thật r") is True
     assert looks_cut_off("Navigation on the sea is open to any one.") is False

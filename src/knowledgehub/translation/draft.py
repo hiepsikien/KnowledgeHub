@@ -11,9 +11,9 @@ from ..settings import resolve_models
 from .parts import (
     ensure_parts,
     join_parts,
-    looks_cut_off,
     part_limits,
     previous_context,
+    translation_looks_truncated,
 )
 from .project import load_project
 from .providers import ProviderError, complete_chat, complete_prompt
@@ -119,11 +119,12 @@ Return ONLY the polished Vietnamese text.
 """
 
 
-def _require_complete(text: str, *, stage: str) -> str:
-    if looks_cut_off(text):
+def _require_complete(text: str, *, stage: str, source: str) -> str:
+    if translation_looks_truncated(source, text):
         tail = " ".join(text.rstrip()[-60:].split())
         raise ProviderError(
-            f"{stage} stopped mid-word, output not saved. Ends with: …{tail}"
+            f"{stage} stopped mid-word where the source did not, output not saved. "
+            f"Ends with: …{tail}"
         )
     return text
 
@@ -136,7 +137,7 @@ def _should_reuse_draft(segment: dict[str, Any], mode: str, *, force_draft: bool
     if force_draft:
         return False
     raw = _raw_for_mode(segment, mode)
-    if not raw or looks_cut_off(raw):
+    if not raw or translation_looks_truncated(str(segment.get("source_text") or ""), raw):
         return False
     pipeline = segment.get("pipeline") if isinstance(segment.get("pipeline"), dict) else {}
     if pipeline.get("polish_pending"):
@@ -228,6 +229,7 @@ def _run_draft(
         draft_vi = _require_complete(
             complete_chat(messages, model=draft_model, temperature=0.3),
             stage="DeepSeek draft",
+            source=source_text,
         )
         raise_if_stopped()
         _checkpoint_draft(
@@ -251,6 +253,7 @@ def _run_draft(
             temperature=0.35,
         ),
         stage="Gemini polish",
+        source=draft_vi,
     )
     raise_if_stopped()
     return draft_vi, polished, reused
@@ -287,14 +290,14 @@ def _run_parts(
         skip_done = (
             not force_draft
             and polished_part
-            and not looks_cut_off(polished_part)
+            and not translation_looks_truncated(source, polished_part)
             and not skip_polish
         )
         reuse_raw = (
             not force_draft
             and not skip_done
             and bool(raw)
-            and not looks_cut_off(raw)
+            and not translation_looks_truncated(source, raw)
         )
         if skip_done:
             report_progress("drafted", f"Phần {index}/{total} đã có bản chỉnh")
@@ -319,6 +322,7 @@ def _run_parts(
             draft_vi = _require_complete(
                 complete_chat(messages, model=draft_model, temperature=0.3),
                 stage=f"DeepSeek draft part {index}",
+                source=source,
             )
             part.setdefault("draft_raw", {})[mode] = draft_vi
             segment["parts"] = parts
@@ -346,6 +350,7 @@ def _run_parts(
                 temperature=0.35,
             ),
             stage=f"Gemini polish part {index}",
+            source=draft_vi,
         )
         part.setdefault("draft_raw", {})[mode] = draft_vi
         part.setdefault("drafts", {})[mode] = polished_part
@@ -355,8 +360,8 @@ def _run_parts(
         prev_en, prev_vi = source, polished_part
     joined_raw = join_parts(parts, mode=mode, field="draft_raw")
     joined_final = join_parts(parts, mode=mode, field="final")
-    if looks_cut_off(joined_final):
-        raise ProviderError("Joined chapter output looks truncated")
+    if translation_looks_truncated(str(segment.get("source_text") or ""), joined_final):
+        raise ProviderError("Joined chapter output stops mid-word where the source does not")
     return joined_raw, joined_final, reused_all
 
 

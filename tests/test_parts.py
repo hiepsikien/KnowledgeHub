@@ -4,6 +4,7 @@ from knowledgehub.translation.parts import (
     completeness_status,
     looks_cut_off,
     pack_paragraphs,
+    translation_looks_truncated,
 )
 
 
@@ -59,6 +60,45 @@ def test_looks_cut_off_allows_legitimate_endings():
 def test_looks_cut_off_still_catches_mid_word():
     assert looks_cut_off("Ngược lại, nếu họ đã đặt trọng tâm vào sự thật r") is True
     assert looks_cut_off("Người Bồ Đào Nha không thể viện dẫn quyền chiếm hữu nào cả vì họ chư") is True
+
+
+def test_translation_is_not_truncated_when_the_source_breaks_off_too():
+    # Chapter VII part 2: a blank line inside the sentence ends the part on
+    # "they do not", so a faithful translation ends mid-sentence as well.
+    source = (
+        "the ownership of that jurisdiction is not thereby acquired over the "
+        "territorial domain. For so far as the merely\nmunicipal laws of any place "
+        "are concerned, they do not"
+    )
+    output = (
+        "quyền sở hữu đối với thẩm quyền ấy không vì thế mà có được trên lãnh thổ. "
+        "Bởi lẽ xét về các luật nội địa của bất kỳ nơi nào được xét đến, chúng không"
+    )
+    assert looks_cut_off(output) is True
+    assert translation_looks_truncated(source, output) is False
+
+
+def test_translation_is_truncated_when_the_source_ended_cleanly():
+    source = "For so far as the merely municipal laws of any place are concerned, they do not apply."
+    output = "Bởi lẽ xét về các luật nội địa của bất kỳ nơi nào được xét đến, chúng khô"
+    assert translation_looks_truncated(source, output) is True
+
+
+def test_completeness_uses_each_part_source():
+    segment = {
+        "source_text": "First part ends cleanly.\n\nSecond part trails off and they do not",
+        "parts": [
+            {"id": 1, "source_text": "First part ends cleanly.", "final": "Phần đầu kết thúc gọn."},
+            {
+                "id": 2,
+                "source_text": "Second part trails off and they do not",
+                "final": "Phần hai bỏ lửng ở đây và chúng không",
+            },
+        ],
+        "final": "Phần đầu kết thúc gọn.\n\nPhần hai bỏ lửng ở đây và chúng không",
+        "pipeline": {},
+    }
+    assert completeness_status(segment) == "ok"
 
 
 def test_completeness_ok_short_final():

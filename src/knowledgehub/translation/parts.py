@@ -18,12 +18,7 @@ def _is_heading(line: str) -> bool:
 
 
 def looks_cut_off(text: str) -> bool:
-    """True when the text stops mid-word instead of at a sentence boundary.
-
-    Only a fallback: the providers already reject responses whose finish reason
-    says the model hit its token ceiling. Kept narrow on purpose, because a false
-    positive throws away a translation that was paid for and is probably fine.
-    """
+    """True when the text stops mid-word instead of at a sentence boundary."""
     stripped = (text or "").rstrip()
     if len(stripped) < 20:
         return False
@@ -31,6 +26,18 @@ def looks_cut_off(text: str) -> bool:
     if not last.isalnum() or last.isdigit():
         return False
     return not _is_heading(stripped.rsplit("\n", 1)[-1].strip())
+
+
+def translation_looks_truncated(source: str, output: str) -> bool:
+    """True when an output breaks off mid-word somewhere its source did not.
+
+    Source scans carry blank lines inside sentences, so a part can legitimately
+    end on "…they do not". A faithful translation of that part ends mid-sentence
+    as well, and must not be thrown away for matching the text it came from.
+    Only a fallback anyway: the providers already reject any response whose
+    finish reason says the model ran into its token ceiling.
+    """
+    return looks_cut_off(output) and not looks_cut_off(source)
 
 
 def split_paragraphs(text: str) -> list[str]:
@@ -168,13 +175,14 @@ def completeness_status(segment: dict[str, Any], *, mode: str = "") -> str:
         cut_parts = [
             p
             for p in parts
-            if isinstance(p, dict) and looks_cut_off(_part_final(p, mode))
+            if isinstance(p, dict)
+            and translation_looks_truncated(str(p.get("source_text") or ""), _part_final(p, mode))
         ]
         if missing_final:
             return "incomplete_parts"
         if cut_parts:
             return "truncated"
-    if looks_cut_off(final):
+    if translation_looks_truncated(source, final):
         return "truncated"
     if final and abs(marker_count(source) - marker_count(final)) >= 2:
         return "truncated"
@@ -197,9 +205,7 @@ def prepare_chapter_for_resplit(segment: dict[str, Any], *, mode: str = "") -> d
     raw = _mode_raw(segment.get("draft_raw") if isinstance(segment.get("draft_raw"), dict) else None, mode)
     if final and not segment.get("legacy_final"):
         segment["legacy_final"] = final
-    if raw and not looks_cut_off(raw) and not segment.get("legacy_draft_raw"):
-        segment["legacy_draft_raw"] = raw
-    elif raw and not segment.get("legacy_draft_raw"):
+    if raw and not segment.get("legacy_draft_raw"):
         segment["legacy_draft_raw"] = raw
     segment["final"] = None
     segment["drafts"] = {"tight": None, "normal": None, "loose": None}
