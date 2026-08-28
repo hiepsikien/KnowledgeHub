@@ -34,5 +34,23 @@
       "tieu thuyet lich su"
     ],
     "pdNotes": "Ngô Tất Tố re-divided the 17 hồi; Wikisource has no chương XII (I–XI then XIII–XXI)."
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "leu_chong.txt",
+    "work": "Lều chõng",
+    "year": 1939,
+    "source_url": "https://vi.wikisource.org/wiki/Lều_chõng",
+    "translator": null,
+    "concepts": [
+      "khoa cu",
+      "si tu",
+      "lang que",
+      "tieu thuyet"
+    ],
+    "pdNotes": "Wikisource; 21 chương + lời tựa."
   }
 ]

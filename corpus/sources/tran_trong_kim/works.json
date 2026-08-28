@@ -33,5 +33,23 @@
       "thap nhi nhan duyen",
       "dai thua"
     ]
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "nho_giao.txt",
+    "work": "Nho giáo",
+    "year": 1930,
+    "source_url": "https://vi.wikisource.org/wiki/Nho_giáo",
+    "translator": null,
+    "concepts": [
+      "nho giao",
+      "khong tu",
+      "luan ly",
+      "triet hoc"
+    ],
+    "pdNotes": "Four quyển as one work from Wikisource unversioned tree."
   }
 ]

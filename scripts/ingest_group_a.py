@@ -118,7 +118,7 @@ def natural_key(title: str):
     keys = []
     for seg in title.split("/"):
         seg_l = seg.strip().lower()
-        if seg_l in {"tựa", "loi mo dau", "lời mở đầu", "mấy câu giới thiệu"}:
+        if seg_l in {"tựa", "loi mo dau", "lời mở đầu", "lời tựa", "lời phát đoan", "mấy câu giới thiệu"}:
             keys.append((0, 0, ""))
             continue
         m = re.match(
@@ -211,6 +211,7 @@ def parse_page(title: str) -> str:
 def clean(text: str) -> str:
     text = FOOTER.sub("", text)
     text = BOILERPLATE.sub("", text)
+    text = re.sub(r"(?m)^\.mw-parser-output.*\n?", "", text)
     drop = (
         "tusachtiengviet.com",
         "TVE-4U",
@@ -294,6 +295,25 @@ def fetch_vietsu_pdf_text(slug: str) -> tuple[str, str]:
     if len(re.findall(r"[A-Za-zÀ-ỹ]", text)) < 400:
         raise RuntimeError(f"{slug}: PDF looks like a scan ({len(text)} chars)")
     return text, pdf_url
+
+
+def fetch_commons_pdf_text(filename: str) -> str:
+    from pypdf import PdfReader
+    import io
+
+    url = "https://commons.wikimedia.org/wiki/Special:FilePath/" + urllib.parse.quote(filename)
+    print(f"  Commons {filename}", flush=True)
+    raw = request(url)
+    reader = PdfReader(io.BytesIO(raw))
+    pages = [(page.extract_text() or "") for page in reader.pages]
+    text = clean("\n\n".join(pages))
+    letters = len(re.findall(r"[A-Za-zÀ-ỹ]", text))
+    if letters < 400:
+        raise RuntimeError(
+            f"{filename}: scan PDF, no extractable text ({letters} letters, "
+            f"{len(reader.pages)} pages). Refusing vietsu Alpha Books 2016 edition."
+        )
+    return text
 
 
 def write_work(brain: str, filename: str, text: str, meta: dict) -> None:
@@ -518,6 +538,51 @@ JOBS = [
             concepts=["nam tien", "cham pa", "mo coi", "lich su"],
         ),
     },
+    {
+        "brain": "tran_trong_kim",
+        "file": "nho_giao.txt",
+        "kind": "wikisource",
+        "root": "Nho giáo",
+        "meta": row(
+            file="nho_giao.txt",
+            work="Nho giáo",
+            year=1930,
+            source_url="https://vi.wikisource.org/wiki/Nho_giáo",
+            translator=None,
+            concepts=["nho giao", "khong tu", "luan ly", "triet hoc"],
+            pdNotes="Four quyển as one work from Wikisource unversioned tree.",
+        ),
+    },
+    {
+        "brain": "ngo_tat_to",
+        "file": "leu_chong.txt",
+        "kind": "wikisource",
+        "root": "Lều chõng",
+        "meta": row(
+            file="leu_chong.txt",
+            work="Lều chõng",
+            year=1939,
+            source_url="https://vi.wikisource.org/wiki/Lều_chõng",
+            translator=None,
+            concepts=["khoa cu", "si tu", "lang que", "tieu thuyet"],
+        ),
+    },
+    {
+        "brain": "ngo_tat_to",
+        "file": "le_van_duyet.txt",
+        "kind": "commons_pdf",
+        "commons_file": "Gia Dinh tong tran ta quan Le Van Duyet.pdf",
+        "ws_try": "Gia Định tổng trấn tả quân Lê Văn Duyệt",
+        "meta": row(
+            file="le_van_duyet.txt",
+            work="Gia Định tổng trấn tả quân Lê Văn Duyệt",
+            year=1937,
+            source_url="https://commons.wikimedia.org/wiki/File:Gia_Dinh_tong_tran_ta_quan_Le_Van_Duyet.pdf",
+            translator=None,
+            concepts=["le van duyet", "gia dinh", "nha nguyen", "tieu su"],
+            pdNotes="Mai Lĩnh 1937 scan on Wikimedia Commons (Gallica). Not the Alpha Books Góc nhìn sử Việt 2016 edition on vietsu.",
+        ),
+    },
 ]
 
 
@@ -563,6 +628,8 @@ def run_job(job: dict) -> str:
         job["meta"]["source_url"] = urls[0]
         job["meta"]["pdNotes"] = "PDF 3 tập via vietsu S3; gộp 1 work; author Lê Văn Hòe PD 2019"
         return "\n\n\n".join(parts)
+    if kind == "commons_pdf":
+        return fetch_commons_pdf_text(job["commons_file"])
     raise ValueError(kind)
 
 

@@ -13415,6 +13415,43 @@
     }
   },
   {
+    "id": "ngo_tat_to--leu_chong",
+    "title": "Lều chõng",
+    "author_id": "ngo_tat_to",
+    "language": "vi",
+    "year": 1939,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Lều_chõng",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "khoa cu",
+      "si tu",
+      "lang que",
+      "tieu thuyet"
+    ],
+    "content_file": "sources/ngo_tat_to/raw/leu_chong.txt",
+    "think_brain": "ngo_tat_to",
+    "think_file": "leu_chong.txt",
+    "content_hash": "de78ddaca7b35573a154a95888742e710931ca007fe1a5a58451f9225ff5eaee",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "nguyen_an_ninh--ideal_jeunesse_annamite",
     "title": "L'idéal de la jeunesse annamite (La Cloche fêlée, 1923–1924)",
     "author_id": "nguyen_an_ninh",
@@ -19674,6 +19711,43 @@
     "think_brain": "tran_trong_kim",
     "think_file": "phat_giao.txt",
     "content_hash": "7a2714325828f27f596c019b3e52d2782a5ae265fcd16f71ec8fb31d09f3ecde",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "tran_trong_kim--nho_giao",
+    "title": "Nho giáo",
+    "author_id": "tran_trong_kim",
+    "language": "vi",
+    "year": 1930,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Nho_giáo",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "nho giao",
+      "khong tu",
+      "luan ly",
+      "triet hoc"
+    ],
+    "content_file": "sources/tran_trong_kim/raw/nho_giao.txt",
+    "think_brain": "tran_trong_kim",
+    "think_file": "nho_giao.txt",
+    "content_hash": "163d649600aef04446c0d9258c17bd2d09af1af114e3640754e4e1734367f57f",
     "version": 1,
     "status": "draft",
     "rights": {
