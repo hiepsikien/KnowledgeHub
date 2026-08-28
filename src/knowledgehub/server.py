@@ -17,6 +17,7 @@ from .catalog import (
     set_read_consumer,
     work_summary,
 )
+from .dotenv import load_dotenv
 from .hash import refresh_hashes
 from .licenses import load_license_catalog
 from .paths import corpus_root
@@ -28,12 +29,16 @@ from .translation.api import (
     list_annotations,
     list_translation_projects,
     run_annotate,
+    run_draft,
     run_qa,
 )
+from .translation.providers import ProviderError
 from .validate import validate_catalog
 
 WEB_DIR = Path(__file__).resolve().parent / "web"
 COOKIE = "kh_ops"
+
+load_dotenv()
 
 
 class LoginBody(BaseModel):
@@ -182,6 +187,8 @@ def create_app() -> FastAPI:
             return get_translation_project(source_work_id)
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/api/translations/{source_work_id}/segments/{chapter}", dependencies=guard)
     def translation_segment(
@@ -205,6 +212,17 @@ def create_app() -> FastAPI:
             return list_annotations(source_work_id, chapter)
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/draft/{chapter}", dependencies=guard)
+    def translation_draft(source_work_id: str, chapter: str) -> dict[str, Any]:
+        try:
+            return run_draft(source_work_id, chapter)
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.post("/api/translations/{source_work_id}/qa/{chapter}", dependencies=guard)
     def translation_qa(source_work_id: str, chapter: str) -> dict[str, Any]:
@@ -232,7 +250,10 @@ def create_app() -> FastAPI:
     def static_or_spa(path: str) -> FileResponse:
         if path.startswith("api/"):
             raise HTTPException(404, "not found")
-        candidate = WEB_DIR / path
+        web_root = WEB_DIR.resolve()
+        candidate = (WEB_DIR / path).resolve()
+        if web_root not in candidate.parents and candidate != web_root:
+            raise HTTPException(404, "not found")
         if candidate.is_file():
             return FileResponse(candidate)
         return FileResponse(WEB_DIR / "index.html")

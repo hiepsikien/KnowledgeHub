@@ -8,7 +8,8 @@ from typing import Any
 from ..paths import corpus_root
 from .paths import glossary_file, project_file, segments_dir, style_brief_file
 from .project import load_project
-from .providers import DEFAULT_GEMINI_MODEL, ProviderError, deepseek_chat, gemini_generate
+from .providers import DEFAULT_GEMINI_MODEL, deepseek_chat, gemini_generate
+from .segments_io import load_segment, save_segment
 
 MODE_INSTRUCTIONS = {
     "tight": (
@@ -109,6 +110,36 @@ Return ONLY the polished Vietnamese text.
 """
 
 
+def _run_draft(
+    *,
+    source_text: str,
+    mode: str,
+    glossary: dict[str, Any],
+    style_brief: str,
+    target_language: str,
+    draft_model: str,
+    polish_model: str,
+    skip_polish: bool,
+) -> tuple[str, str]:
+    messages = _build_draft_messages(
+        source_text=source_text,
+        mode=mode,
+        glossary=glossary,
+        style_brief=style_brief,
+        target_language=target_language,
+    )
+    draft_vi = deepseek_chat(messages, model=draft_model, temperature=0.3)
+    polished = draft_vi
+    if not skip_polish:
+        polished = gemini_generate(
+            _polish_prompt(draft_vi=draft_vi, source_text=source_text, glossary=glossary),
+            system="You polish Vietnamese literary translations. Never change meaning.",
+            model=polish_model,
+            temperature=0.35,
+        )
+    return draft_vi, polished
+
+
 def draft_sample(
     source_work_id: str,
     *,
@@ -135,23 +166,16 @@ def draft_sample(
     polish_model = models.get("polish", DEFAULT_GEMINI_MODEL)
     target_language = project.get("target_language", "vi")
 
-    messages = _build_draft_messages(
+    draft_vi, polished = _run_draft(
         source_text=source_text,
         mode=mode,
         glossary=glossary,
         style_brief=style_brief,
         target_language=target_language,
+        draft_model=draft_model,
+        polish_model=polish_model,
+        skip_polish=skip_polish,
     )
-    draft_vi = deepseek_chat(messages, model=draft_model, temperature=0.3)
-
-    polished = draft_vi
-    if not skip_polish:
-        polished = gemini_generate(
-            _polish_prompt(draft_vi=draft_vi, source_text=source_text, glossary=glossary),
-            system="You polish Vietnamese literary translations. Never change meaning.",
-            model=polish_model,
-            temperature=0.35,
-        )
 
     segment.setdefault("drafts", {})[mode] = polished
     segment.setdefault("draft_raw", {})[mode] = draft_vi
@@ -176,6 +200,69 @@ def draft_sample(
         "work_id": source_work_id,
         "mode": mode,
         "sample": str(sample_path.relative_to(corpus_root())),
+        "draft_chars": len(draft_vi),
+        "final_chars": len(polished),
+        "status": segment["status"],
+    }
+
+
+def draft_chapter(
+    source_work_id: str,
+    *,
+    chapter: str,
+    skip_polish: bool = False,
+) -> dict[str, Any]:
+    project = load_project(source_work_id)
+    mode = project.get("translation_mode")
+    if not mode:
+        raise ValueError("translation_mode not locked; run translate select-mode first")
+
+    path, segment = load_segment(source_work_id, chapter)
+    source_text = str(segment.get("source_text") or "")
+    if not source_text.strip():
+        raise ValueError("Segment has empty source_text")
+
+    glossary = json.loads(glossary_file(source_work_id).read_text(encoding="utf-8"))
+    style_brief = style_brief_file(source_work_id).read_text(encoding="utf-8")
+    models = project.get("models") or {}
+    draft_model = models.get("draft", "deepseek-chat")
+    polish_model = models.get("polish", DEFAULT_GEMINI_MODEL)
+    target_language = project.get("target_language", "vi")
+
+    draft_vi, polished = _run_draft(
+        source_text=source_text,
+        mode=mode,
+        glossary=glossary,
+        style_brief=style_brief,
+        target_language=target_language,
+        draft_model=draft_model,
+        polish_model=polish_model,
+        skip_polish=skip_polish,
+    )
+
+    segment.setdefault("drafts", {})[mode] = polished
+    segment.setdefault("draft_raw", {})[mode] = draft_vi
+    segment["final"] = polished
+    segment["status"] = "draft_ready"
+    segment["pipeline"] = {
+        "mode": mode,
+        "draft_model": draft_model,
+        "polish_model": polish_model if not skip_polish else None,
+        "completed_at": _now(),
+    }
+    save_segment(path, segment)
+
+    project["updated_at"] = _now()
+    project_file(source_work_id).write_text(
+        json.dumps(project, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    return {
+        "work_id": source_work_id,
+        "chapter": str(segment.get("chapter") or chapter),
+        "mode": mode,
+        "segment": str(path.relative_to(corpus_root())),
         "draft_chars": len(draft_vi),
         "final_chars": len(polished),
         "status": segment["status"],

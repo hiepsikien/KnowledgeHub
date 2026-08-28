@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 
 from knowledgehub.server import create_app
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
+from knowledgehub.translation.providers import ProviderError
 
 
 @pytest.fixture
@@ -118,3 +119,26 @@ def test_translation_qa_endpoint(client: TestClient):
         res = client.post("/api/translations/grotius--freedom_of_the_seas/qa/I")
     assert res.status_code == 200
     mock_qa.assert_called_once_with("grotius--freedom_of_the_seas", "I")
+
+
+def test_translation_qa_provider_error(client: TestClient):
+    with patch(
+        "knowledgehub.translation.api.qa_segment",
+        side_effect=ProviderError("DEEPSEEK_API_KEY is not set"),
+    ):
+        res = client.post("/api/translations/grotius--freedom_of_the_seas/qa/I")
+    assert res.status_code == 400
+    assert "DEEPSEEK_API_KEY" in res.json()["detail"]
+
+
+def test_translation_draft_endpoint(client: TestClient):
+    with patch("knowledgehub.translation.api.draft_chapter") as mock_draft:
+        mock_draft.return_value = {"chapter": "II", "final_chars": 12, "status": "draft_ready"}
+        res = client.post("/api/translations/grotius--freedom_of_the_seas/draft/II")
+    assert res.status_code == 200
+    mock_draft.assert_called_once_with("grotius--freedom_of_the_seas", chapter="II")
+
+
+def test_translation_rejects_unsafe_work_id(client: TestClient):
+    res = client.get("/api/translations/foo..bar")
+    assert res.status_code == 400

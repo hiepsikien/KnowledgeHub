@@ -50,6 +50,12 @@ def test_parse_json_object_strips_fences():
     assert parse_json_object('```json\n{"a": 1}\n```') == {"a": 1}
 
 
+def test_parse_json_object_extracts_wrapped_object():
+    assert parse_json_object('Here you go:\n{"scores": {"overall": 8}}\nThanks.') == {
+        "scores": {"overall": 8}
+    }
+
+
 def test_qa_segment_writes_scores(corpus: Path):
     _lock_tight(corpus)
     qa_json = json.dumps(

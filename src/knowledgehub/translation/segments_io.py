@@ -4,12 +4,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .paths import segments_dir
-from .project import load_project
+from .paths import safe_chapter, segments_dir
 
 
 def segment_path(source_work_id: str, chapter: str) -> Path:
-    ch = str(chapter).strip().lower()
+    ch = safe_chapter(chapter).lower()
     return segments_dir(source_work_id) / f"ch{ch}.json"
 
 

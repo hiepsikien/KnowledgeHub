@@ -12,8 +12,15 @@ def parse_json_object(text: str) -> dict[str, Any]:
         text = re.sub(r"\s*```$", "", text)
     try:
         parsed = json.loads(text)
-    except json.JSONDecodeError as exc:
-        raise ValueError(f"Invalid JSON from model: {text[:400]}") from exc
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError(f"Invalid JSON from model: {text[:400]}")
+        try:
+            parsed = json.loads(text[start : end + 1])
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Invalid JSON from model: {text[:400]}") from exc
     if not isinstance(parsed, dict):
         raise ValueError("Expected JSON object")
     return parsed

@@ -5,11 +5,12 @@ import json
 import sys
 
 from .catalog import build_catalog, get_work, set_read_consumer
+from .dotenv import load_dotenv
 from .hash import refresh_hashes
 from .read_publish import PublishError, publish_to_read
 from .translation.annotate import annotate_segment
 from .translation.fetch import FetchError, fetch_raw
-from .translation.draft import draft_sample
+from .translation.draft import draft_chapter, draft_sample
 from .translation.project import init_translation_project, select_translation_mode
 from .translation.providers import ProviderError
 from .translation.qa import qa_segment
@@ -17,6 +18,7 @@ from .validate import validate_catalog
 
 
 def main(argv: list[str] | None = None) -> int:
+    load_dotenv()
     parser = argparse.ArgumentParser(prog="knowledgehub")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
@@ -49,6 +51,10 @@ def main(argv: list[str] | None = None) -> int:
     tr_draft.add_argument("--work", required=True, help="Source work id")
     tr_draft.add_argument("--mode", default="normal", choices=["tight", "normal", "loose"])
     tr_draft.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
+    tr_draft_ch = tr_sub.add_parser("draft", help="AI draft one chapter after mode is locked")
+    tr_draft_ch.add_argument("--work", required=True, help="Source work id")
+    tr_draft_ch.add_argument("--chapter", required=True, help="Chapter label, e.g. I")
+    tr_draft_ch.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
     tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
     tr_mode.add_argument("--work", required=True, help="Source work id")
     tr_mode.add_argument("--mode", required=True, choices=["tight", "normal", "loose"])
@@ -126,6 +132,18 @@ def main(argv: list[str] | None = None) -> int:
                 result = draft_sample(
                     args.work,
                     mode=args.mode,
+                    skip_polish=args.skip_polish,
+                )
+            except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "draft":
+            try:
+                result = draft_chapter(
+                    args.work,
+                    chapter=args.chapter,
                     skip_polish=args.skip_polish,
                 )
             except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:

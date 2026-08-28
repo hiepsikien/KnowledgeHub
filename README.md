@@ -50,7 +50,20 @@ python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
 
 If `KNOWLEDGEHUB_OPS_SECRET` is unset, the UI is open on localhost. Set the secret to require login.
 
+`serve` and CLI commands load `.env` from the repo root (`cp .env.example .env`). Shell `export` still wins over the file.
+
 Publish still needs `READ_API_URL` (default `http://127.0.0.1:8000`) and `READ_HUB_TOKEN` (same as Read `HUB_SYNC_TOKEN`). Default Read status is `pending_review`. `publish-read` sends a **normalized** edition (Gutenberg wrappers, eBook notes, front TOC dumps stripped, hard-wrap lines joined into paragraphs). Source `raw/*.txt` is unchanged; `content_hash` still hashes the file on disk.
+
+## Translation desk (pilot)
+
+Curator tab **Dịch thuật** (`/translation/{work_id}`) for Grotius — *The Freedom of the Seas*: QA scores, EN ↔ VI, annotations. Pipeline docs: [docs/translation.md](./docs/translation.md). Needs `DEEPSEEK_API_KEY` and `GEMINI_API_KEY` in `.env`.
+
+```bash
+.venv/bin/knowledgehub translate init --work grotius--freedom_of_the_seas
+.venv/bin/knowledgehub translate draft-sample --work grotius--freedom_of_the_seas --mode tight
+.venv/bin/knowledgehub translate select-mode --work grotius--freedom_of_the_seas --mode tight
+.venv/bin/knowledgehub translate draft --work grotius--freedom_of_the_seas --chapter II
+```
 
 ## CLI
 
@@ -61,6 +74,7 @@ Publish still needs `READ_API_URL` (default `http://127.0.0.1:8000`) and `READ_H
 .venv/bin/knowledgehub allow-read --work locke--second_treatise
 .venv/bin/knowledgehub publish-read --work locke--second_treatise
 .venv/bin/knowledgehub publish-read --work locke--second_treatise --apply
+.venv/bin/knowledgehub translate draft --work grotius--freedom_of_the_seas --chapter I
 ```
 
 ## Core concepts
@@ -191,7 +205,7 @@ See [corpus/README.md](./corpus/README.md).
 
 ## Status
 
-Catalog, curator UI (`knowledgehub serve`), and Read publisher are in this repo. Phase 0 Think audit: [docs/hub-evolution.md](./docs/hub-evolution.md).
+Catalog, curator UI (`knowledgehub serve`), Read publisher, and a Grotius translation desk are in this repo. Phase 0 Think audit: [docs/hub-evolution.md](./docs/hub-evolution.md).
 
 ## Links
 

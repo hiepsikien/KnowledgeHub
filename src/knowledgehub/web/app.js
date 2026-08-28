@@ -13,6 +13,7 @@ const state = {
     segment: null,
     annotations: [],
     busy: false,
+    lastError: "",
   },
 };
 
@@ -242,6 +243,16 @@ function translationFromPath() {
   };
 }
 
+function setTranslationPath(workId, chapter) {
+  if (!workId) return;
+  const path = chapter
+    ? `/translation/${encodeURIComponent(workId)}/${encodeURIComponent(chapter)}`
+    : `/translation/${encodeURIComponent(workId)}`;
+  if (location.pathname !== path) {
+    history.replaceState({ view: "translation", workId, chapter }, "", path);
+  }
+}
+
 function scoreBar(label, value) {
   const n = Number(value) || 0;
   const pct = Math.max(0, Math.min(100, n * 10));
@@ -366,12 +377,14 @@ function renderTranslationDetail() {
     }
     <div class="row">
       <button class="btn ghost" id="tr-btn-segment" type="button" ${hasTranslation ? "" : "disabled"}>Xem đoạn EN ↔ VI</button>
+      <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button" ${state.translation.busy ? "disabled" : ""}>${hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
       <button class="btn ghost" id="tr-btn-qa" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
       <button class="btn" id="tr-btn-annotate" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${seg.annotations_generated_at ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
     </div>
-    <pre class="err" id="tr-action-out"></pre>
+    <pre class="err" id="tr-action-out">${escapeHtml(state.translation.lastError || "")}</pre>
   `;
   $("tr-btn-segment").onclick = () => showTranslationSegment(true);
+  $("tr-btn-draft").onclick = () => runTranslationDraft();
   $("tr-btn-qa").onclick = () => runTranslationQA();
   $("tr-btn-annotate").onclick = () => runTranslationAnnotate();
 }
@@ -451,8 +464,10 @@ async function selectTranslationChapter(chapter, showSegment) {
   if (!workId || !chapter) return;
   state.translation.selectedChapter = chapter;
   state.translation.segment = null;
+  state.translation.lastError = "";
   renderTranslationRows();
   renderTranslationDetail();
+  setTranslationPath(workId, chapter);
   try {
     const [seg, ann] = await Promise.all([
       api(`/api/translations/${encodeURIComponent(workId)}/segments/${encodeURIComponent(chapter)}`),
@@ -468,51 +483,50 @@ async function selectTranslationChapter(chapter, showSegment) {
   }
 }
 
-async function runTranslationQA() {
+async function runTranslationAction(kind) {
   const workId = state.translation.projectId;
   const chapter = state.translation.selectedChapter;
-  const out = $("tr-action-out");
   if (!workId || !chapter) return;
+  const labels = {
+    draft: "Đang dịch (DeepSeek → Gemini)… có thể mất vài phút.",
+    qa: "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.",
+    annotate: "Đang tạo chú thích (Gemini)…",
+  };
+  const paths = {
+    draft: `/api/translations/${encodeURIComponent(workId)}/draft/${encodeURIComponent(chapter)}`,
+    qa: `/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}`,
+    annotate: `/api/translations/${encodeURIComponent(workId)}/annotate/${encodeURIComponent(chapter)}`,
+  };
+  state.translation.lastError = "";
   state.translation.busy = true;
   renderTranslationDetail();
-  out.textContent = "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.";
+  const out = $("tr-action-out");
+  if (out) out.textContent = labels[kind];
   try {
-    const result = await api(`/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}`, {
-      method: "POST",
-    });
-    toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10`);
+    const result = await api(paths[kind], { method: "POST" });
+    if (kind === "qa") toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10`);
+    if (kind === "annotate") toast(`Đã cập nhật ${result.added_or_updated} chú thích (tổng ${result.total})`);
+    if (kind === "draft") toast(`Đã dịch chương ${chapter} (${result.final_chars || "?"} chữ)`);
     await loadTranslationProject(workId, chapter);
     showTranslationSegment(true);
   } catch (err) {
-    out.textContent = err.message;
+    state.translation.lastError = err.message;
   } finally {
     state.translation.busy = false;
     renderTranslationDetail();
   }
 }
 
+async function runTranslationDraft() {
+  await runTranslationAction("draft");
+}
+
+async function runTranslationQA() {
+  await runTranslationAction("qa");
+}
+
 async function runTranslationAnnotate() {
-  const workId = state.translation.projectId;
-  const chapter = state.translation.selectedChapter;
-  const out = $("tr-action-out");
-  if (!workId || !chapter) return;
-  state.translation.busy = true;
-  renderTranslationDetail();
-  out.textContent = "Đang tạo chú thích (Gemini)…";
-  try {
-    const result = await api(
-      `/api/translations/${encodeURIComponent(workId)}/annotate/${encodeURIComponent(chapter)}`,
-      { method: "POST" },
-    );
-    toast(`Đã cập nhật ${result.added_or_updated} chú thích (tổng ${result.total})`);
-    await loadTranslationProject(workId, chapter);
-    showTranslationSegment(true);
-  } catch (err) {
-    out.textContent = err.message;
-  } finally {
-    state.translation.busy = false;
-    renderTranslationDetail();
-  }
+  await runTranslationAction("annotate");
 }
 
 async function loadTranslationView(workId, chapter) {
@@ -528,6 +542,9 @@ async function loadTranslationView(workId, chapter) {
     await loadTranslationProject(workId, chapter);
   } else if (state.translation.projectId) {
     await loadTranslationProject(state.translation.projectId, chapter);
+  }
+  if (state.translation.projectId) {
+    setTranslationPath(state.translation.projectId, state.translation.selectedChapter);
   }
 }
 

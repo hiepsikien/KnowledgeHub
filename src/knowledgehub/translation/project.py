@@ -24,7 +24,7 @@ DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
 - **Voice:** formal, argumentative, citations from Roman law/classical authors.
 - **Audience:** Vietnamese readers without legal training — clarity without flattening the argument.
 - **Terms:** lock Latin legal terms on first use; prefer consistency (*Law of Nations* → *luật các dân tộc* / *luật quốc tế* — pick one in glossary).
-- **Mode (pilot):** Normal — balanced fidelity and readability.
+- **Mode:** chosen after sample review (tight / normal / loose).
 """
 
 DEFAULT_GLOSSARY = {
@@ -82,7 +82,11 @@ def init_translation_project(
             f"Translation project exists: {root}\nUse --overwrite to recreate."
         )
     root.mkdir(parents=True, exist_ok=True)
-    segments_dir(source_work_id).mkdir(parents=True, exist_ok=True)
+    seg_dir = segments_dir(source_work_id)
+    seg_dir.mkdir(parents=True, exist_ok=True)
+    if overwrite:
+        for leftover in seg_dir.glob("*.json"):
+            leftover.unlink()
 
     text = raw_path.read_text(encoding="utf-8")
     chapters = split_chapters(text)
@@ -150,8 +154,6 @@ def init_translation_project(
     for row in chapters:
         seg_id = f"ch{row['chapter'].lower()}"
         seg_path = segments_dir(source_work_id) / f"{seg_id}.json"
-        if seg_path.exists():
-            continue
         payload = {
             "id": f"{source_work_id}--{seg_id}",
             "chapter": row["chapter"],

@@ -61,6 +61,14 @@ knowledgehub translate draft-sample --work grotius--freedom_of_the_seas --mode n
 
 Pipeline: DeepSeek draft → Gemini polish → writes `segments/chi-sample.json`.
 
+### Draft a chapter (after mode is locked)
+
+```bash
+knowledgehub translate draft --work grotius--freedom_of_the_seas --chapter II
+```
+
+Uses the locked mode. Same DeepSeek → Gemini pipeline; writes `segments/chii.json`. The curator UI **Dịch chương** button calls the same endpoint.
+
 ### QA scoring
 
 After mode is locked and `final` is set on a chapter segment:

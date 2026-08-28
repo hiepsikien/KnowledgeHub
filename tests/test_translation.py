@@ -60,6 +60,18 @@ def test_select_translation_mode(corpus: Path):
     assert chi["final"] == "Bản dịch tight."
 
 
+def test_overwrite_rewrites_chapter_source(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    chi = corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json"
+    payload = json.loads(chi.read_text(encoding="utf-8"))
+    payload["source_text"] = "STALE"
+    chi.write_text(json.dumps(payload), encoding="utf-8")
+    init_translation_project("grotius--freedom_of_the_seas", overwrite=True)
+    rewritten = json.loads(chi.read_text(encoding="utf-8"))
+    assert "STALE" not in rewritten["source_text"]
+    assert "English paragraph one" in rewritten["source_text"]
+
+
 def test_fetch_grotius_writes_english_raw(corpus: Path, monkeypatch: pytest.MonkeyPatch):
     sample = Path(__file__).parent / "fixtures/grotius_pg_snippet.txt"
     monkeypatch.setattr(

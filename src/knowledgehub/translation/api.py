@@ -6,6 +6,7 @@ from typing import Any
 
 from ..paths import corpus_root
 from .annotate import annotate_segment
+from .draft import draft_chapter
 from .paths import annotations_file, segments_dir
 from .project import load_project
 from .qa import qa_segment
@@ -80,7 +81,7 @@ def list_translation_projects() -> dict[str, Any]:
     for work_id in _list_project_ids():
         try:
             project = load_project(work_id)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except (FileNotFoundError, json.JSONDecodeError, ValueError):
             continue
         chapters = _segment_files(work_id)
         with_final = 0
@@ -177,3 +178,7 @@ def run_qa(source_work_id: str, chapter: str) -> dict[str, Any]:
 
 def run_annotate(source_work_id: str, chapter: str) -> dict[str, Any]:
     return annotate_segment(source_work_id, chapter)
+
+
+def run_draft(source_work_id: str, chapter: str) -> dict[str, Any]:
+    return draft_chapter(source_work_id, chapter=chapter)
