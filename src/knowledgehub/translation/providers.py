@@ -17,6 +17,7 @@ DEEPSEEK_MODELS_URL = "https://api.deepseek.com/models"
 GEMINI_HOST = "https://generativelanguage.googleapis.com/v1beta"
 GEMINI_BASE = f"{GEMINI_HOST}/models"
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
+DEFAULT_MAX_OUTPUT_TOKENS = 65536
 _MODEL_NAME = re.compile(r"^[A-Za-z0-9._-]+$")
 _SKIP_GEMINI = re.compile(r"(embedding|imagen|image|veo|tts|audio|robotics|computer-use|lyria|transcribe)", re.I)
 _CATALOG_TTL_SEC = 300.0
@@ -45,6 +46,7 @@ def complete_chat(
     *,
     model: str,
     temperature: float = 0.3,
+    max_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
 ) -> str:
     if is_gemini_model(model):
         system_parts = [m.get("content") or "" for m in messages if m.get("role") == "system"]
@@ -54,8 +56,9 @@ def complete_chat(
             system="\n\n".join(part for part in system_parts if part) or None,
             model=model,
             temperature=temperature,
+            max_tokens=max_tokens,
         )
-    return deepseek_chat(messages, model=model, temperature=temperature)
+    return deepseek_chat(messages, model=model, temperature=temperature, max_tokens=max_tokens)
 
 
 def complete_prompt(
@@ -64,14 +67,21 @@ def complete_prompt(
     model: str,
     system: str | None = None,
     temperature: float = 0.4,
+    max_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
 ) -> str:
     if is_gemini_model(model):
-        return gemini_generate(prompt, system=system, model=model, temperature=temperature)
+        return gemini_generate(
+            prompt,
+            system=system,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
     messages: list[dict[str, str]] = []
     if system:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
-    return deepseek_chat(messages, model=model, temperature=temperature)
+    return deepseek_chat(messages, model=model, temperature=temperature, max_tokens=max_tokens)
 
 
 class ProviderError(Exception):
@@ -127,11 +137,13 @@ def deepseek_chat(
     *,
     model: str = "deepseek-v4-flash",
     temperature: float = 0.3,
+    max_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
 ) -> str:
     payload = {
         "model": model,
         "messages": messages,
         "temperature": temperature,
+        "max_tokens": max_tokens,
         "stream": False,
     }
     result = _post_json(
@@ -143,9 +155,16 @@ def deepseek_chat(
         payload,
     )
     try:
-        return str(result["choices"][0]["message"]["content"]).strip()
+        choice = result["choices"][0]
+        finish = str(choice.get("finish_reason") or "")
+        text = str(choice["message"]["content"]).strip()
     except (KeyError, IndexError, TypeError) as exc:
         raise ProviderError(f"Unexpected DeepSeek response: {result!r}") from exc
+    if finish == "length":
+        raise ProviderError(
+            "DeepSeek hit max_tokens (finish_reason=length); translation likely truncated"
+        )
+    return text
 
 
 def gemini_generate(
@@ -154,6 +173,7 @@ def gemini_generate(
     system: str | None = None,
     model: str = DEFAULT_GEMINI_MODEL,
     temperature: float = 0.4,
+    max_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
 ) -> str:
     if not _MODEL_NAME.fullmatch(model):
         raise ProviderError(f"Invalid Gemini model: {model!r}")
@@ -161,7 +181,7 @@ def gemini_generate(
     url = f"{GEMINI_BASE}/{model}:generateContent"
     body: dict[str, Any] = {
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": temperature},
+        "generationConfig": {"temperature": temperature, "maxOutputTokens": max_tokens},
     }
     if system:
         body["systemInstruction"] = {"parts": [{"text": system}]}
@@ -171,13 +191,20 @@ def gemini_generate(
         body,
     )
     try:
-        parts = result["candidates"][0]["content"]["parts"]
+        candidate = result["candidates"][0]
+        finish = str(candidate.get("finishReason") or "")
+        parts = candidate["content"]["parts"]
         texts = [p["text"] for p in parts if "text" in p]
         if not texts:
             raise KeyError("no text parts")
-        return "\n".join(texts).strip()
+        text = "\n".join(texts).strip()
     except (KeyError, IndexError, TypeError) as exc:
         raise ProviderError(f"Unexpected Gemini response: {result!r}") from exc
+    if finish.upper() == "MAX_TOKENS":
+        raise ProviderError(
+            "Gemini hit maxOutputTokens (finishReason=MAX_TOKENS); translation likely truncated"
+        )
+    return text
 
 
 def _pretty_deepseek_label(model_id: str) -> str:

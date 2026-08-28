@@ -8,6 +8,9 @@ from typing import Any
 
 from .paths import corpus_root
 
+WORKER_MIN_FLOOR = 0
+WORKER_MAX_CAP = 8
+
 MODEL_SLOTS = ("draft", "polish", "qa", "annotations")
 MODES = ("tight", "normal", "loose")
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
@@ -48,12 +51,40 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "auto_annotate": True,
         "auto_qa": True,
         "default_mode": "normal",
+        "min_workers": 1,
+        "max_workers": 2,
+        "max_attempts": 2,
+        "job_timeout_sec": 600,
     }
 }
 
 
 def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def _coerce_worker_int(value: Any, *, name: str, default: int) -> int:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        raise ValueError(f"{name} must be an integer")
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        if not value.is_integer():
+            raise ValueError(f"{name} must be an integer")
+        return int(value)
+    if isinstance(value, str) and value.strip().lstrip("-").isdigit():
+        return int(value.strip())
+    raise ValueError(f"{name} must be an integer")
+
+
+def clamp_worker_limits(min_workers: Any, max_workers: Any) -> tuple[int, int]:
+    min_w = _coerce_worker_int(min_workers, name="min_workers", default=1)
+    max_w = _coerce_worker_int(max_workers, name="max_workers", default=2)
+    max_w = max(1, min(WORKER_MAX_CAP, max_w))
+    min_w = max(WORKER_MIN_FLOOR, min(max_w, min_w))
+    return min_w, max_w
 
 
 def settings_path():
@@ -81,6 +112,32 @@ def _merge_translation(raw: dict[str, Any] | None) -> dict[str, Any]:
     mode = incoming.get("default_mode")
     if mode in MODES:
         base["default_mode"] = mode
+    try:
+        base["min_workers"], base["max_workers"] = clamp_worker_limits(
+            incoming["min_workers"] if "min_workers" in incoming else base["min_workers"],
+            incoming["max_workers"] if "max_workers" in incoming else base["max_workers"],
+        )
+    except ValueError:
+        pass
+    try:
+        base["max_attempts"] = max(
+            1,
+            min(10, _coerce_worker_int(
+                incoming["max_attempts"] if "max_attempts" in incoming else base["max_attempts"],
+                name="max_attempts",
+                default=2,
+            )),
+        )
+        base["job_timeout_sec"] = max(
+            60,
+            min(3600, _coerce_worker_int(
+                incoming["job_timeout_sec"] if "job_timeout_sec" in incoming else base["job_timeout_sec"],
+                name="job_timeout_sec",
+                default=600,
+            )),
+        )
+    except ValueError:
+        pass
     return base
 
 
@@ -118,11 +175,27 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
     mode = translation.get("default_mode") or "normal"
     if mode not in MODES:
         raise ValueError(f"Unknown translation mode {mode!r}; expected one of {list(MODES)}")
+    min_workers, max_workers = clamp_worker_limits(
+        translation.get("min_workers"),
+        translation.get("max_workers"),
+    )
+    max_attempts = max(
+        1,
+        min(10, _coerce_worker_int(translation.get("max_attempts"), name="max_attempts", default=2)),
+    )
+    job_timeout_sec = max(
+        60,
+        min(3600, _coerce_worker_int(translation.get("job_timeout_sec"), name="job_timeout_sec", default=600)),
+    )
     return {
         "models": models,
         "auto_annotate": bool(translation.get("auto_annotate")),
         "auto_qa": bool(translation.get("auto_qa")),
         "default_mode": mode,
+        "min_workers": min_workers,
+        "max_workers": max_workers,
+        "max_attempts": max_attempts,
+        "job_timeout_sec": job_timeout_sec,
     }
 
 
@@ -176,6 +249,9 @@ def save_settings(payload: dict[str, Any], *, sync_projects: bool = True) -> dic
         merged["projects_updated"] = _sync_project_models(merged["translation"]["models"])
     else:
         merged["projects_updated"] = 0
+    from .translation.jobs import scale_workers
+
+    scale_workers()
     return merged
 
 
@@ -191,13 +267,31 @@ def resolve_models(project: dict[str, Any] | None = None) -> dict[str, str]:
     return out
 
 
+def worker_limits() -> tuple[int, int]:
+    tr = load_settings().get("translation") or {}
+    return clamp_worker_limits(tr.get("min_workers"), tr.get("max_workers"))
+
+
+def job_guard_limits() -> tuple[int, int]:
+    tr = load_settings().get("translation") or {}
+    max_attempts = max(1, min(10, int(tr.get("max_attempts") or 2)))
+    job_timeout_sec = max(60, min(3600, int(tr.get("job_timeout_sec") or 600)))
+    return max_attempts, job_timeout_sec
+
+
 def translation_pipeline() -> dict[str, Any]:
     tr = load_settings().get("translation") or {}
+    min_workers, max_workers = worker_limits()
+    max_attempts, job_timeout_sec = job_guard_limits()
     return {
         "auto_annotate": bool(tr.get("auto_annotate")),
         "auto_qa": bool(tr.get("auto_qa")),
         "default_mode": tr.get("default_mode") or "normal",
         "models": resolve_models(),
+        "min_workers": min_workers,
+        "max_workers": max_workers,
+        "max_attempts": max_attempts,
+        "job_timeout_sec": job_timeout_sec,
     }
 
 

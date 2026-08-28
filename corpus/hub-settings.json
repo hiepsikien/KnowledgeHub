@@ -2,13 +2,16 @@
   "translation": {
     "models": {
       "draft": "deepseek-v4-flash",
-      "polish": "gemini-3.7-flash",
+      "polish": "gemini-3.5-flash",
       "qa": "deepseek-v4-pro",
-      "annotations": "gemini-3.7-flash"
+      "annotations": "gemini-3.5-flash"
     },
     "auto_annotate": true,
     "auto_qa": true,
-    "default_mode": "normal"
+    "default_mode": "tight",
+    "min_workers": 1,
+    "max_workers": 2,
+    "job_timeout_sec": 1800
   },
-  "updated_at": "2026-08-28T08:41:00+00:00"
+  "updated_at": "2026-08-28T09:39:46+00:00"
 }

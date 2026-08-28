@@ -49,12 +49,35 @@ def test_gemini_sends_key_in_header(monkeypatch: pytest.MonkeyPatch):
     def fake_post(url, headers, payload, *, timeout=300):
         captured["url"] = url
         captured["headers"] = headers
+        captured["payload"] = payload
         return {"candidates": [{"content": {"parts": [{"text": "ok"}]}}]}
 
     monkeypatch.setattr("knowledgehub.translation.providers._post_json", fake_post)
     assert gemini_generate("hi") == "ok"
     assert "key=" not in captured["url"]
     assert captured["headers"]["x-goog-api-key"] == "secret-key"
+    assert captured["payload"]["generationConfig"]["maxOutputTokens"] == 65536
+
+
+def test_deepseek_sets_max_tokens_and_rejects_length(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    captured: dict = {}
+
+    def fake_post(url, headers, payload, *, timeout=300):
+        captured["payload"] = payload
+        return {
+            "choices": [
+                {
+                    "finish_reason": "length",
+                    "message": {"content": "Bản dịch bị cắt giữa câu và thiếu phầ"},
+                }
+            ]
+        }
+
+    monkeypatch.setattr("knowledgehub.translation.providers._post_json", fake_post)
+    with pytest.raises(ProviderError, match="finish_reason=length"):
+        deepseek_chat([{"role": "user", "content": "hi"}])
+    assert captured["payload"]["max_tokens"] == 65536
 
 
 def test_draft_sample_writes_normal(corpus: Path):
@@ -100,3 +123,124 @@ def test_draft_chapter_writes_locked_mode(corpus: Path):
     assert chii["drafts"]["tight"] == "Chương II đã chỉnh."
     assert chii["final"] == "Chương II đã chỉnh."
     assert chii["status"] == "draft_ready"
+    assert chii["pipeline"]["polish_pending"] is False
+    assert result["reused_draft"] is False
+
+
+def test_draft_chapter_checkpoints_raw_if_polish_fails(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    with (
+        patch("knowledgehub.translation.draft.complete_chat", return_value="Chương II thô.") as mock_chat,
+        patch(
+            "knowledgehub.translation.draft.complete_prompt",
+            side_effect=ProviderError("HTTP 503: high demand"),
+        ),
+    ):
+        with pytest.raises(ProviderError, match="503"):
+            draft_chapter("grotius--freedom_of_the_seas", chapter="II")
+    mock_chat.assert_called_once()
+    chii = json.loads(
+        (corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json").read_text(encoding="utf-8")
+    )
+    assert chii["draft_raw"]["tight"] == "Chương II thô."
+    assert not str(chii.get("final") or "").strip()
+    assert chii["pipeline"]["polish_pending"] is True
+    assert chii["status"] == "pending"
+
+    with (
+        patch("knowledgehub.translation.draft.complete_chat") as mock_chat_again,
+        patch("knowledgehub.translation.draft.complete_prompt", return_value="Chương II đã chỉnh.") as mock_polish,
+    ):
+        result = draft_chapter("grotius--freedom_of_the_seas", chapter="II")
+    mock_chat_again.assert_not_called()
+    mock_polish.assert_called_once()
+    assert result["reused_draft"] is True
+    chii = json.loads(
+        (corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json").read_text(encoding="utf-8")
+    )
+    assert chii["final"] == "Chương II đã chỉnh."
+    assert chii["draft_raw"]["tight"] == "Chương II thô."
+    assert chii["pipeline"]["polish_pending"] is False
+
+
+def test_draft_chapter_force_draft_reruns_deepseek(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    chii_path = corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json"
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    chii["draft_raw"] = {"tight": "Nháp cũ."}
+    chii["pipeline"] = {"polish_pending": True}
+    chii_path.write_text(json.dumps(chii, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with (
+        patch("knowledgehub.translation.draft.complete_chat", return_value="Nháp mới.") as mock_chat,
+        patch("knowledgehub.translation.draft.complete_prompt", return_value="Đã chỉnh."),
+    ):
+        result = draft_chapter("grotius--freedom_of_the_seas", chapter="II", force_draft=True)
+    mock_chat.assert_called_once()
+    assert result["reused_draft"] is False
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    assert chii["draft_raw"]["tight"] == "Nháp mới."
+    assert chii["final"] == "Đã chỉnh."
+
+
+def test_looks_cut_off():
+    from knowledgehub.translation.draft import looks_cut_off
+
+    assert looks_cut_off("Ngược lại, nếu họ đã đặt trọng tâm vào sự thật r") is True
+    assert looks_cut_off("Navigation on the sea is open to any one.") is False
+    assert looks_cut_off("short") is False
+
+
+def test_draft_chapter_rejects_truncated_deepseek(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    cut = "Đây là một bản dịch dài đủ hai mươi ký tự nhưng bị cắt giữa chừ"
+    with (
+        patch("knowledgehub.translation.draft.complete_chat", return_value=cut),
+        patch("knowledgehub.translation.draft.complete_prompt") as mock_polish,
+    ):
+        with pytest.raises(ProviderError, match="truncated"):
+            draft_chapter("grotius--freedom_of_the_seas", chapter="II")
+    mock_polish.assert_not_called()
+    chii = json.loads(
+        (corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json").read_text(encoding="utf-8")
+    )
+    assert not str((chii.get("draft_raw") or {}).get("tight") or "").strip()
+    assert not str(chii.get("final") or "").strip()
+
+
+def test_draft_does_not_reuse_truncated_raw(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    payload = json.loads(sample.read_text(encoding="utf-8"))
+    payload["drafts"]["tight"] = "Bản dịch tight."
+    sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    select_translation_mode("grotius--freedom_of_the_seas", "tight")
+    chii_path = corpus / "translations/grotius--freedom_of_the_seas/segments/chii.json"
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    chii["draft_raw"] = {"tight": "Nháp cũ bị cắt giữa câu và thiếu phần còn lại r"}
+    chii["pipeline"] = {"polish_pending": True}
+    chii_path.write_text(json.dumps(chii, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with (
+        patch("knowledgehub.translation.draft.complete_chat", return_value="Nháp mới đủ câu.") as mock_chat,
+        patch("knowledgehub.translation.draft.complete_prompt", return_value="Đã chỉnh đủ câu."),
+    ):
+        result = draft_chapter("grotius--freedom_of_the_seas", chapter="II")
+    mock_chat.assert_called_once()
+    assert result["reused_draft"] is False
+    chii = json.loads(chii_path.read_text(encoding="utf-8"))
+    assert chii["draft_raw"]["tight"] == "Nháp mới đủ câu."
+    assert chii["final"] == "Đã chỉnh đủ câu."

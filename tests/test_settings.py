@@ -8,8 +8,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from knowledgehub.server import create_app
-from knowledgehub.settings import followup_kinds, resolve_models, save_settings
-from knowledgehub.translation.jobs import enqueue_job, process_next_job
+from knowledgehub.settings import clamp_worker_limits, followup_kinds, resolve_models, save_settings
+from knowledgehub.translation.jobs import desired_worker_count, enqueue_job, process_next_job
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
 from knowledgehub.translation.providers import (
     ProviderError,
@@ -80,6 +80,10 @@ def test_settings_page(client: TestClient):
     assert page.status_code == 200
     assert "Cài đặt Hub" in page.text
     assert "Tải lại danh sách" in page.text
+    assert "min_workers" in page.text
+    assert "max_workers" in page.text
+    assert "max_attempts" in page.text
+    assert "job_timeout_sec" in page.text
 
 
 def test_settings_get_defaults(client: TestClient):
@@ -87,6 +91,10 @@ def test_settings_get_defaults(client: TestClient):
     tr = data["settings"]["translation"]
     assert tr["auto_annotate"] is True
     assert tr["auto_qa"] is True
+    assert tr["min_workers"] == 1
+    assert tr["max_workers"] == 2
+    assert tr["max_attempts"] == 2
+    assert tr["job_timeout_sec"] == 600
     assert tr["models"]["draft"] == "deepseek-v4-flash"
     assert tr["models"]["qa"] == "deepseek-v4-pro"
     ids = {m["id"] for m in data["model_catalog"]}
@@ -111,6 +119,8 @@ def test_settings_save_models_and_pipeline(client: TestClient, tmp_path: Path):
                 "auto_annotate": False,
                 "auto_qa": True,
                 "default_mode": "tight",
+                "min_workers": 1,
+                "max_workers": 3,
             }
         },
     )
@@ -122,6 +132,8 @@ def test_settings_save_models_and_pipeline(client: TestClient, tmp_path: Path):
     assert tr["auto_annotate"] is False
     assert tr["auto_qa"] is True
     assert tr["default_mode"] == "tight"
+    assert tr["min_workers"] == 1
+    assert tr["max_workers"] == 3
     assert body["projects_updated"] == 1
     stored = json.loads((tmp_path / "hub-settings.json").read_text(encoding="utf-8"))
     assert stored["translation"]["models"]["qa"] == "gemini-3.5-flash"
@@ -133,6 +145,41 @@ def test_settings_save_models_and_pipeline(client: TestClient, tmp_path: Path):
     assert pipeline["auto_annotate"] is False
     assert pipeline["auto_qa"] is True
     assert pipeline["models"]["polish"] == "gemini-2.5-pro"
+    assert pipeline["min_workers"] == 1
+    assert pipeline["max_workers"] == 3
+
+
+def test_settings_clamps_worker_limits(client: TestClient):
+    res = client.post(
+        "/api/settings",
+        json={"translation": {"min_workers": 5, "max_workers": 2}},
+    )
+    assert res.status_code == 200, res.text
+    tr = res.json()["settings"]["translation"]
+    assert tr["min_workers"] == 2
+    assert tr["max_workers"] == 2
+    high = client.post(
+        "/api/settings",
+        json={"translation": {"min_workers": -3, "max_workers": 99}},
+    )
+    tr = high.json()["settings"]["translation"]
+    assert tr["min_workers"] == 0
+    assert tr["max_workers"] == 8
+
+
+def test_clamp_worker_limits():
+    assert clamp_worker_limits(1, 2) == (1, 2)
+    assert clamp_worker_limits(5, 2) == (2, 2)
+    assert clamp_worker_limits(-1, 3) == (0, 3)
+    assert clamp_worker_limits(0, 0) == (0, 1)
+    assert clamp_worker_limits("1", "4") == (1, 4)
+
+
+def test_desired_worker_count():
+    assert desired_worker_count(0, 0, 1, 2) == 1
+    assert desired_worker_count(0, 0, 0, 2) == 0
+    assert desired_worker_count(5, 0, 1, 2) == 2
+    assert desired_worker_count(1, 1, 1, 2) == 2
 
 
 def test_settings_rejects_unknown_model(client: TestClient):
@@ -176,6 +223,29 @@ def test_draft_job_queues_annotate_then_qa(client: TestClient, tmp_path: Path):
     store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
     kinds = [job["kind"] for job in store["jobs"]]
     assert kinds.count("draft") == 1
+    assert kinds.count("annotate") == 1
+    assert kinds.count("qa") == 1
+
+
+def test_annotate_error_still_queues_qa(client: TestClient, tmp_path: Path):
+    save_settings({"translation": {"auto_annotate": True, "auto_qa": True}})
+    enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
+    with (
+        patch(
+            "knowledgehub.translation.annotate.annotate_segment",
+            side_effect=RuntimeError("HTTP 429: RESOURCE_EXHAUSTED"),
+        ),
+        patch("knowledgehub.translation.qa.qa_segment", return_value={"scores": {"overall": 8}}),
+    ):
+        failed = process_next_job()
+        assert failed["kind"] == "annotate"
+        assert failed["status"] == "error"
+        follow = process_next_job()
+        assert follow is not None
+        assert follow["kind"] == "qa"
+        assert follow["status"] == "done"
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    kinds = [job["kind"] for job in store["jobs"]]
     assert kinds.count("annotate") == 1
     assert kinds.count("qa") == 1
 

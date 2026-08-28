@@ -86,6 +86,7 @@ def test_translation_list_and_project(client: TestClient):
     ch_i = next(c for c in project["chapters"] if c["chapter"] == "I")
     assert ch_i["qa_overall"] == 8
     assert ch_i["has_final"] is True
+    assert ch_i["has_draft_raw"] is False
     assert ch_i["annotation_count"] == 1
 
 
@@ -249,6 +250,81 @@ def test_promote_rejects_incomplete(client: TestClient):
     assert "Missing final" in res.json()["detail"]
 
 
+def test_chapter_last_error_from_failed_job(client: TestClient):
+    from knowledgehub.translation.jobs import complete_job, enqueue_job
+
+    job = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    complete_job(job["id"], error='HTTP 503: {"error":{"message":"high demand","status":"UNAVAILABLE"}}')
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "503" in ch_ii["last_error"]
+    assert ch_ii["last_error_kind"] == "draft"
+    assert ch_ii["last_error_status"] == "error"
+    assert ch_ii["jobs"] == []
+
+
+def test_last_error_clears_after_later_success(client: TestClient):
+    from knowledgehub.translation.jobs import complete_job, enqueue_job
+
+    failed = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    complete_job(failed["id"], error="HTTP 503: high demand")
+    later = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    complete_job(later["id"], result={"chapter": "II", "status": "draft_ready"})
+    follow = enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "last_error" not in ch_ii
+    assert ch_ii["jobs"][0]["id"] == follow["id"]
+
+
+def test_last_error_kind_follows_failed_annotate(client: TestClient):
+    from knowledgehub.paths import corpus_root
+    from knowledgehub.translation.jobs import complete_job, enqueue_job
+
+    draft = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    complete_job(draft["id"], result={"chapter": "II", "status": "draft_ready"})
+    annotate = enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
+    complete_job(annotate["id"], error="HTTP 429: RESOURCE_EXHAUSTED generate_content_free_tier_requests")
+    store_path = corpus_root() / ".translation-jobs.json"
+    store = json.loads(store_path.read_text(encoding="utf-8"))
+    for job in store["jobs"]:
+        if job.get("id") == annotate["id"]:
+            job["created_at"] = "2099-01-01T00:00:00+00:00"
+            job["finished_at"] = "2099-01-01T00:00:01+00:00"
+    store_path.write_text(json.dumps(store), encoding="utf-8")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "429" in ch_ii["last_error"]
+    assert ch_ii["last_error_kind"] == "annotate"
+    assert ch_ii["last_error_status"] == "error"
+
+
+def test_interrupted_qa_shows_until_later_scores(client: TestClient, tmp_path: Path):
+    from knowledgehub.translation.jobs import claim_next, enqueue_job, interrupt_stale_running
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "qa")
+    assert claim_next()["status"] == "running"
+    assert interrupt_stale_running() == 1
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "interrupted" in ch_ii["last_error"]
+    assert ch_ii["last_error_kind"] == "qa"
+    assert ch_ii["last_error_status"] == "interrupted"
+
+    path = tmp_path / "translations/grotius--freedom_of_the_seas/segments/chii.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload["qa"] = {
+        "scores": {"overall": 8},
+        "issues": [],
+        "completed_at": "2099-01-01T00:00:00+00:00",
+    }
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert "last_error" not in ch_ii
+    assert ch_ii["qa_overall"] == 8
+
+
 def test_enqueue_draft_job_and_dedupe(client: TestClient):
     first = client.post(
         "/api/translations/grotius--freedom_of_the_seas/jobs",
@@ -267,6 +343,9 @@ def test_enqueue_draft_job_and_dedupe(client: TestClient):
     assert second.json()["job"]["created"] is False
     listed = client.get("/api/translations/grotius--freedom_of_the_seas/jobs").json()
     assert listed["worker_alive"] is False
+    assert listed["workers"]["alive"] == 0
+    assert listed["workers"]["min_workers"] == 1
+    assert listed["workers"]["max_workers"] == 2
     assert any(row["id"] == job["id"] for row in listed["jobs"])
     project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
     ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
@@ -299,3 +378,112 @@ def test_process_next_job_runs_draft(client: TestClient, tmp_path: Path):
     follow = next(job for job in store["jobs"] if job["kind"] == "annotate")
     assert follow["status"] == "queued"
     assert follow["chapter"] == "II"
+
+
+def test_claim_next_skips_busy_chapter_but_runs_others(client: TestClient):
+    from knowledgehub.translation.jobs import claim_next, complete_job, enqueue_job
+
+    first = enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    enqueue_job("grotius--freedom_of_the_seas", "II", "qa")
+    enqueue_job("grotius--freedom_of_the_seas", "I", "draft")
+    claimed = claim_next()
+    assert claimed["id"] == first["id"]
+    other = claim_next()
+    assert other["chapter"] == "I"
+    assert claim_next() is None
+    complete_job(claimed["id"], result={"ok": True})
+    waiting = claim_next()
+    assert waiting["chapter"] == "II"
+    assert waiting["kind"] == "qa"
+
+
+def test_claim_next_respects_draft_annotate_qa_order(client: TestClient):
+    from knowledgehub.translation.jobs import claim_next, enqueue_job
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "qa")
+    enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
+    draft = enqueue_job("grotius--freedom_of_the_seas", "I", "draft")
+    first = claim_next()
+    assert first["id"] == draft["id"]
+    assert first["kind"] == "draft"
+    second = claim_next()
+    assert second["kind"] == "annotate"
+    assert second["chapter"] == "II"
+    assert claim_next() is None
+
+
+def test_cancel_running_job_skips_followups(client: TestClient, tmp_path: Path):
+    from knowledgehub.translation.jobs import cancel_jobs, enqueue_job, process_next_job, report_progress
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+
+    def fake_draft(*_args, **_kwargs):
+        report_progress("drafting", "Đang gọi DeepSeek nháp…")
+        cancel_jobs(source_work_id="grotius--freedom_of_the_seas", chapter="II")
+        from knowledgehub.translation.jobs import raise_if_stopped
+
+        raise_if_stopped()
+        return {"chapter": "II"}
+
+    with patch("knowledgehub.translation.draft.draft_chapter", side_effect=fake_draft):
+        done = process_next_job()
+    assert done["status"] == "cancelled"
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    kinds = [job["kind"] for job in store["jobs"]]
+    assert "annotate" not in kinds
+    draft = next(job for job in store["jobs"] if job["kind"] == "draft")
+    assert draft["status"] == "cancelled"
+    assert draft["phase"] == "cancelled"
+
+
+def test_interrupt_stale_running_does_not_requeue(client: TestClient, tmp_path: Path):
+    from knowledgehub.translation.jobs import claim_next, enqueue_job, interrupt_stale_running
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    claimed = claim_next()
+    assert claimed["status"] == "running"
+    n = interrupt_stale_running()
+    assert n == 1
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    job = store["jobs"][0]
+    assert job["status"] == "interrupted"
+    assert claim_next() is None
+
+
+def test_cancel_jobs_api(client: TestClient):
+    queued = client.post(
+        "/api/translations/grotius--freedom_of_the_seas/jobs",
+        json={"kind": "draft", "chapter": "II"},
+    )
+    assert queued.status_code == 200
+    cancelled = client.post(
+        "/api/translations/grotius--freedom_of_the_seas/jobs/cancel",
+        json={"chapter": "II"},
+    )
+    assert cancelled.status_code == 200, cancelled.text
+    body = cancelled.json()
+    assert body["cancelled"] == 1
+    listed = client.get("/api/translations/grotius--freedom_of_the_seas/jobs").json()
+    assert listed["jobs"][0]["status"] == "cancelled"
+
+
+def test_progress_phase_written(client: TestClient, tmp_path: Path):
+    from knowledgehub.translation.jobs import enqueue_job, process_next_job, report_progress
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+
+    def fake_draft(*_args, **_kwargs):
+        report_progress("drafting", "Đang gọi DeepSeek nháp…")
+        return {"chapter": "II"}
+
+    with (
+        patch("knowledgehub.translation.draft.draft_chapter", side_effect=fake_draft),
+        patch("knowledgehub.translation.annotate.annotate_segment", return_value={"added_or_updated": 0}),
+        patch("knowledgehub.translation.qa.qa_segment", return_value={"scores": {"overall": 8}}),
+    ):
+        done = process_next_job()
+    assert done["status"] == "done"
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    draft = next(job for job in store["jobs"] if job["kind"] == "draft")
+    assert draft["phase"] == "done"
+    assert "attempts" in draft

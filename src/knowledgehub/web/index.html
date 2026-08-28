@@ -125,7 +125,7 @@
           <header class="page-head">
             <div>
               <h1>Cài đặt Hub</h1>
-              <p class="lead">Chọn mô hình cho từng khâu dịch, và mặc định có chạy chú thích cùng QA sau khi dịch chương hay không.</p>
+              <p class="lead">Chọn mô hình cho từng khâu dịch, số worker, và mặc định có chạy chú thích cùng QA sau khi dịch chương hay không.</p>
             </div>
           </header>
           <form id="settings-form" class="settings-form">
@@ -143,6 +143,28 @@
               <p class="muted">Nếu bật cả hai, thứ tự là dịch → chú thích → QA (QA chấm cả chú thích). Vẫn bấm được từng nút riêng trên trang Dịch thuật.</p>
               <label class="inline"><input id="set-auto-annotate" type="checkbox" /> Tự tạo chú thích</label>
               <label class="inline"><input id="set-auto-qa" type="checkbox" /> Tự chạy QA</label>
+            </fieldset>
+            <fieldset>
+              <legend>Worker dịch</legend>
+              <p class="muted">Giữ tối thiểu luồng nền; khi xếp nhiều chương thì tăng tới tối đa. Cùng một chương không chạy hai khâu song song.</p>
+              <div class="settings-grid">
+                <label>min_workers
+                  <input id="set-min-workers" type="number" min="0" max="8" step="1" required />
+                  <span>Luồng giữ khi rảnh. 0 = không giữ luồng idle.</span>
+                </label>
+                <label>max_workers
+                  <input id="set-max-workers" type="number" min="1" max="8" step="1" required />
+                  <span>Trần khi hàng đợi dài. Nên 2; trên 4 dễ dính rate limit.</span>
+                </label>
+                <label>max_attempts
+                  <input id="set-max-attempts" type="number" min="1" max="10" step="1" required />
+                  <span>Một job không được claim lại quá số lần này (chống loop).</span>
+                </label>
+                <label>job_timeout_sec
+                  <input id="set-job-timeout" type="number" min="60" max="3600" step="30" required />
+                  <span>Hủy bước LLM tiếp theo nếu job đã chạy quá lâu (giây).</span>
+                </label>
+              </div>
             </fieldset>
             <fieldset>
               <legend>Dự án dịch mới</legend>
@@ -177,6 +199,7 @@
           <div class="toolbar">
             <select id="tr-project"></select>
             <button type="button" class="btn" id="tr-draft-missing">Dịch chương còn thiếu</button>
+            <button type="button" class="btn ghost" id="tr-cancel-jobs" hidden>Hủy job đang chạy</button>
             <button type="button" class="btn" id="tr-promote">Đưa vào catalog</button>
           </div>
           <p class="muted" id="tr-jobs"></p>

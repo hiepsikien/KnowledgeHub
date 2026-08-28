@@ -129,6 +129,8 @@ tr.pick.on { background: var(--accent-soft); }
 .tr-jobs { min-height: 1.3em; margin: 0 0 8px; }
 .badge.bad { background: #f8e4e4; color: var(--bad); }
 .badge.ok { background: var(--ok-soft); color: var(--ok); }
+.tr-status { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.tr-status .sub { width: 100%; }
 
 .detail {
   background: var(--card);
@@ -299,13 +301,17 @@ tr.pick.on { background: var(--accent-soft); }
   color: var(--ink);
   font-size: 14px;
 }
-.settings-form select {
+.settings-form select,
+.settings-form input[type="number"] {
   font: inherit;
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 8px 12px;
   background: #fff;
+}
+.settings-form input[type="number"] {
+  max-width: 8rem;
 }
 .settings-grid {
   display: grid;

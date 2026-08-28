@@ -29,6 +29,7 @@ from .read_publish import PublishError, preview_normalized, publish_to_read
 from .settings import save_settings, settings_payload
 from .translation.api import (
     enqueue_translation_job,
+    cancel_translation_jobs,
     get_segment_detail,
     get_translation_project,
     list_annotations,
@@ -41,7 +42,7 @@ from .translation.api import (
     run_qa,
 )
 from .translation.assemble import IncompleteTranslation
-from .translation.jobs import list_jobs as list_translation_jobs, start_worker, stop_worker, worker_alive
+from .translation.jobs import list_jobs as list_translation_jobs, start_worker, stop_worker, worker_alive, worker_status
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
@@ -86,11 +87,20 @@ class TranslationJobBody(BaseModel):
     missing: bool = False
 
 
+class TranslationCancelBody(BaseModel):
+    job_id: str | None = None
+    chapter: str | None = None
+
+
 class TranslationSettingsBody(BaseModel):
     models: dict[str, str] | None = None
     auto_annotate: bool | None = None
     auto_qa: bool | None = None
     default_mode: str | None = None
+    min_workers: int | None = None
+    max_workers: int | None = None
+    max_attempts: int | None = None
+    job_timeout_sec: int | None = None
 
 
 class SettingsBody(BaseModel):
@@ -356,7 +366,11 @@ def create_app() -> FastAPI:
     @app.get("/api/translations/{source_work_id}/jobs", dependencies=guard)
     def translation_jobs(source_work_id: str) -> dict[str, Any]:
         try:
-            return {"jobs": list_translation_jobs(source_work_id), "worker_alive": worker_alive()}
+            return {
+                "jobs": list_translation_jobs(source_work_id),
+                "worker_alive": worker_alive(),
+                "workers": worker_status(),
+            }
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
 
@@ -371,6 +385,18 @@ def create_app() -> FastAPI:
             )
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/jobs/cancel", dependencies=guard)
+    def translation_cancel(source_work_id: str, payload: TranslationCancelBody | None = None) -> dict[str, Any]:
+        body = payload or TranslationCancelBody()
+        try:
+            return cancel_translation_jobs(
+                source_work_id,
+                job_id=body.job_id,
+                chapter=body.chapter,
+            )
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
 

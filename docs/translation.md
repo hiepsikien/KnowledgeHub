@@ -73,11 +73,7 @@ Pipeline: DeepSeek draft → Gemini polish → writes `segments/chi-sample.json`
 knowledgehub translate draft --work grotius--freedom_of_the_seas --chapter II
 ```
 
-Uses the locked mode. Same DeepSeek → Gemini pipeline; writes `segments/chii.json`. The curator UI **Dịch chương** button enqueues the same work on a **single background worker** (HTTP returns immediately). **Dịch chương còn thiếu** queues every chapter without `final`. QA and chú thích use the same queue.
-
-CLI `translate draft` / `qa` / `annotate` still run synchronously.
-
-Job state is `corpus/.translation-jobs.json` (gitignored). Reload of `serve` re-queues a job that was `running`.
+Uses the locked mode. Same DeepSeek → Gemini pipeline; writes `segments/chii.json`. The curator UI **Dịch chương** button enqueues the same work on a **background worker pool** (HTTP returns immediately). Pool size is `min_workers`–`max_workers` in Cài đặt (default 1–2). **Dịch chương còn thiếu** queues every chapter without `final`. QA and chú thích use the same queue. Workers claim **draft → annotate → QA** across the queue (all dịch before chú thích before QA); two jobs for the same chapter never run at once. Each job writes `phase` / `detail` as it moves (DeepSeek nháp → lưu nháp → Gemini chỉnh văn). **Hủy job đang chạy** marks jobs `cancelled` and skips the next LLM call (in-flight HTTP may still finish). Reload of `serve` marks a `running` job `interrupted` instead of retrying, so a restart cannot loop token spend. Cài đặt `max_attempts` (default 2) and `job_timeout_sec` (default 600) cap retries and wall time.
 
 ### QA scoring
 

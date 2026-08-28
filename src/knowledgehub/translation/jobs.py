@@ -1,4 +1,4 @@
-"""File-backed translation job queue with a single background worker."""
+"""File-backed translation job queue with a scalable background worker pool."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import json
 import os
 import secrets
 import threading
+from contextvars import ContextVar
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -13,13 +14,29 @@ from typing import Any
 from ..paths import corpus_root
 from .paths import safe_chapter, safe_work_id
 
-KINDS = ("draft", "qa", "annotate")
+KIND_ORDER = ("draft", "annotate", "qa")
+KINDS = KIND_ORDER
+KIND_RANK = {kind: index for index, kind in enumerate(KIND_ORDER)}
 ACTIVE = frozenset({"queued", "running"})
+STOPPED = frozenset({"cancelled", "interrupted"})
 
 _lock = threading.Lock()
+_pool_lock = threading.Lock()
 _wake = threading.Event()
 _stop: threading.Event | None = None
-_thread: threading.Thread | None = None
+_threads: list[threading.Thread] = []
+_next_worker = 0
+_requeued = False
+_cancel_flags: set[str] = set()
+_current_job_id: ContextVar[str | None] = ContextVar("kh_job_id", default=None)
+
+
+class JobCancelled(Exception):
+    """Raised when a running job is cancelled or interrupted."""
+
+
+class JobGuardError(Exception):
+    """Raised when a job hits an attempt or timeout guard."""
 
 
 def _now() -> str:
@@ -35,8 +52,33 @@ def jobs_path() -> Path:
     return corpus_root() / ".translation-jobs.json"
 
 
+def desired_worker_count(queued: int, running: int, min_workers: int, max_workers: int) -> int:
+    return max(min_workers, min(max_workers, queued + running))
+
+
 def worker_alive() -> bool:
-    return bool(_thread and _thread.is_alive())
+    return worker_status()["alive"] > 0
+
+
+def worker_status() -> dict[str, int]:
+    from ..settings import worker_limits
+
+    min_workers, max_workers = worker_limits()
+    with _pool_lock:
+        alive = sum(1 for thread in _threads if thread.is_alive())
+    return {
+        "alive": alive,
+        "min_workers": min_workers,
+        "max_workers": max_workers,
+    }
+
+
+def _queue_depth() -> tuple[int, int]:
+    with _lock:
+        jobs = list(_read_store().get("jobs") or [])
+    queued = sum(1 for job in jobs if job.get("status") == "queued")
+    running = sum(1 for job in jobs if job.get("status") == "running")
+    return queued, running
 
 
 def _empty_store() -> dict[str, Any]:
@@ -77,6 +119,10 @@ def _public(job: dict[str, Any]) -> dict[str, Any]:
         "chapter",
         "kind",
         "status",
+        "phase",
+        "detail",
+        "attempts",
+        "heartbeat_at",
         "created_at",
         "started_at",
         "finished_at",
@@ -132,12 +178,17 @@ def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
             "chapter": ch,
             "kind": kind,
             "status": "queued",
+            "phase": "queued",
+            "detail": "Đã xếp hàng",
+            "attempts": 0,
             "created_at": _now(),
+            "heartbeat_at": _now(),
         }
         jobs.append(job)
         store["jobs"] = jobs
         _write_store(store)
     _wake.set()
+    scale_workers()
     payload = _public(job)
     payload["created"] = True
     return payload
@@ -160,51 +211,203 @@ def enqueue_missing_drafts(source_work_id: str) -> dict[str, Any]:
     }
 
 
-def requeue_stale_running() -> int:
+def interrupt_stale_running() -> int:
+    """On worker start, drop in-flight jobs instead of silently retrying (token guard)."""
     n = 0
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
         for job in jobs:
-            if job.get("status") == "running":
-                job["status"] = "queued"
-                job.pop("started_at", None)
-                n += 1
+            if job.get("status") != "running":
+                continue
+            job_id = str(job.get("id") or "")
+            job["status"] = "interrupted"
+            job["phase"] = "interrupted"
+            job["detail"] = "Worker restart — không tự chạy lại"
+            job["finished_at"] = _now()
+            job["heartbeat_at"] = _now()
+            job["error"] = "interrupted: worker restarted"
+            if job_id:
+                _cancel_flags.add(job_id)
+            n += 1
         if n:
             store["jobs"] = jobs
             _write_store(store)
     return n
 
 
-def claim_next() -> dict[str, Any] | None:
+def cancel_jobs(
+    *,
+    source_work_id: str | None = None,
+    chapter: str | None = None,
+    job_id: str | None = None,
+) -> dict[str, Any]:
+    work_id = safe_work_id(source_work_id) if source_work_id else None
+    ch = safe_chapter(chapter).upper() if chapter else None
+    cancelled: list[dict[str, Any]] = []
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
         for job in jobs:
-            if job.get("status") != "queued":
+            if job.get("status") not in ACTIVE:
                 continue
-            job["status"] = "running"
-            job["started_at"] = _now()
+            if job_id and job.get("id") != job_id:
+                continue
+            if work_id and job.get("work_id") != work_id:
+                continue
+            if ch and str(job.get("chapter") or "").upper() != ch:
+                continue
+            job["status"] = "cancelled"
+            job["phase"] = "cancelled"
+            job["detail"] = "Đã hủy"
+            job["finished_at"] = _now()
+            job["heartbeat_at"] = _now()
+            job.pop("error", None)
+            _cancel_flags.add(str(job.get("id") or ""))
+            cancelled.append(_public(job))
+        if cancelled:
             store["jobs"] = jobs
             _write_store(store)
-            return dict(job)
-    return None
+    return {"cancelled": len(cancelled), "jobs": cancelled}
 
 
-def complete_job(job_id: str, *, result: dict[str, Any] | None = None, error: str | None = None) -> None:
+def update_job_progress(job_id: str, *, phase: str, detail: str | None = None) -> None:
+    stamp = _now()
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
         for job in jobs:
             if job.get("id") != job_id:
                 continue
-            job["status"] = "error" if error else "done"
+            if job.get("status") in STOPPED:
+                return
+            job["phase"] = phase
+            if detail is not None:
+                job["detail"] = detail
+            job["heartbeat_at"] = stamp
+            break
+        store["jobs"] = jobs
+        _write_store(store)
+
+
+def report_progress(phase: str, detail: str | None = None) -> None:
+    job_id = _current_job_id.get()
+    if job_id:
+        update_job_progress(job_id, phase=phase, detail=detail)
+
+
+def raise_if_stopped() -> None:
+    job_id = _current_job_id.get()
+    if not job_id:
+        return
+    if job_id in _cancel_flags:
+        raise JobCancelled("job cancelled")
+    from ..settings import job_guard_limits
+
+    _, timeout_sec = job_guard_limits()
+    with _lock:
+        store = _read_store()
+        job = next((row for row in (store.get("jobs") or []) if row.get("id") == job_id), None)
+        snapshot = dict(job) if job else {}
+    status = snapshot.get("status")
+    if status in STOPPED:
+        raise JobCancelled(f"job {status}")
+    started = snapshot.get("started_at")
+    if started:
+        try:
+            started_dt = datetime.fromisoformat(str(started))
+        except ValueError:
+            started_dt = None
+        if started_dt is not None:
+            elapsed = (datetime.now(UTC) - started_dt).total_seconds()
+            if elapsed > timeout_sec:
+                raise JobGuardError(f"timeout after {int(elapsed)}s (limit {timeout_sec}s)")
+
+
+def claim_next() -> dict[str, Any] | None:
+    from ..settings import job_guard_limits
+
+    max_attempts, _timeout = job_guard_limits()
+    with _lock:
+        store = _read_store()
+        jobs = list(store.get("jobs") or [])
+        busy = {
+            (job.get("work_id"), str(job.get("chapter") or "").upper())
+            for job in jobs
+            if job.get("status") == "running"
+        }
+        dirty = False
+        chosen: dict[str, Any] | None = None
+        chosen_rank = len(KIND_ORDER)
+        for job in jobs:
+            if job.get("status") != "queued":
+                continue
+            key = (job.get("work_id"), str(job.get("chapter") or "").upper())
+            if key in busy:
+                continue
+            if int(job.get("attempts") or 0) >= max_attempts:
+                job["status"] = "error"
+                job["phase"] = "error"
+                job["detail"] = f"Quá số lần thử ({max_attempts})"
+                job["error"] = f"max_attempts {max_attempts}"
+                job["finished_at"] = _now()
+                job["heartbeat_at"] = _now()
+                dirty = True
+                continue
+            rank = KIND_RANK.get(str(job.get("kind") or ""), len(KIND_ORDER))
+            if chosen is None or rank < chosen_rank:
+                chosen = job
+                chosen_rank = rank
+                if chosen_rank == 0:
+                    break
+        if chosen is None:
+            if dirty:
+                store["jobs"] = jobs
+                _write_store(store)
+            return None
+        chosen["attempts"] = int(chosen.get("attempts") or 0) + 1
+        chosen["status"] = "running"
+        chosen["phase"] = "starting"
+        chosen["detail"] = "Bắt đầu"
+        chosen["started_at"] = _now()
+        chosen["heartbeat_at"] = _now()
+        store["jobs"] = jobs
+        _write_store(store)
+        return dict(chosen)
+
+
+def complete_job(
+    job_id: str,
+    *,
+    result: dict[str, Any] | None = None,
+    error: str | None = None,
+    status: str | None = None,
+) -> None:
+    with _lock:
+        store = _read_store()
+        jobs = list(store.get("jobs") or [])
+        for job in jobs:
+            if job.get("id") != job_id:
+                continue
+            if job.get("status") in STOPPED and status not in STOPPED:
+                return
+            final = status or ("error" if error else "done")
+            job["status"] = final
+            job["phase"] = final
             job["finished_at"] = _now()
-            if error:
+            job["heartbeat_at"] = _now()
+            if final == "cancelled":
+                job["detail"] = "Đã hủy"
+                job.pop("error", None)
+            elif final == "interrupted":
+                job["detail"] = job.get("detail") or "Bị ngắt"
+            elif error:
                 job["error"] = error
+                job["detail"] = (error or "")[:180]
                 job.pop("result", None)
             else:
                 job.pop("error", None)
+                job["detail"] = "Xong"
                 if result is not None:
                     job["result"] = result
             break
@@ -238,51 +441,125 @@ def _enqueue_followups(job: dict[str, Any]) -> list[dict[str, Any]]:
     return queued
 
 
+def _fail_job(job: dict[str, Any], error: str) -> None:
+    complete_job(job["id"], error=error)
+    job["status"] = "error"
+    job["error"] = error
+    # Annotate uses Gemini; a 429/timeout should not block DeepSeek QA on an existing draft.
+    if job.get("kind") == "annotate":
+        _enqueue_followups(job)
+
+
 def process_next_job() -> dict[str, Any] | None:
     job = claim_next()
     if not job:
         return None
+    token = _current_job_id.set(str(job["id"]))
     try:
+        raise_if_stopped()
         result = execute_job(job)
+        raise_if_stopped()
         complete_job(job["id"], result=result)
         job["status"] = "done"
+        job["phase"] = "done"
         job["result"] = result
         _enqueue_followups(job)
+    except JobCancelled:
+        complete_job(job["id"], status="cancelled")
+        job["status"] = "cancelled"
+        job["phase"] = "cancelled"
+        job["detail"] = "Đã hủy"
+    except JobGuardError as exc:
+        _fail_job(job, str(exc))
     except Exception as exc:
-        complete_job(job["id"], error=str(exc))
-        job["status"] = "error"
-        job["error"] = str(exc)
+        if job["id"] in _cancel_flags:
+            complete_job(job["id"], status="cancelled")
+            job["status"] = "cancelled"
+        else:
+            _fail_job(job, str(exc))
+    finally:
+        _current_job_id.reset(token)
     return job
 
 
 def worker_loop(stop: threading.Event) -> None:
-    requeue_stale_running()
     while not stop.is_set():
         job = process_next_job()
-        if job is None:
-            _wake.wait(timeout=0.75)
-            _wake.clear()
+        if job is not None:
+            continue
+        if _idle_thread_should_exit():
+            return
+        _wake.wait(timeout=0.75)
+        _wake.clear()
+
+
+def _idle_thread_should_exit() -> bool:
+    from ..settings import worker_limits
+
+    current = threading.current_thread()
+    with _pool_lock:
+        min_workers, max_workers = worker_limits()
+        queued, running = _queue_depth()
+        desired = desired_worker_count(queued, running, min_workers, max_workers)
+        alive = [thread for thread in _threads if thread.is_alive()]
+        if len(alive) <= desired:
+            return False
+        _threads[:] = [thread for thread in alive if thread is not current]
+        return True
+
+
+def _scale_workers_locked() -> None:
+    global _stop, _next_worker
+    from ..settings import worker_limits
+
+    if _stop is None or _stop.is_set():
+        _stop = threading.Event()
+    min_workers, max_workers = worker_limits()
+    queued, running = _queue_depth()
+    desired = desired_worker_count(queued, running, min_workers, max_workers)
+    _threads[:] = [thread for thread in _threads if thread.is_alive()]
+    while len(_threads) < desired:
+        _next_worker += 1
+        thread = threading.Thread(
+            target=worker_loop,
+            args=(_stop,),
+            name=f"kh-translate-worker-{_next_worker}",
+            daemon=True,
+        )
+        _threads.append(thread)
+        thread.start()
+    if desired:
+        _wake.set()
+
+
+def scale_workers() -> None:
+    if not worker_enabled():
+        return
+    with _pool_lock:
+        _scale_workers_locked()
 
 
 def start_worker() -> None:
-    global _stop, _thread
+    global _requeued
     if not worker_enabled():
         return
-    if _thread and _thread.is_alive():
-        return
-    _stop = threading.Event()
-    _wake.clear()
-    _thread = threading.Thread(target=worker_loop, args=(_stop,), name="kh-translate-worker", daemon=True)
-    _thread.start()
+    with _pool_lock:
+        first = not _requeued
+        _requeued = True
+    if first:
+        interrupt_stale_running()
+    scale_workers()
 
 
 def stop_worker() -> None:
-    global _stop, _thread
+    global _stop, _threads, _requeued
     if _stop is not None:
         _stop.set()
         _wake.set()
-    thread = _thread
-    if thread and thread.is_alive():
-        thread.join(timeout=2.0)
-    _thread = None
+    threads = list(_threads)
+    for thread in threads:
+        if thread.is_alive():
+            thread.join(timeout=2.0)
+    _threads = []
     _stop = None
+    _requeued = False

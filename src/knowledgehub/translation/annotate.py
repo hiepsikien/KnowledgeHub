@@ -84,6 +84,10 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
     translation_vi = final_text(segment, project)
 
     ann_model = resolve_models(project)["annotations"]
+    from .jobs import raise_if_stopped, report_progress
+
+    raise_if_stopped()
+    report_progress("annotating", "Đang gọi Gemini chú thích…")
     raw = complete_prompt(
         _annotate_prompt(
             source_text=source_text,
@@ -97,6 +101,7 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
         temperature=0.35,
     )
     parsed = parse_json_object(raw)
+    raise_if_stopped()
     new_items = parsed.get("annotations")
     if not isinstance(new_items, list):
         raise ProviderError(f"Annotations response missing list: {parsed!r}")

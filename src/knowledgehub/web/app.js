@@ -14,9 +14,11 @@ const state = {
     annotations: [],
     qaFixes: {},
     jobs: [],
+    workers: null,
     pollTimer: null,
     busy: false,
     lastError: "",
+    selectGen: 0,
   },
   settings: null,
 };
@@ -295,11 +297,36 @@ function annotationIssueLabel(issue) {
   return tail ? `chú thích: ${tail}` : "chú thích";
 }
 
-function statusBadge(status, hasFinal) {
-  if (status === "draft_ready" && hasFinal) return `<span class="badge ok">draft_ready</span>`;
-  if (status === "approved") return `<span class="badge ok">approved</span>`;
-  if (hasFinal) return `<span class="badge ok">${escapeHtml(status || "có bản dịch")}</span>`;
-  return `<span class="badge">${escapeHtml(status || "chưa dịch")}</span>`;
+function chapterStatusLabel(chapter) {
+  if (chapter?.has_final) return chapter.status === "approved" ? "đã duyệt" : "có bản dịch";
+  if (chapter?.has_draft_raw || chapter?.polish_pending) return "có nháp";
+  return "chưa dịch";
+}
+
+function shortJobError(error) {
+  const text = String(error || "");
+  if (!text) return "";
+  if (/interrupted|worker restarted/i.test(text)) {
+    return "Worker restart (uvicorn --reload) — job không tự chạy lại";
+  }
+  if (/503|UNAVAILABLE|high demand/i.test(text)) return "Gemini quá tải (503) — thử lại sau";
+  if (/429|RESOURCE_EXHAUSTED|rate.?limit|quota/i.test(text)) {
+    return "Gemini hết hạn mức (429) — đợi khoảng 1 phút rồi chạy lại chú thích/QA";
+  }
+  const line = text.split("\n").find((part) => part.trim()) || text;
+  return line.length > 140 ? `${line.slice(0, 137)}…` : line;
+}
+
+function lastErrorBadgeLabel(kind, status) {
+  if (status === "interrupted") {
+    return { annotate: "chú thích bị ngắt", qa: "QA bị ngắt", draft: "dịch bị ngắt" }[kind] || "bị ngắt";
+  }
+  return { annotate: "lỗi chú thích", qa: "lỗi QA", draft: "lỗi dịch" }[kind] || "lỗi";
+}
+
+function statusBadge(chapter) {
+  const ok = Boolean(chapter?.has_final);
+  return `<span class="badge ${ok ? "ok" : ""}">${escapeHtml(chapterStatusLabel(chapter))}</span>`;
 }
 
 function kindBadge(kind) {
@@ -316,6 +343,21 @@ function jobKindLabel(kind) {
   return { draft: "dịch", qa: "QA", annotate: "chú thích" }[kind] || kind;
 }
 
+function jobElapsed(job) {
+  const start = job?.started_at || job?.heartbeat_at;
+  if (!start || (job.status !== "running" && job.status !== "queued")) return "";
+  const sec = Math.max(0, Math.round((Date.now() - Date.parse(start)) / 1000));
+  if (!Number.isFinite(sec)) return "";
+  if (sec < 60) return `${sec}s`;
+  return `${Math.floor(sec / 60)}p${String(sec % 60).padStart(2, "0")}s`;
+}
+
+function jobStatusLine(job) {
+  const phase = job.detail || job.phase || jobKindLabel(job.kind);
+  const elapsed = jobElapsed(job);
+  return `chương ${job.chapter}: ${phase}${elapsed ? ` · ${elapsed}` : ""}`;
+}
+
 function activeJobs(jobs) {
   return (jobs || []).filter((job) => job.status === "queued" || job.status === "running");
 }
@@ -326,6 +368,15 @@ function chapterActiveJob(chapterRow, kind) {
   return match.find((job) => job.status === "running") || match.find((job) => job.status === "queued") || null;
 }
 
+function workerRangeLabel() {
+  const p = pipelineSettings();
+  const workers = state.translation.workers || {};
+  const min = Number(workers.min_workers ?? p.min_workers ?? 1);
+  const max = Number(workers.max_workers ?? p.max_workers ?? 2);
+  if (min === max) return `Worker ${max} luồng`;
+  return `Worker ${min}–${max} luồng`;
+}
+
 function renderJobQueue() {
   const el = $("tr-jobs");
   if (!el) return;
@@ -333,19 +384,28 @@ function renderJobQueue() {
   const missingBtn = $("tr-draft-missing");
   const missing = (state.translation.project?.missing_chapters || []).length;
   if (missingBtn) missingBtn.disabled = missing === 0;
+  const cancelBtn = $("tr-cancel-jobs");
+  if (cancelBtn) {
+    cancelBtn.hidden = jobs.length === 0;
+    cancelBtn.disabled = jobs.length === 0;
+  }
   if (!jobs.length) {
     el.textContent = missing
-      ? `Worker 1 luồng — còn ${missing} chương chưa dịch. Xếp hàng rồi làm việc khác trong lúc chờ.`
+      ? `${workerRangeLabel()} — còn ${missing} chương chưa dịch. Xếp hàng rồi làm việc khác trong lúc chờ.`
       : "";
     return;
   }
-  const running = jobs.find((job) => job.status === "running");
+  const running = jobs.filter((job) => job.status === "running");
   const waiting = jobs.filter((job) => job.status === "queued");
   const parts = [];
-  if (running) parts.push(`Đang ${jobKindLabel(running.kind)} chương ${running.chapter}`);
+  if (running.length) {
+    parts.push(`Đang ${running.map(jobStatusLine).join("; ")}`);
+  }
   if (waiting.length) {
     parts.push(`chờ ${waiting.map((job) => `${job.chapter}/${jobKindLabel(job.kind)}`).join(", ")}`);
   }
+  const alive = Number(state.translation.workers?.alive || 0);
+  if (alive > 1) parts.push(`${alive} luồng`);
   el.textContent = parts.join(" · ");
 }
 
@@ -393,6 +453,12 @@ function notifyJobChanges(prev, next) {
     if (old.status !== "error" && job.status === "error") {
       toast(`${jobKindLabel(job.kind)} chương ${job.chapter}: ${job.error || "lỗi"}`);
     }
+    if (old.status !== "cancelled" && job.status === "cancelled") {
+      toast(`Đã hủy ${jobKindLabel(job.kind)} chương ${job.chapter}`);
+    }
+    if (old.status !== "interrupted" && job.status === "interrupted") {
+      toast(`Ngắt ${jobKindLabel(job.kind)} chương ${job.chapter} — không tự chạy lại`);
+    }
   }
 }
 
@@ -417,6 +483,7 @@ async function refreshTranslationJobs() {
     const next = data.jobs || [];
     notifyJobChanges(prev, next);
     state.translation.jobs = next;
+    state.translation.workers = data.workers || state.translation.workers;
     state.translation.project = data;
     state.translation.chapters = data.chapters || [];
     renderTranslationStats();
@@ -433,7 +500,8 @@ async function refreshTranslationJobs() {
     if (justDone.length && selected) {
       await selectTranslationChapter(selected, !$("tr-segment").hidden);
     }
-    if (!activeJobs(next).length) stopJobPoll();
+    if (activeJobs(next).length) startJobPoll();
+    else stopJobPoll();
   } catch {
     /* keep polling; next tick retries */
   }
@@ -477,7 +545,7 @@ function renderTranslationStats() {
 function renderTranslationRows() {
   const chapters = state.translation.chapters || [];
   const selected = state.translation.selectedChapter;
-  $("tr-rows").innerHTML = chapters
+  const html = chapters
     .map((c) => {
       const on = selected === c.chapter ? "on" : "";
       const open = c.open_issue_count != null ? c.open_issue_count : c.issue_count;
@@ -488,17 +556,30 @@ function renderTranslationRows() {
       const annCount = c.annotation_count || 0;
       const ann = annCount ? `${annCount}` : c.annotations_generated_at ? "✓" : "—";
       const job = chapterActiveJob(c);
-      const jobCell = job
-        ? `<span class="badge ${job.status === "running" ? "warn" : ""}">${job.status === "running" ? "" : "chờ "}${escapeHtml(jobKindLabel(job.kind))}${job.status === "running" ? "…" : ""}</span>`
-        : statusBadge(c.status, c.has_final);
+      const jobBadge = job
+        ? `<span class="badge ${job.status === "running" ? "warn" : ""}">${escapeHtml(
+            job.status === "running" ? job.detail || "đang…" : `chờ ${jobKindLabel(job.kind)}`,
+          )}</span>`
+        : "";
+      const errBadge =
+        c.last_error && !job
+          ? `<span class="badge ${c.last_error_status === "interrupted" ? "warn" : "bad"}">${escapeHtml(
+              lastErrorBadgeLabel(c.last_error_kind, c.last_error_status),
+            )}</span>`
+          : "";
+      const errSub = c.last_error
+        ? `<div class="sub">${escapeHtml(shortJobError(c.last_error))}</div>`
+        : "";
       return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
         <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ</div></td>
-        <td>${jobCell}</td>
+        <td><div class="tr-status">${statusBadge(c)}${jobBadge}${errBadge}${errSub}</div></td>
         <td>${escapeHtml(qa)}${qaSub}</td>
         <td>${escapeHtml(String(ann))}</td>
       </tr>`;
     })
     .join("");
+  if ($("tr-rows").innerHTML === html) return;
+  $("tr-rows").innerHTML = html;
 }
 
 function renderTranslationDetail() {
@@ -524,6 +605,11 @@ function renderTranslationDetail() {
   const draftJob = chapterActiveJob(chapterRow, "draft");
   const qaJob = chapterActiveJob(chapterRow, "qa");
   const annJob = chapterActiveJob(chapterRow, "annotate");
+  const lastError = chapterRow?.last_error ? shortJobError(chapterRow.last_error) : "";
+  const longNote =
+    Number(seg.words) >= 3000
+      ? `<p class="muted">Chương dài (${escapeHtml(String(seg.words))} từ) — dịch có thể mất vài phút, hoặc Gemini trả 503 khi quá tải.</p>`
+      : "";
   const scoreHtml = qa.scores
     ? `<div class="tr-score-grid">
         ${scoreBar("Trung thực", scores.fidelity)}
@@ -607,16 +693,32 @@ function renderTranslationDetail() {
     </div>`;
   box.innerHTML = `
     <h2>Chương ${escapeHtml(chapter)}</h2>
-    <p class="sub">${escapeHtml(seg.status || "")} · ${escapeHtml(String(seg.words || "—"))} từ</p>
+    <p class="sub">${escapeHtml(chapterStatusLabel(chapterRow || { has_final: hasTranslation, status: seg.status }))} · ${escapeHtml(String(seg.words || "—"))} từ</p>
+    ${
+      lastError
+        ? `<p class="err">${escapeHtml(
+            draftJob
+              ? "Lần trước lỗi: "
+              : chapterRow?.last_error_status === "interrupted"
+                ? "Job bị ngắt khi server reload: "
+                : hasTranslation && chapterRow?.last_error_kind === "annotate"
+                ? "Bản dịch đã có. Lỗi chú thích: "
+                : hasTranslation && chapterRow?.last_error_kind === "qa"
+                  ? "Bản dịch đã có. Lỗi QA: "
+                  : "",
+          )}${escapeHtml(lastError)}</p>`
+        : ""
+    }
+    ${longNote}
     ${scoreHtml}
     ${qa.summary_vi ? `<div class="tr-summary">${escapeHtml(qa.summary_vi)}</div>` : ""}
     ${issueHtml}
     ${annHtml}
     <div class="row">
-      <button class="btn ghost" id="tr-btn-segment" type="button" ${hasTranslation ? "" : "disabled"}>Xem đoạn EN ↔ VI</button>
-      <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button" ${draftJob ? "disabled" : ""}>${draftJob ? (draftJob.status === "running" ? "Đang dịch…" : "Đã xếp hàng dịch") : hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
-      <button class="btn ghost" id="tr-btn-qa" type="button" ${qaJob || !hasTranslation ? "disabled" : ""}>${qaJob ? (qaJob.status === "running" ? "Đang QA…" : "Đã xếp hàng QA") : qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
-      <button class="btn" id="tr-btn-annotate" type="button" ${annJob || !hasTranslation ? "disabled" : ""}>${annJob ? (annJob.status === "running" ? "Đang tạo chú thích…" : "Đã xếp hàng chú thích") : seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
+      <button class="btn ghost" id="tr-btn-segment" type="button">Xem đoạn EN ↔ VI</button>
+      <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button">${draftJob ? (draftJob.status === "running" ? draftJob.detail || "Đang dịch…" : "Đã xếp hàng dịch") : hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
+      <button class="btn ghost" id="tr-btn-qa" type="button" ${!hasTranslation ? "disabled" : ""}>${qaJob ? (qaJob.status === "running" ? "Đang QA…" : "Đã xếp hàng QA") : qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
+      <button class="btn" id="tr-btn-annotate" type="button" ${!hasTranslation ? "disabled" : ""}>${annJob ? (annJob.status === "running" ? "Đang tạo chú thích…" : "Đã xếp hàng chú thích") : seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
     </div>
     <pre class="err" id="tr-action-out">${escapeHtml(state.translation.lastError || "")}</pre>
   `;
@@ -670,7 +772,13 @@ function showTranslationSegment(show) {
   }
   $("tr-segment-title").textContent = `Chương ${seg.chapter}`;
   $("tr-source").textContent = seg.source_text || "";
-  $("tr-translation").textContent = seg.translation || "";
+  if (seg.translation) {
+    $("tr-translation").textContent = seg.translation;
+  } else if (seg.draft_raw_text) {
+    $("tr-translation").textContent = `Nháp DeepSeek (chưa chỉnh văn)\n\n${seg.draft_raw_text}`;
+  } else {
+    $("tr-translation").textContent = "Chưa có bản dịch cho chương này.";
+  }
   renderTranslationAnnotations();
   block.hidden = false;
   block.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -698,6 +806,7 @@ async function loadTranslationProject(workId, chapterHint) {
   state.translation.project = data;
   state.translation.chapters = data.chapters || [];
   state.translation.jobs = data.jobs || [];
+  state.translation.workers = data.workers || null;
   renderTranslationStats();
   renderTranslationRows();
   renderJobQueue();
@@ -722,24 +831,31 @@ async function selectTranslationChapter(chapter, showSegment) {
   if (state.translation.selectedChapter !== chapter) {
     state.translation.qaFixes = {};
   }
+  const gen = (state.translation.selectGen = (state.translation.selectGen || 0) + 1);
+  const keepPanel =
+    state.translation.selectedChapter === chapter && Boolean(state.translation.segment);
   state.translation.selectedChapter = chapter;
-  state.translation.segment = null;
-  state.translation.annotations = [];
   state.translation.lastError = "";
+  if (!keepPanel) {
+    state.translation.segment = null;
+    state.translation.annotations = [];
+    renderTranslationDetail();
+  }
   renderTranslationRows();
-  renderTranslationDetail();
   setTranslationPath(workId, chapter);
   try {
     const [seg, ann] = await Promise.all([
       api(`/api/translations/${encodeURIComponent(workId)}/segments/${encodeURIComponent(chapter)}`),
       api(`/api/translations/${encodeURIComponent(workId)}/annotations?chapter=${encodeURIComponent(chapter)}`),
     ]);
+    if (state.translation.selectGen !== gen) return;
     state.translation.segment = seg;
     state.translation.annotations = ann.annotations || [];
     renderTranslationDetail();
     if (showSegment) showTranslationSegment(true);
     else renderTranslationAnnotations();
   } catch (err) {
+    if (state.translation.selectGen !== gen) return;
     $("tr-detail").innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
   }
 }
@@ -760,7 +876,8 @@ async function runTranslationAction(kind) {
         ? `Chương ${chapter} đã có trong hàng đợi`
         : followupToast(kind, chapter),
     );
-    await loadTranslationProject(workId, chapter);
+    await refreshTranslationJobs();
+    renderTranslationDetail();
   } catch (err) {
     state.translation.lastError = err.message;
     renderTranslationDetail();
@@ -777,13 +894,48 @@ async function enqueueMissingDrafts() {
     });
     const n = Number(result.enqueued || 0);
     toast(n ? `Đã xếp hàng ${n} chương còn thiếu` : "Không còn chương nào để dịch");
-    await loadTranslationProject(workId, state.translation.selectedChapter);
+    await refreshTranslationJobs();
+    renderTranslationDetail();
   } catch (err) {
     toast(err.message);
   }
 }
 
+async function cancelActiveJobs() {
+  const workId = state.translation.projectId;
+  if (!workId) return;
+  const btn = $("tr-cancel-jobs");
+  if (btn) btn.disabled = true;
+  try {
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/jobs/cancel`, {
+      method: "POST",
+      body: {},
+    });
+    const n = Number(result.cancelled || 0);
+    toast(n ? `Đã hủy ${n} job` : "Không có job đang chạy");
+    await refreshTranslationJobs();
+    renderTranslationDetail();
+  } catch (err) {
+    toast(err.message);
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
 async function runTranslationDraft() {
+  const chapter = state.translation.selectedChapter;
+  const chapterRow = (state.translation.chapters || []).find((row) => row.chapter === chapter);
+  if (chapterActiveJob(chapterRow, "draft")) {
+    toast(`Chương ${chapter} đã có trong hàng đợi`);
+    return;
+  }
+  const hasTranslation = Boolean((state.translation.segment?.translation || "").trim());
+  if (
+    hasTranslation &&
+    !confirm("Chương này đã có bản dịch. Dịch lại sẽ ghi đè cả các sửa QA. Tiếp tục?")
+  ) {
+    return;
+  }
   await runTranslationAction("draft");
 }
 
@@ -917,6 +1069,7 @@ function wireTranslation() {
   $("tr-segment-close").onclick = () => showTranslationSegment(false);
   $("tr-promote").onclick = () => void runTranslationPromote();
   $("tr-draft-missing").onclick = () => void enqueueMissingDrafts();
+  $("tr-cancel-jobs").onclick = () => void cancelActiveJobs();
 }
 
 function modelSelectOptions(catalog, current) {
@@ -998,6 +1151,10 @@ function renderSettingsForm(data) {
     .join("");
   $("set-auto-annotate").checked = Boolean(tr.auto_annotate);
   $("set-auto-qa").checked = Boolean(tr.auto_qa);
+  $("set-min-workers").value = String(tr.min_workers ?? 1);
+  $("set-max-workers").value = String(tr.max_workers ?? 2);
+  $("set-max-attempts").value = String(tr.max_attempts ?? 2);
+  $("set-job-timeout").value = String(tr.job_timeout_sec ?? 600);
   $("set-default-mode").value = tr.default_mode || "normal";
   renderSettingsKeys(data.secrets);
   renderModelCatalogStatus(data);
@@ -1071,6 +1228,10 @@ async function saveSettings(e) {
           models,
           auto_annotate: $("set-auto-annotate").checked,
           auto_qa: $("set-auto-qa").checked,
+          min_workers: Number($("set-min-workers").value),
+          max_workers: Number($("set-max-workers").value),
+          max_attempts: Number($("set-max-attempts").value),
+          job_timeout_sec: Number($("set-job-timeout").value),
           default_mode: $("set-default-mode").value,
         },
       },

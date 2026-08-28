@@ -64,6 +64,11 @@ def main(argv: list[str] | None = None) -> int:
     tr_draft_ch.add_argument("--work", required=True, help="Source work id")
     tr_draft_ch.add_argument("--chapter", required=True, help="Chapter label, e.g. I")
     tr_draft_ch.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
+    tr_draft_ch.add_argument(
+        "--force-draft",
+        action="store_true",
+        help="Ignore saved DeepSeek draft and translate from English again",
+    )
     tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
     tr_mode.add_argument("--work", required=True, help="Source work id")
     tr_mode.add_argument("--mode", required=True, choices=["tight", "normal", "loose"])
@@ -200,6 +205,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.work,
                     chapter=args.chapter,
                     skip_polish=args.skip_polish,
+                    force_draft=args.force_draft,
                 )
             except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:
                 print(str(exc), file=sys.stderr)

@@ -189,6 +189,10 @@ def qa_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
     valid_ann_ids = {str(item.get("id") or "") for item in annotations if item.get("id")}
 
     qa_model = resolve_models(project)["qa"]
+    from .jobs import raise_if_stopped, report_progress
+
+    raise_if_stopped()
+    report_progress("scoring", "Đang gọi DeepSeek QA…")
     raw = complete_chat(
         _qa_prompt(
             source_text=source_text,
@@ -200,6 +204,7 @@ def qa_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
         model=qa_model,
         temperature=0.2,
     )
+    raise_if_stopped()
     report = parse_json_object(raw)
     scores = _normalize_scores(report.get("scores") or {}, require_annotations=False)
     issues = _normalize_issues(report.get("issues") or [], valid_ann_ids)

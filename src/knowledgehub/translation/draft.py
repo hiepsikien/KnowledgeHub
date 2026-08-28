@@ -9,7 +9,7 @@ from ..paths import corpus_root
 from .paths import glossary_file, project_file, segments_dir, style_brief_file
 from ..settings import resolve_models
 from .project import load_project
-from .providers import complete_chat, complete_prompt
+from .providers import ProviderError, complete_chat, complete_prompt
 from .segments_io import load_segment, save_segment
 
 MODE_INSTRUCTIONS = {
@@ -111,8 +111,94 @@ Return ONLY the polished Vietnamese text.
 """
 
 
+def looks_cut_off(text: str) -> bool:
+    """True when the text ends mid-word / mid-sentence instead of punctuation."""
+    stripped = (text or "").rstrip()
+    if len(stripped) < 20:
+        return False
+    return stripped[-1].isalnum()
+
+
+def _require_complete(text: str, *, stage: str) -> str:
+    if looks_cut_off(text):
+        raise ProviderError(
+            f"{stage} output looks truncated (ends mid-word). "
+            "Raise max_tokens or re-run; do not save this draft."
+        )
+    return text
+
+
+def _raw_for_mode(segment: dict[str, Any], mode: str) -> str:
+    return str((segment.get("draft_raw") or {}).get(mode) or "").strip()
+
+
+def _should_reuse_draft(segment: dict[str, Any], mode: str, *, force_draft: bool) -> bool:
+    if force_draft:
+        return False
+    raw = _raw_for_mode(segment, mode)
+    if not raw or looks_cut_off(raw):
+        return False
+    pipeline = segment.get("pipeline") if isinstance(segment.get("pipeline"), dict) else {}
+    if pipeline.get("polish_pending"):
+        return True
+    return not str(segment.get("final") or "").strip()
+
+
+def _checkpoint_draft(
+    path: Path,
+    segment: dict[str, Any],
+    *,
+    mode: str,
+    draft_vi: str,
+    draft_model: str,
+    polish_model: str | None,
+) -> None:
+    segment.setdefault("draft_raw", {})[mode] = draft_vi
+    pipeline = dict(segment.get("pipeline") or {}) if isinstance(segment.get("pipeline"), dict) else {}
+    pipeline.update(
+        {
+            "mode": mode,
+            "draft_model": draft_model,
+            "polish_model": polish_model,
+            "draft_completed_at": _now(),
+            "polish_pending": True,
+        }
+    )
+    pipeline.pop("completed_at", None)
+    segment["pipeline"] = pipeline
+    save_segment(path, segment)
+
+
+def _finish_draft(
+    path: Path,
+    segment: dict[str, Any],
+    *,
+    mode: str,
+    draft_vi: str,
+    polished: str,
+    draft_model: str,
+    polish_model: str | None,
+) -> None:
+    prior = segment.get("pipeline") if isinstance(segment.get("pipeline"), dict) else {}
+    segment.setdefault("drafts", {})[mode] = polished
+    segment.setdefault("draft_raw", {})[mode] = draft_vi
+    segment["final"] = polished
+    segment["status"] = "draft_ready"
+    segment["pipeline"] = {
+        "mode": mode,
+        "draft_model": draft_model,
+        "polish_model": polish_model,
+        "draft_completed_at": prior.get("draft_completed_at") or _now(),
+        "completed_at": _now(),
+        "polish_pending": False,
+    }
+    save_segment(path, segment)
+
+
 def _run_draft(
     *,
+    path: Path,
+    segment: dict[str, Any],
     source_text: str,
     mode: str,
     glossary: dict[str, Any],
@@ -121,24 +207,53 @@ def _run_draft(
     draft_model: str,
     polish_model: str,
     skip_polish: bool,
-) -> tuple[str, str]:
-    messages = _build_draft_messages(
-        source_text=source_text,
-        mode=mode,
-        glossary=glossary,
-        style_brief=style_brief,
-        target_language=target_language,
-    )
-    draft_vi = complete_chat(messages, model=draft_model, temperature=0.3)
-    polished = draft_vi
-    if not skip_polish:
-        polished = complete_prompt(
+    force_draft: bool,
+) -> tuple[str, str, bool]:
+    from .jobs import raise_if_stopped, report_progress
+
+    reused = _should_reuse_draft(segment, mode, force_draft=force_draft)
+    if reused:
+        report_progress("drafted", "Dùng lại bản nháp đã lưu")
+        draft_vi = _raw_for_mode(segment, mode)
+    else:
+        messages = _build_draft_messages(
+            source_text=source_text,
+            mode=mode,
+            glossary=glossary,
+            style_brief=style_brief,
+            target_language=target_language,
+        )
+        raise_if_stopped()
+        report_progress("drafting", "Đang gọi DeepSeek nháp…")
+        draft_vi = _require_complete(
+            complete_chat(messages, model=draft_model, temperature=0.3),
+            stage="DeepSeek draft",
+        )
+        raise_if_stopped()
+        _checkpoint_draft(
+            path,
+            segment,
+            mode=mode,
+            draft_vi=draft_vi,
+            draft_model=draft_model,
+            polish_model=None if skip_polish else polish_model,
+        )
+        report_progress("drafted", "Đã lưu nháp")
+    if skip_polish:
+        return draft_vi, draft_vi, reused
+    raise_if_stopped()
+    report_progress("polishing", "Đang gọi Gemini chỉnh văn…")
+    polished = _require_complete(
+        complete_prompt(
             _polish_prompt(draft_vi=draft_vi, source_text=source_text, glossary=glossary),
             system="You polish Vietnamese literary translations. Never change meaning.",
             model=polish_model,
             temperature=0.35,
-        )
-    return draft_vi, polished
+        ),
+        stage="Gemini polish",
+    )
+    raise_if_stopped()
+    return draft_vi, polished, reused
 
 
 def draft_sample(
@@ -167,7 +282,9 @@ def draft_sample(
     polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
 
-    draft_vi, polished = _run_draft(
+    draft_vi, polished, reused = _run_draft(
+        path=sample_path,
+        segment=segment,
         source_text=source_text,
         mode=mode,
         glossary=glossary,
@@ -176,19 +293,18 @@ def draft_sample(
         draft_model=draft_model,
         polish_model=polish_model,
         skip_polish=skip_polish,
+        force_draft=False,
     )
 
-    segment.setdefault("drafts", {})[mode] = polished
-    segment.setdefault("draft_raw", {})[mode] = draft_vi
-    segment["final"] = polished
-    segment["status"] = "draft_ready"
-    segment["pipeline"] = {
-        "mode": mode,
-        "draft_model": draft_model,
-        "polish_model": polish_model if not skip_polish else None,
-        "completed_at": _now(),
-    }
-    sample_path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _finish_draft(
+        sample_path,
+        segment,
+        mode=mode,
+        draft_vi=draft_vi,
+        polished=polished,
+        draft_model=draft_model,
+        polish_model=polish_model if not skip_polish else None,
+    )
 
     project["status"] = "sample_ready"
     project["updated_at"] = _now()
@@ -203,6 +319,7 @@ def draft_sample(
         "sample": str(sample_path.relative_to(corpus_root())),
         "draft_chars": len(draft_vi),
         "final_chars": len(polished),
+        "reused_draft": reused,
         "status": segment["status"],
     }
 
@@ -212,6 +329,7 @@ def draft_chapter(
     *,
     chapter: str,
     skip_polish: bool = False,
+    force_draft: bool = False,
 ) -> dict[str, Any]:
     project = load_project(source_work_id)
     mode = project.get("translation_mode")
@@ -230,7 +348,9 @@ def draft_chapter(
     polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
 
-    draft_vi, polished = _run_draft(
+    draft_vi, polished, reused = _run_draft(
+        path=path,
+        segment=segment,
         source_text=source_text,
         mode=mode,
         glossary=glossary,
@@ -239,19 +359,18 @@ def draft_chapter(
         draft_model=draft_model,
         polish_model=polish_model,
         skip_polish=skip_polish,
+        force_draft=force_draft,
     )
 
-    segment.setdefault("drafts", {})[mode] = polished
-    segment.setdefault("draft_raw", {})[mode] = draft_vi
-    segment["final"] = polished
-    segment["status"] = "draft_ready"
-    segment["pipeline"] = {
-        "mode": mode,
-        "draft_model": draft_model,
-        "polish_model": polish_model if not skip_polish else None,
-        "completed_at": _now(),
-    }
-    save_segment(path, segment)
+    _finish_draft(
+        path,
+        segment,
+        mode=mode,
+        draft_vi=draft_vi,
+        polished=polished,
+        draft_model=draft_model,
+        polish_model=polish_model if not skip_polish else None,
+    )
 
     project["updated_at"] = _now()
     project_file(source_work_id).write_text(
@@ -266,5 +385,6 @@ def draft_chapter(
         "segment": str(path.relative_to(corpus_root())),
         "draft_chars": len(draft_vi),
         "final_chars": len(polished),
+        "reused_draft": reused,
         "status": segment["status"],
     }
