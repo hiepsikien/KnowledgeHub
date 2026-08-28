@@ -72,7 +72,7 @@ def test_qa_segment_writes_scores(corpus: Path):
             "issues": [],
         }
     )
-    with patch("knowledgehub.translation.qa.deepseek_chat", return_value=qa_json) as mock_chat:
+    with patch("knowledgehub.translation.qa.complete_chat", return_value=qa_json) as mock_chat:
         result = qa_segment("grotius--freedom_of_the_seas", "I")
     user = mock_chat.call_args[0][0][1]["content"]
     assert "--- VIETNAMESE ANNOTATIONS ---" not in user
@@ -127,7 +127,7 @@ def test_qa_segment_reviews_existing_annotations(corpus: Path):
             ],
         }
     )
-    with patch("knowledgehub.translation.qa.deepseek_chat", return_value=qa_json) as mock_chat:
+    with patch("knowledgehub.translation.qa.complete_chat", return_value=qa_json) as mock_chat:
         result = qa_segment("grotius--freedom_of_the_seas", "I")
     prompt = mock_chat.call_args[0][0]
     user = prompt[1]["content"]
@@ -449,7 +449,7 @@ def test_annotate_segment_merges_annotations(corpus: Path):
             ]
         }
     )
-    with patch("knowledgehub.translation.annotate.gemini_generate", return_value=ann_json):
+    with patch("knowledgehub.translation.annotate.complete_prompt", return_value=ann_json):
         result = annotate_segment("grotius--freedom_of_the_seas", "I")
     assert result["added_or_updated"] == 1
     store = json.loads((corpus / "translations/grotius--freedom_of_the_seas/annotations.json").read_text())
@@ -472,7 +472,7 @@ def test_qa_rejects_out_of_range_score(corpus: Path):
             "issues": [],
         }
     )
-    with patch("knowledgehub.translation.qa.deepseek_chat", return_value=qa_json):
+    with patch("knowledgehub.translation.qa.complete_chat", return_value=qa_json):
         with pytest.raises(ProviderError, match="out of range"):
             qa_segment("grotius--freedom_of_the_seas", "I")
 
@@ -518,7 +518,7 @@ def test_annotate_replaces_segment_orphans(corpus: Path):
             ]
         }
     )
-    with patch("knowledgehub.translation.annotate.gemini_generate", return_value=fresh):
+    with patch("knowledgehub.translation.annotate.complete_prompt", return_value=fresh):
         annotate_segment("grotius--freedom_of_the_seas", "I")
     store = json.loads(ann_path.read_text(encoding="utf-8"))
     ids = {a["id"] for a in store["annotations"]}

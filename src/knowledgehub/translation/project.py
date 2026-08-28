@@ -7,6 +7,7 @@ from typing import Any
 
 from ..catalog import get_work
 from ..paths import corpus_root
+from ..settings import resolve_models
 from .paths import (
     annotations_file,
     glossary_file,
@@ -16,7 +17,6 @@ from .paths import (
     translation_catalog_id,
     translation_dir,
 )
-from .providers import DEFAULT_GEMINI_MODEL
 from .segment import sample_segment, split_chapters
 
 DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
@@ -105,12 +105,7 @@ def init_translation_project(
         "status": "sample_pending",
         "created_at": _now(),
         "updated_at": _now(),
-        "models": {
-            "draft": "deepseek-chat",
-            "polish": DEFAULT_GEMINI_MODEL,
-            "qa": "deepseek-reasoner",
-            "annotations": DEFAULT_GEMINI_MODEL,
-        },
+        "models": resolve_models(),
         "source": {
             "title": work.get("title"),
             "language": work.get("language"),

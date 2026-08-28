@@ -60,8 +60,8 @@ def test_gemini_sends_key_in_header(monkeypatch: pytest.MonkeyPatch):
 def test_draft_sample_writes_normal(corpus: Path):
     init_translation_project("grotius--freedom_of_the_seas")
     with (
-        patch("knowledgehub.translation.draft.deepseek_chat", return_value="Bản dịch thô."),
-        patch("knowledgehub.translation.draft.gemini_generate", return_value="Bản dịch đã chỉnh."),
+        patch("knowledgehub.translation.draft.complete_chat", return_value="Bản dịch thô."),
+        patch("knowledgehub.translation.draft.complete_prompt", return_value="Bản dịch đã chỉnh."),
     ):
         result = draft_sample("grotius--freedom_of_the_seas", mode="normal")
     assert result["mode"] == "normal"
@@ -89,8 +89,8 @@ def test_draft_chapter_writes_locked_mode(corpus: Path):
     sample.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     select_translation_mode("grotius--freedom_of_the_seas", "tight")
     with (
-        patch("knowledgehub.translation.draft.deepseek_chat", return_value="Chương II thô."),
-        patch("knowledgehub.translation.draft.gemini_generate", return_value="Chương II đã chỉnh."),
+        patch("knowledgehub.translation.draft.complete_chat", return_value="Chương II thô."),
+        patch("knowledgehub.translation.draft.complete_prompt", return_value="Chương II đã chỉnh."),
     ):
         result = draft_chapter("grotius--freedom_of_the_seas", chapter="II")
     assert result["mode"] == "tight"

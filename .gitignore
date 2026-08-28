@@ -13,3 +13,5 @@ src/*.egg-info/
 # Canonical manuscripts — local only; public GitHub is metadata + docs
 corpus/sources/*/raw/
 corpus/sources/*/chunks/
+corpus/.translation-jobs.json
+.translation-jobs.json

@@ -5,10 +5,11 @@ from datetime import UTC, datetime
 from typing import Any
 
 from ..paths import corpus_root
+from ..settings import resolve_models
 from .llm_json import parse_json_object
 from .paths import annotations_file, glossary_file
 from .project import load_project
-from .providers import ProviderError, deepseek_chat
+from .providers import ProviderError, complete_chat
 from .segments_io import final_text, load_segment, save_segment
 
 
@@ -187,8 +188,8 @@ def qa_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
     annotations = _chapter_annotations(source_work_id, chapter)
     valid_ann_ids = {str(item.get("id") or "") for item in annotations if item.get("id")}
 
-    qa_model = (project.get("models") or {}).get("qa", "deepseek-reasoner")
-    raw = deepseek_chat(
+    qa_model = resolve_models(project)["qa"]
+    raw = complete_chat(
         _qa_prompt(
             source_text=source_text,
             translation_vi=translation_vi,

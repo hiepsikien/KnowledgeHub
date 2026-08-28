@@ -16,6 +16,7 @@ from .translation.project import init_translation_project, select_translation_mo
 from .translation.promote import promote_translation
 from .translation.providers import ProviderError
 from .translation.qa import qa_segment
+from .settings import translation_pipeline
 from .validate import validate_catalog
 
 
@@ -57,7 +58,7 @@ def main(argv: list[str] | None = None) -> int:
     tr_init.add_argument("--overwrite", action="store_true", help="Recreate existing project")
     tr_draft = tr_sub.add_parser("draft-sample", help="AI draft the sample segment (default: normal)")
     tr_draft.add_argument("--work", required=True, help="Source work id")
-    tr_draft.add_argument("--mode", default="normal", choices=["tight", "normal", "loose"])
+    tr_draft.add_argument("--mode", default=None, choices=["tight", "normal", "loose"])
     tr_draft.add_argument("--skip-polish", action="store_true", help="DeepSeek draft only, no Gemini polish")
     tr_draft_ch = tr_sub.add_parser("draft", help="AI draft one chapter after mode is locked")
     tr_draft_ch.add_argument("--work", required=True, help="Source work id")
@@ -185,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
             try:
                 result = draft_sample(
                     args.work,
-                    mode=args.mode,
+                    mode=args.mode or translation_pipeline()["default_mode"],
                     skip_polish=args.skip_polish,
                 )
             except (ProviderError, FileNotFoundError, KeyError, ValueError) as exc:

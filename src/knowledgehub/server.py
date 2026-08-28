@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import secrets
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +26,9 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_publish import PublishError, preview_normalized, publish_to_read
+from .settings import save_settings, settings_payload
 from .translation.api import (
+    enqueue_translation_job,
     get_segment_detail,
     get_translation_project,
     list_annotations,
@@ -38,6 +41,7 @@ from .translation.api import (
     run_qa,
 )
 from .translation.assemble import IncompleteTranslation
+from .translation.jobs import list_jobs as list_translation_jobs, start_worker, stop_worker, worker_alive
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
@@ -76,6 +80,23 @@ class ApproveQaBody(BaseModel):
     replacements: dict[str, str] | None = None
 
 
+class TranslationJobBody(BaseModel):
+    kind: str = "draft"
+    chapter: str | None = None
+    missing: bool = False
+
+
+class TranslationSettingsBody(BaseModel):
+    models: dict[str, str] | None = None
+    auto_annotate: bool | None = None
+    auto_qa: bool | None = None
+    default_mode: str | None = None
+
+
+class SettingsBody(BaseModel):
+    translation: TranslationSettingsBody | None = None
+
+
 def _ops_secret() -> str:
     return (os.environ.get("KNOWLEDGEHUB_OPS_SECRET") or "").strip()
 
@@ -94,8 +115,16 @@ def require_ops(request: Request) -> None:
     if not _authorized(request):
         raise HTTPException(401, "ops secret required")
 
+
+@asynccontextmanager
+async def _lifespan(_app: FastAPI):
+    start_worker()
+    yield
+    stop_worker()
+
+
 def create_app() -> FastAPI:
-    app = FastAPI(title="Knowledge Hub", version="0.1.0")
+    app = FastAPI(title="Knowledge Hub", version="0.1.0", lifespan=_lifespan)
     guard = [Depends(require_ops)]
 
     @app.get("/api/health")
@@ -193,6 +222,22 @@ def create_app() -> FastAPI:
     @app.get("/api/licenses", dependencies=guard)
     def licenses() -> dict[str, Any]:
         return load_license_catalog()
+
+    @app.get("/api/settings", dependencies=guard)
+    def get_settings(refresh: bool = Query(default=False)) -> dict[str, Any]:
+        return settings_payload(refresh=refresh)
+
+    @app.post("/api/settings", dependencies=guard)
+    def update_settings(payload: SettingsBody) -> dict[str, Any]:
+        body: dict[str, Any] = {}
+        if payload.translation is not None:
+            tr = payload.translation.model_dump(exclude_none=True)
+            body["translation"] = tr
+        try:
+            saved = save_settings(body)
+        except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
+        return settings_payload() | {"projects_updated": saved.get("projects_updated", 0)}
 
     @app.get("/api/translations", dependencies=guard)
     def translations_list() -> dict[str, Any]:
@@ -306,6 +351,27 @@ def create_app() -> FastAPI:
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
         except (ProviderError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/translations/{source_work_id}/jobs", dependencies=guard)
+    def translation_jobs(source_work_id: str) -> dict[str, Any]:
+        try:
+            return {"jobs": list_translation_jobs(source_work_id), "worker_alive": worker_alive()}
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/jobs", dependencies=guard)
+    def translation_enqueue(source_work_id: str, payload: TranslationJobBody) -> dict[str, Any]:
+        try:
+            return enqueue_translation_job(
+                source_work_id,
+                kind=payload.kind,
+                chapter=payload.chapter,
+                missing=payload.missing,
+            )
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
 
     @app.post("/api/translations/{source_work_id}/promote", dependencies=guard)

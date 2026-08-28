@@ -5,10 +5,11 @@ from datetime import UTC, datetime
 from typing import Any
 
 from ..paths import corpus_root
+from ..settings import resolve_models
 from .llm_json import parse_json_object
 from .paths import annotations_file, glossary_file
 from .project import load_project
-from .providers import DEFAULT_GEMINI_MODEL, ProviderError, gemini_generate
+from .providers import ProviderError, complete_prompt
 from .segments_io import final_text, load_segment
 
 
@@ -82,8 +83,8 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
     source_text = str(segment.get("source_text") or "")
     translation_vi = final_text(segment, project)
 
-    ann_model = (project.get("models") or {}).get("annotations", DEFAULT_GEMINI_MODEL)
-    raw = gemini_generate(
+    ann_model = resolve_models(project)["annotations"]
+    raw = complete_prompt(
         _annotate_prompt(
             source_text=source_text,
             translation_vi=translation_vi,

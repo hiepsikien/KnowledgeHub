@@ -13,9 +13,12 @@ const state = {
     segment: null,
     annotations: [],
     qaFixes: {},
+    jobs: [],
+    pollTimer: null,
     busy: false,
     lastError: "",
   },
+  settings: null,
 };
 
 async function api(path, { method = "GET", body } = {}) {
@@ -241,6 +244,20 @@ function publishWorkIdFromPath() {
   return null;
 }
 
+function settingsFromPath() {
+  const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+  return parts[0] === "settings";
+}
+
+function hideAllViews() {
+  $("view-works").hidden = true;
+  $("view-licenses").hidden = true;
+  $("view-publish").hidden = true;
+  $("view-translation").hidden = true;
+  $("view-settings").hidden = true;
+  stopJobPoll();
+}
+
 function translationFromPath() {
   const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
   if (parts[0] !== "translation" || !parts[1]) return null;
@@ -295,6 +312,133 @@ function kindBadge(kind) {
   return `<span class="badge ${cls}">${escapeHtml(label)}</span>`;
 }
 
+function jobKindLabel(kind) {
+  return { draft: "dịch", qa: "QA", annotate: "chú thích" }[kind] || kind;
+}
+
+function activeJobs(jobs) {
+  return (jobs || []).filter((job) => job.status === "queued" || job.status === "running");
+}
+
+function chapterActiveJob(chapterRow, kind) {
+  const jobs = chapterRow?.jobs || [];
+  const match = kind ? jobs.filter((job) => job.kind === kind) : jobs;
+  return match.find((job) => job.status === "running") || match.find((job) => job.status === "queued") || null;
+}
+
+function renderJobQueue() {
+  const el = $("tr-jobs");
+  if (!el) return;
+  const jobs = activeJobs(state.translation.jobs);
+  const missingBtn = $("tr-draft-missing");
+  const missing = (state.translation.project?.missing_chapters || []).length;
+  if (missingBtn) missingBtn.disabled = missing === 0;
+  if (!jobs.length) {
+    el.textContent = missing
+      ? `Worker 1 luồng — còn ${missing} chương chưa dịch. Xếp hàng rồi làm việc khác trong lúc chờ.`
+      : "";
+    return;
+  }
+  const running = jobs.find((job) => job.status === "running");
+  const waiting = jobs.filter((job) => job.status === "queued");
+  const parts = [];
+  if (running) parts.push(`Đang ${jobKindLabel(running.kind)} chương ${running.chapter}`);
+  if (waiting.length) {
+    parts.push(`chờ ${waiting.map((job) => `${job.chapter}/${jobKindLabel(job.kind)}`).join(", ")}`);
+  }
+  el.textContent = parts.join(" · ");
+}
+
+function pipelineSettings() {
+  return state.translation.project?.pipeline || state.settings?.settings?.translation || {};
+}
+
+function renderPipelineNote() {
+  const el = $("tr-pipeline-note");
+  if (!el) return;
+  const p = pipelineSettings();
+  const bits = [];
+  if (p.auto_annotate) bits.push("chú thích");
+  if (p.auto_qa) bits.push("QA");
+  if (!bits.length) {
+    el.textContent = "Sau khi dịch cần chạy chú thích và QA riêng — đổi ở Cài đặt.";
+    return;
+  }
+  el.textContent =
+    bits.length === 2
+      ? "Sau khi dịch sẽ tự tạo chú thích rồi chạy QA (đổi ở Cài đặt)."
+      : `Sau khi dịch sẽ tự chạy ${bits[0]} (đổi ở Cài đặt).`;
+}
+
+function followupToast(kind, chapter) {
+  const p = pipelineSettings();
+  const extra = [];
+  if (kind === "draft") {
+    if (p.auto_annotate) extra.push("chú thích");
+    if (p.auto_qa) extra.push("QA");
+  } else if (kind === "annotate" && p.auto_qa) {
+    extra.push("QA");
+  }
+  const base = `Đã xếp hàng ${jobKindLabel(kind)} chương ${chapter}`;
+  return extra.length ? `${base} — tiếp theo: ${extra.join(" rồi ")}` : base;
+}
+
+function notifyJobChanges(prev, next) {
+  for (const job of next) {
+    const old = prev.find((item) => item.id === job.id);
+    if (!old) continue;
+    if (old.status !== "done" && job.status === "done") {
+      toast(`Xong ${jobKindLabel(job.kind)} chương ${job.chapter}`);
+    }
+    if (old.status !== "error" && job.status === "error") {
+      toast(`${jobKindLabel(job.kind)} chương ${job.chapter}: ${job.error || "lỗi"}`);
+    }
+  }
+}
+
+function startJobPoll() {
+  if (state.translation.pollTimer) return;
+  state.translation.pollTimer = setInterval(() => void refreshTranslationJobs(), 2500);
+}
+
+function stopJobPoll() {
+  if (state.translation.pollTimer) {
+    clearInterval(state.translation.pollTimer);
+    state.translation.pollTimer = null;
+  }
+}
+
+async function refreshTranslationJobs() {
+  const workId = state.translation.projectId;
+  if (!workId || $("view-translation")?.hidden) return;
+  try {
+    const prev = state.translation.jobs || [];
+    const data = await api(`/api/translations/${encodeURIComponent(workId)}`);
+    const next = data.jobs || [];
+    notifyJobChanges(prev, next);
+    state.translation.jobs = next;
+    state.translation.project = data;
+    state.translation.chapters = data.chapters || [];
+    renderTranslationStats();
+    renderTranslationRows();
+    renderJobQueue();
+    renderPipelineNote();
+    const selected = state.translation.selectedChapter;
+    const justDone = next.filter(
+      (job) =>
+        job.chapter === selected &&
+        job.status === "done" &&
+        prev.some((item) => item.id === job.id && item.status !== "done"),
+    );
+    if (justDone.length && selected) {
+      await selectTranslationChapter(selected, !$("tr-segment").hidden);
+    }
+    if (!activeJobs(next).length) stopJobPoll();
+  } catch {
+    /* keep polling; next tick retries */
+  }
+}
+
 function renderTranslationStats() {
   const p = state.translation.project;
   const chapters = state.translation.chapters || [];
@@ -343,9 +487,13 @@ function renderTranslationRows() {
         : "";
       const annCount = c.annotation_count || 0;
       const ann = annCount ? `${annCount}` : c.annotations_generated_at ? "✓" : "—";
+      const job = chapterActiveJob(c);
+      const jobCell = job
+        ? `<span class="badge ${job.status === "running" ? "warn" : ""}">${job.status === "running" ? "" : "chờ "}${escapeHtml(jobKindLabel(job.kind))}${job.status === "running" ? "…" : ""}</span>`
+        : statusBadge(c.status, c.has_final);
       return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
         <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ</div></td>
-        <td>${statusBadge(c.status, c.has_final)}</td>
+        <td>${jobCell}</td>
         <td>${escapeHtml(qa)}${qaSub}</td>
         <td>${escapeHtml(String(ann))}</td>
       </tr>`;
@@ -372,6 +520,10 @@ function renderTranslationDetail() {
   const annotations = state.translation.annotations || [];
   const approvedIssues = issues.filter((issue) => issue.approved);
   const hasTranslation = Boolean((seg.translation || "").trim());
+  const chapterRow = (state.translation.chapters || []).find((row) => row.chapter === chapter);
+  const draftJob = chapterActiveJob(chapterRow, "draft");
+  const qaJob = chapterActiveJob(chapterRow, "qa");
+  const annJob = chapterActiveJob(chapterRow, "annotate");
   const scoreHtml = qa.scores
     ? `<div class="tr-score-grid">
         ${scoreBar("Trung thực", scores.fidelity)}
@@ -462,9 +614,9 @@ function renderTranslationDetail() {
     ${annHtml}
     <div class="row">
       <button class="btn ghost" id="tr-btn-segment" type="button" ${hasTranslation ? "" : "disabled"}>Xem đoạn EN ↔ VI</button>
-      <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button" ${state.translation.busy ? "disabled" : ""}>${hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
-      <button class="btn ghost" id="tr-btn-qa" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
-      <button class="btn" id="tr-btn-annotate" type="button" ${state.translation.busy || !hasTranslation ? "disabled" : ""}>${seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
+      <button class="btn ${hasTranslation ? "ghost" : "primary"}" id="tr-btn-draft" type="button" ${draftJob ? "disabled" : ""}>${draftJob ? (draftJob.status === "running" ? "Đang dịch…" : "Đã xếp hàng dịch") : hasTranslation ? "Dịch lại" : "Dịch chương"}</button>
+      <button class="btn ghost" id="tr-btn-qa" type="button" ${qaJob || !hasTranslation ? "disabled" : ""}>${qaJob ? (qaJob.status === "running" ? "Đang QA…" : "Đã xếp hàng QA") : qa.scores ? "Chạy lại QA" : "Chạy QA"}</button>
+      <button class="btn" id="tr-btn-annotate" type="button" ${annJob || !hasTranslation ? "disabled" : ""}>${annJob ? (annJob.status === "running" ? "Đang tạo chú thích…" : "Đã xếp hàng chú thích") : seg.annotations_generated_at || annotations.length ? "Tạo lại chú thích" : "Tạo chú thích"}</button>
     </div>
     <pre class="err" id="tr-action-out">${escapeHtml(state.translation.lastError || "")}</pre>
   `;
@@ -545,8 +697,12 @@ async function loadTranslationProject(workId, chapterHint) {
   const data = await api(`/api/translations/${encodeURIComponent(workId)}`);
   state.translation.project = data;
   state.translation.chapters = data.chapters || [];
+  state.translation.jobs = data.jobs || [];
   renderTranslationStats();
   renderTranslationRows();
+  renderJobQueue();
+  renderPipelineNote();
+  if (activeJobs(state.translation.jobs).length) startJobPoll();
   const pick =
     chapterHint && data.chapters.some((c) => c.chapter === chapterHint)
       ? chapterHint
@@ -592,40 +748,38 @@ async function runTranslationAction(kind) {
   const workId = state.translation.projectId;
   const chapter = state.translation.selectedChapter;
   if (!workId || !chapter) return;
-  const labels = {
-    draft: "Đang dịch (DeepSeek → Gemini)… có thể mất vài phút.",
-    qa: state.translation.annotations?.length
-      ? "Đang chấm QA bản dịch và chú thích (DeepSeek)… có thể mất 1–2 phút."
-      : "Đang chấm QA (DeepSeek)… có thể mất 1–2 phút.",
-    annotate: "Đang tạo chú thích (Gemini)…",
-  };
-  const paths = {
-    draft: `/api/translations/${encodeURIComponent(workId)}/draft/${encodeURIComponent(chapter)}`,
-    qa: `/api/translations/${encodeURIComponent(workId)}/qa/${encodeURIComponent(chapter)}`,
-    annotate: `/api/translations/${encodeURIComponent(workId)}/annotate/${encodeURIComponent(chapter)}`,
-  };
   state.translation.lastError = "";
-  state.translation.busy = true;
-  renderTranslationDetail();
-  const out = $("tr-action-out");
-  if (out) out.textContent = labels[kind];
   try {
-    const result = await api(paths[kind], { method: "POST" });
-    if (kind === "qa") {
-      const extra = result.annotations_reviewed
-        ? ` · ${result.annotations_reviewed} chú thích`
-        : "";
-      toast(`QA xong — tổng thể ${result.scores?.overall ?? "?"}/10${extra}`);
-    }
-    if (kind === "annotate") toast(`Đã cập nhật ${result.added_or_updated} chú thích (tổng ${result.total})`);
-    if (kind === "draft") toast(`Đã dịch chương ${chapter} (${result.final_chars || "?"} chữ)`);
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/jobs`, {
+      method: "POST",
+      body: { kind, chapter },
+    });
+    const job = result.job || result.jobs?.[0];
+    toast(
+      job?.created === false
+        ? `Chương ${chapter} đã có trong hàng đợi`
+        : followupToast(kind, chapter),
+    );
     await loadTranslationProject(workId, chapter);
-    showTranslationSegment(true);
   } catch (err) {
     state.translation.lastError = err.message;
-  } finally {
-    state.translation.busy = false;
     renderTranslationDetail();
+  }
+}
+
+async function enqueueMissingDrafts() {
+  const workId = state.translation.projectId;
+  if (!workId) return;
+  try {
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/jobs`, {
+      method: "POST",
+      body: { kind: "draft", missing: true },
+    });
+    const n = Number(result.enqueued || 0);
+    toast(n ? `Đã xếp hàng ${n} chương còn thiếu` : "Không còn chương nào để dịch");
+    await loadTranslationProject(workId, state.translation.selectedChapter);
+  } catch (err) {
+    toast(err.message);
   }
 }
 
@@ -718,9 +872,7 @@ async function reopenQaIssue(index) {
 async function loadTranslationView(workId, chapter) {
   document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
   document.querySelector('.nav-link[data-view="translation"]')?.classList.add("active");
-  $("view-works").hidden = true;
-  $("view-licenses").hidden = true;
-  $("view-publish").hidden = true;
+  hideAllViews();
   $("view-translation").hidden = false;
   await loadTranslationProjects();
   if (workId) {
@@ -764,6 +916,178 @@ function wireTranslation() {
   };
   $("tr-segment-close").onclick = () => showTranslationSegment(false);
   $("tr-promote").onclick = () => void runTranslationPromote();
+  $("tr-draft-missing").onclick = () => void enqueueMissingDrafts();
+}
+
+function modelSelectOptions(catalog, current) {
+  const groups = { deepseek: [], gemini: [], other: [] };
+  const ids = new Set();
+  for (const model of catalog || []) {
+    if (!model?.id || ids.has(model.id)) continue;
+    ids.add(model.id);
+    const group = model.provider === "deepseek" || model.provider === "gemini" ? model.provider : "other";
+    groups[group].push(model);
+  }
+  if (current && !ids.has(current)) {
+    groups.other.unshift({ id: current, label: `${current} (đang chọn)`, provider: "" });
+  }
+  const titles = { deepseek: "DeepSeek", gemini: "Gemini", other: "Đang chọn / khác" };
+  return ["deepseek", "gemini", "other"]
+    .filter((key) => groups[key].length)
+    .map((key) => {
+      const options = groups[key]
+        .map((model) => {
+          const thinking = model.thinking ? " · thinking" : "";
+          const title = model.description ? ` title="${escapeHtml(model.description)}"` : "";
+          return `<option value="${escapeHtml(model.id)}"${title}${model.id === current ? " selected" : ""}>${escapeHtml(
+            model.label || model.id,
+          )}${thinking}</option>`;
+        })
+        .join("");
+      return `<optgroup label="${titles[key]}">${options}</optgroup>`;
+    })
+    .join("");
+}
+
+function renderModelCatalogStatus(data) {
+  const el = $("settings-models-status");
+  if (!el) return;
+  const counts = data.model_catalog_counts || {};
+  const errors = data.model_catalog_errors || {};
+  const deepseek = Number(counts.deepseek || 0);
+  const gemini = Number(counts.gemini || 0);
+  const parts = [`DeepSeek: ${deepseek} model`, `Gemini: ${gemini} model`];
+  if (data.model_catalog_fetched_at) parts.push(`lúc ${data.model_catalog_fetched_at}`);
+  const errText = Object.entries(errors)
+    .map(([provider, message]) => `${provider}: ${message}`)
+    .join(" · ");
+  el.textContent = errText ? `${parts.join(" · ")} — ${errText}` : parts.join(" · ");
+}
+
+function renderSettingsKeys(secrets) {
+  const s = secrets || {};
+  const rows = [
+    ["DeepSeek", s.deepseek ? "đã set" : "chưa set", s.deepseek],
+    ["Gemini", s.gemini ? "đã set" : "chưa set", s.gemini],
+    ["Read token", s.read_token ? "đã set" : "chưa set", s.read_token],
+    ["Read API", s.read_api || "—", Boolean(s.read_token)],
+  ];
+  $("settings-keys").innerHTML = rows
+    .map(
+      ([label, value, ok]) =>
+        `<div class="settings-key"><b>${escapeHtml(label)}</b><span class="badge ${ok ? "ok" : "bad"}">${escapeHtml(
+          String(value),
+        )}</span></div>`,
+    )
+    .join("");
+}
+
+function renderSettingsForm(data) {
+  state.settings = data;
+  const tr = data.settings?.translation || {};
+  const models = tr.models || {};
+  const catalog = data.model_catalog || [];
+  const stages = data.stages || [];
+  $("settings-models").innerHTML = stages
+    .map(
+      (stage) => `<label>${escapeHtml(stage.label)}
+        <select data-model-slot="${escapeHtml(stage.id)}">${modelSelectOptions(catalog, models[stage.id])}</select>
+        <span>${escapeHtml(stage.hint || "")}</span>
+      </label>`,
+    )
+    .join("");
+  $("set-auto-annotate").checked = Boolean(tr.auto_annotate);
+  $("set-auto-qa").checked = Boolean(tr.auto_qa);
+  $("set-default-mode").value = tr.default_mode || "normal";
+  renderSettingsKeys(data.secrets);
+  renderModelCatalogStatus(data);
+  const note = $("settings-note");
+  if (note) {
+    note.textContent = data.updated_at ? `Đã lưu ${data.updated_at}` : "Chưa lưu file — đang dùng mặc định Hub.";
+  }
+  $("settings-err").textContent = "";
+}
+
+async function refreshModelCatalog() {
+  const selected = {};
+  document.querySelectorAll("[data-model-slot]").forEach((el) => {
+    selected[el.dataset.modelSlot] = el.value;
+  });
+  const btn = $("settings-refresh-models");
+  if (btn) btn.disabled = true;
+  $("settings-err").textContent = "";
+  try {
+    const data = await api("/api/settings?refresh=true");
+    if (data.settings?.translation) {
+      data.settings.translation.models = {
+        ...(data.settings.translation.models || {}),
+        ...selected,
+      };
+    }
+    renderSettingsForm(data);
+    toast("Đã tải danh sách model từ API");
+  } catch (err) {
+    $("settings-err").textContent = err.message;
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function loadSettings() {
+  const data = await api("/api/settings");
+  renderSettingsForm(data);
+  return data;
+}
+
+async function loadSettingsView() {
+  document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
+  document.querySelector('.nav-link[data-view="settings"]')?.classList.add("active");
+  hideAllViews();
+  $("view-settings").hidden = false;
+  if (location.pathname !== "/settings") {
+    history.replaceState({ view: "settings" }, "", "/settings");
+  }
+  try {
+    await loadSettings();
+  } catch (err) {
+    $("settings-err").textContent = err.message;
+  }
+}
+
+async function saveSettings(e) {
+  e.preventDefault();
+  const models = {};
+  document.querySelectorAll("[data-model-slot]").forEach((el) => {
+    models[el.dataset.modelSlot] = el.value;
+  });
+  $("settings-err").textContent = "";
+  const btn = $("settings-save");
+  if (btn) btn.disabled = true;
+  try {
+    const data = await api("/api/settings", {
+      method: "POST",
+      body: {
+        translation: {
+          models,
+          auto_annotate: $("set-auto-annotate").checked,
+          auto_qa: $("set-auto-qa").checked,
+          default_mode: $("set-default-mode").value,
+        },
+      },
+    });
+    renderSettingsForm(data);
+    const n = Number(data.projects_updated || 0);
+    toast(n ? `Đã lưu cài đặt · cập nhật ${n} dự án dịch` : "Đã lưu cài đặt");
+  } catch (err) {
+    $("settings-err").textContent = err.message;
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function wireSettings() {
+  $("settings-form").onsubmit = (e) => void saveSettings(e);
+  $("settings-refresh-models").onclick = () => void refreshModelCatalog();
 }
 
 function collectPublishPayload(apply) {
@@ -798,8 +1122,7 @@ async function sendPublish(apply) {
 
 async function loadPublishPage(id) {
   state.publishId = id;
-  $("view-works").hidden = true;
-  $("view-licenses").hidden = true;
+  hideAllViews();
   $("view-publish").hidden = false;
   document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
   $("pub-heading").textContent = "Đang tải…";
@@ -885,22 +1208,29 @@ function wirePublishForm() {
 function wireNav() {
   document.querySelectorAll(".nav-link").forEach((btn) => {
     btn.onclick = () => {
+      const view = btn.dataset.view;
       if (publishWorkIdFromPath()) {
         location.href = "/";
         return;
       }
-      if (translationFromPath()) {
+      if (translationFromPath() && view !== "translation" && view !== "settings") {
         location.href = "/";
         return;
       }
       document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      const view = btn.dataset.view;
+      if (view === "settings") {
+        void loadSettingsView();
+        return;
+      }
+      if (settingsFromPath()) history.replaceState({ view }, "", "/");
+      hideAllViews();
       $("view-works").hidden = view !== "works";
       $("view-licenses").hidden = view !== "licenses";
-      $("view-publish").hidden = true;
-      $("view-translation").hidden = view !== "translation";
-      if (view === "translation") loadTranslationView(null, null);
+      if (view === "translation") {
+        $("view-translation").hidden = false;
+        void loadTranslationView(null, null);
+      }
     };
   });
 }
@@ -928,6 +1258,7 @@ async function boot() {
   wireNav();
   wirePublishForm();
   wireTranslation();
+  wireSettings();
   $("preview-close").onclick = closePreview;
   $("preview").onclick = (e) => {
     if (e.target.id === "preview") closePreview();
@@ -994,6 +1325,10 @@ async function afterAuth() {
   const tr = translationFromPath();
   if (tr) {
     await loadTranslationView(tr.workId, tr.chapter);
+    return;
+  }
+  if (settingsFromPath()) {
+    await loadSettingsView();
     return;
   }
   await loadDesk();

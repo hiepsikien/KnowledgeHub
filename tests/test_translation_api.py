@@ -34,6 +34,7 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
     (catalog / "authors.json").write_text(json.dumps([{"id": "grotius", "name": "Grotius"}]), encoding="utf-8")
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(tmp_path))
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
     monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
     init_translation_project("grotius--freedom_of_the_seas")
     sample = tmp_path / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
@@ -246,3 +247,55 @@ def test_promote_rejects_incomplete(client: TestClient):
     res = client.post("/api/translations/grotius--freedom_of_the_seas/promote", json={})
     assert res.status_code == 400
     assert "Missing final" in res.json()["detail"]
+
+
+def test_enqueue_draft_job_and_dedupe(client: TestClient):
+    first = client.post(
+        "/api/translations/grotius--freedom_of_the_seas/jobs",
+        json={"kind": "draft", "chapter": "II"},
+    )
+    assert first.status_code == 200, first.text
+    job = first.json()["job"]
+    assert job["status"] == "queued"
+    assert job["created"] is True
+    second = client.post(
+        "/api/translations/grotius--freedom_of_the_seas/jobs",
+        json={"kind": "draft", "chapter": "II"},
+    )
+    assert second.status_code == 200
+    assert second.json()["job"]["id"] == job["id"]
+    assert second.json()["job"]["created"] is False
+    listed = client.get("/api/translations/grotius--freedom_of_the_seas/jobs").json()
+    assert listed["worker_alive"] is False
+    assert any(row["id"] == job["id"] for row in listed["jobs"])
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_ii = next(row for row in project["chapters"] if row["chapter"] == "II")
+    assert ch_ii["jobs"][0]["kind"] == "draft"
+
+
+def test_enqueue_missing_drafts(client: TestClient):
+    res = client.post(
+        "/api/translations/grotius--freedom_of_the_seas/jobs",
+        json={"kind": "draft", "missing": True},
+    )
+    assert res.status_code == 200, res.text
+    body = res.json()
+    assert "II" in body["missing"]
+    assert body["enqueued"] >= 1
+
+
+def test_process_next_job_runs_draft(client: TestClient, tmp_path: Path):
+    from knowledgehub.translation.jobs import enqueue_job, process_next_job
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    with patch("knowledgehub.translation.draft.draft_chapter") as mock_draft:
+        mock_draft.return_value = {"chapter": "II", "final_chars": 12, "status": "draft_ready"}
+        done = process_next_job()
+    assert done["status"] == "done"
+    mock_draft.assert_called_once_with("grotius--freedom_of_the_seas", chapter="II")
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    draft_job = next(job for job in store["jobs"] if job["kind"] == "draft")
+    assert draft_job["status"] == "done"
+    follow = next(job for job in store["jobs"] if job["kind"] == "annotate")
+    assert follow["status"] == "queued"
+    assert follow["chapter"] == "II"

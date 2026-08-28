@@ -19,6 +19,7 @@
         <p class="tagline">Catalog corpus · dịch thuật · publish Read</p>
         <button class="nav-link active" data-view="works" type="button">Tác phẩm</button>
         <button class="nav-link" data-view="translation" type="button">Dịch thuật</button>
+        <button class="nav-link" data-view="settings" type="button">Cài đặt</button>
         <button class="nav-link" data-view="licenses" type="button">License</button>
         <div class="nav-foot" id="health"></div>
       </aside>
@@ -120,6 +121,51 @@
           <p class="lead">Id canonical dùng trên work.license. Bản gốc Think nằm ở license_source.</p>
           <ul class="license-list" id="licenses"></ul>
         </section>
+        <section id="view-settings" hidden>
+          <header class="page-head">
+            <div>
+              <h1>Cài đặt Hub</h1>
+              <p class="lead">Chọn mô hình cho từng khâu dịch, và mặc định có chạy chú thích cùng QA sau khi dịch chương hay không.</p>
+            </div>
+          </header>
+          <form id="settings-form" class="settings-form">
+            <fieldset>
+              <legend>Mô hình dịch</legend>
+              <p class="muted">Danh sách lấy trực tiếp từ API DeepSeek và Gemini (key trong <code>.env</code>). Đổi xong áp dụng cho job tiếp theo và ghi vào các dự án đang có.</p>
+              <p class="muted" id="settings-models-status"></p>
+              <div class="row">
+                <button type="button" class="btn ghost" id="settings-refresh-models">Tải lại danh sách</button>
+              </div>
+              <div class="settings-grid" id="settings-models"></div>
+            </fieldset>
+            <fieldset>
+              <legend>Sau khi dịch chương</legend>
+              <p class="muted">Nếu bật cả hai, thứ tự là dịch → chú thích → QA (QA chấm cả chú thích). Vẫn bấm được từng nút riêng trên trang Dịch thuật.</p>
+              <label class="inline"><input id="set-auto-annotate" type="checkbox" /> Tự tạo chú thích</label>
+              <label class="inline"><input id="set-auto-qa" type="checkbox" /> Tự chạy QA</label>
+            </fieldset>
+            <fieldset>
+              <legend>Dự án dịch mới</legend>
+              <label>Mode mặc định (khi draft sample)
+                <select id="set-default-mode">
+                  <option value="tight">tight — sát cấu trúc &amp; thuật ngữ</option>
+                  <option value="normal">normal — cân bằng</option>
+                  <option value="loose">loose — dễ hiểu, thoát ý có kiểm soát</option>
+                </select>
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Kết nối</legend>
+              <p class="muted">Chỉ xem — key nằm trong <code>.env</code>, không lưu trên trang này.</p>
+              <div class="settings-keys" id="settings-keys"></div>
+            </fieldset>
+            <div class="row">
+              <button class="btn primary" type="submit" id="settings-save">Lưu cài đặt</button>
+            </div>
+            <p class="muted" id="settings-note"></p>
+            <pre class="err" id="settings-err"></pre>
+          </form>
+        </section>
         <section id="view-translation" hidden>
           <header class="page-head">
             <div>
@@ -130,8 +176,11 @@
           <div class="stats" id="tr-stats"></div>
           <div class="toolbar">
             <select id="tr-project"></select>
+            <button type="button" class="btn" id="tr-draft-missing">Dịch chương còn thiếu</button>
             <button type="button" class="btn" id="tr-promote">Đưa vào catalog</button>
           </div>
+          <p class="muted" id="tr-jobs"></p>
+          <p class="muted" id="tr-pipeline-note"></p>
           <p class="muted" id="tr-promote-note"></p>
           <div class="layout tr-layout">
             <div class="table-wrap">

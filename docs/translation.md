@@ -12,11 +12,11 @@ English treatise only (~20k words, 13 chapters) extracted from Gutenberg #75962 
 .venv/bin/knowledgehub translate init --work grotius--freedom_of_the_seas
 ```
 
-Translation project files live under `corpus/translations/{source_work_id}/`:
+Hub-wide Cài đặt is `corpus/hub-settings.json` (models + auto chú thích/QA). Translation project files live under `corpus/translations/{source_work_id}/`:
 
 | File | Purpose |
 |------|---------|
-| `project.json` | Mode, models, status, sample segment pointer |
+| `project.json` | Mode, models snapshot, status, sample segment pointer |
 | `glossary.json` | Locked terms / entities |
 | `style_brief.md` | Voice and genre notes |
 | `segments/ch{i}.json` | Per-chapter source + draft slots (tight/normal/loose) |
@@ -37,14 +37,20 @@ knowledgehub translate select-mode --work grotius--freedom_of_the_seas --mode ti
 
 Pilot: **tight** selected for Grotius (legal treatise — fidelity over fluency).
 
-## Model roles (configured in project.json)
+## Model roles (Cài đặt Hub)
 
-| Pass | Model slot | Default |
-|------|------------|---------|
-| Draft | `models.draft` | `deepseek-chat` |
-| Polish | `models.polish` | `gemini-3.5-flash` |
-| QA | `models.qa` | `deepseek-reasoner` |
-| Annotations | `models.annotations` | `gemini-3.5-flash` |
+Defaults live in **Cài đặt** (`corpus/hub-settings.json`). Saving there also writes `models` into each `project.json`. Runtime reads Hub settings first.
+
+| Pass | Setting | Default |
+|------|---------|---------|
+| Draft | `translation.models.draft` | `deepseek-v4-flash` |
+| Polish | `translation.models.polish` | `gemini-3.5-flash` |
+| QA | `translation.models.qa` | `deepseek-v4-pro` |
+| Annotations | `translation.models.annotations` | `gemini-3.5-flash` |
+
+Any DeepSeek or Gemini text model returned by their list-models APIs can be used on any pass. Cài đặt loads that live catalog (`GET /models` / Gemini `models.list`); it is not a hardcoded shortlist.
+
+After a Hub **Dịch chương** job finishes, Cài đặt can auto-queue chú thích then QA (`auto_annotate` / `auto_qa`, both on by default). CLI `translate draft` / `qa` / `annotate` still run one step at a time.
 
 ### Secrets (Cursor Cloud Agents dashboard)
 
@@ -67,7 +73,11 @@ Pipeline: DeepSeek draft → Gemini polish → writes `segments/chi-sample.json`
 knowledgehub translate draft --work grotius--freedom_of_the_seas --chapter II
 ```
 
-Uses the locked mode. Same DeepSeek → Gemini pipeline; writes `segments/chii.json`. The curator UI **Dịch chương** button calls the same endpoint.
+Uses the locked mode. Same DeepSeek → Gemini pipeline; writes `segments/chii.json`. The curator UI **Dịch chương** button enqueues the same work on a **single background worker** (HTTP returns immediately). **Dịch chương còn thiếu** queues every chapter without `final`. QA and chú thích use the same queue.
+
+CLI `translate draft` / `qa` / `annotate` still run synchronously.
+
+Job state is `corpus/.translation-jobs.json` (gitignored). Reload of `serve` re-queues a job that was `running`.
 
 ### QA scoring
 

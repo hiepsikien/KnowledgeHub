@@ -5,9 +5,11 @@ from pathlib import Path
 from typing import Any
 
 from ..paths import corpus_root
+from ..settings import translation_pipeline
 from .annotate import annotate_segment
 from .assemble import chapter_sort_key, segment_files, translation_status
 from .draft import draft_chapter
+from .jobs import enqueue_job, enqueue_missing_drafts, list_jobs, worker_alive
 from .paths import annotations_file, translation_catalog_id
 from .project import load_project
 from .promote import promote_translation
@@ -106,6 +108,15 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
                 by_chapter[key] = by_chapter.get(key, 0) + 1
         for row in chapters:
             row["annotation_count"] = by_chapter.get(str(row["chapter"]).upper(), 0)
+    jobs = list_jobs(source_work_id)
+    active: dict[str, list[dict[str, Any]]] = {}
+    for job in jobs:
+        if job.get("status") not in {"queued", "running"}:
+            continue
+        key = str(job.get("chapter") or "").upper()
+        active.setdefault(key, []).append(job)
+    for row in chapters:
+        row["jobs"] = active.get(str(row["chapter"]).upper(), [])
     status = translation_status(source_work_id)
     return {
         "project": project,
@@ -116,6 +127,9 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
         ),
         "ready_to_promote": status["complete"],
         "missing_chapters": status["missing"],
+        "jobs": jobs,
+        "worker_alive": worker_alive(),
+        "pipeline": translation_pipeline(),
     }
 
 
@@ -202,3 +216,20 @@ def run_draft(source_work_id: str, chapter: str) -> dict[str, Any]:
 
 def run_promote(source_work_id: str, *, title: str | None = None) -> dict[str, Any]:
     return promote_translation(source_work_id, title=title)
+
+
+def enqueue_translation_job(
+    source_work_id: str,
+    *,
+    kind: str,
+    chapter: str | None = None,
+    missing: bool = False,
+) -> dict[str, Any]:
+    if missing:
+        if kind != "draft":
+            raise ValueError("missing=true is only valid for kind=draft")
+        return enqueue_missing_drafts(source_work_id)
+    if not chapter:
+        raise ValueError("Provide chapter or missing=true")
+    job = enqueue_job(source_work_id, chapter, kind)
+    return {"job": job, "enqueued": 1 if job.get("created") else 0}

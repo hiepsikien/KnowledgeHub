@@ -125,8 +125,10 @@ tr.pick.on { background: var(--accent-soft); }
   background: var(--warn-soft);
   color: var(--warn);
 }
-.badge.ok { background: var(--ok-soft); color: var(--ok); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.tr-jobs { min-height: 1.3em; margin: 0 0 8px; }
 .badge.bad { background: #f8e4e4; color: var(--bad); }
+.badge.ok { background: var(--ok-soft); color: var(--ok); }
 
 .detail {
   background: var(--card);
@@ -260,6 +262,69 @@ tr.pick.on { background: var(--accent-soft); }
   background: #fff;
 }
 .pub-form label.inline { flex-direction: row; align-items: center; gap: 8px; color: var(--ink); }
+
+.settings-form {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.settings-form fieldset {
+  margin: 0;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.settings-form legend {
+  font-family: var(--serif);
+  font-size: 18px;
+  padding: 0 6px;
+}
+.settings-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.settings-form label.inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 14px;
+}
+.settings-form select {
+  font: inherit;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: #fff;
+}
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+}
+.settings-keys {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.settings-key {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+}
+.settings-key b { display: block; font-size: 14px; }
+.settings-key span { color: var(--muted); font-size: 12px; word-break: break-all; }
 .pub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
 .pub-grid p { margin: 0; }
 .split-set { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
@@ -437,4 +502,5 @@ tr.pick.on { background: var(--accent-soft); }
   .detail { position: static; }
   .tr-dual { grid-template-columns: 1fr; }
   .tr-col + .tr-col { border-left: 0; border-top: 1px solid var(--line); }
+  .settings-grid, .settings-keys { grid-template-columns: 1fr; }
 }

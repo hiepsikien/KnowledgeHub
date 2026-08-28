@@ -7,8 +7,9 @@ from typing import Any
 
 from ..paths import corpus_root
 from .paths import glossary_file, project_file, segments_dir, style_brief_file
+from ..settings import resolve_models
 from .project import load_project
-from .providers import DEFAULT_GEMINI_MODEL, deepseek_chat, gemini_generate
+from .providers import complete_chat, complete_prompt
 from .segments_io import load_segment, save_segment
 
 MODE_INSTRUCTIONS = {
@@ -128,10 +129,10 @@ def _run_draft(
         style_brief=style_brief,
         target_language=target_language,
     )
-    draft_vi = deepseek_chat(messages, model=draft_model, temperature=0.3)
+    draft_vi = complete_chat(messages, model=draft_model, temperature=0.3)
     polished = draft_vi
     if not skip_polish:
-        polished = gemini_generate(
+        polished = complete_prompt(
             _polish_prompt(draft_vi=draft_vi, source_text=source_text, glossary=glossary),
             system="You polish Vietnamese literary translations. Never change meaning.",
             model=polish_model,
@@ -161,9 +162,9 @@ def draft_sample(
     if not source_text.strip():
         raise ValueError("Sample segment has empty source_text")
 
-    models = project.get("models") or {}
-    draft_model = models.get("draft", "deepseek-chat")
-    polish_model = models.get("polish", DEFAULT_GEMINI_MODEL)
+    models = resolve_models(project)
+    draft_model = models["draft"]
+    polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
 
     draft_vi, polished = _run_draft(
@@ -224,9 +225,9 @@ def draft_chapter(
 
     glossary = json.loads(glossary_file(source_work_id).read_text(encoding="utf-8"))
     style_brief = style_brief_file(source_work_id).read_text(encoding="utf-8")
-    models = project.get("models") or {}
-    draft_model = models.get("draft", "deepseek-chat")
-    polish_model = models.get("polish", DEFAULT_GEMINI_MODEL)
+    models = resolve_models(project)
+    draft_model = models["draft"]
+    polish_model = models["polish"]
     target_language = project.get("target_language", "vi")
 
     draft_vi, polished = _run_draft(

@@ -14,6 +14,7 @@ def client(tmp_path, monkeypatch):
     build_catalog(src=corpus / "sources", dest=corpus / "catalog")
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
     monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
     return TestClient(create_app())
 
 
@@ -21,6 +22,7 @@ def test_ui_and_list(client):
     home = client.get("/")
     assert home.status_code == 200
     assert "Knowledge Hub" in home.text
+    assert "Cài đặt" in home.text
     stats = client.get("/api/stats").json()
     assert stats["works"] == 1
     works = client.get("/api/works").json()["works"]
@@ -84,6 +86,7 @@ def test_ops_secret_blocks(tmp_path, monkeypatch):
     corpus = _mini_corpus(tmp_path)
     build_catalog(src=corpus / "sources", dest=corpus / "catalog")
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
     monkeypatch.setenv("KNOWLEDGEHUB_OPS_SECRET", "s3cret")
     client = TestClient(create_app())
     assert client.get("/api/works").status_code == 401
