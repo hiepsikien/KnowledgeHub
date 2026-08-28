@@ -102,7 +102,11 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
 
     ann_path = annotations_file(source_work_id)
     store = json.loads(ann_path.read_text(encoding="utf-8")) if ann_path.is_file() else {"annotations": []}
-    existing = store.get("annotations") or []
+    existing = [
+        a
+        for a in (store.get("annotations") or [])
+        if str(a.get("segment_id") or "") != segment_id
+    ]
     by_id = {str(a.get("id")): a for a in existing if a.get("id")}
     for item in new_items:
         if not item.get("id"):

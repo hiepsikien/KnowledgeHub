@@ -92,3 +92,20 @@ def test_ops_secret_blocks(tmp_path, monkeypatch):
     ok = client.post("/api/login", json={"secret": "s3cret"})
     assert ok.status_code == 200
     assert client.get("/api/works").status_code == 200
+
+
+def test_static_rejects_path_traversal(client):
+    for path in (
+        "/%2e%2e/translation/providers.py",
+        "/%2e%2e/%2e%2e/%2e%2e/.env",
+        "/..%2ftranslation/providers.py",
+    ):
+        leaked = client.get(path)
+        assert leaked.status_code == 404, path
+        assert "class ProviderError" not in leaked.text
+        assert "DEEPSEEK_API_KEY" not in leaked.text
+    spa = client.get("/../translation/providers.py")
+    assert "class ProviderError" not in spa.text
+    js = client.get("/app.js")
+    assert js.status_code == 200
+    assert "boot()" in js.text

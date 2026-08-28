@@ -8,7 +8,7 @@ import pytest
 
 from knowledgehub.translation.draft import draft_chapter, draft_sample
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
-from knowledgehub.translation.providers import ProviderError, deepseek_chat
+from knowledgehub.translation.providers import ProviderError, deepseek_chat, gemini_generate
 
 
 @pytest.fixture
@@ -40,6 +40,21 @@ def test_deepseek_missing_key(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     with pytest.raises(ProviderError, match="DEEPSEEK_API_KEY"):
         deepseek_chat([{"role": "user", "content": "hi"}])
+
+
+def test_gemini_sends_key_in_header(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "secret-key")
+    captured: dict = {}
+
+    def fake_post(url, headers, payload, *, timeout=300):
+        captured["url"] = url
+        captured["headers"] = headers
+        return {"candidates": [{"content": {"parts": [{"text": "ok"}]}}]}
+
+    monkeypatch.setattr("knowledgehub.translation.providers._post_json", fake_post)
+    assert gemini_generate("hi") == "ok"
+    assert "key=" not in captured["url"]
+    assert captured["headers"]["x-goog-api-key"] == "secret-key"
 
 
 def test_draft_sample_writes_normal(corpus: Path):

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import urllib.error
 import urllib.request
 from typing import Any
@@ -9,6 +10,7 @@ from typing import Any
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
+_MODEL_NAME = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
 class ProviderError(Exception):
@@ -83,15 +85,21 @@ def gemini_generate(
     model: str = DEFAULT_GEMINI_MODEL,
     temperature: float = 0.4,
 ) -> str:
+    if not _MODEL_NAME.fullmatch(model):
+        raise ProviderError(f"Invalid Gemini model: {model!r}")
     key = gemini_api_key()
-    url = f"{GEMINI_BASE}/{model}:generateContent?key={key}"
+    url = f"{GEMINI_BASE}/{model}:generateContent"
     body: dict[str, Any] = {
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": temperature},
     }
     if system:
         body["systemInstruction"] = {"parts": [{"text": system}]}
-    result = _post_json(url, {"Content-Type": "application/json"}, body)
+    result = _post_json(
+        url,
+        {"Content-Type": "application/json", "x-goog-api-key": key},
+        body,
+    )
     try:
         parts = result["candidates"][0]["content"]["parts"]
         texts = [p["text"] for p in parts if "text" in p]

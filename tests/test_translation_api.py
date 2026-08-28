@@ -142,3 +142,11 @@ def test_translation_draft_endpoint(client: TestClient):
 def test_translation_rejects_unsafe_work_id(client: TestClient):
     res = client.get("/api/translations/foo..bar")
     assert res.status_code == 400
+
+
+def test_translation_annotate_endpoint(client: TestClient):
+    with patch("knowledgehub.translation.api.annotate_segment") as mock_ann:
+        mock_ann.return_value = {"added_or_updated": 1, "total": 1}
+        res = client.post("/api/translations/grotius--freedom_of_the_seas/annotate/I")
+    assert res.status_code == 200
+    mock_ann.assert_called_once_with("grotius--freedom_of_the_seas", "I")

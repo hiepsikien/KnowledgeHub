@@ -123,7 +123,7 @@ def init_translation_project(
     }
 
     sample_payload = {
-        "id": f"{source_work_id}--ch{ch1['chapter']}-sample",
+        "id": f"{source_work_id}--ch{str(ch1['chapter']).lower()}-sample",
         "chapter": ch1["chapter"],
         "words": ch1["words"],
         "source_text": ch1["text"],

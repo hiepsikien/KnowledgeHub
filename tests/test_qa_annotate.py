@@ -9,6 +9,7 @@ import pytest
 from knowledgehub.translation.annotate import annotate_segment
 from knowledgehub.translation.llm_json import parse_json_object
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
+from knowledgehub.translation.providers import ProviderError
 from knowledgehub.translation.qa import qa_segment
 
 
@@ -101,6 +102,76 @@ def test_annotate_segment_merges_annotations(corpus: Path):
     store = json.loads((corpus / "translations/grotius--freedom_of_the_seas/annotations.json").read_text())
     assert len(store["annotations"]) == 1
     assert store["annotations"][0]["body_vi"].startswith("Pliny")
+
+
+def test_qa_rejects_out_of_range_score(corpus: Path):
+    _lock_tight(corpus)
+    qa_json = json.dumps(
+        {
+            "scores": {
+                "fidelity": 11,
+                "fluency": 8,
+                "terminology": 9,
+                "completeness": 10,
+                "overall": 9,
+            },
+            "summary_vi": "Bad score.",
+            "issues": [],
+        }
+    )
+    with patch("knowledgehub.translation.qa.deepseek_chat", return_value=qa_json):
+        with pytest.raises(ProviderError, match="out of range"):
+            qa_segment("grotius--freedom_of_the_seas", "I")
+
+
+def test_annotate_replaces_segment_orphans(corpus: Path):
+    _lock_tight(corpus)
+    ann_path = corpus / "translations/grotius--freedom_of_the_seas/annotations.json"
+    ann_path.write_text(
+        json.dumps(
+            {
+                "annotations": [
+                    {
+                        "id": "stale-fn",
+                        "segment_id": "grotius--freedom_of_the_seas--chi",
+                        "chapter": "I",
+                        "marker": "[99]",
+                        "kind": "footnote",
+                        "body_vi": "orphan",
+                    },
+                    {
+                        "id": "keep-chii",
+                        "segment_id": "grotius--freedom_of_the_seas--chii",
+                        "chapter": "II",
+                        "kind": "context",
+                        "body_vi": "keep",
+                    },
+                ]
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    fresh = json.dumps(
+        {
+            "annotations": [
+                {
+                    "id": "grotius--freedom_of_the_seas--chi--fn-1",
+                    "marker": "[1]",
+                    "kind": "footnote",
+                    "body_vi": "Pliny.",
+                }
+            ]
+        }
+    )
+    with patch("knowledgehub.translation.annotate.gemini_generate", return_value=fresh):
+        annotate_segment("grotius--freedom_of_the_seas", "I")
+    store = json.loads(ann_path.read_text(encoding="utf-8"))
+    ids = {a["id"] for a in store["annotations"]}
+    assert "stale-fn" not in ids
+    assert "keep-chii" in ids
+    assert "grotius--freedom_of_the_seas--chi--fn-1" in ids
 
 
 def test_qa_requires_locked_mode(corpus: Path):

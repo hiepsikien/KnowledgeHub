@@ -5,6 +5,8 @@ import secrets
 from pathlib import Path
 from typing import Any
 
+from urllib.parse import unquote
+
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
@@ -251,8 +253,8 @@ def create_app() -> FastAPI:
         if path.startswith("api/"):
             raise HTTPException(404, "not found")
         web_root = WEB_DIR.resolve()
-        candidate = (WEB_DIR / path).resolve()
-        if web_root not in candidate.parents and candidate != web_root:
+        candidate = (WEB_DIR / unquote(path)).resolve()
+        if not candidate.is_relative_to(web_root):
             raise HTTPException(404, "not found")
         if candidate.is_file():
             return FileResponse(candidate)

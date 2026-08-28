@@ -103,9 +103,18 @@ def qa_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
     )
     report = parse_json_object(raw)
     scores = report.get("scores") or {}
+    normalized: dict[str, float] = {}
     for key in ("fidelity", "fluency", "terminology", "completeness", "overall"):
         if key not in scores:
             raise ProviderError(f"QA response missing scores.{key}: {report!r}")
+        try:
+            value = float(scores[key])
+        except (TypeError, ValueError) as exc:
+            raise ProviderError(f"QA scores.{key} is not a number: {scores[key]!r}") from exc
+        if not 1 <= value <= 10:
+            raise ProviderError(f"QA scores.{key} out of range 1–10: {value}")
+        normalized[key] = int(value) if value == int(value) else value
+    scores = normalized
 
     payload: dict[str, Any] = {
         "mode": mode,
