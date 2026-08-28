@@ -1,0 +1,37 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "lich_su_nam_tien.txt",
+    "work": "Lịch sử Nam tiến của dân tộc Việt Nam",
+    "year": 1930,
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/lich-su-nam-tien-cua-dan-toc-viet-nam.pdf",
+    "translator": null,
+    "concepts": [
+      "nam tien",
+      "cham pa",
+      "mo coi",
+      "lich su"
+    ],
+    "pdNotes": "Nhà xuất bản Ngày Mai via vietsu S3; TVE-4U retype. Trúc Khê (Ngô Văn Triện) d.1947 — VN PD. TVE credits stripped."
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "tran_thu_do.txt",
+    "work": "Trần Thủ Độ",
+    "year": 1930,
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/TRAN THU DO - TRUC-KHE NGO-VAN-TRIEN.pdf",
+    "translator": null,
+    "concepts": [
+      "tran thu do",
+      "nha tran",
+      "tieu su"
+    ],
+    "pdNotes": "Thanh Bình 1952 via vietsu S3 (URL spaces quoted). Trúc Khê d.1947 — VN PD. TVE credits stripped."
+  }
+]

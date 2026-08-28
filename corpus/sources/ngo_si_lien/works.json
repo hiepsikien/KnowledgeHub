@@ -1,0 +1,20 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "dai_viet_su_ky_toan_thu.txt",
+    "work": "Đại Việt sử ký toàn thư (Mạc Bảo Thần / Nhượng Tống dịch, Tân Việt 1945 — Ngoại kỷ đến nhà Ngô)",
+    "year": 1945,
+    "source_url": "https://vi.wikisource.org/wiki/Đại_Việt_sử_ký_toàn_thư",
+    "translator": "Mạc Bảo Thần (Nhượng Tống, Hoàng Phạm Trân, 1906–1949) — VN PD",
+    "concepts": [
+      "toan thu",
+      "ngoai ky",
+      "bien nien",
+      "dai viet"
+    ],
+    "pdNotes": "Nhượng Tống / Mạc Bảo Thần Tân Việt 1945 only (Ngoại kỷ → nhà Ngô). Not the Viện KHXH / Viện Sử học translation."
+  }
+]

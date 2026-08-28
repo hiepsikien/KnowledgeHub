@@ -9,6 +9,30 @@
     "license": "public_domain_vn_wikisource",
     "lang": "vi",
     "chunking": "prose",
-    "concepts": ["ngheo", "phong tuc", "dan ba", "lang que", "thue"]
+    "concepts": [
+      "ngheo",
+      "phong tuc",
+      "dan ba",
+      "lang que",
+      "thue"
+    ]
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "hoang_le_nhat_thong_chi.txt",
+    "work": "Hoàng Lê nhất thống chí (Ngô Tất Tố dịch)",
+    "year": 1945,
+    "source_url": "https://vi.wikisource.org/wiki/Hoàng_Lê_nhất_thống_chí",
+    "translator": "Ngô Tất Tố (1894–1954) — Mai Lĩnh 1945, VN PD",
+    "concepts": [
+      "tay son",
+      "le chieu thong",
+      "nguyen hue",
+      "tieu thuyet lich su"
+    ],
+    "pdNotes": "Ngô Tất Tố re-divided the 17 hồi; Wikisource has no chương XII (I–XI then XIII–XXI)."
   }
 ]

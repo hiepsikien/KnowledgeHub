@@ -1,0 +1,20 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "quoc_trieu_chinh_bien_toat_yeu.txt",
+    "work": "Quốc triều chính biên toát yếu",
+    "year": 1908,
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/quoc-trieu-chanh-bien-toat-yeu-cao-xuan-duc.pdf",
+    "translator": null,
+    "concepts": [
+      "nha nguyen",
+      "chinh bien",
+      "toat yeu",
+      "bien nien"
+    ],
+    "pdNotes": "Image-derived PDF via vietsu S3; 1925 Quốc Sử Quán quốc ngữ. Extraction has spaced-letter artifacts. 1972 reprint wrapper / 2001 email stripped. Author Cao Xuân Dục d.1923 — VN PD."
+  }
+]

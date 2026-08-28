@@ -9,7 +9,12 @@
     "license": "public_domain_original",
     "lang": "vi",
     "chunking": "prose",
-    "concepts": ["nhan nghia", "an dan", "dai viet", "binh ngo"]
+    "concepts": [
+      "nhan nghia",
+      "an dan",
+      "dai viet",
+      "binh ngo"
+    ]
   },
   {
     "file": "tai_du_vuong_thong.txt",
@@ -21,7 +26,12 @@
     "license": "public_domain_vn_wikisource",
     "lang": "vi",
     "chunking": "prose",
-    "concepts": ["thoi the", "tam cong", "du hang", "quan trung"]
+    "concepts": [
+      "thoi the",
+      "tam cong",
+      "du hang",
+      "quan trung"
+    ]
   },
   {
     "file": "quoc_am_thi_tap_dda.txt",
@@ -35,6 +45,29 @@
     "textLayer": "quoc_ngu_pd",
     "lang": "vi",
     "chunking": "verse",
-    "concepts": ["quoc am", "nom", "uc trai", "luc bat"]
+    "concepts": [
+      "quoc am",
+      "nom",
+      "uc trai",
+      "luc bat"
+    ]
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "lam_son_thuc_luc.txt",
+    "work": "Lam Sơn thực lục (Mạc Bảo Thần dịch)",
+    "year": 1945,
+    "source_url": "https://vi.wikisource.org/wiki/Lam_Sơn_thực_lục",
+    "translator": "Mạc Bảo Thần (Nhượng Tống, 1906–1949) — Tân Việt, VN PD",
+    "concepts": [
+      "lam son",
+      "le loi",
+      "khoi nghia",
+      "thuc luc"
+    ],
+    "pdNotes": "Mạc Bảo Thần / Nhượng Tống Tân Việt — not a modern Viện translation."
   }
 ]

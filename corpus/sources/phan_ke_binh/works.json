@@ -9,7 +9,13 @@
     "license": "public_domain_vn_wikisource",
     "lang": "vi",
     "chunking": "prose",
-    "concepts": ["phong tuc", "gia dinh", "huong dang", "hon nhan", "khao"]
+    "concepts": [
+      "phong tuc",
+      "gia dinh",
+      "huong dang",
+      "hon nhan",
+      "khao"
+    ]
   },
   {
     "file": "viet_han_van_khao.txt",
@@ -21,6 +27,28 @@
     "license": "public_domain_vn_wikisource",
     "lang": "vi",
     "chunking": "prose",
-    "concepts": ["van chuong", "the van", "han hoc", "quoc van"]
+    "concepts": [
+      "van chuong",
+      "the van",
+      "han hoc",
+      "quoc van"
+    ]
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "nam_hai_di_nhan_liet_truyen.txt",
+    "work": "Nam Hải dị nhân liệt truyện",
+    "year": 1909,
+    "source_url": "https://vi.wikisource.org/wiki/Nam_Hải_dị_nhân_liệt_truyện",
+    "translator": null,
+    "concepts": [
+      "di nhan",
+      "truyen ky",
+      "danh nhan",
+      "lich su"
+    ]
   }
 ]

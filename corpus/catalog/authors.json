@@ -170,6 +170,11 @@
     "think_brain": "cantor"
   },
   {
+    "id": "cao_xuan_duc",
+    "name": "Cao Xuan Duc",
+    "think_brain": "cao_xuan_duc"
+  },
+  {
     "id": "carlyle",
     "name": "Carlyle",
     "think_brain": "carlyle"
@@ -273,6 +278,11 @@
     "id": "dante",
     "name": "Dante",
     "think_brain": "dante"
+  },
+  {
+    "id": "dao_trinh_nhat",
+    "name": "Dao Trinh Nhat",
+    "think_brain": "dao_trinh_nhat"
   },
   {
     "id": "darwin",
@@ -695,6 +705,11 @@
     "think_brain": "le_bon"
   },
   {
+    "id": "le_ngo_cat",
+    "name": "Le Ngo Cat",
+    "think_brain": "le_ngo_cat"
+  },
+  {
     "id": "le_quy_don",
     "name": "Le Quy Don",
     "think_brain": "le_quy_don"
@@ -908,6 +923,11 @@
     "id": "newton",
     "name": "Newton",
     "think_brain": "newton"
+  },
+  {
+    "id": "ngo_si_lien",
+    "name": "Ngo Si Lien",
+    "think_brain": "ngo_si_lien"
   },
   {
     "id": "ngo_tat_to",
@@ -1275,6 +1295,11 @@
     "think_brain": "tran_hung_dao"
   },
   {
+    "id": "tran_trong_kim",
+    "name": "Tran Trong Kim",
+    "think_brain": "tran_trong_kim"
+  },
+  {
     "id": "trinh_hoai_duc",
     "name": "Trinh Hoai Duc",
     "think_brain": "trinh_hoai_duc"
@@ -1283,6 +1308,16 @@
     "id": "trotsky",
     "name": "Trotsky",
     "think_brain": "trotsky"
+  },
+  {
+    "id": "truc_khe",
+    "name": "Truc Khe",
+    "think_brain": "truc_khe"
+  },
+  {
+    "id": "truong_vinh_ky",
+    "name": "Truong Vinh Ky",
+    "think_brain": "truong_vinh_ky"
   },
   {
     "id": "tue_tinh",

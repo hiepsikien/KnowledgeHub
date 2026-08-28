@@ -2379,6 +2379,43 @@
     }
   },
   {
+    "id": "cao_xuan_duc--quoc_trieu_chinh_bien_toat_yeu",
+    "title": "Quốc triều chính biên toát yếu",
+    "author_id": "cao_xuan_duc",
+    "language": "vi",
+    "year": 1908,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/quoc-trieu-chanh-bien-toat-yeu-cao-xuan-duc.pdf",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "nha nguyen",
+      "chinh bien",
+      "toat yeu",
+      "bien nien"
+    ],
+    "content_file": "sources/cao_xuan_duc/raw/quoc_trieu_chinh_bien_toat_yeu.txt",
+    "think_brain": "cao_xuan_duc",
+    "think_file": "quoc_trieu_chinh_bien_toat_yeu.txt",
+    "content_hash": "d6d3f8a2f7539e559031d8fb4cb5bcfb2b2a00f5d336c6c5c81deb8aacc36cc0",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "carlyle--french_revolution",
     "title": "The French Revolution: A History",
     "author_id": "carlyle",
@@ -3516,6 +3553,43 @@
     },
     "read": {
       "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "dao_trinh_nhat--phan_dinh_phung",
+    "title": "Phan Đình Phùng",
+    "author_id": "dao_trinh_nhat",
+    "language": "vi",
+    "year": 1950,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/phan-dinh-phung.pdf",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "can vuong",
+      "phan dinh phung",
+      "khang phap",
+      "memoir"
+    ],
+    "content_file": "sources/dao_trinh_nhat/raw/phan_dinh_phung.txt",
+    "think_brain": "dao_trinh_nhat",
+    "think_file": "phan_dinh_phung.txt",
+    "content_hash": "7f86ffe858855ef17150b12348f9dfcfeb7a22c6d0a5ad5702b2fb9dec123fdc",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "memoir-biography",
       "price_cents": 0,
       "split_length": "standard"
     }
@@ -9659,6 +9733,43 @@
     }
   },
   {
+    "id": "le_ngo_cat--dai_nam_quoc_su_dien_ca",
+    "title": "Đại Nam quốc sử diễn ca",
+    "author_id": "le_ngo_cat",
+    "language": "vi",
+    "year": 1870,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Đại_Nam_Quốc_sử_Diễn_ca",
+    "gutenberg_id": null,
+    "translator": "Lê Ngô Cát / Phạm Đình Toái — quốc ngữ PD",
+    "concepts": [
+      "dien ca",
+      "luc bat",
+      "lich su",
+      "dai nam"
+    ],
+    "content_file": "sources/le_ngo_cat/raw/dai_nam_quoc_su_dien_ca.txt",
+    "think_brain": "le_ngo_cat",
+    "think_file": "dai_nam_quoc_su_dien_ca.txt",
+    "content_hash": "b936a0bb0a28f553463ac9e12148a2aedf40ceb84b5f61e64a0280863fb49efa",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "poetry",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "le_quy_don--kien_van_cao_si",
     "title": "Kiến văn tiểu lục — Các bực cao-sĩ nước Nam ta",
     "author_id": "le_quy_don",
@@ -13192,6 +13303,43 @@
     }
   },
   {
+    "id": "ngo_si_lien--dai_viet_su_ky_toan_thu",
+    "title": "Đại Việt sử ký toàn thư (Mạc Bảo Thần / Nhượng Tống dịch, Tân Việt 1945 — Ngoại kỷ đến nhà Ngô)",
+    "author_id": "ngo_si_lien",
+    "language": "vi",
+    "year": 1945,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Đại_Việt_sử_ký_toàn_thư",
+    "gutenberg_id": null,
+    "translator": "Mạc Bảo Thần (Nhượng Tống, Hoàng Phạm Trân, 1906–1949) — VN PD",
+    "concepts": [
+      "toan thu",
+      "ngoai ky",
+      "bien nien",
+      "dai viet"
+    ],
+    "content_file": "sources/ngo_si_lien/raw/dai_viet_su_ky_toan_thu.txt",
+    "think_brain": "ngo_si_lien",
+    "think_file": "dai_viet_su_ky_toan_thu.txt",
+    "content_hash": "2eccba77b22aafe4e01e3aba2f3a3b77124f3bb7c8c1a39e0a2defb5d1a61e8c",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "ngo_tat_to--tat_den",
     "title": "Tắt đèn (1937)",
     "author_id": "ngo_tat_to",
@@ -13214,6 +13362,43 @@
     "think_brain": "ngo_tat_to",
     "think_file": "tat_den.txt",
     "content_hash": null,
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "ngo_tat_to--hoang_le_nhat_thong_chi",
+    "title": "Hoàng Lê nhất thống chí (Ngô Tất Tố dịch)",
+    "author_id": "ngo_tat_to",
+    "language": "vi",
+    "year": 1945,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Hoàng_Lê_nhất_thống_chí",
+    "gutenberg_id": null,
+    "translator": "Ngô Tất Tố (1894–1954) — Mai Lĩnh 1945, VN PD",
+    "concepts": [
+      "tay son",
+      "le chieu thong",
+      "nguyen hue",
+      "tieu thuyet lich su"
+    ],
+    "content_file": "sources/ngo_tat_to/raw/hoang_le_nhat_thong_chi.txt",
+    "think_brain": "ngo_tat_to",
+    "think_file": "hoang_le_nhat_thong_chi.txt",
+    "content_hash": "9f7938d8abbb5209f677d971d086079466c2a0c406fb239a5208fef200ba495c",
     "version": 1,
     "status": "draft",
     "rights": {
@@ -14371,6 +14556,43 @@
     }
   },
   {
+    "id": "nguyen_trai--lam_son_thuc_luc",
+    "title": "Lam Sơn thực lục (Mạc Bảo Thần dịch)",
+    "author_id": "nguyen_trai",
+    "language": "vi",
+    "year": 1945,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Lam_Sơn_thực_lục",
+    "gutenberg_id": null,
+    "translator": "Mạc Bảo Thần (Nhượng Tống, 1906–1949) — Tân Việt, VN PD",
+    "concepts": [
+      "lam son",
+      "le loi",
+      "khoi nghia",
+      "thuc luc"
+    ],
+    "content_file": "sources/nguyen_trai/raw/lam_son_thuc_luc.txt",
+    "think_brain": "nguyen_trai",
+    "think_file": "lam_son_thuc_luc.txt",
+    "content_hash": "08a4bfe8746ec3e45e18aef32f0681cd020970c30efed6a6b85e09924490ed55",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "nietzsche--zarathustra",
     "title": "Thus Spake Zarathustra",
     "author_id": "nietzsche",
@@ -15401,6 +15623,43 @@
     "think_brain": "phan_ke_binh",
     "think_file": "viet_han_van_khao.txt",
     "content_hash": null,
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "phan_ke_binh--nam_hai_di_nhan_liet_truyen",
+    "title": "Nam Hải dị nhân liệt truyện",
+    "author_id": "phan_ke_binh",
+    "language": "vi",
+    "year": 1909,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Nam_Hải_dị_nhân_liệt_truyện",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "di nhan",
+      "truyen ky",
+      "danh nhan",
+      "lich su"
+    ],
+    "content_file": "sources/phan_ke_binh/raw/nam_hai_di_nhan_liet_truyen.txt",
+    "think_brain": "phan_ke_binh",
+    "think_file": "nam_hai_di_nhan_liet_truyen.txt",
+    "content_hash": "82fe83939d85fa1086aba006c439fe2983266becf210baeabd9a065c3d556085",
     "version": 1,
     "status": "draft",
     "rights": {
@@ -19357,6 +19616,80 @@
     }
   },
   {
+    "id": "tran_trong_kim--viet_nam_su_luoc",
+    "title": "Việt Nam sử lược",
+    "author_id": "tran_trong_kim",
+    "language": "vi",
+    "year": 1921,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_sử_lược",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "su luoc",
+      "viet nam",
+      "lich su",
+      "trieu dai"
+    ],
+    "content_file": "sources/tran_trong_kim/raw/viet_nam_su_luoc.txt",
+    "think_brain": "tran_trong_kim",
+    "think_file": "viet_nam_su_luoc.txt",
+    "content_hash": "6618297350ca285da205d70353edcfa4b1b551bf12bc2bf952fee1c44c7add62",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "tran_trong_kim--phat_giao",
+    "title": "Phật giáo",
+    "author_id": "tran_trong_kim",
+    "language": "vi",
+    "year": 1940,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Phật_giáo",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "phat giao",
+      "nhan sinh",
+      "thap nhi nhan duyen",
+      "dai thua"
+    ],
+    "content_file": "sources/tran_trong_kim/raw/phat_giao.txt",
+    "think_brain": "tran_trong_kim",
+    "think_file": "phat_giao.txt",
+    "content_hash": "7a2714325828f27f596c019b3e52d2782a5ae265fcd16f71ec8fb31d09f3ecde",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
     "id": "trinh_hoai_duc--di_su_cam_tac",
     "title": "Đi sứ cảm tác (quốc ngữ PD)",
     "author_id": "trinh_hoai_duc",
@@ -19579,6 +19912,116 @@
     },
     "read": {
       "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "truc_khe--lich_su_nam_tien",
+    "title": "Lịch sử Nam tiến của dân tộc Việt Nam",
+    "author_id": "truc_khe",
+    "language": "vi",
+    "year": 1930,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/lich-su-nam-tien-cua-dan-toc-viet-nam.pdf",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "nam tien",
+      "cham pa",
+      "mo coi",
+      "lich su"
+    ],
+    "content_file": "sources/truc_khe/raw/lich_su_nam_tien.txt",
+    "think_brain": "truc_khe",
+    "think_file": "lich_su_nam_tien.txt",
+    "content_hash": "260be0e0713589e03269ca32b4fcfca95f4eee3875e38a8c6e40226931286d3a",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "truc_khe--tran_thu_do",
+    "title": "Trần Thủ Độ",
+    "author_id": "truc_khe",
+    "language": "vi",
+    "year": 1930,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/TRAN THU DO - TRUC-KHE NGO-VAN-TRIEN.pdf",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "tran thu do",
+      "nha tran",
+      "tieu su"
+    ],
+    "content_file": "sources/truc_khe/raw/tran_thu_do.txt",
+    "think_brain": "truc_khe",
+    "think_file": "tran_thu_do.txt",
+    "content_hash": "8426bbcf3714c62653596ccfbd3a8299ca1bce785a0a381058f02fae1d97a4a0",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 0,
+      "split_length": "standard"
+    }
+  },
+  {
+    "id": "truong_vinh_ky--chuyen_di_bac_ky",
+    "title": "Chuyến đi Bắc Kỳ năm Ất Hợi 1876",
+    "author_id": "truong_vinh_ky",
+    "language": "vi",
+    "year": 1876,
+    "description": "",
+    "license": "public_domain_vn_wikisource",
+    "license_source": "public_domain_vn_wikisource",
+    "source_url": "https://vi.wikisource.org/wiki/Chuyến_đi_Bắc_Kỳ_năm_Ất_Hợi_1876",
+    "gutenberg_id": null,
+    "translator": null,
+    "concepts": [
+      "memoir",
+      "du ky",
+      "bac ky",
+      "nam ky"
+    ],
+    "content_file": "sources/truong_vinh_ky/raw/chuyen_di_bac_ky.txt",
+    "think_brain": "truong_vinh_ky",
+    "think_file": "chuyen_di_bac_ky.txt",
+    "content_hash": "70c08f688560d779276ebdf449eedaa47672aee1fa2d1865f6a9918f77185aa6",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "public_domain",
+      "consumers": {
+        "think": "allowed",
+        "read": "blocked"
+      }
+    },
+    "read": {
+      "category_slug": "memoir-biography",
       "price_cents": 0,
       "split_length": "standard"
     }

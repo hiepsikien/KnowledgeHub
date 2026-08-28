@@ -1,0 +1,37 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "viet_nam_su_luoc.txt",
+    "work": "Việt Nam sử lược",
+    "year": 1921,
+    "source_url": "https://vi.wikisource.org/wiki/Việt_Nam_sử_lược",
+    "translator": null,
+    "concepts": [
+      "su luoc",
+      "viet nam",
+      "lich su",
+      "trieu dai"
+    ],
+    "pdNotes": "Quyển I + II as one work (Wikisource unversioned tree). Duplicate Q2 forks (Cận kim / Tự chủ) dropped; keep Phần IV–V."
+  },
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "phat_giao.txt",
+    "work": "Phật giáo",
+    "year": 1940,
+    "source_url": "https://vi.wikisource.org/wiki/Phật_giáo",
+    "translator": null,
+    "concepts": [
+      "phat giao",
+      "nhan sinh",
+      "thap nhi nhan duyen",
+      "dai thua"
+    ]
+  }
+]

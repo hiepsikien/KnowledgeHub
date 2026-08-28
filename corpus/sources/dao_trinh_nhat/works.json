@@ -1,0 +1,20 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "prose",
+    "file": "phan_dinh_phung.txt",
+    "work": "Phan Đình Phùng",
+    "year": 1950,
+    "source_url": "https://vietsu.s3.ap-east-1.amazonaws.com/public/books/phan-dinh-phung.pdf",
+    "translator": null,
+    "concepts": [
+      "can vuong",
+      "phan dinh phung",
+      "khang phap",
+      "memoir"
+    ],
+    "pdNotes": "Tân Việt 1950 (lần 3) via vietsu S3; TVE-4U retype. Author Đào Trinh Nhất d.1951 — VN PD. TVE volunteer credits stripped."
+  }
+]

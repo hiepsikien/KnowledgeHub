@@ -1,0 +1,19 @@
+[
+  {
+    "gutenberg_id": null,
+    "license": "public_domain_vn_wikisource",
+    "lang": "vi",
+    "chunking": "verse",
+    "file": "dai_nam_quoc_su_dien_ca.txt",
+    "work": "Đại Nam quốc sử diễn ca",
+    "year": 1870,
+    "source_url": "https://vi.wikisource.org/wiki/Đại_Nam_Quốc_sử_Diễn_ca",
+    "translator": "Lê Ngô Cát / Phạm Đình Toái — quốc ngữ PD",
+    "concepts": [
+      "dien ca",
+      "luc bat",
+      "lich su",
+      "dai nam"
+    ]
+  }
+]
