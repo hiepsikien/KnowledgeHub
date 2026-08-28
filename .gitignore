@@ -6,6 +6,7 @@
 __pycache__/
 *.pyc
 .venv/
+node_modules/
 src/*.egg-info/
 *.egg-info/
 

@@ -1,0 +1,8 @@
+{
+  "name": "knowledgehub",
+  "private": true,
+  "description": "Knowledge Hub curator",
+  "scripts": {
+    "hub": "bash scripts/hub.sh"
+  }
+}
