@@ -46,7 +46,7 @@ def test_gemini_sends_key_in_header(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("GEMINI_API_KEY", "secret-key")
     captured: dict = {}
 
-    def fake_post(url, headers, payload, *, timeout=300):
+    def fake_post(url, headers, payload, *, timeout=300, label=""):
         captured["url"] = url
         captured["headers"] = headers
         captured["payload"] = payload
@@ -63,7 +63,7 @@ def test_deepseek_sets_max_tokens_and_rejects_length(monkeypatch: pytest.MonkeyP
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
     captured: dict = {}
 
-    def fake_post(url, headers, payload, *, timeout=300):
+    def fake_post(url, headers, payload, *, timeout=300, label=""):
         captured["payload"] = payload
         return {
             "choices": [
@@ -212,7 +212,7 @@ def test_draft_chapter_rejects_truncated_deepseek(corpus: Path):
         patch("knowledgehub.translation.draft.complete_chat", return_value=cut),
         patch("knowledgehub.translation.draft.complete_prompt") as mock_polish,
     ):
-        with pytest.raises(ProviderError, match="truncated"):
+        with pytest.raises(ProviderError, match="stopped mid-word"):
             draft_chapter("grotius--freedom_of_the_seas", chapter="II")
     mock_polish.assert_not_called()
     chii = json.loads(

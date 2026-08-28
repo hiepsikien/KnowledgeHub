@@ -57,7 +57,20 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "job_timeout_sec": 600,
         "max_part_words": 1200,
         "hard_max_part_words": 1500,
+        "llm_retries": 3,
+        "gemini_rpm": 12,
+        "deepseek_rpm": 30,
     }
+}
+
+INT_LIMITS: dict[str, tuple[int, int, int]] = {
+    "max_attempts": (1, 10, 2),
+    "job_timeout_sec": (60, 3600, 600),
+    "max_part_words": (400, 4000, 1200),
+    "hard_max_part_words": (400, 5000, 1500),
+    "llm_retries": (0, 6, 3),
+    "gemini_rpm": (1, 60, 12),
+    "deepseek_rpm": (1, 120, 30),
 }
 
 
@@ -121,41 +134,14 @@ def _merge_translation(raw: dict[str, Any] | None) -> dict[str, Any]:
         )
     except ValueError:
         pass
-    try:
-        base["max_attempts"] = max(
-            1,
-            min(10, _coerce_worker_int(
-                incoming["max_attempts"] if "max_attempts" in incoming else base["max_attempts"],
-                name="max_attempts",
-                default=2,
-            )),
-        )
-        base["job_timeout_sec"] = max(
-            60,
-            min(3600, _coerce_worker_int(
-                incoming["job_timeout_sec"] if "job_timeout_sec" in incoming else base["job_timeout_sec"],
-                name="job_timeout_sec",
-                default=600,
-            )),
-        )
-        base["max_part_words"] = max(
-            400,
-            min(4000, _coerce_worker_int(
-                incoming["max_part_words"] if "max_part_words" in incoming else base["max_part_words"],
-                name="max_part_words",
-                default=1200,
-            )),
-        )
-        base["hard_max_part_words"] = max(
-            base["max_part_words"],
-            min(5000, _coerce_worker_int(
-                incoming["hard_max_part_words"] if "hard_max_part_words" in incoming else base["hard_max_part_words"],
-                name="hard_max_part_words",
-                default=1500,
-            )),
-        )
-    except ValueError:
-        pass
+    for name, (low, high, default) in INT_LIMITS.items():
+        value = incoming[name] if name in incoming else base[name]
+        floor = base["max_part_words"] if name == "hard_max_part_words" else low
+        try:
+            number = _coerce_worker_int(value, name=name, default=default)
+        except ValueError:
+            continue
+        base[name] = max(floor, min(high, number))
     return base
 
 
@@ -197,22 +183,13 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
         translation.get("min_workers"),
         translation.get("max_workers"),
     )
-    max_attempts = max(
-        1,
-        min(10, _coerce_worker_int(translation.get("max_attempts"), name="max_attempts", default=2)),
-    )
-    job_timeout_sec = max(
-        60,
-        min(3600, _coerce_worker_int(translation.get("job_timeout_sec"), name="job_timeout_sec", default=600)),
-    )
-    max_part_words = max(
-        400,
-        min(4000, _coerce_worker_int(translation.get("max_part_words"), name="max_part_words", default=1200)),
-    )
-    hard_max_part_words = max(
-        max_part_words,
-        min(5000, _coerce_worker_int(translation.get("hard_max_part_words"), name="hard_max_part_words", default=1500)),
-    )
+    numbers: dict[str, int] = {}
+    for name, (low, high, default) in INT_LIMITS.items():
+        floor = numbers["max_part_words"] if name == "hard_max_part_words" else low
+        numbers[name] = max(
+            floor,
+            min(high, _coerce_worker_int(translation.get(name), name=name, default=default)),
+        )
     return {
         "models": models,
         "auto_annotate": bool(translation.get("auto_annotate")),
@@ -220,10 +197,7 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
         "default_mode": mode,
         "min_workers": min_workers,
         "max_workers": max_workers,
-        "max_attempts": max_attempts,
-        "job_timeout_sec": job_timeout_sec,
-        "max_part_words": max_part_words,
-        "hard_max_part_words": hard_max_part_words,
+        **numbers,
     }
 
 
@@ -300,17 +274,33 @@ def worker_limits() -> tuple[int, int]:
     return clamp_worker_limits(tr.get("min_workers"), tr.get("max_workers"))
 
 
+def _clamped(translation: dict[str, Any], name: str) -> int:
+    low, high, default = INT_LIMITS[name]
+    value = translation.get(name)
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        number = default
+    return max(low, min(high, number))
+
+
 def job_guard_limits() -> tuple[int, int]:
     tr = load_settings().get("translation") or {}
-    max_attempts = max(1, min(10, int(tr.get("max_attempts") or 2)))
-    job_timeout_sec = max(60, min(3600, int(tr.get("job_timeout_sec") or 600)))
-    return max_attempts, job_timeout_sec
+    return _clamped(tr, "max_attempts"), _clamped(tr, "job_timeout_sec")
+
+
+def llm_call_limits() -> tuple[int, dict[str, int]]:
+    """Retries per LLM call and the requests-per-minute ceiling for each provider."""
+    tr = load_settings().get("translation") or {}
+    return _clamped(tr, "llm_retries"), {
+        "gemini": _clamped(tr, "gemini_rpm"),
+        "deepseek": _clamped(tr, "deepseek_rpm"),
+    }
 
 
 def translation_pipeline() -> dict[str, Any]:
     tr = load_settings().get("translation") or {}
     min_workers, max_workers = worker_limits()
-    max_attempts, job_timeout_sec = job_guard_limits()
     return {
         "auto_annotate": bool(tr.get("auto_annotate")),
         "auto_qa": bool(tr.get("auto_qa")),
@@ -318,10 +308,7 @@ def translation_pipeline() -> dict[str, Any]:
         "models": resolve_models(),
         "min_workers": min_workers,
         "max_workers": max_workers,
-        "max_attempts": max_attempts,
-        "job_timeout_sec": job_timeout_sec,
-        "max_part_words": int(tr.get("max_part_words") or 1200),
-        "hard_max_part_words": int(tr.get("hard_max_part_words") or 1500),
+        **{name: _clamped(tr, name) for name in INT_LIMITS},
     }
 
 

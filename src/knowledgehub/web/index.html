@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=job-log" />
+    <link rel="stylesheet" href="/styles.css?v=retry" />
   </head>
   <body>
     <div class="shell">
@@ -162,7 +162,25 @@
                 </label>
                 <label>job_timeout_sec
                   <input id="set-job-timeout" name="job_timeout_sec" type="number" min="60" max="3600" step="1" required />
-                  <span>Hủy bước LLM tiếp theo nếu job đã chạy quá lâu (giây).</span>
+                  <span>Hủy job nếu không có tiến triển nào trong ngần này giây. Chương nhiều phần vẫn chạy tiếp miễn là từng phần báo tiến độ.</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Gọi API</legend>
+              <p class="muted">Lỗi tạm thời (429 hết hạn mức, 503 quá tải, rớt mạng) sẽ tự chờ rồi gọi lại thay vì hỏng cả chương. Giới hạn phút giữ cho Gemini không vượt quota free tier (20/phút).</p>
+              <div class="settings-grid">
+                <label>Số lần thử lại mỗi lượt gọi
+                  <input id="set-llm-retries" name="llm_retries" type="number" min="0" max="6" step="1" value="3" required />
+                  <span>0 = hỏng là dừng ngay. Chờ tăng dần, ưu tiên thời gian Google trả về.</span>
+                </label>
+                <label>Gemini — request/phút
+                  <input id="set-gemini-rpm" name="gemini_rpm" type="number" min="1" max="60" step="1" value="12" required />
+                  <span>Free tier là 20; để 12 cho an toàn khi chạy nhiều luồng.</span>
+                </label>
+                <label>DeepSeek — request/phút
+                  <input id="set-deepseek-rpm" name="deepseek_rpm" type="number" min="1" max="120" step="1" value="30" required />
+                  <span>Trần gọi nháp và QA mỗi phút.</span>
                 </label>
               </div>
             </fieldset>
@@ -301,6 +319,6 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=job-log"></script>
+    <script src="/app.js?v=retry"></script>
   </body>
 </html>

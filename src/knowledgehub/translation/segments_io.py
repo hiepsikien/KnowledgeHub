@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from ..jsonfile import write_json_atomic
 from .paths import safe_chapter, segments_dir
 
 
@@ -20,7 +21,7 @@ def load_segment(source_work_id: str, chapter: str) -> tuple[Path, dict[str, Any
 
 
 def save_segment(path: Path, segment: dict[str, Any]) -> None:
-    path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_atomic(path, segment)
 
 
 def final_text(segment: dict[str, Any], project: dict[str, Any]) -> str:

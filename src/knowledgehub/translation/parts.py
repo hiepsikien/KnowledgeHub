@@ -9,14 +9,28 @@ from typing import Any
 from .segment import chapter_word_count
 
 _MARKER = re.compile(r"\[\d+\]")
+_HEADING_MAX_CHARS = 80
+
+
+def _is_heading(line: str) -> bool:
+    """A heading such as ``CHƯƠNG VII`` legitimately ends on a letter."""
+    return bool(line) and len(line) <= _HEADING_MAX_CHARS and not any(c.islower() for c in line)
 
 
 def looks_cut_off(text: str) -> bool:
-    """True when the text ends mid-word / mid-sentence instead of punctuation."""
+    """True when the text stops mid-word instead of at a sentence boundary.
+
+    Only a fallback: the providers already reject responses whose finish reason
+    says the model hit its token ceiling. Kept narrow on purpose, because a false
+    positive throws away a translation that was paid for and is probably fine.
+    """
     stripped = (text or "").rstrip()
     if len(stripped) < 20:
         return False
-    return stripped[-1].isalnum()
+    last = stripped[-1]
+    if not last.isalnum() or last.isdigit():
+        return False
+    return not _is_heading(stripped.rsplit("\n", 1)[-1].strip())
 
 
 def split_paragraphs(text: str) -> list[str]:

@@ -407,7 +407,14 @@ function renderJobQueue() {
     parts.push(`Đang ${running.map(jobStatusLine).join("; ")}`);
   }
   if (waiting.length) {
-    parts.push(`chờ ${waiting.map((job) => `${job.chapter}/${jobKindLabel(job.kind)}`).join(", ")}`);
+    parts.push(
+      `chờ ${waiting
+        .map(
+          (job) =>
+            `${job.chapter}/${jobKindLabel(job.kind)}${job.phase === "retry" ? " (thử lại)" : ""}`,
+        )
+        .join(", ")}`,
+    );
   }
   const alive = Number(state.translation.workers?.alive || 0);
   if (alive > 1) parts.push(`${alive} luồng`);
@@ -1263,6 +1270,9 @@ function renderSettingsForm(data) {
   fillNumberInput("set-job-timeout", tr.job_timeout_sec, 600);
   fillNumberInput("set-max-part-words", tr.max_part_words, 1200);
   fillNumberInput("set-hard-max-part-words", tr.hard_max_part_words, 1500);
+  fillNumberInput("set-llm-retries", tr.llm_retries, 3);
+  fillNumberInput("set-gemini-rpm", tr.gemini_rpm, 12);
+  fillNumberInput("set-deepseek-rpm", tr.deepseek_rpm, 30);
   $("set-default-mode").value = tr.default_mode || "normal";
   renderSettingsKeys(data.secrets);
   renderModelCatalogStatus(data);
@@ -1342,6 +1352,9 @@ async function saveSettings(e) {
           job_timeout_sec: readNumberInput("set-job-timeout", 600),
           max_part_words: readNumberInput("set-max-part-words", 1200),
           hard_max_part_words: readNumberInput("set-hard-max-part-words", 1500),
+          llm_retries: readNumberInput("set-llm-retries", 3),
+          gemini_rpm: readNumberInput("set-gemini-rpm", 12),
+          deepseek_rpm: readNumberInput("set-deepseek-rpm", 30),
           default_mode: $("set-default-mode").value,
         },
       },

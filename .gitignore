@@ -15,3 +15,7 @@ corpus/sources/*/raw/
 corpus/sources/*/chunks/
 corpus/.translation-jobs.json
 .translation-jobs.json
+
+# Scratch files from atomic writes, and job queues quarantined after corruption
+.*.tmp
+*.corrupt-*

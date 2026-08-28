@@ -5,14 +5,16 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import secrets
 import threading
 from collections import deque
 from contextvars import ContextVar
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
+from ..jsonfile import quarantine_corrupt, write_json_atomic
 from ..paths import corpus_root
 from .paths import safe_chapter, safe_work_id
 
@@ -67,8 +69,46 @@ class JobGuardError(Exception):
     """Raised when a job hits an attempt or timeout guard."""
 
 
+HARD_JOB_LIMIT_SEC = 6 * 3600
+
+TRANSIENT_ERROR = re.compile(
+    r"HTTP (?:408|409|425|429|500|502|503|504)\b"
+    r"|RESOURCE_EXHAUSTED|UNAVAILABLE|high demand|overloaded|temporarily"
+    r"|timed out|urlopen error|Connection (?:reset|refused|aborted)|Remote end closed"
+    # A model that stopped mid-word is a flake, and finished parts are already
+    # checkpointed, so another attempt only redoes the part that failed.
+    r"|stopped mid-word|hit max_tokens|hit maxOutputTokens",
+    re.I,
+)
+
+
 def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def _now_plus(seconds: float) -> str:
+    return (datetime.now(UTC) + timedelta(seconds=seconds)).replace(microsecond=0).isoformat()
+
+
+def _seconds_since(stamp: Any, now: datetime) -> float | None:
+    if not stamp:
+        return None
+    try:
+        moment = datetime.fromisoformat(str(stamp))
+    except ValueError:
+        return None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=UTC)
+    return (now - moment).total_seconds()
+
+
+def is_transient_error(message: str) -> bool:
+    """Provider hiccups worth another attempt, unlike bad input or our own guards."""
+    return bool(TRANSIENT_ERROR.search(message or ""))
+
+
+def retry_delay_for(attempt: int) -> float:
+    return min(120.0, 15.0 * max(1, attempt))
 
 
 def worker_enabled() -> bool:
@@ -113,16 +153,30 @@ def _empty_store() -> dict[str, Any]:
     return {"jobs": [], "updated_at": _now()}
 
 
+def _discard_corrupt_store(path: Path, reason: str) -> dict[str, Any]:
+    moved = quarantine_corrupt(path)
+    log.error(
+        "translation job store unreadable (%s); queue reset. Saved copy: %s",
+        reason,
+        moved or "none",
+    )
+    job_log_event("store_corrupt", reason=reason, backup=moved.name if moved else None)
+    return _empty_store()
+
+
 def _read_store() -> dict[str, Any]:
     path = jobs_path()
     if not path.is_file():
         return _empty_store()
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
+    except json.JSONDecodeError as exc:
+        return _discard_corrupt_store(path, f"invalid JSON: {exc}")
+    except OSError as exc:
+        log.error("cannot read translation job store: %s", exc)
         return _empty_store()
     if not isinstance(data, dict):
-        return _empty_store()
+        return _discard_corrupt_store(path, "top level is not an object")
     jobs = data.get("jobs")
     if not isinstance(jobs, list):
         data["jobs"] = []
@@ -135,9 +189,7 @@ def _write_store(store: dict[str, Any]) -> None:
     done = [job for job in jobs if job.get("status") not in ACTIVE]
     store["jobs"] = active + done[-40:]
     store["updated_at"] = _now()
-    path = jobs_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(store, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_atomic(jobs_path(), store)
 
 
 def _public(job: dict[str, Any]) -> dict[str, Any]:
@@ -154,6 +206,7 @@ def _public(job: dict[str, Any]) -> dict[str, Any]:
         "created_at",
         "started_at",
         "finished_at",
+        "not_before",
         "error",
         "result",
         "duplicate_of",
@@ -380,16 +433,13 @@ def raise_if_stopped() -> None:
     status = snapshot.get("status")
     if status in STOPPED:
         raise JobCancelled(f"job {status}")
-    started = snapshot.get("started_at")
-    if started:
-        try:
-            started_dt = datetime.fromisoformat(str(started))
-        except ValueError:
-            started_dt = None
-        if started_dt is not None:
-            elapsed = (datetime.now(UTC) - started_dt).total_seconds()
-            if elapsed > timeout_sec:
-                raise JobGuardError(f"timeout after {int(elapsed)}s (limit {timeout_sec}s)")
+    now = datetime.now(UTC)
+    stalled = _seconds_since(snapshot.get("heartbeat_at") or snapshot.get("started_at"), now)
+    if stalled is not None and stalled > timeout_sec:
+        raise JobGuardError(f"no progress for {int(stalled)}s (limit {timeout_sec}s)")
+    total = _seconds_since(snapshot.get("started_at"), now)
+    if total is not None and total > HARD_JOB_LIMIT_SEC:
+        raise JobGuardError(f"job ran {int(total)}s (hard limit {HARD_JOB_LIMIT_SEC}s)")
 
 
 def claim_next() -> dict[str, Any] | None:
@@ -407,8 +457,12 @@ def claim_next() -> dict[str, Any] | None:
         dirty = False
         chosen: dict[str, Any] | None = None
         chosen_rank = len(KIND_ORDER)
+        stamp = _now()
         for job in jobs:
             if job.get("status") != "queued":
+                continue
+            not_before = str(job.get("not_before") or "")
+            if not_before and not_before > stamp:
                 continue
             key = (job.get("work_id"), str(job.get("chapter") or "").upper())
             if key in busy:
@@ -439,6 +493,7 @@ def claim_next() -> dict[str, Any] | None:
         chosen["detail"] = "Bắt đầu"
         chosen["started_at"] = _now()
         chosen["heartbeat_at"] = _now()
+        chosen.pop("not_before", None)
         store["jobs"] = jobs
         _write_store(store)
         job_log_event(
@@ -492,6 +547,34 @@ def complete_job(
         _write_store(store)
 
 
+def requeue_job(job_id: str, *, delay_sec: float, error: str) -> bool:
+    """Put a job back in the queue after a transient provider failure."""
+    requeued = False
+    with _lock:
+        store = _read_store()
+        jobs = list(store.get("jobs") or [])
+        for job in jobs:
+            if job.get("id") != job_id:
+                continue
+            if job.get("status") in STOPPED:
+                return False
+            job["status"] = "queued"
+            job["phase"] = "retry"
+            job["detail"] = f"Lỗi tạm thời — thử lại sau {int(delay_sec)}s"
+            job["error"] = (error or "")[:180]
+            job["not_before"] = _now_plus(delay_sec)
+            job["heartbeat_at"] = _now()
+            job.pop("finished_at", None)
+            requeued = True
+            break
+        if requeued:
+            store["jobs"] = jobs
+            _write_store(store)
+    if requeued:
+        _wake.set()
+    return requeued
+
+
 def execute_job(job: dict[str, Any]) -> dict[str, Any]:
     from .annotate import annotate_segment
     from .draft import draft_chapter
@@ -525,6 +608,32 @@ def _fail_job(job: dict[str, Any], error: str) -> None:
     # Annotate uses Gemini; a 429/timeout should not block DeepSeek QA on an existing draft.
     if job.get("kind") == "annotate":
         _enqueue_followups(job)
+
+
+def _retry_job(job: dict[str, Any], error: str) -> bool:
+    from ..settings import job_guard_limits
+
+    if not is_transient_error(error):
+        return False
+    max_attempts, _timeout = job_guard_limits()
+    attempts = int(job.get("attempts") or 0)
+    if attempts >= max_attempts:
+        return False
+    delay = retry_delay_for(attempts)
+    if not requeue_job(job["id"], delay_sec=delay, error=error):
+        return False
+    job_log_event(
+        "retry_job",
+        job_id=job["id"],
+        work_id=job.get("work_id"),
+        chapter=job.get("chapter"),
+        kind=job.get("kind"),
+        attempt=attempts,
+        of=max_attempts,
+        delay=int(delay),
+        error=error[:140],
+    )
+    return True
 
 
 def process_next_job() -> dict[str, Any] | None:
@@ -583,6 +692,8 @@ def process_next_job() -> dict[str, Any] | None:
                 kind=job.get("kind"),
                 error=str(exc)[:180],
             )
+        elif _retry_job(job, str(exc)):
+            job["status"] = "queued"
         else:
             job_log_event(
                 "error",

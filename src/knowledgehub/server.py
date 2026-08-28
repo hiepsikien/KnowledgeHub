@@ -113,6 +113,9 @@ class TranslationSettingsBody(BaseModel):
     job_timeout_sec: int | None = None
     max_part_words: int | None = None
     hard_max_part_words: int | None = None
+    llm_retries: int | None = None
+    gemini_rpm: int | None = None
+    deepseek_rpm: int | None = None
 
 
 class SettingsBody(BaseModel):

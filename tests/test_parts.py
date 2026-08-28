@@ -48,6 +48,19 @@ def test_completeness_truncated_final():
     assert completeness_status(segment) == "truncated"
 
 
+def test_looks_cut_off_allows_legitimate_endings():
+    assert looks_cut_off("Hiệp ước ấy được ký kết tại Antwerp vào năm 1609") is False
+    assert looks_cut_off("Xem thêm lập luận ở Điều 5") is False
+    assert looks_cut_off("Biển cả vốn thuộc về mọi người.\n\nCHƯƠNG VII") is False
+    assert looks_cut_off("Người La Mã cũng nghĩ như vậy.\n\nTỰ DO BIỂN CẢ") is False
+    assert looks_cut_off("Quyền đi lại trên biển là của chung [12]") is False
+
+
+def test_looks_cut_off_still_catches_mid_word():
+    assert looks_cut_off("Ngược lại, nếu họ đã đặt trọng tâm vào sự thật r") is True
+    assert looks_cut_off("Người Bồ Đào Nha không thể viện dẫn quyền chiếm hữu nào cả vì họ chư") is True
+
+
 def test_completeness_ok_short_final():
     segment = {"source_text": "Hello.", "final": "Xin chào.", "pipeline": {}}
     assert completeness_status(segment) == "ok"

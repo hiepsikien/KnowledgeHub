@@ -121,9 +121,9 @@ Return ONLY the polished Vietnamese text.
 
 def _require_complete(text: str, *, stage: str) -> str:
     if looks_cut_off(text):
+        tail = " ".join(text.rstrip()[-60:].split())
         raise ProviderError(
-            f"{stage} output looks truncated (ends mid-word). "
-            "Raise max_tokens or re-run; do not save this draft."
+            f"{stage} stopped mid-word, output not saved. Ends with: …{tail}"
         )
     return text
 

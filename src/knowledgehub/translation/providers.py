@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import json
 import os
+import random
 import re
 import threading
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from typing import Any
@@ -23,6 +25,10 @@ _SKIP_GEMINI = re.compile(r"(embedding|imagen|image|veo|tts|audio|robotics|compu
 _CATALOG_TTL_SEC = 300.0
 _catalog_lock = threading.Lock()
 _catalog_cache: tuple[float, dict[str, Any]] | None = None
+
+RETRY_HTTP_STATUS = frozenset({408, 409, 425, 429, 500, 502, 503, 504})
+MAX_RETRY_SLEEP_SEC = 90.0
+_RETRY_DELAY = re.compile(r"retry(?:\s*in|Delay\"?\s*:\s*\")[^0-9]{0,12}([0-9]+(?:\.[0-9]+)?)\s*s", re.I)
 
 
 def provider_for_model(model: str) -> str:
@@ -96,26 +102,154 @@ def _read_json_response(resp: Any) -> dict[str, Any]:
         raise ProviderError(f"Invalid JSON from API: {raw[:500]}") from exc
 
 
-def _request_json(url: str, headers: dict[str, str], *, data: bytes | None = None, timeout: int = 300) -> dict[str, Any]:
+def _call_limits() -> tuple[int, dict[str, int]]:
+    from ..settings import llm_call_limits
+
+    return llm_call_limits()
+
+
+def _guarded_sleep(seconds: float) -> None:
+    """Sleep in slices so a cancelled or interrupted job stops waiting."""
+    from .jobs import raise_if_stopped
+
+    end = time.monotonic() + max(0.0, seconds)
+    while True:
+        raise_if_stopped()
+        remaining = end - time.monotonic()
+        if remaining <= 0:
+            return
+        time.sleep(min(1.0, remaining))
+
+
+class _RateLimiter:
+    """Sliding one-minute window per provider so free-tier quotas are not blown."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._calls: dict[str, deque[float]] = {}
+
+    def acquire(self, provider: str, rpm: int) -> None:
+        if rpm <= 0:
+            return
+        while True:
+            with self._lock:
+                now = time.monotonic()
+                window = self._calls.setdefault(provider, deque())
+                while window and now - window[0] >= 60.0:
+                    window.popleft()
+                if len(window) < rpm:
+                    window.append(now)
+                    return
+                wait = 60.0 - (now - window[0])
+            _guarded_sleep(min(wait + 0.05, 60.0))
+
+    def reset(self) -> None:
+        with self._lock:
+            self._calls.clear()
+
+
+_limiter = _RateLimiter()
+
+
+def throttle(provider: str) -> None:
+    _, rpm = _call_limits()
+    _limiter.acquire(provider, rpm.get(provider, 0))
+
+
+def reset_rate_limiter() -> None:
+    _limiter.reset()
+
+
+def _retry_after_seconds(headers: Any, body: str) -> float | None:
+    raw = ""
+    if headers is not None:
+        try:
+            raw = str(headers.get("Retry-After") or "").strip()
+        except AttributeError:
+            raw = ""
+    if raw:
+        try:
+            return float(raw)
+        except ValueError:
+            pass
+    match = _RETRY_DELAY.search(body or "")
+    if match:
+        try:
+            return float(match.group(1))
+        except ValueError:
+            return None
+    return None
+
+
+def _backoff_delay(attempt: int, hinted: float | None) -> float:
+    if hinted is not None and hinted > 0:
+        return min(hinted + 0.5, MAX_RETRY_SLEEP_SEC)
+    return min(2.0 * (2**attempt) + random.uniform(0, 1.0), MAX_RETRY_SLEEP_SEC)
+
+
+def _note_retry(label: str, attempt: int, retries: int, delay: float, message: str) -> None:
+    from .jobs import job_log_event, report_progress
+
+    job_log_event(
+        "llm_retry",
+        stage=label or None,
+        attempt=attempt,
+        of=retries,
+        delay=round(delay, 1),
+        error=message[:140],
+    )
+    report_progress("retry", f"Lỗi tạm thời — chờ {int(delay)}s rồi thử lại ({attempt}/{retries})")
+
+
+def _request_json(
+    url: str,
+    headers: dict[str, str],
+    *,
+    data: bytes | None = None,
+    timeout: int = 300,
+    retries: int | None = None,
+    label: str = "",
+) -> dict[str, Any]:
     method = "POST" if data is not None else "GET"
-    req = urllib.request.Request(url, data=data, headers=headers, method=method)
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return _read_json_response(resp)
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise ProviderError(f"HTTP {exc.code}: {body[:800]}") from exc
-    except urllib.error.URLError as exc:
-        raise ProviderError(str(exc)) from exc
+    if retries is None:
+        retries, _ = _call_limits()
+    attempt = 0
+    while True:
+        try:
+            req = urllib.request.Request(url, data=data, headers=headers, method=method)
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return _read_json_response(resp)
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            message = f"HTTP {exc.code}: {body[:800]}"
+            transient = exc.code in RETRY_HTTP_STATUS
+            hinted = _retry_after_seconds(getattr(exc, "headers", None), body)
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            message = str(exc)
+            transient = True
+            hinted = None
+        if not transient or attempt >= retries:
+            raise ProviderError(message)
+        delay = _backoff_delay(attempt, hinted)
+        attempt += 1
+        _note_retry(label, attempt, retries, delay, message)
+        _guarded_sleep(delay)
 
 
-def _post_json(url: str, headers: dict[str, str], payload: dict[str, Any], *, timeout: int = 300) -> dict[str, Any]:
+def _post_json(
+    url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+    *,
+    timeout: int = 300,
+    label: str = "",
+) -> dict[str, Any]:
     data = json.dumps(payload).encode("utf-8")
-    return _request_json(url, headers, data=data, timeout=timeout)
+    return _request_json(url, headers, data=data, timeout=timeout, label=label)
 
 
 def _get_json(url: str, headers: dict[str, str], *, timeout: int = 20) -> dict[str, Any]:
-    return _request_json(url, headers, timeout=timeout)
+    return _request_json(url, headers, timeout=timeout, retries=0)
 
 
 def deepseek_api_key() -> str:
@@ -146,13 +280,16 @@ def deepseek_chat(
         "max_tokens": max_tokens,
         "stream": False,
     }
+    key = deepseek_api_key()
+    throttle("deepseek")
     result = _post_json(
         DEEPSEEK_URL,
         {
-            "Authorization": f"Bearer {deepseek_api_key()}",
+            "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
         },
         payload,
+        label=f"deepseek {model}",
     )
     try:
         choice = result["choices"][0]
@@ -185,10 +322,12 @@ def gemini_generate(
     }
     if system:
         body["systemInstruction"] = {"parts": [{"text": system}]}
+    throttle("gemini")
     result = _post_json(
         url,
         {"Content-Type": "application/json", "x-goog-api-key": key},
         body,
+        label=f"gemini {model}",
     )
     try:
         candidate = result["candidates"][0]

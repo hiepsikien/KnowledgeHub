@@ -173,6 +173,27 @@ def test_settings_saves_part_word_limits(client: TestClient, tmp_path: Path):
     assert stored["translation"]["hard_max_part_words"] == 1100
 
 
+def test_settings_saves_call_limits(client: TestClient, tmp_path: Path):
+    res = client.post(
+        "/api/settings",
+        json={"translation": {"llm_retries": 4, "gemini_rpm": 8, "deepseek_rpm": 50}},
+    )
+    assert res.status_code == 200, res.text
+    tr = res.json()["settings"]["translation"]
+    assert (tr["llm_retries"], tr["gemini_rpm"], tr["deepseek_rpm"]) == (4, 8, 50)
+    again = client.get("/api/settings").json()["settings"]["translation"]
+    assert (again["llm_retries"], again["gemini_rpm"], again["deepseek_rpm"]) == (4, 8, 50)
+    stored = json.loads((tmp_path / "hub-settings.json").read_text(encoding="utf-8"))
+    assert stored["translation"]["gemini_rpm"] == 8
+
+
+def test_settings_page_has_call_limit_fields(client: TestClient):
+    html = client.get("/settings").text
+    assert 'id="set-llm-retries"' in html
+    assert 'id="set-gemini-rpm"' in html
+    assert 'id="set-deepseek-rpm"' in html
+
+
 def test_settings_clamps_worker_limits(client: TestClient):
     res = client.post(
         "/api/settings",
@@ -252,7 +273,9 @@ def test_draft_job_queues_annotate_then_qa(client: TestClient, tmp_path: Path):
 
 
 def test_annotate_error_still_queues_qa(client: TestClient, tmp_path: Path):
-    save_settings({"translation": {"auto_annotate": True, "auto_qa": True}})
+    save_settings(
+        {"translation": {"auto_annotate": True, "auto_qa": True, "max_attempts": 1}}
+    )
     enqueue_job("grotius--freedom_of_the_seas", "II", "annotate")
     with (
         patch(
