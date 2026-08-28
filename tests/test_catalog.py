@@ -58,3 +58,4 @@ def test_build_validate_and_publish_gate(tmp_path):
     assert payload["hub_work_id"] == wid
     assert payload["raw_text"].startswith("Of civil government")
     assert payload["hub_content_hash"]
+    assert "glossary" not in payload

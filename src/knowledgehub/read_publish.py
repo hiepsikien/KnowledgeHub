@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import get_work, resolve_content_path, update_read_publication
+from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, merge_glossary
 from .normalize import normalize_manuscript
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
@@ -80,10 +81,31 @@ def prepare_publish(
         raise PublishError(f"{work_id} has no content_hash — run: knowledgehub hash")
     raw = path.read_text(encoding="utf-8", errors="replace")
     try:
-        text, report = normalize_manuscript(raw, language=str(work.get("language") or "en"))
+        text, report = normalize_manuscript(
+            raw,
+            language=str(work.get("language") or "en"),
+            work=work,
+        )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
-    payload = _payload(work, text)
+    reading_text, footnote_glossary = glossary_from_footnotes(text)
+    if not footnote_glossary:
+        _, footnote_glossary = glossary_from_footnotes(raw)
+    annotation_glossary: list[dict[str, Any]] = []
+    ann_path = root / "translations" / str(work["id"]) / "annotations.json"
+    if ann_path.is_file():
+        try:
+            store = json.loads(ann_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            store = {}
+        annotation_glossary = glossary_from_annotations(list(store.get("annotations") or []))
+    glossary = merge_glossary(footnote_glossary, annotation_glossary)
+    payload = _payload(work, reading_text)
+    if glossary:
+        payload["glossary"] = glossary
+    report = dict(report)
+    report["glossary_count"] = len(glossary)
+    report["stripped_footnotes"] = reading_text != text
     if title and title.strip():
         payload["title"] = title.strip()
     if description is not None:
@@ -119,7 +141,11 @@ def preview_normalized(
         raise PublishError(f"missing manuscript: {path}")
     raw = path.read_text(encoding="utf-8", errors="replace")
     try:
-        text, report = normalize_manuscript(raw, language=str(work.get("language") or "en"))
+        text, report = normalize_manuscript(
+            raw,
+            language=str(work.get("language") or "en"),
+            work=work,
+        )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
     truncated = (not full) and len(text) > head_chars + tail_chars
@@ -170,6 +196,17 @@ def publish_to_read(
     if dry_run:
         preview = dict(body)
         preview["raw_text"] = f"<{len(body['raw_text'])} chars>"
+        glossary = body.get("glossary") or []
+        preview["glossary"] = [
+            {
+                "name": row.get("name"),
+                "aliases": row.get("aliases") or [],
+                "group_label": row.get("group_label"),
+                "summary_chars": len(str(row.get("summary") or "")),
+            }
+            for row in glossary
+        ]
+        preview["glossary_count"] = len(glossary)
         return {"dry_run": True, "normalize": report, "payload": preview}
 
     base = (api_url or os.environ.get("READ_API_URL") or "http://127.0.0.1:8000").rstrip("/")

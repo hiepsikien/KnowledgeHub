@@ -4,9 +4,10 @@ import argparse
 import json
 import sys
 
-from .catalog import build_catalog, get_work, set_read_consumer
+from .catalog import build_catalog, get_work, resolve_content_path, set_read_consumer
 from .dotenv import load_dotenv
 from .hash import refresh_hashes
+from .normalize import normalize_manuscript
 from .read_publish import PublishError, publish_to_read
 from .translation.annotate import annotate_segment
 from .translation.fetch import FetchError, fetch_raw
@@ -40,6 +41,12 @@ def main(argv: list[str] | None = None) -> int:
 
     fetch = sub.add_parser("fetch-raw", help="Download and prepare manuscript for a work")
     fetch.add_argument("--work", required=True, help="Work id, e.g. grotius--freedom_of_the_seas")
+
+    edition = sub.add_parser("edition", help="Preview reading edition (does not rewrite raw)")
+    edition.add_argument("--work", required=True)
+    edition.add_argument("--llm", action="store_true", help="Classify unsure spans with Gemini")
+    edition.add_argument("--head", type=int, default=700, help="Chars of edition head to print")
+    edition.add_argument("--tail", type=int, default=400, help="Chars of edition tail to print")
 
     tr = sub.add_parser("translate", help="Translation project commands")
     tr_sub = tr.add_subparsers(dest="translate_cmd", required=True)
@@ -113,6 +120,46 @@ def main(argv: list[str] | None = None) -> int:
             print(str(exc), file=sys.stderr)
             return 1
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if args.cmd == "edition":
+        try:
+            work = get_work(args.work)
+            path = resolve_content_path(work)
+            raw = path.read_text(encoding="utf-8", errors="replace")
+            text, report = normalize_manuscript(
+                raw,
+                language=str(work.get("language") or "en"),
+                work=work,
+                use_llm=args.llm,
+            )
+        except (FileNotFoundError, KeyError, ValueError) as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        drops = [
+            s
+            for s in report.get("spans") or []
+            if s.get("action") == "drop" and float(s.get("confidence") or 0) >= 0.85
+        ]
+        summary = {
+            "work_id": args.work,
+            "family": report.get("family"),
+            "source_chars": report.get("source_chars"),
+            "published_chars": report.get("published_chars"),
+            "kept_notes": report.get("kept_notes"),
+            "dropped": [
+                {
+                    "kind": s["kind"],
+                    "confidence": s["confidence"],
+                    "reason": s["reason"],
+                    "chars": s["end"] - s["start"],
+                }
+                for s in drops
+            ],
+            "unsure": report.get("unsure") or [],
+            "head": text[: args.head],
+            "tail": text[-args.tail :],
+        }
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
         return 0
     if args.cmd == "translate":
         if args.translate_cmd == "init":

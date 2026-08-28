@@ -170,11 +170,17 @@ function renderPreview(data) {
   $("preview-title").textContent = data.title || data.id;
   const n = data.normalize || {};
   const dropped = [
+    n.family && n.family !== "plain" ? n.family : "",
     n.gutenberg && "Gutenberg",
     n.dropped_electronic_note && "note eBook",
     n.dropped_contents && "TOC",
     n.dropped_produced_by && "Produced by",
+    n.dropped_transcriber && "transcriber",
     n.dropped_tail_index && "index",
+    n.dropped_library_stamp && "library stamp",
+    n.dropped_publisher_ads && "catalog NXB",
+    n.dropped_scan_boilerplate && "Google scan",
+    n.kept_notes && "giữ notes",
     n.unwrapped && "unwrap dòng",
     n.aozora && "Aozora",
   ].filter(Boolean);

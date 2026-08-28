@@ -6158,7 +6158,7 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {
@@ -18826,7 +18826,7 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {
@@ -19422,7 +19422,7 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {

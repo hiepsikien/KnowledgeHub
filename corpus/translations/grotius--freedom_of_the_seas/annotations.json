@@ -205,7 +205,161 @@
       "title_vi": "Chú thích [9]",
       "body_vi": "Xung đột thương mại vào thế kỷ 13 giữa hai thành bang Bologna và Venice của Ý liên quan đến quyền tự do định hướng và thu thuế trên sông Po.",
       "generated_at": "2026-08-27T17:05:23+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--ctx-possession",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "chiếm hữu thực tế",
+      "title_vi": "Bối cảnh pháp lý",
+      "body_vi": "Trong luật La Mã, 'possessio' (chiếm hữu) đòi hỏi cả yếu tố vật chất (nắm giữ thực tế) và yếu tố tinh thần (ý chí làm chủ). Grotius dùng khái niệm này để bác bỏ yêu sách chủ quyền chỉ dựa trên việc 'nhìn thấy' của người Bồ Đào Nha.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--ctx-sovereignty",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": null,
+      "kind": "context",
+      "anchor_text": "quyền lực dân sự và chủ quyền",
+      "title_vi": "Bối cảnh pháp lý",
+      "body_vi": "Grotius phân biệt giữa quyền tư hữu (dominium) và quyền cai trị công (imperium). Cả hai quyền này đều thuộc về cư dân bản địa Đông Ấn một cách hợp pháp theo luật tự nhiên, bất kể tôn giáo của họ.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-17",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[17]",
+      "kind": "footnote",
+      "anchor_text": "Gordian[17]",
+      "title_vi": "Chú thích [17]",
+      "body_vi": "Hoàng đế La Mã Gordian III (trị vì 238–244 SCN). Sắc thư của ông được lưu lại trong Bộ dân luật Corpus Juris Civilis (mục Codex), nhấn mạnh rằng việc sở hữu thực tế là điều kiện cần để xác lập quyền sở hữu.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-18",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[18]",
+      "kind": "footnote",
+      "anchor_text": "nhà ngữ pháp[18]",
+      "title_vi": "Chú thích [18]",
+      "body_vi": "Các nhà ngữ pháp và từ điển học Latinh cổ đại (như Varro hay Festus), những người đã phân tích từ nguyên học để chỉ ra mối liên hệ chặt chẽ giữa hành vi 'tìm thấy' (invenire) và 'chiếm giữ' (occupare).",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-19",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[19]",
+      "kind": "footnote",
+      "anchor_text": "học giả uyên bác nhất[19]",
+      "title_vi": "Chú thích [19]",
+      "body_vi": "Chỉ các luật gia La Mã nổi tiếng và các nhà bình luận luật Trung cổ (như Bartolus hay Baldus), những người giải thích rằng việc 'khám phá' đơn thuần không tạo ra quyền sở hữu pháp lý nếu thiếu đi sự chiếm hữu thực tế.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-20",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[20]",
+      "kind": "footnote",
+      "anchor_text": "được canh giữ.[20]",
+      "title_vi": "Chú thích [20]",
+      "body_vi": "Tham chiếu đến các quy định trong Bộ Dân luật La Mã (Digest/Pandectae) về cách thức xác lập quyền sở hữu đối với động sản (phải nắm giữ) và bất động sản (phải có ranh giới rõ ràng hoặc được bảo vệ).",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-21",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[21]",
+      "kind": "footnote",
+      "anchor_text": "xứ Ấn xa xăm,”[21]",
+      "title_vi": "Chú thích [21]",
+      "body_vi": "Trích từ tác phẩm Epistles (Thư gửi bạn) của nhà thơ La Mã Horace (Sách I, Thư 1, dòng 44-46), minh chứng rằng người La Mã đã biết đến Ấn Độ từ thời cổ đại.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-22",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[22]",
+      "kind": "footnote",
+      "anchor_text": "đảo Ceylon hay sao?[22]",
+      "title_vi": "Chú thích [22]",
+      "body_vi": "Áp dụng cho các ghi chép của Pliny Toàn thư (Naturalis Historia), trong đó mô tả chi tiết về đảo Taprobane (tên cổ của Ceylon/Sri Lanka) dựa trên thông tin từ các sứ thần thời Hoàng đế Claudius.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-23",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[23]",
+      "kind": "footnote",
+      "anchor_text": "(_res nullius_).[23]",
+      "title_vi": "Chú thích [23]",
+      "body_vi": "Khái niệm pháp lý La Mã chỉ 'vật vô chủ' (vật chưa thuộc sở hữu của ai). Theo luật tự nhiên, vật vô chủ sẽ thuộc về người đầu tiên chiếm hữu nó (occupatio).",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-24",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[24]",
+      "kind": "footnote",
+      "anchor_text": "lý do chính đáng.[24]",
+      "title_vi": "Chú thích [24]",
+      "body_vi": "Lập luận dựa trên học thuyết Luật tự nhiên, khẳng định rằng quyền sở hữu tài sản là quyền tự nhiên của con người, không phụ thuộc vào việc họ có theo Kitô giáo hay không.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-25",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[25]",
+      "kind": "footnote",
+      "anchor_text": "Victoria,[25]",
+      "title_vi": "Chú thích [25]",
+      "body_vi": "Francisco de Vitoria (khoảng 1483–1546), nhà thần học và luật gia người Tây Ban Nha, người sáng lập trường phái Salamanca, nổi tiếng với các bài giảng bảo vệ quyền lợi của người bản địa châu Mỹ chống lại sự áp bức của thực dân Tây Ban Nha.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-26",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[26]",
+      "kind": "footnote",
+      "anchor_text": "Thomas Aquinas[26]",
+      "title_vi": "Chú thích [26]",
+      "body_vi": "Thánh Thomas Aquinas (1225–1274), nhà thần học vĩ đại của Giáo hội Công giáo. Grotius trích dẫn quan điểm của ông trong bộ Summa Theologiae rằng luật nhân loại và luật tự nhiên không bị bãi bỏ bởi luật thần thánh (ân sủng).",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-27",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[27]",
+      "kind": "footnote",
+      "anchor_text": "nói rằng[27]",
+      "title_vi": "Chú thích [27]",
+      "body_vi": "Trích từ bài giảng nổi tiếng De Indis (Về người Ấn độ/bản địa) của Francisco de Vitoria, lập luận rằng sự khác biệt về tôn giáo không phải là lý do hợp pháp để tiến hành chiến tranh hay tước đoạt tài sản.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
+    },
+    {
+      "id": "grotius--freedom_of_the_seas--chii--fn-28",
+      "segment_id": "grotius--freedom_of_the_seas--chii",
+      "chapter": "II",
+      "marker": "[28]",
+      "kind": "footnote",
+      "anchor_text": "thần học Tây Ban Nha,[28]",
+      "title_vi": "Chú thích [28]",
+      "body_vi": "Chỉ các học giả thuộc Trường phái Salamanca (như Vitoria, Covarruvias, và Suarez), những người đã kịch liệt phản đối việc dùng chiêu bài 'khai hóa văn minh' hoặc truyền giáo để biện minh cho các cuộc chiến tranh xâm lược.",
+      "generated_at": "2026-08-28T04:24:10+00:00"
     }
   ],
-  "updated_at": "2026-08-27T17:05:23+00:00"
+  "updated_at": "2026-08-28T04:24:10+00:00"
 }
