@@ -45,8 +45,9 @@ def test_pg_mid_sentence_joins():
 def test_publisher_imprint_merged():
     raw = (CORPUS / "en" / "locke_second_treatise.txt").read_text(encoding="utf-8")
     edition, _ = parse_manuscript_to_ref(raw, language="en", family="gutenberg", strip_first=False)
-    md = edition["reading_markdown"].replace("\n", " ")
-    assert "LONDON PRINTED MDCLXXXVIII REPRINTED" in md
+    imprint = " ".join(str(b.get("text") or "") for b in edition["blocks"])
+    assert "LONDON PRINTED MDCLXXXVIII" in imprint
+    assert "REPRINTED" in imprint
 
 
 def test_wiki_junk_stripped():

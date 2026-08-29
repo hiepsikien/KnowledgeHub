@@ -72,9 +72,24 @@ def labels_to_blocks(lines: list[TextLine], labels: list[LineLabel]) -> list[dic
                 block["stanza_start"] = stanza_start
             blocks.append(block)
             continue
-        if label.role == "heading":
-            blocks.append({"type": "heading", "text": text, "level": label.level or 1})
+        if label.role == "toc":
+            parts = [text]
             i += 1
+            while i < len(lines) and labels[i - 1].join_next:
+                parts.append(lines[i].text)
+                i += 1
+            blocks.append({"type": "metadata", "text": "\n".join(parts)})
+            continue
+        if label.role == "heading":
+            parts = [text]
+            i += 1
+            while i < len(lines) and labels[i - 1].join_next and labels[i].role == "heading":
+                parts.append(lines[i].text)
+                i += 1
+            merged = parts[0]
+            for part in parts[1:]:
+                merged = _glue(merged, part)
+            blocks.append({"type": "heading", "text": merged, "level": label.level or 1})
             continue
         if label.role == "dialogue_line":
             parts = [text]

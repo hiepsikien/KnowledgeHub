@@ -450,13 +450,20 @@ def detect_library_stamp(text: str, *, family: str) -> list[EditionSpan]:
     ]
 
 
-def collect_spans(text: str, *, family: str, work: dict[str, Any] | None = None) -> list[EditionSpan]:
+def collect_spans(
+    text: str,
+    *,
+    family: str,
+    work: dict[str, Any] | None = None,
+    preserve_toc: bool = False,
+) -> list[EditionSpan]:
     overrides = edition_overrides(work)
     spans: list[EditionSpan] = []
     if family in {"gutenberg", "scholastic"}:
         spans.extend(detect_gutenberg_wrappers(text))
         spans.extend(detect_front_apparatus(text, family=family))
-        spans.extend(detect_toc(text, family=family))
+        if not preserve_toc:
+            spans.extend(detect_toc(text, family=family))
     if family == "aozora":
         spans.extend(detect_aozora(text))
     spans.extend(detect_notes(text))

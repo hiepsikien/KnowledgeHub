@@ -32,7 +32,7 @@ def blocks_to_markdown(blocks: list[dict[str, Any]]) -> str:
         elif kind == "list_item":
             parts.append(text)
         elif kind == "metadata":
-            continue
+            parts.append(text)
         elif kind == "paragraph" and text:
             parts.append(text)
     return "\n\n".join(parts).strip()

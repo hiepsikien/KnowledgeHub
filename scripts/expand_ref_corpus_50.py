@@ -23,7 +23,7 @@ UA = "KnowledgeHub-REF-Corpus/1.0"
 EN_PG: list[dict] = [
     {"id": "grotius_treatise", "file": "grotius_treatise.txt", "local": True, "family": "gutenberg", "strip_first": True},
     {"id": "grotius_treatise_ch1", "file": "grotius_treatise_ch1.txt", "local": True, "family": "gutenberg", "strip_first": False},
-    {"id": "locke_second_treatise", "file": "locke_second_treatise.txt", "gid": "7370", "marker": "CHAPTER I", "strip_first": True},
+    {"id": "locke_second_treatise", "file": "locke_second_treatise.txt", "local": True, "family": "gutenberg", "strip_first": True},
     {"id": "dickens_two_cities", "file": "dickens_two_cities.txt", "gid": "98", "marker": "It was the best of times", "strip_first": True},
     {"id": "aquinas_summa", "file": "aquinas_summa.txt", "gid": "17611", "marker": "QUESTION 1", "family": "scholastic", "strip_first": True},
     {"id": "aristotle_politics", "file": "aristotle_politics.txt", "gid": "6762", "marker": None, "strip_first": True},
@@ -225,15 +225,12 @@ def auto_expectations(manifest: list[dict], existing: dict) -> dict:
             continue
         blocks = edition["blocks"]
         types = {b["type"] for b in blocks}
-        required = ["paragraph"]
-        if "heading" in types:
-            required.append("heading")
-        if "dialogue" in types:
-            required.append("dialogue")
-        if "stanza" in types:
-            required.append("stanza")
-        if "list_item" in types:
-            required.append("list_item")
+        required: list[str] = []
+        for kind in ("paragraph", "heading", "metadata", "dialogue", "stanza", "list_item", "stage_direction"):
+            if kind in types:
+                required.append(kind)
+        if not required:
+            required = ["paragraph"]
         n = len(blocks)
         bounds = {
             "min_blocks": max(1, n - 8),

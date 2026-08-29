@@ -8,8 +8,9 @@ CJK_LANG = {"ja", "zh", "ko"}
 HARD_GUTENBERG = re.compile(
     r"^(?:"
     r"[_\-=]{3,}|"
-    r"(?:CHAPTER|BOOK|PART|PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX|PROLOGUE)\b|"
-    r"VOLUME\b"
+    r"(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+|"
+    r"(?:BOOK|PART|VOLUME)\s+[IVXLC\d]+|"
+    r"PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX|PROLOGUE"
     r")",
     re.I,
 )

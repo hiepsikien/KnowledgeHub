@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from .lines import TextLine
+from .toc import merge_split_chapter_titles, relabel_toc_runs
 from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_soft_structural
 from .structure import (
     is_indented_verse,
@@ -237,6 +237,8 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", sourc
         )
     _relabel_play_dialogue(lines, labels, play_mode=play_mode)
     _relabel_quote_continuations(lines, labels)
+    merge_split_chapter_titles(lines, labels, family=family)
+    relabel_toc_runs(lines, labels, family=family)
     for i in range(len(labels) - 1):
         if labels[i].role == "verse_line" and labels[i + 1].role == "verse_line":
             if _continues_quoted_line(lines[i].text, lines[i + 1].text):

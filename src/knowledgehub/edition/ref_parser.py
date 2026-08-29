@@ -32,14 +32,15 @@ def parse_manuscript_to_ref(
             language=lang,
             work=work,
             use_llm=False,
+            preserve_toc=True,
+            strip_only=True,
         )
         report["strip"] = strip_report
         source = stripped
-        detected = str(strip_report.get("family") or fam)
-        if explicit_family in {"scholastic", "aozora", "archive_scan"}:
+        if explicit_family:
             fam = explicit_family
         else:
-            fam = detected
+            fam = str(strip_report.get("family") or fam)
     else:
         source = text
 

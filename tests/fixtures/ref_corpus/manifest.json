@@ -18,8 +18,7 @@
     "file": "en/locke_second_treatise.txt",
     "language": "en",
     "family": "gutenberg",
-    "strip_first": true,
-    "gutenberg_id": "7370"
+    "strip_first": true
   },
   {
     "id": "dickens_two_cities",

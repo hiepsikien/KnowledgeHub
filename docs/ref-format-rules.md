@@ -194,5 +194,13 @@ Regenerate with `scripts/build_ref_corpus_fixtures.py`. Expectations in `tests/f
 
 `content_kind`: `prose` | `verse` | `scholastic` | `mixed` | `drama`
 
-Corpus: **17 samples** (EN 10 incl. archive_scan + full-chapter Grotius, VI 6, JA 1 aozora).
+Corpus: **50 samples** (EN 39 incl. archive_scan, VI 9, JA 2).
 CI: `.github/workflows/ref-corpus.yml` runs corpus tests + rule QA on each PR.
+
+## REF/1 v1.4 — PG table of contents
+
+- **TOC detection** — runs of 3+ `CHAPTER`/`BOOK`/`SECT` list lines → single `metadata` block (not `heading`).
+- **Split chapter titles** — `CHAPTER III. OF THE RISE…` + continuation line merged before labeling.
+- **False heading fix** — `PART`/`BOOK` patterns require numerals (`PART IV` ok; “part of his property” no longer matches).
+- **Strip path** — `strip_only` + `preserve_toc` in REF parser; explicit `family=` is no longer overwritten by strip detection.
+- **`reading_markdown`** — includes `metadata` text (TOC blocks) for fidelity checks.

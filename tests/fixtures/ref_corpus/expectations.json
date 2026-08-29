@@ -1,12 +1,13 @@
 {
   "grotius_treatise": {
-    "min_blocks": 7,
-    "max_blocks": 30,
+    "min_blocks": 6,
+    "max_blocks": 29,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "stanza"
     ],
-    "content_kind": "prose",
+    "content_kind": "mixed",
     "min_footnotes": 8,
     "min_span_styles": {
       "footnote": 8,
@@ -34,13 +35,14 @@
     ]
   },
   "locke_second_treatise": {
-    "min_blocks": 2,
-    "max_blocks": 25,
+    "min_blocks": 3,
+    "max_blocks": 26,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "stanza"
     ],
-    "content_kind": "prose",
+    "content_kind": "mixed",
     "required_in_markdown": [
       "SECOND TREATISE OF GOVERNMENT",
       "LONDON PRINTED MDCLXXXVIII"
@@ -80,7 +82,7 @@
   },
   "aristotle_politics": {
     "min_blocks": 1,
-    "max_blocks": 21,
+    "max_blocks": 22,
     "required_types": [
       "paragraph",
       "heading"
@@ -93,12 +95,13 @@
   },
   "mill_on_liberty": {
     "min_blocks": 1,
-    "max_blocks": 20,
+    "max_blocks": 22,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "dialogue"
     ],
-    "content_kind": "prose",
+    "content_kind": "drama",
     "required_in_markdown": [
       "Philosophical Necessity",
       "liberty"
@@ -257,12 +260,12 @@
   },
   "plato_republic": {
     "min_blocks": 1,
-    "max_blocks": 18,
+    "max_blocks": 19,
     "required_types": [
       "paragraph",
-      "heading"
+      "dialogue"
     ],
-    "content_kind": "prose"
+    "content_kind": "drama"
   },
   "hobbes_leviathan": {
     "min_blocks": 2,
@@ -274,8 +277,8 @@
     "content_kind": "prose"
   },
   "machiavelli_prince": {
-    "min_blocks": 8,
-    "max_blocks": 31,
+    "min_blocks": 2,
+    "max_blocks": 25,
     "required_types": [
       "paragraph",
       "heading"
@@ -292,24 +295,62 @@
     "content_kind": "prose"
   },
   "darwin_origin": {
-    "min_blocks": 73,
-    "max_blocks": 96,
+    "min_blocks": 18,
+    "max_blocks": 41,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "stanza"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "austen_pride": {
-    "min_blocks": 12,
-    "max_blocks": 35,
+    "min_blocks": 1,
+    "max_blocks": 17,
     "required_types": [
+      "metadata",
+      "stanza"
+    ],
+    "content_kind": "verse"
+  },
+  "melville_moby": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "metadata",
       "paragraph",
       "heading"
     ],
     "content_kind": "prose"
   },
-  "melville_moby": {
+  "homer_iliad": {
+    "min_blocks": 7,
+    "max_blocks": 30,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "dialogue"
+    ],
+    "content_kind": "drama"
+  },
+  "hume_treatise": {
+    "min_blocks": 1,
+    "max_blocks": 16,
+    "required_types": [
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "smith_wealth": {
+    "min_blocks": 1,
+    "max_blocks": 19,
+    "required_types": [
+      "paragraph",
+      "dialogue"
+    ],
+    "content_kind": "drama"
+  },
+  "montesquieu_spirit": {
     "min_blocks": 1,
     "max_blocks": 22,
     "required_types": [
@@ -318,45 +359,9 @@
     ],
     "content_kind": "prose"
   },
-  "homer_iliad": {
-    "min_blocks": 31,
-    "max_blocks": 54,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "hume_treatise": {
-    "min_blocks": 1,
-    "max_blocks": 21,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "smith_wealth": {
-    "min_blocks": 1,
-    "max_blocks": 24,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "montesquieu_spirit": {
-    "min_blocks": 1,
-    "max_blocks": 20,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
   "paine_common_sense": {
-    "min_blocks": 6,
-    "max_blocks": 29,
+    "min_blocks": 4,
+    "max_blocks": 27,
     "required_types": [
       "paragraph",
       "heading"
@@ -373,62 +378,68 @@
     "content_kind": "prose"
   },
   "swift_gulliver": {
-    "min_blocks": 6,
-    "max_blocks": 29,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "bronte_jane_eyre": {
-    "min_blocks": 6,
-    "max_blocks": 29,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "wells_war_worlds": {
-    "min_blocks": 1,
-    "max_blocks": 22,
-    "required_types": [
-      "paragraph",
-      "stanza"
-    ],
-    "content_kind": "mixed"
-  },
-  "poe_raven": {
-    "min_blocks": 1,
-    "max_blocks": 21,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "thoreau_walden": {
-    "min_blocks": 17,
-    "max_blocks": 40,
-    "required_types": [
-      "paragraph",
-      "heading"
-    ],
-    "content_kind": "prose"
-  },
-  "franklin_autobiography": {
     "min_blocks": 5,
     "max_blocks": 28,
     "required_types": [
       "paragraph",
       "heading"
     ],
-    "content_kind": "prose"
+    "content_kind": "drama"
+  },
+  "bronte_jane_eyre": {
+    "min_blocks": 5,
+    "max_blocks": 28,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "wells_war_worlds": {
+    "min_blocks": 1,
+    "max_blocks": 24,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "dialogue",
+      "stanza"
+    ],
+    "content_kind": "drama"
+  },
+  "poe_raven": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "thoreau_walden": {
+    "min_blocks": 18,
+    "max_blocks": 41,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "franklin_autobiography": {
+    "min_blocks": 2,
+    "max_blocks": 25,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "stanza"
+    ],
+    "content_kind": "mixed"
   },
   "cicero_offices": {
-    "min_blocks": 3,
-    "max_blocks": 26,
+    "min_blocks": 2,
+    "max_blocks": 25,
     "required_types": [
       "paragraph",
       "heading"
@@ -463,17 +474,17 @@
     "content_kind": "mixed"
   },
   "twain_huckleberry": {
-    "min_blocks": 15,
-    "max_blocks": 38,
+    "min_blocks": 36,
+    "max_blocks": 59,
     "required_types": [
       "paragraph",
-      "heading"
+      "dialogue"
     ],
-    "content_kind": "prose"
+    "content_kind": "drama"
   },
   "shelley_frankenstein": {
-    "min_blocks": 5,
-    "max_blocks": 28,
+    "min_blocks": 1,
+    "max_blocks": 23,
     "required_types": [
       "paragraph",
       "heading"
@@ -491,9 +502,10 @@
   },
   "verne_journey": {
     "min_blocks": 1,
-    "max_blocks": 20,
+    "max_blocks": 22,
     "required_types": [
-      "paragraph"
+      "paragraph",
+      "heading"
     ],
     "content_kind": "prose"
   },
@@ -506,29 +518,30 @@
     "content_kind": "prose"
   },
   "bunyan_pilgrim": {
-    "min_blocks": 85,
-    "max_blocks": 108,
+    "min_blocks": 25,
+    "max_blocks": 48,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "stanza"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "voltaire_candid": {
-    "min_blocks": 12,
-    "max_blocks": 35,
+    "min_blocks": 6,
+    "max_blocks": 29,
     "required_types": [
       "paragraph",
-      "heading"
+      "heading",
+      "stanza"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "tolstoy_war_peace": {
-    "min_blocks": 10,
-    "max_blocks": 33,
+    "min_blocks": 8,
+    "max_blocks": 31,
     "required_types": [
-      "paragraph",
-      "heading"
+      "paragraph"
     ],
     "content_kind": "prose"
   },

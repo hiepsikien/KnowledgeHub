@@ -235,6 +235,8 @@ def parse_and_qa(
             language=language,
             work=work,
             use_llm=False,
+            preserve_toc=True,
+            strip_only=True,
         )
     qa_report = qa_read_edition(
         source_used,
