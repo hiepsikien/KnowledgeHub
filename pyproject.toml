@@ -26,3 +26,6 @@ knowledgehub = ["web/*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "llm: live LLM API tests (run with pytest -m llm)",
+]

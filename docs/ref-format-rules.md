@@ -113,6 +113,57 @@ Nested markers: bracket spans suppress re-parsing of inner parens. Overlaps: pre
 
 Validation: `ref_schema.validate_edition()` — zero errors required for publish.
 
+## QA (how to know parse is not wrong)
+
+Two layers — run both before trusting a new parser change.
+
+### 1. Rule checks (free, always on)
+
+`run_fidelity_checks(source, edition)` in `fidelity.py`:
+
+| Check | What it catches |
+|-------|-----------------|
+| `schema` | Invalid REF/1 fields / span offsets |
+| `text_subsequence` | Rewritten words, missing text, garbled joins |
+| `markdown_consistency` | `reading_markdown` ≠ `blocks_to_markdown()` |
+| `span_offsets` | Span text not matching block slice |
+| `block_sanity` | Absurd block counts / empty paragraphs |
+
+Text preservation uses **compact subsequence**: all non-whitespace characters in blocks must appear in the same order in the source text fed to the parser (post-strip). Whitespace-only and apparatus drops are allowed.
+
+### 2. LLM review (optional, uses `translation.models.qa`)
+
+`qa_read_edition()` / `parse_and_qa()` sends source excerpt + block digest to the QA model. Returns scores 1–10:
+
+- `text_preservation`, `block_structure`, `join_quality`, `inline_spans`, `overall`
+- `issues[]` with `block_index`, severity, Vietnamese notes
+- `verdict`: `pass` | `warn` | `fail`
+
+CLI:
+
+```bash
+# Rule checks only (no API cost)
+knowledgehub ref-qa --corpus grotius_treatise --no-llm
+
+# Rule + LLM on one sample
+knowledgehub ref-qa --corpus nam_cao_chi_pheo
+
+# Full corpus LLM QA (~14 API calls)
+knowledgehub ref-qa --corpus all --min-overall 7
+```
+
+Python:
+
+```python
+from knowledgehub.edition import parse_and_qa
+
+edition, parse_report, qa_report = parse_and_qa(text, language="vi", family="plain", strip_first=False)
+assert qa_report["fidelity"]["passed"]
+assert qa_report["passed"]  # requires LLM pass when use_llm_qa=True
+```
+
+Unit tests mock LLM; live check: `pytest tests/test_ref_qa.py -m llm -v`.
+
 ## Corpus test fixtures
 
 Real excerpts live under `tests/fixtures/ref_corpus/`:

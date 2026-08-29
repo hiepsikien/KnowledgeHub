@@ -43,6 +43,8 @@ def _classify_bracket(inner: str) -> str:
 
 def _classify_paren(inner: str) -> str:
     body = inner.strip()
+    if re.fullmatch(r"(19|20)\d{2}", body):
+        return "paren_aside"
     if FOOTNOTE_INNER.fullmatch(body):
         return "footnote"
     if re.fullmatch(r"\d{1,4}", body):
