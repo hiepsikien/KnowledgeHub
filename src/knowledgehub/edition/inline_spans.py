@@ -81,6 +81,8 @@ def _classify_paren(inner: str) -> str:
     if VI_ERA.search(body):
         return "paren_cite"
     if re.fullmatch(r"\d{1,4}", body):
+        if len(body) <= 2:
+            return "list_marker"
         if len(body) == 4 and int(body) >= 1000:
             return "paren_aside"
         return "paren_page"

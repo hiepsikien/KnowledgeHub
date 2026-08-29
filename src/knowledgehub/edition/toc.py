@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 
 from .lines import TextLine
+from .structure import CONTENTS_HEADER
 
 IMPRINT_PUBLISHER = re.compile(
     r"^(?:REPRINTED|PRINTED|LONDON|NEW YORK|BOSTON|PHILADELPHIA|CAMBRIDGE|INDIANAPOLIS)\b",
@@ -45,9 +46,9 @@ def is_toc_entry_line(line: str) -> bool:
         return True
     if re.match(r"^\d+\.\s+\S", s):
         return True
-    if re.search(r"\s{2,}\S", s) and len(s) < 90:
+    if re.search(r"\s{2,}\d{1,4}$", s) and len(s) < 90:
         return True
-    if re.search(r"\s+\d{1,4}$", s) and len(s) < 80:
+    if re.search(r"\.{2,}\s*\d{1,4}$", s) and len(s) < 90:
         return True
     return False
 
@@ -84,6 +85,24 @@ def relabel_toc_runs(lines: list[TextLine], labels: list, *, family: str) -> Non
     i = 0
     while i < len(labels):
         line = lines[i].text.strip()
+        if CONTENTS_HEADER.match(line):
+            j = i + 1
+            while j < len(labels):
+                raw = lines[j].text.strip()
+                if not raw:
+                    j += 1
+                    continue
+                if is_toc_entry_line(raw) or is_chapter_heading_line(raw):
+                    j += 1
+                    continue
+                if re.match(r"^\*[^*]+\*$", raw) or re.match(r"^CHAPTER\s+[IVXLC\d]+", raw, re.I):
+                    j += 1
+                    continue
+                break
+            if j - i >= 2:
+                _join_toc_lines(lines, labels, i, j)
+                i = j
+                continue
         if not line or not (is_toc_entry_line(line) or (labels[i].role == "heading" and is_chapter_heading_line(line))):
             i += 1
             continue

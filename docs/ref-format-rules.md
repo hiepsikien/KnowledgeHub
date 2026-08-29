@@ -88,7 +88,8 @@ Scan order: `_em_` → straight/curly quotes → guillemets `«»` → corner qu
 | `bracket_note` | `[The Cambridge Modern History, …]` | ≥18 chars or ≥3 spaces or long proper noun |
 | `bracket_cite` | `[Pol.]` | short alphabetic cite |
 | `bracket_other` | other `[…]` | fallback |
-| `paren_page` | `(42)` | digits only, 1–4 digits |
+| `paren_page` | `(42)` | 3–4 digit page refs |
+| `list_marker` | `(1)`, `(2)` | scholastic article list markers |
 | `paren_cite` | `(Politics)`, `(as X also says)` | ≤6 words, or starts `as/see/cf./e.g./i.e.` |
 | `paren_quote` | long parenthetical with inner quotes | ≥40 chars or ≥5 words |
 | `paren_aside` | other `(…)` | fallback |

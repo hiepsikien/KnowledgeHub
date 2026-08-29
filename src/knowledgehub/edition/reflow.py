@@ -26,8 +26,9 @@ HARD_SCHOLASTIC = re.compile(
     r")",
     re.I,
 )
-SOFT_SCHOLASTIC = re.compile(
-    r"^(?:Objection\s+\d|Obj\.\s+\d|Reply Obj|_On the contrary|_I answer that)",
+# Scholastic body markers — relabeled to prose/list_item in label_rules, not headings.
+SCHOLASTIC_BODY = re.compile(
+    r"^(?:Objection\s+\d|Obj\.\s+\d|Reply\s+Obj|_On the contrary|_I answer that)",
     re.I,
 )
 
@@ -47,9 +48,11 @@ def is_hard_structural(line: str, *, family: str = "gutenberg") -> bool:
 
 
 def is_soft_structural(line: str, *, family: str = "gutenberg") -> bool:
-    if family != "scholastic":
-        return False
-    return bool(SOFT_SCHOLASTIC.match(line))
+    return False
+
+
+def is_scholastic_body_marker(line: str) -> bool:
+    return bool(SCHOLASTIC_BODY.match(line.strip()))
 
 
 def looks_like_wrap(line: str, *, family: str) -> bool:

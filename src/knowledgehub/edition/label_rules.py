@@ -4,8 +4,9 @@ import re
 from dataclasses import dataclass
 
 from .toc import merge_split_chapter_titles, relabel_toc_runs
-from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_soft_structural
+from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_scholastic_body_marker, is_soft_structural
 from .structure import (
+    is_heroic_verse_line,
     is_indented_verse,
     is_metadata_line,
     is_scholastic_list_item,
@@ -13,6 +14,7 @@ from .structure import (
     is_stage_direction,
     is_vi_verse_line,
     looks_like_play,
+    poetry_run_score,
 )
 
 RULE_LINE = re.compile(r"^[\-–—_\*=\s]{8,}$")
@@ -38,6 +40,16 @@ IMPRINT_PUBLISHER = re.compile(
 )
 IMPRINT_LIST = re.compile(r"^.*,.*(?:1\.|[A-Z]\.)")
 IMPRINT_ABBREV_END = re.compile(r"\b[A-Z]\.$")
+TITLE_ABBREV_END = re.compile(
+    r"\b(?:Dr|Mr|Mrs|Ms|St|Prof|Rev|Gen|Col|Capt|Lt|Sgt|Hon|Jr|Sr|vs|etc|Vol|Chap|Art|"
+    r"Heb|Job|Cor|Matt|Luke|John|Rom|Gen|Ex|Deut|Ps|Prov|Eccl|Isa|Jer|Ezek|Dan|Hab|Mal|"
+    r"Philem|Tim|Pet|Jas|Jud|Rev|Ecclus|Metaph)\.$",
+    re.I,
+)
+ACT_HEADING = re.compile(r"^ACT\s+[IVXLC]+\.?$", re.I)
+SCENE_HEADING = re.compile(r"^SCENE\s+[IVXLC]+", re.I)
+INCOMPLETE_BRACKET = re.compile(r"\[[^\]]*$")
+BRACKET_CITE_CONT = re.compile(r"^[\d:;,.\]\sA-Za-z-]+$")
 ROMAN_YEAR = re.compile(r"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
 
 
@@ -56,7 +68,7 @@ def _is_imprint_line(line: str) -> bool:
 
 def _sentence_ended(prev: str) -> bool:
     prev_r = prev.rstrip()
-    if IMPRINT_ABBREV_END.search(prev_r):
+    if IMPRINT_ABBREV_END.search(prev_r) or TITLE_ABBREV_END.search(prev_r):
         return False
     return bool(SENTENCE_END.search(prev_r))
 
@@ -94,8 +106,12 @@ def _role_for_line(
         return "speaker_cue", 0, 0.96
     if is_scholastic_list_item(line):
         return "list_item", 0, 0.95
-    if play_mode and re.match(r"^(?:ACT [IVXLC]+\.?$|SCENE [IVXLC]+)", line.strip(), re.I):
+    if family == "scholastic" and is_scholastic_body_marker(line):
+        return "prose", 0, 0.94
+    if play_mode and ACT_HEADING.match(line.strip()):
         return "heading", 1, 0.94
+    if play_mode and SCENE_HEADING.match(line.strip()):
+        return "heading", 2, 0.94
     if is_hard_structural(line, family=family):
         level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
         return "heading", level, 0.95
@@ -112,6 +128,20 @@ def _role_for_line(
     if QUOTE_LINE.match(line.strip()) and len(line.strip()) < 220:
         return "verse_line", 0, 0.86
     return "prose", 0, 0.92
+
+
+def _continues_dialogue(prev: str, nxt: str) -> bool:
+    p = prev.strip()
+    n = nxt.strip()
+    if not p or not n:
+        return False
+    if p.endswith((",", ";", ":", "--")):
+        return True
+    if INCOMPLETE_BRACKET.search(p) and BRACKET_CITE_CONT.match(n):
+        return True
+    if p.endswith("[") or re.search(r"\[[A-Za-z.]+\.$", p):
+        return True
+    return not _sentence_ended(prev) and CONTINUATION_START.match(n)
 
 
 def _should_join(prev: str, nxt: str, *, family: str, blank_before: bool = False) -> bool:
@@ -174,6 +204,17 @@ def _should_join(prev: str, nxt: str, *, family: str, blank_before: bool = False
         return True
     if prev_r.endswith(":") and nxt_s.startswith(('"', "“", "_", "«")):
         return True
+    if INCOMPLETE_BRACKET.search(prev_r) and BRACKET_CITE_CONT.match(nxt_s):
+        return True
+    if not blank_before and family == "gutenberg":
+        if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
+            return False
+        if RULE_LINE.match(nxt) or SHORT_RULE_LINE.match(nxt_s):
+            return False
+        if BRIDGE_LINE.match(nxt_s) or LEAD_IN_LINE.match(nxt_s):
+            return False
+        if len(prev_r) >= 40 or not _sentence_ended(prev):
+            return True
     return False
 
 
@@ -211,6 +252,32 @@ def _relabel_quote_continuations(lines: list[TextLine], labels: list[LineLabel])
             labels[i].confidence = 0.82
 
 
+def _relabel_heroic_verse_runs(lines: list[TextLine], labels: list[LineLabel], *, family: str) -> None:
+    if family != "gutenberg":
+        return
+    i = 0
+    while i < len(labels):
+        if labels[i].role != "prose":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels):
+            if labels[j].role != "prose":
+                break
+            raw = lines[j].text.strip()
+            if not raw or len(raw) > 85 or "{" in raw:
+                break
+            if lines[j].blank_before:
+                break
+            j += 1
+        run = [lines[k].text for k in range(i, j)]
+        if len(run) >= 4 and poetry_run_score(run) >= 0.55:
+            for k in range(i, j):
+                labels[k].role = "verse_line"
+                labels[k].confidence = 0.84
+        i = j if j > i else i + 1
+
+
 def _relabel_play_dialogue(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
     if not play_mode:
         return
@@ -237,6 +304,7 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", sourc
         )
     _relabel_play_dialogue(lines, labels, play_mode=play_mode)
     _relabel_quote_continuations(lines, labels)
+    _relabel_heroic_verse_runs(lines, labels, family=family)
     merge_split_chapter_titles(lines, labels, family=family)
     relabel_toc_runs(lines, labels, family=family)
     for i in range(len(labels) - 1):
@@ -249,11 +317,17 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", sourc
         if i + 1 >= len(labels):
             continue
         nxt = labels[i + 1]
+        if label.role == "verse_line" and nxt.role == "verse_line":
+            continue
         if nxt.role == "verse_line" and LEAD_IN_LINE.match(lines[i].text.strip()):
             label.join_next = True
             continue
         if nxt.role not in {"prose", "verse_line", "dialogue_line"}:
             continue
+        if play_mode and label.role == "dialogue_line" and nxt.role == "dialogue_line":
+            if _continues_dialogue(lines[i].text, lines[i + 1].text):
+                label.join_next = True
+                continue
         if _should_join(
             lines[i].text,
             lines[i + 1].text,

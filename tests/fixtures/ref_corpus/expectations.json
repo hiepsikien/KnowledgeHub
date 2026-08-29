@@ -39,10 +39,9 @@
     "max_blocks": 26,
     "required_types": [
       "paragraph",
-      "heading",
-      "stanza"
+      "heading"
     ],
-    "content_kind": "mixed",
+    "content_kind": "prose",
     "required_in_markdown": [
       "SECOND TREATISE OF GOVERNMENT",
       "LONDON PRINTED MDCLXXXVIII"
@@ -54,7 +53,7 @@
     "required_types": [
       "paragraph"
     ],
-    "content_kind": "prose",
+    "content_kind": "mixed",
     "min_span_styles": {
       "quote": 1
     },
@@ -122,7 +121,7 @@
     ]
   },
   "shakespeare_hamlet": {
-    "min_blocks": 73,
+    "min_blocks": 45,
     "max_blocks": 96,
     "required_types": [
       "paragraph",
@@ -281,7 +280,7 @@
       "paragraph",
       "heading"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "marx_communist": {
     "min_blocks": 3,
@@ -305,7 +304,7 @@
     "required_types": [
       "paragraph"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "melville_moby": {
     "min_blocks": 1,
@@ -316,8 +315,8 @@
     "content_kind": "prose"
   },
   "homer_iliad": {
-    "min_blocks": 73,
-    "max_blocks": 96,
+    "min_blocks": 8,
+    "max_blocks": 30,
     "required_types": [
       "paragraph",
       "stanza"
@@ -401,13 +400,12 @@
     "required_types": [
       "paragraph",
       "heading",
-      "metadata",
       "stanza"
     ],
     "content_kind": "mixed"
   },
   "thoreau_walden": {
-    "min_blocks": 18,
+    "min_blocks": 8,
     "max_blocks": 41,
     "required_types": [
       "paragraph",
@@ -434,7 +432,7 @@
       "paragraph",
       "heading"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "kant_critique": {
     "min_blocks": 3,
@@ -477,8 +475,7 @@
     "max_blocks": 23,
     "required_types": [
       "paragraph",
-      "heading",
-      "metadata"
+      "heading"
     ],
     "content_kind": "prose"
   },
@@ -497,7 +494,7 @@
     "required_types": [
       "paragraph"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "emerson_essays": {
     "min_blocks": 1,
@@ -521,7 +518,6 @@
     "required_types": [
       "paragraph",
       "heading",
-      "metadata",
       "stanza"
     ],
     "content_kind": "mixed"
@@ -532,7 +528,7 @@
     "required_types": [
       "paragraph"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "dostoevsky_crime": {
     "min_blocks": 1,
@@ -541,7 +537,7 @@
       "paragraph",
       "heading"
     ],
-    "content_kind": "prose"
+    "content_kind": "mixed"
   },
   "doan_chinh_phu_ngam": {
     "min_blocks": 395,

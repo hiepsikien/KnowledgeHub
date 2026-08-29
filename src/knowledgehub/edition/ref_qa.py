@@ -27,7 +27,7 @@ def _blocks_digest(edition: dict[str, Any], *, max_blocks: int = 40, preview: in
         if len(text) > preview:
             preview_text += "…"
         spans = block.get("spans") or []
-        span_summary = ", ".join(f"{s.get('style')}:{s.get('text','')[:24]!r}" for s in spans[:6])
+        span_summary = ", ".join(f"{s.get('style')}:{s.get('text','')!r}" for s in spans[:6])
         extra = f" level={level}" if kind == "heading" else ""
         span_part = f" spans=[{span_summary}]" if span_summary else ""
         rows.append(f"{index}: {kind}{extra} char_len={len(text)} | {preview_text!r}{span_part}")
