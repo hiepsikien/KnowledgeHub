@@ -11,6 +11,7 @@ from typing import Any
 from ..catalog import get_work, is_hub_translation, resolve_content_path
 from ..paths import corpus_root
 from .cache import load_cached_edition, save_cached_edition
+from .llm_defaults import default_use_llm_relabel, gemini_available
 from .overrides import apply_chapter_overrides, overrides_digest
 from .ref import build_read_edition
 from .ref_schema import REF_PARSER_VERSION, validate_edition
@@ -113,12 +114,13 @@ def resolve_edition(
     work_id: str,
     *,
     corpus: Path | None = None,
-    use_llm: bool = False,
+    use_llm: bool | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], str]:
     """Build or load REF/1 edition for a catalog work. Returns (edition, report, stripped_source)."""
     from ..normalize import normalize_manuscript
     from ..translation.assemble import assemble_finals
 
+    use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
 
@@ -126,7 +128,7 @@ def resolve_edition(
         source_id = str(work.get("derived_from") or "")
         text, meta = assemble_finals(source_id, require_complete=True)
         content_hash = str(meta["content_hash"])
-        cached = load_cached_edition(work_id, content_hash, corpus=root)
+        cached = load_cached_edition(work_id, content_hash, corpus=root, llm_relabel=use_llm_resolved)
         if cached:
             edition = cached
             report = {"ref_mode": "cache", "origin": "hub_translation", "chapters": meta["chapters"]}
@@ -136,8 +138,16 @@ def resolve_edition(
                 family="plain",
                 language=str(work.get("language") or "vi"),
                 work_id=work_id,
+                use_llm=use_llm_resolved,
             )
-            save_cached_edition(work_id, content_hash, edition, corpus=root, report=ref_report)
+            save_cached_edition(
+                work_id,
+                content_hash,
+                edition,
+                corpus=root,
+                report=ref_report,
+                llm_relabel=use_llm_resolved,
+            )
             report = {"ref": ref_report, "origin": "hub_translation", "chapters": meta["chapters"]}
         report["content_hash"] = content_hash
         return edition, report, text
@@ -153,7 +163,7 @@ def resolve_edition(
             raw,
             language=str(work.get("language") or "en"),
             work=_work_for_normalize(work, root),
-            use_llm=use_llm,
+            use_llm=use_llm_resolved,
         )
     except ValueError as exc:
         raise ReadEditionError(str(exc)) from exc
@@ -269,11 +279,12 @@ def build_read_edition_package(
     *,
     corpus: Path | None = None,
     force: bool = False,
-    use_llm: bool = False,
+    use_llm: bool | None = None,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
-    edition, report, _source = resolve_edition(work_id, corpus=root, use_llm=use_llm)
+    use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
+    edition, report, _source = resolve_edition(work_id, corpus=root, use_llm=use_llm_resolved)
     errors = validate_edition(edition)
     if errors:
         raise ReadEditionError(f"REF validation failed: {'; '.join(errors[:5])}")
@@ -331,6 +342,9 @@ def build_read_edition_package(
         "chapters": chapter_rows,
         "quotation_profile": edition.get("quotation_profile") or {},
         "ref_parser_version": REF_PARSER_VERSION,
+        "ref_mode": (report.get("ref") or {}).get("ref_mode") or report.get("ref_mode") or "rule",
+        "llm_relabel": use_llm_resolved,
+        "llm_segment_count": len((report.get("ref") or {}).get("llm_segments") or []),
         "created_at": _now(),
         "updated_at": _now(),
     }
@@ -381,6 +395,8 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
         "manifest": manifest,
         "qa_chapters": len(qa.get("chapters") or {}),
         "override_chapters": len(overrides),
+        "gemini_available": gemini_available(),
+        "default_use_llm_relabel": default_use_llm_relabel(),
     }
 
 

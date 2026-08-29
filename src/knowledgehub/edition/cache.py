@@ -28,17 +28,26 @@ def _read_cache_meta(root: Path) -> dict[str, Any] | None:
     return data if isinstance(data, dict) else None
 
 
-def _cache_meta_current(root: Path) -> bool:
+def _cache_meta_current(root: Path, *, llm_relabel: bool) -> bool:
     meta = _read_cache_meta(root)
-    return bool(meta and meta.get("ref_parser_version") == REF_PARSER_VERSION)
+    if not meta or meta.get("ref_parser_version") != REF_PARSER_VERSION:
+        return False
+    cached_llm = bool(meta.get("llm_relabel"))
+    return cached_llm == llm_relabel
 
 
-def load_cached_edition(work_id: str, raw_hash: str, *, corpus: Path) -> dict[str, Any] | None:
+def load_cached_edition(
+    work_id: str,
+    raw_hash: str,
+    *,
+    corpus: Path,
+    llm_relabel: bool = False,
+) -> dict[str, Any] | None:
     root = edition_cache_dir(work_id, raw_hash, corpus=corpus)
     path = root / "blocks.json"
     if not path.is_file():
         return None
-    if not _cache_meta_current(root):
+    if not _cache_meta_current(root, llm_relabel=llm_relabel):
         return None
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -53,6 +62,7 @@ def save_cached_edition(
     *,
     corpus: Path,
     report: dict[str, Any] | None = None,
+    llm_relabel: bool = False,
 ) -> Path:
     root = edition_cache_dir(work_id, raw_hash, corpus=corpus)
     root.mkdir(parents=True, exist_ok=True)
@@ -61,7 +71,12 @@ def save_cached_edition(
         encoding="utf-8",
     )
     _cache_meta_path(root).write_text(
-        json.dumps({"ref_parser_version": REF_PARSER_VERSION}, ensure_ascii=False, indent=2) + "\n",
+        json.dumps(
+            {"ref_parser_version": REF_PARSER_VERSION, "llm_relabel": llm_relabel},
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
     )
     if report is not None:

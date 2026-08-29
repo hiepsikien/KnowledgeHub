@@ -142,7 +142,7 @@ class SettingsBody(BaseModel):
 
 class ReadEditionBuildBody(BaseModel):
     force: bool = False
-    use_llm: bool = False
+    use_llm: bool | None = None
 
 
 class ReadEditionPatchBody(BaseModel):

@@ -89,6 +89,8 @@ CMS: **Read Edition** nav → build, preview blocks, rule/LLM QA, edit overrides
 
 Translation projects can align segment boundaries via `POST /api/translations/{id}/sync-ref-chapters` (opt-in, `overwrite` required if segments exist).
 
+When `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) is set, Read Edition build defaults to **LLM relabel** on low-confidence line segments; rule-only and LLM editions are cached separately (`cache_meta.json` → `llm_relabel`).
+
 ## Pilot
 
 `grotius--freedom_of_the_seas` — Gutenberg bilingual treatise, Magoffin English chapters.

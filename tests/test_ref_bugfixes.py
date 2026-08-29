@@ -22,17 +22,19 @@ def test_cache_miss_when_parser_version_stale(tmp_path):
         encoding="utf-8",
     )
     (root / "cache_meta.json").write_text(
-        json.dumps({"ref_parser_version": "1.0"}),
+        json.dumps({"ref_parser_version": "1.0", "llm_relabel": False}),
         encoding="utf-8",
     )
-    assert load_cached_edition("demo--work", "abc123", corpus=corpus) is None
+    assert load_cached_edition("demo--work", "abc123", corpus=corpus, llm_relabel=False) is None
 
     edition = {"edition_format": "ref/1", "blocks": [{"type": "paragraph", "text": "new"}]}
-    save_cached_edition("demo--work", "abc123", edition, corpus=corpus)
+    save_cached_edition("demo--work", "abc123", edition, corpus=corpus, llm_relabel=False)
     meta = json.loads((root / "cache_meta.json").read_text(encoding="utf-8"))
     assert meta["ref_parser_version"] == REF_PARSER_VERSION
-    loaded = load_cached_edition("demo--work", "abc123", corpus=corpus)
+    assert meta["llm_relabel"] is False
+    loaded = load_cached_edition("demo--work", "abc123", corpus=corpus, llm_relabel=False)
     assert loaded["blocks"][0]["text"] == "new"
+    assert load_cached_edition("demo--work", "abc123", corpus=corpus, llm_relabel=True) is None
 
 
 def test_cache_miss_when_meta_missing(tmp_path):
@@ -43,7 +45,7 @@ def test_cache_miss_when_meta_missing(tmp_path):
         json.dumps({"edition_format": "ref/1", "blocks": [{"type": "paragraph", "text": "legacy"}]}),
         encoding="utf-8",
     )
-    assert load_cached_edition("demo--work", "legacy", corpus=corpus) is None
+    assert load_cached_edition("demo--work", "legacy", corpus=corpus, llm_relabel=False) is None
 
 
 def test_orphan_speaker_cue_becomes_stage_direction():

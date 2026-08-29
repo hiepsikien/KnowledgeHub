@@ -7,6 +7,7 @@ from typing import Any
 from .cache import load_cached_edition, save_cached_edition
 from .classify import classify_unsure_spans
 from .detect import AOZORA_NOTE, AOZORA_RUBY, collect_spans
+from .llm_defaults import default_use_llm_relabel
 from .profile import detect_family
 from .ref import build_read_edition
 from .reflow import unwrap_hard_wrap
@@ -40,7 +41,7 @@ def build_edition(
     *,
     language: str = "en",
     work: dict[str, Any] | None = None,
-    use_llm: bool = False,
+    use_llm: bool | None = None,
     preserve_toc: bool = False,
     strip_only: bool = False,
 ) -> tuple[str, dict[str, Any]]:
@@ -48,7 +49,8 @@ def build_edition(
     source_chars = len(text)
     family = detect_family(text, work=work, language=language)
     spans = collect_spans(text, family=family, work=work, preserve_toc=preserve_toc)
-    if use_llm:
+    use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
+    if use_llm_resolved:
         spans = classify_unsure_spans(text, spans, enabled=True)
     body = apply_drops(text, spans)
     aozora_inline = False
@@ -104,13 +106,18 @@ def build_edition(
             "spans": [s.to_dict() for s in spans],
         }
     if raw_hash and corpus_hint:
-        edition = load_cached_edition(work_id, raw_hash, corpus=Path(str(corpus_hint)))
+        edition = load_cached_edition(
+            work_id,
+            raw_hash,
+            corpus=Path(str(corpus_hint)),
+            llm_relabel=use_llm_resolved,
+        )
     if edition is None:
         edition, ref_report = build_read_edition(
             body,
             family=family,
             language=language,
-            use_llm=use_llm,
+            use_llm=use_llm_resolved,
             work_id=work_id or None,
         )
         body = str(edition.get("reading_markdown") or body)
@@ -122,6 +129,7 @@ def build_edition(
                 edition,
                 corpus=Path(str(corpus_hint)),
                 report=ref_report,
+                llm_relabel=use_llm_resolved,
             )
     else:
         body = str(edition.get("reading_markdown") or body)

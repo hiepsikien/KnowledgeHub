@@ -42,7 +42,7 @@ def build_package(
     *,
     corpus: Path | None = None,
     force: bool = False,
-    use_llm: bool = False,
+    use_llm: bool | None = None,
 ) -> dict[str, Any]:
     try:
         return build_read_edition_package(work_id, corpus=corpus, force=force, use_llm=use_llm)

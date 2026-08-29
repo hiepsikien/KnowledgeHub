@@ -137,7 +137,6 @@ def prepare_publish(
             raw,
             language=str(work.get("language") or "en"),
             work=_work_for_normalize(work, root),
-            use_llm=False,
         )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc

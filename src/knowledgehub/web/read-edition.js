@@ -141,6 +141,38 @@
     }
   }
 
+  function useLlmRelabel() {
+    const el = $("re-use-llm");
+    return el ? el.checked : true;
+  }
+
+  function useLlmQa() {
+    const el = $("re-use-llm-qa");
+    return el ? el.checked : true;
+  }
+
+  function applyLlmDefaults(status) {
+    const relabel = $("re-use-llm");
+    const qa = $("re-use-llm-qa");
+    if (relabel && status) {
+      relabel.checked = status.default_use_llm_relabel !== false;
+      relabel.disabled = !status.gemini_available;
+    }
+    if (qa && status) {
+      qa.checked = !!status.gemini_available;
+      qa.disabled = !status.gemini_available;
+    }
+  }
+
+  function formatStatus(status) {
+    const mode = status.manifest?.ref_mode || (status.default_use_llm_relabel ? "llm_hybrid (default)" : "rule");
+    const llmNote = status.gemini_available ? "" : " · không có GEMINI_API_KEY — chỉ rule";
+    const base = status.package_built
+      ? `${status.block_count} blocks · ${status.manifest?.chapter_count || 0} chương · ${status.content_kind || ""} · ${mode}`
+      : "Chưa build package";
+    return base + llmNote;
+  }
+
   async function loadReadEditionPage(workId) {
     state.workId = workId;
     document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
@@ -156,12 +188,14 @@
     $("re-status").textContent = "Đang tải…";
     try {
       const status = await api(`/api/works/${encodeURIComponent(workId)}/read-edition`);
+      applyLlmDefaults(status);
       $("re-heading").textContent = status.title || workId;
-      $("re-status").textContent = status.package_built
-        ? `${status.block_count} blocks · ${status.manifest?.chapter_count || 0} chương · ${status.content_kind || ""}`
-        : "Chưa build package";
+      $("re-status").textContent = formatStatus(status);
       if (!status.package_built) {
-        await api(`/api/works/${encodeURIComponent(workId)}/read-edition/build`, { method: "POST", body: {} });
+        await api(`/api/works/${encodeURIComponent(workId)}/read-edition/build`, {
+          method: "POST",
+          body: { use_llm: useLlmRelabel() },
+        });
       }
       const manifestResp = await api(`/api/works/${encodeURIComponent(workId)}/read-edition/manifest`);
       state.manifest = manifestResp.manifest;
@@ -180,7 +214,7 @@
       try {
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/build`, {
           method: "POST",
-          body: { force: true },
+          body: { force: true, use_llm: useLlmRelabel() },
         });
         toast("Đã build lại REF package");
         await loadReadEditionPage(state.workId);
@@ -194,7 +228,7 @@
       try {
         const qa = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/qa`, {
           method: "POST",
-          body: { chapter_id: state.chapterId, use_llm: false },
+          body: { chapter_id: state.chapterId, use_llm: useLlmQa() },
         });
         toast(qa.passed ? "QA pass" : "QA fail");
         await selectChapter(state.chapterId);
@@ -211,7 +245,7 @@
       try {
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/qa`, {
           method: "POST",
-          body: { use_llm: false },
+          body: { use_llm: useLlmQa() },
         });
         toast("QA xong");
         await loadReadEditionPage(state.workId);

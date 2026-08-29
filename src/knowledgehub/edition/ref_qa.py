@@ -6,11 +6,11 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-DEFAULT_REF_QA_MODEL = "gemini-3.1-flash-lite"
 from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .fidelity import run_fidelity_checks
 from .ref_parser import parse_manuscript_to_ref
+from .ref_schema import DEFAULT_REF_QA_MODEL
 
 
 def _now() -> str:
