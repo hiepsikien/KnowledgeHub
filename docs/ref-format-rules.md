@@ -61,16 +61,13 @@ Scholastic markers (case-sensitive line starts):
 | Indented poetry / short lines | `verse_line` | `verse_line` |
 | default | `prose` | `paragraph` after merge |
 
-### Join rules (`join_next`)
+### Join rules (v1.1)
 
-Join line *i* to *i+1* when both are `prose` and any of:
-
-1. Previous ends with `-` and next starts lowercase → de-hyphenate glue.
-2. Previous does not end `.!?` and next starts `[a-z(`.
-3. Previous length ≥ ordinal wrap threshold and no sentence end.
-4. Previous ends `,;:` and next starts lowercase/`(`.
-
-Never join into/from `heading`, `hr`, `verse_line`, or after a sentence end followed by a capitalized new paragraph.
+- **Blank line = paragraph break** — `iter_lines()` sets `blank_before`; never join across it.
+- **Footnote sentence ends** — `.[150]` counts as sentence end (fixes VI over-merge).
+- **Quote continuation** — multi-line Gutenberg poetry merges into `blockquote`.
+- **Hanging word wrap** — long lines ending in `the`, `of`, … join to next line (PG hard wrap).
+- **Zero-width lines** dropped at ingest.
 
 ### Grotius Latin epigraph
 
