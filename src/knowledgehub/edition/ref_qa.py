@@ -6,7 +6,7 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-from ..settings import resolve_models
+DEFAULT_REF_QA_MODEL = "gemini-3.1-flash-lite"
 from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .fidelity import run_fidelity_checks
@@ -92,14 +92,14 @@ Rule checks already run:
 {json.dumps(failed_rules, ensure_ascii=False, indent=2) if failed_rules else "(all passed)"}
 
 --- SOURCE (excerpt) ---
-{source_text[:5000]}
+{source_text[:4000]}
 --- END SOURCE ---
 
 --- PARSED BLOCKS (digest) ---
-{_blocks_digest(edition, max_blocks=24, preview=160)}
+{_blocks_digest(edition, max_blocks=20, preview=120)}
 
---- READING MARKDOWN (full, may truncate at end) ---
-{str(edition.get("reading_markdown") or "")[:8000]}
+--- READING MARKDOWN (excerpt) ---
+{str(edition.get("reading_markdown") or "")[:4000]}
 --- END ---"""
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
@@ -166,7 +166,7 @@ def qa_read_edition(
         )
         return payload
 
-    qa_model = model or resolve_models().get("qa") or "gemini-3.5-flash"
+    qa_model = model or DEFAULT_REF_QA_MODEL
     try:
         raw = complete_chat(
             _llm_qa_prompt(
@@ -176,8 +176,8 @@ def qa_read_edition(
                 language=language,
             ),
             model=qa_model,
-            temperature=0.15,
-            max_tokens=8192,
+            temperature=0.1,
+            max_tokens=2048,
         )
         report = parse_json_object(raw)
         scores = _normalize_scores(report.get("scores") or {})
