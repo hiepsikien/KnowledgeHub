@@ -41,7 +41,7 @@ def test_fidelity_subsequence_passes_grotius():
 def test_fidelity_fails_on_rewritten_word():
     raw = GROTIUS.read_text(encoding="utf-8")
     edition, _ = parse_manuscript_to_ref(raw, language="en", family="gutenberg", strip_first=False)
-    edition["blocks"][2]["text"] = edition["blocks"][2]["text"].replace("Dutch", "German")
+    edition["blocks"][1]["text"] = edition["blocks"][1]["text"].replace("Law", "Statute")
     result = run_fidelity_checks(raw, edition)
     assert result["passed"] is False
     sub = next(c for c in result["checks"] if c["id"] == "text_subsequence")

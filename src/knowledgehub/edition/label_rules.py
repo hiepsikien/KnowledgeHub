@@ -8,9 +8,82 @@ from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_so
 
 RULE_LINE = re.compile(r"^[\-–—_\*=\s]{8,}$")
 ITALIC_LINE = re.compile(r"^_([^_].*[^_])_$")
-SENTENCE_END = re.compile(r"""[.!?]["'\])]*$""")
-CONTINUATION_START = re.compile(r"^[a-z(\[]")
+SENTENCE_END = re.compile(r"""[.!?](?:\[?\d{1,4}\]?|[\"'\])])*$|[\]\)”»][\"'\])]*$""")
+CONTINUATION_START = re.compile(r"^[a-z(\[\"“‘«_]")
 HYPHEN_BREAK = re.compile(r"-$")
+QUOTE_LINE = re.compile(r'^[“"‘«_].*[”"’»_]?')
+COMPLETE_QUOTE = re.compile(r'(?:[”"\'»_]|etc\.)\]?\.?\[\d{1,4}\]$')
+BRIDGE_LINE = re.compile(r"^and in (?:another place|this wise):$", re.I)
+LEAD_IN_LINE = re.compile(r"^[A-Za-zÀ-ỹ].{0,48}:$")
+HANGING_WORD = re.compile(
+    r"\b(?:the|a|an|of|in|to|for|and|or|as|at|by|with|from|that|which|who|whom|whose|but|not|if|on|"
+    r"into|through|over|under|between|among|upon|de|du|des|la|le|les|un|une|một|của|và|là|trong|trên|"
+    r"với|từ|để|này|đó|các|những)\s*$",
+    re.I,
+)
+
+
+def _continues_quoted_line(prev: str, nxt: str) -> bool:
+    p = prev.strip()
+    n = nxt.strip()
+    if not p or not n:
+        return False
+    if not (p.startswith(('"', "“", "«", "_")) or "“" in p or "«" in p):
+        return False
+    if COMPLETE_QUOTE.search(p):
+        return False
+    if SENTENCE_END.search(p) and not p.endswith((",", ";", ":", "--")):
+        return False
+    return True
+
+
+def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
+    if RULE_LINE.match(line):
+        return "hr", 0, 0.98
+    if is_hard_structural(line, family=family):
+        level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
+        return "heading", level, 0.95
+    if is_soft_structural(line, family=family):
+        return "heading", 3, 0.9
+    if ITALIC_LINE.match(line):
+        return "heading", 2, 0.88
+    if is_all_caps_heading(line):
+        return "heading", 2, 0.82
+    if QUOTE_LINE.match(line.strip()) and len(line.strip()) < 220:
+        return "verse_line", 0, 0.86
+    return "prose", 0, 0.92
+
+
+def _should_join(prev: str, nxt: str, *, family: str, blank_before: bool = False) -> bool:
+    if blank_before:
+        return False
+    if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
+        return False
+    if RULE_LINE.match(nxt):
+        return False
+    if BRIDGE_LINE.match(nxt.strip()) or LEAD_IN_LINE.match(nxt.strip()):
+        return False
+    if COMPLETE_QUOTE.search(prev.strip()):
+        return False
+    if _continues_quoted_line(prev, nxt):
+        return True
+    if (
+        len(prev) >= ORDINAL_WRAP
+        and HANGING_WORD.search(prev.rstrip())
+        and not SENTENCE_END.search(prev.rstrip())
+    ):
+        return True
+    if HYPHEN_BREAK.search(prev.rstrip()) and nxt[:1].islower():
+        return True
+    if CONTINUATION_START.match(nxt) and not SENTENCE_END.search(prev.rstrip()):
+        return True
+    if len(prev) >= ORDINAL_WRAP and not SENTENCE_END.search(prev.rstrip()) and CONTINUATION_START.match(nxt):
+        return True
+    if prev.rstrip().endswith((",", ";", "--")) and CONTINUATION_START.match(nxt):
+        return True
+    if prev.rstrip().endswith(":") and nxt.strip().startswith(('"', "“", "_", "«")):
+        return True
+    return False
 
 
 @dataclass
@@ -33,35 +106,18 @@ class LineLabel:
         }
 
 
-def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
-    if RULE_LINE.match(line):
-        return "hr", 0, 0.98
-    if is_hard_structural(line, family=family):
-        level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
-        return "heading", level, 0.95
-    if is_soft_structural(line, family=family):
-        return "heading", 3, 0.9
-    if ITALIC_LINE.match(line):
-        return "heading", 2, 0.88
-    if is_all_caps_heading(line):
-        return "heading", 2, 0.82
-    return "prose", 0, 0.92
-
-
-def _should_join(prev: str, nxt: str, *, family: str) -> bool:
-    if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
-        return False
-    if RULE_LINE.match(nxt):
-        return False
-    if HYPHEN_BREAK.search(prev.rstrip()) and nxt[:1].islower():
-        return True
-    if CONTINUATION_START.match(nxt) and not SENTENCE_END.search(prev.rstrip()):
-        return True
-    if len(prev) >= ORDINAL_WRAP and not SENTENCE_END.search(prev.rstrip()):
-        return True
-    if prev.rstrip().endswith((",", ";", ":")) and CONTINUATION_START.match(nxt):
-        return True
-    return False
+def _relabel_quote_continuations(lines: list[TextLine], labels: list[LineLabel]) -> None:
+    for i in range(1, len(labels)):
+        if labels[i].role != "prose":
+            continue
+        prev = lines[i - 1].text
+        curr = lines[i].text
+        if labels[i - 1].role == "verse_line" and _continues_quoted_line(prev, curr):
+            labels[i].role = "verse_line"
+            labels[i].confidence = 0.84
+        elif labels[i - 1].role == "verse_line" and not SENTENCE_END.search(prev.strip()):
+            labels[i].role = "verse_line"
+            labels[i].confidence = 0.82
 
 
 def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg") -> list[LineLabel]:
@@ -71,15 +127,28 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg") -> li
         labels.append(
             LineLabel(index=row.index, role=role, level=level, confidence=confidence)
         )
+    _relabel_quote_continuations(lines, labels)
+    for i in range(len(labels) - 1):
+        if labels[i].role == "verse_line" and labels[i + 1].role == "verse_line":
+            if not COMPLETE_QUOTE.search(lines[i].text.strip()):
+                labels[i].join_next = True
     for i, label in enumerate(labels):
-        if label.role != "prose":
+        if label.role not in {"prose", "verse_line"}:
             continue
         if i + 1 >= len(labels):
             continue
         nxt = labels[i + 1]
-        if nxt.role != "prose":
+        if nxt.role == "verse_line" and LEAD_IN_LINE.match(lines[i].text.strip()):
+            label.join_next = True
             continue
-        if _should_join(lines[i].text, lines[i + 1].text, family=family):
+        if nxt.role not in {"prose", "verse_line"}:
+            continue
+        if _should_join(
+            lines[i].text,
+            lines[i + 1].text,
+            family=family,
+            blank_before=lines[i + 1].blank_before,
+        ):
             label.join_next = True
             if label.confidence > 0.75:
                 label.confidence = 0.75

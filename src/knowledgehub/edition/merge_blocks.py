@@ -22,11 +22,20 @@ def labels_to_blocks(lines: list[TextLine], labels: list[LineLabel]) -> list[dic
             blocks.append({"type": "hr"})
             i += 1
             continue
-        if label.role in {"heading", "verse_line"}:
-            block: dict = {"type": label.role if label.role != "verse_line" else "verse_line", "text": text}
-            if label.role == "heading":
-                block["level"] = label.level or 1
-            blocks.append(block)
+        if label.role == "verse_line":
+            parts = [text]
+            i += 1
+            while i < len(lines) and labels[i - 1].join_next:
+                parts.append(lines[i].text)
+                i += 1
+            merged = parts[0]
+            for part in parts[1:]:
+                merged = _glue(merged, part)
+            kind = "blockquote" if len(parts) > 1 or "“" in merged or "«" in merged else "verse_line"
+            blocks.append({"type": kind, "text": merged})
+            continue
+        if label.role == "heading":
+            blocks.append({"type": "heading", "text": text, "level": label.level or 1})
             i += 1
             continue
         if label.role == "blockquote":

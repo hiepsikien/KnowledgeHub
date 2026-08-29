@@ -53,7 +53,7 @@
   },
   "whitman_grass": {
     "min_blocks": 20,
-    "max_blocks": 50,
+    "max_blocks": 70,
     "required_types": ["paragraph"],
     "content_kind": "prose",
     "required_in_markdown": ["myself", "grass"]
@@ -66,8 +66,8 @@
     "required_in_markdown": ["HAMLET", "Horatio"]
   },
   "grotius_vi_chviii": {
-    "min_blocks": 3,
-    "max_blocks": 8,
+    "min_blocks": 6,
+    "max_blocks": 12,
     "required_types": ["heading", "paragraph"],
     "content_kind": "prose",
     "min_footnotes": 10,
