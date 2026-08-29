@@ -1,0 +1,106 @@
+[
+  {
+    "id": "grotius_treatise",
+    "file": "en/grotius_treatise.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "genre": "legal"
+  },
+  {
+    "id": "locke_second_treatise",
+    "file": "en/locke_second_treatise.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "7370"
+  },
+  {
+    "id": "dickens_two_cities",
+    "file": "en/dickens_two_cities.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "98"
+  },
+  {
+    "id": "aquinas_summa",
+    "file": "en/aquinas_summa.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "17611"
+  },
+  {
+    "id": "aristotle_politics",
+    "file": "en/aristotle_politics.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "6762"
+  },
+  {
+    "id": "mill_on_liberty",
+    "file": "en/mill_on_liberty.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "34901"
+  },
+  {
+    "id": "whitman_grass",
+    "file": "en/whitman_grass.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "1322"
+  },
+  {
+    "id": "shakespeare_hamlet",
+    "file": "en/shakespeare_hamlet.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "gutenberg_id": "1524"
+  },
+  {
+    "id": "grotius_vi_chviii",
+    "file": "vi/grotius_vi_chviii.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "legal",
+    "source": "hub_translation"
+  },
+  {
+    "id": "qua_deo_ngang",
+    "file": "vi/qua_deo_ngang.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "verse",
+    "source": "vi.wikisource"
+  },
+  {
+    "id": "ho_banh_troi_nuoc",
+    "file": "vi/ho_banh_troi_nuoc.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "verse",
+    "source": "vi.wikisource"
+  },
+  {
+    "id": "le_kien_van_cao_si",
+    "file": "vi/le_kien_van_cao_si.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "essay",
+    "source": "vi.wikisource"
+  },
+  {
+    "id": "nam_cao_chi_pheo",
+    "file": "vi/nam_cao_chi_pheo.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "fiction",
+    "source": "vi.wikisource"
+  },
+  {
+    "id": "le_van_dai_phong_tuc",
+    "file": "vi/le_van_dai_phong_tuc.txt",
+    "language": "vi",
+    "family": "plain",
+    "genre": "essay",
+    "source": "vi.wikisource"
+  }
+]

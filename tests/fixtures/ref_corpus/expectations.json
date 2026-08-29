@@ -1,0 +1,116 @@
+{
+  "grotius_treatise": {
+    "min_blocks": 10,
+    "max_blocks": 20,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 8,
+    "min_span_styles": {"footnote": 8, "em": 1},
+    "required_in_markdown": [
+      "CHAPTER I",
+      "Dutch--that is to say, the subjects of the United Netherlands",
+      "human fellowship"
+    ],
+    "required_joined": "Dutch--that is to say, the subjects of the United Netherlands"
+  },
+  "locke_second_treatise": {
+    "min_blocks": 15,
+    "max_blocks": 30,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "required_in_markdown": ["SECOND TREATISE OF GOVERNMENT", "John Locke"]
+  },
+  "dickens_two_cities": {
+    "min_blocks": 4,
+    "max_blocks": 12,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "min_span_styles": {"quote": 1},
+    "required_in_markdown": ["best of times", "worst of times"]
+  },
+  "aquinas_summa": {
+    "min_blocks": 15,
+    "max_blocks": 30,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 5,
+    "min_span_styles": {"paren_cite": 3, "footnote": 5},
+    "required_in_markdown": ["QUESTION 1", "Whether it is necessary"]
+  },
+  "aristotle_politics": {
+    "min_blocks": 5,
+    "max_blocks": 15,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "required_in_markdown": ["Politics", "Aristotle"]
+  },
+  "mill_on_liberty": {
+    "min_blocks": 10,
+    "max_blocks": 25,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "required_in_markdown": ["liberty", "CHAPTER"]
+  },
+  "whitman_grass": {
+    "min_blocks": 20,
+    "max_blocks": 50,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "required_in_markdown": ["myself", "grass"]
+  },
+  "shakespeare_hamlet": {
+    "min_blocks": 80,
+    "max_blocks": 200,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "required_in_markdown": ["HAMLET", "Horatio"]
+  },
+  "grotius_vi_chviii": {
+    "min_blocks": 3,
+    "max_blocks": 8,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 10,
+    "required_in_markdown": ["CHƯƠNG VIII", "Bồ Đào Nha"]
+  },
+  "qua_deo_ngang": {
+    "min_blocks": 10,
+    "max_blocks": 25,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 4,
+    "required_in_markdown": ["Bước xuống Đèo Ngang", "Một mảnh tình riêng"]
+  },
+  "ho_banh_troi_nuoc": {
+    "min_blocks": 8,
+    "max_blocks": 20,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 2,
+    "required_in_markdown": ["Bánh trôi nước", "tấm lòng son"]
+  },
+  "le_kien_van_cao_si": {
+    "min_blocks": 8,
+    "max_blocks": 20,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "min_footnotes": 1,
+    "required_in_markdown": ["cao-sĩ", "Lê Quí Đôn"]
+  },
+  "nam_cao_chi_pheo": {
+    "min_blocks": 5,
+    "max_blocks": 15,
+    "required_types": ["paragraph"],
+    "content_kind": "prose",
+    "min_span_styles": {"quote": 2},
+    "required_in_markdown": ["Chí Phèo", "Vũ-đại", "Chắc nó trừ mình ra"]
+  },
+  "le_van_dai_phong_tuc": {
+    "min_blocks": 10,
+    "max_blocks": 25,
+    "required_types": ["heading", "paragraph"],
+    "content_kind": "prose",
+    "min_span_styles": {"paren_quote": 2},
+    "required_in_markdown": ["phong tục", "Việt Nam"]
+  }
+}

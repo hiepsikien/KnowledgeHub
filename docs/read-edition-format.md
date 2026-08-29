@@ -2,6 +2,8 @@
 
 Hub produces REF/1 at publish time; Read consumes it for split, render, and TTS.
 
+**Rule reference:** see [ref-format-rules.md](./ref-format-rules.md) for parser pipeline, join rules, inline span classifiers, and corpus fixtures.
+
 ## Goals
 
 - One canonical structured edition per `(work_id, raw content_hash)`.

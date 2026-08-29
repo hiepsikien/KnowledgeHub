@@ -7,8 +7,9 @@ from typing import Any, Iterable
 
 FOOTNOTE_INNER = re.compile(r"^\d{1,4}(?:,\s*\d{1,4})*$")
 GUTENBERG_EM = re.compile(r"(?<![A-Za-z0-9])_([^_\n]+?)_(?![A-Za-z0-9])")
-# Straight / curly double quotes used as inline quotation marks.
+# Straight / curly / guillemet quotation marks.
 DQUOTE = re.compile(r'(?<!\w)"([^"\n]{2,}?)"(?!\w)|“([^”\n]{2,}?)”')
+GUILLEMET = re.compile(r"«([^»\n]{2,}?)»")
 # Vietnamese / CJK corner quotes
 CORNER_QUOTE = re.compile(r"「([^」\n]{2,}?)」|『([^』\n]{2,}?)』")
 # Fullwidth parens common in Vietnamese editions
@@ -90,7 +91,8 @@ def annotate_inline_spans(text: str) -> list[InlineSpan]:
     for match in GUTENBERG_EM.finditer(text):
         _add_span(spans, match.start(), match.end(), "em", match.group(0))
     for match in DQUOTE.finditer(text):
-        inner = match.group(1) or match.group(2) or ""
+        _add_span(spans, match.start(), match.end(), "quote", match.group(0))
+    for match in GUILLEMET.finditer(text):
         _add_span(spans, match.start(), match.end(), "quote", match.group(0))
     for match in CORNER_QUOTE.finditer(text):
         _add_span(spans, match.start(), match.end(), "quote", match.group(0))
