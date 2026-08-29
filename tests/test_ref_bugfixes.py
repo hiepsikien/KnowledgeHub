@@ -132,3 +132,69 @@ def test_cms_helpers_map_read_edition_error_to_value_error(tmp_path, monkeypatch
         with pytest.raises(ValueError, match="missing manuscript|content_hash") as caught:
             call()
         assert not isinstance(caught.value, ReadEditionError)
+
+
+def test_merge_block_patches_accumulates_across_saves():
+    from knowledgehub.edition.overrides import merge_block_patches
+
+    first = [{"block_index": 2, "type": "paragraph", "text": "one"}]
+    second = [{"block_index": 5, "type": "heading", "text": "Title", "level": 2}]
+    third = [{"block_index": 2, "text": "one revised"}]
+    merged = merge_block_patches(merge_block_patches(first, second), third)
+    by_index = {p["block_index"]: p for p in merged}
+    assert by_index[2]["text"] == "one revised"
+    assert by_index[2]["type"] == "paragraph"
+    assert by_index[5]["level"] == 2
+    assert len(merged) == 2
+
+
+def test_chapter_qa_uses_chapter_text_not_manuscript_head(tmp_path, monkeypatch):
+    from knowledgehub.edition.read_edition import (
+        build_read_edition_package,
+        qa_read_edition_chapter,
+        read_edition_dir,
+    )
+
+    corpus = tmp_path / "corpus"
+    raw_dir = corpus / "sources/demo/raw"
+    raw_dir.mkdir(parents=True)
+    body = (
+        "CHAPTER I\n\n"
+        "Alpha paragraph unique to chapter one.\n\n"
+        "CHAPTER II\n\n"
+        "Beta paragraph unique to chapter two only here.\n"
+    )
+    (raw_dir / "book.txt").write_text(body, encoding="utf-8")
+    catalog = corpus / "catalog"
+    catalog.mkdir()
+    works = [
+        {
+            "id": "demo--book",
+            "title": "Demo",
+            "author_id": "demo",
+            "language": "en",
+            "license": "public_domain_usa_gutenberg",
+            "content_file": "sources/demo/raw/book.txt",
+            "content_hash": "hash-demo",
+            "rights": {"consumers": {"read": "allowed"}},
+        }
+    ]
+    (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
+    (catalog / "authors.json").write_text(json.dumps([{"id": "demo", "name": "Demo"}]), encoding="utf-8")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+
+    built = build_read_edition_package("demo--book", corpus=corpus)
+    chapters = built["manifest"]["chapters"]
+    assert len(chapters) >= 2
+    ch2 = chapters[1]["chapter_id"]
+    qa = qa_read_edition_chapter("demo--book", ch2, corpus=corpus, use_llm=False)
+    assert qa["fidelity"]["passed"] is True
+    md = json.loads(
+        (
+            read_edition_dir("demo--book", built["manifest"]["edition_hash"], corpus=corpus)
+            / "chapters"
+            / f"{ch2}.json"
+        ).read_text(encoding="utf-8")
+    )["reading_markdown"]
+    assert "Beta paragraph" in md
+    assert "Alpha paragraph" not in md

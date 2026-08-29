@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .edition.overrides import apply_block_patches
+from .edition.overrides import apply_block_patches, merge_block_patches
 from .edition.read_edition import (
     ReadEditionError,
     build_read_edition_package,
@@ -97,13 +97,14 @@ def patch_chapter(
         build_read_edition_package(work_id, corpus=root)
         package_dir = read_edition_dir(work_id, str(edition["edition_hash"]), corpus=root)
         chapter = load_chapter(package_dir, chapter_id)
+        overrides = load_overrides(package_dir)
+        entry = dict(overrides.get(chapter_id) or {})
         if block_patches:
+            accumulated = merge_block_patches(entry.get("block_patches"), block_patches)
             patched = apply_block_patches(chapter["blocks"], block_patches)
             chapter["blocks"] = patched
             chapter["reading_markdown"] = blocks_to_markdown(patched)
-        overrides = load_overrides(package_dir)
-        entry = dict(overrides.get(chapter_id) or {})
-        entry["block_patches"] = block_patches
+            entry["block_patches"] = accumulated
         if curator_note is not None:
             entry["curator_note"] = curator_note
         entry["chapter_id"] = chapter_id

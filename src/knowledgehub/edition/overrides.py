@@ -53,6 +53,41 @@ def apply_block_patches(blocks: list[dict[str, Any]], patches: list[dict[str, An
     return out
 
 
+def merge_block_patches(
+    existing: list[dict[str, Any]] | None,
+    incoming: list[dict[str, Any]] | None,
+) -> list[dict[str, Any]]:
+    """Accumulate curator patches across saves.
+
+    Field edits for the same ``block_index`` coalesce (last wins).
+    ``merge_with_next`` actions append in order and are not collapsed.
+    """
+    combined = list(existing or []) + list(incoming or [])
+    result: list[dict[str, Any]] = []
+    last_pos: dict[int, int] = {}
+    for patch in combined:
+        if not isinstance(patch, dict):
+            continue
+        if patch.get("action") == "merge_with_next":
+            result.append(dict(patch))
+            continue
+        index = patch.get("block_index")
+        if not isinstance(index, int):
+            result.append(dict(patch))
+            continue
+        if index in last_pos:
+            prev = result[last_pos[index]]
+            merged = dict(prev)
+            for key, value in patch.items():
+                if value is not None:
+                    merged[key] = value
+            result[last_pos[index]] = merged
+        else:
+            last_pos[index] = len(result)
+            result.append(dict(patch))
+    return result
+
+
 def apply_chapter_overrides(
     edition: dict[str, Any],
     overrides: dict[str, Any],

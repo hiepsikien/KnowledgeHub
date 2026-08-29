@@ -410,7 +410,7 @@ def qa_read_edition_chapter(
     min_overall: float = 7.0,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
-    edition, _report, source = resolve_edition(work_id, corpus=root)
+    edition, _report, _source = resolve_edition(work_id, corpus=root)
     build_read_edition_package(work_id, corpus=root)
     package_dir = read_edition_dir(work_id, str(edition["edition_hash"]), corpus=root)
     chapter = load_chapter(package_dir, chapter_id)
@@ -419,9 +419,8 @@ def qa_read_edition_chapter(
         "blocks": chapter["blocks"],
         "reading_markdown": chapter["reading_markdown"],
     }
-    source_excerpt = chapter["reading_markdown"]
-    if source and chapter.get("block_start") is not None:
-        source_excerpt = source[:8000]
+    # Compare chapter blocks to this chapter's text — not the manuscript head.
+    source_excerpt = str(chapter.get("reading_markdown") or "")
     qa = qa_read_edition(
         source_excerpt,
         sub_edition,
