@@ -49,6 +49,8 @@ def labels_to_blocks(lines: list[TextLine], labels: list[LineLabel]) -> list[dic
                 for part in parts[1:]:
                     merged = _glue(merged, part)
                 blocks.append({"type": "dialogue", "speaker": speaker, "text": merged})
+            else:
+                blocks.append({"type": "stage_direction", "text": f"{speaker}."})
             continue
         if label.role == "verse_line":
             parts = [text]

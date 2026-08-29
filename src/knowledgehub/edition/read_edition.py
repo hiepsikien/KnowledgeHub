@@ -13,12 +13,11 @@ from ..paths import corpus_root
 from .cache import load_cached_edition, save_cached_edition
 from .overrides import apply_chapter_overrides, overrides_digest
 from .ref import build_read_edition
-from .ref_schema import validate_edition
+from .ref_schema import REF_PARSER_VERSION, validate_edition
 from .serialize import blocks_to_markdown
 from .ref_qa import qa_read_edition
 
 READ_EDITION_PACKAGE_VERSION = "1"
-REF_PARSER_VERSION = "1.7"
 
 
 class ReadEditionError(RuntimeError):
@@ -283,7 +282,7 @@ def build_read_edition_package(
     package_dir = read_edition_dir(work_id, edition_hash, corpus=root)
     if package_dir.is_dir() and not force:
         manifest = load_manifest(package_dir)
-        if manifest:
+        if manifest and manifest.get("ref_parser_version") == REF_PARSER_VERSION:
             return {
                 "built": False,
                 "package_dir": str(package_dir.relative_to(root)),

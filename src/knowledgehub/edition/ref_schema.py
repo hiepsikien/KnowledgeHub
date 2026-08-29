@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 REF_FORMAT = "ref/1"
+REF_PARSER_VERSION = "1.7"
 
 BLOCK_TYPES = frozenset(
     {

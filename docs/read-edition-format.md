@@ -68,6 +68,8 @@ corpus/editions/{work_id}/{raw_content_hash}/blocks.json
 
 Republish reuses cache when raw hash unchanged.
 
+Cache entries include `cache_meta.json` with `ref_parser_version`; stale parser versions are rebuilt automatically.
+
 ## Read Edition package (Hub storage)
 
 Per-work REF/1 export split by chapter for CMS preview, QA, and publish:

@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .ref_schema import REF_PARSER_VERSION
+
 
 def edition_cache_dir(work_id: str, raw_hash: str, *, corpus: Path) -> Path:
     safe_id = work_id.replace("/", "_")
@@ -11,9 +13,32 @@ def edition_cache_dir(work_id: str, raw_hash: str, *, corpus: Path) -> Path:
     return corpus / "editions" / safe_id / safe_hash
 
 
-def load_cached_edition(work_id: str, raw_hash: str, *, corpus: Path) -> dict[str, Any] | None:
-    path = edition_cache_dir(work_id, raw_hash, corpus=corpus) / "blocks.json"
+def _cache_meta_path(root: Path) -> Path:
+    return root / "cache_meta.json"
+
+
+def _read_cache_meta(root: Path) -> dict[str, Any] | None:
+    path = _cache_meta_path(root)
     if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _cache_meta_current(root: Path) -> bool:
+    meta = _read_cache_meta(root)
+    return bool(meta and meta.get("ref_parser_version") == REF_PARSER_VERSION)
+
+
+def load_cached_edition(work_id: str, raw_hash: str, *, corpus: Path) -> dict[str, Any] | None:
+    root = edition_cache_dir(work_id, raw_hash, corpus=corpus)
+    path = root / "blocks.json"
+    if not path.is_file():
+        return None
+    if not _cache_meta_current(root):
         return None
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -33,6 +58,10 @@ def save_cached_edition(
     root.mkdir(parents=True, exist_ok=True)
     (root / "blocks.json").write_text(
         json.dumps(edition, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    _cache_meta_path(root).write_text(
+        json.dumps({"ref_parser_version": REF_PARSER_VERSION}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     if report is not None:
