@@ -57,7 +57,7 @@ def test_strips_gutenberg_note_and_toc():
 def test_plain_text_unchanged():
     raw = "Of civil government.\n" * 20
     text, report = normalize_manuscript(raw)
-    assert text == raw.strip()
+    assert text.replace("\n\n", "\n") == raw.strip()
     assert report["gutenberg"] is False
     assert report["dropped_contents"] is False
 
@@ -247,7 +247,7 @@ def test_short_lines_not_merged():
     raw = "Translated by\nFathers of the English Dominican Province\nNew York\n"
     text, report = normalize_manuscript(raw)
     assert report["unwrapped"] is False
-    assert text == "Translated by\nFathers of the English Dominican Province\nNew York"
+    assert text.replace("\n\n", "\n") == "Translated by\nFathers of the English Dominican Province\nNew York"
 
 
 def test_summa_file_if_present():

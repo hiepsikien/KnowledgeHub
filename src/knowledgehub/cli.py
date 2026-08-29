@@ -152,10 +152,12 @@ def main(argv: list[str] | None = None) -> int:
             work = get_work(args.work)
             path = resolve_content_path(work)
             raw = path.read_text(encoding="utf-8", errors="replace")
+            from .paths import corpus_root
+
             text, report = normalize_manuscript(
                 raw,
                 language=str(work.get("language") or "en"),
-                work=work,
+                work={**work, "_corpus_root": str(corpus_root())},
                 use_llm=args.llm,
             )
         except (FileNotFoundError, KeyError, ValueError) as exc:
@@ -169,6 +171,11 @@ def main(argv: list[str] | None = None) -> int:
         summary = {
             "work_id": args.work,
             "family": report.get("family"),
+            "edition_format": report.get("edition_format"),
+            "edition_hash": report.get("edition_hash"),
+            "content_kind": report.get("content_kind"),
+            "block_count": report.get("block_count"),
+            "ref": report.get("ref"),
             "source_chars": report.get("source_chars"),
             "published_chars": report.get("published_chars"),
             "kept_notes": report.get("kept_notes"),

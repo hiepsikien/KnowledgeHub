@@ -9,6 +9,7 @@ from typing import Any
 
 from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication, work_credits
 from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, notes_from_annotations
+from .edition.ref import build_read_edition
 from .normalize import normalize_manuscript
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
@@ -18,6 +19,26 @@ from .translation.paths import annotations_file
 
 class PublishError(RuntimeError):
     pass
+
+
+def _work_for_normalize(work: dict[str, Any], corpus: Path) -> dict[str, Any]:
+    enriched = dict(work)
+    enriched["_corpus_root"] = str(corpus)
+    return enriched
+
+
+def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
+    edition = report.get("edition") or {}
+    if not edition.get("edition_format"):
+        return
+    payload["edition_format"] = edition["edition_format"]
+    payload["edition_hash"] = edition.get("edition_hash")
+    payload["content_kind"] = edition.get("content_kind")
+    payload["reading_markdown"] = edition.get("reading_markdown")
+    payload["blocks"] = edition.get("blocks")
+    payload["split_hints"] = edition.get("split_hints")
+    if edition.get("reading_markdown"):
+        payload["raw_text"] = edition["reading_markdown"]
 
 
 def _payload(work: dict[str, Any], text: str, *, corpus: Path | None = None) -> dict[str, Any]:
@@ -98,7 +119,8 @@ def prepare_publish(
         text, report = normalize_manuscript(
             raw,
             language=str(work.get("language") or "en"),
-            work=work,
+            work=_work_for_normalize(work, root),
+            use_llm=False,
         )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
@@ -106,6 +128,7 @@ def prepare_publish(
     if not footnote_glossary:
         _, footnote_glossary = glossary_from_footnotes(raw)
     payload = _payload(work, reading_text, corpus=root)
+    _attach_edition(payload, report)
     if footnote_glossary:
         payload["glossary"] = footnote_glossary
     report = dict(report)
@@ -140,7 +163,15 @@ def _prepare_translation_publish(
         raise PublishError(str(exc)) from exc
     except (FileNotFoundError, ValueError) as exc:
         raise PublishError(str(exc)) from exc
+    edition, ref_report = build_read_edition(
+        text,
+        family="plain",
+        language=str(work.get("language") or "vi"),
+        work_id=str(work.get("id") or ""),
+    )
+    text = str(edition.get("reading_markdown") or text)
     payload = _payload(work, text, corpus=root)
+    _attach_edition(payload, {"edition": edition, "ref": ref_report})
     payload["hub_content_hash"] = meta["content_hash"]
     payload["language"] = work.get("language") or "vi"
     glossary: list[dict[str, Any]] = []
@@ -261,7 +292,7 @@ def preview_normalized(
         text, report = normalize_manuscript(
             raw,
             language=str(work.get("language") or "en"),
-            work=work,
+            work=_work_for_normalize(work, root),
         )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc

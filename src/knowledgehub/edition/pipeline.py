@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import re
+from pathlib import Path
 from typing import Any
 
+from .cache import load_cached_edition, save_cached_edition
 from .classify import classify_unsure_spans
 from .detect import AOZORA_NOTE, AOZORA_RUBY, collect_spans
 from .profile import detect_family
+from .ref import build_read_edition
 from .reflow import unwrap_hard_wrap
 from .spans import DROP_MIN_CONFIDENCE, EditionSpan, apply_drops
 
@@ -53,7 +56,35 @@ def build_edition(
         body = cleaned
     unwrapped = False
     lang = (language or "en").lower()[:2]
-    body, unwrapped = unwrap_hard_wrap(body, family=family, language=lang)
+    work_id = str((work or {}).get("id") or "")
+    raw_hash = str((work or {}).get("content_hash") or "")
+    corpus_hint = (work or {}).get("_corpus_root")
+    edition: dict | None = None
+    ref_report: dict = {}
+    if raw_hash and corpus_hint:
+        edition = load_cached_edition(work_id, raw_hash, corpus=Path(str(corpus_hint)))
+    if edition is None:
+        edition, ref_report = build_read_edition(
+            body,
+            family=family,
+            language=language,
+            use_llm=use_llm,
+            work_id=work_id or None,
+        )
+        body = str(edition.get("reading_markdown") or body)
+        unwrapped = bool(ref_report.get("unwrapped"))
+        if raw_hash and corpus_hint:
+            save_cached_edition(
+                work_id,
+                raw_hash,
+                edition,
+                corpus=Path(str(corpus_hint)),
+                report=ref_report,
+            )
+    else:
+        body = str(edition.get("reading_markdown") or body)
+        unwrapped = True
+        ref_report = {"ref_mode": "cache", "block_count": len(edition.get("blocks") or [])}
     body = re.sub(r"\n{3,}", "\n\n", body).strip()
     if not body:
         raise ValueError("build_edition produced empty text")
@@ -68,6 +99,12 @@ def build_edition(
         "source_chars": source_chars,
         "published_chars": len(body),
         "family": family,
+        "edition_format": (edition or {}).get("edition_format"),
+        "edition_hash": (edition or {}).get("edition_hash"),
+        "content_kind": (edition or {}).get("content_kind"),
+        "block_count": len((edition or {}).get("blocks") or []),
+        "ref": ref_report,
+        "edition": edition,
         "gutenberg": pg_wrapped,
         "aozora": flags["aozora"],
         "dropped_electronic_note": flags["dropped_electronic_note"],
