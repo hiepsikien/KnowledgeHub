@@ -627,7 +627,19 @@ mark.ann-context {
   overflow: auto;
   padding-right: 8px;
 }
-.re-block { margin-bottom: 0.85em; }
+.re-block {
+  margin-bottom: 0.85em;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.re-block:hover { background: rgba(0, 0, 0, 0.03); }
+.re-block.on {
+  background: rgba(180, 140, 60, 0.12);
+  outline: 1px solid rgba(180, 140, 60, 0.35);
+}
 .re-heading { font-family: var(--serif); margin: 1.2em 0 0.4em; }
 .re-blockquote { margin: 0.8em 0; padding-left: 1em; border-left: 3px solid var(--line); color: #4a433c; }
 .re-dialogue .re-speaker { font-variant: small-caps; }

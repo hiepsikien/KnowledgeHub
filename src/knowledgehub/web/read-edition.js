@@ -2,7 +2,13 @@
 
 (function () {
   const $ = (id) => document.getElementById(id);
-  const state = { workId: null, chapterId: null, manifest: null, chapter: null };
+  const state = {
+    workId: null,
+    chapterId: null,
+    manifest: null,
+    chapter: null,
+    editIndex: null,
+  };
 
   async function api(path, opts = {}) {
     const res = await fetch(path, {
@@ -86,10 +92,56 @@
     return `<p class="re-paragraph">${inner}</p>`;
   }
 
+  function setEditJson(value) {
+    const ta = $("re-edit-json");
+    if (ta) ta.value = value;
+  }
+
+  function fillEditorForSelection() {
+    const blocks = state.chapter?.blocks || [];
+    if (state.editIndex == null || state.editIndex < 0 || state.editIndex >= blocks.length) {
+      setEditJson(JSON.stringify(blocks, null, 2));
+      const label = $("re-edit-label");
+      if (label) label.textContent = "Chỉnh sửa blocks (JSON) — cả chương";
+      return;
+    }
+    setEditJson(JSON.stringify(blocks[state.editIndex], null, 2));
+    const label = $("re-edit-label");
+    if (label) {
+      label.textContent = `Chỉnh sửa block #${state.editIndex} (${blocks[state.editIndex]?.type || "?"})`;
+    }
+  }
+
+  function highlightSelectedBlock() {
+    const box = $("re-body");
+    if (!box) return;
+    box.querySelectorAll(".re-block.on").forEach((el) => el.classList.remove("on"));
+    if (state.editIndex == null) return;
+    const el = box.querySelector(`.re-block[data-index="${state.editIndex}"]`);
+    if (el) {
+      el.classList.add("on");
+      el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }
+
   function renderChapterBody(chapter) {
     const box = $("re-body");
     if (!box) return;
-    box.innerHTML = (chapter.blocks || []).map((b, i) => `<div class="re-block" data-index="${i}">${renderBlock(b)}</div>`).join("");
+    box.innerHTML = (chapter.blocks || [])
+      .map(
+        (b, i) =>
+          `<div class="re-block${state.editIndex === i ? " on" : ""}" data-index="${i}" tabindex="0" role="button">${renderBlock(b)}</div>`,
+      )
+      .join("");
+    box.onclick = (e) => {
+      const hit = e.target.closest(".re-block[data-index]");
+      if (!hit) return;
+      state.editIndex = Number(hit.dataset.index);
+      highlightSelectedBlock();
+      fillEditorForSelection();
+      const details = document.querySelector("details.re-edit");
+      if (details) details.open = true;
+    };
   }
 
   function qaBadge(row) {
@@ -120,7 +172,9 @@
   async function selectChapter(chapterId) {
     if (!state.workId) return;
     state.chapterId = chapterId;
-    $("re-detail").textContent = "Đang tải…";
+    state.editIndex = null;
+    const meta = $("re-detail-meta");
+    if (meta) meta.textContent = "Đang tải…";
     try {
       const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`);
       state.chapter = chapter;
@@ -135,9 +189,10 @@
         $("re-qa-panel").innerHTML = `<p><strong>QA:</strong> ${qa.passed ? "pass" : "fail"} · ${escapeHtml(qa.summary_vi || "")}</p>` +
           (llm.scores ? `<p class="muted">overall ${llm.scores.overall}/10 · structure ${llm.scores.block_structure}/10</p>` : "");
       }
-      $("re-edit-json").value = JSON.stringify(chapter.blocks, null, 2);
+      fillEditorForSelection();
     } catch (err) {
-      $("re-detail").innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
+      if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
+      toast(err.message);
     }
   }
 
@@ -255,25 +310,63 @@
     });
     $("re-save-blocks")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;
-      let blocks;
+      let parsed;
       try {
-        blocks = JSON.parse($("re-edit-json").value || "[]");
+        parsed = JSON.parse($("re-edit-json").value || "null");
       } catch (err) {
         toast("JSON không hợp lệ");
         return;
       }
-      const patches = blocks.map((block, index) => {
-        const orig = (state.chapter?.blocks || [])[index] || {};
-        if (JSON.stringify(orig) === JSON.stringify(block)) return null;
-        return { block_index: index, type: block.type, text: block.text, level: block.level, speaker: block.speaker };
-      }).filter(Boolean);
+      const origBlocks = state.chapter?.blocks || [];
+      let patches = [];
+      if (Array.isArray(parsed)) {
+        patches = parsed
+          .map((block, index) => {
+            const orig = origBlocks[index] || {};
+            if (JSON.stringify(orig) === JSON.stringify(block)) return null;
+            return {
+              block_index: index,
+              type: block.type,
+              text: block.text,
+              level: block.level,
+              speaker: block.speaker,
+            };
+          })
+          .filter(Boolean);
+      } else if (parsed && typeof parsed === "object" && state.editIndex != null) {
+        const orig = origBlocks[state.editIndex] || {};
+        if (JSON.stringify(orig) !== JSON.stringify(parsed)) {
+          patches = [
+            {
+              block_index: state.editIndex,
+              type: parsed.type,
+              text: parsed.text,
+              level: parsed.level,
+              speaker: parsed.speaker,
+            },
+          ];
+        }
+      } else {
+        toast("Chọn một block hoặc dán mảng blocks JSON");
+        return;
+      }
+      if (!patches.length) {
+        toast("Không có thay đổi");
+        return;
+      }
       try {
         await api(
           `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}`,
           { method: "PATCH", body: { block_patches: patches } },
         );
         toast("Đã lưu chỉnh sửa");
+        const keepIndex = state.editIndex;
         await selectChapter(state.chapterId);
+        if (keepIndex != null) {
+          state.editIndex = keepIndex;
+          highlightSelectedBlock();
+          fillEditorForSelection();
+        }
       } catch (err) {
         toast(err.message);
       }
