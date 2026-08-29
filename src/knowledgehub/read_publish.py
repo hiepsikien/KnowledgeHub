@@ -37,6 +37,8 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     payload["reading_markdown"] = edition.get("reading_markdown")
     payload["blocks"] = edition.get("blocks")
     payload["split_hints"] = edition.get("split_hints")
+    if edition.get("quotation_profile"):
+        payload["quotation_profile"] = edition["quotation_profile"]
     if edition.get("reading_markdown"):
         payload["raw_text"] = edition["reading_markdown"]
 

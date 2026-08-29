@@ -29,7 +29,24 @@ Hub produces REF/1 at publish time; Read consumes it for split, render, and TTS.
 | `reading_markdown` | yes with REF | Paragraphs separated by `\n\n`; headings plain |
 | `blocks` | yes with REF | Canonical block array |
 | `split_hints` | optional | Heading indices for chapter split |
+| `quotation_profile` | optional | Rule-based inline marker counts |
 | `raw_text` | yes | Same as `reading_markdown` when REF present (legacy) |
+
+## Inline spans (rule detector — zero LLM cost)
+
+Paragraph blocks may include `spans[]` with offsets into `text`:
+
+| `style` | Example | Notes |
+|---------|---------|-------|
+| `footnote` | `[178]`, `[168]` | Numeric bracket markers only |
+| `bracket_note` | `[The Cambridge Modern History, I, 23-24, …]` | Long editorial note in brackets |
+| `paren_cite` | `(Politics)`, `(foedus aequum)`, `(as X also says)` | Short citation / aside |
+| `paren_quote` | long `(…quoted phrase…)` | Parenthetical quote |
+| `paren_aside` | other `(...)` | Fallback |
+| `quote` | `"..."`, `「…」` | Inline quotation marks |
+| `em` | `_italic_` | Gutenberg emphasis |
+
+`quotation_profile` summarizes counts per edition. Parentheses nested inside `[bracket notes]` are not re-parsed.
 
 ## Line labeling (Hub internal)
 

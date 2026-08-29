@@ -59,8 +59,9 @@ def build_edition_document(
     *,
     language: str,
     source_family: str,
+    quotation_profile: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    return {
+    doc = {
         "edition_format": REF_FORMAT,
         "edition_hash": edition_hash(blocks),
         "content_kind": detect_content_kind(blocks, family=source_family),
@@ -70,6 +71,9 @@ def build_edition_document(
         "reading_markdown": blocks_to_markdown(blocks),
         "split_hints": split_hints_from_blocks(blocks),
     }
+    if quotation_profile:
+        doc["quotation_profile"] = quotation_profile
+    return doc
 
 
 CHAPTER_ONLY = re.compile(r"^CHAPTER\s+[IVXLC\d]+\.?\s*$", re.I)
