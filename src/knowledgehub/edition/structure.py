@@ -5,7 +5,8 @@ from __future__ import annotations
 import re
 from typing import Any
 
-SPEAKER_CUE = re.compile(r"^[A-Z][A-Z\s,\.'-]{0,40}\.$")
+SPEAKER_CUE = re.compile(r"^[A-Z][A-Z\s,\.'-]{2,40}\.$")
+SPEAKER_CUE_EXCLUDE = frozenset({"TO", "BY", "OF", "IN", "ON", "AT", "OR", "AN", "AS", "BE", "NO", "SO", "IF", "UP"})
 STAGE_STRUCTURAL = re.compile(
     r"^(?:ACT|SCENE|CHAPTER|CHAP\.?|BOOK|PART|VOLUME|INTRODUCTION|PROLOGUE)\b",
     re.I,
@@ -62,7 +63,13 @@ def looks_like_play(text: str) -> bool:
 
 def is_speaker_cue(line: str) -> bool:
     s = line.strip()
-    if STAGE_STRUCTURAL.match(s):
+    if STAGE_STRUCTURAL.match(s) or CONTENTS_HEADER.match(s):
+        return False
+    if re.match(r"^(?:PREFACE|INTRODUCTION|DEDICATION|CONTENTS|LETTER|FOREWORD)\.?\s*$", s, re.I):
+        return False
+    if s.rstrip(".") in SPEAKER_CUE_EXCLUDE or s in SPEAKER_CUE_EXCLUDE:
+        return False
+    if re.fullmatch(r"[MDCLXVI.\s]+", s.rstrip(".")):
         return False
     return bool(SPEAKER_CUE.match(s))
 
@@ -119,12 +126,19 @@ def poetry_run_score(lines: list[str]) -> float:
 
 
 def is_indented_verse(*, indent: int, line: str) -> bool:
+    """PG hard-wrap indent — not verse when the line reads like wrapped prose."""
     s = line.strip()
-    if indent >= 2 and len(s) < 120:
-        if s.endswith(".") and len(s) > 60:
-            return False
+    if indent < 2 or len(s) >= 120:
+        return False
+    if s.endswith(".") and len(s) > 60:
+        return False
+    if s.endswith((",", ";")) and len(s) < 95:
         return True
-    return False
+    if len(s.split()) >= 8:
+        return False
+    if len(s) >= 40 and re.search(r"[,;]", s) and not re.search(r"\[\d+\]$", s):
+        return False
+    return indent >= 4 and len(s) < 72
 
 
 def group_dramatis_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -174,6 +188,54 @@ def group_stanzas(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
             lines.append(str(nxt.get("text") or ""))
             i += 1
         out.append({"type": "stanza", "text": "\n".join(lines), "lines": lines})
+    return out
+
+
+def merge_adjacent_metadata(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Join consecutive metadata blocks (split TOC runs)."""
+    if not blocks:
+        return blocks
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "metadata":
+            out.append(block)
+            i += 1
+            continue
+        parts = [str(block.get("text") or "")]
+        i += 1
+        while i < len(blocks) and blocks[i].get("type") == "metadata":
+            parts.append(str(blocks[i].get("text") or ""))
+            i += 1
+        out.append({"type": "metadata", "text": "\n".join(parts)})
+    return out
+
+
+def merge_adjacent_blockquotes(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Join consecutive blockquotes from the same quoted speech."""
+    if not blocks:
+        return blocks
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "blockquote":
+            out.append(block)
+            i += 1
+            continue
+        parts = [str(block.get("text") or "")]
+        i += 1
+        while i < len(blocks) and blocks[i].get("type") == "blockquote":
+            parts.append(str(blocks[i].get("text") or ""))
+            i += 1
+        merged = parts[0]
+        for part in parts[1:]:
+            if merged.rstrip().endswith("-") and part[:1].islower():
+                merged = merged.rstrip()[:-1] + part.lstrip()
+            else:
+                merged = merged.rstrip() + " " + part.lstrip()
+        out.append({"type": "blockquote", "text": merged})
     return out
 
 

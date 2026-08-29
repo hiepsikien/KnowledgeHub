@@ -82,9 +82,13 @@ def _continues_quoted_line(prev: str, nxt: str) -> bool:
         return False
     if COMPLETE_QUOTE.search(p):
         return False
-    if SENTENCE_END.search(p) and not p.endswith((",", ";", ":", "--")):
+    if SENTENCE_END.search(p) and not p.endswith((",", ";", ":", "--", "—")):
         return False
-    return True
+    if n[0].islower():
+        return True
+    if p.endswith((",", ";", ":", "--", "—")):
+        return True
+    return False
 
 
 def _role_for_line(
@@ -125,7 +129,13 @@ def _role_for_line(
         return "verse_line", 0, 0.87
     if family == "plain" and is_vi_verse_line(line):
         return "verse_line", 0, 0.85
-    if QUOTE_LINE.match(line.strip()) and len(line.strip()) < 220:
+    stripped = line.strip()
+    if (
+        not play_mode
+        and QUOTE_LINE.match(stripped)
+        and len(stripped) < 120
+        and stripped.count(" ") <= 16
+    ):
         return "verse_line", 0, 0.86
     return "prose", 0, 0.92
 
@@ -238,18 +248,56 @@ class LineLabel:
         }
 
 
+def _relabel_long_quoted_prose(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
+    if play_mode:
+        return
+    for label in labels:
+        if label.role != "verse_line":
+            continue
+        s = lines[label.index].text.strip()
+        if len(s) >= 80 or s.count(" ") >= 14:
+            label.role = "prose"
+            label.confidence = 0.88
+
+
 def _relabel_quote_continuations(lines: list[TextLine], labels: list[LineLabel]) -> None:
     for i in range(1, len(labels)):
-        if labels[i].role != "prose":
+        if labels[i].role not in {"prose", "verse_line"}:
             continue
         prev = lines[i - 1].text
         curr = lines[i].text
-        if labels[i - 1].role == "verse_line" and _continues_quoted_line(prev, curr):
-            labels[i].role = "verse_line"
+        if labels[i - 1].role in {"verse_line", "prose"} and _continues_quoted_line(prev, curr):
+            labels[i].role = labels[i - 1].role
             labels[i].confidence = 0.84
+            labels[i - 1].join_next = True
         elif labels[i - 1].role == "verse_line" and not SENTENCE_END.search(prev.strip()):
             labels[i].role = "verse_line"
             labels[i].confidence = 0.82
+            labels[i - 1].join_next = True
+
+
+def _relabel_indented_poetry_runs(lines: list[TextLine], labels: list[LineLabel], *, family: str) -> None:
+    """PG poetry with leading indent (Whitman) — not wrapped prose."""
+    if family != "gutenberg":
+        return
+    i = 0
+    while i < len(labels):
+        if lines[i].indent < 2 or labels[i].role != "prose":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels):
+            if lines[j].indent < 2 or labels[j].role != "prose":
+                break
+            if lines[j].blank_before:
+                break
+            j += 1
+        run = [lines[k].text for k in range(i, j)]
+        if len(run) >= 3 and poetry_run_score(run) >= 0.45:
+            for k in range(i, j):
+                labels[k].role = "verse_line"
+                labels[k].confidence = 0.84
+        i = j if j > i else i + 1
 
 
 def _relabel_heroic_verse_runs(lines: list[TextLine], labels: list[LineLabel], *, family: str) -> None:
@@ -303,7 +351,9 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", sourc
             LineLabel(index=row.index, role=role, level=level, confidence=confidence)
         )
     _relabel_play_dialogue(lines, labels, play_mode=play_mode)
+    _relabel_long_quoted_prose(lines, labels, play_mode=play_mode)
     _relabel_quote_continuations(lines, labels)
+    _relabel_indented_poetry_runs(lines, labels, family=family)
     _relabel_heroic_verse_runs(lines, labels, family=family)
     merge_split_chapter_titles(lines, labels, family=family)
     relabel_toc_runs(lines, labels, family=family)

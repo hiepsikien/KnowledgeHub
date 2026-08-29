@@ -92,7 +92,7 @@ def run_qa(manifest: list[dict], corpus_dir: Path, *, use_llm: bool = True) -> d
     avg_overall = sum(overalls) / len(overalls) if overalls else None
     return {
         "corpus": corpus_dir.name,
-        "parser_version": "v1.6",
+        "parser_version": "v1.7",
         "model": model,
         "samples": len(results),
         "rule_passed": rule_pass,

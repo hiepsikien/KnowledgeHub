@@ -212,3 +212,24 @@ CI: `.github/workflows/ref-corpus.yml` runs corpus tests + rule QA on each PR.
 - **Dramatis Personæ** — cast list merged into one `metadata` block before dialogue parsing.
 - **Corpus markers** — PG fixtures use body-text markers (`Call me Ishmael`, `It is a truth…`) not TOC `CHAPTER I`.
 - **LLM QA prompt** — documents that TOC→`metadata` and `apparatus_dropped[]` are intentional.
+
+## REF/1 v1.7 — QA round 2 (TOC, PG prose, speaker cues)
+
+| Group | Change |
+|-------|--------|
+| **TOC** | `CHAPTER I.` trailing period; title/em-dash wrap lines; Letter/Chapter N + VI roman numerals; stop TOC at first body paragraph; merge metadata runs |
+| **PG prose** | Indented hard-wrap (Smith) → `paragraph` not `stanza`; Whitman comma-ended indent → `verse_line` |
+| **Speaker cues** | Exclude `CONTENTS`, `PREFACE`, roman dates (`M. DCC. LXV.`), short words (`TO`, `BY`) |
+| **Scholastic/PG notes** | `NOTE TO THIS ELECTRONIC EDITION` → `metadata`; `Prologue, and…` mid-sentence not heading |
+| **Quotes** | Long quoted prose → `paragraph`; join quoted continuations; merge adjacent `blockquote` |
+
+Five rule groups (not per-sample hacks):
+
+| Group | Change |
+|-------|--------|
+| **Scholastic** | `Objection` / `Obj.` / `_On the contrary_` / `_I answer that_` → `paragraph`, not `heading` L3 |
+| **Drama** | `ACT` L1 and `SCENE` L2 stay separate; dialogue lines join on comma / bracket-cite wrap |
+| **Join/reflow** | Title abbrevs (`Dr.`, `Heb.`) don't end sentences; incomplete `[cite` wraps join; PG wrap joins across sentences when no blank line |
+| **Verse** | Poetry runs (footnote/comma lines, blank-separated) → `verse_line` → `stanza` |
+| **TOC** | `CONTENTS` blocks → `metadata`; double-space mid-line no longer triggers false TOC (Poe fix) |
+| **Inline** | `(1)` list markers; full `paren_aside` spans; QA digest shows complete span text |

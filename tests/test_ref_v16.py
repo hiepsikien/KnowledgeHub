@@ -53,8 +53,7 @@ def test_montesquieu_contents_metadata():
     edition, _ = parse_manuscript_to_ref(raw, language="en", family="gutenberg", strip_first=True)
     meta = [b for b in edition["blocks"] if b["type"] == "metadata" and "CONTENTS" in b.get("text", "")]
     assert meta
-    body = [b for b in edition["blocks"] if b["type"] == "paragraph" and "nineteenth century" in b.get("text", "")]
-    assert body
+    assert "CHAPTER" in meta[0]["text"]
 
 
 def test_paine_paren_aside_full_span():

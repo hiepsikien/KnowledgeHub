@@ -9,7 +9,7 @@ from .llm_blocks import relabel_uncertain_segments
 from .merge_blocks import labels_to_blocks
 from .reflow import unwrap_hard_wrap
 from .serialize import build_edition_document, grotius_latin_to_blockquote
-from .structure import group_dramatis_blocks, group_stanzas, merge_adjacent_headings
+from .structure import group_dramatis_blocks, group_stanzas, merge_adjacent_blockquotes, merge_adjacent_headings, merge_adjacent_metadata
 
 
 def build_read_edition(
@@ -61,6 +61,8 @@ def build_read_edition(
     if work_id and work_id.startswith("grotius--"):
         blocks = grotius_latin_to_blockquote(blocks)
     blocks = merge_adjacent_headings(blocks)
+    blocks = merge_adjacent_metadata(blocks)
+    blocks = merge_adjacent_blockquotes(blocks)
     blocks = group_dramatis_blocks(blocks)
     blocks = group_stanzas(blocks)
     blocks, quotation_profile = annotate_blocks(blocks)

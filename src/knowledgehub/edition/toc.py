@@ -13,13 +13,20 @@ IMPRINT_PUBLISHER = re.compile(
 )
 
 CHAPTER_HEADING = re.compile(
-    r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+(?:[.:]\s|\.\s|\s+[A-Z])",
+    r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+(?:\.\s*$|[.:]\s|\.\s|\s+[A-Z])",
     re.I,
 )
 BOOK_PART_HEADING = re.compile(
     r"^(?:BOOK|PART|VOLUME)\s+[IVXLC\d]+(?:[.:]\s|\.\s|\s+[A-Z])",
     re.I,
 )
+LETTER_CHAPTER_ENTRY = re.compile(
+    r"^(?:Letter|LETTER|Chapter|CHAPTER)\s+\d+\.?\s*$",
+    re.I,
+)
+ROMAN_ONLY = re.compile(r"^(?:[IVXLCDM]+|\d{1,3})$")
+VI_TOC_HEADER = re.compile(r"^Mục\s+lục\b", re.I)
+ELECTRONIC_NOTE = re.compile(r"^NOTE TO THIS ELECTRONIC EDITION\s*$", re.I)
 
 
 def is_chapter_heading_line(line: str) -> bool:
@@ -27,6 +34,20 @@ def is_chapter_heading_line(line: str) -> bool:
     if not s:
         return False
     return bool(CHAPTER_HEADING.match(s) or BOOK_PART_HEADING.match(s))
+
+
+def is_chapter_title_line(line: str) -> bool:
+    """Short title line following a CHAPTER row in a contents list."""
+    s = line.strip()
+    if not s or len(s) > 120 or is_chapter_heading_line(s):
+        return False
+    if re.search(r"\.{2,}\s*\d{1,4}$", s):
+        return True
+    if "—" in s or "–" in s or " - " in s:
+        return True
+    if len(s) < 90 and not re.search(r"[.!?]\s", s) and s.count(".") <= 1:
+        return True
+    return False
 
 
 def is_toc_entry_line(line: str) -> bool:
@@ -39,6 +60,10 @@ def is_toc_entry_line(line: str) -> bool:
     if IMPRINT_PUBLISHER.match(s):
         return False
     if is_chapter_heading_line(s):
+        return True
+    if LETTER_CHAPTER_ENTRY.match(s):
+        return True
+    if ROMAN_ONLY.match(s) and len(s) <= 8:
         return True
     if re.match(r"^(?:BOOK|PART|VOLUME)\s+[IVXLC\d]+\b", s, re.I):
         return True
@@ -53,14 +78,44 @@ def is_toc_entry_line(line: str) -> bool:
     return False
 
 
+def _toc_run_should_stop_at_chapter_body(lines: list[TextLine], j: int) -> bool:
+    """True when CHAPTER at j starts real body (not another TOC row)."""
+    raw = lines[j].text.strip()
+    if not is_chapter_heading_line(raw):
+        return False
+    k = j + 1
+    while k < len(lines) and not lines[k].text.strip():
+        k += 1
+    if k >= len(lines):
+        return False
+    nxt = lines[k].text.strip()
+    if len(nxt) < 55 or is_chapter_heading_line(nxt) or is_toc_entry_line(nxt):
+        return False
+    if is_chapter_title_line(nxt) or _is_toc_wrap_line(nxt):
+        return False
+    return bool(re.search(r"\bthe\b", nxt, re.I))
+
+
+def _is_toc_wrap_line(line: str) -> bool:
+    s = line.strip()
+    if not s or is_chapter_heading_line(s) or len(s) > 100:
+        return False
+    return is_chapter_title_line(s) or (("—" in s or "–" in s) and len(s) < 100)
+
+
 def is_toc_continuation(prev: str, nxt: str) -> bool:
     p = prev.strip()
     n = nxt.strip()
     if not p or not n:
         return False
+    if is_chapter_heading_line(p) and is_chapter_title_line(n):
+        return True
     if is_chapter_heading_line(n) or re.match(r"^(?:BOOK|PART|VOLUME)\s+[IVXLC\d]+\b", n, re.I):
         return False
     if p.endswith((".", "!", "?")) and not p.endswith("--"):
+        if "—" in p or "–" in p:
+            if len(n) < 100 and not is_chapter_heading_line(n):
+                return True
         return False
     if n[0].islower():
         return True
@@ -79,13 +134,52 @@ def _join_toc_lines(lines: list[TextLine], labels: list, start: int, end: int) -
         labels[k].join_next = pos < len(indices) - 1
 
 
+def _consume_toc_run(lines: list[TextLine], labels: list, start: int) -> int:
+    """Return index after a TOC run starting at start (inclusive)."""
+    j = start
+    toc_count = 0
+    while j < len(labels):
+        raw = lines[j].text.strip()
+        if not raw:
+            j += 1
+            continue
+        if is_toc_entry_line(raw) or (labels[j].role == "heading" and is_chapter_heading_line(raw)):
+            if toc_count and _toc_run_should_stop_at_chapter_body(lines, j):
+                break
+            toc_count += 1
+            j += 1
+            continue
+        if toc_count and _is_toc_wrap_line(raw):
+            toc_count += 1
+            j += 1
+            continue
+        if toc_count and is_toc_continuation(lines[j - 1].text, raw):
+            toc_count += 1
+            j += 1
+            continue
+        if toc_count and is_chapter_heading_line(raw):
+            toc_count += 1
+            j += 1
+            if j < len(labels):
+                nxt = lines[j].text.strip()
+                if nxt and is_chapter_title_line(nxt):
+                    toc_count += 1
+                    j += 1
+            continue
+        break
+    if toc_count >= 3:
+        _join_toc_lines(lines, labels, start, j)
+        return j
+    return start + 1
+
+
 def relabel_toc_runs(lines: list[TextLine], labels: list, *, family: str) -> None:
-    if family != "gutenberg":
+    if family not in {"gutenberg", "plain", "scholastic"}:
         return
     i = 0
     while i < len(labels):
         line = lines[i].text.strip()
-        if CONTENTS_HEADER.match(line):
+        if CONTENTS_HEADER.match(line) or VI_TOC_HEADER.match(line):
             j = i + 1
             while j < len(labels):
                 raw = lines[j].text.strip()
@@ -93,9 +187,18 @@ def relabel_toc_runs(lines: list[TextLine], labels: list, *, family: str) -> Non
                     j += 1
                     continue
                 if is_toc_entry_line(raw) or is_chapter_heading_line(raw):
+                    if j > i + 1 and _toc_run_should_stop_at_chapter_body(lines, j):
+                        break
+                    j += 1
+                    if j < len(labels):
+                        nxt = lines[j].text.strip()
+                        if nxt and is_chapter_title_line(nxt):
+                            j += 1
+                    continue
+                if is_toc_continuation(lines[j - 1].text, raw):
                     j += 1
                     continue
-                if re.match(r"^\*[^*]+\*$", raw) or re.match(r"^CHAPTER\s+[IVXLC\d]+", raw, re.I):
+                if _is_toc_wrap_line(raw):
                     j += 1
                     continue
                 break
@@ -103,32 +206,30 @@ def relabel_toc_runs(lines: list[TextLine], labels: list, *, family: str) -> Non
                 _join_toc_lines(lines, labels, i, j)
                 i = j
                 continue
+        if ELECTRONIC_NOTE.match(line):
+            j = i + 1
+            while j < len(labels):
+                raw = lines[j].text.strip()
+                if not raw:
+                    j += 1
+                    continue
+                if is_hard_structural_line(raw):
+                    break
+                j += 1
+            _join_toc_lines(lines, labels, i, j)
+            i = j
+            continue
         if not line or not (is_toc_entry_line(line) or (labels[i].role == "heading" and is_chapter_heading_line(line))):
             i += 1
             continue
-        j = i
-        toc_count = 0
-        while j < len(labels):
-            raw = lines[j].text.strip()
-            if not raw:
-                j += 1
-                continue
-            if is_toc_entry_line(raw) or (
-                labels[j].role == "heading" and is_chapter_heading_line(raw)
-            ):
-                toc_count += 1
-                j += 1
-                continue
-            if toc_count and is_toc_continuation(lines[j - 1].text, raw):
-                toc_count += 1
-                j += 1
-                continue
-            break
-        if toc_count >= 3:
-            _join_toc_lines(lines, labels, i, j)
-            i = j
-        else:
-            i += 1
+        nxt_i = _consume_toc_run(lines, labels, i)
+        i = nxt_i if nxt_i > i else i + 1
+
+
+def is_hard_structural_line(line: str) -> bool:
+    from .reflow import is_hard_structural
+
+    return is_hard_structural(line.strip(), family="gutenberg")
 
 
 def merge_split_chapter_titles(lines: list[TextLine], labels: list, *, family: str) -> None:
