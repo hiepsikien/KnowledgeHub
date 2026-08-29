@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from knowledgehub.edition.cache import load_cached_edition, save_cached_edition
 from knowledgehub.edition.label_rules import LineLabel
 from knowledgehub.edition.lines import TextLine
 from knowledgehub.edition.merge_blocks import labels_to_blocks
-from knowledgehub.edition.ref import build_read_edition
+from knowledgehub.edition.read_edition import ReadEditionError
 from knowledgehub.edition.ref_schema import REF_PARSER_VERSION
+from knowledgehub.read_edition_service import get_chapter, patch_chapter, run_qa
 
 
 def test_cache_miss_when_parser_version_stale(tmp_path):
@@ -97,3 +100,33 @@ def test_read_edition_package_rebuilds_on_parser_version(tmp_path, monkeypatch):
     assert second["built"] is True
     refreshed = json.loads((package_dir / "manifest.json").read_text(encoding="utf-8"))
     assert refreshed["ref_parser_version"] == REF_PARSER_VERSION
+
+
+def test_cms_helpers_map_read_edition_error_to_value_error(tmp_path, monkeypatch):
+    """CMS routes catch ValueError→400; helpers must not leak ReadEditionError→500."""
+    corpus = tmp_path / "corpus"
+    catalog = corpus / "catalog"
+    catalog.mkdir(parents=True)
+    works = [
+        {
+            "id": "demo--nohash",
+            "title": "No Hash",
+            "author_id": "demo",
+            "language": "en",
+            "license": "public_domain_usa_gutenberg",
+            "content_file": "sources/demo/raw/missing.txt",
+            "rights": {"consumers": {"read": "allowed"}},
+        }
+    ]
+    (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
+    (catalog / "authors.json").write_text(json.dumps([{"id": "demo", "name": "Demo"}]), encoding="utf-8")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+
+    for call in (
+        lambda: get_chapter("demo--nohash", "ch-001", corpus=corpus),
+        lambda: patch_chapter("demo--nohash", "ch-001", block_patches=[], corpus=corpus),
+        lambda: run_qa("demo--nohash", use_llm=False, corpus=corpus),
+    ):
+        with pytest.raises(ValueError, match="missing manuscript|content_hash") as caught:
+            call()
+        assert not isinstance(caught.value, ReadEditionError)
