@@ -12,7 +12,7 @@ from .edition.footnotes import glossary_from_annotations, glossary_from_footnote
 from .normalize import normalize_manuscript
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
-from .translation.assemble import IncompleteTranslation, assemble_finals
+from .translation.assemble import IncompleteTranslation, assemble_finals, chapter_finals
 from .translation.paths import annotations_file
 
 
@@ -152,8 +152,9 @@ def _prepare_translation_publish(
         except json.JSONDecodeError:
             store = {}
         raw_anns = list(store.get("annotations") or [])
-        notes = notes_from_annotations(raw_anns)
-        glossary = glossary_from_annotations(raw_anns)
+        chapter_texts = chapter_finals(source_id)
+        notes = notes_from_annotations(raw_anns, chapter_texts=chapter_texts)
+        glossary = glossary_from_annotations(raw_anns, chapter_texts=chapter_texts)
     if notes:
         payload["notes"] = [
             {

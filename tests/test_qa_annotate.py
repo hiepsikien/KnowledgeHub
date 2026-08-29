@@ -511,6 +511,44 @@ def test_annotate_skips_duplicate_glossary_term(corpus: Path):
     assert any(row.get("title_vi") == "Gordian [17]" for row in store["annotations"])
 
 
+def test_annotate_skips_context_that_restates_a_footnote(corpus: Path):
+    _lock_tight(corpus)
+    chi = corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json"
+    row = json.loads(chi.read_text(encoding="utf-8"))
+    row["final"] = (
+        "Augustine,[12] khi người Israel bị khước từ lối đi vô hại qua lãnh thổ."
+    )
+    chi.write_text(json.dumps(row, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    fresh = json.dumps(
+        {
+            "annotations": [
+                {
+                    "id": "fn-12",
+                    "marker": "[12]",
+                    "kind": "footnote",
+                    "anchor_text": "Augustine",
+                    "body_vi": "Ông lập luận rằng việc từ chối một lối đi vô hại là lý do chính đáng.",
+                },
+                {
+                    "id": "ctx-passage",
+                    "kind": "context",
+                    "anchor_text": "lối đi vô hại",
+                    "title_vi": "Bối cảnh pháp lý",
+                    "body_vi": "Khái niệm transitus innoxius.",
+                },
+            ]
+        }
+    )
+    with patch("knowledgehub.translation.annotate.complete_prompt", return_value=fresh):
+        result = annotate_segment("grotius--freedom_of_the_seas", "I")
+    store = json.loads(
+        (corpus / "translations/grotius--freedom_of_the_seas/annotations.json").read_text()
+    )
+    kinds = [row.get("kind") for row in store["annotations"]]
+    assert kinds == ["footnote"]
+    assert result["added_or_updated"] == 1
+
+
 def test_qa_rejects_out_of_range_score(corpus: Path):
     _lock_tight(corpus)
     qa_json = json.dumps(

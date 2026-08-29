@@ -7,7 +7,12 @@ from typing import Any
 from ..paths import corpus_root
 from ..settings import resolve_models
 from .llm_json import parse_json_object
-from ..edition.footnotes import annotation_kind, annotation_label, glossary_term_key
+from ..edition.footnotes import (
+    annotation_kind,
+    annotation_label,
+    extra_covered_by_footnote,
+    glossary_term_key,
+)
 from .paths import annotations_file, glossary_file
 from .project import load_project
 from .providers import ProviderError, complete_prompt
@@ -43,6 +48,7 @@ Rules:
 - Keep marker exactly like "[1]" when kind is footnote.
 - title_vi for footnotes: "{{anchor}} {{marker}}" e.g. "Seneca [4]" — unique per note.
 - glossary: only the first time a locked term appears in this book. Do not emit another glossary row for a term already defined in an earlier chapter.
+- Do not add kind=context or glossary for a phrase that already has an inline [n] in the same sentence, or that merely restates a footnote already written for this chapter.
 - anchor_text: a short exact substring from the Vietnamese text near the marker (for tap-to-expand UI).
 
 Return ONLY JSON:
@@ -122,18 +128,30 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
         for item in existing
         if annotation_kind(item) == "glossary" and glossary_term_key(item)
     }
-    added = 0
+    incoming: list[dict[str, Any]] = []
     for item in new_items:
         if not item.get("id"):
             raise ProviderError(f"Annotation missing id: {item!r}")
         item["kind"] = annotation_kind(item)
+        item["chapter"] = str(chapter)
+        incoming.append(item)
+    chapter_footnotes = [
+        item
+        for item in [*existing, *incoming]
+        if annotation_kind(item) == "footnote"
+    ]
+    added = 0
+    for item in incoming:
         if item["kind"] == "glossary":
             key = glossary_term_key(item)
             if key and key in seen_glossary:
                 continue
             if key:
                 seen_glossary.add(key)
-        item["chapter"] = str(chapter)
+        if item["kind"] != "footnote" and extra_covered_by_footnote(
+            item, chapter_footnotes, translation_vi
+        ):
+            continue
         item["segment_id"] = segment_id
         item["generated_at"] = _now()
         if item["kind"] == "footnote":

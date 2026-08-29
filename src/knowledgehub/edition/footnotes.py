@@ -116,10 +116,15 @@ def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
     return body, entries
 
 
-def notes_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def notes_from_annotations(
+    items: list[dict[str, Any]],
+    *,
+    chapter_texts: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     """Canonical reader notes: unique labels, one glossary term, marker-only match keys."""
     notes: list[dict[str, Any]] = []
     seen_glossary: set[str] = set()
+    footnotes = [item for item in items if annotation_kind(item) == "footnote"]
     for item in items:
         body = str(item.get("body_vi") or item.get("body") or "").strip()
         if not body:
@@ -134,6 +139,13 @@ def notes_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
         label = annotation_label({**item, "kind": kind, "marker": marker})
         if not label:
             continue
+        if kind != "footnote":
+            chapter = str(item.get("chapter") or "")
+            text = ""
+            if chapter_texts:
+                text = chapter_texts.get(chapter) or chapter_texts.get(chapter.upper()) or ""
+            if extra_covered_by_footnote(item, footnotes, text):
+                continue
         if kind == "glossary":
             key = glossary_term_key({"anchor_text": anchor or label})
             if not key or key in seen_glossary:
@@ -160,6 +172,70 @@ def notes_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return notes
 
 
+def extra_covered_by_footnote(
+    extra: dict[str, Any],
+    footnotes: list[dict[str, Any]],
+    chapter_text: str = "",
+) -> bool:
+    """True when a Hub extra restates a book footnote already on that phrase."""
+    anchor = str(extra.get("anchor_text") or extra.get("anchor") or extra.get("title_vi") or "").strip()
+    if len(anchor) < 4:
+        return False
+    key = re.sub(r"\s+", " ", anchor).casefold()
+    if len(key) < 6:
+        return False
+    chapter = str(extra.get("chapter") or "").strip().upper()
+    covering = _markers_covering_anchor(chapter_text, anchor) if chapter_text else set()
+    for item in footnotes:
+        if chapter and str(item.get("chapter") or "").strip().upper() not in {"", chapter}:
+            continue
+        title = _folded_blob(
+            item.get("anchor_text") or item.get("anchor"),
+            item.get("title_vi") or item.get("label"),
+        )
+        if key in title:
+            return True
+        marker = str(item.get("marker") or "").strip()
+        if marker and marker in covering:
+            body = _folded_blob(item.get("body_vi") or item.get("body"))
+            if key in body:
+                return True
+    return False
+
+
+def _folded_blob(*parts: Any) -> str:
+    return re.sub(r"\s+", " ", " ".join(str(part or "") for part in parts)).casefold()
+
+
+def _sentence_spans(text: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    start = 0
+    for match in re.finditer(r"[.!?\n]+", text):
+        if match.start() > start:
+            spans.append((start, match.start()))
+        start = match.end()
+    if start < len(text):
+        spans.append((start, len(text)))
+    return spans
+
+
+def _markers_covering_anchor(text: str, anchor: str) -> set[str]:
+    found: set[str] = set()
+    if not text or not anchor:
+        return found
+    for match in re.finditer(re.escape(anchor), text, flags=re.IGNORECASE):
+        after = text[match.end() : match.end() + 32]
+        before = text[max(0, match.start() - 16) : match.start()]
+        for nearby in re.finditer(r"\[\d+\]", f"{before} {after}"):
+            found.add(nearby.group(0))
+        for start, end in _sentence_spans(text):
+            if start <= match.start() < end:
+                for nearby in re.finditer(r"\[\d+\]", text[start:end]):
+                    found.add(nearby.group(0))
+                break
+    return found
+
+
 def glossary_row_from_note(note: dict[str, Any]) -> dict[str, Any]:
     return {
         "name": str(note.get("label") or note.get("name") or "")[:300],
@@ -173,8 +249,15 @@ def glossary_row_from_note(note: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def glossary_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [glossary_row_from_note(note) for note in notes_from_annotations(items)]
+def glossary_from_annotations(
+    items: list[dict[str, Any]],
+    *,
+    chapter_texts: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
+    return [
+        glossary_row_from_note(note)
+        for note in notes_from_annotations(items, chapter_texts=chapter_texts)
+    ]
 
 
 def merge_glossary(*groups: list[dict[str, Any]]) -> list[dict[str, Any]]:

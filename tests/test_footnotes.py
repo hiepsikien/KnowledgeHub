@@ -113,3 +113,63 @@ def test_notes_dedupe_glossary_and_unique_footnote_labels():
     assert "Seneca [48]" in labels
     seneca_four = next(row for row in notes if row["marker"] == "[4]")
     assert seneca_four["aliases"] == ["[4]"]
+
+
+def test_notes_drop_context_that_restates_a_footnote():
+    items = [
+        {
+            "id": "fn-12",
+            "kind": "footnote",
+            "chapter": "I",
+            "marker": "[12]",
+            "anchor_text": "Augustine",
+            "title_vi": "Augustine [12]",
+            "body_vi": "Ông lập luận rằng việc từ chối một lối đi vô hại là lý do chính đáng để tiến hành chiến tranh.",
+        },
+        {
+            "id": "ctx-passage",
+            "kind": "context",
+            "chapter": "I",
+            "anchor_text": "lối đi vô hại",
+            "title_vi": "Bối cảnh pháp lý",
+            "body_vi": "Khái niệm transitus innoxius.",
+        },
+        {
+            "id": "ctx-vasquez",
+            "kind": "context",
+            "chapter": "I",
+            "anchor_text": "Vasquez",
+            "title_vi": "Bối cảnh lịch sử",
+            "body_vi": "Fernando Vázquez de Menchaca, Trường phái Salamanca.",
+        },
+        {
+            "id": "fn-171",
+            "kind": "footnote",
+            "chapter": "I",
+            "marker": "[171]",
+            "anchor_text": "độc quyền",
+            "title_vi": "Chú thích [171]",
+            "body_vi": "Lập luận về độc quyền thương mại giữa các nước.",
+        },
+        {
+            "id": "gloss-law",
+            "kind": "glossary",
+            "chapter": "I",
+            "anchor_text": "Luật các dân tộc",
+            "title_vi": "Luật các dân tộc",
+            "body_vi": "Jus gentium.",
+        },
+    ]
+    chapter = (
+        "Chúng ta đọc thấy trong các tác phẩm của Augustine,[12] "
+        "khi người Israel bị khước từ lối đi vô hại qua lãnh thổ. "
+        "Vasquez bác bỏ độc quyền.[171] "
+        "Theo Luật các dân tộc thì biển là của chung."
+    )
+    notes = notes_from_annotations(items, chapter_texts={"I": chapter})
+    labels = [row["label"] for row in notes]
+    assert "Augustine [12]" in labels
+    assert "lối đi vô hại" not in labels
+    assert "Bối cảnh pháp lý" not in labels
+    assert any("Vasquez" in row["label"] or row["anchor"] == "Vasquez" for row in notes)
+    assert "Luật các dân tộc" in labels
