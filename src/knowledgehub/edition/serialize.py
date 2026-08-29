@@ -19,8 +19,20 @@ def blocks_to_markdown(blocks: list[dict[str, Any]]) -> str:
             parts.append(text)
         elif kind == "verse_line":
             parts.append(text)
+        elif kind == "stanza":
+            parts.append(text)
         elif kind == "blockquote":
             parts.append("> " + text)
+        elif kind == "dialogue":
+            speaker = block.get("speaker") or ""
+            line = text
+            parts.append(f"{speaker}. {line}" if speaker else line)
+        elif kind == "stage_direction":
+            parts.append(f"[{text.strip('[]')}]" if not text.startswith("[") else text)
+        elif kind == "list_item":
+            parts.append(text)
+        elif kind == "metadata":
+            continue
         elif kind == "paragraph" and text:
             parts.append(text)
     return "\n\n".join(parts).strip()
@@ -42,9 +54,12 @@ def detect_content_kind(blocks: list[dict[str, Any]], *, family: str = "plain") 
     kinds = {b.get("type") for b in blocks}
     if family == "scholastic":
         return "scholastic"
-    if "verse_line" in kinds and "paragraph" not in kinds:
+    if "dialogue" in kinds or "stage_direction" in kinds:
+        return "drama"
+    verseish = kinds & {"verse_line", "stanza"}
+    if verseish and "paragraph" not in kinds:
         return "verse"
-    if "verse_line" in kinds:
+    if verseish:
         return "mixed"
     return "prose"
 
@@ -60,6 +75,7 @@ def build_edition_document(
     language: str,
     source_family: str,
     quotation_profile: dict[str, Any] | None = None,
+    apparatus_dropped: list[str] | None = None,
 ) -> dict[str, Any]:
     doc = {
         "edition_format": REF_FORMAT,
@@ -73,6 +89,8 @@ def build_edition_document(
     }
     if quotation_profile:
         doc["quotation_profile"] = quotation_profile
+    if apparatus_dropped:
+        doc["apparatus_dropped"] = apparatus_dropped
     return doc
 
 

@@ -4,56 +4,86 @@
     "file": "en/grotius_treatise.txt",
     "language": "en",
     "family": "gutenberg",
-    "genre": "legal"
+    "genre": "legal",
+    "strip_first": true
+  },
+  {
+    "id": "grotius_treatise_ch1",
+    "file": "en/grotius_treatise_ch1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "genre": "legal",
+    "strip_first": false
   },
   {
     "id": "locke_second_treatise",
     "file": "en/locke_second_treatise.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "7370"
+    "gutenberg_id": "7370",
+    "strip_first": true
   },
   {
     "id": "dickens_two_cities",
     "file": "en/dickens_two_cities.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "98"
+    "gutenberg_id": "98",
+    "strip_first": true
   },
   {
     "id": "aquinas_summa",
     "file": "en/aquinas_summa.txt",
     "language": "en",
-    "family": "gutenberg",
-    "gutenberg_id": "17611"
+    "family": "scholastic",
+    "gutenberg_id": "17611",
+    "strip_first": true
   },
   {
     "id": "aristotle_politics",
     "file": "en/aristotle_politics.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "6762"
+    "gutenberg_id": "6762",
+    "strip_first": true
   },
   {
     "id": "mill_on_liberty",
     "file": "en/mill_on_liberty.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "34901"
+    "gutenberg_id": "34901",
+    "strip_first": true
   },
   {
     "id": "whitman_grass",
     "file": "en/whitman_grass.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "1322"
+    "gutenberg_id": "1322",
+    "strip_first": false
   },
   {
     "id": "shakespeare_hamlet",
     "file": "en/shakespeare_hamlet.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "1524"
+    "gutenberg_id": "1524",
+    "strip_first": false
+  },
+  {
+    "id": "archive_scan_ocr",
+    "file": "en/archive_scan_ocr.txt",
+    "language": "en",
+    "family": "archive_scan",
+    "strip_first": false
+  },
+  {
+    "id": "aozora_sample",
+    "file": "ja/aozora_sample.txt",
+    "language": "ja",
+    "family": "aozora",
+    "strip_first": false
   },
   {
     "id": "grotius_vi_chviii",
@@ -61,7 +91,8 @@
     "language": "vi",
     "family": "plain",
     "genre": "legal",
-    "source": "hub_translation"
+    "source": "hub_translation",
+    "strip_first": false
   },
   {
     "id": "qua_deo_ngang",
@@ -69,7 +100,8 @@
     "language": "vi",
     "family": "plain",
     "genre": "verse",
-    "source": "vi.wikisource"
+    "source": "vi.wikisource",
+    "strip_first": false
   },
   {
     "id": "ho_banh_troi_nuoc",
@@ -77,7 +109,8 @@
     "language": "vi",
     "family": "plain",
     "genre": "verse",
-    "source": "vi.wikisource"
+    "source": "vi.wikisource",
+    "strip_first": false
   },
   {
     "id": "le_kien_van_cao_si",
@@ -85,7 +118,8 @@
     "language": "vi",
     "family": "plain",
     "genre": "essay",
-    "source": "vi.wikisource"
+    "source": "vi.wikisource",
+    "strip_first": false
   },
   {
     "id": "nam_cao_chi_pheo",
@@ -93,7 +127,8 @@
     "language": "vi",
     "family": "plain",
     "genre": "fiction",
-    "source": "vi.wikisource"
+    "source": "vi.wikisource",
+    "strip_first": false
   },
   {
     "id": "le_van_dai_phong_tuc",
@@ -101,6 +136,7 @@
     "language": "vi",
     "family": "plain",
     "genre": "essay",
-    "source": "vi.wikisource"
+    "source": "vi.wikisource",
+    "strip_first": false
   }
 ]

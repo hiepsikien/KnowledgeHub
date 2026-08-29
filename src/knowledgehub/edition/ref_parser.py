@@ -22,6 +22,7 @@ def parse_manuscript_to_ref(
     """Full pipeline: optional rule strip → REF blocks → validated edition document."""
     work = dict(work or {})
     lang = str(language or work.get("language") or "en")
+    explicit_family = family
     fam = family or detect_family(text, work=work, language=lang)
     report: dict[str, Any] = {"family": fam, "language": lang}
 
@@ -34,7 +35,11 @@ def parse_manuscript_to_ref(
         )
         report["strip"] = strip_report
         source = stripped
-        fam = str(strip_report.get("family") or fam)
+        detected = str(strip_report.get("family") or fam)
+        if explicit_family in {"scholastic", "aozora", "archive_scan"}:
+            fam = explicit_family
+        else:
+            fam = detected
     else:
         source = text
 

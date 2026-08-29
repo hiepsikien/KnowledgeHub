@@ -7,7 +7,18 @@ from typing import Any
 REF_FORMAT = "ref/1"
 
 BLOCK_TYPES = frozenset(
-    {"heading", "paragraph", "blockquote", "verse_line", "hr", "list_item", "dialogue", "stage_direction"}
+    {
+        "heading",
+        "paragraph",
+        "blockquote",
+        "verse_line",
+        "stanza",
+        "hr",
+        "list_item",
+        "dialogue",
+        "stage_direction",
+        "metadata",
+    }
 )
 INLINE_STYLES = frozenset(
     {
@@ -19,11 +30,12 @@ INLINE_STYLES = frozenset(
         "paren_quote",
         "paren_aside",
         "paren_page",
+        "list_marker",
         "quote",
         "em",
     }
 )
-CONTENT_KINDS = frozenset({"prose", "verse", "scholastic", "mixed"})
+CONTENT_KINDS = frozenset({"prose", "verse", "scholastic", "mixed", "drama"})
 
 
 def validate_block(block: dict[str, Any], *, index: int) -> list[str]:
@@ -32,10 +44,14 @@ def validate_block(block: dict[str, Any], *, index: int) -> list[str]:
     if kind not in BLOCK_TYPES:
         errors.append(f"blocks[{index}].type invalid: {kind!r}")
         return errors
-    if kind in {"heading", "paragraph", "blockquote", "verse_line", "dialogue"}:
+    if kind in {"heading", "paragraph", "blockquote", "verse_line", "dialogue", "list_item", "stage_direction", "metadata", "stanza"}:
         text = block.get("text")
         if not isinstance(text, str) or not text.strip():
             errors.append(f"blocks[{index}] missing non-empty text")
+    if kind == "dialogue":
+        speaker = block.get("speaker")
+        if speaker is not None and not isinstance(speaker, str):
+            errors.append(f"blocks[{index}].speaker must be string")
     if kind == "heading":
         level = block.get("level")
         if not isinstance(level, int) or not 1 <= level <= 4:

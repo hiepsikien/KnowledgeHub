@@ -27,8 +27,11 @@ def detect_family(text: str, *, work: dict[str, Any] | None = None, language: st
     override = str(edition_overrides(work).get("family") or "").strip()
     if override in FAMILIES:
         return override
+    head = text[:80000]
+    scholastic_hits = len(SCHOLASTIC_HINT.findall(head))
+    has_question = bool(re.search(r"(?m)^QUESTION\s+\d", head))
     if PG_START.search(text) or PG_END.search(text):
-        if len(SCHOLASTIC_HINT.findall(text[:80000])) >= 4:
+        if scholastic_hits >= 4 or has_question:
             return "scholastic"
         return "gutenberg"
     lang = (language or (work or {}).get("language") or "en").lower()
@@ -38,6 +41,6 @@ def detect_family(text: str, *, work: dict[str, Any] | None = None, language: st
     source_url = str((work or {}).get("source_url") or "")
     if "archive" in license_id or "archive.org" in source_url:
         return "archive_scan"
-    if len(SCHOLASTIC_HINT.findall(text[:80000])) >= 4:
+    if scholastic_hits >= 4 or has_question:
         return "scholastic"
     return "plain"

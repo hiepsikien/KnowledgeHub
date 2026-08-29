@@ -9,6 +9,7 @@ from .llm_blocks import relabel_uncertain_segments
 from .merge_blocks import labels_to_blocks
 from .reflow import unwrap_hard_wrap
 from .serialize import build_edition_document, grotius_latin_to_blockquote
+from .structure import group_stanzas, merge_adjacent_headings
 
 
 def build_read_edition(
@@ -21,10 +22,19 @@ def build_read_edition(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Structured REF/1 edition from stripped manuscript text."""
     lang = (language or "en").lower()[:2]
-    if family in {"archive_scan"} or lang in {"ja", "zh", "ko"}:
+    apparatus: list[str] = []
+    body = text
+    unwrapped = False
+    if family == "plain":
+        body, wiki_apparatus = normalize_wiki_source(text)
+        apparatus.extend(wiki_apparatus)
+    elif family in {"scholastic", "archive_scan"} and lang not in {"ja", "zh", "ko"}:
         body, unwrapped = unwrap_hard_wrap(text, family=family, language=lang)
-        lines = iter_lines(body)
-        labels = label_lines_rules(lines, family=family)
+
+    if lang in {"ja", "zh", "ko"}:
+        unwrapped_body, unwrapped = unwrap_hard_wrap(body, family=family, language=lang)
+        lines = iter_lines(unwrapped_body)
+        labels = label_lines_rules(lines, family=family, source_text=unwrapped_body)
         blocks = labels_to_blocks(lines, labels)
         blocks, quotation_profile = annotate_blocks(blocks)
         edition = build_edition_document(
@@ -32,6 +42,7 @@ def build_read_edition(
             language=language,
             source_family=family,
             quotation_profile=quotation_profile,
+            apparatus_dropped=apparatus or None,
         )
         return edition, {
             "ref_mode": "rule_fallback",
@@ -40,21 +51,25 @@ def build_read_edition(
             "unwrapped": unwrapped,
             "llm_segments": [],
             "quotation_profile": quotation_profile,
+            "apparatus_dropped": apparatus,
         }
 
-    lines = iter_lines(normalize_wiki_source(text) if family == "plain" else text)
-    labels = label_lines_rules(lines, family=family)
+    lines = iter_lines(body)
+    labels = label_lines_rules(lines, family=family, source_text=body)
     labels, llm_events = relabel_uncertain_segments(lines, labels, enabled=use_llm)
     blocks = labels_to_blocks(lines, labels)
     if work_id and work_id.startswith("grotius--"):
         blocks = grotius_latin_to_blockquote(blocks)
+    blocks = merge_adjacent_headings(blocks)
+    blocks = group_stanzas(blocks)
     blocks, quotation_profile = annotate_blocks(blocks)
-    joined = any(label.join_next for label in labels)
+    joined = any(label.join_next for label in labels) or unwrapped
     edition = build_edition_document(
         blocks,
         language=language,
         source_family=family,
         quotation_profile=quotation_profile,
+        apparatus_dropped=apparatus or None,
     )
     return edition, {
         "ref_mode": "llm_hybrid" if use_llm else "rule",
@@ -63,4 +78,5 @@ def build_read_edition(
         "llm_segments": llm_events,
         "unwrapped": joined,
         "quotation_profile": quotation_profile,
+        "apparatus_dropped": apparatus,
     }

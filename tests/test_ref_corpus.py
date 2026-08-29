@@ -18,6 +18,12 @@ def _load_sample(entry: dict) -> tuple[str, dict]:
     return text, entry
 
 
+def _strip_first(entry: dict) -> bool:
+    if "strip_first" in entry:
+        return bool(entry["strip_first"])
+    return entry.get("family") == "gutenberg"
+
+
 @pytest.mark.parametrize("entry", MANIFEST, ids=lambda e: e["id"])
 def test_corpus_parses_to_valid_ref(entry: dict) -> None:
     text, meta = _load_sample(entry)
@@ -25,7 +31,7 @@ def test_corpus_parses_to_valid_ref(entry: dict) -> None:
         text,
         language=meta["language"],
         family=meta.get("family"),
-        strip_first=meta.get("family") == "gutenberg",
+        strip_first=_strip_first(meta),
     )
     assert report["validation_errors"] == [], report["validation_errors"]
     assert_valid_edition(edition)
@@ -44,7 +50,7 @@ def test_corpus_meets_expectations(entry: dict) -> None:
         text,
         language=meta["language"],
         family=meta.get("family"),
-        strip_first=meta.get("family") == "gutenberg",
+        strip_first=_strip_first(meta),
     )
     blocks = edition["blocks"]
     md = edition["reading_markdown"]
@@ -59,6 +65,9 @@ def test_corpus_meets_expectations(entry: dict) -> None:
     assert len(blocks) <= exp["max_blocks"]
     for kind in exp["required_types"]:
         assert kind in types, f"{entry['id']}: missing block type {kind!r}, got {types}"
+    for kind, minimum in exp.get("min_type_counts", {}).items():
+        count = sum(1 for b in blocks if b.get("type") == kind)
+        assert count >= minimum, f"{entry['id']}: expected ≥{minimum} {kind!r}, got {count}"
     assert edition["content_kind"] == exp["content_kind"]
 
     if "min_footnotes" in exp:
@@ -83,5 +92,7 @@ def test_corpus_manifest_covers_expectations() -> None:
 def test_corpus_language_split() -> None:
     en = [e for e in MANIFEST if e["language"] == "en"]
     vi = [e for e in MANIFEST if e["language"] == "vi"]
-    assert len(en) >= 5, "need ≥5 EN corpus samples"
+    ja = [e for e in MANIFEST if e["language"] == "ja"]
+    assert len(en) >= 8, "need ≥8 EN corpus samples"
     assert len(vi) >= 5, "need ≥5 VI corpus samples"
+    assert len(ja) >= 1, "need ≥1 JA corpus sample"

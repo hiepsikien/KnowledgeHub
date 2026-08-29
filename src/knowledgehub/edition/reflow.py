@@ -84,8 +84,8 @@ def reflow_block(lines: list[str], *, family: str) -> tuple[str, bool]:
 
 
 def unwrap_hard_wrap(text: str, *, family: str = "gutenberg", language: str = "en") -> tuple[str, bool]:
-    """Join ~70-char wraps; keep headings. Skip CJK and messy OCR scans."""
-    if family == "archive_scan" or (language or "en").lower()[:2] in CJK_LANG:
+    """Join ~70-char wraps; keep headings. Skip CJK."""
+    if (language or "en").lower()[:2] in CJK_LANG:
         return text.strip(), False
     blocks: list[str] = []
     acc: list[str] = []

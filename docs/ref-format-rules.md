@@ -180,6 +180,19 @@ Regenerate with `scripts/build_ref_corpus_fixtures.py`. Expectations in `tests/f
 ## Not in REF/1 v1
 
 - Read-side rendering of `spans[]`
-- Dialogue / speaker attribution for plays
-- Verse detection for Vietnamese lục bát (short lines currently become `paragraph`)
 - OCR column reflow beyond `archive_scan` unwrap
+
+## REF/1 v1.3 block types
+
+| `type` | Notes |
+|--------|--------|
+| `list_item` | Scholastic `(1) Whether…` items |
+| `dialogue` | `speaker` + `text` (Shakespeare PG) |
+| `stage_direction` | `Enter …`, `[Aside]` |
+| `stanza` | Grouped `verse_line` / lục bát (lines joined with `\n`) |
+| `metadata` | Wikisource nav — also listed in `apparatus_dropped[]` when stripped |
+
+`content_kind`: `prose` | `verse` | `scholastic` | `mixed` | `drama`
+
+Corpus: **17 samples** (EN 10 incl. archive_scan + full-chapter Grotius, VI 6, JA 1 aozora).
+CI: `.github/workflows/ref-corpus.yml` runs corpus tests + rule QA on each PR.

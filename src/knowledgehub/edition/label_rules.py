@@ -5,6 +5,15 @@ from dataclasses import dataclass
 
 from .lines import TextLine
 from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_soft_structural
+from .structure import (
+    is_indented_verse,
+    is_metadata_line,
+    is_scholastic_list_item,
+    is_speaker_cue,
+    is_stage_direction,
+    is_vi_verse_line,
+    looks_like_play,
+)
 
 RULE_LINE = re.compile(r"^[\-–—_\*=\s]{8,}$")
 SHORT_RULE_LINE = re.compile(r"^[\-–—_\*=\s]{3,7}$")
@@ -66,11 +75,27 @@ def _continues_quoted_line(prev: str, nxt: str) -> bool:
     return True
 
 
-def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
+def _role_for_line(
+    line: str,
+    *,
+    family: str,
+    row: TextLine | None = None,
+    play_mode: bool = False,
+) -> tuple[str, int, float]:
+    if is_metadata_line(line):
+        return "metadata", 0, 0.99
     if RULE_LINE.match(line) or SHORT_RULE_LINE.match(line.strip()):
         return "hr", 0, 0.98
     if IMPRINT_PUBLISHER.match(line.strip()) or IMPRINT_LIST.match(line.strip()):
         return "prose", 0, 0.9
+    if play_mode and is_stage_direction(line):
+        return "stage_direction", 0, 0.94
+    if play_mode and is_speaker_cue(line):
+        return "speaker_cue", 0, 0.96
+    if is_scholastic_list_item(line):
+        return "list_item", 0, 0.95
+    if play_mode and re.match(r"^(?:ACT [IVXLC]+\.?$|SCENE [IVXLC]+)", line.strip(), re.I):
+        return "heading", 1, 0.94
     if is_hard_structural(line, family=family):
         level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
         return "heading", level, 0.95
@@ -80,6 +105,10 @@ def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
         return "heading", 2, 0.88
     if is_all_caps_heading(line):
         return "heading", 2, 0.82
+    if family == "gutenberg" and row and is_indented_verse(indent=row.indent, line=line):
+        return "verse_line", 0, 0.87
+    if family == "plain" and is_vi_verse_line(line):
+        return "verse_line", 0, 0.85
     if QUOTE_LINE.match(line.strip()) and len(line.strip()) < 220:
         return "verse_line", 0, 0.86
     return "prose", 0, 0.92
@@ -182,20 +211,38 @@ def _relabel_quote_continuations(lines: list[TextLine], labels: list[LineLabel])
             labels[i].confidence = 0.82
 
 
-def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg") -> list[LineLabel]:
+def _relabel_play_dialogue(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
+    if not play_mode:
+        return
+    i = 0
+    while i < len(labels):
+        if labels[i].role != "speaker_cue":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels) and labels[j].role in {"prose", "verse_line"}:
+            labels[j].role = "dialogue_line"
+            labels[j].confidence = 0.9
+            j += 1
+        i = j
+
+
+def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", source_text: str = "") -> list[LineLabel]:
+    play_mode = looks_like_play(source_text) if source_text else False
     labels: list[LineLabel] = []
     for row in lines:
-        role, level, confidence = _role_for_line(row.text, family=family)
+        role, level, confidence = _role_for_line(row.text, family=family, row=row, play_mode=play_mode)
         labels.append(
             LineLabel(index=row.index, role=role, level=level, confidence=confidence)
         )
+    _relabel_play_dialogue(lines, labels, play_mode=play_mode)
     _relabel_quote_continuations(lines, labels)
     for i in range(len(labels) - 1):
         if labels[i].role == "verse_line" and labels[i + 1].role == "verse_line":
-            if not COMPLETE_QUOTE.search(lines[i].text.strip()):
+            if _continues_quoted_line(lines[i].text, lines[i + 1].text):
                 labels[i].join_next = True
     for i, label in enumerate(labels):
-        if label.role not in {"prose", "verse_line"}:
+        if label.role not in {"prose", "verse_line", "dialogue_line"}:
             continue
         if i + 1 >= len(labels):
             continue
@@ -203,7 +250,7 @@ def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg") -> li
         if nxt.role == "verse_line" and LEAD_IN_LINE.match(lines[i].text.strip()):
             label.join_next = True
             continue
-        if nxt.role not in {"prose", "verse_line"}:
+        if nxt.role not in {"prose", "verse_line", "dialogue_line"}:
             continue
         if _should_join(
             lines[i].text,

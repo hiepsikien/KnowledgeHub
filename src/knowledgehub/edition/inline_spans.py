@@ -7,14 +7,13 @@ from typing import Any, Iterable
 
 FOOTNOTE_INNER = re.compile(r"^\d{1,4}(?:,\s*\d{1,4})*$")
 GUTENBERG_EM = re.compile(r"(?<![A-Za-z0-9])_([^_\n]+?)_(?![A-Za-z0-9])")
-# Straight / curly / guillemet quotation marks.
+FULL_LINE_EM = re.compile(r"^_([^_\n]+?)_$")
 DQUOTE = re.compile(r'(?<!\w)"([^"\n]{2,}?)"(?!\w)|“([^”\n]{2,}?)”')
 GUILLEMET = re.compile(r"«([^»\n]{2,}?)»")
-# Vietnamese / CJK corner quotes
 CORNER_QUOTE = re.compile(r"「([^」\n]{2,}?)」|『([^』\n]{2,}?)』")
-# Fullwidth parens common in Vietnamese editions
-PAREN_PAIR = re.compile(r"\(([^)\n]{1,}?)\)|（([^）\n]{1,}?)）")
 BRACKET_PAIR = re.compile(r"\[([^\]\n]{1,}?)\]")
+YEAR_RANGE = re.compile(r"^\d{3,4}\s*[-–—]\s*\d{3,4}$")
+VI_ERA = re.compile(r"^[A-Za-zÀ-ỹ\-]+\s+\d+\s*\(\d{3,4}(?:-\d{3,4})?\)$")
 
 
 @dataclass(frozen=True)
@@ -26,6 +25,38 @@ class InlineSpan:
 
     def to_dict(self) -> dict[str, Any]:
         return {"start": self.start, "end": self.end, "style": self.style, "text": self.text}
+
+
+def _iter_balanced(text: str, open_ch: str, close_ch: str) -> list[tuple[int, int, str]]:
+    """Yield (start, end, inner) for balanced open/close pairs."""
+    results: list[tuple[int, int, str]] = []
+    i = 0
+    n = len(text)
+    open_full = {"(": ")", "（": "）"}
+    close_full = {")", "）"}
+    while i < n:
+        if text[i] not in open_full and text[i] not in {"(", "（"}:
+            i += 1
+            continue
+        start = i
+        o = text[i]
+        c = open_full.get(o, ")")
+        depth = 0
+        j = i
+        while j < n:
+            if text[j] == o:
+                depth += 1
+            elif text[j] == c:
+                depth -= 1
+                if depth == 0:
+                    inner = text[start + 1 : j]
+                    results.append((start, j + 1, inner))
+                    i = j + 1
+                    break
+            j += 1
+        else:
+            i += 1
+    return results
 
 
 def _classify_bracket(inner: str) -> str:
@@ -45,6 +76,10 @@ def _classify_paren(inner: str) -> str:
     body = inner.strip()
     if re.fullmatch(r"(19|20)\d{2}", body):
         return "paren_aside"
+    if YEAR_RANGE.fullmatch(body):
+        return "paren_aside"
+    if VI_ERA.search(body):
+        return "paren_cite"
     if re.fullmatch(r"\d{1,4}", body):
         if len(body) == 4 and int(body) >= 1000:
             return "paren_aside"
@@ -58,7 +93,6 @@ def _classify_paren(inner: str) -> str:
         return "paren_aside"
     if any(ch in body for ch in "\"'“”‘’"):
         return "paren_quote"
-    # Short legal/latin labels: (Politics), (foedus aequum), (Digest 43.14.1.pr)
     if len(body.split()) <= 6 and re.search(r"[A-Za-zÀ-ỹ]", body):
         return "paren_cite"
     return "paren_aside"
@@ -70,21 +104,12 @@ def _add_span(spans: list[InlineSpan], start: int, end: int, style: str, text: s
     spans.append(InlineSpan(start=start, end=end, style=style, text=text))
 
 
-def _scan_pattern(
-    text: str,
-    pattern: re.Pattern[str],
-    *,
-    classify,
-    group_index: int = 1,
-) -> list[InlineSpan]:
-    spans: list[InlineSpan] = []
-    for match in pattern.finditer(text):
-        inner = match.group(group_index) or (match.group(2) if match.lastindex and match.lastindex >= 2 else "")
-        if inner is None:
-            continue
-        style = classify(inner)
-        _add_span(spans, match.start(), match.end(), style, match.group(0))
-    return spans
+def _scan_em(text: str, spans: list[InlineSpan]) -> None:
+    if FULL_LINE_EM.fullmatch(text.strip()):
+        _add_span(spans, 0, len(text), "em", text.strip())
+        return
+    for match in GUTENBERG_EM.finditer(text):
+        _add_span(spans, match.start(), match.end(), "em", match.group(0))
 
 
 def annotate_inline_spans(text: str) -> list[InlineSpan]:
@@ -92,8 +117,7 @@ def annotate_inline_spans(text: str) -> list[InlineSpan]:
     if not text or not text.strip():
         return []
     spans: list[InlineSpan] = []
-    for match in GUTENBERG_EM.finditer(text):
-        _add_span(spans, match.start(), match.end(), "em", match.group(0))
+    _scan_em(text, spans)
     for match in DQUOTE.finditer(text):
         _add_span(spans, match.start(), match.end(), "quote", match.group(0))
     for match in GUILLEMET.finditer(text):
@@ -103,9 +127,13 @@ def annotate_inline_spans(text: str) -> list[InlineSpan]:
     for match in BRACKET_PAIR.finditer(text):
         inner = match.group(1)
         _add_span(spans, match.start(), match.end(), _classify_bracket(inner), match.group(0))
-    for match in PAREN_PAIR.finditer(text):
-        inner = match.group(1) or match.group(2) or ""
-        _add_span(spans, match.start(), match.end(), _classify_paren(inner), match.group(0))
+    for start, end, inner in _iter_balanced(text, "(", ")"):
+        fullwidth_start = start > 0 and text[start] == "（"
+        if fullwidth_start:
+            continue
+        _add_span(spans, start, end, _classify_paren(inner), text[start:end])
+    for start, end, inner in _iter_balanced(text, "（", "）"):
+        _add_span(spans, start, end, _classify_paren(inner), text[start:end])
     spans.sort(key=lambda s: (s.start, s.end))
     return _dedupe_overlaps(spans)
 
@@ -117,7 +145,6 @@ def _dedupe_overlaps(spans: list[InlineSpan]) -> list[InlineSpan]:
     for span in spans[1:]:
         prev = out[-1]
         if span.start < prev.end:
-            # Keep the earlier span; drop the overlapping later one unless it is narrower footnote.
             if span.style == "footnote" and (prev.end - prev.start) > (span.end - span.start) + 8:
                 out[-1] = span
             continue
@@ -126,7 +153,6 @@ def _dedupe_overlaps(spans: list[InlineSpan]) -> list[InlineSpan]:
 
 
 def detect_quotation_profile(texts: Iterable[str]) -> dict[str, Any]:
-    """Cheap corpus-level profile — no LLM."""
     counts: Counter[str] = Counter()
     for text in texts:
         for span in annotate_inline_spans(text):
@@ -141,24 +167,39 @@ def detect_quotation_profile(texts: Iterable[str]) -> dict[str, Any]:
         "paren_asides": counts.get("paren_aside", 0),
         "inline_quotes": counts.get("quote", 0),
         "italic_spans": counts.get("em", 0),
+        "list_markers": counts.get("list_marker", 0),
         "detector": "rule",
     }
 
 
+_ANNOTATED_TYPES = frozenset(
+    {
+        "paragraph",
+        "blockquote",
+        "heading",
+        "verse_line",
+        "stanza",
+        "dialogue",
+        "stage_direction",
+        "list_item",
+        "metadata",
+    }
+)
+
+
 def annotate_blocks(blocks: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Attach spans[] to textual blocks; return profile from all paragraph text."""
     texts: list[str] = []
     out: list[dict[str, Any]] = []
     for block in blocks:
         row = dict(block)
         kind = row.get("type")
-        if kind in {"paragraph", "blockquote", "heading", "verse_line"}:
+        if kind in _ANNOTATED_TYPES:
             text = str(row.get("text") or "")
             if text:
                 texts.append(text)
-                spans = annotate_inline_spans(text)
-                if spans:
-                    row["spans"] = [s.to_dict() for s in spans]
+                span_list = annotate_inline_spans(text)
+                if span_list:
+                    row["spans"] = [s.to_dict() for s in span_list]
         out.append(row)
     profile = detect_quotation_profile(texts)
     return out, profile
