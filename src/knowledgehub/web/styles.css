@@ -532,6 +532,24 @@ tr.pick.on { background: var(--accent-soft); }
 .tr-ann-head strong { font-size: 14px; }
 .tr-ann .anchor { color: var(--muted); font-size: 12px; }
 .tr-ann p { margin: 0; font-size: 13px; line-height: 1.5; }
+mark.ann-hl {
+  background: transparent;
+  color: inherit;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+mark.ann-footnote {
+  border-bottom: 1px dotted #2a4a7a;
+  background: #e8eef8;
+}
+mark.ann-glossary {
+  border-bottom: 1px solid var(--ok);
+  background: var(--ok-soft);
+}
+mark.ann-context {
+  border-bottom: 1px dashed #5a3a7a;
+  background: #f0e8f8;
+}
 
 @media (max-width: 960px) {
   .shell { grid-template-columns: 1fr; }

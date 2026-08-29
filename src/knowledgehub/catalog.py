@@ -172,6 +172,52 @@ def load_authors(path: Path | None = None) -> list[dict[str, Any]]:
     return data
 
 
+def get_author(author_id: str, *, corpus: Path | None = None) -> dict[str, Any] | None:
+    path = (corpus / "catalog" / "authors.json") if corpus else catalog_authors_path()
+    for row in load_authors(path):
+        if row.get("id") == author_id:
+            return row
+    return None
+
+
+def author_display_name(author_id: str, *, corpus: Path | None = None) -> str:
+    row = get_author(author_id, corpus=corpus)
+    if not row:
+        return author_id
+    return str(row.get("display_name") or row.get("name") or author_id).strip() or author_id
+
+
+def work_credits(work: dict[str, Any], *, corpus: Path | None = None) -> dict[str, Any]:
+    """Bibliographic credits for Read. Empty strings when a field does not apply."""
+    author_id = str(work.get("author_id") or "").strip()
+    author_name = author_display_name(author_id, corpus=corpus) if author_id else ""
+    translator = str(work.get("translator") or "").strip()
+    translator_role = ""
+    if translator:
+        translator_role = "hub_editorial" if translator == "Knowledge Hub" else "translator"
+    source = None
+    derived = str(work.get("derived_from") or "").strip()
+    if derived:
+        try:
+            original = get_work(derived, corpus=corpus)
+        except KeyError:
+            original = {}
+        year = original.get("year")
+        source = {
+            "hub_work_id": derived,
+            "title": str(original.get("title") or "").strip(),
+            "year": int(year) if year not in (None, "") else None,
+            "language": str(original.get("language") or "").strip(),
+        }
+    return {
+        "author_name": author_name,
+        "author_hub_id": author_id,
+        "translator_name": translator,
+        "translator_role": translator_role,
+        "source": source,
+    }
+
+
 def get_work(work_id_value: str, *, corpus: Path | None = None) -> dict[str, Any]:
     path = (corpus / "catalog" / "works.json") if corpus else catalog_works_path()
     for row in load_works(path):

@@ -3,6 +3,7 @@ from __future__ import annotations
 from knowledgehub.edition.footnotes import (
     glossary_from_annotations,
     glossary_from_footnotes,
+    notes_from_annotations,
 )
 
 
@@ -20,7 +21,8 @@ def test_footnotes_become_glossary_and_leave_the_body():
     assert "Seneca[4] thinks" in text
     by_alias = {e["aliases"][0]: e for e in entries}
     assert "[4]" in by_alias
-    assert by_alias["[4]"]["name"] == "Seneca"
+    assert by_alias["[4]"]["name"] == "Seneca [4]"
+    assert by_alias["[4]"]["anchor"] == "Seneca"
     assert "Natural Questions" in by_alias["[4]"]["summary"]
     assert by_alias["[4]"]["group_label"] == "Chú thích"
 
@@ -60,6 +62,54 @@ def test_annotations_map_to_glossary_cards():
             },
         ]
     )
-    assert rows[0]["name"] == "Victoria"
+    assert rows[0]["name"] == "Victoria [10]"
     assert rows[0]["aliases"] == ["[10]"]
+    assert rows[0]["marker"] == "[10]"
     assert rows[1]["group_label"] == "Thuật ngữ"
+
+
+def test_notes_dedupe_glossary_and_unique_footnote_labels():
+    notes = notes_from_annotations(
+        [
+            {
+                "id": "a",
+                "kind": "glossary",
+                "chapter": "I",
+                "anchor_text": "Luật các dân tộc",
+                "title_vi": "Luật các dân tộc",
+                "body_vi": "Jus gentium — bản I.",
+            },
+            {
+                "id": "b",
+                "kind": "glossary",
+                "chapter": "V",
+                "anchor_text": "Luật các dân tộc",
+                "title_vi": "Luật các dân tộc (Jus Gentium)",
+                "body_vi": "Jus gentium — bản V.",
+            },
+            {
+                "id": "c",
+                "kind": "footnote",
+                "chapter": "I",
+                "marker": "[4]",
+                "anchor_text": "Seneca",
+                "title_vi": "Chú thích [4]",
+                "body_vi": "Seneca trẻ.",
+            },
+            {
+                "id": "d",
+                "kind": "footnote",
+                "chapter": "V",
+                "marker": "[48]",
+                "anchor_text": "Seneca",
+                "title_vi": "Chú thích [48]",
+                "body_vi": "Seneca, Thyestes.",
+            },
+        ]
+    )
+    labels = [row["label"] for row in notes]
+    assert labels.count("Luật các dân tộc") == 1
+    assert "Seneca [4]" in labels
+    assert "Seneca [48]" in labels
+    seneca_four = next(row for row in notes if row["marker"] == "[4]")
+    assert seneca_four["aliases"] == ["[4]"]

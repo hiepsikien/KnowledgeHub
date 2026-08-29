@@ -7,8 +7,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication
-from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes
+from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication, work_credits
+from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, notes_from_annotations
 from .normalize import normalize_manuscript
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
@@ -20,9 +20,10 @@ class PublishError(RuntimeError):
     pass
 
 
-def _payload(work: dict[str, Any], text: str) -> dict[str, Any]:
+def _payload(work: dict[str, Any], text: str, *, corpus: Path | None = None) -> dict[str, Any]:
     read = work.get("read") or {}
     rights = work.get("rights") or {}
+    credits = work_credits(work, corpus=corpus)
     return {
         "hub_work_id": work["id"],
         "hub_version": int(work.get("version") or 1),
@@ -42,6 +43,7 @@ def _payload(work: dict[str, Any], text: str) -> dict[str, Any]:
             "rights": rights,
         },
         "raw_text": text,
+        "credits": credits,
     }
 
 
@@ -103,7 +105,7 @@ def prepare_publish(
     reading_text, footnote_glossary = glossary_from_footnotes(text)
     if not footnote_glossary:
         _, footnote_glossary = glossary_from_footnotes(raw)
-    payload = _payload(work, reading_text)
+    payload = _payload(work, reading_text, corpus=root)
     if footnote_glossary:
         payload["glossary"] = footnote_glossary
     report = dict(report)
@@ -138,17 +140,34 @@ def _prepare_translation_publish(
         raise PublishError(str(exc)) from exc
     except (FileNotFoundError, ValueError) as exc:
         raise PublishError(str(exc)) from exc
-    payload = _payload(work, text)
+    payload = _payload(work, text, corpus=root)
     payload["hub_content_hash"] = meta["content_hash"]
     payload["language"] = work.get("language") or "vi"
     glossary: list[dict[str, Any]] = []
+    notes: list[dict[str, Any]] = []
     ann_path = annotations_file(source_id)
     if ann_path.is_file():
         try:
             store = json.loads(ann_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             store = {}
-        glossary = glossary_from_annotations(list(store.get("annotations") or []))
+        raw_anns = list(store.get("annotations") or [])
+        notes = notes_from_annotations(raw_anns)
+        glossary = glossary_from_annotations(raw_anns)
+    if notes:
+        payload["notes"] = [
+            {
+                "id": row.get("id") or "",
+                "kind": row.get("kind") or "footnote",
+                "label": row.get("label") or "",
+                "marker": row.get("marker") or "",
+                "anchor": row.get("anchor") or "",
+                "chapter": row.get("chapter") or "",
+                "body": row.get("body") or "",
+                "group_label": row.get("group_label") or "Chú thích",
+            }
+            for row in notes
+        ]
     if glossary:
         payload["glossary"] = glossary
     _apply_publish_overrides(
@@ -294,6 +313,7 @@ def publish_to_read(
         preview = dict(body)
         preview["raw_text"] = f"<{len(body['raw_text'])} chars>"
         glossary = body.get("glossary") or []
+        notes = body.get("notes") or []
         preview["glossary"] = [
             {
                 "name": row.get("name"),
@@ -304,6 +324,7 @@ def publish_to_read(
             for row in glossary
         ]
         preview["glossary_count"] = len(glossary)
+        preview["notes_count"] = len(notes)
         return {"dry_run": True, "normalize": report, "payload": preview}
 
     base = (api_url or os.environ.get("READ_API_URL") or "http://127.0.0.1:8000").rstrip("/")

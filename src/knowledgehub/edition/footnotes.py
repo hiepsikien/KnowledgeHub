@@ -11,11 +11,37 @@ KIND_LABEL = {
     "footnote": "Chú thích",
     "glossary": "Thuật ngữ",
     "context": "Bối cảnh",
+    "term": "Thuật ngữ",
 }
+KIND_ALIASES = {"term": "glossary"}
+FOOTNOTE_MARKER = re.compile(r"^\[\d+\]$")
 
 FOOTNOTES_ONLY = re.compile(r"(?im)^[ \t]*FOOTNOTES\s*[:.]?\s*$")
 NOTE_ITEM = re.compile(r"(?m)^\[(\d+)\]\s*")
 ROMAN = re.compile(r"^[IVXLCDM]+$", re.I)
+
+
+def annotation_kind(item: dict[str, Any]) -> str:
+    raw = str(item.get("kind") or "footnote").strip().lower()
+    kind = KIND_ALIASES.get(raw, raw)
+    return kind if kind in {"footnote", "glossary", "context"} else "footnote"
+
+
+def glossary_term_key(item: dict[str, Any]) -> str:
+    raw = str(item.get("anchor_text") or item.get("title_vi") or item.get("marker") or "")
+    return re.sub(r"\s+", " ", raw).casefold().strip()
+
+
+def annotation_label(item: dict[str, Any]) -> str:
+    kind = annotation_kind(item)
+    marker = str(item.get("marker") or "").strip()
+    anchor = str(item.get("anchor_text") or "").strip()
+    title = str(item.get("title_vi") or "").strip()
+    if kind == "footnote":
+        if anchor and FOOTNOTE_MARKER.fullmatch(marker) and marker not in anchor:
+            return f"{anchor} {marker}"[:300]
+        return (anchor or title or marker or "Chú thích")[:300]
+    return (title or anchor or KIND_LABEL[kind])[:300]
 
 
 def _anchor_name(body: str, number: int) -> str:
@@ -74,37 +100,81 @@ def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
     for number, summary in sorted(parsed.items()):
         marker = f"[{number}]"
         name = _anchor_name(body, number)
-        aliases = [marker]
+        label = f"{name} {marker}" if name != marker else marker
         entries.append(
             {
-                "name": name[:300],
-                "aliases": aliases,
+                "name": label[:300],
+                "aliases": [marker],
                 "summary": summary[:8000],
                 "group_label": "Chú thích",
+                "kind": "footnote",
+                "marker": marker,
+                "anchor": name[:300],
+                "chapter": "",
             }
         )
     return body, entries
 
 
-def glossary_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    out: list[dict[str, Any]] = []
+def notes_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Canonical reader notes: unique labels, one glossary term, marker-only match keys."""
+    notes: list[dict[str, Any]] = []
+    seen_glossary: set[str] = set()
     for item in items:
-        name = str(item.get("anchor_text") or item.get("title_vi") or item.get("marker") or "").strip()
-        summary = str(item.get("body_vi") or item.get("body") or "").strip()
-        if not name or not summary:
+        body = str(item.get("body_vi") or item.get("body") or "").strip()
+        if not body:
             continue
+        kind = annotation_kind(item)
         marker = str(item.get("marker") or "").strip()
-        aliases = [marker] if marker and marker != name else []
-        kind = str(item.get("kind") or "footnote")
-        out.append(
+        if kind == "glossary":
+            marker = ""
+        elif not FOOTNOTE_MARKER.fullmatch(marker):
+            marker = ""
+        anchor = str(item.get("anchor_text") or "").strip()
+        label = annotation_label({**item, "kind": kind, "marker": marker})
+        if not label:
+            continue
+        if kind == "glossary":
+            key = glossary_term_key({"anchor_text": anchor or label})
+            if not key or key in seen_glossary:
+                continue
+            seen_glossary.add(key)
+        aliases: list[str] = []
+        if marker and marker != label:
+            aliases.append(marker)
+        elif kind != "footnote" and anchor and anchor != label:
+            aliases.append(anchor)
+        notes.append(
             {
-                "name": name[:300],
+                "id": str(item.get("id") or ""),
+                "kind": kind,
+                "label": label[:300],
+                "marker": marker,
+                "anchor": anchor[:300],
+                "chapter": str(item.get("chapter") or ""),
+                "body": body[:8000],
+                "group_label": KIND_LABEL[kind],
                 "aliases": aliases,
-                "summary": summary[:8000],
-                "group_label": KIND_LABEL.get(kind, "Chú thích"),
             }
         )
-    return out
+    return notes
+
+
+def glossary_row_from_note(note: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "name": str(note.get("label") or note.get("name") or "")[:300],
+        "aliases": list(note.get("aliases") or []),
+        "summary": str(note.get("body") or note.get("summary") or "")[:8000],
+        "group_label": str(note.get("group_label") or KIND_LABEL.get(str(note.get("kind") or ""), "Chú thích")),
+        "kind": str(note.get("kind") or "footnote"),
+        "marker": str(note.get("marker") or ""),
+        "anchor": str(note.get("anchor") or ""),
+        "chapter": str(note.get("chapter") or ""),
+    }
+
+
+def glossary_from_annotations(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [glossary_row_from_note(note) for note in notes_from_annotations(items)]
 
 
 def merge_glossary(*groups: list[dict[str, Any]]) -> list[dict[str, Any]]:

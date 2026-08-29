@@ -41,6 +41,8 @@ def _translation_corpus(tmp_path: Path, monkeypatch) -> Path:
             "language": "en",
             "license": "public_domain_usa_gutenberg",
             "content_file": "sources/grotius/raw/freedom_of_the_seas.txt",
+            "year": 1609,
+            "translator": "Ralph Van Deman Magoffin",
             "content_hash": "abc",
             "rights": {"basis": "public_domain", "consumers": {"think": "allowed", "read": "allowed"}},
             "read": {"category_slug": "essays", "price_cents": 0, "split_length": "standard"},
@@ -48,7 +50,8 @@ def _translation_corpus(tmp_path: Path, monkeypatch) -> Path:
     ]
     (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
     (catalog / "authors.json").write_text(
-        json.dumps([{"id": "grotius", "name": "Grotius"}]), encoding="utf-8"
+        json.dumps([{"id": "grotius", "name": "Grotius", "display_name": "Hugo Grotius"}]),
+        encoding="utf-8",
     )
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(tmp_path))
     init_translation_project("grotius--freedom_of_the_seas")
@@ -109,9 +112,29 @@ def test_promote_and_publish_vietnamese(tmp_path, monkeypatch):
     assert payload["language"] == "vi"
     assert payload["raw_text"].startswith("Chương một.")
     assert payload["glossary"][0]["aliases"] == ["[17]"]
+    assert payload["glossary"][0]["name"] == "Gordian [17]"
+    assert payload["notes"][0]["label"] == "Gordian [17]"
+    assert payload["notes"][0]["marker"] == "[17]"
+    assert payload["credits"] == {
+        "author_name": "Hugo Grotius",
+        "author_hub_id": "grotius",
+        "translator_name": "Knowledge Hub",
+        "translator_role": "hub_editorial",
+        "source": {
+            "hub_work_id": "grotius--freedom_of_the_seas",
+            "title": "The Freedom of the Seas",
+            "year": 1609,
+            "language": "en",
+        },
+    }
     english = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert "glossary" not in english
     assert "Chương một." not in english["raw_text"]
+    assert english["credits"]["author_name"] == "Hugo Grotius"
+    assert english["credits"]["author_hub_id"] == "grotius"
+    assert english["credits"]["translator_name"] == "Ralph Van Deman Magoffin"
+    assert english["credits"]["translator_role"] == "translator"
+    assert english["credits"]["source"] is None
 
 
 def test_build_catalog_keeps_promoted_translation(tmp_path):

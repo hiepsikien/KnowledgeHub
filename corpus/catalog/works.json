@@ -21903,5 +21903,36 @@
       "price_cents": 0,
       "split_length": "standard"
     }
+  },
+  {
+    "id": "grotius--freedom_of_the_seas_vi",
+    "title": "Biển cả tự do",
+    "author_id": "grotius",
+    "language": "vi",
+    "year": 1609,
+    "description": "Hugo Grotius viết Mare Liberum năm 1609, khi Bồ Đào Nha đòi độc chiếm đường biển sang Ấn Độ và Đông Ấn. Ông lập luận rằng biển cả là của chung theo luật tự nhiên: không ai được chiếm hữu đại dương, cũng không được cấm người khác đi lại và buôn bán trên đó. Luận văn ngắn này trở thành một trong những văn bản nền của luật quốc tế và luật biển.\n\nBản tiếng Việt do Knowledge Hub biên dịch từ bản Anh của Ralph Van Deman Magoffin, kèm chú thích cho độc giả ngày nay.",
+    "license": "hub_editorial_vi",
+    "license_source": "public_domain_usa_gutenberg",
+    "source_url": "https://www.gutenberg.org/ebooks/75962",
+    "translator": "Knowledge Hub",
+    "derived_from": "grotius--freedom_of_the_seas",
+    "origin": "hub_translation",
+    "content_file": null,
+    "think_brain": "grotius",
+    "content_hash": "b6aa63238f9256b8c08f96f1d37b62c6acda5131c5b7fef5e02a31bd605194f4",
+    "version": 1,
+    "status": "draft",
+    "rights": {
+      "basis": "editorial_derivative",
+      "consumers": {
+        "think": "blocked",
+        "read": "allowed"
+      }
+    },
+    "read": {
+      "category_slug": "essays",
+      "price_cents": 499,
+      "split_length": "standard"
+    }
   }
 ]

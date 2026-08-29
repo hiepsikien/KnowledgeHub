@@ -7,6 +7,7 @@ from typing import Any
 from ..paths import corpus_root
 from ..settings import resolve_models
 from .llm_json import parse_json_object
+from ..edition.footnotes import annotation_kind, annotation_label, glossary_term_key
 from .paths import annotations_file, glossary_file
 from .project import load_project
 from .providers import ProviderError, complete_prompt
@@ -40,7 +41,9 @@ Rules:
 - Write body_vi in clear Vietnamese, 1–3 sentences each.
 - Do NOT invent citations; use well-known classical/legal references only.
 - Keep marker exactly like "[1]" when kind is footnote.
-- anchor_text: a short phrase from the Vietnamese text near the marker (for tap-to-expand UI).
+- title_vi for footnotes: "{{anchor}} {{marker}}" e.g. "Seneca [4]" — unique per note.
+- glossary: only the first time a locked term appears in this book. Do not emit another glossary row for a term already defined in an earlier chapter.
+- anchor_text: a short exact substring from the Vietnamese text near the marker (for tap-to-expand UI).
 
 Return ONLY JSON:
 {{
@@ -52,7 +55,7 @@ Return ONLY JSON:
       "marker": "[1]",
       "kind": "footnote",
       "anchor_text": "Pliny",
-      "title_vi": "Chú thích [1]",
+      "title_vi": "Pliny [1]",
       "body_vi": "..."
     }}
   ]
@@ -114,13 +117,29 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
         if str(a.get("segment_id") or "") != segment_id
     ]
     by_id = {str(a.get("id")): a for a in existing if a.get("id")}
+    seen_glossary = {
+        glossary_term_key(item)
+        for item in existing
+        if annotation_kind(item) == "glossary" and glossary_term_key(item)
+    }
+    added = 0
     for item in new_items:
         if not item.get("id"):
             raise ProviderError(f"Annotation missing id: {item!r}")
+        item["kind"] = annotation_kind(item)
+        if item["kind"] == "glossary":
+            key = glossary_term_key(item)
+            if key and key in seen_glossary:
+                continue
+            if key:
+                seen_glossary.add(key)
         item["chapter"] = str(chapter)
         item["segment_id"] = segment_id
         item["generated_at"] = _now()
+        if item["kind"] == "footnote":
+            item["title_vi"] = annotation_label(item)
         by_id[str(item["id"])] = item
+        added += 1
 
     merged = sorted(by_id.values(), key=lambda a: (str(a.get("chapter", "")), str(a.get("marker", "")), str(a.get("id", ""))))
     store["annotations"] = merged
@@ -136,6 +155,6 @@ def annotate_segment(source_work_id: str, chapter: str) -> dict[str, Any]:
         "work_id": source_work_id,
         "chapter": chapter,
         "annotations_file": str(ann_path.relative_to(corpus_root())),
-        "added_or_updated": len(new_items),
+        "added_or_updated": added,
         "total": len(merged),
     }

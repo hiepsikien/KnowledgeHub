@@ -338,10 +338,58 @@ function kindBadge(kind) {
   const map = {
     footnote: ["kind-footnote", "footnote"],
     glossary: ["kind-glossary", "glossary"],
+    term: ["kind-glossary", "glossary"],
     context: ["kind-context", "context"],
   };
   const [cls, label] = map[kind] || ["", kind || "note"];
   return `<span class="badge ${cls}">${escapeHtml(label)}</span>`;
+}
+
+function annotationLabel(a) {
+  const marker = String(a.marker || "").trim();
+  const anchor = String(a.anchor_text || "").trim();
+  if (marker && /^\[[0-9]+\]$/.test(marker) && anchor && !anchor.includes(marker)) {
+    return `${anchor} ${marker}`;
+  }
+  return String(a.title_vi || marker || anchor || "Chú thích").trim();
+}
+
+function highlightAnnotatedText(text, annotations) {
+  const source = String(text || "");
+  if (!source) return "";
+  const ranges = [];
+  const seen = new Set();
+  for (const item of annotations || []) {
+    const marker = String(item.marker || "").trim();
+    if (/^\[[0-9]+\]$/.test(marker) && !seen.has(marker)) {
+      seen.add(marker);
+      let from = 0;
+      while (from < source.length) {
+        const at = source.indexOf(marker, from);
+        if (at < 0) break;
+        ranges.push({ start: at, end: at + marker.length, kind: item.kind || "footnote" });
+        from = at + marker.length;
+      }
+    }
+  }
+  ranges.sort((a, b) => a.start - b.start || b.end - a.end);
+  const picked = [];
+  let cursor = 0;
+  for (const range of ranges) {
+    if (range.start < cursor) continue;
+    picked.push(range);
+    cursor = range.end;
+  }
+  let html = "";
+  let at = 0;
+  for (const range of picked) {
+    html += escapeHtml(source.slice(at, range.start));
+    const kind = range.kind === "glossary" || range.kind === "term" ? "glossary" : range.kind === "context" ? "context" : "footnote";
+    html += `<mark class="ann-hl ann-${kind}">${escapeHtml(source.slice(range.start, range.end))}</mark>`;
+    at = range.end;
+  }
+  html += escapeHtml(source.slice(at));
+  return html;
 }
 
 function jobKindLabel(kind) {
@@ -723,8 +771,8 @@ function renderTranslationDetail() {
                 (a) => `<article class="tr-ann">
                   <div class="tr-ann-head">
                     ${kindBadge(a.kind)}
-                    ${a.marker ? `<strong>${escapeHtml(a.title_vi || a.marker)}</strong>` : `<strong>${escapeHtml(a.title_vi || "Chú thích")}</strong>`}
-                    ${a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
+                    <strong>${escapeHtml(annotationLabel(a))}</strong>
+                    ${a.anchor_text && annotationLabel(a) !== a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
                   </div>
                   <p>${escapeHtml(a.body_vi || "")}</p>
                 </article>`,
@@ -793,8 +841,8 @@ function renderTranslationAnnotations() {
           (a) => `<article class="tr-ann">
             <div class="tr-ann-head">
               ${kindBadge(a.kind)}
-              ${a.marker ? `<strong>${escapeHtml(a.title_vi || a.marker)}</strong>` : `<strong>${escapeHtml(a.title_vi || "Chú thích")}</strong>`}
-              ${a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
+              <strong>${escapeHtml(annotationLabel(a))}</strong>
+              ${a.anchor_text && annotationLabel(a) !== a.anchor_text ? `<span class="anchor">↳ ${escapeHtml(a.anchor_text)}</span>` : ""}
             </div>
             <p>${escapeHtml(a.body_vi || "")}</p>
           </article>`,
@@ -837,7 +885,13 @@ function showTranslationSegment(show) {
   $("tr-segment-title").textContent = slice.title;
   $("tr-source").textContent = slice.source || "";
   $("tr-draft").textContent = slice.draft || "Chưa có nháp DeepSeek.";
-  $("tr-translation").textContent = slice.polish || "Chưa có bản Gemini.";
+  const polish = slice.polish || "";
+  const translation = $("tr-translation");
+  if (polish && (state.translation.annotations || []).length) {
+    translation.innerHTML = highlightAnnotatedText(polish, state.translation.annotations);
+  } else {
+    translation.textContent = polish || "Chưa có bản Gemini.";
+  }
   const parts = seg.parts || [];
   const wrap = $("tr-part-wrap");
   const select = $("tr-part-select");

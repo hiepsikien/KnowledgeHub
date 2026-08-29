@@ -492,6 +492,7 @@
   {
     "id": "grotius",
     "name": "Grotius",
+    "display_name": "Hugo Grotius",
     "think_brain": "grotius"
   },
   {

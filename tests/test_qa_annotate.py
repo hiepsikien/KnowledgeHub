@@ -455,6 +455,60 @@ def test_annotate_segment_merges_annotations(corpus: Path):
     store = json.loads((corpus / "translations/grotius--freedom_of_the_seas/annotations.json").read_text())
     assert len(store["annotations"]) == 1
     assert store["annotations"][0]["body_vi"].startswith("Pliny")
+    assert store["annotations"][0]["title_vi"] == "Pliny [1]"
+
+
+def test_annotate_skips_duplicate_glossary_term(corpus: Path):
+    _lock_tight(corpus)
+    ann_path = corpus / "translations/grotius--freedom_of_the_seas/annotations.json"
+    ann_path.write_text(
+        json.dumps(
+            {
+                "annotations": [
+                    {
+                        "id": "keep-glossary",
+                        "segment_id": "grotius--freedom_of_the_seas--chii",
+                        "chapter": "II",
+                        "kind": "glossary",
+                        "anchor_text": "Luật các dân tộc",
+                        "title_vi": "Luật các dân tộc",
+                        "body_vi": "Jus gentium.",
+                    }
+                ]
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    fresh = json.dumps(
+        {
+            "annotations": [
+                {
+                    "id": "grotius--freedom_of_the_seas--chi--glossary-law-of-nations",
+                    "kind": "glossary",
+                    "anchor_text": "Luật các dân tộc",
+                    "title_vi": "Luật các dân tộc (Jus Gentium)",
+                    "body_vi": "Bản trùng.",
+                },
+                {
+                    "id": "grotius--freedom_of_the_seas--chi--fn-17",
+                    "marker": "[17]",
+                    "kind": "footnote",
+                    "anchor_text": "Gordian",
+                    "body_vi": "Hoàng đế Gordian.",
+                },
+            ]
+        }
+    )
+    with patch("knowledgehub.translation.annotate.complete_prompt", return_value=fresh):
+        result = annotate_segment("grotius--freedom_of_the_seas", "I")
+    store = json.loads(ann_path.read_text(encoding="utf-8"))
+    glossary = [row for row in store["annotations"] if row.get("kind") == "glossary"]
+    assert len(glossary) == 1
+    assert glossary[0]["id"] == "keep-glossary"
+    assert result["added_or_updated"] == 1
+    assert any(row.get("title_vi") == "Gordian [17]" for row in store["annotations"])
 
 
 def test_qa_rejects_out_of_range_score(corpus: Path):
