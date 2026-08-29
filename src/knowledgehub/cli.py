@@ -253,12 +253,12 @@ def main(argv: list[str] | None = None) -> int:
                 raw = Path(job["path"]).read_text(encoding="utf-8", errors="replace")
                 work = job.get("work")
                 family = job.get("family")
-                strip = family == "gutenberg" if family else bool(work)
+                strip = job.get("strip_first", family == "gutenberg" if family else bool(work))
             else:
                 raw = (corpus_dir / job["file"]).read_text(encoding="utf-8")
                 work = None
                 family = job.get("family")
-                strip = family == "gutenberg"
+                strip = job.get("strip_first", family == "gutenberg")
             try:
                 edition, parse_report, qa_report = parse_and_qa(
                     raw,

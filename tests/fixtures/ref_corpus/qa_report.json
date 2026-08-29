@@ -1,76 +1,113 @@
 {
   "model": "gemini-3.1-flash-lite",
-  "samples": 14,
-  "rule_passed": 14,
-  "llm_ok": 0,
+  "samples": 50,
+  "rule_passed": 50,
+  "llm_ok": 44,
   "llm_errors": 0,
-  "verdict_pass": 14,
-  "verdict_warn": 0,
-  "verdict_fail": 0,
+  "verdict_pass": 33,
+  "verdict_warn": 12,
+  "verdict_fail": 5,
   "results": [
     {
       "id": "grotius_treatise",
       "language": "en",
-      "blocks": 14,
+      "blocks": 15,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 9,
-        "block_structure": 10,
-        "join_quality": 10,
+        "block_structure": 8,
+        "join_quality": 9,
         "inline_spans": 8,
-        "overall": 9
+        "overall": 8
       },
       "verdict": "pass",
       "issue_count": 2,
-      "summary_vi": "Văn bản được chuyển đổi chính xác, giữ nguyên nội dung gốc. Tuy nhiên, các nhãn span inline chưa bao quát hết các thành phần định dạng (như italic) trong một số block.",
+      "summary_vi": "Bản phân tích có cấu trúc tốt, tuy nhiên có một số lỗi nhỏ trong việc phân tách các khối trích dẫn thơ (blockquotes) và định dạng span. Các đoạn văn bản được bảo toàn đầy đủ.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
-          "category": "inline_spans",
-          "note_vi": "Thiếu nhãn span cho các đoạn in nghiêng (italic) trong các block trích dẫn và tiêu đề.",
-          "block_index": 1,
-          "source_excerpt": "_By the Law of Nations navigation is free to all persons whatsoever_",
-          "edition_excerpt": "_By the Law of Nations n"
+          "category": "block_structure",
+          "note_vi": "Khối trích dẫn thơ của Vergil (đoạn 8-10) bị chia nhỏ không cần thiết thành 3 khối thay vì một khối blockquote thống nhất.",
+          "block_index": 8,
+          "source_excerpt": "> “_What men, what monsters... drive us to the cruel seas again._”[6]",
+          "edition_excerpt": "Khối 8, 9, 10 bị tách rời."
         },
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Nhãn span cho block 5 và 7 chỉ bao phủ một phần nội dung trích dẫn.",
-          "block_index": 5,
-          "source_excerpt": "> “_Not every plant on every soil will grow_,”[2]",
-          "edition_excerpt": "> “_Not every plant on eve"
+          "note_vi": "Span cho tiêu đề (block 0) bị cắt cụt không chính xác (chỉ bao gồm một phần của tiêu đề).",
+          "block_index": 0,
+          "source_excerpt": "CHAPTER I _By the Law of Nations navigation is free to all persons whatsoever_",
+          "edition_excerpt": "spans=[em:'_By the Law of Nations n']"
+        }
+      ]
+    },
+    {
+      "id": "grotius_treatise_ch1",
+      "language": "en",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt, các dòng bị ngắt trong nguồn đã được nối lại chính xác. Tuy nhiên, cấu trúc blockquote của đoạn thơ Vergil bị chia tách không nhất quán giữa các block.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn thơ của Vergil (block 8 và 9) bị tách rời một cách không cần thiết, lẽ ra nên nằm trong cùng một blockquote.",
+          "block_index": 8,
+          "source_excerpt": "“_What men, what monsters, what inhuman race,\nWhat laws, what barbarous customs of the place,\nShut up a desert shore to drowning men,\n  And drive us to the cruel seas again._”[6]",
+          "edition_excerpt": "“_What men, what monsters, what inhuman race,\nWhat laws, what barbarous customs of the place,\n\nShut up a desert shore to drowning men,\nAnd drive us to the cruel seas again._”[6]"
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span italic trong block 0 bị cắt cụt giữa chừng, không bao trùm toàn bộ tiêu đề phụ.",
+          "block_index": 0,
+          "source_excerpt": "_By the Law of Nations navigation is free to all persons whatsoever_",
+          "edition_excerpt": "_By the Law of Nations n_avigation is free to all persons whatsoever"
         }
       ]
     },
     {
       "id": "locke_second_treatise",
       "language": "en",
-      "blocks": 19,
+      "blocks": 10,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
-        "block_structure": 8,
-        "join_quality": 10,
+        "block_structure": 9,
+        "join_quality": 9,
         "inline_spans": 10,
         "overall": 9
       },
       "verdict": "pass",
       "issue_count": 1,
-      "summary_vi": "Văn bản được bảo toàn tốt. Tuy nhiên, cấu trúc tiêu đề của đoạn giới thiệu tác phẩm (Two Treatises of Government) bị chia nhỏ thành nhiều khối tiêu đề thay vì một khối thống nhất.",
+      "summary_vi": "Bản phân tích có chất lượng rất tốt, bảo toàn nguyên vẹn văn bản gốc. Chỉ có một lỗi nhỏ về cấu trúc khối khi tách đoạn giữa tiêu đề và nội dung ở phần đầu.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "block_structure",
-          "note_vi": "Các dòng tiêu đề của 'Two Treatises of Government' bị tách rời thành 4 khối tiêu đề riêng biệt thay vì gộp thành một khối tiêu đề duy nhất.",
-          "block_index": 11,
-          "source_excerpt": "TWO TREATISES OF GOVERNMENT. IN THE FORMER THE FALSE PRINCIPLES AND\n\nFOUNDATION OF SIR ROBERT FILMER AND HIS FOLLOWERS ARE DETECTED AND\n\nOVERTHROWN. THE LATTER IS AN ESSAY CONCERNING THE TRUE ORIGINAL EXTENT\n\nAND END OF CIVIL GOVERNMENT.",
-          "edition_excerpt": "TWO TREATISES OF GOVERNMENT. IN THE FORMER THE FALSE PRINCIPLES AND\n\nFOUNDATION OF SIR ROBERT FILMER AND HIS FOLLOWERS ARE DETECTED AND\n\nOVERTHROWN. THE LATTER IS AN ESSAY CONCERNING THE TRUE ORIGINAL EXTENT\n\nAND END OF CIVIL GOVERNMENT."
+          "note_vi": "Đoạn văn bắt đầu bằng 'was published in 1690' bị tách rời khỏi câu trước đó ('John Locke’s “Second Treatise of Government”') do ngắt dòng trong nguồn, lẽ ra nên được nối lại thành một khối duy nhất.",
+          "block_index": 3,
+          "source_excerpt": "John Locke’s “Second Treatise of Government”\n\nwas published in 1690.",
+          "edition_excerpt": "John Locke’s “Second Treatise of Government”\n\nwas published in 1690."
         }
       ]
     },
@@ -79,24 +116,24 @@
       "language": "en",
       "blocks": 6,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
         "block_structure": 10,
         "join_quality": 10,
-        "inline_spans": 8,
-        "overall": 9
+        "inline_spans": 9,
+        "overall": 10
       },
       "verdict": "pass",
       "issue_count": 1,
-      "summary_vi": "Văn bản được bảo toàn nguyên vẹn, cấu trúc các đoạn văn chính xác. Tuy nhiên, việc gắn nhãn span inline chưa hoàn toàn chuẩn xác theo quy tắc.",
+      "summary_vi": "Bản phân tích văn bản đạt chất lượng rất cao, bảo toàn nguyên vẹn nội dung gốc và cấu trúc đoạn văn. Các nhãn khối được phân loại chính xác.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Nhãn paren_cite trong block 3 bao trùm không đủ nội dung (chỉ lấy một phần của cụm trong ngoặc đơn).",
+          "note_vi": "Nhãn paren_cite trong block 3 bị cắt cụt, chỉ bao gồm một phần của cụm từ trong ngoặc đơn.",
           "block_index": 3,
           "source_excerpt": "(supernaturally deficient in originality)",
           "edition_excerpt": "(supernaturally deficien"
@@ -108,35 +145,35 @@
       "language": "en",
       "blocks": 22,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
-        "block_structure": 9,
+        "block_structure": 7,
         "join_quality": 10,
         "inline_spans": 8,
-        "overall": 9
+        "overall": 8
       },
-      "verdict": "pass",
+      "verdict": "warn",
       "issue_count": 2,
-      "summary_vi": "Bản phân tích có độ chính xác cao về nội dung và cấu trúc. Tuy nhiên, hệ thống gắn nhãn span cho các mục liệt kê (1-10) bị nhầm lẫn thành 'paren_page' thay vì 'paren_cite' hoặc 'list_item'.",
+      "summary_vi": "Văn bản được bảo toàn tốt. Tuy nhiên, cấu trúc khối bị lỗi khi gán nhãn 'heading level=3' cho các đoạn văn bản (Objection, Answer, Reply), vốn nên là 'paragraph'. Ngoài ra, các nhãn 'paren_page' được sử dụng không chính xác cho các số thứ tự trong danh sách.",
       "error": null,
       "top_issues": [
         {
-          "severity": "minor",
-          "category": "inline_spans",
-          "note_vi": "Các mục liệt kê (1) đến (10) được gắn nhãn 'paren_page' không chính xác; đây là các chỉ số liệt kê, không phải số trang.",
-          "block_index": 4,
-          "source_excerpt": "(1)",
-          "edition_excerpt": "spans=[paren_page:'(1)']"
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các đoạn Objection, Answer và Reply bị gán nhãn sai là 'heading level=3'. Đây là các đoạn văn bản (paragraph) thông thường.",
+          "block_index": 16,
+          "source_excerpt": "Objection 1: It seems that...",
+          "edition_excerpt": "heading level=3"
         },
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Span 'quote' trong block 17 bị cắt cụt không đúng cách (thiếu dấu ngoặc kép đóng).",
-          "block_index": 17,
-          "source_excerpt": "\"Seek not the things that are too high for thee\"",
-          "edition_excerpt": "spans=[quote:'\"Seek not the things tha', ...]"
+          "note_vi": "Các số thứ tự trong danh sách (1), (2)... bị gán nhãn 'paren_page' không phù hợp; nên để là văn bản thuần hoặc nhãn danh sách.",
+          "block_index": 3,
+          "source_excerpt": "(1)",
+          "edition_excerpt": "spans=[paren_page:'(1)']"
         }
       ]
     },
@@ -145,7 +182,7 @@
       "language": "en",
       "blocks": 6,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
@@ -156,43 +193,51 @@
       },
       "verdict": "pass",
       "issue_count": 1,
-      "summary_vi": "Bản phân tích có độ chính xác cao về nội dung và cấu trúc. Tuy nhiên, khối đầu tiên (Block 0) đã gộp nhầm thông tin xuất bản (First Issue...) vào cùng một đoạn văn với tiêu đề dịch giả, thay vì tách thành một khối riêng biệt.",
+      "summary_vi": "Bản phân tích có độ chính xác cao về văn bản và cấu trúc. Tuy nhiên, khối đầu tiên (metadata) nên được tách thành hai đoạn thay vì gộp chung để phản ánh đúng cấu trúc trình bày của nguồn.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "block_structure",
-          "note_vi": "Thông tin về lần xuất bản (First Issue...) nên được tách thành một khối paragraph riêng biệt thay vì gộp chung với thông tin dịch giả.",
+          "note_vi": "Khối 0 nên được tách thành hai đoạn: thông tin xuất bản và thông tin tái bản để cải thiện khả năng đọc.",
           "block_index": 0,
-          "source_excerpt": "Co\n\nFirst Issue Of This Edition 1912 Reprinted 1919, 1923, 1928",
-          "edition_excerpt": "Co First Issue Of This Edition 1912 Reprinted 1919, 1923, 1928"
+          "source_excerpt": "Co\n\nFirst Issue Of This Edition",
+          "edition_excerpt": "Co First Issue Of This Edition"
         }
       ]
     },
     {
       "id": "mill_on_liberty",
       "language": "en",
-      "blocks": 19,
+      "blocks": 5,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
-        "block_structure": 10,
+        "block_structure": 9,
         "join_quality": 10,
         "inline_spans": 9,
-        "overall": 10
+        "overall": 9
       },
       "verdict": "pass",
-      "issue_count": 1,
-      "summary_vi": "Bản phân tích tuân thủ tốt cấu trúc văn bản gốc. Các khối được phân tách chính xác và văn bản được bảo toàn đầy đủ.",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác cao về văn bản và cấu trúc. Tuy nhiên, nhãn block 1 (Table of Contents) nên được định dạng lại thay vì để dưới dạng paragraph thuần túy.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Block 1 chứa mục lục (Table of Contents) nhưng đang được gắn nhãn là paragraph. Nên tách thành các dòng hoặc block riêng biệt để tăng tính ngữ nghĩa.",
+          "block_index": 1,
+          "source_excerpt": "INTRODUCTORY 1 OF THE LIBERTY...",
+          "edition_excerpt": "INTRODUCTORY 1 OF THE LIBERTY..."
+        },
+        {
+          "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Span 'paren_aside' trong block 18 bao gồm cả dấu ngoặc đơn, nhưng nội dung bên trong ngoặc đơn mới là phần aside chính xác.",
-          "block_index": 18,
+          "note_vi": "Span paren_aside trong block 4 chỉ bao gồm một phần của ngoặc đơn '(except in some of the p'. Cần bao quát toàn bộ cụm '(except in some of the popular governments of Greece)'.",
+          "block_index": 4,
           "source_excerpt": "(except in some of the popular governments of Greece)",
           "edition_excerpt": "(except in some of the p"
         }
@@ -201,9 +246,9 @@
     {
       "id": "whitman_grass",
       "language": "en",
-      "blocks": 48,
+      "blocks": 21,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
@@ -213,26 +258,202 @@
         "overall": 9
       },
       "verdict": "pass",
-      "issue_count": 1,
-      "summary_vi": "Bản phân tích giữ nguyên vẹn văn bản gốc rất tốt. Tuy nhiên, cấu trúc khối cần được cải thiện bằng cách nhóm các dòng thơ liên quan thay vì tách rời từng dòng đơn lẻ, điều này giúp phản ánh đúng nhịp điệu của bài thơ.",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có cấu trúc tốt, giữ nguyên văn bản gốc. Tuy nhiên, một số đoạn stanza bị gộp dòng không nhất quán so với định dạng thơ gốc (ví dụ: các dòng thơ bị nối thành đoạn văn thay vì giữ ngắt dòng stanza).",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "block_structure",
-          "note_vi": "Các dòng thơ trong cùng một khổ nên được nhóm lại thành một khối thay vì tách rời từng dòng, gây khó khăn cho việc đọc nhịp điệu.",
-          "block_index": 2,
-          "source_excerpt": "I celebrate myself, and sing myself,\n\nAnd what I assume you shall assume,",
-          "edition_excerpt": "I celebrate myself, and sing myself,\n\nAnd what I assume you shall assume,"
+          "note_vi": "Một số stanza bị gộp dòng thành đoạn văn (paragraph) thay vì giữ nguyên cấu trúc ngắt dòng của thơ, làm mất đi nhịp điệu gốc.",
+          "block_index": 15,
+          "source_excerpt": "To elaborate is no avail, learn’d and unlearn’d feel that it is so.",
+          "edition_excerpt": "To elaborate is no avail, learn’d and unlearn’d feel that it is so."
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề số (1, 2, 3) nên được tách thành block riêng biệt thay vì dính liền vào dòng đầu tiên của stanza.",
+          "block_index": 1,
+          "source_excerpt": "1\nI celebrate myself",
+          "edition_excerpt": "1 I celebrate myself"
         }
       ]
     },
     {
       "id": "shakespeare_hamlet",
       "language": "en",
-      "blocks": 145,
+      "blocks": 105,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 5,
+        "join_quality": 6,
+        "inline_spans": 8,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 3,
+      "summary_vi": "Bản phân tích gặp lỗi nghiêm trọng trong việc gộp dòng (block structure) ở phần Dramatis Personae, khiến các nhân vật bị dính vào nhau. Ngoài ra, cấu trúc tiêu đề ACT I và SCENE I bị gộp sai quy cách.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Dòng 'GERTRUDE...' và 'POLONIUS...' bị gộp thành một khối duy nhất, thiếu ngắt dòng giữa hai nhân vật.",
+          "block_index": 4,
+          "source_excerpt": "GERTRUDE, the Queen, Hamlet’s mother, now wife of Claudius\nPOLONIUS, Lord Chamberlain",
+          "edition_excerpt": "GERTRUDE, the Queen, Hamlet’s mother, now wife of Claudius POLONIUS, Lord Chamberlain"
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Tiêu đề ACT I và SCENE I bị gộp chung vào một dòng thay vì tách biệt theo phân cấp văn bản.",
+          "source_excerpt": "ACT I\n\nSCENE I. Elsinore. A platform before the Castle.",
+          "edition_excerpt": "ACT I SCENE I. Elsinore. A platform before the Castle."
+        }
+      ]
+    },
+    {
+      "id": "plato_republic",
+      "language": "en",
+      "blocks": 3,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt. Tuy nhiên, khối đầu tiên bị gắn nhãn sai là tiêu đề (heading) thay vì đoạn văn (paragraph).",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Khối 0 là một đoạn văn dài nhưng bị gắn nhãn là 'heading level=2'.",
+          "block_index": 0,
+          "source_excerpt": "INTRODUCTION AND ANALYSIS. The Republic of Plato...",
+          "edition_excerpt": "INTRODUCTION AND ANALYSIS. The Republic of Plato..."
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Nhãn span cho '(cp, especially in Books' bị cắt cụt không đúng cú pháp.",
+          "block_index": 0,
+          "source_excerpt": "(cp, especially in Books V, VI, VII)",
+          "edition_excerpt": "(cp, especially in Books"
+        }
+      ]
+    },
+    {
+      "id": "hobbes_leviathan",
+      "language": "en",
+      "blocks": 10,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 7,
+        "join_quality": 6,
+        "inline_spans": 8,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích giữ nguyên văn bản tốt nhưng gặp lỗi ngắt đoạn không cần thiết ở khối 8. Khối 8 lẽ ra nên được nối liền với khối 7 để đảm bảo tính liên tục của câu văn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Đoạn văn bị ngắt quãng vô lý tại khối 8. Câu 'So that Sense in all cases, is nothing els but originall fancy, caused (as I have said) by the pressure...' bị tách làm hai khối, làm mất tính liên kết của câu.",
+          "block_index": 8,
+          "source_excerpt": "caused (as I have said)\n\nby the pressure",
+          "edition_excerpt": "caused (as I have said)\n\nby the pressure"
+        }
+      ]
+    },
+    {
+      "id": "machiavelli_prince",
+      "language": "en",
+      "blocks": 16,
       "fidelity_passed": true,
       "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 4,
+        "join_quality": 10,
+        "inline_spans": 6,
+        "overall": 7
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Cấu trúc khối bị lỗi nghiêm trọng khi gộp các tiêu đề chương thành đoạn văn. Việc gắn nhãn heading cho các chương không nhất quán và thiếu chính xác.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề chương (CHAPTER I, II, III...) bị gộp chung vào một đoạn văn thay vì tách thành các heading riêng biệt.",
+          "block_index": 0,
+          "source_excerpt": "CHAPTER I. ... CHAPTER II. ... CHAPTER III. ...",
+          "edition_excerpt": "CHAPTER I. HOW MANY KINDS OF PRINCIPALITIES THERE ARE, AND BY WHAT MEANS THEY ARE ACQUIRED CHAPTER II. CONCERNING HEREDI…"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề chương VII và VI bị đảo lộn thứ tự trong block 3.",
+          "block_index": 3,
+          "source_excerpt": "CHAPTER VI. ... CHAPTER VII. ...",
+          "edition_excerpt": "CHAPTER VII. ... CHAPTER VI. ..."
+        }
+      ]
+    },
+    {
+      "id": "marx_communist",
+      "language": "en",
+      "blocks": 17,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn chính xác. Cấu trúc khối nhìn chung tốt, tuy nhiên khối 0 nên được tách thành tiêu đề thay vì để dạng đoạn văn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 0 chứa danh sách các chương nhưng được gắn nhãn là 'paragraph' thay vì 'heading'.",
+          "block_index": 0,
+          "source_excerpt": "I. BOURGEOIS AND PROLETARIANS II. PROLETARIANS AND COMMUNISTS...",
+          "edition_excerpt": "I. BOURGEOIS AND PROLETARIANS II. PROLETARIANS AND COMMUNISTS..."
+        }
+      ]
+    },
+    {
+      "id": "darwin_origin",
+      "language": "en",
+      "blocks": 81,
+      "fidelity_passed": true,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
@@ -243,16 +464,825 @@
       },
       "verdict": "pass",
       "issue_count": 0,
-      "summary_vi": "Bản phân tích tuân thủ nghiêm ngặt cấu trúc văn bản gốc. Không có lỗi về định dạng, ngắt dòng hay thiếu hụt nội dung.",
+      "summary_vi": "Bản phân tích tuân thủ chính xác cấu trúc của tài liệu gốc. Các tiêu đề chương và các mục con được phân loại đúng định dạng, không có lỗi mất mát văn bản hoặc sai sót trong việc nối dòng.",
       "error": null,
       "top_issues": []
+    },
+    {
+      "id": "austen_pride",
+      "language": "en",
+      "blocks": 20,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 5,
+        "join_quality": 6,
+        "inline_spans": 9,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Cấu trúc khối bị lỗi nghiêm trọng do gộp nhầm các tiêu đề chương vào đoạn văn chứa trích dẫn. Một số tiêu đề chương bị mất hoàn toàn trong quá trình phân tích.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Nhiều tiêu đề chương (ví dụ: Chapter IV, X, XII, XVIII, XXIV, XXXI) bị gộp vào đoạn văn phía trước thay vì tách thành khối heading riêng.",
+          "block_index": 2,
+          "source_excerpt": "“She is tolerable” 15 Heading to Chapter IV. 18",
+          "edition_excerpt": "“She is tolerable” 15 Heading to Chapter IV. 18"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Thiếu khối cho 'Heading to Chapter XXXI' ở cuối văn bản.",
+          "block_index": 19,
+          "source_excerpt": "Heading to Chapter XXXI."
+        }
+      ]
+    },
+    {
+      "id": "melville_moby",
+      "language": "en",
+      "blocks": 7,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 3,
+        "join_quality": 4,
+        "inline_spans": 10,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Cấu trúc khối bị phân mảnh nghiêm trọng do ngắt dòng sai vị trí. Các tiêu đề chương bị tách rời khỏi nội dung hoặc bị gán nhãn sai, gây mất tính liên tục của văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề chương (ví dụ: CHAPTER 57, CHAPTER 58) bị tách rời khỏi phần còn lại của tiêu đề hoặc bị gán nhãn là heading trong khi lẽ ra nên là một phần của văn bản liền mạch.",
+          "block_index": 2,
+          "source_excerpt": "CHAPTER 57. Of Whales in Paint; in Teeth; in Wood; in Sheet-Iron; in",
+          "edition_excerpt": "CHAPTER 57. Of Whales in Paint; in Teeth; in Wood; in Sheet-Iron; in"
+        },
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Văn bản bị ngắt dòng không cần thiết (hard line breaks) làm đứt quãng các câu tiêu đề, ví dụ như đoạn 'Pictures of Whaling Scenes' bị tách khỏi câu trước đó.",
+          "block_index": 1,
+          "source_excerpt": "True\n\nPictures of Whaling Scenes.",
+          "edition_excerpt": "Pictures of Whaling Scenes."
+        }
+      ]
+    },
+    {
+      "id": "homer_iliad",
+      "language": "en",
+      "blocks": 39,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích giữ nguyên vẹn văn bản gốc. Tuy nhiên, cấu trúc khối có sự nhầm lẫn khi gán nhãn heading cho một số mục danh sách minh họa (ví dụ: 'THE APOTHEOSIS OF HOMER...'), trong khi đây chỉ là các tiêu đề mục lục.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các mục danh sách minh họa (như 'THE APOTHEOSIS OF HOMER...') bị gán nhãn heading level 2 không phù hợp, nên để là paragraph hoặc list item.",
+          "block_index": 6,
+          "source_excerpt": "THE APOTHEOSIS OF HOMER JUPITER SENDING THE EVIL DREAM TO AGAMEMNON",
+          "edition_excerpt": "THE APOTHEOSIS OF HOMER JUPITER SENDING THE EVIL DREAM TO AGAMEMNON"
+        }
+      ]
+    },
+    {
+      "id": "hume_treatise",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 5,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn đầy đủ nhưng cấu trúc khối chưa hợp lý. Các tiêu đề mục (SECT.) bị gộp chung vào các đoạn văn thay vì tách thành các khối tiêu đề riêng biệt.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề mục (SECT.) nên được tách thành các khối tiêu đề riêng thay vì để lẫn trong đoạn văn.",
+          "block_index": 2,
+          "source_excerpt": "SECT. III.  OF THE IDEAS OF THE MEMORY AND IMAGINATION. SECT. IV.   OF THE CONNECTION OR ASSOCIATION OF IDEAS.",
+          "edition_excerpt": "SECT. III.  OF THE IDEAS OF THE MEMORY AND IMAGINATION. SECT. IV.   OF THE CONNECTION OR ASSOCIATION OF IDEAS."
+        }
+      ]
+    },
+    {
+      "id": "smith_wealth",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 4,
+        "join_quality": 5,
+        "inline_spans": 10,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Cấu trúc khối bị lỗi nghiêm trọng. Nhiều tiêu đề chương bị gộp nhầm vào đoạn văn, và các dòng bị ngắt quãng không cần thiết (đặc biệt là ở phần mục lục) chưa được nối lại đúng cách.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề chương (CHAPTER...) bị trộn lẫn vào trong các đoạn văn thay vì tách thành các khối heading riêng biệt.",
+          "block_index": 0,
+          "source_excerpt": "CHAPTER II. OF THE PRINCIPLE...",
+          "edition_excerpt": "BOOK I. ... CHAPTER II. OF THE PRINCIPLE..."
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Các dòng bị ngắt quãng trong phần mục lục (ví dụ: 'CITIES AND' và 'TOWNS...') chưa được nối lại thành một câu hoàn chỉnh.",
+          "block_index": 3,
+          "source_excerpt": "CHAPTER III. OF THE RISE AND PROGRESS OF CITIES AND\n\nTOWNS, AFTER THE FALL OF THE ROMAN EMPIRE.",
+          "edition_excerpt": "CHAPTER III. OF THE RISE AND PROGRESS OF CITIES AND\n\nTOWNS, AFTER THE FALL OF THE ROMAN EMPIRE."
+        }
+      ]
+    },
+    {
+      "id": "montesquieu_spirit",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 7,
+        "overall": 8
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác văn bản cao. Tuy nhiên, việc gán nhãn tiêu đề (heading) cho khối 1 chưa chính xác về mặt ngữ nghĩa và định dạng span bị cắt cụt.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 1 chứa cả thông tin nguồn và tiêu đề chương, nên được tách hoặc gán nhãn là paragraph thay vì heading level 2 để tránh sai lệch cấu trúc tài liệu.",
+          "block_index": 1,
+          "source_excerpt": "_From the Set of Eight Volumes of “Celebrated Crimes”_ *ALI PACHA* CHAPTER I",
+          "edition_excerpt": "_From the Set of Eight Volumes of “Celebrated Crimes”_ *ALI PACHA* CHAPTER I"
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span italic trong khối 1 bị cắt cụt giữa chừng (chỉ bao gồm một phần của câu), không phản ánh đúng toàn bộ cụm từ in nghiêng trong nguồn.",
+          "block_index": 1,
+          "source_excerpt": "_From the Set of Eight Volumes of “Celebrated Crimes”_",
+          "edition_excerpt": "_From the Set of Eight V_"
+        }
+      ]
+    },
+    {
+      "id": "paine_common_sense",
+      "language": "en",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 4,
+        "join_quality": 5,
+        "inline_spans": 8,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Văn bản giữ nguyên nội dung gốc nhưng gặp lỗi nghiêm trọng về cấu trúc khối ở cuối tài liệu. Các dòng bị ngắt quãng do định dạng nguồn đã không được nối lại, dẫn đến việc tạo ra các tiêu đề giả và phân đoạn sai quy cách.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "critical",
+          "category": "block_structure",
+          "note_vi": "Đoạn cuối bị ngắt quãng sai quy cách, tạo ra một tiêu đề giả (block 12) từ một phần câu đang dang dở.",
+          "block_index": 12,
+          "source_excerpt": "part of his property to furnish means for the protection of the rest;",
+          "edition_excerpt": "part of his property to furnish means for the protection of the rest;"
+        },
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Các dòng bị ngắt do xuống dòng trong nguồn (hard line breaks) không được nối lại thành đoạn văn hoàn chỉnh.",
+          "block_index": 13,
+          "source_excerpt": "and this he is induced to do by the same prudence which in every other case a",
+          "edition_excerpt": "and this he is induced to do by the same prudence which in every other case a"
+        }
+      ]
+    },
+    {
+      "id": "federalist_papers",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 5,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt về nội dung và cấu trúc đoạn. Tuy nhiên, việc gắn nhãn span cho chú thích trong ngoặc đơn (paren_aside) bị lỗi cắt ngắn nội dung, chỉ bao gồm một phần nhỏ của cụm từ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span 'paren_aside' bị cắt cụt giữa chừng, chỉ bao gồm một phần của nội dung trong ngoặc đơn thay vì toàn bộ cụm từ.",
+          "block_index": 8,
+          "source_excerpt": "(merely because their situations might subject them to suspicion)",
+          "edition_excerpt": "(merely because their si"
+        }
+      ]
+    },
+    {
+      "id": "swift_gulliver",
+      "language": "en",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có cấu trúc tốt và bảo toàn văn bản gốc chính xác. Tuy nhiên, có một lỗi phân loại khối tiêu đề ở phần đầu và một lỗi ngắt dòng giữa câu cần được hợp nhất.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 0 (PART II...) nên được gắn nhãn là heading thay vì paragraph.",
+          "block_index": 0
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Khối 8 và 9 bị ngắt giữa chừng tại cụm 'Mr. / Gulliver'. Cần hợp nhất hai khối này thành một đoạn văn duy nhất.",
+          "block_index": 8,
+          "source_excerpt": "that Mr.\n\nGulliver",
+          "edition_excerpt": "that Mr.\n\nGulliver"
+        }
+      ]
+    },
+    {
+      "id": "bronte_jane_eyre",
+      "language": "en",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác cao về văn bản và cấu trúc. Tuy nhiên, các khối trích dẫn (blockquote) đang bị gắn nhãn sai là đoạn văn (paragraph) trong metadata, và một số span inline cần được kiểm tra lại định dạng.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các khối 5, 6, 10, 11, 12 là trích dẫn (blockquote) nhưng đang được gắn nhãn là 'paragraph' trong digest.",
+          "block_index": 5,
+          "source_excerpt": "> “What does Bessie say I have done?” I asked.",
+          "edition_excerpt": "> “What does Bessie say I have done?” I asked."
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span 'paren_aside' trong block 1 bị cắt cụt không tự nhiên ở cuối chuỗi.",
+          "block_index": 1,
+          "source_excerpt": "(Mrs. Reed, when there was no company, dined early)",
+          "edition_excerpt": "(Mrs. Reed, when there w"
+        }
+      ]
+    },
+    {
+      "id": "wells_war_worlds",
+      "language": "en",
+      "blocks": 7,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 7,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác văn bản cao. Tuy nhiên, cấu trúc khối của phần trích dẫn (stanza) bị tách rời không hợp lý và nhãn span cho phần chú thích (paren_aside) bị cắt cụt sai vị trí.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Phần trích dẫn của Kepler bị tách thành hai khối (3 và 4) thay vì một khối thống nhất, làm mất tính liên kết của stanza.",
+          "block_index": 3,
+          "source_excerpt": "‘But who shall dwell in these worlds if they be inhabited?\n. . . Are we or they Lords of the World? . . . And how are all things made for man?’",
+          "edition_excerpt": "‘But who shall dwell in these worlds if they be inhabited?\n\n. . . Are we or they Lords of the World? . . . And how are all things made for man?’"
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Nhãn paren_aside bị cắt cụt giữa chừng (chỉ bao gồm 'quoted in _The Anatomy '), không bao quát toàn bộ nội dung trong ngoặc đơn.",
+          "block_index": 4,
+          "source_excerpt": "(quoted in _The Anatomy of Melancholy_)",
+          "edition_excerpt": "(quoted in _The Anatomy of Melancholy_)"
+        }
+      ]
+    },
+    {
+      "id": "poe_raven",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích giữ nguyên văn bản tốt. Tuy nhiên, khối 'DE BERANGER' bị gắn nhãn là heading cấp 2, trong khi đây chỉ là một dòng chú thích tác giả thông thường.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Dòng 'DE BERANGER' không nên được gắn nhãn là heading (h2), nên để là paragraph hoặc blockquote.",
+          "block_index": 3,
+          "source_excerpt": "DE BERANGER.",
+          "edition_excerpt": "DE BERANGER."
+        }
+      ]
+    },
+    {
+      "id": "thoreau_walden",
+      "language": "en",
+      "blocks": 25,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 4,
+        "join_quality": 5,
+        "inline_spans": 10,
+        "overall": 6
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích gặp lỗi nghiêm trọng trong việc tách khối (block segmentation) ở phần mục lục, khiến các tiêu đề bị gộp sai. Cấu trúc danh sách chương bị mất định dạng phân tách, dẫn đến việc các tiêu đề bị dính vào nhau.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề trong mục lục bị gộp sai (ví dụ: 'Where I Lived...' và 'Reading' bị dính vào cùng một khối).",
+          "block_index": 1,
+          "source_excerpt": "Where I Lived, and What I Lived For\n\nReading",
+          "edition_excerpt": "Where I Lived, and What I Lived For Reading"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 18 (trích dẫn) bị cắt cụt trong digest dù văn bản gốc đầy đủ.",
+          "block_index": 18,
+          "source_excerpt": "standing on his roost, if only to wake my neighbors up.",
+          "edition_excerpt": "standing on his…"
+        }
+      ]
+    },
+    {
+      "id": "franklin_autobiography",
+      "language": "en",
+      "blocks": 13,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 8,
+        "overall": 8
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có cấu trúc tốt, tuy nhiên có một số lỗi nhỏ trong việc phân loại block (navigation list) và thiếu sót trong việc đóng ngoặc kép ở một số span. Văn bản gốc được bảo toàn đầy đủ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các mục trong phần 'Navigation' nên được nhóm thành một danh sách (list) thay vì các đoạn văn (paragraph) riêng lẻ.",
+          "block_index": 5,
+          "source_excerpt": "Letter from Mr. Abel James.",
+          "edition_excerpt": "Letter from Mr. Abel James."
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span trích dẫn bị cắt cụt hoặc thiếu dấu đóng ngoặc kép (ví dụ: 'Poor Richard's Almanac' thiếu dấu đóng, 'The Pennsylvania Gazett' bị cắt).",
+          "block_index": 11,
+          "source_excerpt": "\"Poor Richard's Almanac.\"",
+          "edition_excerpt": "\"Poor Richard's Almanac."
+        }
+      ]
+    },
+    {
+      "id": "cicero_offices",
+      "language": "en",
+      "blocks": 11,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích tuân thủ chính xác cấu trúc văn bản gốc. Các đoạn văn được nối liền mạch và các nhãn khối được gán đúng quy định.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "kant_critique",
+      "language": "en",
+      "blocks": 11,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích hoàn toàn chính xác, bảo toàn nguyên vẹn văn bản gốc và cấu trúc khối. Các nhãn khối và định dạng in nghiêng được xử lý đúng quy chuẩn.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "archive_scan_ocr",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích thực hiện xuất sắc việc nối các dòng bị ngắt quãng do định dạng OCR. Cấu trúc khối được duy trì chính xác và không có từ ngữ nào bị mất hoặc thay đổi.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "twain_huckleberry",
+      "language": "en",
+      "blocks": 23,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 5,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, tuy nhiên cấu trúc khối (block structure) bị lỗi nghiêm trọng do gộp nhiều chương vào cùng một khối thay vì tách riêng theo từng chương. Điều này làm giảm khả năng điều hướng và định dạng của tài liệu.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Nhiều chương bị gộp chung vào một khối (ví dụ: khối 0 chứa chương I, II, III, IV, V). Mỗi chương nên là một khối riêng biệt.",
+          "block_index": 0,
+          "source_excerpt": "CHAPTER I... CHAPTER II...",
+          "edition_excerpt": "CHAPTER I... CHAPTER II..."
+        }
+      ]
+    },
+    {
+      "id": "shelley_frankenstein",
+      "language": "en",
+      "blocks": 13,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác cao về nội dung và cấu trúc. Tuy nhiên, khối chứa danh sách chương (Block 4) bị gắn nhãn là heading level 1 không phù hợp với ngữ cảnh văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 4 chứa danh sách các chương không nên được gắn nhãn là heading level 1, vì đây không phải là tiêu đề chương thực thụ mà là một danh sách liệt kê.",
+          "block_index": 4,
+          "source_excerpt": "Chapter 1 Chapter 2...",
+          "edition_excerpt": "Chapter 1 Chapter 2..."
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span italic trong khối 6 bị cắt cụt ký tự cuối (thiếu chữ 'd' trong 'England').",
+          "block_index": 6,
+          "source_excerpt": "_To Mrs. Saville, England._",
+          "edition_excerpt": "_To Mrs. Saville, Englan_"
+        }
+      ]
+    },
+    {
+      "id": "wilde_dorian",
+      "language": "en",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn chính xác. Tuy nhiên, cấu trúc khối có lỗi phân loại tiêu đề ở block 11.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Block 11 bị gắn nhãn là tiêu đề (heading level 1) trong khi thực tế đây là đoạn văn bắt đầu chương (paragraph).",
+          "block_index": 11,
+          "source_excerpt": "CHAPTER I. The studio was filled with the rich odour of roses...",
+          "edition_excerpt": "CHAPTER I. The studio was filled with the rich odour of roses..."
+        }
+      ]
+    },
+    {
+      "id": "verne_journey",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích khớp hoàn toàn với văn bản nguồn. Cấu trúc khối và các thẻ định dạng được xử lý chính xác.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "emerson_essays",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích tuân thủ chính xác cấu trúc văn bản gốc. Không có lỗi về định dạng, nối dòng hoặc mất mát nội dung.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "bunyan_pilgrim",
+      "language": "en",
+      "blocks": 93,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích giữ nguyên văn bản gốc tốt. Tuy nhiên, cấu trúc khối chưa tối ưu do tách rời các dòng thơ thành từng đoạn riêng biệt thay vì nhóm chúng lại theo khổ thơ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các dòng thơ trong bài 'Renascence' bị tách thành từng đoạn đơn lẻ thay vì nhóm thành các khổ thơ, làm mất cấu trúc logic của văn bản.",
+          "source_excerpt": "All I could see from where I stood\nWas three long mountains and a wood;\nI turned and looked another way,\nAnd saw three islands in a bay.",
+          "edition_excerpt": "All I could see from where I stood\n\nWas three long mountains and a wood;\n\nI turned and looked another way,\n\nAnd saw three islands in a bay."
+        }
+      ]
+    },
+    {
+      "id": "voltaire_candid",
+      "language": "en",
+      "blocks": 20,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích giữ nguyên văn bản tốt. Tuy nhiên, các khối Transcriber's Note nên được gộp thành một đoạn thay vì giữ nguyên định dạng bảng ASCII, và một số tiêu đề cần được phân loại chính xác hơn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các dòng trong Transcriber's Note không nên được giữ nguyên định dạng bảng ASCII mà nên gộp thành một đoạn văn bản thuần túy.",
+          "block_index": 0,
+          "source_excerpt": "| Transcriber's Note: |",
+          "edition_excerpt": "| Transcriber's Note: |"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 13 (BONI AND LIVERIGHT, INC.) nên được gắn nhãn là tiêu đề hoặc căn giữa thay vì đoạn văn bản thông thường.",
+          "block_index": 13,
+          "source_excerpt": "BONI AND LIVERIGHT, INC.",
+          "edition_excerpt": "BONI AND LIVERIGHT, INC."
+        }
+      ]
+    },
+    {
+      "id": "tolstoy_war_peace",
+      "language": "en",
+      "blocks": 18,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 6,
+        "join_quality": 5,
+        "inline_spans": 10,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Văn bản giữ nguyên nội dung gốc nhưng gặp lỗi nghiêm trọng về cấu trúc khối. Cụm từ 'part' bị tách sai thành tiêu đề (heading) và các đoạn văn bị ngắt dòng không cần thiết ở cuối văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Từ 'part' bị gán nhãn là heading level 1, trong khi đây là phần tiếp nối của câu trước đó.",
+          "block_index": 14,
+          "source_excerpt": "stale\n\npart. Anna",
+          "edition_excerpt": "stale\n\npart. Anna"
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Các dòng bị ngắt quãng (line breaks) trong nguồn không được nối lại thành đoạn văn hoàn chỉnh (block 13, 14, 15).",
+          "block_index": 13,
+          "source_excerpt": "stale\n\npart.",
+          "edition_excerpt": "stale\n\npart."
+        }
+      ]
+    },
+    {
+      "id": "dostoevsky_crime",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 8,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích cấu trúc khối chính xác, bảo toàn nguyên vẹn văn bản gốc. Tuy nhiên, việc gắn nhãn span cho các trích dẫn trong khối 5 chưa bao quát hết toàn bộ nội dung trích dẫn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Nhãn 'quote' trong khối 5 chỉ bao phủ một phần nhỏ của đoạn trích dẫn, thay vì toàn bộ nội dung nằm trong dấu ngoặc kép.",
+          "block_index": 5,
+          "source_excerpt": "“I want to attempt a thing _like that_ and am frightened by these trifles,” he thought, with an odd smile. “Hm... yes, all is in a man’s hands and he lets it all slip from cowardice, that’s an axiom. ... Yes, maybe it is a plaything.”",
+          "edition_excerpt": "spans=[quote:'“I want to attempt a thi', quote:'“Hm... yes, all is in a ']"
+        }
+      ]
     },
     {
       "id": "grotius_vi_chviii",
       "language": "vi",
       "blocks": 8,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 9,
@@ -263,16 +1293,53 @@
       },
       "verdict": "pass",
       "issue_count": 1,
-      "summary_vi": "Bản phân tích có độ chính xác cao về cấu trúc và nội dung. Tuy nhiên, có một lỗi nhỏ trong việc gắn nhãn span cho phần chú thích trong ngoặc đơn ở block 5.",
+      "summary_vi": "Văn bản được chuyển đổi chính xác, giữ nguyên nội dung gốc. Tuy nhiên, có một lỗi nhỏ trong việc gắn nhãn span cho cụm từ trong ngoặc đơn ở block 5.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Span 'paren_aside' ở block 5 bị cắt cụt nội dung ('(một sự thay đổi xuất ph'), cần bao trọn toàn bộ cụm trong ngoặc đơn.",
+          "note_vi": "Span 'paren_aside' ở block 5 bị cắt cụt nội dung (chỉ lấy một phần của câu trong ngoặc đơn).",
           "block_index": 5,
           "source_excerpt": "(một sự thay đổi xuất phát từ nhu cầu tất yếu, như đã giải thích ở trên)",
           "edition_excerpt": "(một sự thay đổi xuất ph"
+        }
+      ]
+    },
+    {
+      "id": "doan_chinh_phu_ngam",
+      "language": "vi",
+      "blocks": 403,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 8,
+        "overall": 8
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt về nội dung. Tuy nhiên, cấu trúc khối bị lỗi do các dòng tiêu đề bị tách rời không cần thiết và một số đoạn văn bị ngắt quãng do định dạng nguồn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các tiêu đề như 'Chinh phụ ngâm (征婦吟)' và 'Chinh phụ ngâm khúc (征婦吟曲)' bị tách thành các khối riêng biệt thay vì nhóm lại hoặc giữ nguyên cấu trúc tiêu đề.",
+          "block_index": 1,
+          "source_excerpt": "Chinh phụ ngâm (征婦吟)\nChinh phụ ngâm khúc (征婦吟曲)",
+          "edition_excerpt": "Chinh phụ ngâm (征婦吟)\n\nChinh phụ ngâm khúc (征婦吟曲)"
+        },
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Thiếu ký tự kết thúc ở cuối văn bản (dấu ngoặc vuông mở).",
+          "block_index": 402,
+          "source_excerpt": "欺𧗱㧅[",
+          "edition_excerpt": "欺𧗱㧅["
         }
       ]
     },
@@ -281,26 +1348,33 @@
       "language": "vi",
       "blocks": 16,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 9,
-        "block_structure": 9,
-        "join_quality": 10,
-        "inline_spans": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 9,
         "overall": 9
       },
       "verdict": "pass",
-      "issue_count": 1,
-      "summary_vi": "Bản phân tích có cấu trúc tốt, bảo toàn đầy đủ nội dung văn bản gốc. Tuy nhiên, có một đoạn mã rác '3692' xuất hiện trong nguồn nhưng đã bị loại bỏ trong bản parsed, điều này là hợp lý để làm sạch văn bản.",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có cấu trúc tốt, bảo toàn nội dung văn bản gốc. Tuy nhiên, khối tiêu đề 'Qua đèo Ngang' bị gộp sai cách so với nguồn và thiếu sót một số dòng rác (junk text) từ nguồn gốc không được loại bỏ hoàn toàn.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
-          "category": "text_preservation",
-          "note_vi": "Chuỗi ký tự '3692' trong nguồn gốc đã bị lược bỏ. Mặc dù đây là hành động làm sạch văn bản tốt, nhưng về mặt kỹ thuật vẫn là sự khác biệt so với nguồn.",
-          "source_excerpt": "3692Qua đèo NgangBà Huyện Thanh Quan",
+          "category": "block_structure",
+          "note_vi": "Khối 1 gộp tiêu đề và tác giả thành một dòng, trong khi nguồn gốc có sự ngắt dòng rõ rệt.",
+          "block_index": 1,
+          "source_excerpt": "Qua đèo Ngang  \ncủa Bà Huyện Thanh Quan",
           "edition_excerpt": "Qua đèo Ngang của Bà Huyện Thanh Quan"
+        },
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Thiếu sót các dòng rác '3692Qua đèo NgangBà Huyện Thanh Quan' từ nguồn (dù đây là dữ liệu rác, nhưng theo yêu cầu bảo toàn văn bản thì cần lưu ý).",
+          "source_excerpt": "3692Qua đèo NgangBà Huyện Thanh Quan"
         }
       ]
     },
@@ -309,35 +1383,32 @@
       "language": "vi",
       "blocks": 12,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 8,
         "block_structure": 9,
-        "join_quality": 10,
+        "join_quality": 9,
         "inline_spans": 8,
-        "overall": 9
+        "overall": 8
       },
       "verdict": "pass",
       "issue_count": 2,
-      "summary_vi": "Bản phân tích đã giữ nguyên nội dung văn bản tốt, tuy nhiên có một số thiếu sót trong việc nhận diện đầy đủ các span nội dòng. Cụ thể, phần chú thích cuối cùng bị cắt ngắn trong metadata của block 11.",
+      "summary_vi": "Bản phân tích đã giữ đúng cấu trúc văn bản gốc. Tuy nhiên, một số dữ liệu tiêu đề đầu trang bị mất và span chú thích cuối cùng bị cắt ngắn.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
-          "category": "inline_spans",
-          "note_vi": "Span paren_aside ở block 11 bị cắt cụt (chỉ nhận diện đến 'chọ'), không bao trọn toàn bộ nội dung trong ngoặc đơn.",
-          "block_index": 11,
-          "source_excerpt": "(Lữ Huy Nguyên tuyển chọn và giới thiệu)",
-          "edition_excerpt": "(Lữ Huy Nguyên tuyển chọ"
+          "category": "text_preservation",
+          "note_vi": "Thiếu các thông tin tiêu đề phụ và metadata wiki ở đầu văn bản (ví dụ: 'của Hồ Xuân Hươngcác dự án wiki khác...')."
         },
         {
           "severity": "minor",
-          "category": "text_preservation",
-          "note_vi": "Thông tin tiêu đề phụ và metadata thừa từ nguồn (như 'các dự án wiki khác...') đã bị loại bỏ, dù đây là hành động làm sạch tốt nhưng cần lưu ý nếu yêu cầu là bảo tồn nguyên văn tuyệt đối.",
-          "block_index": 0,
-          "source_excerpt": "Bánh trôi nước của Hồ Xuân Hươngcác dự án wiki khác: mục Wikidata.",
-          "edition_excerpt": "Bánh trôi nước"
+          "category": "inline_spans",
+          "note_vi": "Span paren_aside ở block 11 bị cắt cụt (chỉ nhận diện đến 'chọ').",
+          "block_index": 11,
+          "source_excerpt": "(Lữ Huy Nguyên tuyển chọn và giới thiệu)",
+          "edition_excerpt": "(Lữ Huy Nguyên tuyển chọ"
         }
       ]
     },
@@ -346,27 +1417,35 @@
       "language": "vi",
       "blocks": 10,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
-        "block_structure": 10,
+        "block_structure": 9,
         "join_quality": 10,
         "inline_spans": 9,
-        "overall": 10
+        "overall": 9
       },
       "verdict": "pass",
-      "issue_count": 1,
-      "summary_vi": "Bản phân tích có độ chính xác cao, bảo toàn đầy đủ nội dung văn bản gốc. Cấu trúc các khối được phân chia hợp lý, các chú thích và trích dẫn được gắn nhãn chính xác.",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có độ chính xác cao về nội dung và cấu trúc. Có một lỗi nhỏ trong việc phân loại span ở block 4 (nhầm lẫn giữa paren_aside và paren_cite) và block 8 (bracket_other không cần thiết).",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Nhãn 'paren_aside' được sử dụng cho các năm trong ngoặc đơn, tuy nhiên theo quy ước của hệ thống, các năm này nên được coi là 'paren_cite' hoặc văn bản thuần túy nếu không phải là lời dẫn giải ngoài lề.",
-          "block_index": 3,
-          "source_excerpt": "(1570-1597)",
-          "edition_excerpt": "(1570-1597)"
+          "note_vi": "Block 4: (1505) nên được gắn nhãn paren_cite thay vì paren_aside vì đây là thông tin niên đại/chú dẫn.",
+          "block_index": 4,
+          "source_excerpt": "(1505)",
+          "edition_excerpt": "(1505)"
+        },
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Block 8: Nhãn [sửa] không nên được gắn là bracket_other trong ngữ cảnh này, đây là phần tử giao diện wiki không thuộc văn bản gốc.",
+          "block_index": 8,
+          "source_excerpt": "[sửa]",
+          "edition_excerpt": "[sửa]"
         }
       ]
     },
@@ -378,28 +1457,28 @@
       "llm_passed": false,
       "model": "gemini-3.1-flash-lite",
       "scores": {
-        "text_preservation": 8,
+        "text_preservation": 6,
         "block_structure": 9,
         "join_quality": 10,
         "inline_spans": 9,
-        "overall": 9
+        "overall": 8
       },
-      "verdict": "pass",
+      "verdict": "fail",
       "issue_count": 2,
-      "summary_vi": "Bản parse giữ đúng nội dung và cấu trúc văn bản. Tuy nhiên, phần đầu bị mất một số thông tin metadata từ nguồn (tên tác giả và các dự án wiki) do quy trình xử lý block.",
+      "summary_vi": "Bản phân tích bị thiếu hụt một lượng lớn văn bản ở phần đầu (thông tin tác giả và các dự án wiki). Cấu trúc các khối văn bản được phân chia hợp lý, tuy nhiên việc mất mát dữ liệu nguồn là lỗi nghiêm trọng.",
       "error": null,
       "top_issues": [
         {
-          "severity": "minor",
+          "severity": "critical",
           "category": "text_preservation",
-          "note_vi": "Mất đoạn 'của Nam Caothông tin về bản này. các dự án wiki khác: bài viết Wikipedia, mục Wikidata.' ở block 0.",
-          "block_index": 0,
+          "note_vi": "Thiếu hụt nghiêm trọng văn bản ở phần đầu (của Nam Cao, thông tin bản này, các dự án wiki...).",
+          "block_index": 1,
           "source_excerpt": "của Nam Caothông tin về bản này. các dự án wiki khác: bài viết Wikipedia, mục Wikidata."
         },
         {
           "severity": "minor",
-          "category": "text_preservation",
-          "note_vi": "Mất dòng '5415Chí Phèo1941Nam Cao' ở giữa văn bản.",
+          "category": "block_structure",
+          "note_vi": "Dòng '5415Chí Phèo1941Nam Cao' trong nguồn bị bỏ qua hoàn toàn, cần xác định xem đây là metadata hay nội dung cần hiển thị.",
           "source_excerpt": "5415Chí Phèo1941Nam Cao"
         }
       ]
@@ -407,29 +1486,140 @@
     {
       "id": "le_van_dai_phong_tuc",
       "language": "vi",
-      "blocks": 16,
+      "blocks": 14,
       "fidelity_passed": true,
-      "llm_passed": false,
+      "llm_passed": true,
       "model": "gemini-3.1-flash-lite",
       "scores": {
         "text_preservation": 10,
-        "block_structure": 10,
+        "block_structure": 9,
         "join_quality": 10,
-        "inline_spans": 9,
-        "overall": 10
+        "inline_spans": 8,
+        "overall": 9
       },
       "verdict": "pass",
-      "issue_count": 1,
-      "summary_vi": "Bản phân tích có độ chính xác cao, bảo toàn nguyên vẹn văn bản gốc. Cấu trúc các khối tiêu đề và đoạn văn được phân chia hợp lý, các lỗi ngắt dòng trong nguồn đã được xử lý tốt.",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt, các dòng được nối chính xác. Tuy nhiên, một số đoạn chú thích trong ngoặc đơn bị phân loại nhầm thành 'paren_aside' thay vì 'paren_cite' hoặc văn bản thuần túy.",
       "error": null,
       "top_issues": [
         {
           "severity": "minor",
           "category": "inline_spans",
-          "note_vi": "Một số đoạn chú thích trong ngoặc đơn được gắn nhãn 'paren_aside' thay vì 'paren_cite' hoặc ngược lại, tuy nhiên không ảnh hưởng đến nội dung.",
-          "block_index": 9,
+          "note_vi": "Một số đoạn trong ngoặc đơn (như giải nghĩa từ ngữ) được gắn nhãn 'paren_aside' không chính xác, nên để là văn bản thường hoặc 'paren_cite' nếu là trích dẫn.",
+          "block_index": 7,
           "source_excerpt": "(nghĩa là chơi ngọc hay chơi ngói)",
-          "edition_excerpt": "spans=[paren_aside:'(nghĩa là chơi ngọc hay ', paren_aside:'(nghĩa là treo cung hay ']"
+          "edition_excerpt": "(nghĩa là chơi ngọc hay "
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'I.— CHA MẸ VỚI CON' bị gộp chung vào khối heading với 'THIÊN THỨ NHỨT', nên tách riêng để đảm bảo cấu trúc phân cấp.",
+          "block_index": 1,
+          "source_excerpt": "THIÊN THỨ NHỨT\n\nNÓI VỀ PHONG-TỤC TRONG GIA-TỘC\n\nI.— CHA MẸ VỚI CON",
+          "edition_excerpt": "THIÊN THỨ NHỨT NÓI VỀ PHONG-TỤC TRONG GIA-TỘC I.— CHA MẸ VỚI CON"
+        }
+      ]
+    },
+    {
+      "id": "truyen_kieu",
+      "language": "vi",
+      "blocks": 103,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 8,
+        "join_quality": 8,
+        "inline_spans": 7,
+        "overall": 8
+      },
+      "verdict": "pass",
+      "issue_count": 3,
+      "summary_vi": "Bản phân tích giữ nguyên nội dung văn bản tốt. Tuy nhiên, có một số lỗi nhỏ về cấu trúc khối (block) và định dạng span chưa chính xác theo quy tắc.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Span 'paren_aside' bị cắt cụt sai vị trí, bao gồm cả dấu ngoặc đơn nhưng thiếu nội dung bên trong.",
+          "block_index": 1,
+          "source_excerpt": "(tên gốc là Đoạn Trường Tân Thanh 斷腸新聲)",
+          "edition_excerpt": "(tên gốc là Đoạn Trường "
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Dòng 'Bản truyện tiếng Hán: 金雲翹傳' bị dính vào khối trước đó thay vì tách thành khối riêng.",
+          "block_index": 2,
+          "source_excerpt": "Bản truyện tiếng Hán: 金雲翹傳",
+          "edition_excerpt": "bản Kiều Oánh Mậu 1902 Bản truyện tiếng Hán: 金雲翹傳"
+        }
+      ]
+    },
+    {
+      "id": "tat_den",
+      "language": "vi",
+      "blocks": 40,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 7,
+        "join_quality": 8,
+        "inline_spans": 9,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích đã bỏ sót một số đoạn văn bản quan trọng từ nguồn (thông tin wiki và trích dẫn). Cấu trúc khối bị phân mảnh quá mức ở phần mục lục, gây ảnh hưởng đến trải nghiệm đọc.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "text_preservation",
+          "note_vi": "Bỏ sót đoạn 'thông tin về bản này. các dự án wiki khác: bài viết Wikipedia, mục Wikidata.' và '— Trích dẫn từ Tắt đèn của Wikipedia, bách khoa toàn thư mở.'",
+          "block_index": 0,
+          "source_excerpt": "của Ngô Tất Tốthông tin về bản này. các dự án wiki khác: bài viết Wikipedia, mục Wikidata.",
+          "edition_excerpt": "Tắt đèn là một truyện dài của nhà văn Ngô Tất Tố, được in báo năm 1936 và in thành sách năm 1…"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Phần mục lục (I-XXVII) bị tách thành quá nhiều khối đơn lẻ, nên nhóm lại thành một danh sách hoặc khối văn bản duy nhất.",
+          "block_index": 4,
+          "source_excerpt": "I\nII\nIII...",
+          "edition_excerpt": "I"
+        }
+      ]
+    },
+    {
+      "id": "aozora_sample",
+      "language": "ja",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn chính xác. Cấu trúc khối cơ bản ổn định, tuy nhiên có sự ngắt dòng không cần thiết ở khối 5 và 6 làm tách rời một câu hoàn chỉnh.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Câu trong khối 5 và 6 bị ngắt dòng không cần thiết, nên được gộp thành một khối paragraph duy nhất.",
+          "block_index": 5,
+          "source_excerpt": "※この作品は1922年に死没した著者に当たり、著作権の保護期間が満了したため、\n　著作権者の許諾なく引用・利用できます。",
+          "edition_excerpt": "※この作品は1922年に死没した著者に当たり、著作権の保護期間が満了したため、\n\n著作権者の許諾なく引用・利用できます。"
         }
       ]
     }

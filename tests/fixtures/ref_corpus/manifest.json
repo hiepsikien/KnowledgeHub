@@ -4,7 +4,6 @@
     "file": "en/grotius_treatise.txt",
     "language": "en",
     "family": "gutenberg",
-    "genre": "legal",
     "strip_first": true
   },
   {
@@ -12,7 +11,6 @@
     "file": "en/grotius_treatise_ch1.txt",
     "language": "en",
     "family": "gutenberg",
-    "genre": "legal",
     "strip_first": false
   },
   {
@@ -20,56 +18,224 @@
     "file": "en/locke_second_treatise.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "7370",
-    "strip_first": true
+    "strip_first": true,
+    "gutenberg_id": "7370"
   },
   {
     "id": "dickens_two_cities",
     "file": "en/dickens_two_cities.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "98",
-    "strip_first": true
+    "strip_first": true,
+    "gutenberg_id": "98"
   },
   {
     "id": "aquinas_summa",
     "file": "en/aquinas_summa.txt",
     "language": "en",
     "family": "scholastic",
-    "gutenberg_id": "17611",
-    "strip_first": true
+    "strip_first": true,
+    "gutenberg_id": "17611"
   },
   {
     "id": "aristotle_politics",
     "file": "en/aristotle_politics.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "6762",
-    "strip_first": true
+    "strip_first": true,
+    "gutenberg_id": "6762"
   },
   {
     "id": "mill_on_liberty",
     "file": "en/mill_on_liberty.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "34901",
-    "strip_first": true
+    "strip_first": true,
+    "gutenberg_id": "34901"
   },
   {
     "id": "whitman_grass",
     "file": "en/whitman_grass.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "1322",
-    "strip_first": false
+    "strip_first": false,
+    "gutenberg_id": "1322"
   },
   {
     "id": "shakespeare_hamlet",
     "file": "en/shakespeare_hamlet.txt",
     "language": "en",
     "family": "gutenberg",
-    "gutenberg_id": "1524",
-    "strip_first": false
+    "strip_first": false,
+    "gutenberg_id": "1524"
+  },
+  {
+    "id": "plato_republic",
+    "file": "en/plato_republic.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1497"
+  },
+  {
+    "id": "hobbes_leviathan",
+    "file": "en/hobbes_leviathan.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "3207"
+  },
+  {
+    "id": "machiavelli_prince",
+    "file": "en/machiavelli_prince.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1232"
+  },
+  {
+    "id": "marx_communist",
+    "file": "en/marx_communist.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "61"
+  },
+  {
+    "id": "darwin_origin",
+    "file": "en/darwin_origin.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1228"
+  },
+  {
+    "id": "austen_pride",
+    "file": "en/austen_pride.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1342"
+  },
+  {
+    "id": "melville_moby",
+    "file": "en/melville_moby.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "2701"
+  },
+  {
+    "id": "homer_iliad",
+    "file": "en/homer_iliad.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "6130"
+  },
+  {
+    "id": "hume_treatise",
+    "file": "en/hume_treatise.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "4705"
+  },
+  {
+    "id": "smith_wealth",
+    "file": "en/smith_wealth.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "3300"
+  },
+  {
+    "id": "montesquieu_spirit",
+    "file": "en/montesquieu_spirit.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "2753"
+  },
+  {
+    "id": "paine_common_sense",
+    "file": "en/paine_common_sense.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "147"
+  },
+  {
+    "id": "federalist_papers",
+    "file": "en/federalist_papers.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1404"
+  },
+  {
+    "id": "swift_gulliver",
+    "file": "en/swift_gulliver.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "829"
+  },
+  {
+    "id": "bronte_jane_eyre",
+    "file": "en/bronte_jane_eyre.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "1260"
+  },
+  {
+    "id": "wells_war_worlds",
+    "file": "en/wells_war_worlds.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "36"
+  },
+  {
+    "id": "poe_raven",
+    "file": "en/poe_raven.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "932"
+  },
+  {
+    "id": "thoreau_walden",
+    "file": "en/thoreau_walden.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "205"
+  },
+  {
+    "id": "franklin_autobiography",
+    "file": "en/franklin_autobiography.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "148"
+  },
+  {
+    "id": "cicero_offices",
+    "file": "en/cicero_offices.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "541"
+  },
+  {
+    "id": "kant_critique",
+    "file": "en/kant_critique.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "4280"
   },
   {
     "id": "archive_scan_ocr",
@@ -79,18 +245,90 @@
     "strip_first": false
   },
   {
-    "id": "aozora_sample",
-    "file": "ja/aozora_sample.txt",
-    "language": "ja",
-    "family": "aozora",
-    "strip_first": false
+    "id": "twain_huckleberry",
+    "file": "en/twain_huckleberry.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "76"
+  },
+  {
+    "id": "shelley_frankenstein",
+    "file": "en/shelley_frankenstein.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "84"
+  },
+  {
+    "id": "wilde_dorian",
+    "file": "en/wilde_dorian.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "174"
+  },
+  {
+    "id": "verne_journey",
+    "file": "en/verne_journey.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "18857"
+  },
+  {
+    "id": "emerson_essays",
+    "file": "en/emerson_essays.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "16643"
+  },
+  {
+    "id": "bunyan_pilgrim",
+    "file": "en/bunyan_pilgrim.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "109"
+  },
+  {
+    "id": "voltaire_candid",
+    "file": "en/voltaire_candid.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "19942"
+  },
+  {
+    "id": "tolstoy_war_peace",
+    "file": "en/tolstoy_war_peace.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "2600"
+  },
+  {
+    "id": "dostoevsky_crime",
+    "file": "en/dostoevsky_crime.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "gutenberg_id": "2554"
   },
   {
     "id": "grotius_vi_chviii",
     "file": "vi/grotius_vi_chviii.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "legal",
+    "source": "hub_translation",
+    "strip_first": false
+  },
+  {
+    "id": "doan_chinh_phu_ngam",
+    "file": "vi/doan_chinh_phu_ngam.txt",
+    "language": "vi",
+    "family": "plain",
     "source": "hub_translation",
     "strip_first": false
   },
@@ -99,7 +337,6 @@
     "file": "vi/qua_deo_ngang.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "verse",
     "source": "vi.wikisource",
     "strip_first": false
   },
@@ -108,7 +345,6 @@
     "file": "vi/ho_banh_troi_nuoc.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "verse",
     "source": "vi.wikisource",
     "strip_first": false
   },
@@ -117,7 +353,6 @@
     "file": "vi/le_kien_van_cao_si.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "essay",
     "source": "vi.wikisource",
     "strip_first": false
   },
@@ -126,7 +361,6 @@
     "file": "vi/nam_cao_chi_pheo.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "fiction",
     "source": "vi.wikisource",
     "strip_first": false
   },
@@ -135,8 +369,30 @@
     "file": "vi/le_van_dai_phong_tuc.txt",
     "language": "vi",
     "family": "plain",
-    "genre": "essay",
     "source": "vi.wikisource",
+    "strip_first": false
+  },
+  {
+    "id": "truyen_kieu",
+    "file": "vi/truyen_kieu.txt",
+    "language": "vi",
+    "family": "plain",
+    "source": "vi.wikisource",
+    "strip_first": false
+  },
+  {
+    "id": "tat_den",
+    "file": "vi/tat_den.txt",
+    "language": "vi",
+    "family": "plain",
+    "source": "vi.wikisource",
+    "strip_first": false
+  },
+  {
+    "id": "aozora_sample",
+    "file": "ja/aozora_sample.txt",
+    "language": "ja",
+    "family": "aozora",
     "strip_first": false
   }
 ]

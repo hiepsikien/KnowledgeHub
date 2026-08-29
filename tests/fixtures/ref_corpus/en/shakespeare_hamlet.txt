@@ -1,35 +1,3 @@
-Scene I. Elsinore. A platform before the Castle
- Scene II. Elsinore. A room of state in the Castle
- Scene III. A room in Polonius’s house
- Scene IV. The platform
- Scene V. A more remote part of the Castle
-
- ACT II
- Scene I. A room in Polonius’s house
- Scene II. A room in the Castle
-
- ACT III
- Scene I. A room in the Castle
- Scene II. A hall in the Castle
- Scene III. A room in the Castle
- Scene IV. Another room in the Castle
-
- ACT IV
- Scene I. A room in the Castle
- Scene II. Another room in the Castle
- Scene III. Another room in the Castle
- Scene IV. A plain in Denmark
- Scene V. Elsinore. A room in the Castle
- Scene VI. Another room in the Castle
- Scene VII. Another room in the Castle
-
- ACT V
- Scene I. A churchyard
- Scene II. A hall in the Castle
-
-
-
-
 Dramatis Personæ
 
 HAMLET, Prince of Denmark
@@ -199,4 +167,41 @@ MARCELLUS.
 Question it, Horatio.
 
 HORATIO.
-What art thou that usurp’
+What art thou that usurp’st this time of night,
+Together with that fair and warlike form
+In which the majesty of buried Denmark
+Did sometimes march? By heaven I charge thee speak.
+
+MARCELLUS.
+It is offended.
+
+BARNARDO.
+See, it stalks away.
+
+HORATIO.
+Stay! speak, speak! I charge thee speak!
+
+[_Exit Ghost._]
+
+MARCELLUS.
+’Tis gone, and will not answer.
+
+BARNARDO.
+How now, Horatio! You tremble and look pale.
+Is not this something more than fantasy?
+What think you on’t?
+
+HORATIO.
+Before my God, I might not this believe
+Without the sensible and true avouch
+Of mine own eyes.
+
+MARCELLUS.
+Is it not like the King?
+
+HORATIO.
+As thou art to thyself:
+Such was the very armour he had on
+When he th’ambitious Norway combated;
+So frown’d he once, when in an angry parle
+He smote the sled
