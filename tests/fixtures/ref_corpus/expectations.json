@@ -1,0 +1,548 @@
+{
+  "grotius_treatise": {
+    "min_blocks": 3,
+    "max_blocks": 26,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "min_footnotes": 8,
+    "min_span_styles": {
+      "footnote": 8,
+      "em": 1
+    },
+    "required_in_markdown": [
+      "CHAPTER I",
+      "Dutch--that is to say, the subjects of the United Netherlands",
+      "Megarians against the Athenians"
+    ],
+    "required_joined": "Dutch--that is to say, the subjects of the United Netherlands"
+  },
+  "grotius_treatise_ch1": {
+    "min_blocks": 3,
+    "max_blocks": 26,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "CHAPTER I",
+      "Megarians against the Athenians"
+    ]
+  },
+  "locke_second_treatise": {
+    "min_blocks": 1,
+    "max_blocks": 24,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "SECOND TREATISE OF GOVERNMENT",
+      "LONDON PRINTED MDCLXXXVIII"
+    ]
+  },
+  "dickens_two_cities": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose",
+    "min_span_styles": {
+      "quote": 1
+    },
+    "required_in_markdown": [
+      "best of times",
+      "Christian pastors"
+    ]
+  },
+  "aquinas_summa": {
+    "min_blocks": 14,
+    "max_blocks": 37,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "list_item"
+    ],
+    "content_kind": "scholastic",
+    "min_type_counts": {
+      "list_item": 8
+    },
+    "required_in_markdown": [
+      "QUESTION 1",
+      "(1) Whether it is necessary"
+    ]
+  },
+  "aristotle_politics": {
+    "min_blocks": 1,
+    "max_blocks": 21,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "Politics",
+      "Aristotle"
+    ]
+  },
+  "mill_on_liberty": {
+    "min_blocks": 1,
+    "max_blocks": 18,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "Philosophical Necessity",
+      "liberty"
+    ]
+  },
+  "whitman_grass": {
+    "min_blocks": 1,
+    "max_blocks": 21,
+    "required_types": [
+      "paragraph",
+      "metadata",
+      "stanza"
+    ],
+    "content_kind": "mixed",
+    "min_type_counts": {
+      "stanza": 1
+    },
+    "required_in_markdown": [
+      "celebrate myself",
+      "grass"
+    ]
+  },
+  "shakespeare_hamlet": {
+    "min_blocks": 47,
+    "max_blocks": 70,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata",
+      "dialogue",
+      "stage_direction"
+    ],
+    "content_kind": "drama",
+    "min_type_counts": {
+      "dialogue": 20,
+      "stage_direction": 2
+    },
+    "required_in_markdown": [
+      "BARNARDO",
+      "there",
+      "Horatio"
+    ]
+  },
+  "archive_scan_ocr": {
+    "min_blocks": 1,
+    "max_blocks": 23,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "archive.org",
+      "Philosophy"
+    ]
+  },
+  "aozora_sample": {
+    "min_blocks": 1,
+    "max_blocks": 23,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose",
+    "required_in_markdown": [
+      "青空文庫",
+      "窓"
+    ]
+  },
+  "grotius_vi_chviii": {
+    "min_blocks": 1,
+    "max_blocks": 23,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "min_footnotes": 10,
+    "required_in_markdown": [
+      "CHƯƠNG VIII",
+      "Nếu người Bồ Đào Nha"
+    ]
+  },
+  "qua_deo_ngang": {
+    "min_blocks": 4,
+    "max_blocks": 27,
+    "required_types": [
+      "paragraph",
+      "stanza"
+    ],
+    "content_kind": "mixed",
+    "min_type_counts": {
+      "stanza": 4
+    },
+    "min_footnotes": 4,
+    "required_in_markdown": [
+      "Bước xuống Đèo Ngang",
+      "Một mảnh tình riêng"
+    ]
+  },
+  "ho_banh_troi_nuoc": {
+    "min_blocks": 3,
+    "max_blocks": 26,
+    "required_types": [
+      "paragraph",
+      "stanza"
+    ],
+    "content_kind": "mixed",
+    "min_footnotes": 2,
+    "required_in_markdown": [
+      "Bánh trôi nước",
+      "tấm lòng son"
+    ]
+  },
+  "le_kien_van_cao_si": {
+    "min_blocks": 2,
+    "max_blocks": 25,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "min_footnotes": 1,
+    "required_in_markdown": [
+      "cao-sĩ",
+      "Lê-quí-Đôn"
+    ]
+  },
+  "nam_cao_chi_pheo": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "min_span_styles": {
+      "quote": 2
+    },
+    "required_in_markdown": [
+      "Chí Phèo",
+      "Vũ-đại",
+      "Chắc nó trừ mình ra"
+    ]
+  },
+  "le_van_dai_phong_tuc": {
+    "min_blocks": 6,
+    "max_blocks": 29,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose",
+    "min_span_styles": {
+      "paren_aside": 2
+    },
+    "required_in_markdown": [
+      "phong tục",
+      "CHA MẸ VỚI CON"
+    ]
+  },
+  "plato_republic": {
+    "min_blocks": 14,
+    "max_blocks": 37,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "hobbes_leviathan": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "machiavelli_prince": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "marx_communist": {
+    "min_blocks": 3,
+    "max_blocks": 26,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "darwin_origin": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "austen_pride": {
+    "min_blocks": 15,
+    "max_blocks": 38,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "melville_moby": {
+    "min_blocks": 1,
+    "max_blocks": 21,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "homer_iliad": {
+    "min_blocks": 5,
+    "max_blocks": 28,
+    "required_types": [
+      "paragraph",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "hume_treatise": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "smith_wealth": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "montesquieu_spirit": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "paine_common_sense": {
+    "min_blocks": 3,
+    "max_blocks": 26,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "federalist_papers": {
+    "min_blocks": 1,
+    "max_blocks": 24,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "swift_gulliver": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "bronte_jane_eyre": {
+    "min_blocks": 1,
+    "max_blocks": 24,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "wells_war_worlds": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "poe_raven": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "thoreau_walden": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "franklin_autobiography": {
+    "min_blocks": 2,
+    "max_blocks": 25,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "cicero_offices": {
+    "min_blocks": 1,
+    "max_blocks": 20,
+    "required_types": [
+      "paragraph",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "kant_critique": {
+    "min_blocks": 1,
+    "max_blocks": 24,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "truyen_kieu": {
+    "min_blocks": 48,
+    "max_blocks": 71,
+    "required_types": [
+      "paragraph",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "tat_den": {
+    "min_blocks": 4,
+    "max_blocks": 27,
+    "required_types": [
+      "paragraph",
+      "metadata",
+      "stanza"
+    ],
+    "content_kind": "mixed"
+  },
+  "twain_huckleberry": {
+    "min_blocks": 1,
+    "max_blocks": 19,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "shelley_frankenstein": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "wilde_dorian": {
+    "min_blocks": 2,
+    "max_blocks": 25,
+    "required_types": [
+      "paragraph",
+      "heading",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "verne_journey": {
+    "min_blocks": 5,
+    "max_blocks": 28,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "emerson_essays": {
+    "min_blocks": 1,
+    "max_blocks": 23,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "bunyan_pilgrim": {
+    "min_blocks": 1,
+    "max_blocks": 23,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "voltaire_candid": {
+    "min_blocks": 5,
+    "max_blocks": 28,
+    "required_types": [
+      "paragraph",
+      "heading"
+    ],
+    "content_kind": "prose"
+  },
+  "tolstoy_war_peace": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  },
+  "dostoevsky_crime": {
+    "min_blocks": 1,
+    "max_blocks": 22,
+    "required_types": [
+      "paragraph",
+      "metadata"
+    ],
+    "content_kind": "prose"
+  },
+  "doan_chinh_phu_ngam": {
+    "min_blocks": 395,
+    "max_blocks": 418,
+    "required_types": [
+      "paragraph"
+    ],
+    "content_kind": "prose"
+  }
+}

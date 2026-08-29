@@ -1,0 +1,414 @@
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+
+from .toc import merge_split_chapter_titles, relabel_toc_runs
+from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_scholastic_body_marker, is_soft_structural
+from .structure import (
+    is_heroic_verse_line,
+    is_indented_verse,
+    is_metadata_line,
+    is_scholastic_list_item,
+    is_speaker_cue,
+    is_stage_direction,
+    is_vi_verse_line,
+    looks_like_play,
+    poetry_run_score,
+)
+
+RULE_LINE = re.compile(r"^[\-–—_\*=\s]{8,}$")
+SHORT_RULE_LINE = re.compile(r"^[\-–—_\*=\s]{3,7}$")
+ITALIC_LINE = re.compile(r"^_([^_].*[^_])_$")
+SENTENCE_END = re.compile(r"""[.!?](?:\[?\d{1,4}\]?|[\"'\])])*$|[\]\)”»][\"'\])]*$""")
+CONTINUATION_START = re.compile(r"^[a-z(\[\"“‘«_]")
+HYPHEN_BREAK = re.compile(r"-$")
+QUOTE_LINE = re.compile(r'^[“"‘«_].*[”"’»_]?')
+COMPLETE_QUOTE = re.compile(r'(?:[”"\'»_]|etc\.)\]?\.?\[\d{1,4}\]$')
+BRIDGE_LINE = re.compile(r"^and in (?:another place|this wise):$", re.I)
+LEAD_IN_LINE = re.compile(r"^[A-Z][A-Za-zÀ-ỹ .,''-]{0,40}:$")
+HANGING_WORD = re.compile(
+    r"\b(?:the|a|an|of|in|to|for|and|or|as|at|by|with|from|that|which|who|whom|whose|but|not|if|on|"
+    r"her|his|its|their|our|my|your|this|these|those|such|some|any|each|every|both|all|other|"
+    r"into|through|over|under|between|among|upon|de|du|des|la|le|les|un|une|một|của|và|là|trong|trên|"
+    r"với|từ|để|này|đó|các|những)\s*$",
+    re.I,
+)
+IMPRINT_PUBLISHER = re.compile(
+    r"^(?:REPRINTED|PRINTED|LONDON|NEW YORK|BOSTON|PHILADELPHIA|CAMBRIDGE|INDIANAPOLIS)\b",
+    re.I,
+)
+IMPRINT_LIST = re.compile(r"^.*,.*(?:1\.|[A-Z]\.)")
+IMPRINT_ABBREV_END = re.compile(r"\b[A-Z]\.$")
+TITLE_ABBREV_END = re.compile(
+    r"\b(?:Dr|Mr|Mrs|Ms|St|Prof|Rev|Gen|Col|Capt|Lt|Sgt|Hon|Jr|Sr|vs|etc|Vol|Chap|Art|"
+    r"Heb|Job|Cor|Matt|Luke|John|Rom|Gen|Ex|Deut|Ps|Prov|Eccl|Isa|Jer|Ezek|Dan|Hab|Mal|"
+    r"Philem|Tim|Pet|Jas|Jud|Rev|Ecclus|Metaph)\.$",
+    re.I,
+)
+ACT_HEADING = re.compile(r"^ACT\s+[IVXLC]+\.?$", re.I)
+SCENE_HEADING = re.compile(r"^SCENE\s+[IVXLC]+", re.I)
+INCOMPLETE_BRACKET = re.compile(r"\[[^\]]*$")
+BRACKET_CITE_CONT = re.compile(r"^[\d:;,.\]\sA-Za-z-]+$")
+ROMAN_YEAR = re.compile(r"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
+
+
+def _is_imprint_line(line: str) -> bool:
+    s = line.strip()
+    if not s:
+        return False
+    if IMPRINT_PUBLISHER.match(s) or IMPRINT_LIST.match(s) or ROMAN_YEAR.fullmatch(s):
+        return True
+    if s.count(",") >= 3 and len(s) >= 30:
+        letters = [c for c in s if c.isascii() and c.isalpha()]
+        if len(letters) >= 12 and sum(c.isupper() for c in letters) / len(letters) >= 0.7:
+            return True
+    return False
+
+
+def _sentence_ended(prev: str) -> bool:
+    prev_r = prev.rstrip()
+    if IMPRINT_ABBREV_END.search(prev_r) or TITLE_ABBREV_END.search(prev_r):
+        return False
+    return bool(SENTENCE_END.search(prev_r))
+
+
+def _continues_quoted_line(prev: str, nxt: str) -> bool:
+    p = prev.strip()
+    n = nxt.strip()
+    if not p or not n:
+        return False
+    if not (p.startswith(('"', "“", "«", "_")) or "“" in p or "«" in p):
+        return False
+    if COMPLETE_QUOTE.search(p):
+        return False
+    if SENTENCE_END.search(p) and not p.endswith((",", ";", ":", "--", "—")):
+        return False
+    if n[0].islower():
+        return True
+    if p.endswith((",", ";", ":", "--", "—")):
+        return True
+    return False
+
+
+def _role_for_line(
+    line: str,
+    *,
+    family: str,
+    row: TextLine | None = None,
+    play_mode: bool = False,
+) -> tuple[str, int, float]:
+    if is_metadata_line(line):
+        return "metadata", 0, 0.99
+    if RULE_LINE.match(line) or SHORT_RULE_LINE.match(line.strip()):
+        return "hr", 0, 0.98
+    if IMPRINT_PUBLISHER.match(line.strip()) or IMPRINT_LIST.match(line.strip()):
+        return "prose", 0, 0.9
+    if play_mode and is_stage_direction(line):
+        return "stage_direction", 0, 0.94
+    if play_mode and is_speaker_cue(line):
+        return "speaker_cue", 0, 0.96
+    if is_scholastic_list_item(line):
+        return "list_item", 0, 0.95
+    if family == "scholastic" and is_scholastic_body_marker(line):
+        return "prose", 0, 0.94
+    if play_mode and ACT_HEADING.match(line.strip()):
+        return "heading", 1, 0.94
+    if play_mode and SCENE_HEADING.match(line.strip()):
+        return "heading", 2, 0.94
+    if is_hard_structural(line, family=family):
+        level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
+        return "heading", level, 0.95
+    if is_soft_structural(line, family=family):
+        return "heading", 3, 0.9
+    if ITALIC_LINE.match(line):
+        return "heading", 2, 0.88
+    if is_all_caps_heading(line):
+        return "heading", 2, 0.82
+    if family == "gutenberg" and row and is_indented_verse(indent=row.indent, line=line):
+        return "verse_line", 0, 0.87
+    if family == "plain" and is_vi_verse_line(line):
+        return "verse_line", 0, 0.85
+    stripped = line.strip()
+    if (
+        not play_mode
+        and QUOTE_LINE.match(stripped)
+        and len(stripped) < 120
+        and stripped.count(" ") <= 16
+    ):
+        return "verse_line", 0, 0.86
+    return "prose", 0, 0.92
+
+
+def _continues_dialogue(prev: str, nxt: str) -> bool:
+    p = prev.strip()
+    n = nxt.strip()
+    if not p or not n:
+        return False
+    if p.endswith((",", ";", ":", "--")):
+        return True
+    if INCOMPLETE_BRACKET.search(p) and BRACKET_CITE_CONT.match(n):
+        return True
+    if p.endswith("[") or re.search(r"\[[A-Za-z.]+\.$", p):
+        return True
+    return not _sentence_ended(prev) and CONTINUATION_START.match(n)
+
+
+def _should_join(prev: str, nxt: str, *, family: str, blank_before: bool = False) -> bool:
+    prev_r = prev.rstrip()
+    nxt_s = nxt.strip()
+    spurious_blank = (
+        blank_before
+        and HANGING_WORD.search(prev_r)
+        and not _sentence_ended(prev)
+    )
+    imprint_blank = (
+        blank_before
+        and family == "gutenberg"
+        and (_is_imprint_line(prev_r) or _is_imprint_line(nxt_s))
+    )
+    if blank_before and not spurious_blank and not imprint_blank:
+        return False
+    if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
+        return False
+    if RULE_LINE.match(nxt) or SHORT_RULE_LINE.match(nxt_s):
+        return False
+    if BRIDGE_LINE.match(nxt_s) or LEAD_IN_LINE.match(nxt_s):
+        return False
+    if COMPLETE_QUOTE.search(prev.strip()):
+        return False
+    if spurious_blank and re.match(r"^[A-Za-z(\[\"]", nxt_s):
+        return True
+    if (
+        family == "gutenberg"
+        and _is_imprint_line(prev_r)
+        and (
+            _is_imprint_line(nxt_s)
+            or ROMAN_YEAR.fullmatch(nxt_s)
+            or nxt_s.startswith(("AND ", "and "))
+        )
+    ):
+        return True
+    if _continues_quoted_line(prev, nxt):
+        return True
+    if (
+        len(prev) >= ORDINAL_WRAP
+        and HANGING_WORD.search(prev_r)
+        and not _sentence_ended(prev)
+    ):
+        return True
+    if HYPHEN_BREAK.search(prev_r) and nxt[:1].islower():
+        return True
+    if CONTINUATION_START.match(nxt) and not _sentence_ended(prev):
+        return True
+    if len(prev) >= ORDINAL_WRAP and not _sentence_ended(prev) and CONTINUATION_START.match(nxt):
+        return True
+    if (
+        len(prev_r) >= ORDINAL_WRAP
+        and not _sentence_ended(prev)
+        and re.match(r"^[A-Z]", nxt_s)
+        and not nxt_s.startswith(("CHAPTER", "BOOK", "PART", "QUESTION", "ACT ", "SCENE"))
+    ):
+        return True
+    if prev_r.endswith((",", ";", "--")) and CONTINUATION_START.match(nxt):
+        return True
+    if prev_r.endswith(":") and nxt_s.startswith(('"', "“", "_", "«")):
+        return True
+    if INCOMPLETE_BRACKET.search(prev_r) and BRACKET_CITE_CONT.match(nxt_s):
+        return True
+    if not blank_before and family == "gutenberg":
+        if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
+            return False
+        if RULE_LINE.match(nxt) or SHORT_RULE_LINE.match(nxt_s):
+            return False
+        if BRIDGE_LINE.match(nxt_s) or LEAD_IN_LINE.match(nxt_s):
+            return False
+        if len(prev_r) >= 40 or not _sentence_ended(prev):
+            return True
+    return False
+
+
+@dataclass
+class LineLabel:
+    index: int
+    role: str
+    level: int = 0
+    join_next: bool = False
+    confidence: float = 1.0
+    source: str = "rule"
+
+    def to_dict(self) -> dict:
+        return {
+            "index": self.index,
+            "role": self.role,
+            "level": self.level,
+            "join_next": self.join_next,
+            "confidence": self.confidence,
+            "source": self.source,
+        }
+
+
+def _relabel_long_quoted_prose(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
+    if play_mode:
+        return
+    for label in labels:
+        if label.role != "verse_line":
+            continue
+        s = lines[label.index].text.strip()
+        if len(s) >= 80 or s.count(" ") >= 14:
+            label.role = "prose"
+            label.confidence = 0.88
+
+
+def _relabel_quote_continuations(lines: list[TextLine], labels: list[LineLabel]) -> None:
+    for i in range(1, len(labels)):
+        if labels[i].role not in {"prose", "verse_line"}:
+            continue
+        prev = lines[i - 1].text
+        curr = lines[i].text
+        if labels[i - 1].role in {"verse_line", "prose"} and _continues_quoted_line(prev, curr):
+            labels[i].role = labels[i - 1].role
+            labels[i].confidence = 0.84
+            labels[i - 1].join_next = True
+        elif labels[i - 1].role == "verse_line" and not SENTENCE_END.search(prev.strip()):
+            labels[i].role = "verse_line"
+            labels[i].confidence = 0.82
+            labels[i - 1].join_next = True
+
+
+def _relabel_indented_poetry_runs(lines: list[TextLine], labels: list[LineLabel], *, family: str) -> None:
+    """PG poetry with leading indent (Whitman) — not wrapped prose."""
+    if family != "gutenberg":
+        return
+    i = 0
+    while i < len(labels):
+        if lines[i].indent < 2 or labels[i].role != "prose":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels):
+            if lines[j].indent < 2 or labels[j].role != "prose":
+                break
+            if lines[j].blank_before:
+                break
+            j += 1
+        run = [lines[k].text for k in range(i, j)]
+        if len(run) >= 3 and poetry_run_score(run) >= 0.45:
+            for k in range(i, j):
+                labels[k].role = "verse_line"
+                labels[k].confidence = 0.84
+        i = j if j > i else i + 1
+
+
+def _relabel_heroic_verse_runs(lines: list[TextLine], labels: list[LineLabel], *, family: str) -> None:
+    if family != "gutenberg":
+        return
+    i = 0
+    while i < len(labels):
+        if labels[i].role != "prose":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels):
+            if labels[j].role != "prose":
+                break
+            raw = lines[j].text.strip()
+            if not raw or len(raw) > 85 or "{" in raw:
+                break
+            if lines[j].blank_before:
+                break
+            j += 1
+        run = [lines[k].text for k in range(i, j)]
+        if len(run) >= 4 and poetry_run_score(run) >= 0.55:
+            for k in range(i, j):
+                labels[k].role = "verse_line"
+                labels[k].confidence = 0.84
+        i = j if j > i else i + 1
+
+
+def _relabel_play_dialogue(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
+    if not play_mode:
+        return
+    i = 0
+    while i < len(labels):
+        if labels[i].role != "speaker_cue":
+            i += 1
+            continue
+        j = i + 1
+        while j < len(labels) and labels[j].role in {"prose", "verse_line"}:
+            labels[j].role = "dialogue_line"
+            labels[j].confidence = 0.9
+            j += 1
+        i = j
+
+
+def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", source_text: str = "") -> list[LineLabel]:
+    play_mode = looks_like_play(source_text) if source_text else False
+    labels: list[LineLabel] = []
+    for row in lines:
+        role, level, confidence = _role_for_line(row.text, family=family, row=row, play_mode=play_mode)
+        labels.append(
+            LineLabel(index=row.index, role=role, level=level, confidence=confidence)
+        )
+    _relabel_play_dialogue(lines, labels, play_mode=play_mode)
+    _relabel_long_quoted_prose(lines, labels, play_mode=play_mode)
+    _relabel_quote_continuations(lines, labels)
+    _relabel_indented_poetry_runs(lines, labels, family=family)
+    _relabel_heroic_verse_runs(lines, labels, family=family)
+    merge_split_chapter_titles(lines, labels, family=family)
+    relabel_toc_runs(lines, labels, family=family)
+    for i in range(len(labels) - 1):
+        if labels[i].role == "verse_line" and labels[i + 1].role == "verse_line":
+            if _continues_quoted_line(lines[i].text, lines[i + 1].text):
+                labels[i].join_next = True
+    for i, label in enumerate(labels):
+        if label.role not in {"prose", "verse_line", "dialogue_line"}:
+            continue
+        if i + 1 >= len(labels):
+            continue
+        nxt = labels[i + 1]
+        if label.role == "verse_line" and nxt.role == "verse_line":
+            continue
+        if nxt.role == "verse_line" and LEAD_IN_LINE.match(lines[i].text.strip()):
+            label.join_next = True
+            continue
+        if nxt.role not in {"prose", "verse_line", "dialogue_line"}:
+            continue
+        if play_mode and label.role == "dialogue_line" and nxt.role == "dialogue_line":
+            if _continues_dialogue(lines[i].text, lines[i + 1].text):
+                label.join_next = True
+                continue
+        if _should_join(
+            lines[i].text,
+            lines[i + 1].text,
+            family=family,
+            blank_before=lines[i + 1].blank_before,
+        ):
+            label.join_next = True
+            if label.confidence > 0.75:
+                label.confidence = 0.75
+    return labels
+
+
+def uncertain_segment_indices(labels: list[LineLabel], *, threshold: float = 0.8) -> list[tuple[int, int]]:
+    """Inclusive line-index ranges that need LLM review."""
+    if not labels:
+        return []
+    ranges: list[tuple[int, int]] = []
+    start: int | None = None
+    for i, label in enumerate(labels):
+        low = label.confidence < threshold or label.role == "verse_line"
+        if low and start is None:
+            start = i
+        elif not low and start is not None:
+            ranges.append((start, i - 1))
+            start = None
+    if start is not None:
+        ranges.append((start, len(labels) - 1))
+    merged: list[tuple[int, int]] = []
+    for lo, hi in ranges:
+        if merged and lo <= merged[-1][1] + 2:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], hi))
+        else:
+            merged.append((lo, hi))
+    return merged

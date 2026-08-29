@@ -1,0 +1,66 @@
+{
+  "summaries": [
+    {
+      "corpus": "ref_corpus",
+      "samples": 50,
+      "rule_passed": 50,
+      "verdict_pass": 35,
+      "verdict_warn": 12,
+      "verdict_fail": 3,
+      "avg_overall": 8.76,
+      "warn_ids": [
+        "locke_second_treatise",
+        "machiavelli_prince",
+        "homer_iliad",
+        "bronte_jane_eyre",
+        "thoreau_walden",
+        "cicero_offices",
+        "twain_huckleberry",
+        "shelley_frankenstein",
+        "verne_journey",
+        "voltaire_candid",
+        "tolstoy_war_peace",
+        "tat_den"
+      ],
+      "fail_ids": [
+        "austen_pride",
+        "smith_wealth",
+        "dostoevsky_crime"
+      ]
+    },
+    {
+      "corpus": "ref_corpus_b",
+      "samples": 50,
+      "rule_passed": 50,
+      "verdict_pass": 23,
+      "verdict_warn": 16,
+      "verdict_fail": 11,
+      "avg_overall": 8.16,
+      "warn_ids": [
+        "aquinas_summa_part2_2",
+        "aquinas_summa_part3",
+        "aristotle_poetics",
+        "augustine_city_of_god_vol1",
+        "augustine_city_of_god_vol2",
+        "bach_abdy_williams",
+        "bach_forkel_life",
+        "beethoven_moscheles_life",
+        "beethoven_thayer_vol1",
+        "beethoven_thayer_vol2",
+        "beethoven_thayer_vol3",
+        "bergson_creative_evolution",
+        "bismarck_bismarck_secret_pages_vol1",
+        "blackstone_commentaries_book1",
+        "blake_poems",
+        "brahms_life_vol1"
+      ],
+      "fail_ids": [
+        "aristotle_nicomachean_ethics",
+        "arnold_discourses_in_america",
+        "balzac_father_goriot",
+        "balzac_lost_illusions",
+        "beethoven_memoirs_letters_vol2"
+      ]
+    }
+  ]
+}

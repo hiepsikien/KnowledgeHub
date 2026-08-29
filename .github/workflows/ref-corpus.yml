@@ -1,0 +1,33 @@
+name: REF corpus
+
+on:
+  push:
+    paths:
+      - "src/knowledgehub/edition/**"
+      - "tests/fixtures/ref_corpus/**"
+      - "tests/test_ref_*.py"
+      - "tests/test_inline_quotations.py"
+  pull_request:
+    paths:
+      - "src/knowledgehub/edition/**"
+      - "tests/fixtures/ref_corpus/**"
+      - "tests/test_ref_*.py"
+      - "tests/test_inline_quotations.py"
+
+jobs:
+  ref-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: pip install -e ".[dev]"
+      - name: REF corpus + structure tests
+        run: |
+          pytest tests/test_ref_corpus.py tests/test_ref_join_fixes.py \
+            tests/test_ref_structure.py tests/test_ref_qa.py \
+            tests/test_inline_quotations.py -q -m "not llm"
+      - name: Rule-only QA
+        run: python -m knowledgehub ref-qa --corpus all --no-llm

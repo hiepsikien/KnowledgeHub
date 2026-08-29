@@ -8,8 +8,9 @@ CJK_LANG = {"ja", "zh", "ko"}
 HARD_GUTENBERG = re.compile(
     r"^(?:"
     r"[_\-=]{3,}|"
-    r"(?:CHAPTER|BOOK|PART|PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX|PROLOGUE)\b|"
-    r"VOLUME\b"
+    r"(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+|"
+    r"(?:BOOK|PART|VOLUME)\s+[IVXLC\d]+|"
+    r"(?:PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX|PROLOGUE)(?:[.:]|\s*$)"
     r")",
     re.I,
 )
@@ -18,15 +19,17 @@ HARD_SCHOLASTIC = re.compile(
     r"[_\-=]{3,}|"
     r"QUESTION\s+\d|"
     r"(?:FIRST|SECOND|THIRD|FOURTH|FIFTH|SIXTH|SEVENTH|EIGHTH|NINTH|TENTH|ELEVENTH|TWELFTH)\s+ARTICLE\b|"
-    r"(?:CHAPTER|BOOK|PART|PROLOGUE|PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX)\b|"
+    r"(?:CHAPTER|BOOK|PART)\s+[IVXLC\d]+|"
+    r"(?:PROLOGUE|PREFACE|INTRODUCTION|CONTENTS|DEDICATION|APPENDIX)(?:[.:]|\s*$)|"
     r"TREATISE\b|"
     r"SUMMA THEOLOGICA|"
     r"\([^)]*Articles?\)"
     r")",
     re.I,
 )
-SOFT_SCHOLASTIC = re.compile(
-    r"^(?:Objection\s+\d|Obj\.\s+\d|Reply Obj|_On the contrary|_I answer that)",
+# Scholastic body markers — relabeled to prose/list_item in label_rules, not headings.
+SCHOLASTIC_BODY = re.compile(
+    r"^(?:Objection\s+\d|Obj\.\s+\d|Reply\s+Obj|_On the contrary|_I answer that)",
     re.I,
 )
 
@@ -34,6 +37,8 @@ SOFT_SCHOLASTIC = re.compile(
 def is_all_caps_heading(line: str) -> bool:
     letters = [c for c in line if c.isalpha()]
     if len(letters) < 8 or len(line) >= 90:
+        return False
+    if line.count(",") >= 2:
         return False
     return sum(1 for c in letters if c.isupper()) / len(letters) >= 0.85
 
@@ -44,9 +49,11 @@ def is_hard_structural(line: str, *, family: str = "gutenberg") -> bool:
 
 
 def is_soft_structural(line: str, *, family: str = "gutenberg") -> bool:
-    if family != "scholastic":
-        return False
-    return bool(SOFT_SCHOLASTIC.match(line))
+    return False
+
+
+def is_scholastic_body_marker(line: str) -> bool:
+    return bool(SCHOLASTIC_BODY.match(line.strip()))
 
 
 def looks_like_wrap(line: str, *, family: str) -> bool:
@@ -82,8 +89,8 @@ def reflow_block(lines: list[str], *, family: str) -> tuple[str, bool]:
 
 
 def unwrap_hard_wrap(text: str, *, family: str = "gutenberg", language: str = "en") -> tuple[str, bool]:
-    """Join ~70-char wraps; keep headings. Skip CJK and messy OCR scans."""
-    if family == "archive_scan" or (language or "en").lower()[:2] in CJK_LANG:
+    """Join ~70-char wraps; keep headings. Skip CJK."""
+    if (language or "en").lower()[:2] in CJK_LANG:
         return text.strip(), False
     blocks: list[str] = []
     acc: list[str] = []

@@ -13,9 +13,11 @@ src/*.egg-info/
 # Canonical manuscripts — local only; public GitHub is metadata + docs
 corpus/sources/*/raw/
 corpus/sources/*/chunks/
+corpus/editions/
 corpus/.translation-jobs.json
 .translation-jobs.json
 
 # Scratch files from atomic writes, and job queues quarantined after corruption
 .*.tmp
 *.corrupt-*
+Read/

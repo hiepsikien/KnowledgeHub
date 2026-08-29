@@ -1,0 +1,285 @@
+"""Post-parse structure: stanzas, play dialogue, heading merge."""
+
+from __future__ import annotations
+
+import re
+from typing import Any
+
+SPEAKER_CUE = re.compile(r"^[A-Z][A-Z\s,\.'-]{2,40}\.$")
+SPEAKER_CUE_EXCLUDE = frozenset({"TO", "BY", "OF", "IN", "ON", "AT", "OR", "AN", "AS", "BE", "NO", "SO", "IF", "UP"})
+STAGE_STRUCTURAL = re.compile(
+    r"^(?:ACT|SCENE|CHAPTER|CHAP\.?|BOOK|PART|VOLUME|INTRODUCTION|PROLOGUE)\b",
+    re.I,
+)
+DRAMATIS_MARKER = re.compile(r"Dramatis Personæ|DRAMATIS PERSON", re.I)
+STAGE_DIRECTION = re.compile(
+    r"^(?:Enter |Exit |Exeunt |Re-enter |Scene continues|\[Aside|\[Within|\[Coming|\[Exit)",
+    re.I,
+)
+SCHOLASTIC_LIST = re.compile(r"^\(\d+\)\s+")
+SCHOLASTIC_HEADING = re.compile(
+    r"^(?:QUESTION\s+\d|(?:FIRST|SECOND|THIRD)\s+ARTICLE|Objection\s+\d)",
+    re.I,
+)
+PLAY_MARKER = re.compile(r"Dramatis Personæ|DRAMATIS PERSON", re.I)
+ACT_HEADING = re.compile(r"^ACT\s+[IVXLC]+\.?$", re.I)
+SCENE_HEADING = re.compile(r"^SCENE\s+[IVXLC]+", re.I)
+VI_VERSE_LINE = re.compile(r"^[À-ỹ0-9\s\[\],;—–-]{4,80}[,;]$")
+HEROIC_VERSE = re.compile(
+    r"^[A-Za-z].{8,78}(\[\d+\])?$"
+)
+HANGING_VERSE_END = re.compile(
+    r"\b(?:the|a|an|of|in|to|for|and|or|as|at|by|with|from|that|which|who|on|into|have|has|had|been|"
+    r"were|was|is|are|be|me|my|it|this|these|those|some|all|not|but|if|so|could|would|should|might|"
+    r"will|can|may|must|I|we|he|she|they|their|our|his|her|its|very|more|most|such|only|also|then|than|"
+    r"when|where|while|after|before|between|through|during|without|within|upon|over|under|about|"
+    r"against|among|each|every|both|other|another|one|two|three|first|second|new|old|same|own|well|"
+    r"even|just|still|yet|already|now|here|there|thus|however|moreover|nevertheless|although|though|"
+    r"because|since|until|unless|whether|power|ground|world|species|facts|work|notes|statements)\s*$",
+    re.I,
+)
+CONTENTS_HEADER = re.compile(r"^CONTENTS\b", re.I)
+
+METADATA_LINE = re.compile(
+    r"^(?:"
+    r"←(?:TỰA|\d+)$|"
+    r".*→$|"
+    r"\d{3,6}$|"
+    r"\d{4,6}[A-Za-zÀ-ỹ].*|"
+    r"\d+\s*—\s.*(?:dịch|của)\b|"
+    r".*(?:Wikipedia|Wikidata|wiki khác|bài viết Wikipedia).*"
+    r")",
+    re.I,
+)
+
+
+def looks_like_play(text: str) -> bool:
+    head = text[:8000]
+    if PLAY_MARKER.search(head):
+        return True
+    cues = sum(1 for line in head.splitlines() if SPEAKER_CUE.match(line.strip()))
+    return cues >= 4
+
+
+def is_speaker_cue(line: str) -> bool:
+    s = line.strip()
+    if STAGE_STRUCTURAL.match(s) or CONTENTS_HEADER.match(s):
+        return False
+    if re.match(r"^(?:PREFACE|INTRODUCTION|DEDICATION|CONTENTS|LETTER|FOREWORD)\.?\s*$", s, re.I):
+        return False
+    if s.rstrip(".") in SPEAKER_CUE_EXCLUDE or s in SPEAKER_CUE_EXCLUDE:
+        return False
+    if re.fullmatch(r"[MDCLXVI.\s]+", s.rstrip(".")):
+        return False
+    return bool(SPEAKER_CUE.match(s))
+
+
+def is_stage_direction(line: str) -> bool:
+    s = line.strip()
+    return bool(STAGE_DIRECTION.match(s)) or (s.startswith("[") and s.endswith("]"))
+
+
+def is_scholastic_list_item(line: str) -> bool:
+    return bool(SCHOLASTIC_LIST.match(line.strip()))
+
+
+def is_metadata_line(line: str) -> bool:
+    return bool(METADATA_LINE.match(line.strip()))
+
+
+def is_vi_verse_line(line: str) -> bool:
+    s = line.strip()
+    if not re.search(r"[À-ỹ]", s):
+        return False
+    if len(s) > 80 or len(s) < 4:
+        return False
+    if re.search(r"[.!?]$", s):
+        return False
+    return s.endswith(",") or s.endswith(";")
+
+
+def is_heroic_verse_line(line: str) -> bool:
+    """Single-line signal for Pope-style PG verse (footnote or comma-ended)."""
+    s = line.strip()
+    if not HEROIC_VERSE.match(s) or HANGING_VERSE_END.search(s):
+        return False
+    if re.search(r"\[\d+\]$", s):
+        return True
+    if s.endswith((",", ";", "!", "?")) and s.count(".") == 0:
+        return len(s.split()) <= 12
+    return False
+
+
+def poetry_run_score(lines: list[str]) -> float:
+    if not lines:
+        return 0.0
+    hits = 0
+    for line in lines:
+        s = line.strip()
+        if len(s) > 85 or "{" in s or re.search(r"\b(?:CHAPTER|ACT|SCENE|BOOK)\b", s, re.I):
+            return 0.0
+        if re.search(r"\[\d+\]$", s):
+            hits += 1
+        elif s.endswith((",", ";", "!", "?")) and len(s) < 75 and not HANGING_VERSE_END.search(s):
+            hits += 1
+    return hits / len(lines)
+
+
+def is_indented_verse(*, indent: int, line: str) -> bool:
+    """PG hard-wrap indent — not verse when the line reads like wrapped prose."""
+    s = line.strip()
+    if indent < 2 or len(s) >= 120:
+        return False
+    if s.endswith(".") and len(s) > 60:
+        return False
+    if s.endswith((",", ";")) and len(s) < 95:
+        return True
+    if len(s.split()) >= 8:
+        return False
+    if len(s) >= 40 and re.search(r"[,;]", s) and not re.search(r"\[\d+\]$", s):
+        return False
+    return indent >= 4 and len(s) < 72
+
+
+def group_dramatis_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge Dramatis Personæ cast list into one metadata block."""
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        text = str(block.get("text") or "")
+        if block.get("type") == "paragraph" and DRAMATIS_MARKER.search(text):
+            parts = [text]
+            i += 1
+            while i < len(blocks):
+                nxt = blocks[i]
+                if nxt.get("type") != "paragraph":
+                    break
+                line = str(nxt.get("text") or "").strip()
+                if STAGE_STRUCTURAL.match(line):
+                    break
+                parts.append(str(nxt.get("text") or ""))
+                i += 1
+            out.append({"type": "metadata", "text": "\n".join(parts)})
+            continue
+        out.append(block)
+        i += 1
+    return out
+
+
+def group_stanzas(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge consecutive verse_line blocks; stanza_start marks blank-line breaks."""
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "verse_line":
+            out.append(block)
+            i += 1
+            continue
+        lines = [str(block.get("text") or "")]
+        i += 1
+        while i < len(blocks):
+            nxt = blocks[i]
+            if nxt.get("type") != "verse_line":
+                break
+            if nxt.get("stanza_start"):
+                break
+            lines.append(str(nxt.get("text") or ""))
+            i += 1
+        out.append({"type": "stanza", "text": "\n".join(lines), "lines": lines})
+    return out
+
+
+def merge_adjacent_metadata(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Join consecutive metadata blocks (split TOC runs)."""
+    if not blocks:
+        return blocks
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "metadata":
+            out.append(block)
+            i += 1
+            continue
+        parts = [str(block.get("text") or "")]
+        i += 1
+        while i < len(blocks) and blocks[i].get("type") == "metadata":
+            parts.append(str(blocks[i].get("text") or ""))
+            i += 1
+        out.append({"type": "metadata", "text": "\n".join(parts)})
+    return out
+
+
+def merge_adjacent_blockquotes(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Join consecutive blockquotes from the same quoted speech."""
+    if not blocks:
+        return blocks
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "blockquote":
+            out.append(block)
+            i += 1
+            continue
+        parts = [str(block.get("text") or "")]
+        i += 1
+        while i < len(blocks) and blocks[i].get("type") == "blockquote":
+            parts.append(str(blocks[i].get("text") or ""))
+            i += 1
+        merged = parts[0]
+        for part in parts[1:]:
+            if merged.rstrip().endswith("-") and part[:1].islower():
+                merged = merged.rstrip()[:-1] + part.lstrip()
+            else:
+                merged = merged.rstrip() + " " + part.lstrip()
+        out.append({"type": "blockquote", "text": merged})
+    return out
+
+
+def merge_adjacent_headings(blocks: list[dict[str, Any]], *, max_level: int = 2) -> list[dict[str, Any]]:
+    """Join consecutive short headings (e.g. Locke title page)."""
+    if not blocks:
+        return blocks
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.get("type") != "heading":
+            out.append(block)
+            i += 1
+            continue
+        level = int(block.get("level") or 1)
+        if level > max_level:
+            out.append(block)
+            i += 1
+            continue
+        parts = [str(block.get("text") or "")]
+        lvl = level
+        i += 1
+        while i < len(blocks) and blocks[i].get("type") == "heading":
+            nxt_lvl = int(blocks[i].get("level") or 1)
+            nxt_text = str(blocks[i].get("text") or "")
+            if nxt_lvl > max_level or len(nxt_text) > 90:
+                break
+            if SCHOLASTIC_HEADING.match(parts[0]) or SCHOLASTIC_HEADING.match(nxt_text):
+                break
+            if ACT_HEADING.match(parts[-1]) and SCENE_HEADING.match(nxt_text):
+                break
+            if ACT_HEADING.match(nxt_text) or SCENE_HEADING.match(nxt_text):
+                break
+            parts.append(nxt_text)
+            lvl = min(lvl, nxt_lvl)
+            i += 1
+        merged = " ".join(parts)
+        if len(parts) > 1:
+            out.append({"type": "heading", "text": merged, "level": lvl})
+        else:
+            out.append(block)
+    return out
+
+
+def scholastic_list_marker(inner: str) -> bool:
+    return bool(re.fullmatch(r"\d+", inner.strip()))

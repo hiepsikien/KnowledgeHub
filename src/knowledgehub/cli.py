@@ -52,6 +52,17 @@ def main(argv: list[str] | None = None) -> int:
     edition.add_argument("--head", type=int, default=700, help="Chars of edition head to print")
     edition.add_argument("--tail", type=int, default=400, help="Chars of edition tail to print")
 
+    ref_qa = sub.add_parser("ref-qa", help="QA REF/1 parse (rule checks + optional LLM review)")
+    ref_qa.add_argument("--corpus", default=None, help="Corpus sample id from tests/fixtures/ref_corpus/manifest.json, or 'all'")
+    ref_qa.add_argument("--work", default=None, help="Catalog work id (uses normalized manuscript)")
+    ref_qa.add_argument("--file", default=None, type=Path, help="Raw text file to parse and QA")
+    ref_qa.add_argument("--language", default=None, help="Language code when using --file")
+    ref_qa.add_argument("--family", default=None, help="Source family override")
+    ref_qa.add_argument("--model", default=None, help="LLM model override (default: settings qa slot or gemini-3.5-flash)")
+    ref_qa.add_argument("--no-llm", action="store_true", help="Rule checks only (no LLM cost)")
+    ref_qa.add_argument("--min-overall", type=float, default=7.0, help="Minimum LLM overall score to pass")
+    ref_qa.add_argument("--fail-fast", action="store_true", help="Exit 1 on first failed sample")
+
     tr = sub.add_parser("translate", help="Translation project commands")
     tr_sub = tr.add_subparsers(dest="translate_cmd", required=True)
     tr_init = tr_sub.add_parser("init", help="Create translation project from local raw text")
@@ -104,6 +115,11 @@ def main(argv: list[str] | None = None) -> int:
     serve.add_argument("--reload", action="store_true", default=True)
     serve.add_argument("--no-reload", action="store_false", dest="reload")
 
+    re_exp = sub.add_parser("export-read-edition", help="Build REF/1 package split by chapter")
+    re_exp.add_argument("--work", required=True, help="Work id")
+    re_exp.add_argument("--force", action="store_true", help="Rebuild even if package exists")
+    re_exp.add_argument("--llm", action="store_true", help="Use LLM during REF build")
+
     args = parser.parse_args(argv)
 
     if args.cmd == "build-catalog":
@@ -152,10 +168,12 @@ def main(argv: list[str] | None = None) -> int:
             work = get_work(args.work)
             path = resolve_content_path(work)
             raw = path.read_text(encoding="utf-8", errors="replace")
+            from .paths import corpus_root
+
             text, report = normalize_manuscript(
                 raw,
                 language=str(work.get("language") or "en"),
-                work=work,
+                work={**work, "_corpus_root": str(corpus_root())},
                 use_llm=args.llm,
             )
         except (FileNotFoundError, KeyError, ValueError) as exc:
@@ -169,6 +187,11 @@ def main(argv: list[str] | None = None) -> int:
         summary = {
             "work_id": args.work,
             "family": report.get("family"),
+            "edition_format": report.get("edition_format"),
+            "edition_hash": report.get("edition_hash"),
+            "content_kind": report.get("content_kind"),
+            "block_count": report.get("block_count"),
+            "ref": report.get("ref"),
             "source_chars": report.get("source_chars"),
             "published_chars": report.get("published_chars"),
             "kept_notes": report.get("kept_notes"),
@@ -187,6 +210,99 @@ def main(argv: list[str] | None = None) -> int:
         }
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         return 0
+    if args.cmd == "ref-qa":
+        from .edition.ref_qa import parse_and_qa
+
+        corpus_dir = Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "ref_corpus"
+        jobs: list[dict] = []
+        if args.corpus:
+            manifest = json.loads((corpus_dir / "manifest.json").read_text(encoding="utf-8"))
+            if args.corpus == "all":
+                jobs = manifest
+            else:
+                jobs = [e for e in manifest if e["id"] == args.corpus]
+                if not jobs:
+                    print(f"Unknown corpus id: {args.corpus}", file=sys.stderr)
+                    return 1
+        elif args.work:
+            work = get_work(args.work)
+            path = resolve_content_path(work)
+            jobs = [
+                {
+                    "id": args.work,
+                    "file": None,
+                    "language": work.get("language") or "en",
+                    "family": None,
+                    "work": work,
+                    "path": path,
+                }
+            ]
+        elif args.file:
+            jobs = [
+                {
+                    "id": args.file.stem,
+                    "file": None,
+                    "language": args.language or "en",
+                    "family": args.family,
+                    "path": args.file,
+                }
+            ]
+        else:
+            print("Provide --corpus, --work, or --file", file=sys.stderr)
+            return 1
+
+        results: list[dict] = []
+        exit_code = 0
+        for job in jobs:
+            if job.get("path"):
+                raw = Path(job["path"]).read_text(encoding="utf-8", errors="replace")
+                work = job.get("work")
+                family = job.get("family")
+                strip = job.get("strip_first", family == "gutenberg" if family else bool(work))
+            else:
+                raw = (corpus_dir / job["file"]).read_text(encoding="utf-8")
+                work = None
+                family = job.get("family")
+                strip = job.get("strip_first", family == "gutenberg")
+            try:
+                edition, parse_report, qa_report = parse_and_qa(
+                    raw,
+                    language=str(job.get("language") or "en"),
+                    family=family,
+                    strip_first=strip,
+                    work=work,
+                    use_llm_qa=not args.no_llm,
+                    min_overall=args.min_overall,
+                    qa_model=args.model,
+                )
+            except (ProviderError, ValueError, FileNotFoundError, KeyError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            row = {
+                "id": job["id"],
+                "passed": qa_report.get("passed"),
+                "block_count": len(edition.get("blocks") or []),
+                "validation_errors": parse_report.get("validation_errors"),
+                "fidelity": {
+                    "passed": qa_report.get("fidelity", {}).get("passed"),
+                    "failed_count": qa_report.get("fidelity", {}).get("failed_count"),
+                },
+                "summary_vi": qa_report.get("summary_vi"),
+            }
+            llm = qa_report.get("llm")
+            if llm:
+                row["llm"] = {
+                    k: llm.get(k)
+                    for k in ("model", "scores", "verdict", "open_issue_count", "issues", "error")
+                    if k in llm
+                }
+            results.append(row)
+            if not qa_report.get("passed"):
+                exit_code = 1
+                if args.fail_fast:
+                    break
+        print(json.dumps({"samples": len(results), "passed": sum(1 for r in results if r["passed"]), "results": results}, ensure_ascii=False, indent=2))
+        return exit_code
     if args.cmd == "translate":
         if args.translate_cmd == "init":
             try:
@@ -267,6 +383,16 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
         return 2
+    if args.cmd == "export-read-edition":
+        from .read_edition_service import build_package
+
+        try:
+            result = build_package(args.work, force=args.force, use_llm=args.llm)
+        except (ValueError, KeyError) as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
     if args.cmd == "serve":
         try:
             import uvicorn

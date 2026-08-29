@@ -1,0 +1,21 @@
+The Internet Archive has digitized this book from the public domain.
+
+https://archive.org/details/sample-philosophy-text
+
+Title: Philosophy and the Modern Mind
+
+Author: Sample Author
+
+Release date: January 1, 2010
+
+This is a sample OCR column with hard-wrapped lines typ-
+ical of scanned books where the right margin breaks mid-
+word and sentences continue on the next physical line.
+
+Philosophy begins in wonder, as Aristotle said long ago
+in the Metaphysics. The modern reader may find these line
+breaks distracting unless the parser joins them correctly.
+
+Another paragraph begins here after a blank line. Short lines
+should still merge when they clearly belong to one thought
+and no structural heading interrupts the flow.

@@ -1,0 +1,489 @@
+[
+  {
+    "id": "aquinas_summa_part1_2",
+    "hub_work_id": "aquinas--summa_part1_2",
+    "file": "en/aquinas_summa_part1_2.txt",
+    "language": "en",
+    "family": "scholastic",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "17897"
+  },
+  {
+    "id": "aquinas_summa_part2_2",
+    "hub_work_id": "aquinas--summa_part2_2",
+    "file": "en/aquinas_summa_part2_2.txt",
+    "language": "en",
+    "family": "scholastic",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "18755"
+  },
+  {
+    "id": "aquinas_summa_part3",
+    "hub_work_id": "aquinas--summa_part3",
+    "file": "en/aquinas_summa_part3.txt",
+    "language": "en",
+    "family": "scholastic",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "19950"
+  },
+  {
+    "id": "aristotle_nicomachean_ethics",
+    "hub_work_id": "aristotle--nicomachean_ethics",
+    "file": "en/aristotle_nicomachean_ethics.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "8438"
+  },
+  {
+    "id": "aristotle_poetics",
+    "hub_work_id": "aristotle--poetics",
+    "file": "en/aristotle_poetics.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "1974"
+  },
+  {
+    "id": "armour_how_they_succeeded_armour",
+    "hub_work_id": "armour--how_they_succeeded_armour",
+    "file": "en/armour_how_they_succeeded_armour.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "64059"
+  },
+  {
+    "id": "arnold_culture_and_anarchy",
+    "hub_work_id": "arnold--culture_and_anarchy",
+    "file": "en/arnold_culture_and_anarchy.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "4212"
+  },
+  {
+    "id": "arnold_discourses_in_america",
+    "hub_work_id": "arnold--discourses_in_america",
+    "file": "en/arnold_discourses_in_america.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "44919"
+  },
+  {
+    "id": "arnold_essays_in_criticism",
+    "hub_work_id": "arnold--essays_in_criticism",
+    "file": "en/arnold_essays_in_criticism.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "77244"
+  },
+  {
+    "id": "augustine_city_of_god_vol1",
+    "hub_work_id": "augustine--city_of_god_vol1",
+    "file": "en/augustine_city_of_god_vol1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "45304"
+  },
+  {
+    "id": "augustine_city_of_god_vol2",
+    "hub_work_id": "augustine--city_of_god_vol2",
+    "file": "en/augustine_city_of_god_vol2.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "45305"
+  },
+  {
+    "id": "augustine_confessions",
+    "hub_work_id": "augustine--confessions",
+    "file": "en/augustine_confessions.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "3296"
+  },
+  {
+    "id": "bach_abdy_williams",
+    "hub_work_id": "bach--abdy_williams",
+    "file": "en/bach_abdy_williams.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "43650"
+  },
+  {
+    "id": "bach_forkel_life",
+    "hub_work_id": "bach--forkel_life",
+    "file": "en/bach_forkel_life.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "35041"
+  },
+  {
+    "id": "bach_poole",
+    "hub_work_id": "bach--poole",
+    "file": "en/bach_poole.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "46076"
+  },
+  {
+    "id": "bacon_novum_organum",
+    "hub_work_id": "bacon--novum_organum",
+    "file": "en/bacon_novum_organum.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "45988"
+  },
+  {
+    "id": "balzac_eugenie_grandet",
+    "hub_work_id": "balzac--eugenie_grandet",
+    "file": "en/balzac_eugenie_grandet.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "1715"
+  },
+  {
+    "id": "balzac_father_goriot",
+    "hub_work_id": "balzac--father_goriot",
+    "file": "en/balzac_father_goriot.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "1237"
+  },
+  {
+    "id": "balzac_lost_illusions",
+    "hub_work_id": "balzac--lost_illusions",
+    "file": "en/balzac_lost_illusions.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "13159"
+  },
+  {
+    "id": "barnum_struggles_and_triumphs",
+    "hub_work_id": "barnum--struggles_and_triumphs",
+    "file": "en/barnum_struggles_and_triumphs.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "50115"
+  },
+  {
+    "id": "bastiat_economic_sophisms",
+    "hub_work_id": "bastiat--economic_sophisms",
+    "file": "en/bastiat_economic_sophisms.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "44145"
+  },
+  {
+    "id": "bastiat_the_law",
+    "hub_work_id": "bastiat--the_law",
+    "file": "en/bastiat_the_law.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "44800"
+  },
+  {
+    "id": "beethoven_memoirs_letters_vol1",
+    "hub_work_id": "beethoven--memoirs_letters_vol1",
+    "file": "en/beethoven_memoirs_letters_vol1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "13065"
+  },
+  {
+    "id": "beethoven_memoirs_letters_vol2",
+    "hub_work_id": "beethoven--memoirs_letters_vol2",
+    "file": "en/beethoven_memoirs_letters_vol2.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "13272"
+  },
+  {
+    "id": "beethoven_moscheles_life",
+    "hub_work_id": "beethoven--moscheles_life",
+    "file": "en/beethoven_moscheles_life.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "39093"
+  },
+  {
+    "id": "beethoven_thayer_vol1",
+    "hub_work_id": "beethoven--thayer_vol1",
+    "file": "en/beethoven_thayer_vol1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "43591"
+  },
+  {
+    "id": "beethoven_thayer_vol2",
+    "hub_work_id": "beethoven--thayer_vol2",
+    "file": "en/beethoven_thayer_vol2.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "43592"
+  },
+  {
+    "id": "beethoven_thayer_vol3",
+    "hub_work_id": "beethoven--thayer_vol3",
+    "file": "en/beethoven_thayer_vol3.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "43593"
+  },
+  {
+    "id": "bell_researches_electric_telephony",
+    "hub_work_id": "bell--researches_electric_telephony",
+    "file": "en/bell_researches_electric_telephony.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "55787"
+  },
+  {
+    "id": "bergson_creative_evolution",
+    "hub_work_id": "bergson--creative_evolution",
+    "file": "en/bergson_creative_evolution.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "26163"
+  },
+  {
+    "id": "berkeley_principles_human_knowledge",
+    "hub_work_id": "berkeley--principles_human_knowledge",
+    "file": "en/berkeley_principles_human_knowledge.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "4723"
+  },
+  {
+    "id": "bismarck_bismarck_secret_pages_vol1",
+    "hub_work_id": "bismarck--bismarck_secret_pages_vol1",
+    "file": "en/bismarck_bismarck_secret_pages_vol1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "68651"
+  },
+  {
+    "id": "blackstone_commentaries_book1",
+    "hub_work_id": "blackstone--commentaries_book1",
+    "file": "en/blackstone_commentaries_book1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "30802"
+  },
+  {
+    "id": "blackwell_pioneer_work",
+    "hub_work_id": "blackwell--pioneer_work",
+    "file": "en/blackwell_pioneer_work.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "65496"
+  },
+  {
+    "id": "blake_marriage_heaven_hell",
+    "hub_work_id": "blake--marriage_heaven_hell",
+    "file": "en/blake_marriage_heaven_hell.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "45315"
+  },
+  {
+    "id": "blake_poems",
+    "hub_work_id": "blake--poems",
+    "file": "en/blake_poems.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "574"
+  },
+  {
+    "id": "brahms_life_vol1",
+    "hub_work_id": "brahms--life_vol1",
+    "file": "en/brahms_life_vol1.txt",
+    "language": "en",
+    "family": "gutenberg",
+    "strip_first": true,
+    "source": "hub_catalog",
+    "gutenberg_id": "40643"
+  },
+  {
+    "id": "ho_xuan_huong_tu_tinh_i",
+    "hub_work_id": "ho_xuan_huong--tu_tinh_i",
+    "file": "vi/ho_xuan_huong_tu_tinh_i.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "ho_xuan_huong_tu_tinh_ii",
+    "hub_work_id": "ho_xuan_huong--tu_tinh_ii",
+    "file": "vi/ho_xuan_huong_tu_tinh_ii.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "ho_xuan_huong_tu_tinh_iii",
+    "hub_work_id": "ho_xuan_huong--tu_tinh_iii",
+    "file": "vi/ho_xuan_huong_tu_tinh_iii.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_ngo_cat_dai_nam_quoc_su_dien_ca",
+    "hub_work_id": "le_ngo_cat--dai_nam_quoc_su_dien_ca",
+    "file": "vi/le_ngo_cat_dai_nam_quoc_su_dien_ca.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_kien_van_108",
+    "hub_work_id": "le_quy_don--kien_van_108",
+    "file": "vi/le_quy_don_kien_van_108.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_kien_van_109",
+    "hub_work_id": "le_quy_don--kien_van_109",
+    "file": "vi/le_quy_don_kien_van_109.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_kien_van_110",
+    "hub_work_id": "le_quy_don--kien_van_110",
+    "file": "vi/le_quy_don_kien_van_110.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_kien_van_111",
+    "hub_work_id": "le_quy_don--kien_van_111",
+    "file": "vi/le_quy_don_kien_van_111.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_van_dai_i2",
+    "hub_work_id": "le_quy_don--van_dai_i2",
+    "file": "vi/le_quy_don_van_dai_i2.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_van_dai_i3",
+    "hub_work_id": "le_quy_don--van_dai_i3",
+    "file": "vi/le_quy_don_van_dai_i3.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "le_quy_don_viet_han_van_khao_van_dai",
+    "hub_work_id": "le_quy_don--viet_han_van_khao_van_dai",
+    "file": "vi/le_quy_don_viet_han_van_khao_van_dai.txt",
+    "language": "vi",
+    "family": "plain",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "fukuzawa_fukuou_jiden",
+    "hub_work_id": "fukuzawa--fukuou_jiden",
+    "file": "ja/fukuzawa_fukuou_jiden.txt",
+    "language": "ja",
+    "family": "aozora",
+    "strip_first": false,
+    "source": "hub_catalog"
+  },
+  {
+    "id": "fukuzawa_gakumon_no_susume",
+    "hub_work_id": "fukuzawa--gakumon_no_susume",
+    "file": "ja/fukuzawa_gakumon_no_susume.txt",
+    "language": "ja",
+    "family": "aozora",
+    "strip_first": false,
+    "source": "hub_catalog"
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "id": "en_grotius_footnotes",
+    "language": "en",
+    "family": "gutenberg",
+    "text": "The Greeks[178] call the former kind a compact between equals, the latter an enjoined truce; the former is meant for high souled men, the latter for servile spirits. Demosthenes in his speech on the liberty of the Rhodians[179] says that it was necessary.",
+    "expect": [
+      [
+        "[178]",
+        "footnote"
+      ],
+      [
+        "[179]",
+        "footnote"
+      ]
+    ]
+  },
+  {
+    "id": "en_grotius_paren_cite",
+    "language": "en",
+    "family": "gutenberg",
+    "text": "Aristotle, in a very clever phrase, in his work entitled the Politics,[148] has said that the art of exchange is a completion of the independence which Nature requires. Victoria (as Victoria also says) rejected the claim.",
+    "expect": [
+      [
+        "(as Victoria also says)",
+        "paren_cite"
+      ],
+      [
+        "[148]",
+        "footnote"
+      ]
+    ]
+  },
+  {
+    "id": "en_grotius_bracket_note",
+    "language": "en",
+    "family": "gutenberg",
+    "text": "* [The Cambridge Modern History, I, 23-24, has a good paragraph upon this famous Papal Bull of May 14, 1493 (modified June 7, 1494, by treaty of Tordesillas).]",
+    "expect": [
+      [
+        "[The Cambridge Modern History",
+        "bracket_note"
+      ]
+    ]
+  },
+  {
+    "id": "en_grotius_paren_aside",
+    "language": "en",
+    "family": "gutenberg",
+    "text": "Prescription is a matter of municipal law; hence it cannot be applied as between kings, or as between free and independent nations.[114] It has even less standing when it is in conflict with that which is always stronger than the municipal law, namely, the law of nature or nations. Nay, even municipal law itself prevents prescription in this case.[115] For it is impossible to acquire by usucaption or prescription things which cannot become property.",
+    "expect": [
+      [
+        "[114]",
+        "footnote"
+      ],
+      [
+        "[115]",
+        "footnote"
+      ]
+    ]
+  },
+  {
+    "id": "en_dialogue_quotes",
+    "language": "en",
+    "family": "plain",
+    "text": "He said \"navigation ought to remain free\" and cited (Politics) in support.",
+    "expect": [
+      [
+        "\"navigation ought to remain free\"",
+        "quote"
+      ],
+      [
+        "(Politics)",
+        "paren_cite"
+      ]
+    ]
+  },
+  {
+    "id": "vi_grotius_footnotes",
+    "language": "vi",
+    "family": "plain",
+    "text": "Người Hy Lạp[178] gọi loại thứ nhất là thỏa ước giữa những kẻ bình đẳng, loại thứ hai là cuộc đình chiến bị áp đặt; Demosthenes, trong bài diễn văn về tự do của người Rhodes[179], đã nói rằng",
+    "expect": [
+      [
+        "[178]",
+        "footnote"
+      ],
+      [
+        "[179]",
+        "footnote"
+      ]
+    ]
+  },
+  {
+    "id": "vi_grotius_paren_latin",
+    "language": "vi",
+    "family": "plain",
+    "text": "sự phân biệt trong chính trị Hy Lạp cổ đại giữa thỏa ước bình đẳng (foedus aequum) và đình chiến áp đặt (foedus iniquum)",
+    "expect": [
+      [
+        "(foedus aequum)",
+        "paren_cite"
+      ],
+      [
+        "(foedus iniquum)",
+        "paren_cite"
+      ]
+    ]
+  },
+  {
+    "id": "vi_grotius_bracket_note",
+    "language": "vi",
+    "family": "plain",
+    "text": "* [Tác phẩm The Cambridge Modern History, tập I, trang 23-24, có một đoạn viết rất hay về Sắc chỉ Giáo hoàng nổi tiếng này ngày 14 tháng 5 năm 1493 (được sửa đổi ngày 7 tháng 6 năm 1494 theo Hiệp ước Tordesillas).]",
+    "expect": [
+      [
+        "[Tác phẩm The Cambridge Modern History",
+        "bracket_note"
+      ]
+    ]
+  },
+  {
+    "id": "vi_grotius_dash_footnote",
+    "language": "vi",
+    "family": "plain",
+    "text": "cơ hội tham gia thương mại — điều mà không ai có thể bị tước đoạt[147] — phải được tự do đối với tất cả mọi người. Chính trị học,[148] đã nói rằng",
+    "expect": [
+      [
+        "[147]",
+        "footnote"
+      ],
+      [
+        "[148]",
+        "footnote"
+      ]
+    ]
+  },
+  {
+    "id": "vi_corner_quotes",
+    "language": "vi",
+    "family": "plain",
+    "text": "Luật sư nhắc lại khẩu hiệu 「biển thuộc về tất cả mọi người」 và dẫn (Digest 43.14.1.pr).",
+    "expect": [
+      [
+        "「biển thuộc về tất cả mọi người」",
+        "quote"
+      ],
+      [
+        "(Digest 43.14.1.pr)",
+        "paren_cite"
+      ]
+    ]
+  }
+]

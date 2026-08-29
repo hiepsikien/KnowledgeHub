@@ -25,7 +25,7 @@ def normalize_manuscript(
     *,
     language: str = "en",
     work: dict[str, Any] | None = None,
-    use_llm: bool = False,
+    use_llm: bool | None = None,
 ) -> tuple[str, dict[str, Any]]:
     """Edition text for consumers. Does not rewrite the source file."""
     return build_edition(text, language=language, work=work, use_llm=use_llm)
