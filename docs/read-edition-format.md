@@ -68,6 +68,25 @@ corpus/editions/{work_id}/{raw_content_hash}/blocks.json
 
 Republish reuses cache when raw hash unchanged.
 
+## Read Edition package (Hub storage)
+
+Per-work REF/1 export split by chapter for CMS preview, QA, and publish:
+
+```
+corpus/read-editions/{work_id}/{edition_hash}/
+  manifest.json
+  edition.full.json
+  chapters/ch-NNN.json
+  qa/report.json
+  qa/overrides.json
+  reading.md
+```
+
+CLI: `knowledgehub export-read-edition --work {id}`  
+CMS: **Read Edition** nav → build, preview blocks, rule/LLM QA, edit overrides → **Publish Read**.
+
+Translation projects can align segment boundaries via `POST /api/translations/{id}/sync-ref-chapters` (opt-in, `overwrite` required if segments exist).
+
 ## Pilot
 
 `grotius--freedom_of_the_seas` — Gutenberg bilingual treatise, Magoffin English chapters.

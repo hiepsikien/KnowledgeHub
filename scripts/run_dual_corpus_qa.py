@@ -146,7 +146,7 @@ def main() -> int:
         print("\n=== Corpus A (ref_corpus — 50 mẫu cũ) ===", flush=True)
         manifest_a = _load_manifest(CORPUS_A)
         report_a = run_qa(manifest_a, CORPUS_A, use_llm=use_llm)
-        out_a = CORPUS_A / "qa_report_v16.json"
+        out_a = CORPUS_A / "qa_report_v17.json"
         out_a.write_text(json.dumps(report_a, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         summaries.append(_summarize(report_a))
         print(json.dumps(_summarize(report_a), ensure_ascii=False, indent=2))
@@ -155,12 +155,12 @@ def main() -> int:
         print("\n=== Corpus B (ref_corpus_b — 50 mẫu mới) ===", flush=True)
         manifest_b = _load_manifest(CORPUS_B)
         report_b = run_qa(manifest_b, CORPUS_B, use_llm=use_llm)
-        out_b = CORPUS_B / "qa_report_v16.json"
+        out_b = CORPUS_B / "qa_report_v17.json"
         out_b.write_text(json.dumps(report_b, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         summaries.append(_summarize(report_b))
         print(json.dumps(_summarize(report_b), ensure_ascii=False, indent=2))
 
-    combined = ROOT / "tests" / "fixtures" / "ref_corpus_qa_dual_v16.json"
+    combined = ROOT / "tests" / "fixtures" / "ref_corpus_qa_dual_v17.json"
     combined.write_text(json.dumps({"summaries": summaries}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"\nCombined summary -> {combined}")
     return 0

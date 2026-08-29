@@ -115,6 +115,11 @@ def main(argv: list[str] | None = None) -> int:
     serve.add_argument("--reload", action="store_true", default=True)
     serve.add_argument("--no-reload", action="store_false", dest="reload")
 
+    re_exp = sub.add_parser("export-read-edition", help="Build REF/1 package split by chapter")
+    re_exp.add_argument("--work", required=True, help="Work id")
+    re_exp.add_argument("--force", action="store_true", help="Rebuild even if package exists")
+    re_exp.add_argument("--llm", action="store_true", help="Use LLM during REF build")
+
     args = parser.parse_args(argv)
 
     if args.cmd == "build-catalog":
@@ -378,6 +383,16 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
         return 2
+    if args.cmd == "export-read-edition":
+        from .read_edition_service import build_package
+
+        try:
+            result = build_package(args.work, force=args.force, use_llm=args.llm)
+        except (ValueError, KeyError) as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
     if args.cmd == "serve":
         try:
             import uvicorn

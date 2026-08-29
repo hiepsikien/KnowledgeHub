@@ -10,7 +10,9 @@ from typing import Any
 from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication, work_credits
 from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, notes_from_annotations
 from .edition.ref import build_read_edition
+from .edition.ref_schema import validate_edition
 from .normalize import normalize_manuscript
+from .read_edition_service import edition_for_publish
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
 from .translation.assemble import IncompleteTranslation, assemble_finals, chapter_finals
@@ -129,6 +131,17 @@ def prepare_publish(
     reading_text, footnote_glossary = glossary_from_footnotes(text)
     if not footnote_glossary:
         _, footnote_glossary = glossary_from_footnotes(raw)
+    try:
+        edition, package_meta = edition_for_publish(work_id, corpus=root)
+        reading_text = str(edition.get("reading_markdown") or reading_text)
+        report = dict(report)
+        report["edition"] = edition
+        report["read_edition"] = package_meta
+        validate_errors = validate_edition(edition)
+        if validate_errors:
+            raise PublishError(f"REF validation: {'; '.join(validate_errors[:3])}")
+    except ValueError as exc:
+        raise PublishError(str(exc)) from exc
     payload = _payload(work, reading_text, corpus=root)
     _attach_edition(payload, report)
     if footnote_glossary:
@@ -165,15 +178,23 @@ def _prepare_translation_publish(
         raise PublishError(str(exc)) from exc
     except (FileNotFoundError, ValueError) as exc:
         raise PublishError(str(exc)) from exc
-    edition, ref_report = build_read_edition(
-        text,
-        family="plain",
-        language=str(work.get("language") or "vi"),
-        work_id=str(work.get("id") or ""),
-    )
+    try:
+        edition, package_meta = edition_for_publish(str(work.get("id") or ""), corpus=root)
+        ref_report = package_meta.get("report") or {}
+    except ValueError:
+        edition, ref_report = build_read_edition(
+            text,
+            family="plain",
+            language=str(work.get("language") or "vi"),
+            work_id=str(work.get("id") or ""),
+        )
+        package_meta = {}
     text = str(edition.get("reading_markdown") or text)
+    validate_errors = validate_edition(edition)
+    if validate_errors:
+        raise PublishError(f"REF validation: {'; '.join(validate_errors[:3])}")
     payload = _payload(work, text, corpus=root)
-    _attach_edition(payload, {"edition": edition, "ref": ref_report})
+    _attach_edition(payload, {"edition": edition, "ref": ref_report, "read_edition": package_meta})
     payload["hub_content_hash"] = meta["content_hash"]
     payload["language"] = work.get("language") or "vi"
     glossary: list[dict[str, Any]] = []

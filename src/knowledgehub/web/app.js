@@ -186,6 +186,7 @@ async function selectWork(id) {
         <button class="btn" id="toggle-read" type="button">${
           summary.read_allowed ? "Block Read" : "Allow Read"
         }</button>
+        <a class="btn" href="/read-edition/${encodeURIComponent(id)}">Read Edition</a>
         <a class="btn primary" id="apply" href="/publish/${encodeURIComponent(id)}">Publish to Read</a>
       </div>
       ${workTranslateHtml(work, summary)}
@@ -296,7 +297,16 @@ function hideAllViews() {
   $("view-publish").hidden = true;
   $("view-translation").hidden = true;
   $("view-settings").hidden = true;
+  if ($("view-read-edition")) $("view-read-edition").hidden = true;
   stopJobPoll();
+}
+
+function readEditionFromPath() {
+  if (window.KHReadEdition) return window.KHReadEdition.fromPath();
+  const parts = location.pathname.replace(/^\/+/, "").split("/");
+  if (parts[0] === "read-edition" && parts[1]) return decodeURIComponent(parts.slice(1).join("/"));
+  if (parts[0] === "read-edition") return "";
+  return null;
 }
 
 function translationFromPath() {
@@ -1417,6 +1427,25 @@ async function loadTranslationView(workId, chapter) {
   }
 }
 
+async function syncTranslationRefChapters() {
+  const workId = state.translation.projectId;
+  if (!workId) return;
+  const overwrite = confirm(
+    "Tách lại segments theo REF split_hints?\nCần overwrite=true nếu đã có segment — bản dịch cũ sẽ mất.",
+  );
+  if (!overwrite) return;
+  try {
+    const result = await api(`/api/translations/${encodeURIComponent(workId)}/sync-ref-chapters`, {
+      method: "POST",
+      body: { overwrite: true },
+    });
+    toast(`Đã sync ${result.segments_written} segments từ REF`);
+    await loadTranslationView(workId, null);
+  } catch (err) {
+    toast(err.message);
+  }
+}
+
 async function runTranslationPromote() {
   const workId = state.translation.projectId;
   if (!workId) return;
@@ -1479,6 +1508,7 @@ function wireTranslation() {
     btn.onclick = () => setCompareTab(btn.dataset.compareTab);
   });
   $("tr-promote").onclick = () => void runTranslationPromote();
+  $("tr-sync-ref")?.addEventListener("click", () => void syncTranslationRefChapters());
   $("tr-draft-missing").onclick = () => void enqueueMissingDrafts();
   $("tr-cancel-jobs").onclick = () => void cancelActiveJobs();
 }
@@ -1813,6 +1843,10 @@ function wireNav() {
         location.href = "/";
         return;
       }
+      if (readEditionFromPath() !== null && view !== "read-edition" && view !== "settings") {
+        location.href = "/";
+        return;
+      }
       document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       if (view === "settings") {
@@ -1826,6 +1860,11 @@ function wireNav() {
       if (view === "translation") {
         $("view-translation").hidden = false;
         void loadTranslationView(null, null);
+      }
+      if (view === "read-edition") {
+        const reId = readEditionFromPath();
+        if (reId) void window.KHReadEdition?.load(reId);
+        else void window.KHReadEdition?.pickWork();
       }
     };
   });
@@ -1925,6 +1964,12 @@ async function afterAuth() {
   }
   if (settingsFromPath()) {
     await loadSettingsView();
+    return;
+  }
+  const reId = readEditionFromPath();
+  if (reId !== null) {
+    if (reId) await window.KHReadEdition?.load(reId);
+    else await window.KHReadEdition?.pickWork();
     return;
   }
   await loadDesk();

@@ -25,6 +25,14 @@ from .hash import refresh_hashes
 from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
+from .read_edition_service import (
+    build_package as build_read_edition,
+    get_chapter as get_read_edition_chapter,
+    get_manifest as get_read_edition_manifest,
+    get_status as get_read_edition_status,
+    patch_chapter as patch_read_edition_chapter,
+    run_qa as run_read_edition_qa,
+)
 from .read_publish import PublishError, preview_normalized, publish_to_read
 from .settings import save_settings, settings_payload
 from .translation.api import (
@@ -44,6 +52,7 @@ from .translation.api import (
 )
 from .translation.project import list_project_ids, translation_offer
 from .translation.assemble import IncompleteTranslation
+from .translation.ref_chapters import sync_translation_chapters_from_ref
 from .translation.jobs import (
     configure_job_logging,
     job_log_event,
@@ -129,6 +138,26 @@ class TranslationSettingsBody(BaseModel):
 
 class SettingsBody(BaseModel):
     translation: TranslationSettingsBody | None = None
+
+
+class ReadEditionBuildBody(BaseModel):
+    force: bool = False
+    use_llm: bool = False
+
+
+class ReadEditionPatchBody(BaseModel):
+    block_patches: list[dict[str, Any]] = Field(default_factory=list)
+    curator_note: str | None = None
+
+
+class ReadEditionQaBody(BaseModel):
+    chapter_id: str | None = None
+    use_llm: bool = True
+
+
+class SyncRefChaptersBody(BaseModel):
+    overwrite: bool = False
+    include_front_matter: bool = False
 
 
 def _ops_secret() -> str:
@@ -247,6 +276,89 @@ def create_app() -> FastAPI:
         except PublishError as exc:
             raise HTTPException(400, str(exc)) from exc
         return result
+
+    @app.get("/api/works/{work_id}/read-edition", dependencies=guard)
+    def read_edition_status(work_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_status(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+
+    @app.post("/api/works/{work_id}/read-edition/build", dependencies=guard)
+    def read_edition_build(work_id: str, payload: ReadEditionBuildBody | None = None) -> dict[str, Any]:
+        body = payload or ReadEditionBuildBody()
+        try:
+            return build_read_edition(work_id, force=body.force, use_llm=body.use_llm)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/manifest", dependencies=guard)
+    def read_edition_manifest(work_id: str) -> dict[str, Any]:
+        try:
+            return {"manifest": get_read_edition_manifest(work_id)}
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/chapters/{chapter_id}", dependencies=guard)
+    def read_edition_chapter(work_id: str, chapter_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_chapter(work_id, chapter_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.patch("/api/works/{work_id}/read-edition/chapters/{chapter_id}", dependencies=guard)
+    def read_edition_patch(
+        work_id: str, chapter_id: str, payload: ReadEditionPatchBody
+    ) -> dict[str, Any]:
+        try:
+            return patch_read_edition_chapter(
+                work_id,
+                chapter_id,
+                block_patches=payload.block_patches,
+                curator_note=payload.curator_note,
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/qa", dependencies=guard)
+    def read_edition_qa(work_id: str, payload: ReadEditionQaBody | None = None) -> dict[str, Any]:
+        body = payload or ReadEditionQaBody()
+        try:
+            return run_read_edition_qa(
+                work_id,
+                chapter_id=body.chapter_id,
+                use_llm=body.use_llm,
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/translations/{source_work_id}/sync-ref-chapters", dependencies=guard)
+    def translation_sync_ref_chapters(
+        source_work_id: str, payload: SyncRefChaptersBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or SyncRefChaptersBody()
+        try:
+            return sync_translation_chapters_from_ref(
+                source_work_id,
+                overwrite=body.overwrite,
+                include_front_matter=body.include_front_matter,
+            )
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except FileExistsError as exc:
+            raise HTTPException(409, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.post("/api/validate", dependencies=guard)
     def validate() -> dict[str, Any]:
