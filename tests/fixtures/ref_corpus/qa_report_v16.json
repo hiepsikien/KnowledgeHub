@@ -1,0 +1,1483 @@
+{
+  "corpus": "ref_corpus",
+  "parser_version": "v1.6",
+  "model": "gemini-3.1-flash-lite",
+  "samples": 50,
+  "rule_passed": 50,
+  "llm_ok": 46,
+  "llm_errors": 0,
+  "verdict_pass": 35,
+  "verdict_warn": 12,
+  "verdict_fail": 3,
+  "avg_overall": 8.76,
+  "results": [
+    {
+      "id": "grotius_treatise",
+      "language": "en",
+      "blocks": 12,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, các đoạn văn được nối chính xác. Tuy nhiên, cấu trúc khối của đoạn trích thơ Vergil bị chia tách không nhất quán giữa blockquote và stanza, gây ngắt quãng dòng thơ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn trích thơ của Vergil bị chia thành hai khối (7 và 8) một cách không cần thiết, làm mất tính liên tục của khổ thơ.",
+          "block_index": 7,
+          "source_excerpt": "“_What men, what monsters, what inhuman race,\nWhat laws, what barbarous customs of the place,\nShut up a desert shore to drowning men,\n  And drive us to the cruel seas again._”[6]",
+          "edition_excerpt": "Block 7: “_What men, what monsters, what inhuman race, What laws, what barbarous customs of the place,\nBlock 8: Shut up a desert shore to drowning men, And drive us to the cruel seas again._”[6]"
+        }
+      ]
+    },
+    {
+      "id": "grotius_treatise_ch1",
+      "language": "en",
+      "blocks": 12,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, tuy nhiên cấu trúc khối của đoạn trích dẫn thơ (Vergil) bị chia tách không hợp lý. Việc tách khối blockquote và stanza làm gián đoạn dòng chảy của bài thơ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn trích dẫn thơ của Vergil bị chia thành hai khối (blockquote và stanza) thay vì một khối thống nhất, làm mất tính liên tục của khổ thơ.",
+          "block_index": 7,
+          "source_excerpt": "“_What men, what monsters, what inhuman race,\nWhat laws, what barbarous customs of the place,\nShut up a desert shore to drowning men,\n  And drive us to the cruel seas again._”[6]",
+          "edition_excerpt": "Block 7: “_What men, what monsters, what inhuman race, What laws, what barbarous customs of the place,\nBlock 8: Shut up a desert shore to drowning men, And drive us to the cruel seas again._”[6]"
+        }
+      ]
+    },
+    {
+      "id": "locke_second_treatise",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 6,
+        "join_quality": 5,
+        "inline_spans": 10,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Cấu trúc khối bị lỗi do tách nhầm tiêu đề và đoạn văn ở phần thông tin xuất bản (MDCLXXXVIII). Việc nối dòng chưa hoàn thiện ở các đoạn liệt kê tên nhà xuất bản, gây ra ngắt dòng không cần thiết.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Khối 3 và 4 bị tách rời không hợp lý; danh sách nhà xuất bản bị ngắt quãng giữa chừng tạo thành hai khối riêng biệt thay vì một đoạn văn thống nhất.",
+          "block_index": 3,
+          "source_excerpt": "REPRINTED, THE SIXTH TIME, BY A. MILLAR, H. WOODFALL, 1. WHISTON AND B. WHITE, 1. RIVINGTON...",
+          "edition_excerpt": "REPRINTED, THE SIXTH TIME, BY A. MILLAR, H. WOODFALL, 1. WHISTON AND B.\n\nWHITE, 1. RIVINGTON..."
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Thiếu sót trong việc nối các dòng bị ngắt do định dạng cột/dòng của nguồn, đặc biệt là trong danh sách tên nhà xuất bản.",
+          "block_index": 4,
+          "source_excerpt": "B. WHITE, 1. RIVINGTON",
+          "edition_excerpt": "B.\n\nWHITE, 1. RIVINGTON"
+        }
+      ]
+    },
+    {
+      "id": "dickens_two_cities",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, các dòng được nối chính xác. Tuy nhiên, khối cuối cùng bị tách rời một cách không cần thiết thành một 'stanza' chứa từ 'the'.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối cuối cùng (block 5) chỉ chứa từ 'the' và bị gắn nhãn là 'stanza', lẽ ra nên được gộp vào khối 4.",
+          "block_index": 5,
+          "source_excerpt": "the",
+          "edition_excerpt": "the"
+        }
+      ]
+    },
+    {
+      "id": "aquinas_summa",
+      "language": "en",
+      "blocks": 22,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được xử lý tốt, giữ nguyên nội dung gốc. Cấu trúc khối chính xác, tuy nhiên tiêu đề 'FIRST ARTICLE' nên được gắn nhãn là heading thay vì paragraph để phù hợp với phân cấp tài liệu.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 14 ('FIRST ARTICLE...') nên được gắn nhãn là 'heading' thay vì 'paragraph' để phản ánh đúng cấu trúc phân cấp của văn bản học thuật.",
+          "block_index": 14,
+          "source_excerpt": "FIRST ARTICLE [I, Q. 1, Art. 1]",
+          "edition_excerpt": "FIRST ARTICLE [I, Q. 1, Art. 1]"
+        }
+      ]
+    },
+    {
+      "id": "aristotle_politics",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích hoàn toàn chính xác, các đoạn văn được nối liền mạch và các nhãn khối được gán đúng. Không có lỗi về mất mát văn bản hay định dạng.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "mill_on_liberty",
+      "language": "en",
+      "blocks": 3,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý chính xác, các dòng bị ngắt trong nguồn đã được nối lại hoàn hảo. Cấu trúc khối và các nhãn span được định dạng đúng theo quy định.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "whitman_grass",
+      "language": "en",
+      "blocks": 20,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, các dòng được nối chính xác. Tuy nhiên, các tiêu đề chương (1, 2, 3) bị gộp chung vào khối stanza thay vì tách thành khối heading riêng biệt.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các số chương (1, 2, 3) nên được tách thành khối 'heading' thay vì để nằm trong khối 'stanza'.",
+          "block_index": 1,
+          "source_excerpt": "1\n  I celebrate myself",
+          "edition_excerpt": "1 I celebrate myself"
+        }
+      ]
+    },
+    {
+      "id": "shakespeare_hamlet",
+      "language": "en",
+      "blocks": 55,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 8,
+        "join_quality": 9,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có cấu trúc tốt và bảo toàn văn bản chính xác. Tuy nhiên, có một lỗi nhỏ trong việc phân loại block đối với lời thoại của Barnardo bị ngắt quãng.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Lời thoại của Barnardo ('It would be spoke to.') bị tách thành một block riêng biệt thay vì gộp vào block trước đó hoặc xử lý như một phần của đối thoại, tạo ra khoảng trống không cần thiết.",
+          "source_excerpt": "BARNARDO\nIt would be spoke to.",
+          "edition_excerpt": "BARNARDO\n\nIt would be spoke to."
+        }
+      ]
+    },
+    {
+      "id": "plato_republic",
+      "language": "en",
+      "blocks": 22,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích hoàn toàn chính xác và tuân thủ nghiêm ngặt các quy tắc REF/1. Cấu trúc khối và việc bảo toàn văn bản đều đạt chất lượng cao.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "hobbes_leviathan",
+      "language": "en",
+      "blocks": 7,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích hoàn toàn chính xác, bảo toàn nguyên vẹn văn bản gốc và cấu trúc đoạn văn. Các nhãn span được gán đúng theo quy định REF/1.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "machiavelli_prince",
+      "language": "en",
+      "blocks": 10,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 5,
+        "join_quality": 4,
+        "inline_spans": 9,
+        "overall": 6
+      },
+      "verdict": "warn",
+      "issue_count": 3,
+      "summary_vi": "Văn bản bị phân mảnh sai cách ở đoạn trích dẫn thư của Machiavelli, làm đứt gãy các câu văn và tạo ra các khối 'stanza' và 'blockquote' không cần thiết. Cấu trúc khối cần được hợp nhất lại để đảm bảo tính liên tục của văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Đoạn trích dẫn thư bị chia nhỏ thành nhiều khối (stanza, blockquote) một cách không hợp lý, làm gián đoạn luồng đọc.",
+          "block_index": 5,
+          "source_excerpt": "He writes: “I have received your letter... if you are willing to do your share.”",
+          "edition_excerpt": "5: stanza... 6: blockquote... 7: stanza..."
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 2 (YOUTH...) nên được gắn nhãn là 'heading' thay vì 'paragraph' để đồng nhất với khối 8.",
+          "block_index": 2,
+          "source_excerpt": "YOUTH — Æt. 1-25—1469-94",
+          "edition_excerpt": "2: paragraph char_len=24 | 'YOUTH — Æt. 1-25—1469-94'"
+        }
+      ]
+    },
+    {
+      "id": "marx_communist",
+      "language": "en",
+      "blocks": 11,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích hoàn toàn chính xác và tuân thủ nghiêm ngặt các quy tắc REF/1. Văn bản được bảo toàn nguyên vẹn, các đoạn văn được nối đúng cách và các nhãn khối được gán chính xác.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "darwin_origin",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý chính xác, các dòng bị ngắt trong nguồn gốc đã được nối lại hoàn hảo. Cấu trúc khối phản ánh đúng nội dung đoạn văn.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "austen_pride",
+      "language": "en",
+      "blocks": 42,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 4,
+        "join_quality": 3,
+        "inline_spans": 9,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Bản phân tích gặp lỗi nghiêm trọng về cấu trúc khối (block structure) và ngắt dòng (join quality). Nhiều đoạn hội thoại bị ngắt quãng giữa chừng thành các khối riêng biệt thay vì được nối liền thành một đoạn văn hoàn chỉnh.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Nhiều đoạn hội thoại bị ngắt dòng sai quy tắc, tạo ra các khối văn bản rời rạc thay vì nối liền các dòng bị ngắt bởi định dạng gốc.",
+          "block_index": 13,
+          "source_excerpt": "that he came down on Monday...",
+          "edition_excerpt": "down on Monday..."
+        },
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Các đoạn hội thoại dài bị chia nhỏ thành nhiều khối blockquote không cần thiết, làm mất tính liên tục của văn bản.",
+          "block_index": 12,
+          "source_excerpt": "Why, my dear, you must know, Mrs. Long says that Netherfield is taken by a young man of large fortune from the north of England; that he came down on Monday...",
+          "edition_excerpt": "Why, my dear, you must know, Mrs. Long says that Netherfield is taken by a young man of large fortune from the north of England; that he came [Block 12] down on Monday... [Block 13]"
+        }
+      ]
+    },
+    {
+      "id": "melville_moby",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý hoàn hảo, không có lỗi về cấu trúc khối hoặc mất mát dữ liệu. Các dòng bị ngắt trong nguồn đã được nối lại chính xác theo quy tắc REF/1.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "homer_iliad",
+      "language": "en",
+      "blocks": 13,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 7,
+        "join_quality": 8,
+        "inline_spans": 9,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có cấu trúc tốt nhưng gặp vấn đề về phân đoạn blockquote. Một số đoạn hội thoại bị cắt rời không hợp lý giữa blockquote và stanza, gây gián đoạn luồng đọc.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Blockquote ở block 7 và 10 bị cắt ngang, khiến phần còn lại của câu nói bị đẩy sang block stanza tiếp theo, làm mất tính toàn vẹn của trích dẫn.",
+          "block_index": 7,
+          "source_excerpt": "“O Smintheus! sprung from fair Latona’s line,[47]\n\nThou guardian power of Cilla the divine,[48]",
+          "edition_excerpt": "Block 7: blockquote, Block 8: stanza"
+        },
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Từ cuối cùng của văn bản bị cắt cụt ('kne' thay vì 'knew').",
+          "block_index": 12,
+          "source_excerpt": "the future kne",
+          "edition_excerpt": "the future kne"
+        }
+      ]
+    },
+    {
+      "id": "hume_treatise",
+      "language": "en",
+      "blocks": 6,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt, các đoạn văn được nối chính xác. Tuy nhiên, phần chú thích (footnote) bị tách thành hai khối (stanza và blockquote) không cần thiết, làm gián đoạn cấu trúc logic của chú thích.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Chú thích [1] bị chia tách thành hai khối (stanza và blockquote) thay vì là một khối chú thích thống nhất.",
+          "block_index": 1,
+          "source_excerpt": "the _English_ or any other language, that I know of.",
+          "edition_excerpt": "the _English_ or any other language, that I know of."
+        }
+      ]
+    },
+    {
+      "id": "smith_wealth",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 3,
+        "join_quality": 2,
+        "inline_spans": 10,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 2,
+      "summary_vi": "Văn bản bị ngắt dòng sai quy định tại các đoạn đầu, khiến câu bị chia cắt giữa chừng. Cấu trúc block bị phân mảnh không cần thiết thành nhiều 'stanza' thay vì các 'paragraph' thống nhất.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Câu đầu tiên bị ngắt dòng sai tại 'annually', tạo ra một block mới bắt đầu bằng 'consumes'. Cần nối lại thành một đoạn văn duy nhất.",
+          "block_index": 0,
+          "source_excerpt": "annually consumes",
+          "edition_excerpt": "annually\n\nconsumes"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các đoạn văn bản xuôi (prose) được gắn nhãn là 'stanza' thay vì 'paragraph'.",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "id": "montesquieu_spirit",
+      "language": "en",
+      "blocks": 7,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có cấu trúc tốt và bảo toàn văn bản chính xác. Tuy nhiên, tiêu đề chương 'ALI PACHA' và 'CHAPTER I' bị gộp vào khối metadata thay vì tách thành các khối heading riêng biệt.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'ALI PACHA' và 'CHAPTER I' xuất hiện sau phần mục lục nên được tách thành các khối heading thay vì gộp vào khối metadata.",
+          "block_index": 3,
+          "source_excerpt": "*ALI PACHA*\n\nCHAPTER I",
+          "edition_excerpt": "CONTENTS *ALI PACHA* CHAPTER I..."
+        }
+      ]
+    },
+    {
+      "id": "paine_common_sense",
+      "language": "en",
+      "blocks": 11,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có chất lượng rất tốt, các đoạn văn được nối liền mạch và cấu trúc khối chính xác. Tuy nhiên, có một lỗi nhỏ về thiếu sót từ ở cuối văn bản nguồn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Từ cuối cùng 'a' trong đoạn cuối bị thiếu so với văn bản nguồn.",
+          "block_index": 10,
+          "source_excerpt": "in every other case a",
+          "edition_excerpt": "in every other case"
+        }
+      ]
+    },
+    {
+      "id": "federalist_papers",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt và các dòng được nối chính xác. Tuy nhiên, cấu trúc khối có một số nhầm lẫn nhỏ trong việc phân loại tiêu đề và đoạn văn ở phần đầu.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các khối 1 và 2 ('General Introduction' và thông tin ngày tháng) nên được gộp vào một khối metadata hoặc định dạng lại thay vì để là paragraph riêng lẻ.",
+          "block_index": 1,
+          "source_excerpt": "General Introduction\n\nFor the Independent Journal. Saturday, October 27, 1787",
+          "edition_excerpt": "General Introduction\n\nFor the Independent Journal. Saturday, October 27, 1787"
+        }
+      ]
+    },
+    {
+      "id": "swift_gulliver",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý chính xác, các dòng bị ngắt trong nguồn đã được nối lại hoàn hảo. Cấu trúc khối phản ánh đúng các đoạn văn trong nguyên tác.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "bronte_jane_eyre",
+      "language": "en",
+      "blocks": 13,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 6,
+        "join_quality": 6,
+        "inline_spans": 10,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt nhưng cấu trúc khối bị phân mảnh không cần thiết ở các đoạn đối thoại và thơ. Một số dòng bị ngắt quãng sai quy tắc (join_quality) làm ảnh hưởng đến trải nghiệm đọc.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn đối thoại của Mrs. Reed bị chia tách thành blockquote và stanza một cách không hợp lý.",
+          "block_index": 4,
+          "source_excerpt": "“Jane, I don’t like cavillers or questioners; besides, there is something truly forbidding in a child taking up her elders in that manner. Be seated somewhere; and until you can speak pleasantly, remain silent.”",
+          "edition_excerpt": "“Jane, I don’t like cavillers or questioners; besides, there is something truly forbidding in a child taking up her elde… manner. Be seated somewhere; and until you can speak pleasantly, remain silent.”"
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Đoạn cuối bị ngắt dòng thủ công thay vì nối liền thành một khối paragraph hoàn chỉnh.",
+          "block_index": 12,
+          "source_excerpt": "accumulation of centuries of winters, glazed in Alpine heights above heights, surround the pole, and concentre the multiplied rigours of extreme cold.”",
+          "edition_excerpt": "accumulation of centuries of winters, glazed in Alpine heights above heights, surround the pole, and concentre the multi… [còn tiếp]"
+        }
+      ]
+    },
+    {
+      "id": "wells_war_worlds",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý chính xác, các dòng bị ngắt trong nguồn đã được nối lại hoàn hảo. Cấu trúc khối phản ánh đúng nội dung và không có lỗi định dạng.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "poe_raven",
+      "language": "en",
+      "blocks": 5,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt và các dòng được nối chính xác. Tuy nhiên, nhãn block cho phần trích dẫn tác giả bị gán nhầm là heading thay vì stanza hoặc blockquote.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Nhãn 'DE BERANGER.' được gán là heading level 2, trong khi đây là phần ghi chú tác giả của đoạn thơ phía trên, nên thuộc về stanza hoặc blockquote.",
+          "block_index": 2,
+          "source_excerpt": "DE BERANGER.",
+          "edition_excerpt": "DE BERANGER."
+        }
+      ]
+    },
+    {
+      "id": "thoreau_walden",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 6,
+        "join_quality": 7,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 3,
+      "summary_vi": "Cấu trúc khối bị lỗi do danh sách mục lục (TOC) bị gộp thành một đoạn văn thay vì metadata. Ngoài ra, phần trích dẫn bị chia tách sai thành nhiều khối stanza thay vì một khối blockquote duy nhất.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Danh sách mục lục ở đầu văn bản nên được gắn nhãn là 'metadata' thay vì 'paragraph'.",
+          "block_index": 0,
+          "source_excerpt": "Economy\n Where I Lived, and What I Lived For...",
+          "edition_excerpt": "Economy Where I Lived, and What I Lived For..."
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối trích dẫn bị chia tách không hợp lý thành blockquote và stanza, làm ngắt quãng câu văn.",
+          "block_index": 2,
+          "source_excerpt": "standing on his roost,\n\n    if only to wake my neighbors up.\"",
+          "edition_excerpt": "standing on his roost,\n\nif only to wake my neighbors up.\""
+        }
+      ]
+    },
+    {
+      "id": "franklin_autobiography",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có chất lượng tốt, văn bản được bảo toàn đầy đủ. Tuy nhiên, khối 'Navigation' và danh sách đi kèm nên được gộp vào một block metadata thay vì tách rời thành paragraph và stanza.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Danh sách điều hướng (Navigation) nên được nhóm lại thành một block metadata duy nhất thay vì tách thành paragraph và stanza riêng biệt.",
+          "block_index": 4,
+          "source_excerpt": "Navigation\n\n    Letter from Mr. Abel James.\n    Publishes the first number of \"Poor Richard's Almanac.\n    Proposes a Plan of Union for the colonies\n    Chief events in Franklin's life.",
+          "edition_excerpt": "Navigation\n\nLetter from Mr. Abel James.\nPublishes the first number of \"Poor Richard's Almanac.\nProposes a Plan of Union for the colonies\nChief events in Franklin's life."
+        }
+      ]
+    },
+    {
+      "id": "cicero_offices",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 6,
+        "join_quality": 7,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích có lỗi cấu trúc khối nghiêm trọng khi tách nhầm một phần câu văn thành khối 'stanza' riêng biệt. Ngoài ra, tiêu đề chương bị gộp sai định dạng.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Khối 7 ('forefathers thousands of years ago.') bị tách rời khỏi đoạn văn trước đó một cách không hợp lý, tạo thành một khối 'stanza' sai lệch.",
+          "block_index": 7,
+          "source_excerpt": "destinies of his forefathers thousands of years ago.",
+          "edition_excerpt": "destinies of his\n\nforefathers thousands of years ago."
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'Book I' và 'I.' bị gộp chung vào một khối heading, cần tách biệt rõ ràng hơn theo cấu trúc văn bản gốc.",
+          "block_index": 2,
+          "source_excerpt": "Book I\n\nI.",
+          "edition_excerpt": "Book I I."
+        }
+      ]
+    },
+    {
+      "id": "kant_critique",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có độ chính xác cao, bảo toàn nguyên vẹn văn bản gốc. Cấu trúc khối được phân chia hợp lý, mặc dù đoạn thơ Ovid có thể được nhóm lại chặt chẽ hơn nhưng không vi phạm quy tắc.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Các dòng thơ của Ovid bị chia thành 3 khối riêng biệt (4, 5, 6) thay vì một khối thơ thống nhất, tuy nhiên điều này không ảnh hưởng đến tính toàn vẹn của nội dung.",
+          "block_index": 4,
+          "source_excerpt": "Modo maxima rerum,\nTot generis, natisque potens...\nNunc trahor exul, inops.\n—Ovid, Metamorphoses. xiii",
+          "edition_excerpt": "Modo maxima rerum, Tot generis, natisque potens...\n\nNunc trahor exul, inops.\n\n—Ovid, Metamorphoses. xiii"
+        }
+      ]
+    },
+    {
+      "id": "archive_scan_ocr",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Bản phân tích thực hiện xuất sắc việc nối các dòng bị ngắt quãng trong văn bản gốc. Cấu trúc khối được phân chia hợp lý và nội dung văn bản được bảo toàn nguyên vẹn.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "twain_huckleberry",
+      "language": "en",
+      "blocks": 68,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 6,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Cấu trúc khối bị lỗi ở phần mục lục (TOC). Theo quy định REF/1, danh sách mục lục dài cần được nhóm vào một khối 'metadata' duy nhất, nhưng bản phân tích lại tách rời từng chương thành các khối heading riêng lẻ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Vi phạm quy định REF/1 về việc nhóm danh sách mục lục (TOC) dài thành một khối 'metadata' duy nhất thay vì tách rời từng chương.",
+          "block_index": 3,
+          "source_excerpt": "CONTENTS.\n\nCHAPTER I.\nCivilizing Huck.—Miss Watson.—Tom Sawyer Waits.\n\nCHAPTER II.",
+          "edition_excerpt": "3: metadata char_len=20 | 'CONTENTS. CHAPTER I.'\n4: paragraph char_len=47 | 'Civilizing Huck.—Miss Watson.—Tom Sawyer Waits.'\n5: heading level=1 char_len=11 | 'CHAPTER II.'"
+        }
+      ]
+    },
+    {
+      "id": "shelley_frankenstein",
+      "language": "en",
+      "blocks": 9,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 5,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Cấu trúc khối bị sai lệch nghiêm trọng do phân loại nhầm danh sách mục lục (TOC) thành các đoạn văn và tiêu đề. Nội dung văn bản được bảo toàn tốt, không có lỗi nối dòng.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Danh sách 'Letter 1-4' và 'Chapter 1-24' nên được gộp vào một khối 'metadata' duy nhất theo chính sách REF/1, thay vì chia thành các khối paragraph và heading riêng lẻ.",
+          "block_index": 0,
+          "source_excerpt": "Letter 1\n Letter 2\n Letter 3\n Letter 4",
+          "edition_excerpt": "Letter 1 Letter 2 Letter 3 Letter 4"
+        },
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Khối 'Chapter 1...' bị gắn nhãn là heading level 1, điều này không chính xác vì đây là một danh sách mục lục dài, cần được xử lý như metadata.",
+          "block_index": 1,
+          "source_excerpt": "Chapter 1\n Chapter 2\n ...\n Chapter 24",
+          "edition_excerpt": "Chapter 1 Chapter 2 Chapter 3 Chapter 4 Chapter 5 Chapter 6 Chapter 7 Chapter 8 Chapter 9 Chapter 10 Chapter 11 Chapter …"
+        }
+      ]
+    },
+    {
+      "id": "wilde_dorian",
+      "language": "en",
+      "blocks": 12,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 8,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được bảo toàn tốt. Tuy nhiên, cấu trúc khối có một lỗi nhỏ khi gộp tiêu đề 'THE PREFACE' vào khối metadata và gộp 'OSCAR WILDE' với 'CHAPTER I'.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'THE PREFACE' bị gộp vào khối metadata của danh sách chương, thay vì là một tiêu đề riêng biệt.",
+          "block_index": 0,
+          "source_excerpt": "CHAPTER XX.\n\nTHE PREFACE",
+          "edition_excerpt": "CHAPTER XX. THE PREFACE"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tác giả 'OSCAR WILDE' và tiêu đề chương 'CHAPTER I.' bị gộp chung vào một khối heading.",
+          "block_index": 8,
+          "source_excerpt": "OSCAR WILDE\n\nCHAPTER I.",
+          "edition_excerpt": "OSCAR WILDE CHAPTER I."
+        }
+      ]
+    },
+    {
+      "id": "verne_journey",
+      "language": "en",
+      "blocks": 15,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 7,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "warn",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn tốt. Tuy nhiên, cấu trúc khối bị lỗi ở đoạn hội thoại của nhân vật Harry, khiến câu văn bị ngắt quãng không hợp lý giữa blockquote và stanza.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn hội thoại bị chia tách sai giữa blockquote và stanza, làm ngắt quãng câu văn đang diễn ra.",
+          "block_index": 4,
+          "source_excerpt": "\"Harry--Harry--Harry--\" I hastened to obey, but before I could reach his room, jumping three steps at a time, he was stamping his right foot upon the landing.",
+          "edition_excerpt": "Block 4: \"Harry--Harry--Harry--\" I hastened to obey, but before I could reach his room, jumping three\nBlock 5: steps at a time, he was stamping his right foot upon the landing."
+        }
+      ]
+    },
+    {
+      "id": "emerson_essays",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 0,
+      "summary_vi": "Văn bản được xử lý chính xác, giữ nguyên nội dung gốc và cấu trúc đoạn văn. Các nhãn khối và định dạng inline (italic, quote) được áp dụng đúng quy định.",
+      "error": null,
+      "top_issues": []
+    },
+    {
+      "id": "bunyan_pilgrim",
+      "language": "en",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có chất lượng rất tốt, bảo toàn đầy đủ văn bản gốc và xử lý ngắt dòng chính xác. Chỉ có một lỗi nhỏ trong việc phân loại nhãn span cho các chú thích trong ngoặc vuông.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Các chú thích trong ngoặc vuông (bracket_other) nên được đồng nhất nhãn là bracket_note theo quy chuẩn của hệ thống.",
+          "block_index": 3,
+          "source_excerpt": "[Job 33:23]",
+          "edition_excerpt": "[Job 33:23]"
+        }
+      ]
+    },
+    {
+      "id": "voltaire_candid",
+      "language": "en",
+      "blocks": 15,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 6,
+        "join_quality": 7,
+        "inline_spans": 9,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 3,
+      "summary_vi": "Bản phân tích có một số vấn đề về cấu trúc khối, đặc biệt là việc phân tách sai các đoạn văn và tiêu đề. Một số đoạn văn bị ngắt dòng không cần thiết hoặc gộp sai, làm ảnh hưởng đến tính toàn vẹn của văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Khối 12 và 13 bị ngắt quãng giữa câu (từ 'It' ở cuối khối 12 và 'would' ở đầu khối 13), tạo ra sự đứt gãy không cần thiết trong đoạn văn.",
+          "block_index": 12,
+          "source_excerpt": "It\nwould have been",
+          "edition_excerpt": "It\n\nwould have been"
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề ở khối 7 nên được tách thành các dòng riêng biệt thay vì gộp chung một khối, vì chúng là các dòng thông tin khác nhau (Tác giả, Giới thiệu, Nhà xuất bản).",
+          "block_index": 7,
+          "source_excerpt": "BY VOLTAIRE\nINTRODUCTION BY PHILIP LITTELL\nBONI AND LIVERIGHT, INC.\nPUBLISHERS NEW YORK",
+          "edition_excerpt": "BY VOLTAIRE INTRODUCTION BY PHILIP LITTELL BONI AND LIVERIGHT, INC. PUBLISHERS NEW YORK"
+        }
+      ]
+    },
+    {
+      "id": "tolstoy_war_peace",
+      "language": "en",
+      "blocks": 21,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 6,
+        "join_quality": 5,
+        "inline_spans": 10,
+        "overall": 7
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích gặp vấn đề nghiêm trọng về cấu trúc khối khi chia nhỏ các đoạn văn và câu thoại một cách tùy tiện (stanza hóa). Việc ngắt dòng giữa câu làm giảm chất lượng đọc, dù văn bản gốc được bảo toàn đầy đủ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Nhiều đoạn văn bị chia cắt thành các khối 'stanza' không cần thiết, làm gián đoạn luồng văn bản (ví dụ: khối 1, 5, 7, 9, 14).",
+          "block_index": 1,
+          "source_excerpt": "have frightened you—sit down and tell me all the news.”",
+          "edition_excerpt": "have frightened you—sit down and tell me all the news.”"
+        },
+        {
+          "severity": "minor",
+          "category": "join_quality",
+          "note_vi": "Các câu thoại dài bị ngắt dòng không hợp lý giữa các khối blockquote và stanza, gây khó khăn cho việc đọc liền mạch.",
+          "block_index": 6,
+          "source_excerpt": "He had just entered, wearing an embroidered court uniform...",
+          "edition_excerpt": "He had just entered, wearing an\n\nembroidered court uniform..."
+        }
+      ]
+    },
+    {
+      "id": "dostoevsky_crime",
+      "language": "en",
+      "blocks": 10,
+      "fidelity_passed": true,
+      "llm_passed": false,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 4,
+        "join_quality": 3,
+        "inline_spans": 8,
+        "overall": 6
+      },
+      "verdict": "fail",
+      "issue_count": 3,
+      "summary_vi": "Bản phân tích gặp lỗi nghiêm trọng về cấu trúc khối (block structure) khi chia nhỏ đoạn văn của nhân vật thành các phần rời rạc không hợp lý. Việc ngắt dòng giữa câu (mid-sentence breaks) trong các khối 6 và 7 làm hỏng tính toàn vẹn của văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "major",
+          "category": "block_structure",
+          "note_vi": "Đoạn độc thoại nội tâm của nhân vật bị chia cắt thành nhiều khối (5, 6, 7) một cách không cần thiết, làm gián đoạn mạch văn.",
+          "block_index": 6,
+          "source_excerpt": "It would be interesting to know...",
+          "edition_excerpt": "be interesting to know..."
+        },
+        {
+          "severity": "major",
+          "category": "join_quality",
+          "note_vi": "Khối 6 bắt đầu bằng một từ bị cắt ngang ('be' thay vì 'It would be'), cho thấy lỗi xử lý ngắt dòng từ nguồn.",
+          "block_index": 6,
+          "source_excerpt": "It would be interesting to know",
+          "edition_excerpt": "be interesting to know"
+        }
+      ]
+    },
+    {
+      "id": "grotius_vi_chviii",
+      "language": "vi",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được xử lý tốt, giữ nguyên nội dung gốc. Tuy nhiên, đoạn cuối bị cắt cụt do nguồn cung cấp bị thiếu hụt ở câu cuối cùng.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Đoạn cuối bị thiếu mất phần kết của câu do nguồn cung cấp bị cắt ngang (còn bá...).",
+          "block_index": 7,
+          "source_excerpt": "còn bá",
+          "edition_excerpt": "còn bá"
+        }
+      ]
+    },
+    {
+      "id": "doan_chinh_phu_ngam",
+      "language": "vi",
+      "blocks": 403,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 2,
+      "summary_vi": "Văn bản được xử lý tốt, giữ nguyên nội dung gốc và cấu trúc đoạn. Có một vài lỗi nhỏ về nhãn block và thiếu sót ký tự ở cuối văn bản.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Block 6 chứa tiêu đề và tên tác giả bị dính liền, nên tách thành các block riêng biệt.",
+          "block_index": 6,
+          "source_excerpt": "Chinh phụ ngâm khúc (征婦吟曲)Đoàn Thị ĐiểmĐặng Trần Côn",
+          "edition_excerpt": "Chinh phụ ngâm khúc (征婦吟曲)Đoàn Thị ĐiểmĐặng Trần Côn"
+        },
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Văn bản bị cắt cụt ở cuối câu '欺𧗱㧅['.",
+          "block_index": 402,
+          "source_excerpt": "欺𧗱㧅[",
+          "edition_excerpt": "欺𧗱㧅["
+        }
+      ]
+    },
+    {
+      "id": "qua_deo_ngang",
+      "language": "vi",
+      "blocks": 16,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có cấu trúc tốt, bảo toàn đầy đủ nội dung văn bản gốc. Tuy nhiên, khối tiêu đề (Block 1) nên được tách biệt rõ ràng hơn thay vì gộp chung vào một đoạn văn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'Qua đèo Ngang của Bà Huyện Thanh Quan' nên được gắn nhãn 'heading' thay vì 'paragraph' để phản ánh đúng cấu trúc văn bản.",
+          "block_index": 1,
+          "source_excerpt": "Qua đèo Ngang  \ncủa Bà Huyện Thanh Quan",
+          "edition_excerpt": "Qua đèo Ngang của Bà Huyện Thanh Quan"
+        }
+      ]
+    },
+    {
+      "id": "ho_banh_troi_nuoc",
+      "language": "vi",
+      "blocks": 12,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích thực hiện tốt việc tách biệt các đoạn thơ và chú giải. Cấu trúc khối chính xác, tuy nhiên khối 1 (stanza) nên được nhóm cùng các dòng thơ khác để đảm bảo tính nhất quán của khổ thơ.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Khối 1 (stanza) chỉ chứa một dòng, trong khi các dòng thơ tiếp theo lại bị tách thành các khối paragraph riêng biệt. Nên nhóm toàn bộ bài thơ vào một khối stanza duy nhất.",
+          "block_index": 1,
+          "source_excerpt": "Thân em vừa trắng lại vừa tròn,\n\nBảy nổi ba chìm với nước non.[1]\n\nRắn nát[2] mặc dầu tay kẻ nặn.\n\nMà em vẫn giữ tấm lòng son.[3]",
+          "edition_excerpt": "Thân em vừa trắng lại vừa tròn,\n\nBảy nổi ba chìm với nước non.[1]\n\nRắn nát[2] mặc dầu tay kẻ nặn.\n\nMà em vẫn giữ tấm lòng son.[3]"
+        }
+      ]
+    },
+    {
+      "id": "le_kien_van_cao_si",
+      "language": "vi",
+      "blocks": 10,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 9,
+        "overall": 10
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích cấu trúc khối rất chính xác và bảo toàn nguyên vẹn nội dung văn bản. Các nhãn khối được đặt đúng vị trí, việc xử lý các chú thích và trích dẫn phù hợp với quy định REF/1.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "inline_spans",
+          "note_vi": "Nhãn [sửa] trong khối 8 nên được phân loại là 'bracket_note' thay vì 'bracket_other' để nhất quán với quy ước hệ thống.",
+          "block_index": 8,
+          "source_excerpt": "Chú thích[sửa]",
+          "edition_excerpt": "Chú thích[sửa]"
+        }
+      ]
+    },
+    {
+      "id": "nam_cao_chi_pheo",
+      "language": "vi",
+      "blocks": 7,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 8,
+        "block_structure": 10,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có cấu trúc tốt, giữ nguyên nội dung văn bản gốc. Tuy nhiên, có một đoạn văn bị mất ở đầu văn bản do lỗi xử lý phần apparatus.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "text_preservation",
+          "note_vi": "Cụm từ 'của Nam Cao' bị mất trong quá trình xử lý apparatus, dẫn đến câu đầu tiên bị thiếu chủ ngữ/ngữ cảnh.",
+          "block_index": 1,
+          "source_excerpt": "của Nam Caothông tin về bản này.",
+          "edition_excerpt": "là một trong những truyện ngắn..."
+        }
+      ]
+    },
+    {
+      "id": "le_van_dai_phong_tuc",
+      "language": "vi",
+      "blocks": 14,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có độ chính xác cao, bảo toàn đầy đủ nội dung văn bản gốc. Cấu trúc các khối được phân chia hợp lý, tuy nhiên tiêu đề chương nên được tách riêng thay vì gộp chung vào một khối với nội dung.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Tiêu đề 'THIÊN THỨ NHỨT...' và 'I.— CHA MẸ VỚI CON' nên được tách thành các khối heading riêng biệt thay vì gộp chung vào một khối với nội dung.",
+          "block_index": 1,
+          "source_excerpt": "THIÊN THỨ NHỨT\n\nNÓI VỀ PHONG-TỤC TRONG GIA-TỘC\n\nI.— CHA MẸ VỚI CON",
+          "edition_excerpt": "THIÊN THỨ NHỨT NÓI VỀ PHONG-TỤC TRONG GIA-TỘC I.— CHA MẸ VỚI CON"
+        }
+      ]
+    },
+    {
+      "id": "truyen_kieu",
+      "language": "vi",
+      "blocks": 103,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Bản phân tích có độ chính xác cao về nội dung và cấu trúc. Tuy nhiên, một số dòng trong phần giới thiệu bị gộp sai cách, cần tách biệt rõ ràng hơn giữa các đoạn văn bản và tiêu đề.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Dòng 'Bản truyện tiếng Hán: 金雲翹傳' nên được tách thành một block riêng thay vì gộp chung vào đoạn văn phía trước.",
+          "block_index": 2,
+          "source_excerpt": "bản Kiều Oánh Mậu 1902\nBản truyện tiếng Hán: 金雲翹傳",
+          "edition_excerpt": "bản Kiều Oánh Mậu 1902 Bản truyện tiếng Hán: 金雲翹傳"
+        }
+      ]
+    },
+    {
+      "id": "tat_den",
+      "language": "vi",
+      "blocks": 40,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 9,
+        "block_structure": 7,
+        "join_quality": 8,
+        "inline_spans": 10,
+        "overall": 8
+      },
+      "verdict": "warn",
+      "issue_count": 2,
+      "summary_vi": "Bản phân tích đã tách biệt tốt các thành phần nội dung, tuy nhiên danh sách Mục lục (I-XXVII) bị phân mảnh thành quá nhiều block đơn lẻ thay vì gộp thành một block metadata theo quy định REF/1. Ngoài ra, block đầu tiên bị gộp sai giữa tiêu đề và đoạn văn.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Danh sách Mục lục (I đến XXVII) nên được nhóm lại thành một block metadata thay vì tách thành 27 block riêng biệt.",
+          "block_index": 4,
+          "source_excerpt": "I\nII\nIII...",
+          "edition_excerpt": "I\nII\nIII..."
+        },
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Block 0 gộp tiêu đề 'Tắt đèn (1936)' với đoạn văn giới thiệu. Nên tách thành heading và paragraph riêng biệt.",
+          "block_index": 0,
+          "source_excerpt": "Tắt đèn (1936)\nTắt đèn là một truyện dài...",
+          "edition_excerpt": "Tắt đèn (1936) Tắt đèn là một truyện dài..."
+        }
+      ]
+    },
+    {
+      "id": "aozora_sample",
+      "language": "ja",
+      "blocks": 8,
+      "fidelity_passed": true,
+      "llm_passed": true,
+      "model": "gemini-3.1-flash-lite",
+      "scores": {
+        "text_preservation": 10,
+        "block_structure": 9,
+        "join_quality": 10,
+        "inline_spans": 10,
+        "overall": 9
+      },
+      "verdict": "pass",
+      "issue_count": 1,
+      "summary_vi": "Văn bản được bảo toàn đầy đủ nội dung. Cấu trúc khối hợp lý, tuy nhiên các dòng chú thích bản quyền (block 5 và 6) nên được gộp thành một đoạn văn duy nhất thay vì tách rời để đảm bảo tính liền mạch của câu.",
+      "error": null,
+      "top_issues": [
+        {
+          "severity": "minor",
+          "category": "block_structure",
+          "note_vi": "Đoạn chú thích bản quyền bị ngắt dòng không cần thiết giữa hai khối 5 và 6, làm gián đoạn câu văn.",
+          "block_index": 5,
+          "source_excerpt": "著作権の保護期間が満了したため、\n　著作権者の許諾なく引用・利用できます。",
+          "edition_excerpt": "著作権の保護期間が満了したため、\n\n著作権者の許諾なく引用・利用できます。"
+        }
+      ]
+    }
+  ]
+}
