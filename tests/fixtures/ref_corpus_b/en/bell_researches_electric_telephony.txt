@@ -1,0 +1,110 @@
+Researches in electric telephony
+
+Author: Alexander Graham Bell
+
+Editor: Frank Bolton
+        William Edward Langdon
+
+
+        
+Release date: October 21, 2017 [eBook #55787]
+                Most recently updated: October 23, 2024
+
+Language: English
+
+Other information and formats: www.gutenberg.org/ebooks/55787
+
+Credits: Produced by Chris Curnow, Paul Marshall and the Online
+        Distributed Proofreading Team at http://www.pgdp.net (This
+        file was produced from images generously made available
+        by The Internet Archive)
+
+
+*** START OF THE PROJECT GUTENBERG EBOOK THE TELEPHONE ***
+
+Transcriber's Notes:
+
+  Underscores "_" before and after a word or phrase indicate _italics_
+    in the original text.
+  Equal signs "=" before and after a word or phrase indicate =bold=
+    in the original text.
+  Carat symbol "^" designates a superscript.
+  Underscore "_" is used to designates a subscript.
+  Small capitals have been converted to SOLID capitals.
+  Illustrations have been moved so they do not break up paragraphs.
+  Old or antiquated spellings have been preserved.
+  Typographical errors have been silently corrected but other variations
+    in spelling and punctuation remain unaltered.
+
+
+
+
+                             THE TELEPHONE.
+                               A LECTURE
+
+                                ENTITLED
+                   RESEARCHES IN ELECTRIC TELEPHONY,
+
+                  BY PROFESSOR ALEXANDER GRAHAM BELL,
+
+                            DELIVERED BEFORE
+                  The Society of Telegraph Engineers,
+                          OCTOBER 31ST, 1877.
+
+                       PUBLISHED BY THE SOCIETY,
+                             AND EDITED BY
+            LIEUT.-COL. FRANK BOLTON, C.E., HON. SECRETARY,
+                                  AND
+               WILLIAM EDWARD LANGDON, ACTING SECRETARY.
+
+                                London:
+                 E. AND F. N. SPON, 46, CHARING CROSS.
+
+                               New York:
+                          446, BROOME STREET.
+
+                                 1878.
+                   _Price One Shilling and Sixpence._
+         The right of translation and reproduction is reserved
+
+
+
+
+EXTRACTS OF PROCEEDINGS OF THE SOCIETY OF TELEGRAPH ENGINEERS.
+
+
+  Special General Meeting, held at 25, Great George Street,
+     Westminster, on Wednesday, the 31st October, 1877.
+     PROFESSOR ABEL, C.B., F.R.S., President, in the Chair.
+
+The PRESIDENT: Gentlemen, the Council of the Society of
+Telegraph Engineers felt that they were sure of doing what the members
+would consider right in summoning a special meeting for the two-fold
+purpose of giving a welcome to Professor Bell to this country and
+affording the Members an opportunity of hearing from him an account,
+which he has been so good as to promise to give us, of the nature,
+history, and development of, what may well be called, one of the most
+interesting discoveries of our age. Our time is very precious this
+evening. We all desire to hear everything Professor Bell can tell us
+on this subject, and many gentlemen will probably desire afterwards to
+ask questions or discuss the subject, for I see present a great number
+of eminent scientific men. I will not waste another moment, but at once
+call upon Professor Bell to commence his discourse on the Electric
+Telephone.
+
+
+
+
+RESEARCHES IN ELECTRIC TELEPHONY.
+
+
+By PROFESSOR ALEXANDER GRAHAM BELL.
+
+PROFESSOR BELL: Mr. President and Gentlemen of the Society of
+Telegraph Engineers. It is to-night my pleasure, as well as duty, to
+give you some account of the telephonic researches in which I have been
+so long engaged. Many years ago my attention was directed to the
+mechanism of speech by my father, Alexander Melville Bell, of
+Edinburgh, who has made a life-long study of the subject. Many of
+those present may recollect the invention by my father of a means
+of representing, in a won
