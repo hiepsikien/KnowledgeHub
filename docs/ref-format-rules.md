@@ -61,12 +61,15 @@ Scholastic markers (case-sensitive line starts):
 | Indented poetry / short lines | `verse_line` | `verse_line` |
 | default | `prose` | `paragraph` after merge |
 
-### Join rules (v1.1)
+### Join rules (v1.2)
 
-- **Blank line = paragraph break** — `iter_lines()` sets `blank_before`; never join across it.
+- **Blank line = paragraph break** — `iter_lines()` sets `blank_before`; never join across it (except spurious PG wrap: hanging word, or gutenberg imprint lines).
 - **Footnote sentence ends** — `.[150]` counts as sentence end (fixes VI over-merge).
 - **Quote continuation** — multi-line Gutenberg poetry merges into `blockquote`.
-- **Hanging word wrap** — long lines ending in `the`, `of`, … join to next line (PG hard wrap).
+- **Hanging word wrap** — long lines ending in `the`, `her`, `of`, … join to next line (PG hard wrap).
+- **Uppercase wrap** — PG lines ≥55 chars without sentence end join to next line even if capitalized (`Philosophical` / `Necessity`).
+- **Imprint lines** — publisher lists (Locke-style) merge across wraps and spurious blank lines.
+- **Wikisource cleanup** — `normalize_wiki_source()` drops nav/metadata lines for `plain` family.
 - **Zero-width lines** dropped at ingest.
 
 ### Grotius Latin epigraph

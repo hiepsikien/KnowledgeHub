@@ -45,15 +45,17 @@ def _classify_paren(inner: str) -> str:
     body = inner.strip()
     if re.fullmatch(r"(19|20)\d{2}", body):
         return "paren_aside"
+    if re.fullmatch(r"\d{1,4}", body):
+        if len(body) == 4 and int(body) >= 1000:
+            return "paren_aside"
+        return "paren_page"
     if FOOTNOTE_INNER.fullmatch(body):
         return "footnote"
-    if re.fullmatch(r"\d{1,4}", body):
-        return "paren_page"
     lower = body.lower()
     if lower.startswith(("as ", "see ", "cf. ", "e.g. ", "i.e. ")):
         return "paren_cite"
     if body.count(" ") >= 5 or len(body) >= 40:
-        return "paren_quote"
+        return "paren_aside"
     if any(ch in body for ch in "\"'“”‘’"):
         return "paren_quote"
     # Short legal/latin labels: (Politics), (foedus aequum), (Digest 43.14.1.pr)

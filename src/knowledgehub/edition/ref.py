@@ -4,7 +4,7 @@ from typing import Any
 
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
-from .lines import iter_lines
+from .lines import iter_lines, normalize_wiki_source
 from .llm_blocks import relabel_uncertain_segments
 from .merge_blocks import labels_to_blocks
 from .reflow import unwrap_hard_wrap
@@ -42,7 +42,7 @@ def build_read_edition(
             "quotation_profile": quotation_profile,
         }
 
-    lines = iter_lines(text)
+    lines = iter_lines(normalize_wiki_source(text) if family == "plain" else text)
     labels = label_lines_rules(lines, family=family)
     labels, llm_events = relabel_uncertain_segments(lines, labels, enabled=use_llm)
     blocks = labels_to_blocks(lines, labels)

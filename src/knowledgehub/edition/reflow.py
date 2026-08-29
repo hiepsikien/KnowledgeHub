@@ -35,6 +35,8 @@ def is_all_caps_heading(line: str) -> bool:
     letters = [c for c in line if c.isalpha()]
     if len(letters) < 8 or len(line) >= 90:
         return False
+    if line.count(",") >= 2:
+        return False
     return sum(1 for c in letters if c.isupper()) / len(letters) >= 0.85
 
 

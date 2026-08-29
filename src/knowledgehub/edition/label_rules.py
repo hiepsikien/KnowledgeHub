@@ -7,6 +7,7 @@ from .lines import TextLine
 from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_soft_structural
 
 RULE_LINE = re.compile(r"^[\-–—_\*=\s]{8,}$")
+SHORT_RULE_LINE = re.compile(r"^[\-–—_\*=\s]{3,7}$")
 ITALIC_LINE = re.compile(r"^_([^_].*[^_])_$")
 SENTENCE_END = re.compile(r"""[.!?](?:\[?\d{1,4}\]?|[\"'\])])*$|[\]\)”»][\"'\])]*$""")
 CONTINUATION_START = re.compile(r"^[a-z(\[\"“‘«_]")
@@ -14,13 +15,41 @@ HYPHEN_BREAK = re.compile(r"-$")
 QUOTE_LINE = re.compile(r'^[“"‘«_].*[”"’»_]?')
 COMPLETE_QUOTE = re.compile(r'(?:[”"\'»_]|etc\.)\]?\.?\[\d{1,4}\]$')
 BRIDGE_LINE = re.compile(r"^and in (?:another place|this wise):$", re.I)
-LEAD_IN_LINE = re.compile(r"^[A-Za-zÀ-ỹ].{0,48}:$")
+LEAD_IN_LINE = re.compile(r"^[A-Z][A-Za-zÀ-ỹ .,''-]{0,40}:$")
 HANGING_WORD = re.compile(
     r"\b(?:the|a|an|of|in|to|for|and|or|as|at|by|with|from|that|which|who|whom|whose|but|not|if|on|"
+    r"her|his|its|their|our|my|your|this|these|those|such|some|any|each|every|both|all|other|"
     r"into|through|over|under|between|among|upon|de|du|des|la|le|les|un|une|một|của|và|là|trong|trên|"
     r"với|từ|để|này|đó|các|những)\s*$",
     re.I,
 )
+IMPRINT_PUBLISHER = re.compile(
+    r"^(?:REPRINTED|PRINTED|LONDON|NEW YORK|BOSTON|PHILADELPHIA|CAMBRIDGE|INDIANAPOLIS)\b",
+    re.I,
+)
+IMPRINT_LIST = re.compile(r"^.*,.*(?:1\.|[A-Z]\.)")
+IMPRINT_ABBREV_END = re.compile(r"\b[A-Z]\.$")
+ROMAN_YEAR = re.compile(r"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
+
+
+def _is_imprint_line(line: str) -> bool:
+    s = line.strip()
+    if not s:
+        return False
+    if IMPRINT_PUBLISHER.match(s) or IMPRINT_LIST.match(s) or ROMAN_YEAR.fullmatch(s):
+        return True
+    if s.count(",") >= 3 and len(s) >= 30:
+        letters = [c for c in s if c.isascii() and c.isalpha()]
+        if len(letters) >= 12 and sum(c.isupper() for c in letters) / len(letters) >= 0.7:
+            return True
+    return False
+
+
+def _sentence_ended(prev: str) -> bool:
+    prev_r = prev.rstrip()
+    if IMPRINT_ABBREV_END.search(prev_r):
+        return False
+    return bool(SENTENCE_END.search(prev_r))
 
 
 def _continues_quoted_line(prev: str, nxt: str) -> bool:
@@ -38,8 +67,10 @@ def _continues_quoted_line(prev: str, nxt: str) -> bool:
 
 
 def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
-    if RULE_LINE.match(line):
+    if RULE_LINE.match(line) or SHORT_RULE_LINE.match(line.strip()):
         return "hr", 0, 0.98
+    if IMPRINT_PUBLISHER.match(line.strip()) or IMPRINT_LIST.match(line.strip()):
+        return "prose", 0, 0.9
     if is_hard_structural(line, family=family):
         level = 1 if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME)\b", line, re.I) else 2
         return "heading", level, 0.95
@@ -55,33 +86,64 @@ def _role_for_line(line: str, *, family: str) -> tuple[str, int, float]:
 
 
 def _should_join(prev: str, nxt: str, *, family: str, blank_before: bool = False) -> bool:
-    if blank_before:
+    prev_r = prev.rstrip()
+    nxt_s = nxt.strip()
+    spurious_blank = (
+        blank_before
+        and HANGING_WORD.search(prev_r)
+        and not _sentence_ended(prev)
+    )
+    imprint_blank = (
+        blank_before
+        and family == "gutenberg"
+        and (_is_imprint_line(prev_r) or _is_imprint_line(nxt_s))
+    )
+    if blank_before and not spurious_blank and not imprint_blank:
         return False
     if is_hard_structural(nxt, family=family) or is_soft_structural(nxt, family=family):
         return False
-    if RULE_LINE.match(nxt):
+    if RULE_LINE.match(nxt) or SHORT_RULE_LINE.match(nxt_s):
         return False
-    if BRIDGE_LINE.match(nxt.strip()) or LEAD_IN_LINE.match(nxt.strip()):
+    if BRIDGE_LINE.match(nxt_s) or LEAD_IN_LINE.match(nxt_s):
         return False
     if COMPLETE_QUOTE.search(prev.strip()):
         return False
+    if spurious_blank and re.match(r"^[A-Za-z(\[\"]", nxt_s):
+        return True
+    if (
+        family == "gutenberg"
+        and _is_imprint_line(prev_r)
+        and (
+            _is_imprint_line(nxt_s)
+            or ROMAN_YEAR.fullmatch(nxt_s)
+            or nxt_s.startswith(("AND ", "and "))
+        )
+    ):
+        return True
     if _continues_quoted_line(prev, nxt):
         return True
     if (
         len(prev) >= ORDINAL_WRAP
-        and HANGING_WORD.search(prev.rstrip())
-        and not SENTENCE_END.search(prev.rstrip())
+        and HANGING_WORD.search(prev_r)
+        and not _sentence_ended(prev)
     ):
         return True
-    if HYPHEN_BREAK.search(prev.rstrip()) and nxt[:1].islower():
+    if HYPHEN_BREAK.search(prev_r) and nxt[:1].islower():
         return True
-    if CONTINUATION_START.match(nxt) and not SENTENCE_END.search(prev.rstrip()):
+    if CONTINUATION_START.match(nxt) and not _sentence_ended(prev):
         return True
-    if len(prev) >= ORDINAL_WRAP and not SENTENCE_END.search(prev.rstrip()) and CONTINUATION_START.match(nxt):
+    if len(prev) >= ORDINAL_WRAP and not _sentence_ended(prev) and CONTINUATION_START.match(nxt):
         return True
-    if prev.rstrip().endswith((",", ";", "--")) and CONTINUATION_START.match(nxt):
+    if (
+        len(prev_r) >= ORDINAL_WRAP
+        and not _sentence_ended(prev)
+        and re.match(r"^[A-Z]", nxt_s)
+        and not nxt_s.startswith(("CHAPTER", "BOOK", "PART", "QUESTION", "ACT ", "SCENE"))
+    ):
         return True
-    if prev.rstrip().endswith(":") and nxt.strip().startswith(('"', "“", "_", "«")):
+    if prev_r.endswith((",", ";", "--")) and CONTINUATION_START.match(nxt):
+        return True
+    if prev_r.endswith(":") and nxt_s.startswith(('"', "“", "_", "«")):
         return True
     return False
 
