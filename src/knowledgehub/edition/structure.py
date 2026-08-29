@@ -6,6 +6,11 @@ import re
 from typing import Any
 
 SPEAKER_CUE = re.compile(r"^[A-Z][A-Z\s,\.'-]{0,40}\.$")
+STAGE_STRUCTURAL = re.compile(
+    r"^(?:ACT|SCENE|CHAPTER|CHAP\.?|BOOK|PART|VOLUME|INTRODUCTION|PROLOGUE)\b",
+    re.I,
+)
+DRAMATIS_MARKER = re.compile(r"Dramatis Personæ|DRAMATIS PERSON", re.I)
 STAGE_DIRECTION = re.compile(
     r"^(?:Enter |Exit |Exeunt |Re-enter |Scene continues|\[Aside|\[Within|\[Coming|\[Exit)",
     re.I,
@@ -39,7 +44,10 @@ def looks_like_play(text: str) -> bool:
 
 
 def is_speaker_cue(line: str) -> bool:
-    return bool(SPEAKER_CUE.match(line.strip()))
+    s = line.strip()
+    if STAGE_STRUCTURAL.match(s):
+        return False
+    return bool(SPEAKER_CUE.match(s))
 
 
 def is_stage_direction(line: str) -> bool:
@@ -73,6 +81,32 @@ def is_indented_verse(*, indent: int, line: str) -> bool:
             return False
         return True
     return False
+
+
+def group_dramatis_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge Dramatis Personæ cast list into one metadata block."""
+    out: list[dict[str, Any]] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        text = str(block.get("text") or "")
+        if block.get("type") == "paragraph" and DRAMATIS_MARKER.search(text):
+            parts = [text]
+            i += 1
+            while i < len(blocks):
+                nxt = blocks[i]
+                if nxt.get("type") != "paragraph":
+                    break
+                line = str(nxt.get("text") or "").strip()
+                if STAGE_STRUCTURAL.match(line):
+                    break
+                parts.append(str(nxt.get("text") or ""))
+                i += 1
+            out.append({"type": "metadata", "text": "\n".join(parts)})
+            continue
+        out.append(block)
+        i += 1
+    return out
 
 
 def group_stanzas(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:

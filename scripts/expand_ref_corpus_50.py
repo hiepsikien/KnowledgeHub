@@ -27,37 +27,37 @@ EN_PG: list[dict] = [
     {"id": "dickens_two_cities", "file": "dickens_two_cities.txt", "gid": "98", "marker": "It was the best of times", "strip_first": True},
     {"id": "aquinas_summa", "file": "aquinas_summa.txt", "gid": "17611", "marker": "QUESTION 1", "family": "scholastic", "strip_first": True},
     {"id": "aristotle_politics", "file": "aristotle_politics.txt", "gid": "6762", "marker": None, "strip_first": True},
-    {"id": "mill_on_liberty", "file": "mill_on_liberty.txt", "gid": "34901", "marker": "CHAPTER I", "strip_first": True},
+    {"id": "mill_on_liberty", "file": "mill_on_liberty.txt", "gid": "34901", "marker": "subject of this Essay", "strip_first": True, "refetch": True},
     {"id": "whitman_grass", "file": "whitman_grass.txt", "gid": "1322", "marker": "Song of Myself", "strip_first": False},
     {"id": "shakespeare_hamlet", "file": "shakespeare_hamlet.txt", "gid": "1524", "marker": "Dramatis Personæ", "strip_first": False},
-    {"id": "plato_republic", "file": "plato_republic.txt", "gid": "1497", "marker": "BOOK I", "strip_first": True},
-    {"id": "hobbes_leviathan", "file": "hobbes_leviathan.txt", "gid": "3207", "marker": "PART I", "strip_first": True},
-    {"id": "machiavelli_prince", "file": "machiavelli_prince.txt", "gid": "1232", "marker": "CHAPTER I", "strip_first": True},
-    {"id": "marx_communist", "file": "marx_communist.txt", "gid": "61", "marker": "I. BOURGEOIS", "strip_first": True},
-    {"id": "darwin_origin", "file": "darwin_origin.txt", "gid": "1228", "marker": "CHAPTER I", "strip_first": True},
-    {"id": "austen_pride", "file": "austen_pride.txt", "gid": "1342", "marker": "Chapter I", "strip_first": True},
-    {"id": "melville_moby", "file": "melville_moby.txt", "gid": "2701", "marker": "CHAPTER 1", "strip_first": True},
-    {"id": "homer_iliad", "file": "homer_iliad.txt", "gid": "6130", "marker": "BOOK I", "strip_first": True},
-    {"id": "hume_treatise", "file": "hume_treatise.txt", "gid": "4705", "marker": "BOOK I", "strip_first": True},
-    {"id": "smith_wealth", "file": "smith_wealth.txt", "gid": "3300", "marker": "BOOK I", "strip_first": True},
+    {"id": "plato_republic", "file": "plato_republic.txt", "gid": "1497", "marker": "I went down yesterday", "strip_first": True, "refetch": True},
+    {"id": "hobbes_leviathan", "file": "hobbes_leviathan.txt", "gid": "3207", "marker": "Nature (the art", "strip_first": True, "refetch": True},
+    {"id": "machiavelli_prince", "file": "machiavelli_prince.txt", "gid": "1232", "marker": "Nicolo Machiavelli was born", "strip_first": True, "refetch": True},
+    {"id": "marx_communist", "file": "marx_communist.txt", "gid": "61", "marker": "The history of all hitherto existing", "strip_first": True, "refetch": True},
+    {"id": "darwin_origin", "file": "darwin_origin.txt", "gid": "1228", "marker": "When on board H.M.S.", "strip_first": True, "refetch": True},
+    {"id": "austen_pride", "file": "austen_pride.txt", "gid": "1342", "marker": "It is a truth universally acknowledged", "strip_first": True, "refetch": True},
+    {"id": "melville_moby", "file": "melville_moby.txt", "gid": "2701", "marker": "Call me Ishmael", "strip_first": True, "refetch": True},
+    {"id": "homer_iliad", "file": "homer_iliad.txt", "gid": "6130", "marker": "Declare, O Muse", "strip_first": True, "refetch": True},
+    {"id": "hume_treatise", "file": "hume_treatise.txt", "gid": "4705", "marker": "All the perceptions of the human mind", "strip_first": True, "refetch": True},
+    {"id": "smith_wealth", "file": "smith_wealth.txt", "gid": "3300", "marker": "The annual labour of every nation", "strip_first": True, "refetch": True},
     {"id": "montesquieu_spirit", "file": "montesquieu_spirit.txt", "gid": "2753", "marker": "BOOK I", "strip_first": True},
     {"id": "paine_common_sense", "file": "paine_common_sense.txt", "gid": "147", "marker": "INTRODUCTION", "strip_first": True},
     {"id": "federalist_papers", "file": "federalist_papers.txt", "gid": "1404", "marker": "FEDERALIST No. 1", "strip_first": True},
-    {"id": "swift_gulliver", "file": "swift_gulliver.txt", "gid": "829", "marker": "PART I", "strip_first": True},
-    {"id": "bronte_jane_eyre", "file": "bronte_jane_eyre.txt", "gid": "1260", "marker": "CHAPTER I", "strip_first": True},
-    {"id": "wells_war_worlds", "file": "wells_war_worlds.txt", "gid": "36", "marker": "CHAPTER ONE", "strip_first": True},
+    {"id": "swift_gulliver", "file": "swift_gulliver.txt", "gid": "829", "marker": "My father had a small estate", "strip_first": True, "refetch": True},
+    {"id": "bronte_jane_eyre", "file": "bronte_jane_eyre.txt", "gid": "1260", "marker": "There was no possibility", "strip_first": True, "refetch": True},
+    {"id": "wells_war_worlds", "file": "wells_war_worlds.txt", "gid": "36", "marker": "No one would have believed", "strip_first": True, "refetch": True},
     {"id": "poe_raven", "file": "poe_raven.txt", "gid": "932", "marker": "The Raven", "strip_first": True},
     {"id": "thoreau_walden", "file": "thoreau_walden.txt", "gid": "205", "marker": "Economy", "strip_first": True},
     {"id": "franklin_autobiography", "file": "franklin_autobiography.txt", "gid": "148", "marker": "TWYFORD", "strip_first": True},
     {"id": "cicero_offices", "file": "cicero_offices.txt", "gid": "541", "marker": "BOOK I", "strip_first": True},
     {"id": "kant_critique", "file": "kant_critique.txt", "gid": "4280", "marker": "PREFACE", "strip_first": True},
     {"id": "archive_scan_ocr", "file": "archive_scan_ocr.txt", "local": True, "family": "archive_scan", "strip_first": False},
-    {"id": "twain_huckleberry", "file": "twain_huckleberry.txt", "gid": "76", "marker": "CHAPTER I", "strip_first": True},
+    {"id": "twain_huckleberry", "file": "twain_huckleberry.txt", "gid": "76", "marker": "You don't know about me", "strip_first": True, "refetch": True},
     {"id": "shelley_frankenstein", "file": "shelley_frankenstein.txt", "gid": "84", "marker": "Letter 1", "strip_first": True},
     {"id": "wilde_dorian", "file": "wilde_dorian.txt", "gid": "174", "marker": "CHAPTER I", "strip_first": True},
-    {"id": "verne_journey", "file": "verne_journey.txt", "gid": "18857", "marker": "CHAPTER I", "strip_first": True},
+    {"id": "verne_journey", "file": "verne_journey.txt", "gid": "18857", "marker": "Looking back to all that has occurred", "strip_first": True, "refetch": True},
     {"id": "emerson_essays", "file": "emerson_essays.txt", "gid": "16643", "marker": "History", "strip_first": True},
-    {"id": "bunyan_pilgrim", "file": "bunyan_pilgrim.txt", "gid": "109", "marker": "THE AUTHOR'S", "strip_first": True},
+    {"id": "bunyan_pilgrim", "file": "bunyan_pilgrim.txt", "gid": "131", "marker": "As I walked through the wilderness", "strip_first": True, "refetch": True},
     {"id": "voltaire_candid", "file": "voltaire_candid.txt", "gid": "19942", "marker": "CHAPTER I", "strip_first": True},
     {"id": "tolstoy_war_peace", "file": "tolstoy_war_peace.txt", "gid": "2600", "marker": "Well, Prince", "strip_first": True},
     {"id": "dostoevsky_crime", "file": "dostoevsky_crime.txt", "gid": "2554", "marker": "PART I", "strip_first": True},
@@ -102,7 +102,7 @@ def _pg(gid: str, marker: str | None) -> str:
     url = f"https://www.gutenberg.org/cache/epub/{gid}/pg{gid}.txt"
     text = _fetch(url)
     if marker:
-        idx = text.find(marker)
+        idx = text.lower().find(marker.lower())
         if idx >= 0:
             text = text[idx:]
     return text[:EXCERPT]
@@ -169,7 +169,7 @@ def fetch_files() -> None:
     (CORPUS / "ja").mkdir(parents=True, exist_ok=True)
     for row in EN_PG:
         out = CORPUS / "en" / row["file"]
-        if out.exists() and len(out.read_text(encoding="utf-8").strip()) >= 80:
+        if out.exists() and len(out.read_text(encoding="utf-8").strip()) >= 80 and not row.get("refetch"):
             continue
         if row.get("local"):
             continue

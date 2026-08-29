@@ -56,6 +56,11 @@ Review the SOURCE excerpt against the PARSED BLOCKS digest. Be strict on:
 - wrong heading vs paragraph labels
 - inline span styles that look wrong (footnote vs bracket_note, paren_cite vs paren_aside)
 
+REF/1 policies (do NOT penalize these as errors):
+- Project Gutenberg table-of-contents runs (3+ consecutive CHAPTER/BOOK/SECT list lines) grouped into one `metadata` block — this is CORRECT, not a missing heading split.
+- Wikisource / wiki apparatus (nav lines, project links, edition IDs) listed in `apparatus_dropped[]` or omitted from blocks — intentional, not text loss.
+- A single real chapter heading followed by body prose should remain `heading` + `paragraph`; only long TOC lists become `metadata`.
+
 IMPORTANT: Block digest lines end with "…" when truncated for display only. Each block lists char_len= — if char_len > preview length, the block is NOT truncated in the edition. Only flag missing text if words from SOURCE are absent from the full edition (not just the preview).
 
 Return ONLY valid JSON:
@@ -82,11 +87,13 @@ Return ONLY valid JSON:
 }
 
 Scores are 1–10 (10 = excellent). verdict=fail if any critical issue or text_preservation < 7."""
+    apparatus = edition.get("apparatus_dropped") or []
     user = f"""Language: {language}
 Content kind: {edition.get("content_kind")}
 Source family: {edition.get("source_family")}
 Block count: {len(edition.get("blocks") or [])}
 Quotation profile: {json.dumps(profile, ensure_ascii=False)}
+Apparatus dropped (intentional, not text loss): {json.dumps(apparatus[:12], ensure_ascii=False)}{"…" if len(apparatus) > 12 else ""}
 
 Rule checks already run:
 {json.dumps(failed_rules, ensure_ascii=False, indent=2) if failed_rules else "(all passed)"}

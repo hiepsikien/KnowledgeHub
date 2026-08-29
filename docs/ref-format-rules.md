@@ -204,3 +204,10 @@ CI: `.github/workflows/ref-corpus.yml` runs corpus tests + rule QA on each PR.
 - **False heading fix** — `PART`/`BOOK` patterns require numerals (`PART IV` ok; “part of his property” no longer matches).
 - **Strip path** — `strip_only` + `preserve_toc` in REF parser; explicit `family=` is no longer overwritten by strip detection.
 - **`reading_markdown`** — includes `metadata` text (TOC blocks) for fidelity checks.
+
+## REF/1 v1.5 — drama + corpus markers
+
+- **Speaker cue guard** — `CHAPTER`/`ACT`/`SCENE` lines are never speaker cues (fixes Twain false `dialogue`).
+- **Dramatis Personæ** — cast list merged into one `metadata` block before dialogue parsing.
+- **Corpus markers** — PG fixtures use body-text markers (`Call me Ishmael`, `It is a truth…`) not TOC `CHAPTER I`.
+- **LLM QA prompt** — documents that TOC→`metadata` and `apparatus_dropped[]` are intentional.

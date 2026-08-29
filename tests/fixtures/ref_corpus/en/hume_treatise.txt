@@ -1,102 +1,62 @@
-BOOK I  OF THE UNDERSTANDING
+All the perceptions of the human mind resolve themselves into two
+distinct kinds, which I shall call IMPRESSIONS and IDEAS. The difference
+betwixt these consists in the degrees of force and liveliness, with
+which they strike upon the mind, and make their way into our thought
+or consciousness. Those perceptions, which enter with most force and
+violence, we may name impressions: and under this name I comprehend
+all our sensations, passions and emotions, as they make their first
+appearance in the soul. By ideas I mean the faint images of these in
+thinking and reasoning; such as, for instance, are all the perceptions
+excited by the present discourse, excepting only those which arise from
+the sight and touch, and excepting the immediate pleasure or uneasiness
+it may occasion. I believe it will not be very necessary to employ many
+words in explaining this distinction. Every one of himself will readily
+perceive the difference betwixt feeling and thinking. The common degrees
+of these are easily distinguished; though it is not impossible but in
+particular instances they may very nearly approach to each other. Thus
+in sleep, in a fever, in madness, or in any very violent emotions of
+soul, our ideas may approach to our impressions, As on the other hand
+it sometimes happens, that our impressions are so faint and low, that
+we cannot distinguish them from our ideas. But notwithstanding this near
+resemblance in a few instances, they are in general so very different,
+that no-one can make a scruple to rank them under distinct heads, and
+assign to each a peculiar name to mark the difference.[1]
 
-  PART I     OF IDEAS, THEIR ORIGIN, COMPOSITION, CONNEXION,
-               ABSTRACTION, ETC.
+    [1] I here make use of these terms, _impression and idea_, in a
+    sense different from what is usual, and I hope this liberty will be
+    allowed me. Perhaps I rather restore the word, idea, to its
+    original sense, from which Mr Locke had perverted it, in making it
+    stand for all our perceptions. By the terms of impression I would
+    not be understood to express the manner, in which our lively
+    perceptions are produced in the soul, but merely the perceptions
+    themselves; for which there is no particular name either in the
+    _English_ or any other language, that I know of.
 
-  SECT. I     OF THE ORIGIN OF OUR IDEAS.
-  SECT. II.   DIVISION OF THE SUBJECT.
-  SECT. III.  OF THE IDEAS OF THE MEMORY AND IMAGINATION.
-  SECT. IV.   OF THE CONNECTION OR ASSOCIATION OF IDEAS.
-  SECT. V.    OF RELATIONS.
-  SECT. VI.   OF MODES AND SUBSTANCES
-  SECT. VII.  OF ABSTRACT IDEAS.
+There is another division of our perceptions, which it will be
+convenient to observe, and which extends itself both to our impressions
+and ideas. This division is into SIMPLE and COMPLEX. Simple perceptions
+or impressions and ideas are such as admit of no distinction nor
+separation. The complex are the contrary to these, and may be
+distinguished into parts. Though a particular colour, taste, and smell,
+are qualities all united together in this apple, it is easy to perceive
+they are not the same, but are at least distinguishable from each other.
 
-  PART II.   OF THE IDEAS OF SPACE AND TIME.
+Having by these divisions given an order and arrangement to our objects,
+we may now apply ourselves to consider with the more accuracy their
+qualities and relations. The first circumstance, that strikes my eye, is
+the great resemblance betwixt our impressions and ideas in every other
+particular, except their degree of force and vivacity. The one seem to
+be in a manner the reflexion of the other; so that all the perceptions
+of the mind are double, and appear both as impressions and ideas. When
+I shut my eyes and think of my chamber, the ideas I form are exact
+representations of the impressions I felt; nor is there any circumstance
+of the one, which is not to be found in the other. In running over my
+other perceptions, I find still the same resemblance and representation.
+Ideas and impressions appear always to correspond to each other. This
+circumstance seems to me remarkable, and engages my attention for a
+moment.
 
-  SECT. I.    OF THE INFINITE DIVISIBILITY OF OUR IDEAS OF SPACE AND TIME.
-  SECT. II.   OF THE INFINITE DIVISIBILITY OF SPACE AND TIME.
-  SECT. III.  OF THE OTHER QUALITIES OF OUR IDEA OF SPACE AND TIME.
-  SECT. IV.   OBJECTIONS ANSWERED.
-  SECT. V.    THE SAME SUBJECT CONTINUED.
-  SECT. VI.   OF THE IDEA OF EXISTENCE, AND OF EXTERNAL EXISTENCE.
-
-  PART III.  OF KNOWLEDGE AND PROBABILITY.
-
-  SECT. I.    OF KNOWLEDGE.
-  SECT. II.   OF PROBABILITY, AND OF THE IDEA OF CAUSE AND EFFECT.
-  SECT. III.  WHY A CAUSE IS ALWAYS NECESSARY.
-  SECT. IV.   OF THE COMPONENT PARTS OF OUR REASONINGS CONCERNING CAUSE
-               AND EFFECT.
-  SECT. V.    OF THE IMPRESSIONS OF THE SENSES AND MEMORY.
-  SECT. VI.   OF THE INFERENCE FROM THE IMPRESSION TO THE IDEA.
-  SECT. VII.  OF THE NATURE OF THE IDEA OR BELIEF.
-  SECT. VIII. OF THE CAUSES OF BELIEF.
-  SECT. IX.   OF THE EFFECTS OF OTHER RELATIONS AND OTHER HABITS.
-  SECT. X.    OF THE INFLUENCE OF BELIEF.
-  SECT. XI.   OF THE PROBABILITY OF CHANCES.
-  SECT. XII.  OF THE PROBABILITY OF CAUSES.
-  SECT. XIII. OF UNPHILOSOPHICAL PROBABILITY.
-  SECT. XIV.  OF THE IDEA OF NECESSARY CONNECTION.
-  SECT. XV.   RULES BY WHICH TO JUDGE OF CAUSES AND EFFECTS.
-  SECT. XVI   OF THE REASON OF ANIMALS
-
-  PART IV.   OF THE SCEPTICAL AND OTHER SYSTEMS OF PHILOSOPHY.
-
-  SECT. I.    OF SCEPTICISM WITH REGARD TO REASON.
-  SECT. II.   OF SCEPTICISM WITH REGARD TO THE SENSES.
-  SECT. III.  OF THE ANTIENT PHILOSOPHY.
-  SECT. IV.   OF THE MODERN PHILOSOPHY.
-  SECT. V.    OF THE IMMATERIALITY OF THE SOUL.
-  SECT. VI.   OF PERSONAL IDENTITY
-  SECT. VII.  CONCLUSION OF THIS BOOK.
-
-  VOLUME II
-
-  BOOK II   OF THE PASSIONS
-
-  PART I     OF PRIDE AND HUMILITY
-
-  SECT. I     DIVISION OF THE SUBJECT
-  SECT. II    OF PRIDE AND HUMILITY, THEIR OBJECTS AND CAUSES
-  SECT. III   WHENCE THESE OBJECTS AND CAUSES ARE DERIVED
-  SECT. IV    OF THE RELATIONS OF IMPRESSIONS AND IDEAS
-  SECT. V     OF THE INFLUENCE OF THESE RELATIONS ON PRIDE AND HUMILITY
-  SECT. VI    LIMITATIONS OF THIS SYSTEM
-  SECT. VII   OF VICE AND VIRTUE
-  SECT. VIII  OF BEAUTY AND DEFORMITY
-  SECT. IX    OF EXTERNAL ADVANTAGES AND DISADVANTAGES
-  SECT. X     OF PROPERTY AND RICHES
-  SECT. XI    OF THE LOVE OF FAME
-  SECT. XII   OF THE PRIDE AND HUMILITY OF ANIMALS
-
-  PART II    OF LOVE AND HATRED
-
-  SECT. I     OF THE OBJECT AND CAUSES OF LOVE AND HATRED
-  SECT. II    EXPERIMENTS TO CONFIRM THIS SYSTEM
-  SECT. III   DIFFICULTIES SOLVED
-  SECT. IV    OF THE LOVE OF RELATIONS
-  SECT. V     OF OUR ESTEEM FOR THE RICH AND POWERFUL
-  SECT. VI    OF BENEVOLENCE AND ANGER
-  SECT. VII   OF COMPASSION
-  SECT. VIII  OF MALICE AND ENVY
-  SECT. IX    OF THE MIXTURE OF BENEVOLENCE AND ANGER WITH COMPASSION
-               AND MALICE
-  SECT. X     OF RESPECT AND CONTEMPT
-  SECT. XI    OF THE AMOROUS PASSION, OR LOVE BETWIXT THE SEXES
-  SECT. XII   OF THE LOVE AND HATRED OF ANIMALS
-
-  PART III   OF THE WILL AND DIRECT PASSIONS
-
-  SECT. I     OF LIBERTY AND NECESSITY
-  SECT. II    THE SAME SUBJECT CONTINUED
-  SECT. III   OF THE INFLUENCING MOTIVES OF THE WILL
-  SECT. IV    OF THE CAUSES OF THE VIOLENT PASSIONS
-  SECT. V     OF THE EFFECTS OF CUSTOM
-  SECT. VI    OF THE INFLUENCE OF THE IMAGINATION ON THE PASSIONS
-  SECT. VII   OF CONTIGUITY AND DISTANCE IN SPACE AND TIME
-  SECT. VIII  THE SAME SUBJECT CONTINUED
-  SECT. IX    OF THE DIRECT PASSIONS
-  SECT. X     OF CURIOSITY, OR THE LOVE OF TRUTH
-
-  BOOK III  OF MORALS
-
+Upon a more accurate survey I find I have been carried away too far by
+the first appearance, and that I must make use of the distinction of
+perceptions into simple and complex, to limit this general decision,
+that all our ideas and impressions are resem
