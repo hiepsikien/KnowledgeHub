@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from ..paths import corpus_root
-from ..settings import translation_pipeline
+from ..settings import MODE_OPTIONS, translation_pipeline
 from .annotate import annotate_segment
 from .assemble import chapter_sort_key, segment_files, translation_status
 from .draft import draft_chapter
@@ -20,21 +20,14 @@ from .jobs import (
 )
 from .parts import completeness_status
 from .paths import annotations_file, translation_catalog_id
-from .project import load_project
+from .project import init_translation_project, list_project_ids, load_project
 from .promote import promote_translation
 from .qa import qa_segment, approve_qa_issues, reopen_qa_issues
 from .segments_io import final_text, load_segment
 
 
 def _list_project_ids() -> list[str]:
-    root = corpus_root() / "translations"
-    if not root.is_dir():
-        return []
-    ids: list[str] = []
-    for path in sorted(root.iterdir()):
-        if path.is_dir() and (path / "project.json").is_file():
-            ids.append(path.name)
-    return ids
+    return list_project_ids()
 
 
 def _segment_files(source_work_id: str) -> list[Path]:
@@ -123,7 +116,13 @@ def list_translation_projects() -> dict[str, Any]:
                 "updated_at": project.get("updated_at"),
             }
         )
-    return {"projects": rows, "total": len(rows)}
+    pipe = translation_pipeline()
+    return {
+        "projects": rows,
+        "total": len(rows),
+        "modes": list(MODE_OPTIONS),
+        "default_mode": pipe.get("default_mode") or "normal",
+    }
 
 
 def get_translation_project(source_work_id: str) -> dict[str, Any]:
@@ -338,6 +337,23 @@ def split_translation_parts(source_work_id: str, *, enqueue: bool = True) -> dic
 
 def run_promote(source_work_id: str, *, title: str | None = None) -> dict[str, Any]:
     return promote_translation(source_work_id, title=title)
+
+
+def create_translation_project(
+    source_work_id: str,
+    *,
+    mode: str,
+    overwrite: bool = False,
+    target_language: str = "vi",
+) -> dict[str, Any]:
+    created = init_translation_project(
+        source_work_id,
+        target_language=target_language,
+        translation_mode=mode,
+        overwrite=overwrite,
+    )
+    detail = get_translation_project(source_work_id)
+    return {**detail, "created": True, "paths": created.get("paths")}
 
 
 def enqueue_translation_job(

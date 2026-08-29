@@ -13,6 +13,11 @@ WORKER_MAX_CAP = 8
 
 MODEL_SLOTS = ("draft", "polish", "qa", "annotations")
 MODES = ("tight", "normal", "loose")
+MODE_OPTIONS: list[dict[str, str]] = [
+    {"id": "tight", "label": "Sát nguyên bản", "hint": "Giữ cấu trúc và thuật ngữ."},
+    {"id": "normal", "label": "Cân bằng", "hint": "Đủ sát, đọc tự nhiên."},
+    {"id": "loose", "label": "Dễ đọc", "hint": "Thoát ý có kiểm soát."},
+]
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
 
 DEFAULT_MODELS: dict[str, str] = {

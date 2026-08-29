@@ -20,7 +20,14 @@ const state = {
     busy: false,
     lastError: "",
     selectGen: 0,
+    modes: [],
+    defaultMode: "normal",
+    startOpen: false,
+    startWorkId: null,
+    startMode: "normal",
+    startWorks: [],
   },
+  workMode: "normal",
   settings: null,
 };
 
@@ -113,6 +120,35 @@ function renderRows() {
     .join("");
 }
 
+const TRANSLATION_MODES = [
+  { id: "tight", label: "Sát nguyên bản", hint: "Giữ cấu trúc và thuật ngữ." },
+  { id: "normal", label: "Cân bằng", hint: "Đủ sát, đọc tự nhiên." },
+  { id: "loose", label: "Dễ đọc", hint: "Thoát ý có kiểm soát." },
+];
+
+function translationModes() {
+  return state.translation.modes?.length ? state.translation.modes : TRANSLATION_MODES;
+}
+
+function translateBlockReason(code) {
+  if (code === "no_raw") return "Cần file raw trước khi dịch.";
+  if (code === "not_english") return "Hiện chỉ dịch bản tiếng Anh.";
+  if (code === "hub_translation") return "Đây đã là bản dịch Hub.";
+  return "";
+}
+
+function modeOptionsHtml(current) {
+  return translationModes()
+    .map((opt) => {
+      const on = opt.id === current ? "on" : "";
+      return `<button type="button" class="split-opt ${on}" data-mode="${escapeHtml(opt.id)}">
+        <strong>${escapeHtml(opt.label)}</strong>
+        <small>${escapeHtml(opt.hint)}</small>
+      </button>`;
+    })
+    .join("");
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -152,6 +188,7 @@ async function selectWork(id) {
         }</button>
         <a class="btn primary" id="apply" href="/publish/${encodeURIComponent(id)}">Publish to Read</a>
       </div>
+      ${workTranslateHtml(work, summary)}
       ${ready ? "" : `<p class="err">Publish cần allow Read + file raw + content_hash. Mở trang để điền category / split trước.</p>`}
       <pre class="err" id="pub-out"></pre>
     `;
@@ -164,6 +201,7 @@ async function selectWork(id) {
       await selectWork(id);
     };
     $("btn-preview").onclick = () => openPreview(id, false);
+    wireWorkTranslate(work, summary);
   } catch (err) {
     box.innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
   }
@@ -924,9 +962,190 @@ function setCompareTab(name) {
   });
 }
 
+function workTranslateHtml(work, summary) {
+  const openId = summary.translation_source_id;
+  if (summary.has_translation_project || (summary.translate_block === "hub_translation" && openId)) {
+    return `<div class="row">
+      <button class="btn" type="button" id="btn-translate-open">Mở bàn dịch</button>
+    </div>`;
+  }
+  if (summary.can_translate) {
+    const mode = state.workMode || state.translation.defaultMode || "normal";
+    return `<fieldset class="split-set" id="work-translate">
+      <legend>Dịch sang tiếng Việt</legend>
+      <p class="muted">Chọn một cách dịch. Không cần dịch thử một đoạn mẫu.</p>
+      <div class="split-opts" id="work-mode-opts">${modeOptionsHtml(mode)}</div>
+      <div class="row">
+        <button class="btn primary" type="button" id="btn-translate-start">Bắt đầu dịch</button>
+      </div>
+      <p class="err" id="work-translate-err"></p>
+    </fieldset>`;
+  }
+  const reason = translateBlockReason(summary.translate_block);
+  return reason ? `<p class="muted">${escapeHtml(reason)}</p>` : "";
+}
+
+function wireWorkTranslate(work, summary) {
+  const openId = summary.translation_source_id || work.id;
+  const openBtn = $("btn-translate-open");
+  if (openBtn) {
+    openBtn.onclick = () => {
+      void loadTranslationView(openId, null);
+    };
+  }
+  const opts = $("work-mode-opts");
+  if (opts) {
+    opts.onclick = (event) => {
+      const btn = event.target.closest("[data-mode]");
+      if (!btn) return;
+      state.workMode = btn.dataset.mode;
+      opts.querySelectorAll(".split-opt").forEach((el) => el.classList.toggle("on", el === btn));
+    };
+  }
+  const startBtn = $("btn-translate-start");
+  if (startBtn) {
+    startBtn.onclick = async () => {
+      const err = $("work-translate-err");
+      startBtn.disabled = true;
+      if (err) err.textContent = "";
+      try {
+        await beginTranslation(work.id, state.workMode || state.translation.defaultMode || "normal");
+      } catch (error) {
+        if (err) err.textContent = error.message;
+      } finally {
+        startBtn.disabled = false;
+      }
+    };
+  }
+}
+
+function setTranslationStartVisible(open) {
+  const start = $("tr-start");
+  const desk = $("tr-desk");
+  const pick = $("tr-pick-work");
+  state.translation.startOpen = open;
+  if (start) start.hidden = !open;
+  if (desk) desk.hidden = open || !state.translation.projectId;
+  if (pick) pick.hidden = open;
+}
+
+async function ensureStartWorks() {
+  if (!state.works?.length) {
+    const data = await api("/api/works");
+    state.works = data.works || [];
+  }
+  state.translation.startWorks = state.works;
+}
+
+function startWorkRows() {
+  const q = ($("tr-work-q")?.value || "").trim().toLowerCase();
+  return (state.translation.startWorks || []).filter((work) => {
+    if (work.translate_block === "hub_translation") return false;
+    if (!work.can_translate && !work.has_translation_project) return false;
+    if (!q) return true;
+    const hay = `${work.title} ${work.id} ${work.author_id}`.toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+function renderStartWorks() {
+  const rows = startWorkRows();
+  const selected = state.translation.startWorkId;
+  const count = $("tr-work-count");
+  const body = $("tr-work-rows");
+  if (count) count.textContent = `${rows.length} tác phẩm`;
+  if (body) {
+    body.innerHTML = rows
+      .map((work) => {
+        const on = selected === work.id ? "on" : "";
+        const status = work.has_translation_project ? "Đã có dự án" : "Chưa dịch";
+        return `<tr class="pick ${on}" data-id="${escapeHtml(work.id)}">
+          <td><div class="title">${escapeHtml(work.title)}</div><div class="sub">${escapeHtml(work.id)}</div></td>
+          <td>${escapeHtml(work.author_id)}</td>
+          <td>${escapeHtml(status)}</td>
+        </tr>`;
+      })
+      .join("");
+  }
+  const chosen = rows.find((work) => work.id === selected);
+  const wrap = $("tr-mode-wrap");
+  if (wrap) wrap.hidden = !chosen || chosen.has_translation_project;
+  const go = $("tr-start-go");
+  if (go) go.disabled = !chosen || chosen.has_translation_project || !state.translation.startMode;
+}
+
+function renderStartModes() {
+  const box = $("tr-mode-opts");
+  if (!box) return;
+  const current = state.translation.startMode || state.translation.defaultMode || "normal";
+  box.innerHTML = modeOptionsHtml(current);
+}
+
+async function openTranslationStart() {
+  await ensureStartWorks();
+  state.translation.startWorkId = null;
+  state.translation.startMode = state.translation.defaultMode || "normal";
+  const err = $("tr-start-err");
+  if (err) err.textContent = "";
+  setTranslationStartVisible(true);
+  renderStartWorks();
+  renderStartModes();
+}
+
+async function pickStartWork(id) {
+  const work = (state.translation.startWorks || []).find((row) => row.id === id);
+  if (!work) return;
+  if (work.has_translation_project) {
+    await loadTranslationProject(id, null);
+    setTranslationStartVisible(false);
+    if (state.translation.projectId) {
+      setTranslationPath(id, state.translation.selectedChapter);
+    }
+    return;
+  }
+  state.translation.startWorkId = id;
+  renderStartWorks();
+  renderStartModes();
+}
+
+async function beginTranslation(workId, mode) {
+  try {
+    await api("/api/translations", {
+      method: "POST",
+      body: { source_work_id: workId, mode },
+    });
+    toast(`Đã tạo dự án · ${mode}`);
+  } catch (err) {
+    if (!/exists/i.test(err.message || "")) throw err;
+  }
+  await loadTranslationView(workId, null);
+}
+
+async function confirmStartTranslation() {
+  const workId = state.translation.startWorkId;
+  const mode = state.translation.startMode;
+  const err = $("tr-start-err");
+  const go = $("tr-start-go");
+  if (!workId || !mode) return;
+  if (go) go.disabled = true;
+  if (err) err.textContent = "";
+  try {
+    await beginTranslation(workId, mode);
+  } catch (error) {
+    if (err) err.textContent = error.message;
+  } finally {
+    if (go) go.disabled = false;
+  }
+}
+
 async function loadTranslationProjects() {
   const data = await api("/api/translations");
   state.translation.projects = data.projects || [];
+  state.translation.modes = data.modes || TRANSLATION_MODES;
+  state.translation.defaultMode = data.default_mode || "normal";
+  if (!state.translation.startMode) {
+    state.translation.startMode = state.translation.defaultMode;
+  }
   const select = $("tr-project");
   select.innerHTML = (data.projects || [])
     .map(
@@ -934,6 +1153,10 @@ async function loadTranslationProjects() {
         `<option value="${escapeHtml(p.source_work_id)}" ${p.source_work_id === state.translation.projectId ? "selected" : ""}>${escapeHtml(p.source_title || p.source_work_id)} (${escapeHtml(p.target_language || "vi")})</option>`,
     )
     .join("");
+  if (!data.projects?.length) {
+    state.translation.projectId = null;
+    return;
+  }
   if (!state.translation.projectId && data.projects?.length) {
     state.translation.projectId = data.projects[0].source_work_id;
     select.value = state.translation.projectId;
@@ -1171,10 +1394,23 @@ async function loadTranslationView(workId, chapter) {
   $("view-translation").hidden = false;
   await loadTranslationProjects();
   if (workId) {
-    $("tr-project").value = workId;
-    await loadTranslationProject(workId, chapter);
+    try {
+      $("tr-project").value = workId;
+      await loadTranslationProject(workId, chapter);
+      setTranslationStartVisible(false);
+    } catch {
+      await openTranslationStart();
+      state.translation.startWorkId = workId;
+      renderStartWorks();
+      renderStartModes();
+      return;
+    }
   } else if (state.translation.projectId) {
     await loadTranslationProject(state.translation.projectId, chapter);
+    setTranslationStartVisible(false);
+  } else {
+    await openTranslationStart();
+    return;
   }
   if (state.translation.projectId) {
     setTranslationPath(state.translation.projectId, state.translation.selectedChapter);
@@ -1201,6 +1437,28 @@ async function runTranslationPromote() {
 }
 
 function wireTranslation() {
+  $("tr-pick-work").onclick = () => void openTranslationStart();
+  $("tr-start-cancel").onclick = () => {
+    if (state.translation.projectId) {
+      setTranslationStartVisible(false);
+      return;
+    }
+    state.translation.startWorkId = null;
+    renderStartWorks();
+  };
+  $("tr-work-q").oninput = renderStartWorks;
+  $("tr-work-rows").onclick = (event) => {
+    const row = event.target.closest("tr[data-id]");
+    if (row) void pickStartWork(row.dataset.id);
+  };
+  $("tr-mode-opts").onclick = (event) => {
+    const btn = event.target.closest("[data-mode]");
+    if (!btn) return;
+    state.translation.startMode = btn.dataset.mode;
+    renderStartModes();
+    renderStartWorks();
+  };
+  $("tr-start-go").onclick = () => void confirmStartTranslation();
   $("tr-project").onchange = async () => {
     const workId = $("tr-project").value;
     if (workId) await loadTranslationProject(workId, null);

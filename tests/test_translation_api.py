@@ -77,6 +77,8 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
 def test_translation_list_and_project(client: TestClient):
     listed = client.get("/api/translations").json()
     assert listed["total"] == 1
+    assert {row["id"] for row in listed["modes"]} == {"tight", "normal", "loose"}
+    assert listed["default_mode"] in {"tight", "normal", "loose"}
     assert listed["projects"][0]["source_work_id"] == "grotius--freedom_of_the_seas"
     assert listed["projects"][0]["translation_work_id"] == "grotius--freedom_of_the_seas_vi"
     assert listed["projects"][0]["ready_to_promote"] is False
@@ -523,3 +525,52 @@ def test_progress_phase_written(client: TestClient, tmp_path: Path):
     draft = next(job for job in store["jobs"] if job["kind"] == "draft")
     assert draft["phase"] == "done"
     assert "attempts" in draft
+
+
+def test_create_translation_from_catalog(client: TestClient, tmp_path: Path):
+    sources = tmp_path / "sources/locke/raw"
+    sources.mkdir(parents=True)
+    (sources / "second_treatise.txt").write_text("Of civil government.\n" * 12, encoding="utf-8")
+    works_path = tmp_path / "catalog/works.json"
+    works = json.loads(works_path.read_text(encoding="utf-8"))
+    works.append(
+        {
+            "id": "locke--second_treatise",
+            "title": "Second Treatise of Government",
+            "author_id": "locke",
+            "language": "en",
+            "content_file": "sources/locke/raw/second_treatise.txt",
+        }
+    )
+    works_path.write_text(json.dumps(works), encoding="utf-8")
+
+    listed = client.get("/api/works").json()["works"]
+    grotius = next(row for row in listed if row["id"] == "grotius--freedom_of_the_seas")
+    locke = next(row for row in listed if row["id"] == "locke--second_treatise")
+    assert grotius["has_translation_project"] is True
+    assert grotius["can_translate"] is True
+    assert locke["can_translate"] is True
+    assert locke["has_translation_project"] is False
+
+    exists = client.post(
+        "/api/translations",
+        json={"source_work_id": "grotius--freedom_of_the_seas", "mode": "tight"},
+    )
+    assert exists.status_code == 409
+
+    created = client.post(
+        "/api/translations",
+        json={"source_work_id": "locke--second_treatise", "mode": "loose"},
+    )
+    assert created.status_code == 200
+    body = created.json()
+    assert body["created"] is True
+    assert body["project"]["translation_mode"] == "loose"
+    assert body["project"]["status"] == "mode_locked"
+    assert len(body["chapters"]) == 1
+    assert body["chapters"][0]["chapter"] == "1"
+    assert not (tmp_path / "translations/locke--second_treatise/segments/chi-sample.json").exists()
+
+    page = client.get("/")
+    assert "Dịch sách khác" in page.text
+    assert "Pilot: Grotius" not in page.text

@@ -28,6 +28,24 @@ def test_ui_and_list(client):
     works = client.get("/api/works").json()["works"]
     assert works[0]["id"] == "locke--second_treatise"
     assert works[0]["read_allowed"] is False
+    assert works[0]["can_translate"] is True
+    assert works[0]["has_translation_project"] is False
+    assert "Dịch sách khác" in home.text
+    assert "Pilot: Grotius" not in home.text
+
+
+def test_create_translation_from_works_list(client):
+    created = client.post(
+        "/api/translations",
+        json={"source_work_id": "locke--second_treatise", "mode": "tight"},
+    )
+    assert created.status_code == 200
+    body = created.json()
+    assert body["project"]["translation_mode"] == "tight"
+    assert body["chapters"][0]["chapter"] == "1"
+    summary = client.get("/api/works/locke--second_treatise").json()["summary"]
+    assert summary["has_translation_project"] is True
+    assert summary["translation_source_id"] == "locke--second_treatise"
 
 
 def test_preview_normalized_without_allow(client):

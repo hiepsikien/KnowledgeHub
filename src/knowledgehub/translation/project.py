@@ -5,9 +5,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from ..catalog import get_work
+from ..catalog import get_work, is_hub_translation, work_has_manuscript
 from ..paths import corpus_root
-from ..settings import resolve_models
+from ..settings import MODES, resolve_models
 from .paths import (
     annotations_file,
     glossary_file,
@@ -20,45 +20,117 @@ from .paths import (
 from .parts import SPLIT_VERSION
 from .segment import sample_segment, split_chapters
 
-DEFAULT_STYLE_BRIEF = """# Style brief — Grotius, *The Freedom of the Seas*
-
-- **Genre:** legal-political treatise (1609), arguing natural law and freedom of navigation.
-- **Voice:** formal, argumentative, citations from Roman law/classical authors.
-- **Audience:** Vietnamese readers without legal training — clarity without flattening the argument.
-- **Terms:** lock Latin legal terms on first use; prefer consistency (*Law of Nations* → *luật các dân tộc* / *luật quốc tế* — pick one in glossary).
-- **Mode:** chosen after sample review (tight / normal / loose).
-"""
-
-DEFAULT_GLOSSARY = {
-    "terms": [
-        {
-            "id": "term-law-of-nations",
-            "source": "Law of Nations",
-            "target": None,
-            "locked": False,
-            "notes": "Primary term — decide in review",
-        },
-        {
-            "id": "term-mare-liberum",
-            "source": "freedom of the seas",
-            "target": None,
-            "locked": False,
-            "notes": "Latin title Mare Liberum; may keep as proper phrase",
-        },
-        {
-            "id": "term-voc",
-            "source": "Dutch East India Company",
-            "target": "VOC",
-            "locked": True,
-            "notes": "Use VOC with expand-on-first-mention annotation",
-        },
-    ],
-    "entities": [],
-}
+SOURCE_LANGUAGES = frozenset({"en", "eng", "english"})
+DEFAULT_GLOSSARY = {"terms": [], "entities": []}
 
 
 def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def list_project_ids() -> list[str]:
+    root = corpus_root() / "translations"
+    if not root.is_dir():
+        return []
+    return sorted(
+        path.name
+        for path in root.iterdir()
+        if path.is_dir() and (path / "project.json").is_file()
+    )
+
+
+def translation_offer(work: dict[str, Any], *, project_ids: set[str] | None = None) -> dict[str, Any]:
+    wid = str(work.get("id") or "")
+    ids = project_ids if project_ids is not None else set(list_project_ids())
+    derived = str(work.get("derived_from") or "")
+    if is_hub_translation(work):
+        return {
+            "can_translate": False,
+            "translate_block": "hub_translation",
+            "has_translation_project": bool(derived) and derived in ids,
+            "translation_source_id": derived or None,
+        }
+    lang = str(work.get("language") or "en").strip().lower()
+    if lang not in SOURCE_LANGUAGES:
+        return {
+            "can_translate": False,
+            "translate_block": "not_english",
+            "has_translation_project": wid in ids,
+            "translation_source_id": wid if wid in ids else None,
+        }
+    if not work_has_manuscript(work):
+        return {
+            "can_translate": False,
+            "translate_block": "no_raw",
+            "has_translation_project": wid in ids,
+            "translation_source_id": wid if wid in ids else None,
+        }
+    return {
+        "can_translate": True,
+        "translate_block": None,
+        "has_translation_project": wid in ids,
+        "translation_source_id": wid if wid in ids else None,
+    }
+
+
+def _require_translatable(work: dict[str, Any]) -> None:
+    wid = str(work.get("id") or "")
+    if is_hub_translation(work):
+        raise ValueError(f"{wid} is already a Hub translation")
+    lang = str(work.get("language") or "en").strip().lower()
+    if lang not in SOURCE_LANGUAGES:
+        raise ValueError(f"Only English sources can be translated (got {lang!r})")
+
+
+def _style_brief(work: dict[str, Any], mode: str | None) -> str:
+    title = str(work.get("title") or work.get("id") or "Untitled")
+    author = str(work.get("author_id") or "").strip()
+    year = work.get("year")
+    source = ", ".join(part for part in (author, str(year) if year not in (None, "") else "") if part)
+    mode_line = (
+        f"- **Mode:** {mode} — locked at project start."
+        if mode
+        else "- **Mode:** locked when the curator picks tight / normal / loose."
+    )
+    return (
+        f"# Style brief — {title}\n\n"
+        + (f"- **Source:** {source}\n" if source else "")
+        + "- **Voice:** stay close to the source register; do not modernize or flatten the argument.\n"
+        + "- **Audience:** Vietnamese readers who may not know the original language.\n"
+        + f"{mode_line}\n"
+    )
+
+
+def _manuscript_text(work: dict[str, Any], raw_path: Path) -> str:
+    from ..normalize import normalize_manuscript
+
+    raw = raw_path.read_text(encoding="utf-8")
+    language = str(work.get("language") or "en")
+    text, _report = normalize_manuscript(raw, language=language, work=work)
+    return text if text.strip() else raw
+
+
+def _write_sample(source_work_id: str, chapter: dict[str, str | int]) -> Path:
+    ch = str(chapter["chapter"])
+    sample_path = segments_dir(source_work_id) / f"ch{ch.lower()}-sample.json"
+    sample_path.write_text(
+        json.dumps(
+            {
+                "id": f"{source_work_id}--ch{ch.lower()}-sample",
+                "chapter": ch,
+                "words": chapter["words"],
+                "source_text": chapter["text"],
+                "drafts": {"tight": None, "normal": None, "loose": None},
+                "final": None,
+                "status": "pending",
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return sample_path
 
 
 def init_translation_project(
@@ -66,9 +138,13 @@ def init_translation_project(
     *,
     target_language: str = "vi",
     translation_work_id: str | None = None,
+    translation_mode: str | None = None,
     overwrite: bool = False,
 ) -> dict[str, Any]:
     work = get_work(source_work_id)
+    _require_translatable(work)
+    if translation_mode is not None and translation_mode not in MODES:
+        raise ValueError(f"Unknown mode {translation_mode!r}; expected one of {list(MODES)}")
     raw_rel = work.get("content_file")
     if not raw_rel:
         raise FileNotFoundError(f"{source_work_id} has no content_file")
@@ -90,20 +166,21 @@ def init_translation_project(
         for leftover in seg_dir.glob("*.json"):
             leftover.unlink()
 
-    text = raw_path.read_text(encoding="utf-8")
-    chapters = split_chapters(text)
-    ch1 = sample_segment(chapters, chapter="I")
+    chapters = split_chapters(_manuscript_text(work, raw_path))
+    if not chapters:
+        raise ValueError(f"{source_work_id} produced no chapters")
 
     translation_work_id = translation_work_id or translation_catalog_id(
         source_work_id, target_language
     )
+    locked = translation_mode in MODES
     project: dict[str, Any] = {
         "source_work_id": source_work_id,
         "translation_work_id": translation_work_id,
         "target_language": target_language,
-        "translation_mode": None,
-        "translation_modes_available": ["tight", "normal", "loose"],
-        "status": "sample_pending",
+        "translation_mode": translation_mode if locked else None,
+        "translation_modes_available": list(MODES),
+        "status": "mode_locked" if locked else "mode_pending",
         "created_at": _now(),
         "updated_at": _now(),
         "split_version": SPLIT_VERSION,
@@ -114,31 +191,22 @@ def init_translation_project(
             "words": sum(int(c["words"]) for c in chapters),
             "chapters": len(chapters),
         },
-        "sample_segment": {
-            "chapter": ch1["chapter"],
-            "words": ch1["words"],
-            "file": f"segments/ch{ch1['chapter'].lower()}-sample.json",
-        },
         "segments_total": len(chapters),
     }
 
-    sample_payload = {
-        "id": f"{source_work_id}--ch{str(ch1['chapter']).lower()}-sample",
-        "chapter": ch1["chapter"],
-        "words": ch1["words"],
-        "source_text": ch1["text"],
-        "drafts": {"tight": None, "normal": None, "loose": None},
-        "final": None,
-        "status": "pending",
-    }
+    sample_path: Path | None = None
+    if not locked:
+        first = sample_segment(chapters)
+        sample_path = _write_sample(source_work_id, first)
+        project["status"] = "sample_pending"
+        project["sample_segment"] = {
+            "chapter": first["chapter"],
+            "words": first["words"],
+            "file": f"segments/ch{str(first['chapter']).lower()}-sample.json",
+        }
 
     project_file(source_work_id).write_text(
         json.dumps(project, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    sample_path = segments_dir(source_work_id) / f"ch{str(ch1['chapter']).lower()}-sample.json"
-    sample_path.write_text(
-        json.dumps(sample_payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     glossary_file(source_work_id).write_text(
@@ -149,10 +217,10 @@ def init_translation_project(
         json.dumps({"annotations": []}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    style_brief_file(source_work_id).write_text(DEFAULT_STYLE_BRIEF, encoding="utf-8")
+    style_brief_file(source_work_id).write_text(_style_brief(work, translation_mode if locked else None), encoding="utf-8")
 
     for row in chapters:
-        seg_id = f"ch{row['chapter'].lower()}"
+        seg_id = f"ch{str(row['chapter']).lower()}"
         seg_path = segments_dir(source_work_id) / f"{seg_id}.json"
         payload = {
             "id": f"{source_work_id}--{seg_id}",
@@ -165,13 +233,10 @@ def init_translation_project(
         }
         seg_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    return {
-        "project": project,
-        "paths": {
-            "root": str(root.relative_to(corpus_root())),
-            "sample": str(sample_path.relative_to(corpus_root())),
-        },
-    }
+    paths = {"root": str(root.relative_to(corpus_root()))}
+    if sample_path is not None:
+        paths["sample"] = str(sample_path.relative_to(corpus_root()))
+    return {"project": project, "paths": paths}
 
 
 def load_project(source_work_id: str) -> dict[str, Any]:
@@ -183,39 +248,38 @@ def load_project(source_work_id: str) -> dict[str, Any]:
 
 def select_translation_mode(source_work_id: str, mode: str) -> dict[str, Any]:
     project = load_project(source_work_id)
-    available = project.get("translation_modes_available") or []
+    available = project.get("translation_modes_available") or list(MODES)
     if mode not in available:
         raise ValueError(f"Unknown mode {mode!r}; expected one of {available}")
 
-    sample_rel = project.get("sample_segment", {}).get("file")
-    if not sample_rel:
-        raise ValueError("Project has no sample_segment")
-    sample_path = segments_dir(source_work_id) / Path(sample_rel).name
-    if not sample_path.is_file():
-        raise FileNotFoundError(f"Sample segment not found: {sample_path}")
-
-    segment = json.loads(sample_path.read_text(encoding="utf-8"))
-    chosen = (segment.get("drafts") or {}).get(mode)
-    if not chosen:
-        raise ValueError(
-            f"No {mode} draft in sample. Run: knowledgehub translate draft-sample "
-            f"--work {source_work_id} --mode {mode}"
-        )
-
-    segment["final"] = chosen
-    segment["status"] = "approved"
-    sample_path.write_text(json.dumps(segment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    chapter = str(segment.get("chapter") or "").lower()
-    chapter_path = segments_dir(source_work_id) / f"ch{chapter}.json"
-    if chapter_path.is_file():
-        chapter_seg = json.loads(chapter_path.read_text(encoding="utf-8"))
-        chapter_seg["final"] = chosen
-        chapter_seg.setdefault("drafts", {})[mode] = chosen
-        if segment.get("draft_raw", {}).get(mode):
-            chapter_seg.setdefault("draft_raw", {})[mode] = segment["draft_raw"][mode]
-        chapter_seg["status"] = "draft_ready"
-        chapter_path.write_text(json.dumps(chapter_seg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    sample_path: Path | None = None
+    chapter_path: Path | None = None
+    sample_rel = (project.get("sample_segment") or {}).get("file")
+    if sample_rel:
+        sample_path = segments_dir(source_work_id) / Path(sample_rel).name
+        if sample_path.is_file():
+            segment = json.loads(sample_path.read_text(encoding="utf-8"))
+            chosen = (segment.get("drafts") or {}).get(mode)
+            if chosen:
+                segment["final"] = chosen
+                segment["status"] = "approved"
+                sample_path.write_text(
+                    json.dumps(segment, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                chapter = str(segment.get("chapter") or "").lower()
+                chapter_path = segments_dir(source_work_id) / f"ch{chapter}.json"
+                if chapter_path.is_file():
+                    chapter_seg = json.loads(chapter_path.read_text(encoding="utf-8"))
+                    chapter_seg["final"] = chosen
+                    chapter_seg.setdefault("drafts", {})[mode] = chosen
+                    if segment.get("draft_raw", {}).get(mode):
+                        chapter_seg.setdefault("draft_raw", {})[mode] = segment["draft_raw"][mode]
+                    chapter_seg["status"] = "draft_ready"
+                    chapter_path.write_text(
+                        json.dumps(chapter_seg, ensure_ascii=False, indent=2) + "\n",
+                        encoding="utf-8",
+                    )
 
     project["translation_mode"] = mode
     project["status"] = "mode_locked"
@@ -229,6 +293,6 @@ def select_translation_mode(source_work_id: str, mode: str) -> dict[str, Any]:
         "work_id": source_work_id,
         "translation_mode": mode,
         "status": project["status"],
-        "sample": str(sample_path.relative_to(corpus_root())),
-        "chapter_segment": str(chapter_path.relative_to(corpus_root())) if chapter_path.is_file() else None,
+        "sample": str(sample_path.relative_to(corpus_root())) if sample_path and sample_path.is_file() else None,
+        "chapter_segment": str(chapter_path.relative_to(corpus_root())) if chapter_path and chapter_path.is_file() else None,
     }

@@ -29,6 +29,13 @@ _ROMAN = {
     "xiv": 14,
     "xv": 15,
 }
+_NAMED = {
+    "preface": 0,
+    "introduction": 0,
+    "prologue": 0,
+    "epilogue": 10_000,
+    "appendix": 10_001,
+}
 
 
 class IncompleteTranslation(ValueError):
@@ -41,6 +48,10 @@ class IncompleteTranslation(ValueError):
 
 def chapter_sort_key(chapter: str) -> tuple[int, str]:
     key = chapter.strip().lower()
+    if key.isdigit():
+        return (int(key), chapter)
+    if key in _NAMED:
+        return (_NAMED[key], chapter)
     return (_ROMAN.get(key, 999), chapter)
 
 
@@ -75,6 +86,23 @@ def translation_status(source_work_id: str) -> dict[str, Any]:
         "missing": missing,
         "complete": bool(files) and not missing,
     }
+
+
+def chapter_finals(source_work_id: str) -> dict[str, str]:
+    """Chapter id → Vietnamese final, for publish-time note filtering."""
+    project = load_project(source_work_id)
+    texts: dict[str, str] = {}
+    for path in segment_files(source_work_id):
+        segment = json.loads(path.read_text(encoding="utf-8"))
+        chapter = str(segment.get("chapter") or path.stem.removeprefix("ch").upper())
+        try:
+            text = final_text(segment, project)
+        except ValueError:
+            continue
+        texts[chapter] = text
+        texts[chapter.upper()] = text
+        texts[chapter.lower()] = text
+    return texts
 
 
 def assemble_finals(

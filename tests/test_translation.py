@@ -5,8 +5,10 @@ from pathlib import Path
 
 import pytest
 
+from knowledgehub.translation.assemble import chapter_sort_key
 from knowledgehub.translation.fetch import fetch_grotius_freedom_of_seas
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
+from knowledgehub.translation.segment import split_chapters
 
 
 @pytest.fixture
@@ -39,11 +41,33 @@ def test_init_translation_project(corpus: Path):
     result = init_translation_project("grotius--freedom_of_the_seas")
     assert result["project"]["source"]["chapters"] == 2
     assert result["project"]["translation_work_id"] == "grotius--freedom_of_the_seas_vi"
+    assert result["project"]["translation_mode"] is None
     sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
     assert sample.is_file()
     payload = json.loads(sample.read_text(encoding="utf-8"))
     assert payload["chapter"] == "I"
     assert "English paragraph one" in payload["source_text"]
+
+
+def test_init_locks_mode_without_sample(corpus: Path):
+    result = init_translation_project("grotius--freedom_of_the_seas", translation_mode="normal")
+    assert result["project"]["translation_mode"] == "normal"
+    assert result["project"]["status"] == "mode_locked"
+    assert "sample" not in result["paths"]
+    sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
+    assert not sample.exists()
+    project = json.loads((corpus / "translations/grotius--freedom_of_the_seas/project.json").read_text())
+    assert "sample_segment" not in project
+
+
+def test_select_mode_without_sample_draft(corpus: Path):
+    init_translation_project("grotius--freedom_of_the_seas")
+    result = select_translation_mode("grotius--freedom_of_the_seas", "loose")
+    assert result["translation_mode"] == "loose"
+    project = json.loads((corpus / "translations/grotius--freedom_of_the_seas/project.json").read_text())
+    assert project["status"] == "mode_locked"
+    chi = json.loads((corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json").read_text())
+    assert not chi.get("final")
 
 
 def test_select_translation_mode(corpus: Path):
@@ -71,6 +95,17 @@ def test_overwrite_rewrites_chapter_source(corpus: Path):
     rewritten = json.loads(chi.read_text(encoding="utf-8"))
     assert "STALE" not in rewritten["source_text"]
     assert "English paragraph one" in rewritten["source_text"]
+
+
+def test_split_arabic_and_plain_text():
+    arabic = split_chapters("Chapter 1\n\nFirst.\n\nChapter 2\n\nSecond.\n")
+    assert [row["chapter"] for row in arabic] == ["1", "2"]
+    assert "First." in arabic[0]["text"]
+    plain = split_chapters("Of civil government.\n" * 8)
+    assert len(plain) == 1
+    assert plain[0]["chapter"] == "1"
+    assert chapter_sort_key("2") < chapter_sort_key("10")
+    assert chapter_sort_key("preface") < chapter_sort_key("I")
 
 
 def test_fetch_grotius_writes_english_raw(corpus: Path, monkeypatch: pytest.MonkeyPatch):

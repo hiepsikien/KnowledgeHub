@@ -57,6 +57,7 @@ def main(argv: list[str] | None = None) -> int:
     tr_init = tr_sub.add_parser("init", help="Create translation project from local raw text")
     tr_init.add_argument("--work", required=True, help="Source work id")
     tr_init.add_argument("--lang", default="vi", help="Target language (default: vi)")
+    tr_init.add_argument("--mode", default=None, choices=["tight", "normal", "loose"])
     tr_init.add_argument("--overwrite", action="store_true", help="Recreate existing project")
     tr_draft = tr_sub.add_parser("draft-sample", help="AI draft the sample segment (default: normal)")
     tr_draft.add_argument("--work", required=True, help="Source work id")
@@ -81,7 +82,7 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Rewrite segments only; do not queue draft jobs",
     )
-    tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode after sample review")
+    tr_mode = tr_sub.add_parser("select-mode", help="Lock translation mode (sample draft optional)")
     tr_mode.add_argument("--work", required=True, help="Source work id")
     tr_mode.add_argument("--mode", required=True, choices=["tight", "normal", "loose"])
     tr_qa = tr_sub.add_parser("qa", help="Run QA on a chapter translation (and annotations if present)")
@@ -192,6 +193,7 @@ def main(argv: list[str] | None = None) -> int:
                 result = init_translation_project(
                     args.work,
                     target_language=args.lang,
+                    translation_mode=args.mode,
                     overwrite=args.overwrite,
                 )
             except (FileExistsError, FileNotFoundError, KeyError, ValueError) as exc:

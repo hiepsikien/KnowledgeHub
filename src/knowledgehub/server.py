@@ -30,6 +30,7 @@ from .settings import save_settings, settings_payload
 from .translation.api import (
     enqueue_translation_job,
     cancel_translation_jobs,
+    create_translation_project,
     get_segment_detail,
     get_translation_project,
     list_annotations,
@@ -41,6 +42,7 @@ from .translation.api import (
     run_promote,
     run_qa,
 )
+from .translation.project import list_project_ids, translation_offer
 from .translation.assemble import IncompleteTranslation
 from .translation.jobs import (
     configure_job_logging,
@@ -82,6 +84,13 @@ class PublishBody(BaseModel):
 
 class PromoteBody(BaseModel):
     title: str | None = None
+
+
+class CreateTranslationBody(BaseModel):
+    source_work_id: str
+    mode: str
+    overwrite: bool = False
+    target_language: str = "vi"
 
 
 class ApproveQaBody(BaseModel):
@@ -180,7 +189,12 @@ def create_app() -> FastAPI:
     def list_works() -> dict[str, Any]:
         root = corpus_root()
         works = load_works(root / "catalog" / "works.json")
-        rows = [work_summary(w, root=root) for w in works]
+        project_ids = set(list_project_ids())
+        rows = []
+        for work in works:
+            row = work_summary(work, root=root)
+            row.update(translation_offer(work, project_ids=project_ids))
+            rows.append(row)
         return {"works": rows, "total": len(rows)}
 
     @app.get("/api/works/{work_id}", dependencies=guard)
@@ -190,7 +204,9 @@ def create_app() -> FastAPI:
             work = get_work(work_id, corpus=root)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
-        return {"work": work, "summary": work_summary(work, root=root)}
+        summary = work_summary(work, root=root)
+        summary.update(translation_offer(work, project_ids=set(list_project_ids())))
+        return {"work": work, "summary": summary}
 
     @app.get("/api/works/{work_id}/preview", dependencies=guard)
     def work_preview(work_id: str, full: bool = Query(default=False)) -> dict[str, Any]:
@@ -268,6 +284,24 @@ def create_app() -> FastAPI:
     @app.get("/api/translations", dependencies=guard)
     def translations_list() -> dict[str, Any]:
         return list_translation_projects()
+
+    @app.post("/api/translations", dependencies=guard)
+    def translations_create(payload: CreateTranslationBody) -> dict[str, Any]:
+        try:
+            return create_translation_project(
+                payload.source_work_id,
+                mode=payload.mode,
+                overwrite=payload.overwrite,
+                target_language=payload.target_language,
+            )
+        except FileExistsError as exc:
+            raise HTTPException(409, str(exc)) from exc
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {payload.source_work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/api/translations/{source_work_id}", dependencies=guard)
     def translation_project(source_work_id: str) -> dict[str, Any]:

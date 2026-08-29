@@ -359,6 +359,17 @@ tr.pick.on { background: var(--accent-soft); }
 .split-opt small { display: block; color: var(--muted); font-size: 12px; }
 
 /* Translation desk */
+.tr-start {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+.tr-start h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 6px; }
+.tr-work-wrap { max-height: min(42vh, 420px); margin: 8px 0 16px; }
+#tr-mode-wrap .split-set { margin-top: 4px; }
 .tr-layout { margin-top: 8px; }
 .tr-score-grid { display: grid; gap: 10px; margin: 12px 0; }
 .tr-score {
