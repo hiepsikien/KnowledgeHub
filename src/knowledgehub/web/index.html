@@ -121,13 +121,15 @@
           <header class="page-head">
             <div>
               <h1 id="re-heading">Read Edition</h1>
-              <p class="lead" id="re-status">REF/1 structured edition — preview, QA, chỉnh sửa theo chương.</p>
+              <p class="lead" id="re-status">Hai bước: (1) phân đoạn chương bằng LLM, (2) parse REF từng chương.</p>
             </div>
             <div class="page-actions">
+              <label class="inline re-llm-toggle"><input id="re-use-llm-macro" type="checkbox" checked /> LLM phân đoạn</label>
               <label class="inline re-llm-toggle"><input id="re-use-llm" type="checkbox" checked /> LLM relabel</label>
               <label class="inline re-llm-toggle"><input id="re-use-llm-qa" type="checkbox" checked /> LLM QA</label>
-              <button type="button" class="btn ghost" id="re-build">Build lại</button>
-              <button type="button" class="btn ghost" id="re-qa-all">QA (rule)</button>
+              <button type="button" class="btn primary" id="re-macro">Bước 1: Phân đoạn</button>
+              <button type="button" class="btn ghost" id="re-parse-ch">Parse REF chương</button>
+              <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
               <button type="button" class="btn" id="re-publish">Publish Read</button>
             </div>
           </header>
@@ -141,7 +143,13 @@
             </div>
           </section>
           <div id="re-desk" class="re-layout">
-            <aside class="re-sidebar" id="re-chapters"></aside>
+            <aside class="re-sidebar-wrap">
+              <div class="re-sidebar-head">
+                <span>Chương / phần</span>
+                <label class="re-select-all"><input type="checkbox" id="re-select-all" /> Chọn tất</label>
+              </div>
+              <aside class="re-sidebar" id="re-chapters"></aside>
+            </aside>
             <div class="re-main">
               <header class="re-detail-head">
                 <div>

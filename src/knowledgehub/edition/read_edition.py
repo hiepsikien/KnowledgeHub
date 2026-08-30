@@ -17,12 +17,30 @@ from .ref import build_read_edition
 from .ref_schema import REF_PARSER_VERSION, validate_edition
 from .serialize import blocks_to_markdown
 from .ref_qa import qa_read_edition
+from .read_edition_steps import (
+    ReadEditionStepError,
+    assemble_edition_from_package,
+    load_structure,
+    package_root,
+    resolve_stripped_source,
+    section_source_slice,
+)
 
-READ_EDITION_PACKAGE_VERSION = "1"
+READ_EDITION_PACKAGE_VERSION = "2"
 
 
 class ReadEditionError(RuntimeError):
     pass
+
+
+def package_dir_for_work(
+    work_id: str,
+    *,
+    corpus: Path | None = None,
+) -> tuple[Path, dict[str, Any], dict[str, Any]]:
+    root = corpus or corpus_root()
+    _text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    return package_root(work_id, str(meta["content_hash"]), corpus=root), meta, work
 
 
 def _now() -> str:
@@ -373,28 +391,29 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
     try:
-        edition, report, _ = resolve_edition(work_id, corpus=root)
-    except ReadEditionError as exc:
+        _text, meta, _work = resolve_stripped_source(work_id, corpus=root)
+    except ReadEditionStepError as exc:
         return {"work_id": work_id, "ready": False, "error": str(exc)}
-    edition_hash = edition.get("edition_hash")
-    package_dir = read_edition_dir(work_id, str(edition_hash), corpus=root)
-    manifest = load_manifest(package_dir) if package_dir.is_dir() else None
-    qa = load_qa_report(package_dir) if package_dir.is_dir() else {"chapters": {}}
-    overrides = load_overrides(package_dir) if package_dir.is_dir() else {}
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    manifest = load_manifest(package_dir) if (package_dir / "manifest.json").is_file() else None
+    chapters = (manifest or {}).get("chapters") or []
+    parsed = sum(1 for row in chapters if row.get("micro_status") == "complete")
     return {
         "work_id": work_id,
         "title": work.get("title"),
-        "language": edition.get("language") or work.get("language"),
+        "language": work.get("language"),
         "ready": True,
-        "edition_hash": edition_hash,
-        "content_hash": report.get("content_hash") or work.get("content_hash"),
-        "content_kind": edition.get("content_kind"),
-        "block_count": len(edition.get("blocks") or []),
+        "pipeline": "two_step" if structure else "legacy",
+        "content_hash": meta.get("content_hash"),
+        "macro_complete": structure is not None,
+        "macro_mode": (structure or {}).get("mode"),
+        "structure": structure,
+        "manifest": manifest,
         "package_built": manifest is not None,
         "package_dir": str(package_dir.relative_to(root)) if package_dir.is_dir() else None,
-        "manifest": manifest,
-        "qa_chapters": len(qa.get("chapters") or {}),
-        "override_chapters": len(overrides),
+        "chapters_total": len(chapters) or len((structure or {}).get("sections") or []),
+        "chapters_parsed": parsed,
         "gemini_available": gemini_available(),
         "default_use_llm_relabel": default_use_llm_relabel(),
     }
@@ -410,21 +429,30 @@ def qa_read_edition_chapter(
     min_overall: float = 7.0,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
-    edition, _report, _source = resolve_edition(work_id, corpus=root)
-    build_read_edition_package(work_id, corpus=root)
-    package_dir = read_edition_dir(work_id, str(edition["edition_hash"]), corpus=root)
+    package_dir, _meta, work = package_dir_for_work(work_id, corpus=root)
     chapter = load_chapter(package_dir, chapter_id)
+    if not chapter.get("blocks"):
+        raise ReadEditionError(f"{chapter_id} not parsed — run micro parse first")
+    text, _, _ = resolve_stripped_source(work_id, corpus=root)
+    structure = load_structure(package_dir)
+    source_excerpt = chapter.get("reading_markdown") or ""
+    if structure:
+        section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
+        if section:
+            source_excerpt = section_source_slice(text, section)
     sub_edition = {
-        **edition,
+        "edition_format": "ref/1",
+        "language": work.get("language") or "en",
         "blocks": chapter["blocks"],
-        "reading_markdown": chapter["reading_markdown"],
+        "reading_markdown": chapter.get("reading_markdown") or "",
+        "content_kind": chapter.get("content_kind") or "prose",
+        "source_family": (structure or {}).get("source_family") or "plain",
+        "edition_hash": chapter.get("edition_hash") or "0" * 64,
     }
-    # Compare chapter blocks to this chapter's text — not the manuscript head.
-    source_excerpt = str(chapter.get("reading_markdown") or "")
     qa = qa_read_edition(
         source_excerpt,
         sub_edition,
-        language=str(edition.get("language") or "en"),
+        language=str(work.get("language") or "en"),
         use_llm=use_llm,
         model=model,
         min_overall=min_overall,
@@ -461,27 +489,31 @@ def qa_all_chapters(
 
 
 def chapters_for_translation(work_id: str, *, corpus: Path | None = None) -> list[dict[str, str | int]]:
-    """Chapter texts aligned to REF split_hints — for translation segmentation."""
+    """Chapter plain texts from macro structure (step 1 boundaries)."""
     root = corpus or corpus_root()
-    edition, _, _ = resolve_edition(work_id, corpus=root)
-    specs = split_edition_chapters(edition)
+    text, meta, _work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionError("Run macro step before translation sync")
     used: dict[str, int] = {}
     out: list[dict[str, str | int]] = []
-    for spec in specs:
-        ch = chapter_document(edition, spec)
-        hint = spec.get("split_hint") or {}
-        raw_label = str(hint.get("text") or spec["chapter_id"]).strip()
-        label = re.sub(r"[^A-Za-z0-9]", "", raw_label)[:16] or spec["chapter_id"].replace("ch-", "")
+    for section in structure.get("sections") or []:
+        if section.get("kind") == "front_matter":
+            continue
+        slice_text = section_source_slice(text, section)
+        raw_label = str(section.get("title") or section["section_id"]).strip()
+        label = re.sub(r"[^A-Za-z0-9]", "", raw_label)[:16] or section["section_id"].replace("sec-", "")
         count = used.get(label, 0) + 1
         used[label] = count
         chapter_label = label if count == 1 else f"{label[:12]}{count}"
         out.append(
             {
                 "chapter": chapter_label,
-                "title": spec["title"],
-                "text": ch["reading_markdown"],
-                "words": ch["word_count"],
-                "ref_chapter_id": spec["chapter_id"],
+                "title": section.get("title"),
+                "text": slice_text,
+                "words": section.get("word_count") or _word_count(slice_text),
+                "ref_chapter_id": section["section_id"],
             }
         )
     return out
