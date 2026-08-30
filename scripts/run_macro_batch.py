@@ -105,7 +105,7 @@ def run_one(entry: dict, *, skip_qa: bool, sleep_sec: float) -> dict:
     expected = count_expected_body_divisions(markers)
     toc_len = len(extract_toc_from_raw(raw) or "")
 
-    llm = build_macro_structure(text, language=lang, family=family, use_llm=True)
+    llm = build_macro_structure(text, language=lang, family=family, use_llm=True, raw=raw)
     if sleep_sec:
         time.sleep(sleep_sec)
 
@@ -157,6 +157,7 @@ def save_report(path: Path, results: list[dict], errors: list[dict]) -> None:
         "llm_qa_fail": sum(1 for r in results if r.get("qa_verdict") == "fail"),
         "qa_complete_true": sum(1 for r in results if r.get("qa_complete")),
         "det_complete": sum(1 for r in results if r.get("deterministic_complete")),
+        "mode_markers": sum(1 for r in results if r.get("llm_mode") == "markers"),
         "full_pg_en": sum(1 for r in en if str(r.get("source", "")).startswith("gutenberg:")),
     }
     path.parent.mkdir(parents=True, exist_ok=True)
