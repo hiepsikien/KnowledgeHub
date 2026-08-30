@@ -12,7 +12,7 @@ from ..translation.providers import ProviderError, complete_chat
 from .profile import detect_family
 from .llm_defaults import gemini_available, ref_llm_model
 from .ref_schema import REF_PARSER_VERSION
-from .toc import is_chapter_heading_line, is_toc_entry_line
+from .toc import is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
 
 STRUCTURE_VERSION = "1"
 
@@ -60,6 +60,12 @@ def line_map(text: str) -> list[dict[str, Any]]:
     return rows
 
 
+ESSAY_SECTION = re.compile(
+    r"^(?:What (?:Is|Are|Ought)|The (?:Law|Complete|Solution|Conclusion)|Property and)\b",
+    re.I,
+)
+
+
 def scan_heading_candidates(text: str, *, language: str = "en") -> list[dict[str, Any]]:
     lang = (language or "en").lower()[:2]
     rows = line_map(text)
@@ -68,15 +74,42 @@ def scan_heading_candidates(text: str, *, language: str = "en") -> list[dict[str
         stripped = row["text"].strip()
         if not stripped or len(stripped) > 160:
             continue
+        if is_body_heading_line(stripped):
+            out.append({**row, "text": stripped, "heuristic": "heading"})
+            continue
+        if is_all_caps_section_line(stripped):
+            out.append({**row, "text": stripped, "heuristic": "heading", "kind": "all_caps_section"})
+            continue
+        if ESSAY_SECTION.match(stripped) and len(stripped) < 80:
+            out.append({**row, "text": stripped, "heuristic": "heading", "kind": "section"})
+            continue
         if is_toc_entry_line(stripped):
             out.append({**row, "text": stripped, "heuristic": "toc_entry"})
             continue
-        if is_chapter_heading_line(stripped) or HEADING_CANDIDATE.match(stripped):
+        if HEADING_CANDIDATE.match(stripped):
             out.append({**row, "text": stripped, "heuristic": "heading"})
             continue
         if lang == "vi" and VI_CHAPTER.match(stripped):
             out.append({**row, "text": stripped, "heuristic": "heading"})
     return out
+
+
+def filter_candidates_for_llm(candidates: list[dict[str, Any]], *, limit: int = 500) -> list[dict[str, Any]]:
+    """Drop noisy toc_entry rows; prefer body headings for boundary LLM."""
+    keep_heuristics = {
+        "heading",
+        "content_match",
+        "profile_pattern",
+        "profile_builtin",
+        "marker",
+    }
+    body = [c for c in candidates if c.get("heuristic") in keep_heuristics]
+    if len(body) >= 5:
+        return body[:limit]
+    # sparse headings — include toc_entry chapter rows as fallback
+    fallback = [c for c in candidates if c.get("heuristic") == "toc_entry" and is_chapter_heading_line(str(c.get("text") or ""))]
+    merged = {int(c["line"]): c for c in body + fallback}
+    return sorted(merged.values(), key=lambda c: int(c["line"]))[:limit]
 
 
 def _toc_excerpt(text: str, *, max_chars: int = 3500) -> str:
@@ -147,7 +180,8 @@ def _sections_from_boundaries(
 
 
 def _rule_macro_structure(text: str, candidates: list[dict[str, Any]], *, language: str) -> dict[str, Any]:
-    body = [c for c in candidates if c.get("heuristic") == "heading"]
+    body_heuristics = {"heading", "content_match", "profile_pattern", "profile_builtin", "marker"}
+    body = [c for c in candidates if c.get("heuristic") in body_heuristics]
     if not body:
         return _sections_from_boundaries(
             text,
@@ -191,7 +225,7 @@ def _llm_macro_prompt(
     toc = _toc_excerpt(text)
     cand_block = "\n".join(
         f"{c['line']}: [{c.get('heuristic', '?')}] {c['text'][:120]}"
-        for c in candidates[:150]
+        for c in filter_candidates_for_llm(candidates)
     )
     system = """You segment a public-domain book into reading sections for Knowledge Hub.
 
@@ -271,16 +305,29 @@ def build_macro_structure(
         )
     candidates = scan_heading_candidates(text, language=language)
 
+    from .macro_markers import try_marker_assembly
+    from .macro_qa import detect_body_markers
+
+    markers = detect_body_markers(text)
+    marker_doc = try_marker_assembly(text, markers, language=language)
+    if marker_doc is not None:
+        marker_doc["candidate_count"] = len(candidates)
+        marker_doc["content_kind"] = marker_doc.get("content_kind") or "prose"
+        marker_doc["summary_vi"] = marker_doc.get("summary_vi") or (
+            f"Phân đoạn deterministic từ {marker_doc.get('marker_count')} marker ({marker_doc.get('division_level')})."
+        )
+        return marker_doc
+
     if use_llm and gemini_available():
         qa_model = model or ref_llm_model()
         try:
-            raw = complete_chat(
+            raw_resp = complete_chat(
                 _llm_macro_prompt(text=text, candidates=candidates, language=language, family=family),
                 model=qa_model,
                 temperature=0.1,
-                max_tokens=4096,
+                max_tokens=8192,
             )
-            parsed = parse_json_object(raw)
+            parsed = parse_json_object(raw_resp)
             sections_in = parsed.get("sections") or []
             if not isinstance(sections_in, list) or not sections_in:
                 raise ProviderError("macro LLM returned no sections")

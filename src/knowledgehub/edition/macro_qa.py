@@ -11,10 +11,12 @@ from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .llm_defaults import gemini_available, ref_llm_model
 from .macro import _toc_excerpt, scan_heading_candidates, section_source_slice
-from .toc import is_chapter_heading_line, is_toc_entry_line
+from .toc import is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
 
 CONTENTS_HEAD = re.compile(r"(?m)^[ \t]*(TABLE OF CONTENTS|CONTENTS)\s*\.?\s*$", re.I)
-BOOK_LINE = re.compile(r"^(?:BOOK|Book)\s+(?:ONE|TWO|THREE|IV|I{1,3}|IV|V|\d+)", re.I)
+TITLE_PAGE_SUBJECTS = re.compile(r"^SUBJECTS?\s*$", re.I)
+QUESTION_LINE = re.compile(r"^QUESTION\s+\d+", re.I)
+BOOK_LINE = re.compile(r"^(?:BOOK|Book)\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|[IVXLC]+|\d+)\b", re.I)
 ROMAN_SECTION = re.compile(r"^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX)\.\s*$")
 CHAPTER_LINE = re.compile(r"^CHAPTER\s+[IVXLC\d]+", re.I)
 
@@ -23,8 +25,65 @@ def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
 
 
+def extract_title_page_toc(raw: str, *, max_chars: int = 8000) -> str:
+    """PG pamphlet title-page topic list (e.g. Paine Common Sense SUBJECTS block)."""
+    lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    block: list[str] = []
+    in_subjects = False
+    for line in lines[:180]:
+        s = line.strip()
+        if TITLE_PAGE_SUBJECTS.match(s):
+            in_subjects = True
+            block = []
+            continue
+        if not in_subjects:
+            if re.match(r"^Of (?:the|Monarchy|Thoughts)\b", s, re.I) and len(s) < 120:
+                block.append(s)
+            elif re.match(r"^with concise Remarks\b", s, re.I):
+                if block:
+                    block[-1] = f"{block[-1]} {s}"
+            continue
+        if not s:
+            if len(block) >= 2:
+                break
+            continue
+        if "*** START" in s or s.startswith("***"):
+            break
+        if re.match(r"^(PHILADELPHIA|Printed|Man knows|MDCCL|Thomson)", s, re.I):
+            break
+        if len(s) < 140:
+            block.append(s)
+        if sum(len(x) + 1 for x in block) > max_chars:
+            break
+    return "\n".join(block)[:max_chars]
+
+
+def parse_title_page_entries(raw: str) -> list[dict[str, Any]]:
+    """Structured TOC entries from PG title page for PA2 content matching."""
+    toc = extract_title_page_toc(raw)
+    if not toc:
+        return []
+    entries: list[dict[str, Any]] = []
+    for index, line in enumerate(toc.split("\n"), start=1):
+        label = line.strip()
+        if not label or len(label) < 8:
+            continue
+        upper = label.upper()
+        entries.append(
+            {
+                "index": index,
+                "label": label,
+                "title": label,
+                "match_strings": [label, upper, upper.rstrip(",.")],
+                "kind": "chapter",
+            }
+        )
+    return entries
+
+
 def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
     """Full TOC block from PG raw text (before strip drops it)."""
+    title_page = extract_title_page_toc(raw, max_chars=max_chars)
     lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
     start: int | None = None
     for i, line in enumerate(lines):
@@ -42,7 +101,10 @@ def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
                 block.append(s)
             elif block and len(s) > 100:
                 break
-        return "\n".join(block)[:max_chars] if block else ""
+        inline = "\n".join(block)[:max_chars] if block else ""
+        if title_page and inline:
+            return f"{title_page}\n\n{inline}"[:max_chars]
+        return title_page or inline
 
     out: list[str] = []
     for line in lines[start : start + 200]:
@@ -70,13 +132,21 @@ def detect_body_markers(text: str) -> list[dict[str, Any]]:
         if not s:
             continue
         kind: str | None = None
-        if CHAPTER_LINE.match(s):
+        if CHAPTER_LINE.match(s) or (is_body_heading_line(s) and "CHAPTER" in s.upper()):
             kind = "chapter"
+        elif QUESTION_LINE.match(s):
+            kind = "question"
         elif ROMAN_SECTION.match(s):
             kind = "roman_section"
         elif BOOK_LINE.match(s) and len(s) < 60:
             kind = "book"
-        elif is_chapter_heading_line(s) and len(s) < 80:
+        elif is_all_caps_section_line(s):
+            if line_no == 0:
+                continue
+            if s.upper().startswith(("WITH ", "AND ")):
+                continue
+            kind = "all_caps_section"
+        elif is_body_heading_line(s) and len(s) < 80:
             kind = "heading"
         if kind:
             markers.append({"line": line_no, "kind": kind, "text": s[:100]})
@@ -92,6 +162,12 @@ def count_expected_body_divisions(markers: list[dict[str, Any]], *, prefer: str 
     if by_kind.get("chapter"):
         expected = by_kind["chapter"]
         basis = "chapter_lines"
+    elif by_kind.get("all_caps_section"):
+        expected = by_kind["all_caps_section"]
+        basis = "all_caps_sections"
+    elif by_kind.get("question"):
+        expected = by_kind["question"]
+        basis = "question_lines"
     elif by_kind.get("roman_section"):
         expected = by_kind["roman_section"]
         basis = "roman_sections"

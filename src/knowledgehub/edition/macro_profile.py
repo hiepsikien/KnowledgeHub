@@ -14,10 +14,12 @@ from .macro import (
     _rule_macro_structure,
     _sections_from_boundaries,
     _toc_excerpt,
+    filter_candidates_for_llm,
     line_map,
     scan_heading_candidates,
 )
-from .macro_qa import detect_body_markers, extract_toc_from_raw
+from .macro_markers import try_marker_assembly
+from .macro_qa import detect_body_markers, extract_toc_from_raw, parse_title_page_entries
 from .toc import is_chapter_heading_line, is_toc_entry_line
 
 ROMAN_SECTION = re.compile(
@@ -261,9 +263,11 @@ def scan_content_matches(
             norm = _normalize_heading(raw_line)
             if line_no in matched:
                 continue
-            if norm in needles or any(n == norm or (len(n) >= 6 and n in norm) for n in needles):
+            if norm in needles or any(
+                n == norm or (len(n) >= 8 and (n in norm or norm in n or norm.startswith(n[: min(24, len(n))])))
+                for n in needles
+            ):
                 if is_toc_entry_line(raw_line) and not is_chapter_heading_line(raw_line):
-                    # Skip pure TOC rows unless exact chapter heading
                     if not any(is_chapter_heading_line(n) for n in [raw_line]):
                         continue
                 row = rows[line_no]
@@ -278,6 +282,38 @@ def scan_content_matches(
                 break
 
     return sorted(matched.values(), key=lambda c: int(c["line"]))
+
+
+def _merge_toc_entries(profile: dict[str, Any], raw: str | None) -> dict[str, Any]:
+    if not raw:
+        return profile
+    existing = profile.get("toc_body_entries") or []
+    if len(existing) >= 3:
+        return profile
+    parsed = parse_title_page_entries(raw)
+    if not parsed:
+        return profile
+    seen = {_normalize_heading(str(e.get("label") or "")) for e in existing if isinstance(e, dict)}
+    merged = list(existing)
+    for entry in parsed:
+        key = _normalize_heading(str(entry.get("label") or ""))
+        if key and key not in seen:
+            merged.append(entry)
+            seen.add(key)
+    out = dict(profile)
+    out["toc_body_entries"] = merged
+    return out
+
+
+def _looks_like_verse_excerpt(text: str, markers: list[dict[str, Any]]) -> bool:
+    if markers:
+        return False
+    sample = text[:2000]
+    lines = [ln.strip() for ln in sample.split("\n") if ln.strip()]
+    if len(lines) < 8:
+        return False
+    tab_indented = sum(1 for ln in lines if ln.startswith("\t") or re.match(r"^\d+\t", ln))
+    return tab_indented >= len(lines) * 0.25
 
 
 def merge_candidates(*groups: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -364,6 +400,15 @@ def build_structure_with_profile(
     expected_body_divisions: int = 0,
 ) -> dict[str, Any]:
     """Build macro structure using an inferred heading profile."""
+    markers = detect_body_markers(text)
+    marker_doc = try_marker_assembly(text, markers, language=language)
+    if marker_doc is not None:
+        marker_doc["profile_mode"] = strategy
+        marker_doc["profile"] = _profile_summary(profile)
+        marker_doc["summary_vi"] = str(profile.get("summary_vi") or marker_doc.get("summary_vi") or "")
+        marker_doc["content_kind"] = str(profile.get("content_kind") or "prose")
+        return marker_doc
+
     ext = scan_extended_candidates(text, profile, language=language)
     content: list[dict[str, Any]] = []
     if strategy == "pa2":
@@ -396,19 +441,18 @@ def build_structure_with_profile(
     if use_llm_boundaries and gemini_available():
         qa_model = model or ref_llm_model()
         try:
-            # Chunk large candidate lists: send all if <=400 else prioritize content_match + first 300
-            send = candidates
-            if len(candidates) > 400:
-                hi = [c for c in candidates if c.get("heuristic") in {"content_match", "profile_pattern"}]
-                rest = [c for c in candidates if c not in hi][: max(0, 400 - len(hi))]
+            send = filter_candidates_for_llm(candidates)
+            if len(send) > 400:
+                hi = [c for c in send if c.get("heuristic") in {"content_match", "profile_pattern", "profile_builtin"}]
+                rest = [c for c in send if c not in hi][: max(0, 400 - len(hi))]
                 send = sorted(hi + rest, key=lambda c: int(c["line"]))
-            raw = complete_chat(
+            raw_resp = complete_chat(
                 _llm_macro_prompt(text=text, candidates=send, language=language, family=family),
                 model=qa_model,
                 temperature=0.1,
-                max_tokens=4096,
+                max_tokens=8192,
             )
-            parsed = parse_json_object(raw)
+            parsed = parse_json_object(raw_resp)
             sections_in = parsed.get("sections") or []
             if not isinstance(sections_in, list) or not sections_in:
                 raise ProviderError("boundary LLM returned no sections")
@@ -479,9 +523,20 @@ def build_macro_with_strategy(
 
     if not use_llm:
         profile = profile or {}
-    from .macro_qa import count_expected_body_divisions, detect_body_markers
+    elif strategy == "pa2":
+        profile = _merge_toc_entries(profile, raw)
 
-    expected = count_expected_body_divisions(detect_body_markers(text))
+    markers = detect_body_markers(text)
+    if strategy == "pa2" and _looks_like_verse_excerpt(text, markers):
+        profile = dict(profile)
+        profile["content_kind"] = "verse"
+        profile["toc_body_entries"] = []
+
+    # Include APPENDIX/INTRODUCTION in pamphlet marker paths (handled in markers_at_level)
+
+    from .macro_qa import count_expected_body_divisions
+
+    expected = count_expected_body_divisions(markers)
     return build_structure_with_profile(
         text,
         language=language,
