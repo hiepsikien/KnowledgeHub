@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 from typing import Any
 
@@ -10,10 +11,259 @@ from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .llm_defaults import gemini_available, ref_llm_model
 from .macro import _toc_excerpt, scan_heading_candidates, section_source_slice
+from .toc import is_chapter_heading_line, is_toc_entry_line
+
+CONTENTS_HEAD = re.compile(r"(?m)^[ \t]*(TABLE OF CONTENTS|CONTENTS)\s*\.?\s*$", re.I)
+BOOK_LINE = re.compile(r"^(?:BOOK|Book)\s+(?:ONE|TWO|THREE|IV|I{1,3}|IV|V|\d+)", re.I)
+ROMAN_SECTION = re.compile(r"^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX)\.\s*$")
+CHAPTER_LINE = re.compile(r"^CHAPTER\s+[IVXLC\d]+", re.I)
 
 
 def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
+    """Full TOC block from PG raw text (before strip drops it)."""
+    lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    start: int | None = None
+    for i, line in enumerate(lines):
+        if CONTENTS_HEAD.match(line.strip()) or line.strip().upper() == "CONTENTS":
+            start = i
+            break
+    if start is None:
+        # PG inline contents: " BOOK ONE.—..." cluster in first ~120 lines
+        block: list[str] = []
+        for i, line in enumerate(lines[:120]):
+            s = line.strip()
+            if not s:
+                continue
+            if is_toc_entry_line(s) or BOOK_LINE.match(s) or re.match(r"^[IVXLC]+\.", s):
+                block.append(s)
+            elif block and len(s) > 100:
+                break
+        return "\n".join(block)[:max_chars] if block else ""
+
+    out: list[str] = []
+    for line in lines[start : start + 200]:
+        s = line.strip()
+        if not s and len(out) > 3:
+            break
+        if start != 0 and len(out) > 8 and len(s) > 110 and not is_toc_entry_line(s):
+            break
+        if is_toc_entry_line(s) or CONTENTS_HEAD.match(s) or BOOK_LINE.match(s) or not out:
+            out.append(s)
+        elif out and (is_chapter_heading_line(s) or re.match(r"^[IVXLC]+\.", s)):
+            out.append(s)
+        elif out and len(s) > 90:
+            break
+        if sum(len(x) + 1 for x in out) > max_chars:
+            break
+    return "\n".join(out)[:max_chars]
+
+
+def detect_body_markers(text: str) -> list[dict[str, Any]]:
+    """Deterministic body division markers in stripped text (ground-truth hint)."""
+    markers: list[dict[str, Any]] = []
+    for line_no, line in enumerate(text.replace("\r\n", "\n").split("\n")):
+        s = line.strip()
+        if not s:
+            continue
+        kind: str | None = None
+        if CHAPTER_LINE.match(s):
+            kind = "chapter"
+        elif ROMAN_SECTION.match(s):
+            kind = "roman_section"
+        elif BOOK_LINE.match(s) and len(s) < 60:
+            kind = "book"
+        elif is_chapter_heading_line(s) and len(s) < 80:
+            kind = "heading"
+        if kind:
+            markers.append({"line": line_no, "kind": kind, "text": s[:100]})
+    return markers
+
+
+def count_expected_body_divisions(markers: list[dict[str, Any]], *, prefer: str = "chapter") -> dict[str, Any]:
+    """Best-effort expected body section count from markers."""
+    by_kind: dict[str, int] = {}
+    for m in markers:
+        k = m["kind"]
+        by_kind[k] = by_kind.get(k, 0) + 1
+    if by_kind.get("chapter"):
+        expected = by_kind["chapter"]
+        basis = "chapter_lines"
+    elif by_kind.get("roman_section"):
+        expected = by_kind["roman_section"]
+        basis = "roman_sections"
+    elif by_kind.get("book"):
+        expected = by_kind["book"]
+        basis = "book_lines"
+    elif by_kind.get("heading"):
+        expected = by_kind["heading"]
+        basis = "heading_lines"
+    else:
+        expected = 0
+        basis = "none"
+    return {"expected_body_divisions": expected, "basis": basis, "by_kind": by_kind, "markers": markers}
+
+
+def _body_sections(structure: dict[str, Any]) -> list[dict[str, Any]]:
+    skip = {"front_matter", "back_matter", "other"}
+    return [s for s in structure.get("sections") or [] if str(s.get("kind") or "") not in skip]
+
+
+def _all_boundary_excerpts(
+    text: str,
+    structure: dict[str, Any],
+    *,
+    before: int = 80,
+    after: int = 220,
+) -> str:
+    sections = structure.get("sections") or []
+    if not sections:
+        return "(no sections)"
+    parts: list[str] = []
+    for sec in sections:
+        start = int(sec.get("start_char") or 0)
+        lo = max(0, start - before)
+        hi = min(len(text), start + after)
+        excerpt = text[lo:hi].replace("\n", " ↵ ")
+        parts.append(
+            f"[{sec.get('section_id')}] L{sec.get('start_line')} {sec.get('kind')} "
+            f"«{str(sec.get('title') or '')[:70]}»\n  ...{excerpt}...\n  {' ' * (before if start >= lo else 0)}^"
+        )
+    return "\n".join(parts)
+
+
+def _llm_completeness_prompt(
+    *,
+    book_id: str,
+    language: str,
+    text_len: int,
+    toc_full: str,
+    structure: dict[str, Any],
+    all_boundaries: str,
+    expected: dict[str, Any],
+    marker_table: str,
+) -> list[dict[str, str]]:
+    system = """You QA whether Step-1 macro segmentation is COMPLETE and CORRECT.
+
+You receive:
+- FULL table of contents (from publisher/Gutenberg, may include all chapter titles)
+- Deterministic body markers found in stripped text (CHAPTER lines, roman I. II. III., BOOK lines)
+- The macro LLM's full section list with start lines
+- ALL boundary excerpts (^ = section start) — still NOT the full book prose
+
+Your job: decide if macro sections cover EVERY body division implied by TOC + markers.
+
+Rules:
+- front_matter / preface before first body chapter is OK as its own section
+- Do NOT count TOC lines as missing body chapters
+- If TOC lists N body chapters but macro has fewer distinct body starts → incomplete (fail)
+- If macro has extra splits inside a chapter with no heading → fail/warn
+- If TOC absent, trust CHAPTER/roman/BOOK markers in stripped text
+
+Return ONLY JSON:
+{
+  "summary_vi": "2-4 câu tiếng Việt",
+  "complete": boolean,
+  "verdict": "pass" | "warn" | "fail",
+  "score": number,
+  "toc_body_entries_estimate": number,
+  "macro_body_sections": number,
+  "missing": [{"title_or_marker": "...", "note_vi": "..."}],
+  "extra": [{"section_id": "...", "note_vi": "..."}],
+  "issues": [{"severity": "minor|major|critical", "note_vi": "..."}]
+}
+complete=true only if all TOC body chapters (or marker count) have a matching macro section start."""
+    user = f"""Book: {book_id}
+Language: {language}
+Stripped length: {text_len} chars
+
+Deterministic expected (hint): {json.dumps({k: expected[k] for k in expected if k != 'markers'}, ensure_ascii=False)}
+Marker sample:
+{marker_table}
+
+--- FULL TOC (from raw / PG) ---
+{toc_full or "(none — rely on markers)"}
+
+--- MACRO STRUCTURE (mode={structure.get('mode')}, {structure.get('section_count')} sections) ---
+content_kind: {structure.get('content_kind')}
+summary_vi: {structure.get('summary_vi', '')}
+{_section_table(structure)}
+
+--- ALL BOUNDARY EXCERPTS ---
+{all_boundaries}"""
+    return [{"role": "system", "content": system}, {"role": "user", "content": user}]
+
+
+def qa_macro_completeness(
+    text: str,
+    raw: str,
+    structure: dict[str, Any],
+    *,
+    book_id: str,
+    language: str = "en",
+    use_llm: bool = True,
+    model: str | None = None,
+) -> dict[str, Any]:
+    """Full TOC + all boundary excerpts QA for macro completeness."""
+    markers = detect_body_markers(text)
+    expected = count_expected_body_divisions(markers)
+    toc_full = extract_toc_from_raw(raw) or _toc_excerpt(text, max_chars=12000)
+    body_secs = _body_sections(structure)
+    macro_body = body_secs
+    marker_table = "\n".join(f"L{m['line']}\t{m['kind']}\t{m['text']}" for m in markers[:40])
+    if len(markers) > 40:
+        marker_table += f"\n... +{len(markers) - 40} markers"
+
+    det_complete = (
+        expected["expected_body_divisions"] > 0
+        and len(macro_body) >= expected["expected_body_divisions"]
+    )
+    out: dict[str, Any] = {
+        "book_id": book_id,
+        "text_chars": len(text),
+        "expected": expected,
+        "toc_chars": len(toc_full),
+        "macro_section_count": structure.get("section_count"),
+        "macro_body_section_count": len(body_secs),
+        "deterministic_complete": det_complete,
+        "qa_at": _now(),
+    }
+
+    if not use_llm or not gemini_available():
+        out["llm_qa"] = {"skipped": True}
+        out["complete"] = det_complete
+        return out
+
+    qa_model = model or ref_llm_model()
+    try:
+        raw_resp = complete_chat(
+            _llm_completeness_prompt(
+                book_id=book_id,
+                language=language,
+                text_len=len(text),
+                toc_full=toc_full,
+                structure=structure,
+                all_boundaries=_all_boundary_excerpts(text, structure),
+                expected=expected,
+                marker_table=marker_table,
+            ),
+            model=qa_model,
+            temperature=0.1,
+            max_tokens=4096,
+        )
+        parsed = parse_json_object(raw_resp)
+        parsed["model"] = qa_model
+        out["llm_qa"] = parsed
+        out["complete"] = bool(parsed.get("complete"))
+        out["verdict"] = parsed.get("verdict")
+    except (ProviderError, ValueError, json.JSONDecodeError) as exc:
+        out["llm_qa"] = {"error": str(exc), "model": qa_model}
+        out["complete"] = det_complete
+        out["verdict"] = "error"
+    return out
 
 
 def _section_table(structure: dict[str, Any]) -> str:
