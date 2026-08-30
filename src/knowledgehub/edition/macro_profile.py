@@ -25,7 +25,7 @@ from .toc import is_chapter_heading_line, is_toc_entry_line
 ROMAN_SECTION = re.compile(
     r"^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX|XXI|XXII|XXIII|XXIV|XXV)\.\s*$"
 )
-QUESTION_LINE = re.compile(r"^QUESTION\s+\d+", re.I)
+QUESTION_LINE = re.compile(r"^QUESTION\s+\d+\.?\s*$", re.I)
 SECT_LINE = re.compile(r"^SECT\.?\s+[IVXLC\d]+", re.I)
 LETTER_LINE = re.compile(r"^(?:Letter|LETTER)\s+(?:[IVXLC\d]+|\d+)", re.I)
 

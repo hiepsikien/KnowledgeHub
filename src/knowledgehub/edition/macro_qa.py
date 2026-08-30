@@ -11,11 +11,11 @@ from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .llm_defaults import gemini_available, ref_llm_model
 from .macro import _toc_excerpt, scan_heading_candidates, section_source_slice
-from .toc import is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
+from .toc import is_all_caps_body_section_line, is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
 
 CONTENTS_HEAD = re.compile(r"(?m)^[ \t]*(TABLE OF CONTENTS|CONTENTS)\s*\.?\s*$", re.I)
 TITLE_PAGE_SUBJECTS = re.compile(r"^SUBJECTS?\s*$", re.I)
-QUESTION_LINE = re.compile(r"^QUESTION\s+\d+", re.I)
+QUESTION_LINE = re.compile(r"^QUESTION\s+\d+\.?\s*$", re.I)
 BOOK_LINE = re.compile(r"^(?:BOOK|Book)\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|[IVXLC]+|\d+)\b", re.I)
 ROMAN_SECTION = re.compile(r"^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX)\.\s*$")
 CHAPTER_LINE = re.compile(r"^CHAPTER\s+[IVXLC\d]+", re.I)
@@ -140,7 +140,7 @@ def detect_body_markers(text: str) -> list[dict[str, Any]]:
             kind = "roman_section"
         elif BOOK_LINE.match(s) and len(s) < 60:
             kind = "book"
-        elif is_all_caps_section_line(s):
+        elif is_all_caps_body_section_line(s):
             if line_no == 0:
                 continue
             if s.upper().startswith(("WITH ", "AND ")):

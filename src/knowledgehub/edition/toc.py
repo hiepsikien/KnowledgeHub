@@ -58,6 +58,29 @@ def is_all_caps_section_line(line: str) -> bool:
     return True
 
 
+def is_all_caps_body_section_line(line: str) -> bool:
+    """Strict ALL-CAPS body section (Paine pamphlet), not biography pull quotes."""
+    s = line.strip()
+    if not is_all_caps_section_line(s):
+        return False
+    upper = s.upper()
+    if upper.startswith(("INTRODUCTION", "APPENDIX", "PREFACE", "EPILOGUE")):
+        return True
+    if re.match(r"^OF (?:THE|MONARCHY|THOUGHTS|A )", upper):
+        return True
+    if upper.startswith("THOUGHTS ON "):
+        return True
+    if s.endswith(",") and 28 <= len(s) <= 95:
+        if re.search(r"\b(I|MY|WE|OUR|ME|TO)\b", upper):
+            return False
+        return True
+    if re.search(r"\b(I|MY|WE|OUR|ME)\b", upper):
+        return False
+    if s.endswith(".") and len(s.split()) > 7 and "," not in s:
+        return False
+    return False
+
+
 def is_body_heading_line(line: str) -> bool:
     """Standalone body section start — not a TOC list duplicate."""
     s = line.strip()

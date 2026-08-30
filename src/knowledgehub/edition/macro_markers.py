@@ -35,6 +35,10 @@ def resolve_division_level(markers: list[dict[str, Any]]) -> str:
 
     if chapters >= MIN_MARKER_COUNT:
         return "chapter"
+    if chapters >= 2 and chapters >= caps:
+        return "chapter"
+    if chapters >= 2 and caps > chapters * 5:
+        return "chapter"
     if questions >= 3:
         return "question"
     if books >= 2 and books >= max(romans, caps, sections):
@@ -90,6 +94,8 @@ def should_use_marker_assembly(markers: list[dict[str, Any]], *, level: str | No
         return len(selected) >= 2
     if level == "book":
         return len(selected) >= 2
+    if level in {"chapter", "question"}:
+        return len(selected) >= 3
     return len(selected) >= MIN_MARKER_COUNT
 
 

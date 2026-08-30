@@ -39,9 +39,12 @@ def select_books(
     langs: list[str],
     limit: int,
     vi_all: bool,
+    en_only: bool = False,
 ) -> list[dict]:
     vi = [by_id[k] for k in sorted(by_id) if by_id[k].get("language") in langs and by_id[k].get("language") == "vi"]
     en = [by_id[k] for k in sorted(by_id) if by_id[k].get("language") == "en"]
+    if en_only:
+        return en[:limit]
     if vi_all:
         picked = list(vi)
         need_en = max(0, limit - len(picked))
@@ -155,6 +158,7 @@ def save_report(path: Path, results: list[dict], errors: list[dict]) -> None:
         "llm_qa_pass": sum(1 for r in results if r.get("qa_verdict") == "pass"),
         "llm_qa_warn": sum(1 for r in results if r.get("qa_verdict") == "warn"),
         "llm_qa_fail": sum(1 for r in results if r.get("qa_verdict") == "fail"),
+        "llm_qa_error": sum(1 for r in results if r.get("qa_verdict") == "error"),
         "qa_complete_true": sum(1 for r in results if r.get("qa_complete")),
         "det_complete": sum(1 for r in results if r.get("deterministic_complete")),
         "mode_markers": sum(1 for r in results if r.get("llm_mode") == "markers"),
@@ -175,13 +179,14 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=FIXTURES / "ref_corpus" / "macro_batch_50_report.json")
     parser.add_argument("--sleep", type=float, default=1.0)
     parser.add_argument("--skip-qa", action="store_true")
+    parser.add_argument("--en-only", action="store_true", help="EN full PG/fixtures only (no VI)")
     parser.add_argument("--start", type=int, default=0, help="resume offset")
     args = parser.parse_args()
 
     langs = [x.strip() for x in args.langs.split(",") if x.strip()]
     corpora = [x.strip() for x in args.corpora.split(",") if x.strip()]
     by_id = load_manifests(*corpora)
-    books = select_books(by_id, langs=langs, limit=args.limit, vi_all=True)
+    books = select_books(by_id, langs=langs, limit=args.limit, vi_all=not args.en_only, en_only=args.en_only)
 
     results: list[dict] = []
     errors: list[dict] = []
