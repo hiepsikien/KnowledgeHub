@@ -244,11 +244,31 @@ def build_macro_structure(
     work: dict[str, Any] | None = None,
     use_llm: bool = True,
     model: str | None = None,
+    strategy: str = "baseline",
+    raw: str | None = None,
 ) -> dict[str, Any]:
-    """Step 1 — section boundaries on stripped source text (one LLM call, no block parse)."""
+    """Step 1 — section boundaries on stripped source text (one LLM call, no block parse).
+
+    strategy: baseline (legacy) | pa1 (LLM heading patterns) | pa2 (patterns + TOC content match)
+    raw: optional unstripped source for TOC extraction (required for best pa1/pa2 results).
+    """
     if not text.strip():
         raise ValueError("empty text for macro structure")
     family = family or detect_family(text, work=work, language=language)
+    if strategy not in {"baseline", "pa1", "pa2"}:
+        raise ValueError(f"unknown macro strategy: {strategy}")
+    if strategy in {"pa1", "pa2"}:
+        from .macro_profile import build_macro_with_strategy
+
+        return build_macro_with_strategy(
+            text,
+            raw,
+            language=language,
+            family=family,
+            strategy=strategy,
+            use_llm=use_llm,
+            model=model,
+        )
     candidates = scan_heading_candidates(text, language=language)
 
     if use_llm and gemini_available():
