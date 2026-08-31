@@ -28,6 +28,7 @@ SECTION_KINDS = frozenset(
         "epilogue",
         "appendix",
         "back_matter",
+        "notes",
         "other",
     }
 )

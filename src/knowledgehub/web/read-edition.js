@@ -10,6 +10,7 @@
     status: null,
     selected: new Set(),
     editIndex: null,
+    review: null,
   };
 
   async function api(path, opts = {}) {
@@ -158,7 +159,15 @@
     };
   }
 
-  function microBadge(row) {
+  function flagBadges(flags) {
+    return (flags || [])
+      .map((f) => `<span class="re-flag re-flag-${escapeHtml(f)}">${escapeHtml(f.replace("_", " "))}</span>`)
+      .join("");
+  }
+
+  function reviewRow(chapterId) {
+    return (state.review?.sections || []).find((s) => s.section_id === chapterId) || null;
+  }
     const st = row.micro_status || "pending";
     return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "parsed" : st)}</span>`;
   }
@@ -181,6 +190,7 @@
               <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
               ${microBadge(row)}
               ${qaBadge(row)}
+              ${flagBadges(reviewRow(row.chapter_id)?.flags)}
               <span class="muted">${(row.word_count || 0).toLocaleString()} từ</span>
             </button>
           </div>`,
@@ -233,6 +243,8 @@
       }
       fillEditorForSelection();
       $("re-edit-json")?.closest("details")?.toggleAttribute("open", parsed);
+      renderStructTools(chapter);
+      renderCompare(chapter);
     } catch (err) {
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
@@ -282,7 +294,159 @@
     const parsed = status.chapters_parsed || 0;
     const total = status.chapters_total || 0;
     const summary = status.manifest?.macro_summary_vi || status.structure?.summary_vi || "";
-    return `Macro (${mode}): ${total} phần · đã parse ${parsed}/${total}${summary ? " · " + summary.slice(0, 80) : ""}${llmNote}`;
+    const toc = state.review?.toc_candidate?.status;
+    const tocNote = toc ? ` · TOC ${toc}` : " · chưa confirm TOC";
+    return `Macro (${mode}): ${total} phần · đã parse ${parsed}/${total}${summary ? " · " + summary.slice(0, 80) : ""}${tocNote}${llmNote}`;
+  }
+
+  function renderTocPanel(review) {
+    const box = $("re-toc");
+    if (!box) return;
+    if (!review) {
+      box.hidden = true;
+      return;
+    }
+    box.hidden = false;
+    const toc = review.toc_candidate || {};
+    const loc = toc.location && toc.location !== "none" ? toc.location : "không thấy";
+    const src = toc.source || "none";
+    $("re-toc-meta").textContent = `${toc.line_count || 0} dòng · ${src} · ${loc}`;
+    $("re-toc-excerpt").textContent = toc.excerpt || "(không tìm thấy mục lục — chọn «Không có TOC» nếu đúng)";
+    const status = toc.status;
+    const banner = $("re-toc-banner");
+    if (status === "yes") banner.textContent = "Đã xác nhận: đây là mục lục.";
+    else if (status === "no") banner.textContent = "Đã ghi: đoạn này không phải mục lục.";
+    else if (status === "none") banner.textContent = "Đã ghi: sách không có mục lục.";
+    else banner.textContent = "Đây có phải mục lục của sách không?";
+  }
+
+  function renderHealth(review) {
+    const el = $("re-health");
+    if (!el) return;
+    if (!review) {
+      el.hidden = true;
+      return;
+    }
+    const h = review.health || {};
+    const cov = review.coverage || {};
+    const bits = [
+      `short ${h.short || 0}`,
+      `super ${h.super || 0}`,
+      `inner ${h.inner_heads || 0}`,
+      `toc miss ${h.toc_miss || 0}`,
+    ];
+    if (!cov.complete) bits.push(`orphan ${(cov.orphan_chars || 0).toLocaleString()} chữ`);
+    if (!h.toc_answered) bits.push("chưa confirm TOC");
+    if (h.ready_to_parse) bits.push("sẵn sàng parse");
+    el.hidden = false;
+    el.textContent = bits.join(" · ");
+  }
+
+  function applyReview(review) {
+    state.review = review;
+    if (review?.manifest) state.manifest = review.manifest;
+    renderTocPanel(review);
+    renderHealth(review);
+    if (state.manifest) renderChapterList(state.manifest);
+  }
+
+  async function loadReview() {
+    if (!state.workId) return null;
+    try {
+      const review = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/review`);
+      applyReview(review);
+      return review;
+    } catch {
+      applyReview(null);
+      return null;
+    }
+  }
+
+  function renderStructTools(chapter) {
+    const bar = $("re-struct-tools");
+    if (!bar) return;
+    const hasMacro = !!(state.review || state.status?.macro_complete);
+    bar.hidden = !hasMacro;
+    const kind = $("re-kind");
+    if (kind && chapter?.kind) kind.value = chapter.kind;
+  }
+
+  function renderCompare(chapter) {
+    const box = $("re-compare");
+    if (!box) return;
+    const compare = chapter?.compare || reviewRow(chapter?.chapter_id)?.compare;
+    const inner = chapter?.inner_heads || reviewRow(chapter?.chapter_id)?.inner_heads || [];
+    const match = chapter?.toc_match || reviewRow(chapter?.chapter_id)?.toc_match;
+    if (!compare && !inner.length && !match) {
+      box.hidden = true;
+      box.innerHTML = "";
+      return;
+    }
+    const panes = [];
+    if (compare?.prev_tail) {
+      panes.push(`<div class="re-compare-pane"><h3>Cuối section trước</h3><pre>${escapeHtml(compare.prev_tail)}</pre></div>`);
+    }
+    if (compare?.this_head) {
+      panes.push(`<div class="re-compare-pane"><h3>Đầu section này</h3><pre>${escapeHtml(compare.this_head)}</pre></div>`);
+    }
+    if (compare?.this_tail) {
+      panes.push(`<div class="re-compare-pane"><h3>Cuối section này</h3><pre>${escapeHtml(compare.this_tail)}</pre></div>`);
+    }
+    if (compare?.next_head) {
+      panes.push(`<div class="re-compare-pane"><h3>Đầu section sau</h3><pre>${escapeHtml(compare.next_head)}</pre></div>`);
+    }
+    if (match?.label) {
+      panes.push(`<div class="re-compare-pane"><h3>Khớp TOC</h3><p>${escapeHtml(match.label)}</p></div>`);
+    }
+    if (inner.length) {
+      const rows = inner
+        .map(
+          (h) =>
+            `<button type="button" class="btn ghost" data-split-line="${h.line}">Tách tại L${h.line}: ${escapeHtml(h.text)}</button>`,
+        )
+        .join("");
+      panes.push(
+        `<div class="re-compare-pane"><h3>Heading lồng (${inner.length}) — bấm để tách super-chapter</h3><div class="re-inner-heads">${rows}</div></div>`,
+      );
+    }
+    box.hidden = !panes.length;
+    box.innerHTML = panes.join("");
+    box.onclick = (e) => {
+      const btn = e.target.closest("[data-split-line]");
+      if (!btn) return;
+      void applyStructureEdit("split_at", { start_line: Number(btn.dataset.splitLine) });
+    };
+  }
+
+  async function applyStructureEdit(action, extra = {}) {
+    if (!state.workId || !state.chapterId) return;
+    try {
+      const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/structure/edit`, {
+        method: "POST",
+        body: { action, section_id: state.chapterId, ...extra },
+      });
+      applyReview(result);
+      const focus = result.focused_section_id || (result.structure?.sections || [])[0]?.section_id;
+      toast(action === "confirm" ? "Đã xác nhận section" : "Đã sửa ranh");
+      if (focus) await selectChapter(focus);
+    } catch (err) {
+      toast(err.message);
+    }
+  }
+
+  async function confirmToc(status) {
+    if (!state.workId) return;
+    try {
+      const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/toc`, {
+        method: "POST",
+        body: { status },
+      });
+      applyReview(result);
+      toast(status === "yes" ? "Đã xác nhận TOC" : status === "none" ? "Không có TOC" : "Không phải TOC");
+      if (state.chapterId) await selectChapter(state.chapterId);
+    } catch (err) {
+      toast(err.message);
+    }
   }
 
   async function loadReadEditionPage(workId) {
@@ -307,12 +471,17 @@
       $("re-status").textContent = formatStatus(status);
       if (status.macro_complete && status.manifest) {
         state.manifest = status.manifest;
+        await loadReview();
+        $("re-status").textContent = formatStatus(status);
         renderChapterList(state.manifest);
         const first = (state.manifest.chapters || [])[0];
         if (first) await selectChapter(first.chapter_id);
       } else {
+        applyReview(null);
         $("re-chapters").innerHTML = `<p class="muted">Chạy «Bước 1: Phân đoạn» để liệt kê chương.</p>`;
         $("re-body").innerHTML = "";
+        if ($("re-compare")) $("re-compare").hidden = true;
+        if ($("re-struct-tools")) $("re-struct-tools").hidden = true;
       }
     } catch (err) {
       $("re-status").textContent = err.message;
@@ -372,6 +541,39 @@
         toast(errCount ? `Xong ${result.count}, lỗi ${errCount}` : `Parse xong ${result.count} chương`);
         const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
         state.status = status;
+        await loadReview();
+        $("re-status").textContent = formatStatus(status);
+        await refreshManifest();
+        if (state.chapterId) await selectChapter(state.chapterId);
+      } catch (err) {
+        toast(err.message);
+      }
+    });
+
+    $("re-parse-ready")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      const health = state.review?.health || {};
+      if (!health.ready_to_parse) {
+        toast("Còn TOC chưa confirm hoặc section short/super chưa xử lý — vẫn parse hết pending");
+      }
+      const ids = (state.manifest?.chapters || [])
+        .filter((row) => row.micro_status !== "complete")
+        .map((row) => row.chapter_id);
+      if (!ids.length) {
+        toast("Không còn chương pending");
+        return;
+      }
+      toast(`Đang parse ${ids.length} chương…`);
+      try {
+        const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/parse`, {
+          method: "POST",
+          body: { chapter_ids: ids, use_llm: useLlmRelabel() },
+        });
+        const errCount = Object.keys(result.errors || {}).length;
+        toast(errCount ? `Xong ${result.count}, lỗi ${errCount}` : `Parse xong ${result.count} chương`);
+        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
+        state.status = status;
+        await loadReview();
         $("re-status").textContent = formatStatus(status);
         await refreshManifest();
         if (state.chapterId) await selectChapter(state.chapterId);
@@ -387,6 +589,18 @@
         else state.selected.delete(row.chapter_id);
       }
       renderChapterList(state.manifest);
+    });
+
+    $("re-toc-yes")?.addEventListener("click", () => void confirmToc("yes"));
+    $("re-toc-no")?.addEventListener("click", () => void confirmToc("no"));
+    $("re-toc-none")?.addEventListener("click", () => void confirmToc("none"));
+    $("re-merge-prev")?.addEventListener("click", () => void applyStructureEdit("merge_prev"));
+    $("re-merge-next")?.addEventListener("click", () => void applyStructureEdit("merge_next"));
+    $("re-drop-start")?.addEventListener("click", () => void applyStructureEdit("drop_start"));
+    $("re-confirm-sec")?.addEventListener("click", () => void applyStructureEdit("confirm"));
+    $("re-kind")?.addEventListener("change", (e) => {
+      const kind = e.target.value;
+      if (kind) void applyStructureEdit("set_kind", { kind });
     });
 
     $("re-qa-ch")?.addEventListener("click", async () => {
@@ -496,6 +710,7 @@
       $("view-read-edition").hidden = false;
       $("re-pick").hidden = false;
       $("re-desk").hidden = true;
+      applyReview(null);
       $("re-heading").textContent = "Read Edition";
       $("re-status").textContent = "Chọn tác phẩm có file raw";
       const works = await api("/api/works");

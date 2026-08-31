@@ -628,6 +628,65 @@ mark.ann-context {
 .re-preview { font-size: 13px; max-height: 840px; overflow: auto; background: #faf8f5; padding: 12px; border-radius: 6px; }
 .re-preview pre { margin: 0; white-space: pre-wrap; font: inherit; }
 .re-preview .preview-gap { margin: 10px 0; padding: 10px 0; }
+.re-toc {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 0 0 12px;
+}
+.re-toc-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 8px; }
+.re-toc-excerpt {
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-size: 12px;
+  background: #faf8f5;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 0 0 8px;
+}
+.re-toc-banner { margin: 0 0 8px; font-size: 13px; }
+.re-toc-actions { gap: 8px; }
+.re-health { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+.re-flag {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-right: 4px;
+}
+.re-flag-short { background: #fde7c7; color: #8a4b08; }
+.re-flag-super { background: #f8d0d0; color: #8a1f1f; }
+.re-flag-inner_heads { background: #e4eaf8; color: #243e80; }
+.re-flag-toc_miss { background: #eee; color: #555; }
+.re-flag-toc_hit { background: #d8f0d8; color: #1b6b1b; }
+.re-struct-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.re-kind-label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.re-compare {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+.re-compare-pane {
+  background: #faf8f5;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.re-compare-pane h3 { margin: 0 0 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.re-compare-pane pre { margin: 0; white-space: pre-wrap; font-size: 12px; }
+.re-inner-heads { display: flex; flex-direction: column; gap: 4px; }
+.re-inner-heads button { text-align: left; font-size: 12px; }
 .re-ch-title { font-weight: 600; font-size: 13px; }
 .re-main {
   background: var(--card);

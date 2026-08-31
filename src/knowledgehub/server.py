@@ -26,8 +26,11 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_edition_service import (
+    confirm_toc as confirm_read_edition_toc,
+    edit_structure as edit_read_edition_structure,
     get_chapter as get_read_edition_chapter,
     get_manifest as get_read_edition_manifest,
+    get_review as get_read_edition_review,
     get_status as get_read_edition_status,
     get_structure as get_read_edition_structure,
     parse_micro as parse_read_edition_micro,
@@ -165,6 +168,17 @@ class ReadEditionPatchBody(BaseModel):
 class ReadEditionQaBody(BaseModel):
     chapter_id: str | None = None
     use_llm: bool = True
+
+
+class ReadEditionTocBody(BaseModel):
+    status: str
+
+
+class ReadEditionStructureEditBody(BaseModel):
+    action: str
+    section_id: str
+    start_line: int | None = None
+    kind: str | None = None
 
 
 class SyncRefChaptersBody(BaseModel):
@@ -310,6 +324,39 @@ def create_app() -> FastAPI:
     def read_edition_structure(work_id: str) -> dict[str, Any]:
         try:
             return {"structure": get_read_edition_structure(work_id)}
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/review", dependencies=guard)
+    def read_edition_review(work_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_review(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/toc", dependencies=guard)
+    def read_edition_toc(work_id: str, payload: ReadEditionTocBody) -> dict[str, Any]:
+        try:
+            return confirm_read_edition_toc(work_id, payload.status)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/structure/edit", dependencies=guard)
+    def read_edition_structure_edit(work_id: str, payload: ReadEditionStructureEditBody) -> dict[str, Any]:
+        try:
+            return edit_read_edition_structure(
+                work_id,
+                action=payload.action,
+                section_id=payload.section_id,
+                start_line=payload.start_line,
+                kind=payload.kind,
+            )
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:

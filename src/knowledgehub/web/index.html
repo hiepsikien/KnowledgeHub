@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=re-preview-ht" />
+    <link rel="stylesheet" href="/styles.css?v=read-edition-hitl" />
   </head>
   <body>
     <div class="shell">
@@ -130,6 +130,7 @@
               <button type="button" class="btn primary" id="re-macro">Bước 1: Phân đoạn</button>
               <button type="button" class="btn ghost" id="re-parse-ch">Parse REF chương</button>
               <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
+              <button type="button" class="btn primary" id="re-parse-ready">Cấu trúc OK — parse REF</button>
               <button type="button" class="btn" id="re-publish">Publish Read</button>
             </div>
           </header>
@@ -142,6 +143,20 @@
               </table>
             </div>
           </section>
+          <section id="re-toc" class="re-toc" hidden>
+            <header class="re-toc-head">
+              <strong>Mục lục đề xuất</strong>
+              <span class="muted" id="re-toc-meta"></span>
+            </header>
+            <pre class="re-toc-excerpt" id="re-toc-excerpt"></pre>
+            <p class="re-toc-banner" id="re-toc-banner">Đây có phải mục lục của sách không?</p>
+            <div class="row re-toc-actions">
+              <button type="button" class="btn" id="re-toc-yes">Đúng TOC</button>
+              <button type="button" class="btn ghost" id="re-toc-no">Không phải</button>
+              <button type="button" class="btn ghost" id="re-toc-none">Không có TOC</button>
+            </div>
+          </section>
+          <p class="re-health" id="re-health" hidden></p>
           <div id="re-desk" class="re-layout">
             <aside class="re-sidebar-wrap">
               <div class="re-sidebar-head">
@@ -158,6 +173,23 @@
                 </div>
                 <button type="button" class="btn ghost" id="re-qa-ch">QA chương</button>
               </header>
+              <div id="re-struct-tools" class="re-struct-tools" hidden>
+                <button type="button" class="btn ghost" id="re-merge-prev">Gộp với trước</button>
+                <button type="button" class="btn ghost" id="re-merge-next">Gộp với sau</button>
+                <button type="button" class="btn ghost" id="re-drop-start">Bỏ start giả</button>
+                <label class="re-kind-label">Kind
+                  <select id="re-kind">
+                    <option value="front_matter">front_matter</option>
+                    <option value="chapter">chapter</option>
+                    <option value="part">part</option>
+                    <option value="book">book</option>
+                    <option value="notes">notes</option>
+                    <option value="other">other</option>
+                  </select>
+                </label>
+                <button type="button" class="btn" id="re-confirm-sec">Xác nhận section</button>
+              </div>
+              <div id="re-compare" class="re-compare" hidden></div>
               <article class="re-render" id="re-body"></article>
               <div class="re-qa-panel" id="re-qa-panel" hidden></div>
               <details class="re-edit">
@@ -409,7 +441,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=read-edition-2"></script>
-    <script src="/read-edition.js?v=re-preview-ht"></script>
+    <script src="/app.js?v=read-edition-hitl"></script>
+    <script src="/read-edition.js?v=read-edition-hitl"></script>
   </body>
 </html>

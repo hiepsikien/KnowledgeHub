@@ -21,9 +21,12 @@ from .edition.read_edition import (
 from .edition.read_edition_steps import (
     ReadEditionStepError,
     assemble_edition_from_package,
+    confirm_toc_step,
+    edit_structure_step,
     load_structure,
     parse_micro_chapter,
     resolve_stripped_source,
+    review_structure_step,
     run_macro_step,
     section_source_slice,
 )
@@ -143,6 +146,42 @@ def get_structure(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]
         raise _map_error(exc) from exc
 
 
+def get_review(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return review_structure_step(work_id, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def confirm_toc(work_id: str, status: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return confirm_toc_step(work_id, status, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def edit_structure(
+    work_id: str,
+    *,
+    action: str,
+    section_id: str,
+    start_line: int | None = None,
+    kind: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return edit_structure_step(
+            work_id,
+            action=action,
+            section_id=section_id,
+            start_line=start_line,
+            kind=kind,
+            corpus=corpus,
+        )
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
 def get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
     try:
         return _get_chapter(work_id, chapter_id, corpus=corpus)
@@ -176,10 +215,41 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
             "blocks": [],
             "reading_markdown": "",
         }
+        try:
+            review = review_structure_step(work_id, corpus=root)
+            diag = next(
+                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
+                None,
+            )
+            if diag:
+                chapter["flags"] = diag.get("flags") or []
+                chapter["inner_heads"] = diag.get("inner_heads") or []
+                chapter["toc_match"] = diag.get("toc_match")
+                chapter["compare"] = diag.get("compare") or {}
+                chapter["confirmed"] = bool(diag.get("confirmed"))
+                chapter["char_share"] = diag.get("char_share")
+        except ReadEditionStepError:
+            pass
     qa = (load_qa_report(package_dir).get("chapters") or {}).get(chapter_id)
     overrides = load_overrides(package_dir).get(chapter_id)
     chapter["qa"] = qa
     chapter["overrides"] = overrides
+    if "flags" not in chapter:
+        try:
+            review = review_structure_step(work_id, corpus=root)
+            diag = next(
+                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
+                None,
+            )
+            if diag:
+                chapter["flags"] = diag.get("flags") or []
+                chapter["inner_heads"] = diag.get("inner_heads") or []
+                chapter["toc_match"] = diag.get("toc_match")
+                chapter["compare"] = diag.get("compare") or {}
+                chapter["confirmed"] = bool(diag.get("confirmed"))
+                chapter["char_share"] = diag.get("char_share")
+        except ReadEditionStepError:
+            pass
     return chapter
 
 

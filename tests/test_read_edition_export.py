@@ -14,7 +14,7 @@ from knowledgehub.edition.read_edition import (
 )
 from knowledgehub.edition.read_edition_steps import parse_micro_chapter, run_macro_step
 from knowledgehub.edition.ref import build_read_edition
-from knowledgehub.read_edition_service import edition_for_publish, head_tail_preview
+from knowledgehub.read_edition_service import confirm_toc, edition_for_publish, get_review, head_tail_preview
 from knowledgehub.server import create_app
 from test_catalog import _mini_corpus
 
@@ -133,6 +133,16 @@ def test_read_edition_api(client):
     assert qa.status_code == 200
     assert "passed" in qa.json()
 
+    review = client.get(f"/api/works/{wid}/read-edition/review")
+    assert review.status_code == 200
+    payload = review.json()
+    assert "toc_candidate" in payload
+    assert "health" in payload
+    assert "coverage" in payload
+    toc = client.post(f"/api/works/{wid}/read-edition/toc", json={"status": "none"})
+    assert toc.status_code == 200
+    assert toc.json()["toc_candidate"]["status"] == "none"
+
 
 def test_publish_rejects_incomplete_edition(tmp_path, monkeypatch):
     corpus = tmp_path / "corpus"
@@ -202,6 +212,73 @@ def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload.get("_normalize", {}).get("read_edition")
+
+
+def _grotius_corpus(tmp_path, monkeypatch):
+    corpus = tmp_path / "corpus"
+    raw_dir = corpus / "sources/grotius/raw"
+    raw_dir.mkdir(parents=True)
+    (raw_dir / "freedom_of_the_seas.txt").write_text(FIXTURE.read_text(encoding="utf-8"), encoding="utf-8")
+    catalog = corpus / "catalog"
+    catalog.mkdir()
+    works = [
+        {
+            "id": "grotius--freedom_of_the_seas",
+            "title": "The Freedom of the Seas",
+            "author_id": "grotius",
+            "language": "en",
+            "license": "public_domain_usa_gutenberg",
+            "content_file": "sources/grotius/raw/freedom_of_the_seas.txt",
+            "content_hash": "deadbeef01",
+            "rights": {"consumers": {"read": "allowed"}},
+        }
+    ]
+    (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
+    (catalog / "authors.json").write_text(json.dumps([{"id": "grotius", "name": "Grotius"}]), encoding="utf-8")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    return corpus
+
+
+def test_structure_hitl_edit_prunes_stale_chapter_json(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    from knowledgehub.edition.read_edition_steps import edit_structure_step
+    from knowledgehub.read_edition_service import get_review
+
+    result = run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
+    chapters = result["manifest"]["chapters"]
+    assert len(chapters) >= 2
+    first_id = chapters[0]["chapter_id"]
+    second_id = chapters[1]["chapter_id"]
+    parse_micro_chapter("grotius--freedom_of_the_seas", first_id, corpus=corpus, use_llm=False)
+    parse_micro_chapter("grotius--freedom_of_the_seas", second_id, corpus=corpus, use_llm=False)
+    package_dir = corpus / result["package_dir"]
+    assert (package_dir / "chapters" / f"{second_id}.json").is_file()
+
+    review = get_review("grotius--freedom_of_the_seas", corpus=corpus)
+    assert "toc_candidate" in review
+    assert review["coverage"]["complete"] is True
+
+    edited = edit_structure_step(
+        "grotius--freedom_of_the_seas",
+        action="merge_prev",
+        section_id=second_id,
+        corpus=corpus,
+    )
+    assert edited["structure"]["section_count"] == result["structure"]["section_count"] - 1
+    assert not (package_dir / "chapters" / f"{second_id}.json").is_file()
+    remaining = list((package_dir / "chapters").glob("*.json"))
+    assert remaining == [] or all(
+        row.get("micro_status") != "complete"
+        for row in edited["manifest"]["chapters"]
+    )
+    for row in edited["manifest"]["chapters"]:
+        assert row.get("micro_status") == "pending"
+
+    toc = confirm_toc("grotius--freedom_of_the_seas", "yes", corpus=corpus)
+    assert toc["toc_candidate"]["status"] == "yes"
 
 
 def test_head_tail_preview_short_text_is_full():
