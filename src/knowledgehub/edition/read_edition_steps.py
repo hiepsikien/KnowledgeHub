@@ -151,6 +151,36 @@ def _prune_stale_chapter_files(package_dir: Path, manifest: dict[str, Any]) -> N
             path.unlink(missing_ok=True)
 
 
+def _sync_chapter_json_metadata(package_dir: Path, structure: dict[str, Any]) -> None:
+    """Keep parsed chapter JSON kind/title in sync with structure (set_kind does not reparse)."""
+    chapters_dir = package_dir / "chapters"
+    if not chapters_dir.is_dir():
+        return
+    for sec in structure.get("sections") or []:
+        sid = str(sec.get("section_id") or "")
+        if not sid:
+            continue
+        path = chapters_dir / f"{sid}.json"
+        if not path.is_file():
+            continue
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        kind = sec.get("kind")
+        title = sec.get("title")
+        subtitle = sec.get("subtitle")
+        changed = False
+        if kind is not None and doc.get("kind") != kind:
+            doc["kind"] = kind
+            changed = True
+        if title is not None and doc.get("title") != title:
+            doc["title"] = title
+            changed = True
+        if doc.get("subtitle") != subtitle:
+            doc["subtitle"] = subtitle
+            changed = True
+        if changed:
+            path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def persist_package_structure(
     work_id: str,
     structure: dict[str, Any],
@@ -198,6 +228,8 @@ def persist_package_structure(
         encoding="utf-8",
     )
     _prune_stale_chapter_files(package_dir, manifest)
+    if not reset_micro:
+        _sync_chapter_json_metadata(package_dir, structure)
     (package_dir / "chapters").mkdir(exist_ok=True)
     (package_dir / "qa").mkdir(exist_ok=True)
     return {
@@ -323,11 +355,14 @@ def confirm_layout_step(work_id: str, *, corpus: Path | None = None) -> dict[str
 
 
 def ensure_ready_to_parse(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
-    """Raise if HITL review is not ready for REF parse. Returns the review payload."""
+    """Raise unless diagnostics are clean and curator stamped Cấu trúc OK."""
     review = review_structure_step(work_id, corpus=corpus)
-    if not (review.get("health") or {}).get("ready_to_parse"):
+    health = review.get("health") or {}
+    if not health.get("can_parse"):
         raise ReadEditionStepError(
-            (review.get("health") or {}).get("not_ready_reason") or "Structure not ready to parse"
+            health.get("parse_block_reason")
+            or health.get("not_ready_reason")
+            or "Confirm layout (Cấu trúc OK) before parse"
         )
     return review
 

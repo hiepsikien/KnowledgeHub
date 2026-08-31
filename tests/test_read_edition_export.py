@@ -136,6 +136,9 @@ def test_read_edition_api(client):
             json={"action": "confirm", "section_id": sid},
         )
         assert confirmed.status_code == 200
+    blocked = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
+    assert blocked.status_code == 400
+    assert "cấu trúc ok" in str(blocked.json()["detail"]).lower()
     layout = client.post(f"/api/works/{wid}/read-edition/layout")
     assert layout.status_code == 200
     assert layout.json()["health"]["layout_ok"] is True

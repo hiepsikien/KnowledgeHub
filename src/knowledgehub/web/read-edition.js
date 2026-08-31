@@ -180,8 +180,12 @@
 
   function assertReadyToParse() {
     const health = state.review?.health || {};
-    if (health.ready_to_parse) return true;
-    toast(health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý");
+    if (health.can_parse || (health.layout_ok && health.ready_to_parse)) return true;
+    if (health.ready_to_parse && !health.layout_ok) {
+      toast("Bấm «Cấu trúc OK» trước khi parse REF");
+      return false;
+    }
+    toast(health.parse_block_reason || health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý");
     return false;
   }
 

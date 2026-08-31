@@ -343,6 +343,14 @@ def build_review(
     toc_answered = toc_status in {"yes", "no", "none"}
     layout_ok = bool(hitl.get("layout_ok"))
     ready = bool(toc_answered and not untreated and coverage.get("complete"))
+    diag_reason = None if ready else structure_not_ready_reason(toc_answered, untreated, coverage)
+    can_parse = bool(ready and layout_ok)
+    if can_parse:
+        parse_reason = None
+    elif not ready:
+        parse_reason = diag_reason
+    else:
+        parse_reason = "Confirm layout (Cấu trúc OK) before parse"
     return {
         "toc_candidate": toc,
         "coverage": coverage,
@@ -356,7 +364,9 @@ def build_review(
             "toc_answered": toc_answered,
             "layout_ok": layout_ok,
             "ready_to_parse": ready,
-            "not_ready_reason": None if ready else structure_not_ready_reason(toc_answered, untreated, coverage),
+            "can_parse": can_parse,
+            "not_ready_reason": diag_reason,
+            "parse_block_reason": parse_reason,
         },
         "hitl": {**hitl, "toc": toc},
     }

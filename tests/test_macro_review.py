@@ -201,6 +201,7 @@ def test_build_review_flags_short_and_inner():
     assert "toc_hit" in by_title["CHAPTER I"]["flags"]
     assert review["coverage"]["complete"] is True
     assert review["health"]["ready_to_parse"] is False
+    assert review["health"]["can_parse"] is False
     assert "unconfirmed" in (review["health"]["not_ready_reason"] or "")
 
 
@@ -266,6 +267,7 @@ def test_set_kind_keeps_parsed_chapter_json(tmp_path, monkeypatch):
     assert row["kind"] == "preface"
     after = json.loads(ch_path.read_text(encoding="utf-8"))
     assert after["blocks"] == before["blocks"]
+    assert after["kind"] == "preface"
 
 
 def test_parse_requires_hitl_ready(tmp_path, monkeypatch):
@@ -275,9 +277,12 @@ def test_parse_requires_hitl_ready(tmp_path, monkeypatch):
     with pytest.raises(ReadEditionStepError, match="not ready"):
         parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
     _make_ready("grotius--freedom_of_the_seas", corpus)
+    with pytest.raises(ReadEditionStepError, match="Cấu trúc OK"):
+        parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
     layout = confirm_layout_step("grotius--freedom_of_the_seas", corpus=corpus)
     assert layout["health"]["layout_ok"] is True
     assert layout["health"]["ready_to_parse"] is True
+    assert layout["health"]["can_parse"] is True
     chapter = parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
     assert chapter["micro_status"] == "complete"
 
