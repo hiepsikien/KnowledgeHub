@@ -14,6 +14,7 @@ src/*.egg-info/
 corpus/sources/*/raw/
 corpus/sources/*/chunks/
 corpus/editions/
+corpus/read-editions/
 corpus/.translation-jobs.json
 .translation-jobs.json
 

@@ -35,6 +35,6 @@ Translation projects (pilot): `corpus/translations/<source_work_id>/`. Promote a
 
 Think may still set `KNOWLEDGEHUB_CORPUS` and ingest `sources/` into RAG chunks. That does not update `catalog/`.
 
-## Do not commit `raw/`
+## Do not commit `raw/` or generated editions
 
-Public GitHub = metadata only.
+Public GitHub = metadata only. Generated Read Edition packages live under `corpus/read-editions/` and are gitignored (same as `corpus/editions/`).
