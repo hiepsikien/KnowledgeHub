@@ -1,0 +1,381 @@
+{
+  "books": 10,
+  "errors": [],
+  "summary": {
+    "llm_better_than_rule_count": 9,
+    "recommend_llm_count": 9,
+    "rule_fail_count": 6
+  },
+  "results": [
+    {
+      "id": "grotius_treatise",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3924,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 1,
+        "content_kind": "prose",
+        "summary_vi": "Tác phẩm này lập luận về quyền tự do hàng hải và thương mại quốc tế dựa trên luật tự nhiên, khẳng định rằng mọi quốc gia đều có quyền tiếp cận và giao thương với nhau. Tác giả sử dụng các dẫn chứng từ triết học, luật pháp và lịch sử để bảo vệ quyền tự do đi lại trên biển.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 1,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 0,
+        "section_count_delta": 0
+      },
+      "qa": {
+        "passed": true,
+        "recommendation": "either",
+        "rule_verdict": "pass",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": false,
+        "summary_vi": "Tác phẩm là một luận thuyết pháp lý của Hugo Grotius về quyền tự do hàng hải và thương mại quốc tế. Văn bản được cung cấp chỉ bao gồm chương mở đầu, tập trung vào việc khẳng định quyền của người Hà Lan trong việc giao thương tại Đông Ấn.",
+        "rule_score": 10,
+        "llm_score": 10
+      }
+    },
+    {
+      "id": "locke_second_treatise",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3889,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "prose",
+        "summary_vi": "Tác phẩm kinh điển của John Locke về triết học chính trị, lập luận rằng chính phủ hợp pháp phải dựa trên sự đồng thuận của người dân và bảo vệ các quyền tự nhiên. Văn bản này bao gồm lời tựa của tác giả, trong đó ông giải thích mục đích bảo vệ tính chính danh của Vua William và bác bỏ các lý thuyết về quyền lực tuyệt đối.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 2,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 1,
+        "section_count_delta": 1
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "warn",
+        "llm_better_than_rule": true,
+        "summary_vi": "Tác phẩm triết học chính trị kinh điển của John Locke. Cấu trúc hiện tại chỉ bao gồm phần giới thiệu và lời tựa, chưa bao gồm các chương chính của tác phẩm.",
+        "rule_score": 2,
+        "llm_score": 6
+      }
+    },
+    {
+      "id": "melville_moby",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3936,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 1,
+        "content_kind": "prose",
+        "summary_vi": "Đây là đoạn mở đầu kinh điển của tiểu thuyết Moby-Dick, nơi người kể chuyện Ishmael chia sẻ về nỗi ám ảnh với đại dương và lý do anh quyết định ra khơi. Tác giả mô tả sự gắn kết kỳ lạ giữa con người và nước, coi đó là nơi trú ẩn tinh thần trước những áp lực của cuộc sống trên đất liền.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 1,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 0,
+        "section_count_delta": 0
+      },
+      "qa": {
+        "passed": true,
+        "recommendation": "llm",
+        "rule_verdict": "pass",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Dữ liệu đầu vào là một đoạn trích ngắn (707 từ) từ chương đầu tiên của tiểu thuyết Moby-Dick. Cả Rule và LLM đều xác định đây là một phần duy nhất, phù hợp với phạm vi văn bản được cung cấp.",
+        "rule_score": 8,
+        "llm_score": 10
+      }
+    },
+    {
+      "id": "austen_pride",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3898,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 1,
+        "content_kind": "prose",
+        "summary_vi": "Đây là đoạn mở đầu kinh điển của tiểu thuyết 'Kiêu hãnh và Định kiến' của Jane Austen, giới thiệu cuộc đối thoại giữa vợ chồng ông bà Bennet về việc một người đàn ông giàu có tên Bingley chuyển đến vùng lân cận. Đoạn trích khắc họa tính cách trái ngược của hai vợ chồng và sự lo lắng của bà Bennet về tương lai hôn nhân của năm cô con gái.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 1,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 0,
+        "section_count_delta": 0
+      },
+      "qa": {
+        "passed": true,
+        "recommendation": "llm",
+        "rule_verdict": "pass",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Dữ liệu đầu vào là một đoạn trích ngắn (747 từ) từ chương 1 của tiểu thuyết 'Kiêu hãnh và Định kiến'. Cả Rule và LLM đều xác định đây là một phần duy nhất, phù hợp với quy mô của đoạn trích được cung cấp.",
+        "rule_score": 9,
+        "llm_score": 10
+      }
+    },
+    {
+      "id": "shakespeare_hamlet",
+      "language": "en",
+      "family": "gutenberg",
+      "text_chars": 3794,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "drama",
+        "summary_vi": "Đây là phần mở đầu của vở kịch kinh điển 'Hamlet' của William Shakespeare, giới thiệu các nhân vật chính và cảnh tượng hồn ma của cố vương Đan Mạch xuất hiện trước các lính canh.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 2,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 1,
+        "section_count_delta": 1
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Văn bản là vở kịch Hamlet của Shakespeare. Cấu trúc Rule chỉ nhận diện toàn bộ văn bản là một khối duy nhất, trong khi cấu trúc LLM đã tách biệt phần danh sách nhân vật (Dramatis Personae) và bắt đầu phân đoạn theo hồi (ACT I).",
+        "rule_score": 2,
+        "llm_score": 9
+      }
+    },
+    {
+      "id": "aquinas_summa",
+      "language": "en",
+      "family": "scholastic",
+      "text_chars": 3912,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "scholastic",
+        "summary_vi": "Đoạn trích này trình bày câu hỏi đầu tiên trong bộ 'Summa Theologica' của Thomas Aquinas, thảo luận về bản chất và sự cần thiết của giáo lý thánh thiêng. Tác giả lập luận rằng ngoài triết học dựa trên lý trí, con người cần có sự mặc khải từ Thiên Chúa để đạt được sự cứu rỗi.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 2,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 1,
+        "section_count_delta": 1
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Đoạn trích thuộc tác phẩm 'Summa Theologica' của Thomas Aquinas, tập trung vào Question 1 về bản chất của giáo lý thánh thiêng. Cấu trúc LLM phân tách tốt hơn giữa tiêu đề chương và nội dung bài luận đầu tiên so với cấu trúc Rule.",
+        "rule_score": 3,
+        "llm_score": 9
+      }
+    },
+    {
+      "id": "machiavelli_prince",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3919,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 3,
+        "content_kind": "prose",
+        "summary_vi": "Văn bản này cung cấp một cái nhìn tổng quan về cuộc đời của Nicolo Machiavelli, chia thành ba giai đoạn chính gắn liền với lịch sử Florence. Tác giả mô tả bối cảnh thời trẻ, sự nghiệp chính trị trong thời kỳ Cộng hòa và những ảnh hưởng văn hóa định hình tư tưởng của ông.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 3,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 2,
+        "section_count_delta": 2
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Văn bản là phần giới thiệu tiểu sử về Nicolo Machiavelli. Cấu trúc Rule chỉ coi toàn bộ văn bản là một khối duy nhất, trong khi cấu trúc LLM đã phân tách thành các phần nhỏ hơn dựa trên các giai đoạn cuộc đời của nhân vật.",
+        "rule_score": 2,
+        "llm_score": 9
+      }
+    },
+    {
+      "id": "federalist_papers",
+      "language": "en",
+      "family": "plain",
+      "text_chars": 3930,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 1,
+        "content_kind": "prose",
+        "summary_vi": "Đây là bài viết đầu tiên trong loạt bài Federalist Papers của Alexander Hamilton, mở đầu cho cuộc thảo luận về việc phê chuẩn Hiến pháp Hoa Kỳ. Tác giả kêu gọi người dân xem xét vấn đề một cách khách quan, tránh những định kiến cá nhân và lợi ích cục bộ để hướng tới lợi ích chung của quốc gia.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 1,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 0,
+        "section_count_delta": 0
+      },
+      "qa": {
+        "passed": true,
+        "recommendation": "llm",
+        "rule_verdict": "pass",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Tài liệu này là phần đầu tiên của Federalist Papers, một tập hợp các bài luận chính trị quan trọng trong lịch sử Hoa Kỳ. Cấu trúc hiện tại chỉ bao gồm một phần duy nhất, phù hợp với dữ liệu đầu vào hạn chế.",
+        "rule_score": 8,
+        "llm_score": 9
+      }
+    },
+    {
+      "id": "truyen_kieu",
+      "language": "vi",
+      "family": "plain",
+      "text_chars": 4000,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "verse",
+        "summary_vi": "Truyện Kiều là kiệt tác văn học trung đại Việt Nam của đại thi hào Nguyễn Du, kể về cuộc đời đầy truân chuyên của nàng Thúy Kiều. Đoạn trích giới thiệu gia cảnh, tài sắc của chị em Thúy Kiều và cuộc gặp gỡ định mệnh tại nấm mồ Đạm Tiên trong tiết Thanh minh.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 2,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 1,
+        "section_count_delta": 1
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Dữ liệu đầu vào là tác phẩm Truyện Kiều, một kiệt tác văn học cổ điển Việt Nam. Cấu trúc cần phân tách rõ ràng giữa phần giới thiệu (front matter) và nội dung chính (các đoạn thơ/chương hồi) để tối ưu hóa trải nghiệm đọc.",
+        "rule_score": 2,
+        "llm_score": 9
+      }
+    },
+    {
+      "id": "nam_cao_chi_pheo",
+      "language": "vi",
+      "family": "plain",
+      "text_chars": 4000,
+      "rule": {
+        "mode": "rule",
+        "sections": 1,
+        "content_kind": null,
+        "preflight_toc_starts": 0
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "prose",
+        "summary_vi": "Tác phẩm kinh điển của Nam Cao kể về cuộc đời bi kịch của Chí Phèo, từ một đứa trẻ bị bỏ rơi đến khi trở thành tay sai đắc lực cho bá Kiến và cuối cùng là sự tha hóa, khát khao hoàn lương. Truyện phản ánh sâu sắc hiện thực xã hội nông thôn Việt Nam trước năm 1945.",
+        "error": null
+      },
+      "diff": {
+        "rule_sections": 1,
+        "llm_sections": 2,
+        "shared_start_lines": 1,
+        "rule_only_starts": 0,
+        "llm_only_starts": 1,
+        "section_count_delta": 1
+      },
+      "qa": {
+        "passed": false,
+        "recommendation": "llm",
+        "rule_verdict": "fail",
+        "llm_verdict": "pass",
+        "llm_better_than_rule": true,
+        "summary_vi": "Tài liệu là truyện ngắn 'Chí Phèo' của Nam Cao. Rule thất bại trong việc phân tách nội dung, trong khi LLM đã nhận diện đúng phần giới thiệu (front matter) và bắt đầu chương chính.",
+        "rule_score": 2,
+        "llm_score": 9
+      }
+    }
+  ]
+}

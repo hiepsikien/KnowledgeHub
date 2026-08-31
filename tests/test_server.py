@@ -5,6 +5,7 @@ from fastapi.testclient import TestClient
 
 from knowledgehub.catalog import build_catalog
 from knowledgehub.server import create_app
+from read_edition_helpers import bootstrap_read_edition
 from test_catalog import _mini_corpus
 
 
@@ -15,6 +16,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
     monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
     monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    bootstrap_read_edition("locke--second_treatise", corpus=corpus)
     return TestClient(create_app())
 
 

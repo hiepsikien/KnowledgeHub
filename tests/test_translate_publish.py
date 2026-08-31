@@ -107,6 +107,9 @@ def test_promote_and_publish_vietnamese(tmp_path, monkeypatch):
     assert work["content_hash"]
     assert validate_catalog(corpus=corpus) == []
     set_read_consumer(work["id"], True, corpus=corpus)
+    from read_edition_helpers import bootstrap_read_edition
+
+    bootstrap_read_edition(work["id"], corpus=corpus)
     payload = prepare_publish(work["id"], corpus=corpus)
     assert payload["hub_work_id"] == "grotius--freedom_of_the_seas_vi"
     assert payload["language"] == "vi"
@@ -127,6 +130,7 @@ def test_promote_and_publish_vietnamese(tmp_path, monkeypatch):
             "language": "en",
         },
     }
+    bootstrap_read_edition("grotius--freedom_of_the_seas", corpus=corpus)
     english = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert "glossary" not in english
     assert "Chương một." not in english["raw_text"]

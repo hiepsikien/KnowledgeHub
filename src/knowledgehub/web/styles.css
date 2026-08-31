@@ -583,6 +583,20 @@ mark.ann-context {
   gap: 16px;
   align-items: start;
 }
+.re-sidebar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.re-sidebar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0 4px;
+}
+.re-select-all { font-size: 11px; display: flex; align-items: center; gap: 4px; }
 .re-sidebar {
   display: flex;
   flex-direction: column;
@@ -604,6 +618,14 @@ mark.ann-context {
   gap: 2px;
 }
 .re-ch-item.on, .re-ch-item:hover { border-color: var(--accent); background: var(--accent-soft); }
+.re-ch-row { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
+.re-ch-row.on .re-ch-item { border-color: var(--accent); background: var(--accent-soft); }
+.re-ch-check { padding-top: 8px; flex: 0 0 auto; }
+.re-ch-item { flex: 1; }
+.re-micro { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+.re-micro-pending { color: var(--muted); }
+.re-micro-complete { color: var(--ok); }
+.re-preview { white-space: pre-wrap; font-size: 13px; max-height: 420px; overflow: auto; background: #faf8f5; padding: 12px; border-radius: 6px; }
 .re-ch-title { font-weight: 600; font-size: 13px; }
 .re-main {
   background: var(--card);

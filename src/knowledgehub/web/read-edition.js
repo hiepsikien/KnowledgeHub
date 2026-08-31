@@ -1,4 +1,4 @@
-/* Read Edition CMS — REF/1 per-chapter preview, QA, edit */
+/* Read Edition CMS — two-step: macro (LLM chapters) + micro (per-chapter REF parse) */
 
 (function () {
   const $ = (id) => document.getElementById(id);
@@ -7,6 +7,8 @@
     chapterId: null,
     manifest: null,
     chapter: null,
+    status: null,
+    selected: new Set(),
     editIndex: null,
   };
 
@@ -127,7 +129,12 @@
   function renderChapterBody(chapter) {
     const box = $("re-body");
     if (!box) return;
-    box.innerHTML = (chapter.blocks || [])
+    const blocks = chapter.blocks || [];
+    if (!blocks.length && chapter.source_preview) {
+      box.innerHTML = `<pre class="re-preview">${escapeHtml(chapter.source_preview)}</pre><p class="muted">Chưa parse REF — bấm «Parse REF chương».</p>`;
+      return;
+    }
+    box.innerHTML = blocks
       .map(
         (b, i) =>
           `<div class="re-block${state.editIndex === i ? " on" : ""}" data-index="${i}" tabindex="0" role="button">${renderBlock(b)}</div>`,
@@ -139,9 +146,13 @@
       state.editIndex = Number(hit.dataset.index);
       highlightSelectedBlock();
       fillEditorForSelection();
-      const details = document.querySelector("details.re-edit");
-      if (details) details.open = true;
+      document.querySelector("details.re-edit")?.setAttribute("open", "");
     };
+  }
+
+  function microBadge(row) {
+    const st = row.micro_status || "pending";
+    return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "parsed" : st)}</span>`;
   }
 
   function qaBadge(row) {
@@ -156,17 +167,34 @@
     list.innerHTML = (manifest.chapters || [])
       .map(
         (row) =>
-          `<button type="button" class="re-ch-item${row.chapter_id === state.chapterId ? " on" : ""}" data-ch="${escapeHtml(row.chapter_id)}">
-            <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
-            ${qaBadge(row)}
-            <span class="muted">${(row.word_count || 0).toLocaleString()} từ</span>
-          </button>`,
+          `<div class="re-ch-row${row.chapter_id === state.chapterId ? " on" : ""}">
+            <label class="re-ch-check"><input type="checkbox" data-chk="${escapeHtml(row.chapter_id)}" ${state.selected.has(row.chapter_id) ? "checked" : ""} /></label>
+            <button type="button" class="re-ch-item" data-ch="${escapeHtml(row.chapter_id)}">
+              <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
+              ${microBadge(row)}
+              ${qaBadge(row)}
+              <span class="muted">${(row.word_count || 0).toLocaleString()} từ</span>
+            </button>
+          </div>`,
       )
       .join("");
     list.onclick = (e) => {
       const btn = e.target.closest("[data-ch]");
       if (btn) void selectChapter(btn.dataset.ch);
     };
+    list.onchange = (e) => {
+      const chk = e.target.closest("[data-chk]");
+      if (!chk) return;
+      if (chk.checked) state.selected.add(chk.dataset.chk);
+      else state.selected.delete(chk.dataset.chk);
+    };
+  }
+
+  async function refreshManifest() {
+    if (!state.workId) return;
+    const manifestResp = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/manifest`);
+    state.manifest = manifestResp.manifest;
+    renderChapterList(state.manifest);
   }
 
   async function selectChapter(chapterId) {
@@ -180,20 +208,30 @@
       state.chapter = chapter;
       renderChapterList(state.manifest);
       $("re-detail-title").textContent = chapter.title || chapterId;
-      $("re-detail-meta").textContent = `${(chapter.block_count || 0)} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`;
+      const parsed = chapter.micro_status === "complete";
+      $("re-detail-meta").textContent = parsed
+        ? `${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`
+        : "Chưa parse REF — xem preview nguồn";
       renderChapterBody(chapter);
       const qa = chapter.qa;
       $("re-qa-panel").hidden = !qa;
       if (qa) {
         const llm = qa.llm || {};
-        $("re-qa-panel").innerHTML = `<p><strong>QA:</strong> ${qa.passed ? "pass" : "fail"} · ${escapeHtml(qa.summary_vi || "")}</p>` +
+        $("re-qa-panel").innerHTML =
+          `<p><strong>QA:</strong> ${qa.passed ? "pass" : "fail"} · ${escapeHtml(qa.summary_vi || "")}</p>` +
           (llm.scores ? `<p class="muted">overall ${llm.scores.overall}/10 · structure ${llm.scores.block_structure}/10</p>` : "");
       }
       fillEditorForSelection();
+      $("re-edit-json")?.closest("details")?.toggleAttribute("open", parsed);
     } catch (err) {
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
     }
+  }
+
+  function useLlmMacro() {
+    const el = $("re-use-llm-macro");
+    return el ? el.checked : true;
   }
 
   function useLlmRelabel() {
@@ -207,29 +245,39 @@
   }
 
   function applyLlmDefaults(status) {
+    const macro = $("re-use-llm-macro");
     const relabel = $("re-use-llm");
     const qa = $("re-use-llm-qa");
+    const gemini = !!status.gemini_available;
+    if (macro && status) {
+      macro.checked = gemini;
+      macro.disabled = !gemini;
+    }
     if (relabel && status) {
       relabel.checked = status.default_use_llm_relabel !== false;
-      relabel.disabled = !status.gemini_available;
+      relabel.disabled = !gemini;
     }
     if (qa && status) {
-      qa.checked = !!status.gemini_available;
-      qa.disabled = !status.gemini_available;
+      qa.checked = gemini;
+      qa.disabled = !gemini;
     }
   }
 
   function formatStatus(status) {
-    const mode = status.manifest?.ref_mode || (status.default_use_llm_relabel ? "llm_hybrid (default)" : "rule");
     const llmNote = status.gemini_available ? "" : " · không có GEMINI_API_KEY — chỉ rule";
-    const base = status.package_built
-      ? `${status.block_count} blocks · ${status.manifest?.chapter_count || 0} chương · ${status.content_kind || ""} · ${mode}`
-      : "Chưa build package";
-    return base + llmNote;
+    if (!status.macro_complete) {
+      return "Chưa phân đoạn — chạy Bước 1 (LLM phân đoạn chương)" + llmNote;
+    }
+    const mode = status.macro_mode || status.manifest?.macro_mode || "rule";
+    const parsed = status.chapters_parsed || 0;
+    const total = status.chapters_total || 0;
+    const summary = status.manifest?.macro_summary_vi || status.structure?.summary_vi || "";
+    return `Macro (${mode}): ${total} phần · đã parse ${parsed}/${total}${summary ? " · " + summary.slice(0, 80) : ""}${llmNote}`;
   }
 
   async function loadReadEditionPage(workId) {
     state.workId = workId;
+    state.selected.clear();
     document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
     document.querySelector('.nav-link[data-view="read-edition"]')?.classList.add("active");
     ["view-works", "view-publish", "view-licenses", "view-settings", "view-translation"].forEach((id) => {
@@ -243,42 +291,100 @@
     $("re-status").textContent = "Đang tải…";
     try {
       const status = await api(`/api/works/${encodeURIComponent(workId)}/read-edition`);
+      state.status = status;
       applyLlmDefaults(status);
       $("re-heading").textContent = status.title || workId;
       $("re-status").textContent = formatStatus(status);
-      if (!status.package_built) {
-        await api(`/api/works/${encodeURIComponent(workId)}/read-edition/build`, {
-          method: "POST",
-          body: { use_llm: useLlmRelabel() },
-        });
+      if (status.macro_complete && status.manifest) {
+        state.manifest = status.manifest;
+        renderChapterList(state.manifest);
+        const first = (state.manifest.chapters || [])[0];
+        if (first) await selectChapter(first.chapter_id);
+      } else {
+        $("re-chapters").innerHTML = `<p class="muted">Chạy «Bước 1: Phân đoạn» để liệt kê chương.</p>`;
+        $("re-body").innerHTML = "";
       }
-      const manifestResp = await api(`/api/works/${encodeURIComponent(workId)}/read-edition/manifest`);
-      state.manifest = manifestResp.manifest;
-      renderChapterList(state.manifest);
-      const first = (state.manifest.chapters || [])[0];
-      if (first) await selectChapter(first.chapter_id);
     } catch (err) {
       $("re-status").textContent = err.message;
     }
   }
 
   function wireReadEdition() {
-    $("re-build")?.addEventListener("click", async () => {
+    $("re-macro")?.addEventListener("click", async () => {
       if (!state.workId) return;
-      $("re-status").textContent = "Đang build…";
+      $("re-status").textContent = "Đang phân đoạn (macro)…";
       try {
-        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/build`, {
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
           method: "POST",
-          body: { force: true, use_llm: useLlmRelabel() },
+          body: { force: true, use_llm: useLlmMacro() },
         });
-        toast("Đã build lại REF package");
+        toast("Đã phân đoạn xong");
         await loadReadEditionPage(state.workId);
+      } catch (err) {
+        toast(err.message);
+        $("re-status").textContent = err.message;
+      }
+    });
+
+    $("re-parse-ch")?.addEventListener("click", async () => {
+      if (!state.workId || !state.chapterId) return;
+      toast("Đang parse REF chương…");
+      try {
+        await api(
+          `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}/parse`,
+          { method: "POST", body: { use_llm: useLlmRelabel() } },
+        );
+        toast("Parse xong");
+        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
+        state.status = status;
+        $("re-status").textContent = formatStatus(status);
+        await refreshManifest();
+        await selectChapter(state.chapterId);
       } catch (err) {
         toast(err.message);
       }
     });
+
+    $("re-parse-selected")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      const ids = [...state.selected];
+      if (!ids.length) {
+        toast("Chọn ít nhất một chương");
+        return;
+      }
+      toast(`Đang parse ${ids.length} chương…`);
+      try {
+        const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/parse`, {
+          method: "POST",
+          body: { chapter_ids: ids, use_llm: useLlmRelabel() },
+        });
+        const errCount = Object.keys(result.errors || {}).length;
+        toast(errCount ? `Xong ${result.count}, lỗi ${errCount}` : `Parse xong ${result.count} chương`);
+        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
+        state.status = status;
+        $("re-status").textContent = formatStatus(status);
+        await refreshManifest();
+        if (state.chapterId) await selectChapter(state.chapterId);
+      } catch (err) {
+        toast(err.message);
+      }
+    });
+
+    $("re-select-all")?.addEventListener("change", (e) => {
+      const on = e.target.checked;
+      for (const row of state.manifest?.chapters || []) {
+        if (on) state.selected.add(row.chapter_id);
+        else state.selected.delete(row.chapter_id);
+      }
+      renderChapterList(state.manifest);
+    });
+
     $("re-qa-ch")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;
+      if (state.chapter?.micro_status !== "complete") {
+        toast("Parse REF chương trước khi QA");
+        return;
+      }
       toast("Đang QA chương…");
       try {
         const qa = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/qa`, {
@@ -287,33 +393,18 @@
         });
         toast(qa.passed ? "QA pass" : "QA fail");
         await selectChapter(state.chapterId);
-        const manifestResp = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/manifest`);
-        state.manifest = manifestResp.manifest;
-        renderChapterList(state.manifest);
+        await refreshManifest();
       } catch (err) {
         toast(err.message);
       }
     });
-    $("re-qa-all")?.addEventListener("click", async () => {
-      if (!state.workId) return;
-      toast("Đang QA toàn bộ (rule only)…");
-      try {
-        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/qa`, {
-          method: "POST",
-          body: { use_llm: useLlmQa() },
-        });
-        toast("QA xong");
-        await loadReadEditionPage(state.workId);
-      } catch (err) {
-        toast(err.message);
-      }
-    });
+
     $("re-save-blocks")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;
       let parsed;
       try {
         parsed = JSON.parse($("re-edit-json").value || "null");
-      } catch (err) {
+      } catch {
         toast("JSON không hợp lệ");
         return;
       }
@@ -371,9 +462,11 @@
         toast(err.message);
       }
     });
+
     $("re-publish")?.addEventListener("click", () => {
       if (state.workId) location.href = `/publish/${encodeURIComponent(state.workId)}`;
     });
+
     document.querySelector('.nav-link[data-view="read-edition"]')?.addEventListener("click", () => {
       location.href = "/read-edition";
     });

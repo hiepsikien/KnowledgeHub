@@ -71,7 +71,9 @@ def test_normalize_attaches_ref_edition(tmp_path, monkeypatch):
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
 
     from knowledgehub.read_publish import prepare_publish
+    from read_edition_helpers import bootstrap_read_edition
 
+    bootstrap_read_edition("grotius--freedom_of_the_seas", corpus=corpus)
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload["edition_hash"]

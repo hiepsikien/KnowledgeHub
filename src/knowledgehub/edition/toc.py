@@ -25,6 +25,7 @@ LETTER_CHAPTER_ENTRY = re.compile(
     re.I,
 )
 ROMAN_ONLY = re.compile(r"^(?:[IVXLCDM]+|\d{1,3})$")
+ALL_CAPS_SECTION = re.compile(r"^[A-Z][A-Z\s,\-\';]{15,95}[,.]?\s*$")
 VI_TOC_HEADER = re.compile(r"^Mục\s+lục\b", re.I)
 ELECTRONIC_NOTE = re.compile(r"^NOTE TO THIS ELECTRONIC EDITION\s*$", re.I)
 
@@ -34,6 +35,62 @@ def is_chapter_heading_line(line: str) -> bool:
     if not s:
         return False
     return bool(CHAPTER_HEADING.match(s) or BOOK_PART_HEADING.match(s))
+
+
+def is_toc_list_row(line: str) -> bool:
+    """TOC contents-list row (dot leaders / page number), not a body heading."""
+    s = line.strip()
+    if not s:
+        return False
+    if re.search(r"\.{2,}\s*\d{1,4}$", s):
+        return True
+    if re.search(r"\s{2,}\d{1,4}$", s) and len(s) < 90:
+        return True
+    return False
+
+
+def is_all_caps_section_line(line: str) -> bool:
+    s = line.strip()
+    if not s or not ALL_CAPS_SECTION.match(s):
+        return False
+    if re.match(r"^(?:PHILADELPHIA|PRINTED|COMMON SENSE|INHABITANTS|AMERICA|MDCCL|ISBN)\b", s):
+        return False
+    return True
+
+
+def is_all_caps_body_section_line(line: str) -> bool:
+    """Strict ALL-CAPS body section (Paine pamphlet), not biography pull quotes."""
+    s = line.strip()
+    if not is_all_caps_section_line(s):
+        return False
+    upper = s.upper()
+    if upper.startswith(("INTRODUCTION", "APPENDIX", "PREFACE", "EPILOGUE")):
+        return True
+    if re.match(r"^OF (?:THE|MONARCHY|THOUGHTS|A )", upper):
+        return True
+    if upper.startswith("THOUGHTS ON "):
+        return True
+    if s.endswith(",") and 28 <= len(s) <= 95:
+        if re.search(r"\b(I|MY|WE|OUR|ME|TO)\b", upper):
+            return False
+        return True
+    if re.search(r"\b(I|MY|WE|OUR|ME)\b", upper):
+        return False
+    if s.endswith(".") and len(s.split()) > 7 and "," not in s:
+        return False
+    return False
+
+
+def is_body_heading_line(line: str) -> bool:
+    """Standalone body section start — not a TOC list duplicate."""
+    s = line.strip()
+    if not s or len(s) > 160:
+        return False
+    if is_chapter_heading_line(s) and not is_toc_list_row(s):
+        return True
+    if re.match(r"^(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b", s, re.I):
+        return not is_toc_list_row(s)
+    return False
 
 
 def is_chapter_title_line(line: str) -> bool:
