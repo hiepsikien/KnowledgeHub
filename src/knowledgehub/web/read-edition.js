@@ -535,8 +535,8 @@
         renderChapterList(state.manifest);
         const chapters = state.manifest.chapters || [];
         const remembered =
-          status.hitl?.last_section_id ||
-          (workId ? localStorage.getItem(lastSectionKey(workId)) : null);
+          (workId ? localStorage.getItem(lastSectionKey(workId)) : null) ||
+          status.hitl?.last_section_id;
         const pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
         if (pick) await selectChapter(pick.chapter_id);
       } else {

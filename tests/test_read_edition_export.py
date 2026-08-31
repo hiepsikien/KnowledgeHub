@@ -124,6 +124,8 @@ def test_read_edition_api(client):
     assert pending.get("micro_status") == "pending"
     assert "source_preview" in pending
     assert "source_preview_truncated" in pending
+    viewed = client.get(f"/api/works/{wid}/read-edition")
+    assert viewed.json()["hitl"]["last_section_id"] == ch_id
 
     parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
     assert parsed.status_code == 400
@@ -320,6 +322,62 @@ def test_structure_hitl_edit_prunes_stale_chapter_json(tmp_path, monkeypatch):
 
     toc = confirm_toc("grotius--freedom_of_the_seas", "yes", corpus=corpus)
     assert toc["toc_candidate"]["status"] == "yes"
+
+
+def test_list_sessions_uses_catalog_hash_without_manuscript(tmp_path, monkeypatch):
+    corpus = tmp_path / "corpus"
+    catalog = corpus / "catalog"
+    catalog.mkdir(parents=True)
+    works = [
+        {
+            "id": "bacon--novum_organum",
+            "title": "Novum Organum",
+            "author_id": "bacon",
+            "language": "en",
+            "content_hash": "abc123",
+            "content_file": "sources/bacon/raw/novum_organum.txt",
+            "rights": {"consumers": {"read": "allowed"}},
+        }
+    ]
+    (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
+    (catalog / "authors.json").write_text(json.dumps([{"id": "bacon", "name": "Bacon"}]), encoding="utf-8")
+    pkg = corpus / "read-editions/bacon--novum_organum/abc123"
+    pkg.mkdir(parents=True)
+    (pkg / "structure.json").write_text(
+        json.dumps(
+            {
+                "structure_version": "1",
+                "sections": [{"section_id": "ch-001", "title": "BOOK I", "kind": "book", "start_line": 0}],
+                "section_count": 1,
+                "hitl": {"last_section_id": "ch-001", "toc": {"status": "none"}},
+                "created_at": "2026-01-01T00:00:00",
+                "mode": "markers",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (pkg / "manifest.json").write_text(
+        json.dumps(
+            {
+                "work_id": "bacon--novum_organum",
+                "macro_status": "complete",
+                "macro_mode": "markers",
+                "updated_at": "2026-01-02T00:00:00",
+                "chapters": [{"chapter_id": "ch-001", "micro_status": "pending"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    from knowledgehub.edition.read_edition import list_read_edition_sessions
+
+    sessions = list_read_edition_sessions(corpus=corpus)
+    assert len(sessions) == 1
+    row = sessions[0]
+    assert row["work_id"] == "bacon--novum_organum"
+    assert row["last_section_id"] == "ch-001"
+    assert row["phase"] == "hitl"
+    assert row["chapters_total"] == 1
 
 
 def test_head_tail_preview_short_text_is_full():

@@ -21,6 +21,7 @@ from .edition.read_edition import (
 )
 from .edition.read_edition_steps import (
     ReadEditionStepError,
+    remember_last_section,
     assemble_edition_from_package,
     confirm_layout_step,
     confirm_toc_step,
@@ -282,6 +283,8 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
                 chapter["char_share"] = diag.get("char_share")
         except ReadEditionStepError:
             pass
+    if structure:
+        remember_last_section(package_dir, structure, chapter_id)
     return chapter
 
 

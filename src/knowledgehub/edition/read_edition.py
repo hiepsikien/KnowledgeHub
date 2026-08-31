@@ -387,6 +387,29 @@ def build_read_edition_package(
     }
 
 
+def _read_edition_phase(
+    structure: dict[str, Any] | None,
+    manifest: dict[str, Any] | None,
+) -> str:
+    chapters = (manifest or {}).get("chapters") or []
+    parsed = sum(1 for row in chapters if row.get("micro_status") == "complete")
+    total = len(chapters) or len((structure or {}).get("sections") or [])
+    hitl = dict((structure or {}).get("hitl") or {})
+    toc_status = (hitl.get("toc") or {}).get("status")
+    layout_ok = bool(hitl.get("layout_ok"))
+    if not structure:
+        return "empty"
+    if total and parsed >= total:
+        return "parsed"
+    if parsed > 0:
+        return "parsing"
+    if layout_ok:
+        return "layout_ok"
+    if toc_status:
+        return "hitl"
+    return "macro"
+
+
 def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
@@ -403,18 +426,7 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
     hitl = dict((structure or {}).get("hitl") or {})
     toc_status = (hitl.get("toc") or {}).get("status")
     layout_ok = bool(hitl.get("layout_ok"))
-    if not structure:
-        phase = "empty"
-    elif total and parsed >= total:
-        phase = "parsed"
-    elif parsed > 0:
-        phase = "parsing"
-    elif layout_ok:
-        phase = "layout_ok"
-    elif toc_status:
-        phase = "hitl"
-    else:
-        phase = "macro"
+    phase = _read_edition_phase(structure, manifest)
     return {
         "work_id": work_id,
         "title": work.get("title"),
@@ -444,7 +456,10 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
 
 
 def list_read_edition_sessions(*, corpus: Path | None = None) -> list[dict[str, Any]]:
-    """Works that already have a Read Edition package on disk (in-progress or done)."""
+    """Works that already have a Read Edition package on disk (in-progress or done).
+
+    Uses catalog ``content_hash`` to locate ``package_dir`` — does not strip manuscripts.
+    """
     from ..catalog import load_works
 
     root = corpus or corpus_root()
@@ -454,28 +469,32 @@ def list_read_edition_sessions(*, corpus: Path | None = None) -> list[dict[str, 
     sessions: list[dict[str, Any]] = []
     for work in load_works(works_path):
         work_id = str(work.get("id") or "")
-        if not work_id:
+        content_hash = str(work.get("content_hash") or "")
+        if not work_id or not content_hash:
             continue
-        try:
-            status = package_status(work_id, corpus=root)
-        except (KeyError, FileNotFoundError, ValueError):
+        package_dir = package_root(work_id, content_hash, corpus=root)
+        structure = load_structure(package_dir)
+        manifest = load_manifest(package_dir)
+        if structure is None and manifest is None:
             continue
-        if not status.get("macro_complete") and not status.get("package_built"):
-            continue
+        hitl = dict((structure or {}).get("hitl") or {})
+        chapters = (manifest or {}).get("chapters") or []
+        parsed = sum(1 for row in chapters if row.get("micro_status") == "complete")
+        total = len(chapters) or len((structure or {}).get("sections") or [])
         sessions.append(
             {
-                "work_id": status.get("work_id"),
-                "title": status.get("title"),
-                "language": status.get("language"),
-                "phase": status.get("phase"),
-                "chapters_total": status.get("chapters_total") or 0,
-                "chapters_parsed": status.get("chapters_parsed") or 0,
-                "toc_status": (status.get("hitl") or {}).get("toc_status"),
-                "layout_ok": bool((status.get("hitl") or {}).get("layout_ok")),
-                "last_section_id": (status.get("hitl") or {}).get("last_section_id"),
-                "updated_at": status.get("updated_at"),
-                "publishable": bool(status.get("publishable")),
-                "macro_mode": status.get("macro_mode"),
+                "work_id": work_id,
+                "title": work.get("title"),
+                "language": work.get("language"),
+                "phase": _read_edition_phase(structure, manifest),
+                "chapters_total": total,
+                "chapters_parsed": parsed,
+                "toc_status": (hitl.get("toc") or {}).get("status"),
+                "layout_ok": bool(hitl.get("layout_ok")),
+                "last_section_id": hitl.get("last_section_id"),
+                "updated_at": (manifest or {}).get("updated_at") or (structure or {}).get("created_at"),
+                "publishable": structure is not None and total > 0 and parsed == total,
+                "macro_mode": (structure or {}).get("mode") or (manifest or {}).get("macro_mode"),
             }
         )
     sessions.sort(key=lambda row: str(row.get("updated_at") or ""), reverse=True)
