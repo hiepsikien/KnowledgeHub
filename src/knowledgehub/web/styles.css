@@ -67,6 +67,7 @@ h1 { font-family: var(--serif); font-size: 30px; font-weight: 600; margin: 0 0 6
 .muted { color: var(--muted); }
 
 .page-actions, .toolbar, .stats, .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.page-actions[hidden], .toolbar[hidden], .stats[hidden], .row[hidden] { display: none !important; }
 .stats { margin-bottom: 16px; }
 .stat {
   background: var(--card);
