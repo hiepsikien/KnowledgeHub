@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import Any
 
 from .lines import TextLine
 from .structure import CONTENTS_HEADER
@@ -44,7 +45,7 @@ def is_toc_list_row(line: str) -> bool:
         return False
     if re.search(r"\.{2,}\s*\d{1,4}$", s):
         return True
-    if re.search(r"\s{2,}\d{1,4}$", s) and len(s) < 90:
+    if re.search(r"\s{2,}(?:\d{1,4}|[ivxlcdm]{1,8})\s*$", s, re.I) and len(s) < 90:
         return True
     return False
 
@@ -128,7 +129,7 @@ def is_toc_entry_line(line: str) -> bool:
         return True
     if re.match(r"^\d+\.\s+\S", s):
         return True
-    if re.search(r"\s{2,}\d{1,4}$", s) and len(s) < 90:
+    if re.search(r"\s{2,}(?:\d{1,4}|[ivxlcdm]{1,8})$", s, re.I) and len(s) < 90:
         return True
     if re.search(r"\.{2,}\s*\d{1,4}$", s) and len(s) < 90:
         return True
@@ -312,3 +313,306 @@ def merge_split_chapter_titles(lines: list[TextLine], labels: list, *, family: s
             labels[i + 1].role = "heading"
             labels[i + 1].level = labels[i].level or 1
             labels[i + 1].confidence = 0.88
+
+
+CONTENTS_HEAD = re.compile(
+    r"^(?:TABLE OF CONTENTS|CONTENTS(?: OF (?:THIS )?BOOK)?|MỤC LỤC)\s*\.?\s*$",
+    re.I,
+)
+_PAGE_COL = re.compile(r"^PAGE\s*$", re.I)
+_CHAPTER_TOC_LINE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+([IVXLC\d]+)\.?\s*(.*)$", re.I)
+_BOOK_PART_TOC_LINE = re.compile(r"^(BOOK|PART|VOLUME)\s+([IVXLC\d]+)\b(.*)$", re.I)
+_NAMED_TOC_LINE = re.compile(
+    r"^(PREFACE|INTRODUCTION|PROLOGUE|FOREWORD|APPENDIX|NOTES|INDEX|"
+    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|CATALOGUE\b.*|CATALOG\b.*)\s*(.*)$",
+    re.I,
+)
+_TOC_PAGE_TAIL = re.compile(r"(?:\.{2,}|\s{2,})(\d{1,4}|[ivxlcdm]{1,8})\s*$", re.I)
+_TOC_STOP = re.compile(
+    r"^(?:\*\*\*|List of |Illustrations\b|END OF THE PROJECT GUTENBERG)",
+    re.I,
+)
+_STOP_WORDS = frozenset({"of", "the", "a", "an", "and", "or", "to", "in", "on", "for"})
+
+
+def toc_page_tail(line: str) -> str | None:
+    match = _TOC_PAGE_TAIL.search(line.strip())
+    return match.group(1) if match else None
+
+
+def strip_toc_page_tail(line: str) -> str:
+    return _TOC_PAGE_TAIL.sub("", line.strip()).strip(" \t-–—.")
+
+
+def kind_for_toc_label(label: str) -> str:
+    u = (label or "").strip().upper()
+    if u.startswith(("CHAPTER", "CHAP")):
+        return "chapter"
+    if u.startswith("BOOK"):
+        return "book"
+    if u.startswith(("PART", "VOLUME")):
+        return "part"
+    if u.startswith("PREFACE") or "FOREWORD" in u:
+        return "preface"
+    if u.startswith("INTRODUCTION"):
+        return "introduction"
+    if u.startswith("PROLOGUE"):
+        return "prologue"
+    if u.startswith("APPENDIX"):
+        return "appendix"
+    if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA")):
+        return "back_matter"
+    return "other"
+
+
+def chapter_number_key(label: str) -> str | None:
+    match = re.match(r"^(?:chapter|chap\.?)\s+([ivxlcdm]+|\d+)\b", (label or "").strip(), re.I)
+    if not match:
+        return None
+    num = match.group(1)
+    return num.upper() if not num.isdigit() else str(int(num))
+
+
+def is_toc_chapter_block(lines: list[str], index: int) -> bool:
+    """True when this CHAPTER line is a contents stub (synopsis + page), not body."""
+    if index < 0 or index >= len(lines):
+        return False
+    stripped = lines[index].strip()
+    if not re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+\.?\s*$", stripped, re.I):
+        return False
+    seen = 0
+    for j in range(index + 1, min(index + 14, len(lines))):
+        nxt = lines[j].strip()
+        if not nxt:
+            continue
+        if re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", nxt, re.I):
+            return False
+        seen += 1
+        if is_toc_list_row(nxt) or toc_page_tail(nxt):
+            return True
+        if seen >= 8:
+            return False
+    return False
+
+
+def _norm_toc_heading(text: str) -> str:
+    s = (text or "").lower().replace("\u00a0", " ")
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _sig_tokens(text: str) -> set[str]:
+    return {p for p in _norm_toc_heading(text).split() if p not in _STOP_WORDS and len(p) > 1}
+
+
+def _match_strings_for(label: str, title: str) -> list[str]:
+    out: list[str] = []
+    for val in (label, title):
+        val = (val or "").strip()
+        if val:
+            out.append(val)
+    num = chapter_number_key(label)
+    if num:
+        out.extend([f"CHAPTER {num}", f"Chapter {num}", f"CHAPTER {num}.", f"Chapter {num}."])
+    seen: set[str] = set()
+    uniq: list[str] = []
+    for item in out:
+        key = _norm_toc_heading(item)
+        if key and key not in seen:
+            seen.add(key)
+            uniq.append(item)
+    return uniq
+
+
+def _flush_toc_pending(pending: dict[str, Any] | None, entries: list[dict[str, Any]]) -> None:
+    if not pending:
+        return
+    title = re.sub(r"\s+", " ", " ".join(pending.get("title_parts") or [])).strip()
+    title = strip_toc_page_tail(title)
+    label = str(pending.get("label") or title or "Section")
+    entries.append(
+        {
+            "index": len(entries) + 1,
+            "label": label,
+            "title": title or label,
+            "kind": str(pending.get("kind") or kind_for_toc_label(label)),
+            "page": pending.get("page"),
+            "match_strings": _match_strings_for(label, title),
+        }
+    )
+
+
+def parse_contents_entries(text: str) -> list[dict[str, Any]]:
+    """Structured body entries from a Contents / Table of Contents block."""
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    start: int | None = None
+    for i, line in enumerate(lines):
+        if CONTENTS_HEAD.match(line.strip()):
+            start = i
+            break
+    if start is None:
+        return []
+
+    entries: list[dict[str, Any]] = []
+    pending: dict[str, Any] | None = None
+
+    def flush() -> None:
+        nonlocal pending
+        _flush_toc_pending(pending, entries)
+        pending = None
+
+    for index in range(start + 1, min(start + 450, len(lines))):
+        stripped = lines[index].strip()
+        if not stripped or _PAGE_COL.match(stripped):
+            continue
+        if _TOC_STOP.match(stripped):
+            flush()
+            break
+
+        chapter = _CHAPTER_TOC_LINE.match(stripped)
+        if chapter:
+            rest = chapter.group(2).strip()
+            page = toc_page_tail(stripped)
+            word0 = stripped.split()[0]
+            if (
+                entries
+                and pending is None
+                and word0[:1].isupper()
+                and word0[1:].islower()
+            ):
+                break
+            flush()
+            num = chapter.group(1)
+            label = f"CHAPTER {num.upper() if not num.isdigit() else num}"
+            pending = {
+                "label": label,
+                "kind": "chapter",
+                "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
+                "page": page,
+            }
+            if page:
+                flush()
+            continue
+
+        named = _NAMED_TOC_LINE.match(stripped)
+        if named:
+            flush()
+            full = strip_toc_page_tail(stripped)
+            pending = {
+                "label": full or named.group(1),
+                "kind": kind_for_toc_label(full or named.group(1)),
+                "title_parts": [],
+                "page": toc_page_tail(stripped),
+            }
+            if pending["page"]:
+                flush()
+            continue
+
+        book_part = _BOOK_PART_TOC_LINE.match(stripped)
+        if book_part:
+            flush()
+            unit = book_part.group(1).upper()
+            num = book_part.group(2)
+            rest = book_part.group(3).strip()
+            label = f"{unit} {num.upper() if not num.isdigit() else num}"
+            pending = {
+                "label": label,
+                "kind": "book" if unit == "BOOK" else "part",
+                "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
+                "page": toc_page_tail(stripped),
+            }
+            if pending["page"] and not rest:
+                flush()
+            continue
+
+        if pending is not None:
+            pending.setdefault("title_parts", []).append(strip_toc_page_tail(stripped))
+            page = toc_page_tail(stripped)
+            if page:
+                pending["page"] = page
+                flush()
+            continue
+
+        page = toc_page_tail(stripped)
+        if page and len(stripped) < 90:
+            label = strip_toc_page_tail(stripped)
+            if label:
+                entries.append(
+                    {
+                        "index": len(entries) + 1,
+                        "label": label,
+                        "title": label,
+                        "kind": kind_for_toc_label(label),
+                        "page": page,
+                        "match_strings": _match_strings_for(label, label),
+                    }
+                )
+            continue
+
+        if entries and len(stripped) > 90 and not page:
+            break
+
+    flush()
+    return entries
+
+
+def format_contents_excerpt(entries: list[dict[str, Any]], *, max_chars: int = 12000) -> str:
+    rows: list[str] = ["CONTENTS"]
+    for entry in entries:
+        label = str(entry.get("label") or "")
+        title = str(entry.get("title") or "")
+        if title and title.upper() != label.upper() and not title.upper().startswith(label.upper()):
+            line = f"{label}  {title}"
+        else:
+            line = label
+        rows.append(line)
+        if sum(len(x) + 1 for x in rows) > max_chars:
+            break
+    return "\n".join(rows)[:max_chars]
+
+
+def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Locate TOC entries on body heading lines, skipping leftover contents-list rows."""
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    matched: list[dict[str, Any]] = []
+    cursor = -1
+    for entry in entries:
+        chap = chapter_number_key(str(entry.get("label") or ""))
+        needles = [_norm_toc_heading(s) for s in (entry.get("match_strings") or []) if s]
+        need_toks = _sig_tokens(str(entry.get("label") or ""))
+        found_line: int | None = None
+        found_text = ""
+        for line_no, raw in enumerate(lines):
+            if line_no <= cursor:
+                continue
+            raw_line = raw.strip()
+            if not raw_line or len(raw_line) > 120:
+                continue
+            if is_toc_list_row(raw_line) or is_toc_chapter_block(lines, line_no):
+                continue
+            if chap:
+                got = chapter_number_key(raw_line)
+                if got == chap:
+                    found_line = line_no
+                    found_text = raw_line
+                    break
+                continue
+            norm = _norm_toc_heading(raw_line)
+            if not norm:
+                continue
+            if any(n == norm for n in needles if n):
+                found_line = line_no
+                found_text = raw_line
+                break
+            if len(need_toks) >= 2 and need_toks <= _sig_tokens(raw_line) and len(raw_line) < 80:
+                found_line = line_no
+                found_text = raw_line
+                break
+        if found_line is None:
+            continue
+        item = dict(entry)
+        item["line"] = found_line
+        item["text"] = found_text
+        matched.append(item)
+        cursor = found_line
+    return matched

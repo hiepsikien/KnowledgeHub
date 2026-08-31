@@ -11,7 +11,15 @@ from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .llm_defaults import gemini_available, ref_llm_model
 from .macro import _toc_excerpt, scan_heading_candidates, section_source_slice
-from .toc import is_all_caps_body_section_line, is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
+from .toc import (
+    is_all_caps_body_section_line,
+    is_all_caps_section_line,
+    is_body_heading_line,
+    is_chapter_heading_line,
+    is_toc_chapter_block,
+    is_toc_entry_line,
+    is_toc_list_row,
+)
 
 CONTENTS_HEAD = re.compile(r"(?m)^[ \t]*(TABLE OF CONTENTS|CONTENTS)\s*\.?\s*$", re.I)
 TITLE_PAGE_SUBJECTS = re.compile(r"^SUBJECTS?\s*$", re.I)
@@ -83,7 +91,13 @@ def parse_title_page_entries(raw: str) -> list[dict[str, Any]]:
 
 def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
     """Full TOC block from PG raw text (before strip drops it)."""
+    from .toc import format_contents_excerpt, parse_contents_entries
+
     title_page = extract_title_page_toc(raw, max_chars=max_chars)
+    parsed = parse_contents_entries(raw)
+    if len(parsed) >= 2:
+        return format_contents_excerpt(parsed, max_chars=max_chars)
+
     lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
     start: int | None = None
     for i, line in enumerate(lines):
@@ -107,9 +121,16 @@ def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
         return title_page or inline
 
     out: list[str] = []
-    for line in lines[start : start + 200]:
+    blank_run = 0
+    for line in lines[start : start + 400]:
         s = line.strip()
-        if not s and len(out) > 3:
+        if not s:
+            blank_run += 1
+            if blank_run >= 4 and len(out) > 8:
+                break
+            continue
+        blank_run = 0
+        if s.startswith("***") or re.match(r"^List of ", s, re.I):
             break
         if start != 0 and len(out) > 8 and len(s) > 110 and not is_toc_entry_line(s):
             break
@@ -119,17 +140,25 @@ def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
             out.append(s)
         elif out and len(s) > 90:
             break
+        else:
+            out.append(s)
         if sum(len(x) + 1 for x in out) > max_chars:
             break
-    return "\n".join(out)[:max_chars]
+    excerpt = "\n".join(out)[:max_chars]
+    if title_page and excerpt:
+        return f"{title_page}\n\n{excerpt}"[:max_chars]
+    return title_page or excerpt
 
 
 def detect_body_markers(text: str) -> list[dict[str, Any]]:
     """Deterministic body division markers in stripped text (ground-truth hint)."""
     markers: list[dict[str, Any]] = []
-    for line_no, line in enumerate(text.replace("\r\n", "\n").split("\n")):
+    split_lines = text.replace("\r\n", "\n").split("\n")
+    for line_no, line in enumerate(split_lines):
         s = line.strip()
         if not s:
+            continue
+        if is_toc_list_row(s) or is_toc_chapter_block(split_lines, line_no):
             continue
         kind: str | None = None
         if CHAPTER_LINE.match(s) or (is_body_heading_line(s) and "CHAPTER" in s.upper()):

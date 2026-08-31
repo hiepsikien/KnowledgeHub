@@ -54,6 +54,14 @@ def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
 
 
+def _same_heading(left: str, right: str) -> bool:
+    def norm(value: str) -> str:
+        return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+
+    a, b = norm(left), norm(right)
+    return bool(a) and a == b
+
+
 def line_map(text: str) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     pos = 0
@@ -361,6 +369,44 @@ def build_macro_structure(
 
     from .macro_markers import try_marker_assembly
     from .macro_qa import detect_body_markers
+    from .toc import match_toc_entries_in_body, parse_contents_entries
+
+    toc_source = raw or text
+    toc_entries = parse_contents_entries(toc_source)
+    toc_matched = match_toc_entries_in_body(text, toc_entries) if toc_entries else []
+    if len(toc_entries) >= 3 and len(toc_matched) >= max(3, int(0.7 * len(toc_entries))):
+        boundaries: list[dict[str, Any]] = []
+        if int(toc_matched[0]["line"]) > 0:
+            boundaries.append(
+                {"start_line": 0, "kind": "front_matter", "title": "Front matter", "confidence": 0.85}
+            )
+        for row in toc_matched:
+            title = str(row.get("text") or row.get("label") or "Section")
+            subtitle = str(row.get("title") or "")
+            if _same_heading(subtitle, title) or _same_heading(subtitle, str(row.get("label") or "")):
+                subtitle_out = None
+            else:
+                subtitle_out = subtitle[:180] or None
+            boundaries.append(
+                {
+                    "start_line": int(row["line"]),
+                    "heading_line": int(row["line"]),
+                    "kind": str(row.get("kind") or "chapter"),
+                    "title": title,
+                    "subtitle": subtitle_out,
+                    "confidence": 0.93,
+                }
+            )
+        doc = _sections_from_boundaries(text, boundaries, language=language)
+        doc["mode"] = "toc_match"
+        doc["candidate_count"] = len(candidates)
+        doc["content_kind"] = "prose"
+        doc["toc_entry_count"] = len(toc_entries)
+        doc["toc_matched_count"] = len(toc_matched)
+        doc["summary_vi"] = (
+            f"Phân đoạn từ mục lục ({len(toc_matched)}/{len(toc_entries)} mục khớp trong body)."
+        )
+        return doc
 
     markers = detect_body_markers(text)
     marker_doc = try_marker_assembly(text, markers, language=language)
