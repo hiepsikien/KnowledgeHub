@@ -370,7 +370,68 @@ def chapter_number_key(label: str) -> str | None:
     if not match:
         return None
     num = match.group(1)
-    return num.upper() if not num.isdigit() else str(int(num))
+    if num.isdigit():
+        value = int(num)
+        return str(value) if value > 0 else None
+    value = _roman_to_int(num.upper())
+    return str(value) if value else None
+
+
+def _roman_to_int(token: str) -> int | None:
+    values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    if not token or any(ch not in values for ch in token):
+        return None
+    total = 0
+    prev = 0
+    for ch in reversed(token):
+        val = values[ch]
+        if val < prev:
+            total -= val
+        else:
+            total += val
+            prev = val
+    return total if total > 0 else None
+
+
+def _following_has_toc_wrap_page(lines: list[str], index: int) -> bool:
+    """True when a bare CHAPTER line is followed by a synopsis that ends in a page number."""
+    for j in range(index + 1, min(index + 14, len(lines))):
+        nxt = lines[j].strip()
+        if not nxt:
+            continue
+        if _CHAPTER_TOC_LINE.match(nxt) or _NAMED_TOC_LINE.match(nxt) or _BOOK_PART_TOC_LINE.match(nxt):
+            return False
+        if _TOC_STOP.match(nxt):
+            return False
+        if toc_page_tail(nxt) or is_toc_list_row(nxt):
+            return True
+    return False
+
+
+def toc_is_wrap_page_column(entries: list[dict[str, Any]]) -> bool:
+    """Abdy-style TOC: chapter heading on its own line, wrap + page column — not Austen one-liners."""
+    if len(entries) < 3:
+        return False
+    wrapped = sum(1 for e in entries if e.get("wrapped"))
+    paged = sum(1 for e in entries if e.get("page"))
+    return wrapped >= 2 and paged >= 2
+
+
+_STRUCTURAL_TOC_KINDS = frozenset({"chapter", "part", "book", "preface", "introduction", "prologue"})
+
+
+def toc_match_covers_structure(
+    entries: list[dict[str, Any]],
+    matched: list[dict[str, Any]],
+) -> bool:
+    """Reject partial maps — a missed chapter would be swallowed by the previous section."""
+    if not entries or not matched:
+        return False
+    needed = [e for e in entries if e.get("kind") in _STRUCTURAL_TOC_KINDS]
+    if not needed:
+        needed = list(entries)
+    got = {(m.get("index"), m.get("label")) for m in matched}
+    return all((e.get("index"), e.get("label")) in got for e in needed)
 
 
 def is_toc_chapter_block(lines: list[str], index: int) -> bool:
@@ -405,6 +466,31 @@ def _sig_tokens(text: str) -> set[str]:
     return {p for p in _norm_toc_heading(text).split() if p not in _STOP_WORDS and len(p) > 1}
 
 
+def _int_to_roman(value: int) -> str:
+    table = (
+        (1000, "M"),
+        (900, "CM"),
+        (500, "D"),
+        (400, "CD"),
+        (100, "C"),
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
+        (10, "X"),
+        (9, "IX"),
+        (5, "V"),
+        (4, "IV"),
+        (1, "I"),
+    )
+    parts: list[str] = []
+    n = value
+    for amount, glyph in table:
+        while n >= amount:
+            parts.append(glyph)
+            n -= amount
+    return "".join(parts)
+
+
 def _match_strings_for(label: str, title: str) -> list[str]:
     out: list[str] = []
     for val in (label, title):
@@ -413,7 +499,14 @@ def _match_strings_for(label: str, title: str) -> list[str]:
             out.append(val)
     num = chapter_number_key(label)
     if num:
-        out.extend([f"CHAPTER {num}", f"Chapter {num}", f"CHAPTER {num}.", f"Chapter {num}."])
+        tokens = [num]
+        roman = _int_to_roman(int(num))
+        if roman and roman != num:
+            tokens.append(roman)
+        for token in tokens:
+            out.extend(
+                [f"CHAPTER {token}", f"Chapter {token}", f"CHAPTER {token}.", f"Chapter {token}."]
+            )
     seen: set[str] = set()
     uniq: list[str] = []
     for item in out:
@@ -437,6 +530,7 @@ def _flush_toc_pending(pending: dict[str, Any] | None, entries: list[dict[str, A
             "title": title or label,
             "kind": str(pending.get("kind") or kind_for_toc_label(label)),
             "page": pending.get("page"),
+            "wrapped": bool(pending.get("wrapped")),
             "match_strings": _match_strings_for(label, title),
         }
     )
@@ -474,21 +568,30 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
             rest = chapter.group(2).strip()
             page = toc_page_tail(stripped)
             word0 = stripped.split()[0]
+            num = chapter.group(1)
+            label = f"CHAPTER {num.upper() if not num.isdigit() else num}"
+            already = chapter_number_key(label)
             if (
                 entries
                 and pending is None
-                and word0[:1].isupper()
-                and word0[1:].islower()
+                and (
+                    (word0[:1].isupper() and word0[1:].islower())
+                    or already in {chapter_number_key(str(e.get("label") or "")) for e in entries}
+                    or (
+                        not rest
+                        and not page
+                        and not _following_has_toc_wrap_page(lines, index)
+                    )
+                )
             ):
                 break
             flush()
-            num = chapter.group(1)
-            label = f"CHAPTER {num.upper() if not num.isdigit() else num}"
             pending = {
                 "label": label,
                 "kind": "chapter",
                 "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
                 "page": page,
+                "wrapped": False,
             }
             if page:
                 flush()
@@ -496,13 +599,24 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
 
         named = _NAMED_TOC_LINE.match(stripped)
         if named:
-            flush()
             full = strip_toc_page_tail(stripped)
+            kind = kind_for_toc_label(full or named.group(1))
+            page = toc_page_tail(stripped)
+            if (
+                entries
+                and pending is None
+                and any(e.get("kind") == kind for e in entries)
+                and not page
+                and not _following_has_toc_wrap_page(lines, index)
+            ):
+                flush()
+                break
+            flush()
             pending = {
                 "label": full or named.group(1),
-                "kind": kind_for_toc_label(full or named.group(1)),
+                "kind": kind,
                 "title_parts": [],
-                "page": toc_page_tail(stripped),
+                "page": page,
             }
             if pending["page"]:
                 flush()
@@ -527,6 +641,7 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
 
         if pending is not None:
             pending.setdefault("title_parts", []).append(strip_toc_page_tail(stripped))
+            pending["wrapped"] = True
             page = toc_page_tail(stripped)
             if page:
                 pending["page"] = page

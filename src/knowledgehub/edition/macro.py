@@ -369,12 +369,20 @@ def build_macro_structure(
 
     from .macro_markers import try_marker_assembly
     from .macro_qa import detect_body_markers
-    from .toc import match_toc_entries_in_body, parse_contents_entries
+    from .toc import (
+        match_toc_entries_in_body,
+        parse_contents_entries,
+        toc_is_wrap_page_column,
+        toc_match_covers_structure,
+    )
 
     toc_source = raw or text
     toc_entries = parse_contents_entries(toc_source)
     toc_matched = match_toc_entries_in_body(text, toc_entries) if toc_entries else []
-    if len(toc_entries) >= 3 and len(toc_matched) >= max(3, int(0.7 * len(toc_entries))):
+    if (
+        toc_is_wrap_page_column(toc_entries)
+        and toc_match_covers_structure(toc_entries, toc_matched)
+    ):
         boundaries: list[dict[str, Any]] = []
         if int(toc_matched[0]["line"]) > 0:
             boundaries.append(

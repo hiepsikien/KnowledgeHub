@@ -9,9 +9,13 @@ from knowledgehub.edition.macro_markers import resolve_division_level, try_marke
 from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_page_toc, extract_toc_from_raw, parse_title_page_entries
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
+    chapter_number_key,
     is_body_heading_line,
     is_toc_list_row,
     parse_contents_entries,
+    toc_is_wrap_page_column,
+    toc_match_covers_structure,
+    match_toc_entries_in_body,
 )
 
 
@@ -201,3 +205,203 @@ def test_resolve_division_level_aristotle():
     text, _ = build_edition(raw.read_text(encoding="utf-8"), language="en", strip_only=True)
     markers = detect_body_markers(text)
     assert resolve_division_level(markers) == "chapter"
+
+
+def test_chapter_number_key_roman_equals_arabic():
+    assert chapter_number_key("CHAPTER I") == "1"
+    assert chapter_number_key("Chapter 1") == "1"
+    assert chapter_number_key("CHAPTER XIV") == chapter_number_key("Chapter 14") == "14"
+    assert chapter_number_key("Chap. IV.") == "4"
+
+
+def _austen_style_one_line_toc() -> str:
+    return """Title page
+
+CONTENTS
+
+CHAPTER I.     Mr. Bennet sees Bingley          1
+CHAPTER II.    Visit to Netherfield             8
+CHAPTER III.   The assembly                    15
+CHAPTER IV.    Jane's letter                   22
+CHAPTER V.     The ball                        30
+
+Chapter 1
+
+It is a truth universally acknowledged.
+
+Chapter 2
+
+Mr. Bennet was among the earliest of those who waited.
+
+Chapter 3
+
+Not all that Mrs. Bennet, however, with the assistance of her five daughters.
+
+Chapter 4
+
+When Jane and Elizabeth were alone.
+
+Chapter 5
+
+The village of Longbourn was only one mile from Meryton.
+"""
+
+
+def test_one_line_contents_is_not_wrap_page_column():
+    entries = parse_contents_entries(_austen_style_one_line_toc())
+    assert len(entries) >= 5
+    assert all(not e.get("wrapped") for e in entries)
+    assert not toc_is_wrap_page_column(entries)
+
+
+def test_macro_keeps_markers_for_austen_style_one_line_toc():
+    text = _austen_style_one_line_toc()
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    assert doc["mode"] == "markers"
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert kinds.count("chapter") == 5
+
+
+def test_all_caps_body_chapter_not_ingested_as_toc():
+    raw = """Title
+
+Contents
+
+
+                                                                     PAGE
+
+ CHAPTER I
+
+ The Bachs of Thuringia--Veit Bach, the ancestor of John Sebastian     1
+
+
+ CHAPTER II
+
+ Bach’s attitude towards art--His birth                                20
+
+
+ CHAPTER III
+
+ The organ works at Weimar                                            40
+
+
+CHAPTER I
+
+John Sebastian Bach came of a large family of musicians in Thuringia who
+were known throughout the district.
+
+CHAPTER II
+
+He was born at Eisenach in 1685 and orphaned while still a boy.
+
+CHAPTER III
+
+At Weimar he wrote the greater number of his organ works.
+"""
+    entries = parse_contents_entries(raw)
+    labels = [e["label"] for e in entries]
+    assert labels == ["CHAPTER I", "CHAPTER II", "CHAPTER III"]
+    assert "John Sebastian" not in " ".join(e.get("title") or "" for e in entries)
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert titles.count("CHAPTER I") == 1
+    assert kinds.count("chapter") == 3
+
+
+def test_partial_toc_match_does_not_win():
+    raw = """Title
+
+Contents
+
+
+                                                                     PAGE
+
+ CHAPTER I
+
+ The Bachs of Thuringia--Veit Bach                                     1
+
+
+ CHAPTER II
+
+ Bach’s attitude towards art                                           20
+
+
+ CHAPTER III
+
+ The organ works at Weimar                                            40
+
+
+Chapter I
+
+Body of chapter one continues without a chapter two heading.
+
+Chapter III
+
+Body of chapter three. Chapter II is missing so a 70% rule would still win.
+"""
+    entries = parse_contents_entries(raw)
+    matched = match_toc_entries_in_body(raw, entries)
+    assert toc_is_wrap_page_column(entries)
+    assert len(matched) == 2
+    assert not toc_match_covers_structure(entries, matched)
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] != "toc_match"
+
+
+def test_toc_match_maps_roman_chapter_to_arabic_body():
+    raw = """Title
+
+Contents
+
+
+                                                                     PAGE
+
+ CHAPTER I
+
+ The Bachs of Thuringia--Veit Bach                                     1
+
+
+ CHAPTER II
+
+ Bach’s attitude towards art                                           20
+
+
+ CHAPTER III
+
+ The organ works at Weimar                                            40
+
+
+Chapter 1
+
+John Sebastian Bach came of a large family.
+
+Chapter 2
+
+He was born at Eisenach.
+
+Chapter 3
+
+At Weimar he wrote for the organ.
+"""
+    entries = parse_contents_entries(raw)
+    matched = match_toc_entries_in_body(raw, entries)
+    assert toc_is_wrap_page_column(entries)
+    assert toc_match_covers_structure(entries, matched)
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    assert "Chapter 1" in titles
+    assert "Chapter 2" in titles
+    assert "Chapter 3" in titles
+
+
+def test_build_macro_structure_markers_path_grotius():
+    raw_path = Path("/tmp/pg_full/pg75962.txt")
+    if not raw_path.is_file():
+        pytest.skip("PG cache missing")
+    text, _ = build_edition(raw_path.read_text(encoding="utf-8"), language="en", strip_only=True)
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False)
+    assert doc["mode"] == "markers"
+    assert [s["kind"] for s in doc["sections"]].count("chapter") >= 10
