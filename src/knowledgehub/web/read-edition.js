@@ -11,6 +11,7 @@
     selected: new Set(),
     editIndex: null,
     review: null,
+    editionSettings: { use_llm_macro: true, use_llm_relabel: true, use_llm_qa: true },
   };
 
   async function api(path, opts = {}) {
@@ -131,16 +132,24 @@
     const box = $("re-body");
     if (!box) return;
     const blocks = chapter.blocks || [];
-    if (!blocks.length && (chapter.source_preview_head || chapter.source_preview)) {
+    const parsed = chapter.micro_status === "complete" && blocks.length;
+    if (!parsed) {
+      const compare = chapter.compare || reviewRow(chapter.chapter_id)?.compare || {};
       const omitted = Number(chapter.source_preview_omitted) || 0;
       const gap = chapter.source_preview_truncated
         ? `<p class="preview-gap">… đã rút ${omitted.toLocaleString()} chữ giữa đầu và cuối …</p>`
         : "";
-      const head = escapeHtml(chapter.source_preview_head || chapter.source_preview);
+      const head = escapeHtml(chapter.source_preview_head || chapter.source_preview || "");
       const tail = chapter.source_preview_truncated
         ? `<pre>${escapeHtml(chapter.source_preview_tail || "")}</pre>`
         : "";
-      box.innerHTML = `<div class="re-preview"><pre>${head}</pre>${gap}${tail}</div><p class="muted">Chưa parse REF — bấm «Parse REF chương».</p>`;
+      const prev = compare.prev_tail
+        ? `<aside class="re-rail"><h3>Rìa trước</h3><pre>${escapeHtml(compare.prev_tail)}</pre></aside>`
+        : "";
+      const next = compare.next_head
+        ? `<aside class="re-rail"><h3>Rìa sau</h3><pre>${escapeHtml(compare.next_head)}</pre></aside>`
+        : "";
+      box.innerHTML = `${prev}<div class="re-preview"><pre>${head}</pre>${gap}${tail}</div>${next}<p class="muted">Chưa parse REF — bấm «Parse chương này» khi cấu trúc đã OK.</p>`;
       return;
     }
     box.innerHTML = blocks
@@ -222,6 +231,7 @@
       if (!chk) return;
       if (chk.checked) state.selected.add(chk.dataset.chk);
       else state.selected.delete(chk.dataset.chk);
+      syncToolbar();
     };
   }
 
@@ -267,58 +277,115 @@
       $("re-edit-json")?.closest("details")?.toggleAttribute("open", parsed);
       renderStructTools(chapter);
       renderCompare(chapter);
+      syncToolbar();
     } catch (err) {
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
     }
   }
 
+  function editionFlag(name) {
+    const ed = state.editionSettings || {};
+    return ed[name] !== false;
+  }
+
   function useLlmMacro() {
-    const el = $("re-use-llm-macro");
-    return el ? el.checked : true;
+    return editionFlag("use_llm_macro");
   }
 
   function useLlmRelabel() {
-    const el = $("re-use-llm");
-    return el ? el.checked : true;
+    return editionFlag("use_llm_relabel");
   }
 
   function useLlmQa() {
-    const el = $("re-use-llm-qa");
-    return el ? el.checked : true;
+    return editionFlag("use_llm_qa");
   }
 
-  function applyLlmDefaults(status) {
-    const macro = $("re-use-llm-macro");
-    const relabel = $("re-use-llm");
-    const qa = $("re-use-llm-qa");
-    const gemini = !!status.gemini_available;
-    if (macro && status) {
-      macro.checked = gemini;
-      macro.disabled = !gemini;
+  async function loadEditionSettings() {
+    try {
+      const data = await api("/api/settings");
+      const ed = data.settings?.edition;
+      if (ed && typeof ed === "object") state.editionSettings = ed;
+    } catch {
+      /* keep defaults */
     }
-    if (relabel && status) {
-      relabel.checked = status.default_use_llm_relabel !== false;
-      relabel.disabled = !gemini;
-    }
-    if (qa && status) {
-      qa.checked = gemini;
-      qa.disabled = !gemini;
-    }
+  }
+
+  function showBtn(id, show) {
+    const el = $(id);
+    if (el) el.hidden = !show;
+  }
+
+  function markPrimary(id) {
+    ["re-macro", "re-layout-ok", "re-parse-ch", "re-parse-ready", "re-publish"].forEach((btnId) => {
+      const el = $(btnId);
+      if (!el) return;
+      const on = btnId === id && !el.hidden;
+      el.classList.toggle("primary", on);
+      if (btnId === "re-publish" || btnId === "re-parse-ready") {
+        el.classList.toggle("ghost", !on && !el.hidden);
+      }
+    });
+  }
+
+  function syncToolbar() {
+    const crumb = $("re-crumb");
+    const actions = $("re-actions");
+    const onDesk = !!state.workId && $("re-pick")?.hidden;
+    if (crumb) crumb.hidden = !onDesk;
+    if (actions) actions.hidden = !onDesk;
+    if (!onDesk) return;
+
+    const status = state.status || {};
+    const health = state.review?.health || {};
+    const macro = !!status.macro_complete;
+    const layoutOk = !!health.layout_ok;
+    const chapters = state.manifest?.chapters || [];
+    const pending = chapters.filter((row) => row.micro_status !== "complete");
+    const current = chapters.find((row) => row.chapter_id === state.chapterId);
+    const currentPending = !!(current && current.micro_status !== "complete");
+    const parsed = chapters.filter((row) => row.micro_status === "complete").length;
+    const selectedPending = [...state.selected].filter((id) =>
+      chapters.some((row) => row.chapter_id === id && row.micro_status !== "complete"),
+    ).length;
+
+    showBtn("re-macro", !macro);
+    showBtn("re-layout-ok", macro && !layoutOk);
+    const layoutBtn = $("re-layout-ok");
+    if (layoutBtn) layoutBtn.disabled = !(health.ready_to_parse && !layoutOk);
+    showBtn("re-parse-ch", layoutOk && currentPending);
+    showBtn("re-parse-selected", layoutOk && selectedPending > 1);
+    showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(currentPending && pending.length === 1));
+    showBtn("re-publish", layoutOk && parsed > 0);
+    showBtn("re-more", true);
+
+    let primary = "re-macro";
+    if (!macro) primary = "re-macro";
+    else if (!layoutOk) primary = "re-layout-ok";
+    else if (currentPending) primary = "re-parse-ch";
+    else if (pending.length) primary = "re-parse-ready";
+    else primary = "re-publish";
+    markPrimary(primary);
   }
 
   function formatStatus(status) {
     const llmNote = status.gemini_available ? "" : " · không có GEMINI_API_KEY — chỉ rule";
     if (!status.macro_complete) {
-      return "Chưa phân đoạn — chạy Bước 1 (LLM phân đoạn chương)" + llmNote;
+      return "Chưa phân đoạn — bấm Phân đoạn." + llmNote;
     }
-    const mode = status.macro_mode || status.manifest?.macro_mode || "rule";
     const parsed = status.chapters_parsed || 0;
     const total = status.chapters_total || 0;
-    const summary = status.manifest?.macro_summary_vi || status.structure?.summary_vi || "";
+    const health = state.review?.health || {};
     const toc = state.review?.toc_candidate?.status;
-    const tocNote = toc ? ` · TOC ${toc}` : " · chưa confirm TOC";
-    return `Macro (${mode}): ${total} phần · đã parse ${parsed}/${total}${summary ? " · " + summary.slice(0, 80) : ""}${tocNote}${llmNote}`;
+    if (!health.layout_ok) {
+      if (health.ready_to_parse) {
+        return `${total} phần · sẵn sàng — bấm Cấu trúc OK` + llmNote;
+      }
+      const why = health.not_ready_reason || (toc ? "duyệt short/super" : "chưa confirm TOC");
+      return `${total} phần · ${why}` + llmNote;
+    }
+    if (parsed < total) return `${parsed}/${total} đã parse REF` + llmNote;
+    return `${total} phần đã parse — đưa sang Read` + llmNote;
   }
 
   function renderTocPanel(review) {
@@ -372,6 +439,7 @@
     renderTocPanel(review);
     renderHealth(review);
     if (state.manifest) renderChapterList(state.manifest);
+    syncToolbar();
   }
 
   async function loadReview() {
@@ -413,23 +481,15 @@
     const compare = chapter?.compare || reviewRow(chapter?.chapter_id)?.compare;
     const inner = chapter?.inner_heads || reviewRow(chapter?.chapter_id)?.inner_heads || [];
     const match = chapter?.toc_match || reviewRow(chapter?.chapter_id)?.toc_match;
-    if (!compare && !inner.length && !match) {
-      box.hidden = true;
-      box.innerHTML = "";
-      return;
-    }
+    const parsed = chapter?.micro_status === "complete" && (chapter?.blocks || []).length;
     const panes = [];
-    if (compare?.prev_tail) {
-      panes.push(`<div class="re-compare-pane"><h3>Cuối section trước</h3><pre>${escapeHtml(compare.prev_tail)}</pre></div>`);
-    }
-    if (compare?.this_head) {
-      panes.push(`<div class="re-compare-pane"><h3>Đầu section này</h3><pre>${escapeHtml(compare.this_head)}</pre></div>`);
-    }
-    if (compare?.this_tail) {
-      panes.push(`<div class="re-compare-pane"><h3>Cuối section này</h3><pre>${escapeHtml(compare.this_tail)}</pre></div>`);
-    }
-    if (compare?.next_head) {
-      panes.push(`<div class="re-compare-pane"><h3>Đầu section sau</h3><pre>${escapeHtml(compare.next_head)}</pre></div>`);
+    if (parsed && compare && (compare.prev_tail || compare.this_head || compare.this_tail || compare.next_head)) {
+      panes.push(`<details class="re-cut"><summary>Rìa cắt</summary>
+        ${compare.prev_tail ? `<div class="re-compare-pane"><h3>Cuối section trước</h3><pre>${escapeHtml(compare.prev_tail)}</pre></div>` : ""}
+        ${compare.this_head ? `<div class="re-compare-pane"><h3>Đầu section này</h3><pre>${escapeHtml(compare.this_head)}</pre></div>` : ""}
+        ${compare.this_tail ? `<div class="re-compare-pane"><h3>Cuối section này</h3><pre>${escapeHtml(compare.this_tail)}</pre></div>` : ""}
+        ${compare.next_head ? `<div class="re-compare-pane"><h3>Đầu section sau</h3><pre>${escapeHtml(compare.next_head)}</pre></div>` : ""}
+      </details>`);
     }
     if (match?.label) {
       panes.push(`<div class="re-compare-pane"><h3>Khớp TOC</h3><p>${escapeHtml(match.label)}</p></div>`);
@@ -522,10 +582,10 @@
     $("re-desk").hidden = false;
     $("re-heading").textContent = workId;
     $("re-status").textContent = "Đang tải…";
+    await loadEditionSettings();
     try {
       const status = await api(`/api/works/${encodeURIComponent(workId)}/read-edition`);
       state.status = status;
-      applyLlmDefaults(status);
       $("re-heading").textContent = status.title || workId;
       $("re-status").textContent = formatStatus(status);
       if (status.macro_complete && status.manifest) {
@@ -541,13 +601,15 @@
         if (pick) await selectChapter(pick.chapter_id);
       } else {
         applyReview(null);
-        $("re-chapters").innerHTML = `<p class="muted">Chạy «Bước 1: Phân đoạn» để liệt kê chương.</p>`;
+        $("re-chapters").innerHTML = `<p class="muted">Bấm «Phân đoạn» để liệt kê chương.</p>`;
         $("re-body").innerHTML = "";
         if ($("re-compare")) $("re-compare").hidden = true;
         if ($("re-struct-tools")) $("re-struct-tools").hidden = true;
       }
+      syncToolbar();
     } catch (err) {
       $("re-status").textContent = err.message;
+      syncToolbar();
     }
   }
 
@@ -574,7 +636,7 @@
 
     $("re-reset")?.addEventListener("click", async () => {
       if (!state.workId) return;
-      if (!window.confirm("Xóa cấu trúc HITL và parse REF của sách này, làm lại từ Bước 1?")) return;
+      if (!window.confirm("Xóa cấu trúc HITL và parse REF của sách này, làm lại từ Phân đoạn?")) return;
       $("re-status").textContent = "Đang reset phân đoạn…";
       try {
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
@@ -696,6 +758,7 @@
         else state.selected.delete(row.chapter_id);
       }
       renderChapterList(state.manifest);
+      syncToolbar();
     });
 
     $("re-toc-yes")?.addEventListener("click", () => void confirmToc("yes"));
@@ -821,8 +884,11 @@
       $("re-pick").hidden = false;
       $("re-desk").hidden = true;
       applyReview(null);
-      $("re-heading").textContent = "Read Edition";
-      $("re-status").textContent = "Chọn sách đang làm hoặc bắt đầu sách mới";
+      $("re-heading").textContent = "Chế bản";
+      $("re-status").textContent = "Cấu trúc chương, định dạng REF, đưa sang Read.";
+      state.workId = null;
+      syncToolbar();
+      await loadEditionSettings();
       const [sessionResp, works] = await Promise.all([api("/api/read-editions"), api("/api/works")]);
       const sessions = sessionResp.sessions || [];
       const sessionIds = new Set(sessions.map((s) => s.work_id));

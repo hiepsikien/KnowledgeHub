@@ -144,8 +144,15 @@ class TranslationSettingsBody(BaseModel):
     deepseek_rpm: int | None = None
 
 
+class EditionSettingsBody(BaseModel):
+    use_llm_macro: bool | None = None
+    use_llm_relabel: bool | None = None
+    use_llm_qa: bool | None = None
+
+
 class SettingsBody(BaseModel):
     translation: TranslationSettingsBody | None = None
+    edition: EditionSettingsBody | None = None
 
 
 class ReadEditionMacroBody(BaseModel):
@@ -500,6 +507,8 @@ def create_app() -> FastAPI:
         if payload.translation is not None:
             tr = payload.translation.model_dump(exclude_none=True)
             body["translation"] = tr
+        if payload.edition is not None:
+            body["edition"] = payload.edition.model_dump(exclude_none=True)
         try:
             saved = save_settings(body)
         except (ProviderError, ValueError) as exc:

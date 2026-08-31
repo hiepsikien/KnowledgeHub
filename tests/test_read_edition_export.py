@@ -98,6 +98,19 @@ def client(tmp_path, monkeypatch):
     return TestClient(create_app())
 
 
+def test_cheban_ui_labels(client):
+    page = client.get("/read-edition")
+    assert page.status_code == 200
+    html = page.text
+    assert ">Chế bản<" in html
+    assert "Đang làm" in html
+    assert "← Đang làm" in html
+    assert "Bước 1: Phân đoạn" not in html
+    assert "Parse REF chương" not in html
+    assert "Parse chương này" in html
+    assert "Chế bản (REF)" in html
+
+
 def test_read_edition_api(client):
     wid = "locke--second_treatise"
     empty = client.get("/api/read-editions")
