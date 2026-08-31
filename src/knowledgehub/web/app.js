@@ -108,7 +108,10 @@ function editionBadge(workId) {
   if (!s) return `<span class="muted">—</span>`;
   const parsed = s.chapters_parsed || 0;
   const total = s.chapters_total || 0;
-  return `<span class="badge ok">${parsed}/${total}</span>`;
+  const phase = s.phase || "macro";
+  const tone = phase === "parsed" ? "ok" : phase === "parsing" || phase === "layout_ok" ? "warn" : "";
+  const klass = tone ? `badge ${tone}` : "badge";
+  return `<span class="${klass}" title="${escapeHtml(phase)}">${parsed}/${total}</span>`;
 }
 
 function renderRows() {
@@ -1887,9 +1890,8 @@ function wireNav() {
         void loadTranslationView(null, null);
       }
       if (view === "read-edition") {
-        const reId = readEditionFromPath();
-        if (reId) void window.KHReadEdition?.load(reId);
-        else void window.KHReadEdition?.pickWork();
+        // Nav always opens Đang làm, even when already on /read-edition/<work>.
+        void window.KHReadEdition?.pickWork();
       }
     };
   });

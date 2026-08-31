@@ -637,6 +637,7 @@ mark.ann-context {
   border-radius: 6px;
   padding: 8px 10px;
   margin: 0 0 10px;
+  /* Above / below the source preview — not a side-by-side grid. */
 }
 .re-rail h3 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
 .re-rail pre { margin: 0; white-space: pre-wrap; font: inherit; max-height: 140px; overflow: auto; }

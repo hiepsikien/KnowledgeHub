@@ -353,7 +353,13 @@
     showBtn("re-macro", !macro);
     showBtn("re-layout-ok", macro && !layoutOk);
     const layoutBtn = $("re-layout-ok");
-    if (layoutBtn) layoutBtn.disabled = !(health.ready_to_parse && !layoutOk);
+    if (layoutBtn) {
+      const canConfirm = !!(health.ready_to_parse && !layoutOk);
+      layoutBtn.disabled = !canConfirm;
+      layoutBtn.title = canConfirm
+        ? "Xác nhận cấu trúc, rồi parse REF"
+        : health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý";
+    }
     showBtn("re-parse-ch", layoutOk && currentPending);
     showBtn("re-parse-selected", layoutOk && selectedPending > 1);
     showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(currentPending && pending.length === 1));
@@ -863,10 +869,6 @@
 
     $("re-publish")?.addEventListener("click", () => {
       if (state.workId) location.href = `/publish/${encodeURIComponent(state.workId)}`;
-    });
-
-    document.querySelector('.nav-link[data-view="read-edition"]')?.addEventListener("click", () => {
-      location.href = "/read-edition";
     });
   }
 
