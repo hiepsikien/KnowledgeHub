@@ -301,7 +301,9 @@ At Weimar he wrote the greater number of his organ works.
     entries = parse_contents_entries(raw)
     labels = [e["label"] for e in entries]
     assert labels == ["CHAPTER I", "CHAPTER II", "CHAPTER III"]
-    assert "John Sebastian" not in " ".join(e.get("title") or "" for e in entries)
+    joined = " ".join(e.get("title") or "" for e in entries)
+    assert "large family of musicians" not in joined
+    assert "orphaned while still a boy" not in joined
     doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
     assert doc["mode"] == "toc_match"
     titles = [s["title"] for s in doc["sections"]]
