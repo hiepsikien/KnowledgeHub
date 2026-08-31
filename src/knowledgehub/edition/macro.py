@@ -385,6 +385,7 @@ def build_macro_structure(
     ):
         boundaries: list[dict[str, Any]] = []
         if int(toc_matched[0]["line"]) > 0:
+            # CONTENTS stays in front_matter. kind: toc is HITL only (set_kind / expand).
             boundaries.append(
                 {"start_line": 0, "kind": "front_matter", "title": "Front matter", "confidence": 0.85}
             )

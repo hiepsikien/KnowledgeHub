@@ -417,6 +417,8 @@ def toc_is_wrap_page_column(entries: list[dict[str, Any]]) -> bool:
     return wrapped >= 2 and paged >= 2
 
 
+# Catalogue / glossary / bibliography are optional. A miss still allows toc_match;
+# that tail stays in the previous section. Require every chapter/part/book/preface.
 _STRUCTURAL_TOC_KINDS = frozenset({"chapter", "part", "book", "preface", "introduction", "prologue"})
 
 
@@ -424,7 +426,7 @@ def toc_match_covers_structure(
     entries: list[dict[str, Any]],
     matched: list[dict[str, Any]],
 ) -> bool:
-    """Reject partial maps — a missed chapter would be swallowed by the previous section."""
+    """Require every structural TOC entry; unmatched back_matter is allowed."""
     if not entries or not matched:
         return False
     needed = [e for e in entries if e.get("kind") in _STRUCTURAL_TOC_KINDS]

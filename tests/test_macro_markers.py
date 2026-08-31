@@ -147,12 +147,13 @@ def test_macro_uses_toc_for_abdy_style_sections():
     assert "preface" in kinds
     assert kinds.count("chapter") == 3
     assert kinds.count("back_matter") == 4
+    assert "toc" not in kinds
 
 
 def test_macro_abdy_williams_full_pg():
     raw_path = Path("/tmp/pg_full/pg43650.txt")
     if not raw_path.is_file():
-        pytest.skip("PG cache missing")
+        pytest.skip("PG cache missing — compact fixtures cover Abdy wrap TOC")
     raw = raw_path.read_text(encoding="utf-8", errors="replace")
     text, _ = build_edition(raw, language="en", strip_only=True)
     doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
@@ -170,7 +171,7 @@ def test_macro_abdy_williams_full_pg():
 def test_marker_assembly_austen():
     raw = Path("/tmp/pg_full/pg1342.txt")
     if not raw.is_file():
-        pytest.skip("PG cache missing")
+        pytest.skip("PG cache missing — compact Austen TOC fixture covers markers")
     text, _ = build_edition(raw.read_text(encoding="utf-8"), language="en", strip_only=True)
     markers = detect_body_markers(text)
     doc = try_marker_assembly(text, markers, language="en")
@@ -191,7 +192,7 @@ def test_title_page_toc_paine():
 def test_build_macro_structure_markers_path_austen():
     raw = Path("/tmp/pg_full/pg1342.txt")
     if not raw.is_file():
-        pytest.skip("PG cache missing")
+        pytest.skip("PG cache missing — compact Austen TOC fixture covers markers")
     text, _ = build_edition(raw.read_text(encoding="utf-8"), language="en", strip_only=True)
     doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False)
     assert doc["mode"] == "markers"
@@ -312,6 +313,57 @@ At Weimar he wrote the greater number of his organ works.
     assert kinds.count("chapter") == 3
 
 
+def test_unmatched_back_matter_still_allows_toc_match():
+    raw = """Title
+
+Contents
+
+
+                                                                     PAGE
+
+ CHAPTER I
+
+ The Bachs of Thuringia--Veit Bach                                     1
+
+
+ CHAPTER II
+
+ Bach’s attitude towards art                                           20
+
+
+ CATALOGUE OF VOCAL WORKS                                             177
+
+ GLOSSARY                                                             205
+
+
+Chapter I
+
+John Sebastian Bach came of a large family.
+
+Chapter II
+
+He was born at Eisenach. Matthew Passion is listed only here; Ahle, Joh. Rudolph.
+"""
+    entries = parse_contents_entries(raw)
+    kinds = [e["kind"] for e in entries]
+    assert kinds.count("chapter") == 2
+    assert kinds.count("back_matter") == 2
+    matched = match_toc_entries_in_body(raw, entries)
+    assert toc_is_wrap_page_column(entries)
+    assert toc_match_covers_structure(entries, matched)
+    assert len(matched) == 2
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    section_kinds = [s["kind"] for s in doc["sections"]]
+    assert "toc" not in section_kinds
+    assert section_kinds.count("back_matter") == 0
+    last = doc["sections"][-1]
+    assert last["kind"] == "chapter"
+    slice_text = raw[int(last["start_char"]) : int(last["end_char"]) + 1]
+    assert "Matthew Passion" in slice_text
+    assert "Ahle" in slice_text
+
+
 def test_partial_toc_match_does_not_win():
     raw = """Title
 
@@ -402,7 +454,7 @@ At Weimar he wrote for the organ.
 def test_build_macro_structure_markers_path_grotius():
     raw_path = Path("/tmp/pg_full/pg75962.txt")
     if not raw_path.is_file():
-        pytest.skip("PG cache missing")
+        pytest.skip("PG cache missing — Grotius snippet tests cover markers/HITL")
     text, _ = build_edition(raw_path.read_text(encoding="utf-8"), language="en", strip_only=True)
     doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False)
     assert doc["mode"] == "markers"
