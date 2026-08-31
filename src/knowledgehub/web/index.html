@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=read-edition-hitl" />
+    <link rel="stylesheet" href="/styles.css?v=read-edition-hitl2" />
   </head>
   <body>
     <div class="shell">
@@ -128,9 +128,10 @@
               <label class="inline re-llm-toggle"><input id="re-use-llm" type="checkbox" checked /> LLM relabel</label>
               <label class="inline re-llm-toggle"><input id="re-use-llm-qa" type="checkbox" checked /> LLM QA</label>
               <button type="button" class="btn primary" id="re-macro">Bước 1: Phân đoạn</button>
+              <button type="button" class="btn" id="re-layout-ok">Cấu trúc OK</button>
               <button type="button" class="btn ghost" id="re-parse-ch">Parse REF chương</button>
               <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
-              <button type="button" class="btn primary" id="re-parse-ready">Cấu trúc OK — parse REF</button>
+              <button type="button" class="btn primary" id="re-parse-ready">Parse REF</button>
               <button type="button" class="btn" id="re-publish">Publish Read</button>
             </div>
           </header>
@@ -180,10 +181,16 @@
                 <label class="re-kind-label">Kind
                   <select id="re-kind">
                     <option value="front_matter">front_matter</option>
+                    <option value="preface">preface</option>
+                    <option value="introduction">introduction</option>
+                    <option value="prologue">prologue</option>
                     <option value="chapter">chapter</option>
                     <option value="part">part</option>
                     <option value="book">book</option>
+                    <option value="epilogue">epilogue</option>
+                    <option value="appendix">appendix</option>
                     <option value="notes">notes</option>
+                    <option value="back_matter">back_matter</option>
                     <option value="other">other</option>
                   </select>
                 </label>
@@ -441,7 +448,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=read-edition-hitl"></script>
-    <script src="/read-edition.js?v=read-edition-hitl"></script>
+    <script src="/app.js?v=read-edition-hitl2"></script>
+    <script src="/read-edition.js?v=read-edition-hitl2"></script>
   </body>
 </html>

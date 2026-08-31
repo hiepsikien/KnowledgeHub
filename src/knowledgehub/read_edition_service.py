@@ -21,8 +21,10 @@ from .edition.read_edition import (
 from .edition.read_edition_steps import (
     ReadEditionStepError,
     assemble_edition_from_package,
+    confirm_layout_step,
     confirm_toc_step,
     edit_structure_step,
+    ensure_ready_to_parse,
     load_structure,
     parse_micro_chapter,
     resolve_stripped_source,
@@ -99,9 +101,12 @@ def parse_micro(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
     try:
-        return parse_micro_chapter(work_id, chapter_id, corpus=corpus, use_llm=use_llm)
+        return parse_micro_chapter(
+            work_id, chapter_id, corpus=corpus, use_llm=use_llm, require_ready=require_ready
+        )
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
 
@@ -112,12 +117,20 @@ def parse_micro_batch(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
+    if require_ready:
+        try:
+            ensure_ready_to_parse(work_id, corpus=corpus)
+        except ReadEditionStepError as exc:
+            raise _map_error(exc) from exc
     parsed: dict[str, Any] = {}
     errors: dict[str, str] = {}
     for ch_id in chapter_ids:
         try:
-            parsed[ch_id] = parse_micro_chapter(work_id, ch_id, corpus=corpus, use_llm=use_llm)
+            parsed[ch_id] = parse_micro_chapter(
+                work_id, ch_id, corpus=corpus, use_llm=use_llm, require_ready=False
+            )
         except ReadEditionStepError as exc:
             errors[ch_id] = str(exc)
     return {"parsed": parsed, "errors": errors, "count": len(parsed)}
@@ -156,6 +169,13 @@ def get_review(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
 def confirm_toc(work_id: str, status: str, *, corpus: Path | None = None) -> dict[str, Any]:
     try:
         return confirm_toc_step(work_id, status, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def confirm_layout(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return confirm_layout_step(work_id, corpus=corpus)
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
 
@@ -230,6 +250,11 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
                 chapter["char_share"] = diag.get("char_share")
         except ReadEditionStepError:
             pass
+    structure = load_structure(package_dir)
+    if structure:
+        section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
+        if section:
+            chapter["kind"] = section.get("kind", chapter.get("kind"))
     qa = (load_qa_report(package_dir).get("chapters") or {}).get(chapter_id)
     overrides = load_overrides(package_dir).get(chapter_id)
     chapter["qa"] = qa

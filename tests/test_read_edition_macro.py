@@ -73,7 +73,7 @@ def test_run_macro_and_parse_one_chapter(tmp_path, monkeypatch):
     assert structure["section_count"] >= 1
 
     ch_id = structure["sections"][0]["section_id"]
-    chapter = parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
+    chapter = parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False, require_ready=False)
     assert chapter["micro_status"] == "complete"
     assert chapter["blocks"]
 
@@ -132,7 +132,7 @@ def test_force_remacro_resets_parsed_chapters(tmp_path, monkeypatch):
     package_dir = corpus / macro["package_dir"]
     structure = load_structure(package_dir)
     for sec in structure["sections"]:
-        parse_micro_chapter("grotius--freedom_of_the_seas", sec["section_id"], corpus=corpus, use_llm=False)
+        parse_micro_chapter("grotius--freedom_of_the_seas", sec["section_id"], corpus=corpus, use_llm=False, require_ready=False)
 
     edition_for_publish("grotius--freedom_of_the_seas", corpus=corpus)
 

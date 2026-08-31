@@ -103,6 +103,13 @@ def toc_lines_from_hitl(structure: dict[str, Any]) -> list[str]:
     return [ln.strip() for ln in excerpt.split("\n") if ln.strip()]
 
 
+def _contained_as_words(needle: str, haystack: str) -> bool:
+    """True when needle is a whole-word (space-delimited) substring of haystack."""
+    if not needle or not haystack:
+        return False
+    return re.search(rf"(?:^|\s){re.escape(needle)}(?:$|\s)", haystack) is not None
+
+
 def match_toc_line(title: str, toc_lines: list[str]) -> dict[str, Any] | None:
     needle = normalize_toc_label(title)
     if len(needle) < 4:
@@ -115,8 +122,13 @@ def match_toc_line(title: str, toc_lines: list[str]) -> dict[str, Any] | None:
             continue
         if needle == label:
             score = 1.0
-        elif needle in label or label in needle:
-            score = min(len(needle), len(label)) / max(len(needle), len(label))
+        elif _contained_as_words(needle, label) or _contained_as_words(label, needle):
+            # Word-boundary containment so "chapter i" does not hit "chapter ii".
+            # Boost past TOC_MATCH_MIN: short titles vs long TOC lines fail a raw length ratio.
+            score = max(
+                min(len(needle), len(label)) / max(len(needle), len(label)),
+                0.8,
+            )
         else:
             continue
         if score > best_score:
@@ -150,7 +162,13 @@ def coverage_report(text: str, sections: list[dict[str, Any]]) -> dict[str, Any]
         if right_start > left_end + 1:
             gaps.append({"start_char": left_end + 1, "end_char": right_start - 1})
         elif right_start <= left_end:
-            overlaps.append({"start_char": right_start, "end_char": min(left_end, right_start)})
+            right_end = int(right.get("end_char") or 0)
+            overlaps.append(
+                {
+                    "start_char": right_start,
+                    "end_char": min(left_end, right_end),
+                }
+            )
     last_end = int(ordered[-1].get("end_char") or 0)
     if last_end < n - 1:
         gaps.append({"start_char": last_end + 1, "end_char": n - 1})
@@ -323,6 +341,7 @@ def build_review(
     ]
     toc_status = toc.get("status")
     toc_answered = toc_status in {"yes", "no", "none"}
+    layout_ok = bool(hitl.get("layout_ok"))
     ready = bool(toc_answered and not untreated and coverage.get("complete"))
     return {
         "toc_candidate": toc,
@@ -335,10 +354,27 @@ def build_review(
             "toc_miss": sum(1 for s in sections if "toc_miss" in (s.get("flags") or [])),
             "untreated_flags": untreated,
             "toc_answered": toc_answered,
+            "layout_ok": layout_ok,
             "ready_to_parse": ready,
+            "not_ready_reason": None if ready else structure_not_ready_reason(toc_answered, untreated, coverage),
         },
         "hitl": {**hitl, "toc": toc},
     }
+
+
+def structure_not_ready_reason(
+    toc_answered: bool,
+    untreated: list[str],
+    coverage: dict[str, Any],
+) -> str:
+    parts: list[str] = []
+    if not toc_answered:
+        parts.append("TOC not confirmed")
+    if untreated:
+        parts.append(f"{len(untreated)} short/super section(s) unconfirmed")
+    if not coverage.get("complete"):
+        parts.append("coverage incomplete (gaps or overlaps)")
+    return "Structure not ready to parse — " + ("; ".join(parts) or "HITL review incomplete")
 
 
 def sections_to_boundaries(sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -417,8 +453,11 @@ def apply_structure_edit(
         if kind_norm not in SECTION_KINDS:
             raise ValueError(f"unknown kind: {kind}")
         sections[index] = {**sections[index], "kind": kind_norm}
-        focused = int(sections[index]["start_line"])
-    elif action == "merge_prev":
+        out = dict(structure)
+        out["sections"] = sections
+        out["hitl"] = hitl
+        return out, focused
+    if action == "merge_prev":
         if index == 0:
             raise ValueError("cannot merge first section with previous")
         focused = int(sections[index - 1]["start_line"])
@@ -475,5 +514,6 @@ def apply_structure_edit(
     out = _copy_envelope(structure, rebuilt)
     still = sorted(s for s in confirmed if any(int(sec["start_line"]) == s for sec in rebuilt.get("sections") or []))
     hitl["confirmed_starts"] = still
+    hitl["layout_ok"] = False
     out["hitl"] = hitl
     return out, focused

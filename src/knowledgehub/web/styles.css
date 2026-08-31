@@ -649,6 +649,7 @@ mark.ann-context {
 .re-toc-banner { margin: 0 0 8px; font-size: 13px; }
 .re-toc-actions { gap: 8px; }
 .re-health { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+.re-health.ok { color: var(--ok, #2a7a4b); }
 .re-flag {
   display: inline-block;
   font-size: 10px;

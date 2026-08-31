@@ -301,6 +301,37 @@ def confirm_toc_step(
     return {**persisted, **review}
 
 
+def confirm_layout_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Curator asserts macro structure is final. Requires ready_to_parse; does not parse."""
+    root = corpus or corpus_root()
+    text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    language = str(work.get("language") or structure.get("language") or "en")
+    raw = load_raw_source(work_id, corpus=root)
+    review = build_review(text, structure, raw=raw, language=language)
+    if not review["health"].get("ready_to_parse"):
+        raise ReadEditionStepError(review["health"].get("not_ready_reason") or "Structure not ready")
+    hitl = dict(structure.get("hitl") or {})
+    hitl["layout_ok"] = True
+    structure["hitl"] = hitl
+    persisted = persist_package_structure(work_id, structure, corpus=root, reset_micro=False)
+    review = review_structure_step(work_id, corpus=root)
+    return {**persisted, **review}
+
+
+def ensure_ready_to_parse(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Raise if HITL review is not ready for REF parse. Returns the review payload."""
+    review = review_structure_step(work_id, corpus=corpus)
+    if not (review.get("health") or {}).get("ready_to_parse"):
+        raise ReadEditionStepError(
+            (review.get("health") or {}).get("not_ready_reason") or "Structure not ready to parse"
+        )
+    return review
+
+
 def edit_structure_step(
     work_id: str,
     *,
@@ -329,7 +360,7 @@ def edit_structure_step(
         )
     except ValueError as exc:
         raise ReadEditionStepError(str(exc)) from exc
-    reset_micro = action != "confirm"
+    reset_micro = action not in {"confirm", "set_kind"}
     persisted = persist_package_structure(
         work_id, new_structure, corpus=root, reset_micro=reset_micro
     )
@@ -352,6 +383,7 @@ def parse_micro_chapter(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     text, meta, work = resolve_stripped_source(work_id, corpus=root)
@@ -363,6 +395,8 @@ def parse_micro_chapter(
     section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
     if not section:
         raise ReadEditionStepError(f"Unknown section: {chapter_id}")
+    if require_ready:
+        ensure_ready_to_parse(work_id, corpus=root)
 
     use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
     slice_text = section_source_slice(text, section)

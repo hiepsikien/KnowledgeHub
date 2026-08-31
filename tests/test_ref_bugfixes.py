@@ -185,7 +185,7 @@ def test_chapter_qa_uses_chapter_text_not_manuscript_head(tmp_path, monkeypatch)
     structure = load_structure(corpus / macro["package_dir"])
     assert len(structure.get("sections") or []) >= 2
     ch2 = structure["sections"][1]["section_id"]
-    parse_micro_chapter("demo--book", ch2, corpus=corpus, use_llm=False)
+    parse_micro_chapter("demo--book", ch2, corpus=corpus, use_llm=False, require_ready=False)
     qa = qa_read_edition_chapter("demo--book", ch2, corpus=corpus, use_llm=False)
     assert qa["fidelity"]["passed"] is True
     chapter_path = corpus / macro["package_dir"] / "chapters" / f"{ch2}.json"

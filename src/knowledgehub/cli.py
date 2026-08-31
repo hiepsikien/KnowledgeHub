@@ -120,6 +120,11 @@ def main(argv: list[str] | None = None) -> int:
     re_exp.add_argument("--force", action="store_true", help="Rebuild macro even if structure exists")
     re_exp.add_argument("--llm", action="store_true", help="Use LLM for macro segmentation")
     re_exp.add_argument("--parse-all", action="store_true", help="After macro, REF-parse every section")
+    re_exp.add_argument(
+        "--skip-hitl",
+        action="store_true",
+        help="Allow --parse-all before TOC/section HITL is ready",
+    )
     re_exp.add_argument("--parse-llm", action="store_true", help="Use LLM relabel during micro parse")
 
     args = parser.parse_args(argv)
@@ -397,6 +402,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.work,
                     chapter_ids,
                     use_llm=True if args.parse_llm else None,
+                    require_ready=not args.skip_hitl,
                 )
                 result["micro"] = micro
         except (ValueError, KeyError) as exc:

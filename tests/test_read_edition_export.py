@@ -70,14 +70,14 @@ def test_two_step_read_edition_package(tmp_path, monkeypatch):
     loaded = load_manifest(package_dir)
     assert loaded["work_id"] == "grotius--freedom_of_the_seas"
     ch_id = loaded["chapters"][0]["chapter_id"]
-    chapter = parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
+    chapter = parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False, require_ready=False)
     assert chapter["blocks"]
     chapter = load_chapter(package_dir, ch_id)
     assert chapter["blocks"]
 
     for row in loaded["chapters"]:
         if row["chapter_id"] != ch_id:
-            parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False)
+            parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False, require_ready=False)
 
     edition, _report = edition_for_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert edition["edition_format"] == "ref/1"
@@ -120,6 +120,26 @@ def test_read_edition_api(client):
     assert pending.get("micro_status") == "pending"
     assert "source_preview" in pending
     assert "source_preview_truncated" in pending
+
+    parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
+    assert parsed.status_code == 400
+    detail = parsed.json()["detail"]
+    assert "not ready" in str(detail).lower()
+
+    toc = client.post(f"/api/works/{wid}/read-edition/toc", json={"status": "none"})
+    assert toc.status_code == 200
+    review = client.get(f"/api/works/{wid}/read-edition/review")
+    assert review.status_code == 200
+    for sid in review.json()["health"]["untreated_flags"]:
+        confirmed = client.post(
+            f"/api/works/{wid}/read-edition/structure/edit",
+            json={"action": "confirm", "section_id": sid},
+        )
+        assert confirmed.status_code == 200
+    layout = client.post(f"/api/works/{wid}/read-edition/layout")
+    assert layout.status_code == 200
+    assert layout.json()["health"]["layout_ok"] is True
+    assert layout.json()["health"]["ready_to_parse"] is True
 
     parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
     assert parsed.status_code == 200
@@ -172,7 +192,7 @@ def test_publish_rejects_incomplete_edition(tmp_path, monkeypatch):
 
     run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
     manifest = load_manifest(corpus / "read-editions/grotius--freedom_of_the_seas/deadbeef01")
-    parse_micro_chapter("grotius--freedom_of_the_seas", manifest["chapters"][0]["chapter_id"], corpus=corpus, use_llm=False)
+    parse_micro_chapter("grotius--freedom_of_the_seas", manifest["chapters"][0]["chapter_id"], corpus=corpus, use_llm=False, require_ready=False)
     with pytest.raises(PublishError, match="incomplete"):
         prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
 
@@ -208,7 +228,7 @@ def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
         corpus / "read-editions/grotius--freedom_of_the_seas/deadbeef01"
     )
     for row in manifest["chapters"]:
-        parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False)
+        parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False, require_ready=False)
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload.get("_normalize", {}).get("read_edition")
@@ -252,8 +272,8 @@ def test_structure_hitl_edit_prunes_stale_chapter_json(tmp_path, monkeypatch):
     assert len(chapters) >= 2
     first_id = chapters[0]["chapter_id"]
     second_id = chapters[1]["chapter_id"]
-    parse_micro_chapter("grotius--freedom_of_the_seas", first_id, corpus=corpus, use_llm=False)
-    parse_micro_chapter("grotius--freedom_of_the_seas", second_id, corpus=corpus, use_llm=False)
+    parse_micro_chapter("grotius--freedom_of_the_seas", first_id, corpus=corpus, use_llm=False, require_ready=False)
+    parse_micro_chapter("grotius--freedom_of_the_seas", second_id, corpus=corpus, use_llm=False, require_ready=False)
     package_dir = corpus / result["package_dir"]
     assert (package_dir / "chapters" / f"{second_id}.json").is_file()
 

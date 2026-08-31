@@ -26,6 +26,7 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_edition_service import (
+    confirm_layout as confirm_read_edition_layout,
     confirm_toc as confirm_read_edition_toc,
     edit_structure as edit_read_edition_structure,
     get_chapter as get_read_edition_chapter,
@@ -342,6 +343,15 @@ def create_app() -> FastAPI:
     def read_edition_toc(work_id: str, payload: ReadEditionTocBody) -> dict[str, Any]:
         try:
             return confirm_read_edition_toc(work_id, payload.status)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/layout", dependencies=guard)
+    def read_edition_layout(work_id: str) -> dict[str, Any]:
+        try:
+            return confirm_read_edition_layout(work_id)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:

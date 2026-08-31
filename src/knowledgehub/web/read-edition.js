@@ -168,8 +168,21 @@
   function reviewRow(chapterId) {
     return (state.review?.sections || []).find((s) => s.section_id === chapterId) || null;
   }
+
+  function microBadge(row) {
     const st = row.micro_status || "pending";
     return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "parsed" : st)}</span>`;
+  }
+
+  function layoutConfirmed() {
+    return !!(state.review?.health?.layout_ok || state.review?.hitl?.layout_ok);
+  }
+
+  function assertReadyToParse() {
+    const health = state.review?.health || {};
+    if (health.ready_to_parse) return true;
+    toast(health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý");
+    return false;
   }
 
   function qaBadge(row) {
@@ -190,7 +203,7 @@
               <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
               ${microBadge(row)}
               ${qaBadge(row)}
-              ${flagBadges(reviewRow(row.chapter_id)?.flags)}
+              ${layoutConfirmed() ? "" : flagBadges(reviewRow(row.chapter_id)?.flags)}
               <span class="muted">${(row.word_count || 0).toLocaleString()} từ</span>
             </button>
           </div>`,
@@ -329,17 +342,19 @@
     }
     const h = review.health || {};
     const cov = review.coverage || {};
-    const bits = [
-      `short ${h.short || 0}`,
-      `super ${h.super || 0}`,
-      `inner ${h.inner_heads || 0}`,
-      `toc miss ${h.toc_miss || 0}`,
-    ];
-    if (!cov.complete) bits.push(`orphan ${(cov.orphan_chars || 0).toLocaleString()} chữ`);
-    if (!h.toc_answered) bits.push("chưa confirm TOC");
-    if (h.ready_to_parse) bits.push("sẵn sàng parse");
+    const bits = [];
+    if (h.layout_ok) {
+      bits.push("cấu trúc đã xác nhận");
+    } else {
+      bits.push(`short ${h.short || 0}`, `super ${h.super || 0}`, `inner ${h.inner_heads || 0}`, `toc miss ${h.toc_miss || 0}`);
+      if (!cov.complete) bits.push(`orphan ${(cov.orphan_chars || 0).toLocaleString()} chữ`);
+      if (!h.toc_answered) bits.push("chưa confirm TOC");
+      if (h.ready_to_parse) bits.push("sẵn sàng — bấm Cấu trúc OK");
+    }
+    if (h.layout_ok && h.ready_to_parse) bits.push("sẵn sàng parse");
     el.hidden = false;
     el.textContent = bits.join(" · ");
+    el.classList.toggle("ok", !!h.layout_ok);
   }
 
   function applyReview(review) {
@@ -507,6 +522,7 @@
 
     $("re-parse-ch")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;
+      if (!assertReadyToParse()) return;
       toast("Đang parse REF chương…");
       try {
         await api(
@@ -526,6 +542,7 @@
 
     $("re-parse-selected")?.addEventListener("click", async () => {
       if (!state.workId) return;
+      if (!assertReadyToParse()) return;
       const ids = [...state.selected];
       if (!ids.length) {
         toast("Chọn ít nhất một chương");
@@ -550,12 +567,28 @@
       }
     });
 
-    $("re-parse-ready")?.addEventListener("click", async () => {
+    $("re-layout-ok")?.addEventListener("click", async () => {
       if (!state.workId) return;
       const health = state.review?.health || {};
       if (!health.ready_to_parse) {
-        toast("Còn TOC chưa confirm hoặc section short/super chưa xử lý — vẫn parse hết pending");
+        toast(health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý");
+        return;
       }
+      try {
+        const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/layout`, {
+          method: "POST",
+        });
+        applyReview(result);
+        toast("Đã xác nhận cấu trúc");
+        if (state.chapterId) await selectChapter(state.chapterId);
+      } catch (err) {
+        toast(err.message);
+      }
+    });
+
+    $("re-parse-ready")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      if (!assertReadyToParse()) return;
       const ids = (state.manifest?.chapters || [])
         .filter((row) => row.micro_status !== "complete")
         .map((row) => row.chapter_id);
