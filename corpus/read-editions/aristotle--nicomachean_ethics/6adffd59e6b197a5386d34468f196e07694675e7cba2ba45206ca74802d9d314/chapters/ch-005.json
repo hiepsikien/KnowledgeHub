@@ -1,0 +1,56 @@
+{
+  "chapter_id": "ch-005",
+  "title": "APPENDIX",
+  "block_start": 326,
+  "block_end": 329,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "APPENDIX",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "On ἐπισπήμη, from I. Post. Analyt. chap. i. and ii."
+    },
+    {
+      "type": "paragraph",
+      "text": "(Such parts only are translated as throw light on the Ethics.)",
+      "spans": [
+        {
+          "start": 0,
+          "end": 62,
+          "style": "paren_aside",
+          "text": "(Such parts only are translated as throw light on the Ethics.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All teaching, and all intellectual learning, proceeds on the basis of previous knowledge, as will appear on an examination of all. The Mathematical Sciences, and every other system, draw their conclusions in this method. So too of reasonings, whether by syllogism, or induction: for both teach through what is previously known, the former assuming the premisses as from wise men, the latter proving universals from the evidentness of the particulars. In like manner too rhetoricians persuade, either through examples (which amounts to induction), or through enthymemes (which amounts to syllogism).",
+      "spans": [
+        {
+          "start": 517,
+          "end": 545,
+          "style": "paren_cite",
+          "text": "(which amounts to induction)"
+        },
+        {
+          "start": 569,
+          "end": 597,
+          "style": "paren_cite",
+          "text": "(which amounts to syllogism)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "APPENDIX\n\nOn ἐπισπήμη, from I. Post. Analyt. chap. i. and ii.\n\n(Such parts only are translated as throw light on the Ethics.)\n\nAll teaching, and all intellectual learning, proceeds on the basis of previous knowledge, as will appear on an examination of all. The Mathematical Sciences, and every other system, draw their conclusions in this method. So too of reasonings, whether by syllogism, or induction: for both teach through what is previously known, the former assuming the premisses as from wise men, the latter proving universals from the evidentness of the particulars. In like manner too rhetoricians persuade, either through examples (which amounts to induction), or through enthymemes (which amounts to syllogism).",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 326,
+    "text": "APPENDIX"
+  },
+  "word_count": 112,
+  "block_count": 4
+}

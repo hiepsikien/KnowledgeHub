@@ -1,0 +1,41 @@
+{
+  "chapter_id": "ch-004",
+  "title": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.",
+  "block_start": 11,
+  "block_end": 13,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "TOOKS COURT, CHANCERY LANE, LONDON."
+    },
+    {
+      "type": "stanza",
+      "text": "[Illustration: _To J. Comyns Carr in acknowledgment of all I owe to his friendship and advice, these illustrations are gratefully inscribed_",
+      "lines": [
+        "[Illustration: _To J. Comyns Carr in acknowledgment of all I owe to his friendship and advice, these illustrations are gratefully inscribed_"
+      ],
+      "spans": [
+        {
+          "start": 15,
+          "end": 140,
+          "style": "em",
+          "text": "_To J. Comyns Carr in acknowledgment of all I owe to his friendship and advice, these illustrations are gratefully inscribed_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.\n\nTOOKS COURT, CHANCERY LANE, LONDON.\n\n[Illustration: _To J. Comyns Carr in acknowledgment of all I owe to his friendship and advice, these illustrations are gratefully inscribed_",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 11,
+    "text": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO."
+  },
+  "word_count": 32,
+  "block_count": 3
+}

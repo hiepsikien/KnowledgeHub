@@ -1,0 +1,108 @@
+{
+  "chapter_id": "ch-040",
+  "title": "THE CONSISTORY.",
+  "block_start": 272,
+  "block_end": 279,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "THE CONSISTORY.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "“Furthermore ask him by what power he has latterly allowed the strange maiden to appear, and to make music in the choir.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 121,
+          "style": "quote",
+          "text": "“Furthermore ask him by what power he has latterly allowed the strange maiden to appear, and to make music in the choir.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "ILLE."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Has already spoken about it to Master Uthe.”[20]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 45,
+          "style": "quote",
+          "text": "“Has already spoken about it to Master Uthe.”"
+        },
+        {
+          "start": 45,
+          "end": 49,
+          "style": "footnote",
+          "text": "[20]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The “strange maiden” who made music with Bach in private in the church seems to have been his cousin, Maria Barbara, youngest daughter of Michael Bach of Gehren,[21] whom he married in the following year. It is not known how the matter ended, but Bach, from this time, began to endeavour to find another post.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 20,
+          "style": "quote",
+          "text": "“strange maiden”"
+        },
+        {
+          "start": 161,
+          "end": 165,
+          "style": "footnote",
+          "text": "[21]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Second appointment_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Second appointment_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "An important post at St Blasius, Mühlhausen, some 20 miles north of Gotha, fell vacant through the death of Johann Georg Ahle on December 2nd, 1706, and there were many candidates. It seems, from Gerber’s account (vol. ii. p. 764), to have been at first offered to Johann Gottfried Walther of Erfurt, but to have been declined by him;[22] and when Bach, whose friction with the Consistory made him anxious to leave Arnstadt, offered himself as a candidate, the Council, after hearing him play, were unanimous in his favour.",
+      "spans": [
+        {
+          "start": 213,
+          "end": 230,
+          "style": "paren_cite",
+          "text": "(vol. ii. p. 764)"
+        },
+        {
+          "start": 334,
+          "end": 338,
+          "style": "footnote",
+          "text": "[22]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The church of St Blasius is a fine Gothic building, in strong contrast to the homely, towerless New Church at Arnstadt; and the office of organist is proportionately more important. Its present holder is Herr Musikdirector Möller."
+    }
+  ],
+  "reading_markdown": "THE CONSISTORY.\n\n> “Furthermore ask him by what power he has latterly allowed the strange maiden to appear, and to make music in the choir.”\n\nILLE.\n\n> “Has already spoken about it to Master Uthe.”[20]\n\nThe “strange maiden” who made music with Bach in private in the church seems to have been his cousin, Maria Barbara, youngest daughter of Michael Bach of Gehren,[21] whom he married in the following year. It is not known how the matter ended, but Bach, from this time, began to endeavour to find another post.\n\n[Sidenote: _Second appointment_]\n\nAn important post at St Blasius, Mühlhausen, some 20 miles north of Gotha, fell vacant through the death of Johann Georg Ahle on December 2nd, 1706, and there were many candidates. It seems, from Gerber’s account (vol. ii. p. 764), to have been at first offered to Johann Gottfried Walther of Erfurt, but to have been declined by him;[22] and when Bach, whose friction with the Consistory made him anxious to leave Arnstadt, offered himself as a candidate, the Council, after hearing him play, were unanimous in his favour.\n\nThe church of St Blasius is a fine Gothic building, in strong contrast to the homely, towerless New Church at Arnstadt; and the office of organist is proportionately more important. Its present holder is Herr Musikdirector Möller.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 272,
+    "text": "THE CONSISTORY."
+  },
+  "word_count": 221,
+  "block_count": 8
+}

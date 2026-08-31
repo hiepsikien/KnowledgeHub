@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-012",
+  "title": "QUESTION 6",
+  "block_start": 401,
+  "block_end": 401,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 6",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 6",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 401,
+    "text": "QUESTION 6"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

@@ -1,0 +1,46 @@
+{
+  "chapter_id": "ch-009",
+  "title": "CHAPTER IX",
+  "block_start": 171,
+  "block_end": 172,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHAPTER IX",
+      "level": 1
+    },
+    {
+      "type": "blockquote",
+      "text": "_Trade with the East Indies does not belong to the Portuguese by title of occupation_ Neither discovery nor occupation [which have been fully treated in Chapters II and V], is to be invoked on the point here under consideration, because the right of carrying on trade is not something corporal, which can be physically seized; nor would discovery or occupation help the case of the Portuguese even if they had been the very first persons to trade with the East Indies, although such a claim would be entirely untenable and false. For since in the beginning peoples set out along different paths, it was necessary that some become the first traders, nevertheless it is absolutely certain that those traders did not on that account acquire any rights. Wherefore if the Portuguese have any right by virtue of which they _alone_ may trade with the East Indies, that right like other servitudes ought to arise from concession, either express or tacit, that is to say, from prescription. Otherwise no such right can exist.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 85,
+          "style": "em",
+          "text": "_Trade with the East Indies does not belong to the Portuguese by title of occupation_"
+        },
+        {
+          "start": 119,
+          "end": 171,
+          "style": "bracket_note",
+          "text": "[which have been fully treated in Chapters II and V]"
+        },
+        {
+          "start": 817,
+          "end": 824,
+          "style": "em",
+          "text": "_alone_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHAPTER IX\n\n> _Trade with the East Indies does not belong to the Portuguese by title of occupation_ Neither discovery nor occupation [which have been fully treated in Chapters II and V], is to be invoked on the point here under consideration, because the right of carrying on trade is not something corporal, which can be physically seized; nor would discovery or occupation help the case of the Portuguese even if they had been the very first persons to trade with the East Indies, although such a claim would be entirely untenable and false. For since in the beginning peoples set out along different paths, it was necessary that some become the first traders, nevertheless it is absolutely certain that those traders did not on that account acquire any rights. Wherefore if the Portuguese have any right by virtue of which they _alone_ may trade with the East Indies, that right like other servitudes ought to arise from concession, either express or tacit, that is to say, from prescription. Otherwise no such right can exist.",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 171,
+    "text": "CHAPTER IX"
+  },
+  "word_count": 174,
+  "block_count": 2
+}

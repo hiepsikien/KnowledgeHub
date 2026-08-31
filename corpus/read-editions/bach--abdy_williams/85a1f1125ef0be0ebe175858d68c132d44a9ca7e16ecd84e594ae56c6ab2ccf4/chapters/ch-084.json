@@ -1,0 +1,114 @@
+{
+  "chapter_id": "ch-084",
+  "title": "_In G minor._",
+  "block_start": 1222,
+  "block_end": 1226,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_In G minor._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 13,
+          "style": "em",
+          "text": "_In G minor._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_In B minor._      The subject is by Corelli. _In C minor._      Probably written for pedal clavichord. Composed at Arnstadt.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 13,
+          "style": "em",
+          "text": "_In B minor._"
+        },
+        {
+          "start": 46,
+          "end": 59,
+          "style": "em",
+          "text": "_In C minor._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Canzona in D minor (243)._      In two movements. It was popular, and many copies appear to have existed.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 27,
+          "style": "em",
+          "text": "_Canzona in D minor (243)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Fantasias (243) in G._      In three movements of which the tempi are indicated by Bach. “Très Vitement,” “Grave,” “Lentement.” From the number of copies which exist this fantasia, also called “Pièce d’orgue,” appears to have been very popular.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 23,
+          "style": "em",
+          "text": "_Fantasias (243) in G._"
+        },
+        {
+          "start": 90,
+          "end": 106,
+          "style": "quote",
+          "text": "“Très Vitement,”"
+        },
+        {
+          "start": 107,
+          "end": 115,
+          "style": "quote",
+          "text": "“Grave,”"
+        },
+        {
+          "start": 116,
+          "end": 128,
+          "style": "quote",
+          "text": "“Lentement.”"
+        },
+        {
+          "start": 194,
+          "end": 210,
+          "style": "quote",
+          "text": "“Pièce d’orgue,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_In C minor._      In five voices. In some MSS. called “Prelude.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 13,
+          "style": "em",
+          "text": "_In C minor._"
+        },
+        {
+          "start": 55,
+          "end": 65,
+          "style": "quote",
+          "text": "“Prelude.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_In G minor._\n\n> _In B minor._      The subject is by Corelli. _In C minor._      Probably written for pedal clavichord. Composed at Arnstadt.\n\n_Canzona in D minor (243)._      In two movements. It was popular, and many copies appear to have existed.\n\n_Fantasias (243) in G._      In three movements of which the tempi are indicated by Bach. “Très Vitement,” “Grave,” “Lentement.” From the number of copies which exist this fantasia, also called “Pièce d’orgue,” appears to have been very popular.\n\n_In C minor._      In five voices. In some MSS. called “Prelude.”",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1222,
+    "text": "_In G minor._"
+  },
+  "word_count": 96,
+  "block_count": 5
+}

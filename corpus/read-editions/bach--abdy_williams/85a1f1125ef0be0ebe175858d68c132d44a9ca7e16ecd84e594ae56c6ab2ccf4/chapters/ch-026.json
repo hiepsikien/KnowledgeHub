@@ -1,0 +1,66 @@
+{
+  "chapter_id": "ch-026",
+  "title": "36. JOH. GÜNTHER ...",
+  "block_start": 89,
+  "block_end": 93,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "36. JOH. GÜNTHER ...",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_Son of_ Joh. Bernhard (No. 18).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 8,
+          "style": "em",
+          "text": "_Son of_"
+        },
+        {
+          "start": 23,
+          "end": 31,
+          "style": "paren_cite",
+          "text": "(No. 18)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "37. JOH. ERNST, 1722-1781."
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sons of_ Joh. Christoph (No. 19).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "style": "em",
+          "text": "_Sons of_"
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "style": "paren_cite",
+          "text": "(No. 19)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "38. JOH. FRIEDRICH, 1703 ... 39. JOH. AUGUST, 17 ..."
+    }
+  ],
+  "reading_markdown": "36. JOH. GÜNTHER ...\n\n> _Son of_ Joh. Bernhard (No. 18).\n\n37. JOH. ERNST, 1722-1781.\n\n> _Sons of_ Joh. Christoph (No. 19).\n\n38. JOH. FRIEDRICH, 1703 ... 39. JOH. AUGUST, 17 ...",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 89,
+    "text": "36. JOH. GÜNTHER ..."
+  },
+  "word_count": 27,
+  "block_count": 5
+}

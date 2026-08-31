@@ -1,0 +1,633 @@
+{
+  "chapter_id": "ch-221",
+  "title": "OF MAN'S ABODE, WHICH IS PARADISE (In Four Articles)",
+  "block_start": 7271,
+  "block_end": 7325,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "OF MAN'S ABODE, WHICH IS PARADISE (In Four Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 34,
+          "end": 52,
+          "style": "paren_cite",
+          "text": "(In Four Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We next consider man's abode, which is paradise. Under this head there are four points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) Whether paradise is a corporeal place?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) Whether it is a place apt for human habitation?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) For what purpose was man placed in paradise?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) Whether he should have been created in paradise?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 102, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 102, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Paradise Is a Corporeal Place?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that paradise is not a corporeal place. For Bede [*Strabus, Gloss on Gen. 2:8] says that \"paradise reaches to the lunar circle.\" But no earthly place answers that description, both because it is contrary to the nature of the earth to be raised up so high, and because beneath the moon is the region of fire, which would consume the earth. Therefore paradise is not a corporeal place.",
+      "spans": [
+        {
+          "start": 76,
+          "end": 105,
+          "style": "bracket_note",
+          "text": "[*Strabus, Gloss on Gen. 2:8]"
+        },
+        {
+          "start": 116,
+          "end": 155,
+          "style": "quote",
+          "text": "\"paradise reaches to the lunar circle.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, Scripture mentions four rivers as rising in paradise (Gen. 2:10). But the rivers there mentioned have visible sources elsewhere, as is clear from the Philosopher (Meteor. i). Therefore paradise is not a corporeal place.",
+      "spans": [
+        {
+          "start": 70,
+          "end": 81,
+          "style": "paren_cite",
+          "text": "(Gen. 2:10)"
+        },
+        {
+          "start": 179,
+          "end": 190,
+          "style": "paren_cite",
+          "text": "(Meteor. i)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, although men have explored the entire habitable world, yet none have made mention of the place of paradise. Therefore apparently it is not a corporeal place."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, the tree of life is described as growing in paradise. But the tree of life is a spiritual thing, for it is written of Wisdom that \"She is a tree of life to them that lay hold on her\" (Prov. 3:18). Therefore paradise also is not a corporeal, but a spiritual place.",
+      "spans": [
+        {
+          "start": 147,
+          "end": 199,
+          "style": "quote",
+          "text": "\"She is a tree of life to them that lay hold on her\""
+        },
+        {
+          "start": 200,
+          "end": 212,
+          "style": "paren_cite",
+          "text": "(Prov. 3:18)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, if paradise be a corporeal place, the trees also of paradise must be corporeal. But it seems they were not; for corporeal trees were produced on the third day, while the planting of the trees of paradise is recorded after the work of the six days. Therefore paradise was not a corporeal place."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (Gen. ad lit. viii, 1): \"Three general opinions prevail about paradise. Some understand a place merely corporeal; others a place entirely spiritual; while others, whose opinion, I confess, pleases me, hold that paradise was both corporeal and spiritual.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 56,
+          "style": "paren_cite",
+          "text": "(Gen. ad lit. viii, 1)"
+        },
+        {
+          "start": 58,
+          "end": 288,
+          "style": "quote",
+          "text": "\"Three general opinions prevail about paradise. Some understand a place merely corporeal; others a place entirely spiritual; while others, whose opinion, I confess, pleases me, hold that paradise was both corporeal and spiritual.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As Augustine says (De Civ. Dei xiii, 21): \"Nothing prevents us from holding, within proper limits, a spiritual paradise; so long as we believe in the truth of the events narrated as having there occurred.\" For whatever Scripture tells us about paradise is set down as matter of history; and wherever Scripture makes use of this method, we must hold to the historical truth of the narrative as a foundation of whatever spiritual explanation we may offer. And so paradise, as Isidore says (Etym. xiv, 3), \"is a place situated in the east, its name being the Greek for garden.\" It was fitting that it should be in the east; for it is to be believed that it was situated in the most excellent part of the earth. Now the east is the right hand on the heavens, as the Philosopher explains (De Coel. ii, 2); and the right hand is nobler than the left: hence it was fitting that God should place the earthly paradise in the east.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 35,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Civ. Dei xiii, 21)"
+        },
+        {
+          "start": 59,
+          "end": 222,
+          "style": "quote",
+          "text": "\"Nothing prevents us from holding, within proper limits, a spiritual paradise; so long as we believe in the truth of the events narrated as having there occurred.\""
+        },
+        {
+          "start": 504,
+          "end": 518,
+          "style": "paren_cite",
+          "text": "(Etym. xiv, 3)"
+        },
+        {
+          "start": 520,
+          "end": 591,
+          "style": "quote",
+          "text": "\"is a place situated in the east, its name being the Greek for garden.\""
+        },
+        {
+          "start": 800,
+          "end": 816,
+          "style": "paren_cite",
+          "text": "(De Coel. ii, 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Bede's assertion is untrue, if taken in its obvious sense. It may, however, be explained to mean that paradise reaches to the moon, not literally, but figuratively; because, as Isidore says (Etym. xiv, 3), the atmosphere there is \"a continually even temperature\"; and in this respect it is like the heavenly bodies, which are devoid of opposing elements. Mention, however, is made of the moon rather than of other bodies, because, of all the heavenly bodies, the moon is nearest to us, and is, moreover, the most akin to the earth; hence it is observed to be overshadowed by clouds so as to be almost obscured. Others say that paradise reached to the moon--that is, to the middle space of the air, where rain, and wind, and the like arise; because the moon is said to have influence on such changes. But in this sense it would not be a fit place for human dwelling, through being uneven in temperature, and not attuned to the human temperament, as is the lower atmosphere in the neighborhood of the earth.",
+      "spans": [
+        {
+          "start": 204,
+          "end": 218,
+          "style": "paren_cite",
+          "text": "(Etym. xiv, 3)"
+        },
+        {
+          "start": 244,
+          "end": 276,
+          "style": "quote",
+          "text": "\"a continually even temperature\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Augustine says (Gen. ad lit. viii, 7): \"It is probable that man has no idea where paradise was, and that the rivers, whose sources are said to be known, flowed for some distance underground, and then sprang up elsewhere. For who is not aware that such is the case with some other streams?\"",
+      "spans": [
+        {
+          "start": 29,
+          "end": 51,
+          "style": "paren_cite",
+          "text": "(Gen. ad lit. viii, 7)"
+        },
+        {
+          "start": 53,
+          "end": 303,
+          "style": "quote",
+          "text": "\"It is probable that man has no idea where paradise was, and that the rivers, whose sources are said to be known, flowed for some distance underground, and then sprang up elsewhere. For who is not aware that such is the case with some other streams?\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The situation of paradise is shut off from the habitable world by mountains, or seas, or some torrid region, which cannot be crossed; and so people who have written about topography make no mention of it."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: The tree of life is a material tree, and so called because its fruit was endowed with a life-preserving power as above stated (Q. 97, A. 4). Yet it had a spiritual signification; as the rock in the desert was of a material nature, and yet signified Christ. In like manner the tree of the knowledge of good and evil was a material tree, so called in view of future events; because, after eating of it, man was to learn, by experience of the consequent punishment, the difference between the good of obedience and the evil of rebellion. It may also be said to signify spiritually the free-will as some say.",
+      "spans": [
+        {
+          "start": 140,
+          "end": 153,
+          "style": "paren_cite",
+          "text": "(Q. 97, A. 4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: According to Augustine (Gen. ad lit. v, 5, viii, 3), the plants were not actually produced on the third day, but in their seminal virtues; whereas, after the work of the six days, the plants, both of paradise and others, were actually produced. According to other holy writers, we ought to say that all the plants were actually produced on the third day, including the trees of paradise; and what is said of the trees of paradise being planted after the work of the six days is to be understood, they say, by way of recapitulation. Whence our text reads: \"The Lord God had planted a paradise of pleasure from the beginning\" (Gen. 2:8).",
+      "spans": [
+        {
+          "start": 37,
+          "end": 65,
+          "style": "paren_aside",
+          "text": "(Gen. ad lit. v, 5, viii, 3)"
+        },
+        {
+          "start": 569,
+          "end": 637,
+          "style": "quote",
+          "text": "\"The Lord God had planted a paradise of pleasure from the beginning\""
+        },
+        {
+          "start": 638,
+          "end": 648,
+          "style": "paren_cite",
+          "text": "(Gen. 2:8)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 102, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[I, Q. 102, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Paradise Was a Place Adapted to Be the Abode of Man?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that paradise was not a place adapted to be the abode of man. For man and angels are similarly ordered to beatitude. But the angels from the very beginning of their existence were made to dwell in the abode of the blessed--that is, the empyrean heaven. Therefore the place of man's habitation should have been there also."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, if some definite place were required for man's abode, this would be required on the part either of the soul or of the body. If on the part of the soul, the place would be in heaven, which is adapted to the nature of the soul; since the desire of heaven is implanted in all. On the part of the body, there was no need for any other place than the one provided for other animals. Therefore paradise was not at all adapted to be the abode of man."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, a place which contains nothing is useless. But after sin, paradise was not occupied by man. Therefore if it were adapted as a dwelling-place for man, it seems that God made paradise to no purpose."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, since man is of an even temperament, a fitting place for him should be of even temperature. But paradise was not of an even temperature; for it is said to have been on the equator--a situation of extreme heat, since twice in the year the sun passes vertically over the heads of its inhabitants. Therefore paradise was not a fit dwelling-place for man."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Damascene says (De Fide Orth. ii, 11): \"Paradise was a divinely ordered region, and worthy of him who was made to God's image.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 56,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 11)"
+        },
+        {
+          "start": 58,
+          "end": 146,
+          "style": "quote",
+          "text": "\"Paradise was a divinely ordered region, and worthy of him who was made to God's image.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As above stated (Q. 97, A. 1), Man was incorruptible and immortal, not because his body had a disposition to incorruptibility, but because in his soul there was a power preserving the body from corruption. Now the human body may be corrupted from within or from without. From within, the body is corrupted by the consumption of the humors, and by old age, as above explained (Q. 97, A. 4), and man was able to ward off such corruption by food. Among those things which corrupt the body from without, the chief seems to be an atmosphere of unequal temperature; and to such corruption a remedy is found in an atmosphere of equable nature. In paradise both conditions were found; because, as Damascene says (De Fide Orth. ii, 11): \"Paradise was permeated with the all pervading brightness of a temperate, pure, and exquisite atmosphere, and decked with ever-flowering plants.\" Whence it is clear that paradise was most fit to be a dwelling-place for man, and in keeping with his original state of immortality.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 33,
+          "end": 46,
+          "style": "paren_cite",
+          "text": "(Q. 97, A. 1)"
+        },
+        {
+          "start": 392,
+          "end": 405,
+          "style": "paren_cite",
+          "text": "(Q. 97, A. 4)"
+        },
+        {
+          "start": 721,
+          "end": 743,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 11)"
+        },
+        {
+          "start": 745,
+          "end": 890,
+          "style": "quote",
+          "text": "\"Paradise was permeated with the all pervading brightness of a temperate, pure, and exquisite atmosphere, and decked with ever-flowering plants.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: The empyrean heaven is the highest of corporeal places, and is outside the region of change. By the first of these two conditions, it is a fitting abode for the angelic nature: for, as Augustine says (De Trin. ii), \"God rules corporeal creatures through spiritual creatures.\" Hence it is fitting that the spiritual nature should be established above the entire corporeal nature, as presiding over it. By the second condition, it is a fitting abode for the state of beatitude, which is endowed with the highest degree of stability. Thus the abode of beatitude was suited to the very nature of the angel; therefore he was created there. But it is not suited to man's nature, since man is not set as a ruler over the entire corporeal creation: it is a fitting abode for man in regard only to his beatitude. Wherefore he was not placed from the beginning in the empyrean heaven, but was destined to be transferred thither in the state of his final beatitude.",
+      "spans": [
+        {
+          "start": 214,
+          "end": 227,
+          "style": "paren_cite",
+          "text": "(De Trin. ii)"
+        },
+        {
+          "start": 229,
+          "end": 289,
+          "style": "quote",
+          "text": "\"God rules corporeal creatures through spiritual creatures.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: It is ridiculous to assert that any particular place is natural to the soul or to any spiritual substances, though some particular place may have a certain fitness in regard to spiritual substances. For the earthly paradise was a place adapted to man, as regards both his body and his soul--that is, inasmuch as in his soul was the force which preserved the human body from corruption. This could not be said of the other animals. Therefore, as Damascene says (De Fide Orth. ii, 11): \"No irrational animal inhabited paradise\"; although, by a certain dispensation, the animals were brought thither by God to Adam; and the serpent was able to trespass therein by the complicity of the devil.",
+      "spans": [
+        {
+          "start": 474,
+          "end": 496,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 11)"
+        },
+        {
+          "start": 498,
+          "end": 539,
+          "style": "quote",
+          "text": "\"No irrational animal inhabited paradise\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Paradise did not become useless through being unoccupied by man after sin, just as immortality was not conferred on man in vain, though he was to lose it. For thereby we learn God's kindness to man, and what man lost by sin. Moreover, some say that Enoch and Elias still dwell in that paradise."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: Those who say that paradise was on the equinoctial line are of opinion that such a situation is most temperate, on account of the unvarying equality of day and night; that it is never too cold there, because the sun is never too far off; and never too hot, because, although the sun passes over the heads of the inhabitants, it does not remain long in that position. However, Aristotle distinctly says (Meteor. ii, 5) that such a region is uninhabitable on account of the heat. This seems to be more probable; because, even those regions where the sun does not pass vertically overhead, are extremely hot on account of the mere proximity of the sun. But whatever be the truth of the matter, we must hold that paradise was situated in a most temperate situation, whether on the equator or elsewhere.",
+      "spans": [
+        {
+          "start": 416,
+          "end": 431,
+          "style": "paren_cite",
+          "text": "(Meteor. ii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 102, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 102, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Man Was Placed in Paradise to Dress It and Keep It?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that man was not placed in paradise to dress and keep it. For what was brought on him as a punishment of sin would not have existed in paradise in the state of innocence. But the cultivation of the soil was a punishment of sin (Gen. 3:17). Therefore man was not placed in paradise to dress and keep it.",
+      "spans": [
+        {
+          "start": 254,
+          "end": 265,
+          "style": "paren_cite",
+          "text": "(Gen. 3:17)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, there is no need of a keeper when there is no fear of trespass with violence. But in paradise there was no fear of trespass with violence. Therefore there was no need for man to keep paradise."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, if man was placed in paradise to dress and keep it, man would apparently have been made for the sake of paradise, and not contrariwise; which seems to be false. Therefore man was not place in paradise to dress and keep it."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ It is written (Gen. 2: 15): \"The Lord God took man and placed in the paradise of pleasure, to dress and keep it.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 33,
+          "end": 45,
+          "style": "paren_cite",
+          "text": "(Gen. 2: 15)"
+        },
+        {
+          "start": 47,
+          "end": 132,
+          "style": "quote",
+          "text": "\"The Lord God took man and placed in the paradise of pleasure, to dress and keep it.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As Augustine says (Gen. ad lit. viii, 10), these words in Genesis may be understood in two ways. First, in the sense that God placed man in paradise that He might Himself work in man and keep him, by sanctifying him (for if this work cease, man at once relapses into darkness, as the air grows dark when the light ceases to shine); and by keeping man from all corruption and evil. Secondly, that man might dress and keep paradise, which dressing would not have involved labor, as it did after sin; but would have been pleasant on account of man's practical knowledge of the powers of nature. Nor would man have kept paradise against a trespasser; but he would have striven to keep paradise for himself lest he should lose it by sin. All of which was for man's good; wherefore paradise was ordered to man's benefit, and not conversely.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 35,
+          "end": 58,
+          "style": "paren_cite",
+          "text": "(Gen. ad lit. viii, 10)"
+        },
+        {
+          "start": 233,
+          "end": 347,
+          "style": "paren_aside",
+          "text": "(for if this work cease, man at once relapses into darkness, as the air grows dark when the light ceases to shine)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whence the Replies to the Objections are made clear."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 102, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[I, Q. 102, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Man Was Created in Paradise?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that man was created in paradise. For the angel was created in his dwelling-place--namely, the empyrean heaven. But before sin paradise was a fitting abode for man. Therefore it seems that man was created in paradise."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, other animals remain in the place where they are produced, as the fish in the water, and walking animals on the earth from which they were made. Now man would have remained in paradise after he was created (Q. 97, A. 4). Therefore he was created in paradise.",
+      "spans": [
+        {
+          "start": 223,
+          "end": 236,
+          "style": "paren_cite",
+          "text": "(Q. 97, A. 4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, woman was made in paradise. But man is greater than woman. Therefore much more should man have been made in paradise."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ It is written (Gen. 2:15): \"God took man and placed him in paradise.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 33,
+          "end": 44,
+          "style": "paren_cite",
+          "text": "(Gen. 2:15)"
+        },
+        {
+          "start": 46,
+          "end": 88,
+          "style": "quote",
+          "text": "\"God took man and placed him in paradise.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Paradise was a fitting abode for man as regards the incorruptibility of the primitive state. Now this incorruptibility was man's, not by nature, but by a supernatural gift of God. Therefore that this might be attributed to God, and not to human nature, God made man outside of paradise, and afterwards placed him there to live there during the whole of his animal life; and, having attained to the spiritual life, to be transferred thence to heaven.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: The empyrean heaven was a fitting abode for the angels as regards their nature, and therefore they were created there."
+    },
+    {
+      "type": "paragraph",
+      "text": "In the same way I reply to the second objection, for those places befit those animals in their nature."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Woman was made in paradise, not by reason of her own dignity, but on account of the dignity of the principle from which her body was formed. For the same reason the children would have been born in paradise, where their parents were already."
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "OF MAN'S ABODE, WHICH IS PARADISE (In Four Articles)\n\nWe next consider man's abode, which is paradise. Under this head there are four points of inquiry:\n\n(1) Whether paradise is a corporeal place?\n\n(2) Whether it is a place apt for human habitation?\n\n(3) For what purpose was man placed in paradise?\n\n(4) Whether he should have been created in paradise?\n\n---\n\nFIRST ARTICLE [I, Q. 102, Art. 1]\n\nWhether Paradise Is a Corporeal Place?\n\nObjection 1: It would seem that paradise is not a corporeal place. For Bede [*Strabus, Gloss on Gen. 2:8] says that \"paradise reaches to the lunar circle.\" But no earthly place answers that description, both because it is contrary to the nature of the earth to be raised up so high, and because beneath the moon is the region of fire, which would consume the earth. Therefore paradise is not a corporeal place.\n\nObj. 2: Further, Scripture mentions four rivers as rising in paradise (Gen. 2:10). But the rivers there mentioned have visible sources elsewhere, as is clear from the Philosopher (Meteor. i). Therefore paradise is not a corporeal place.\n\nObj. 3: Further, although men have explored the entire habitable world, yet none have made mention of the place of paradise. Therefore apparently it is not a corporeal place.\n\nObj. 4: Further, the tree of life is described as growing in paradise. But the tree of life is a spiritual thing, for it is written of Wisdom that \"She is a tree of life to them that lay hold on her\" (Prov. 3:18). Therefore paradise also is not a corporeal, but a spiritual place.\n\nObj. 5: Further, if paradise be a corporeal place, the trees also of paradise must be corporeal. But it seems they were not; for corporeal trees were produced on the third day, while the planting of the trees of paradise is recorded after the work of the six days. Therefore paradise was not a corporeal place.\n\n_On the contrary,_ Augustine says (Gen. ad lit. viii, 1): \"Three general opinions prevail about paradise. Some understand a place merely corporeal; others a place entirely spiritual; while others, whose opinion, I confess, pleases me, hold that paradise was both corporeal and spiritual.\"\n\n_I answer that,_ As Augustine says (De Civ. Dei xiii, 21): \"Nothing prevents us from holding, within proper limits, a spiritual paradise; so long as we believe in the truth of the events narrated as having there occurred.\" For whatever Scripture tells us about paradise is set down as matter of history; and wherever Scripture makes use of this method, we must hold to the historical truth of the narrative as a foundation of whatever spiritual explanation we may offer. And so paradise, as Isidore says (Etym. xiv, 3), \"is a place situated in the east, its name being the Greek for garden.\" It was fitting that it should be in the east; for it is to be believed that it was situated in the most excellent part of the earth. Now the east is the right hand on the heavens, as the Philosopher explains (De Coel. ii, 2); and the right hand is nobler than the left: hence it was fitting that God should place the earthly paradise in the east.\n\nReply Obj. 1: Bede's assertion is untrue, if taken in its obvious sense. It may, however, be explained to mean that paradise reaches to the moon, not literally, but figuratively; because, as Isidore says (Etym. xiv, 3), the atmosphere there is \"a continually even temperature\"; and in this respect it is like the heavenly bodies, which are devoid of opposing elements. Mention, however, is made of the moon rather than of other bodies, because, of all the heavenly bodies, the moon is nearest to us, and is, moreover, the most akin to the earth; hence it is observed to be overshadowed by clouds so as to be almost obscured. Others say that paradise reached to the moon--that is, to the middle space of the air, where rain, and wind, and the like arise; because the moon is said to have influence on such changes. But in this sense it would not be a fit place for human dwelling, through being uneven in temperature, and not attuned to the human temperament, as is the lower atmosphere in the neighborhood of the earth.\n\nReply Obj. 2: Augustine says (Gen. ad lit. viii, 7): \"It is probable that man has no idea where paradise was, and that the rivers, whose sources are said to be known, flowed for some distance underground, and then sprang up elsewhere. For who is not aware that such is the case with some other streams?\"\n\nReply Obj. 3: The situation of paradise is shut off from the habitable world by mountains, or seas, or some torrid region, which cannot be crossed; and so people who have written about topography make no mention of it.\n\nReply Obj. 4: The tree of life is a material tree, and so called because its fruit was endowed with a life-preserving power as above stated (Q. 97, A. 4). Yet it had a spiritual signification; as the rock in the desert was of a material nature, and yet signified Christ. In like manner the tree of the knowledge of good and evil was a material tree, so called in view of future events; because, after eating of it, man was to learn, by experience of the consequent punishment, the difference between the good of obedience and the evil of rebellion. It may also be said to signify spiritually the free-will as some say.\n\nReply Obj. 5: According to Augustine (Gen. ad lit. v, 5, viii, 3), the plants were not actually produced on the third day, but in their seminal virtues; whereas, after the work of the six days, the plants, both of paradise and others, were actually produced. According to other holy writers, we ought to say that all the plants were actually produced on the third day, including the trees of paradise; and what is said of the trees of paradise being planted after the work of the six days is to be understood, they say, by way of recapitulation. Whence our text reads: \"The Lord God had planted a paradise of pleasure from the beginning\" (Gen. 2:8).\n\n---\n\nSECOND ARTICLE [I, Q. 102, Art. 2]\n\nWhether Paradise Was a Place Adapted to Be the Abode of Man?\n\nObjection 1: It would seem that paradise was not a place adapted to be the abode of man. For man and angels are similarly ordered to beatitude. But the angels from the very beginning of their existence were made to dwell in the abode of the blessed--that is, the empyrean heaven. Therefore the place of man's habitation should have been there also.\n\nObj. 2: Further, if some definite place were required for man's abode, this would be required on the part either of the soul or of the body. If on the part of the soul, the place would be in heaven, which is adapted to the nature of the soul; since the desire of heaven is implanted in all. On the part of the body, there was no need for any other place than the one provided for other animals. Therefore paradise was not at all adapted to be the abode of man.\n\nObj. 3: Further, a place which contains nothing is useless. But after sin, paradise was not occupied by man. Therefore if it were adapted as a dwelling-place for man, it seems that God made paradise to no purpose.\n\nObj. 4: Further, since man is of an even temperament, a fitting place for him should be of even temperature. But paradise was not of an even temperature; for it is said to have been on the equator--a situation of extreme heat, since twice in the year the sun passes vertically over the heads of its inhabitants. Therefore paradise was not a fit dwelling-place for man.\n\n_On the contrary,_ Damascene says (De Fide Orth. ii, 11): \"Paradise was a divinely ordered region, and worthy of him who was made to God's image.\"\n\n_I answer that,_ As above stated (Q. 97, A. 1), Man was incorruptible and immortal, not because his body had a disposition to incorruptibility, but because in his soul there was a power preserving the body from corruption. Now the human body may be corrupted from within or from without. From within, the body is corrupted by the consumption of the humors, and by old age, as above explained (Q. 97, A. 4), and man was able to ward off such corruption by food. Among those things which corrupt the body from without, the chief seems to be an atmosphere of unequal temperature; and to such corruption a remedy is found in an atmosphere of equable nature. In paradise both conditions were found; because, as Damascene says (De Fide Orth. ii, 11): \"Paradise was permeated with the all pervading brightness of a temperate, pure, and exquisite atmosphere, and decked with ever-flowering plants.\" Whence it is clear that paradise was most fit to be a dwelling-place for man, and in keeping with his original state of immortality.\n\nReply Obj. 1: The empyrean heaven is the highest of corporeal places, and is outside the region of change. By the first of these two conditions, it is a fitting abode for the angelic nature: for, as Augustine says (De Trin. ii), \"God rules corporeal creatures through spiritual creatures.\" Hence it is fitting that the spiritual nature should be established above the entire corporeal nature, as presiding over it. By the second condition, it is a fitting abode for the state of beatitude, which is endowed with the highest degree of stability. Thus the abode of beatitude was suited to the very nature of the angel; therefore he was created there. But it is not suited to man's nature, since man is not set as a ruler over the entire corporeal creation: it is a fitting abode for man in regard only to his beatitude. Wherefore he was not placed from the beginning in the empyrean heaven, but was destined to be transferred thither in the state of his final beatitude.\n\nReply Obj. 2: It is ridiculous to assert that any particular place is natural to the soul or to any spiritual substances, though some particular place may have a certain fitness in regard to spiritual substances. For the earthly paradise was a place adapted to man, as regards both his body and his soul--that is, inasmuch as in his soul was the force which preserved the human body from corruption. This could not be said of the other animals. Therefore, as Damascene says (De Fide Orth. ii, 11): \"No irrational animal inhabited paradise\"; although, by a certain dispensation, the animals were brought thither by God to Adam; and the serpent was able to trespass therein by the complicity of the devil.\n\nReply Obj. 3: Paradise did not become useless through being unoccupied by man after sin, just as immortality was not conferred on man in vain, though he was to lose it. For thereby we learn God's kindness to man, and what man lost by sin. Moreover, some say that Enoch and Elias still dwell in that paradise.\n\nReply Obj. 4: Those who say that paradise was on the equinoctial line are of opinion that such a situation is most temperate, on account of the unvarying equality of day and night; that it is never too cold there, because the sun is never too far off; and never too hot, because, although the sun passes over the heads of the inhabitants, it does not remain long in that position. However, Aristotle distinctly says (Meteor. ii, 5) that such a region is uninhabitable on account of the heat. This seems to be more probable; because, even those regions where the sun does not pass vertically overhead, are extremely hot on account of the mere proximity of the sun. But whatever be the truth of the matter, we must hold that paradise was situated in a most temperate situation, whether on the equator or elsewhere.\n\n---\n\nTHIRD ARTICLE [I, Q. 102, Art. 3]\n\nWhether Man Was Placed in Paradise to Dress It and Keep It?\n\nObjection 1: It would seem that man was not placed in paradise to dress and keep it. For what was brought on him as a punishment of sin would not have existed in paradise in the state of innocence. But the cultivation of the soil was a punishment of sin (Gen. 3:17). Therefore man was not placed in paradise to dress and keep it.\n\nObj. 2: Further, there is no need of a keeper when there is no fear of trespass with violence. But in paradise there was no fear of trespass with violence. Therefore there was no need for man to keep paradise.\n\nObj. 3: Further, if man was placed in paradise to dress and keep it, man would apparently have been made for the sake of paradise, and not contrariwise; which seems to be false. Therefore man was not place in paradise to dress and keep it.\n\n_On the contrary,_ It is written (Gen. 2: 15): \"The Lord God took man and placed in the paradise of pleasure, to dress and keep it.\"\n\n_I answer that,_ As Augustine says (Gen. ad lit. viii, 10), these words in Genesis may be understood in two ways. First, in the sense that God placed man in paradise that He might Himself work in man and keep him, by sanctifying him (for if this work cease, man at once relapses into darkness, as the air grows dark when the light ceases to shine); and by keeping man from all corruption and evil. Secondly, that man might dress and keep paradise, which dressing would not have involved labor, as it did after sin; but would have been pleasant on account of man's practical knowledge of the powers of nature. Nor would man have kept paradise against a trespasser; but he would have striven to keep paradise for himself lest he should lose it by sin. All of which was for man's good; wherefore paradise was ordered to man's benefit, and not conversely.\n\nWhence the Replies to the Objections are made clear.\n\n---\n\nFOURTH ARTICLE [I, Q. 102, Art. 4]\n\nWhether Man Was Created in Paradise?\n\nObjection 1: It would seem that man was created in paradise. For the angel was created in his dwelling-place--namely, the empyrean heaven. But before sin paradise was a fitting abode for man. Therefore it seems that man was created in paradise.\n\nObj. 2: Further, other animals remain in the place where they are produced, as the fish in the water, and walking animals on the earth from which they were made. Now man would have remained in paradise after he was created (Q. 97, A. 4). Therefore he was created in paradise.\n\nObj. 3: Further, woman was made in paradise. But man is greater than woman. Therefore much more should man have been made in paradise.\n\n_On the contrary,_ It is written (Gen. 2:15): \"God took man and placed him in paradise.\"\n\n_I answer that,_ Paradise was a fitting abode for man as regards the incorruptibility of the primitive state. Now this incorruptibility was man's, not by nature, but by a supernatural gift of God. Therefore that this might be attributed to God, and not to human nature, God made man outside of paradise, and afterwards placed him there to live there during the whole of his animal life; and, having attained to the spiritual life, to be transferred thence to heaven.\n\nReply Obj. 1: The empyrean heaven was a fitting abode for the angels as regards their nature, and therefore they were created there.\n\nIn the same way I reply to the second objection, for those places befit those animals in their nature.\n\nReply Obj. 3: Woman was made in paradise, not by reason of her own dignity, but on account of the dignity of the principle from which her body was formed. For the same reason the children would have been born in paradise, where their parents were already.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 7271,
+    "text": "OF MAN'S ABODE, WHICH IS PARADISE (In Four Articles)"
+  },
+  "word_count": 2704,
+  "block_count": 55
+}

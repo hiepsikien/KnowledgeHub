@@ -1,0 +1,401 @@
+{
+  "chapter_id": "ch-009",
+  "title": "_This ought ye to have done, and not to have left the other undone._",
+  "block_start": 287,
+  "block_end": 315,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_This ought ye to have done, and not to have left the other undone._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 68,
+          "style": "em",
+          "text": "_This ought ye to have done, and not to have left the other undone._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I have said that the present tendency of Catholicism,—the Catholicism of the main body of the Catholic clergy and laity,—seems likely to exaggerate rather than to remove all that in this form of religion is most repugnant to reason; but this Catholicism was not that of Mdlle. de Guérin. The insufficiency of her Catholicism comes from a doctrine which Protestantism, too, has adopted, although Protestantism, from its inherent element of freedom, may find it easier to escape from it; a doctrine with a certain attraction for all noble natures, but, in the modern world at any rate, incurably sterile,—the doctrine of the emptiness and nothingness of human life, of the superiority of renouncement to activity, of quietism to energy; the doctrine which makes effort for things on this side of the grave a folly, and joy in things on this side of the grave a sin. But her Catholicism is remarkably free from the faults which Protestants commonly think inseparable from Catholicism; the relation to the priest, the practice of confession, assume, when she speaks of them, an aspect which is not that under which Exeter Hall knows them, but which,—unless one is of the number of those who prefer regarding that by which men and nations die to regarding that by which they live,—one is glad to study. “_La confession_,” she says twice in her journal, “_n’est qu’une expansion du repentir dans l’amour_;” and her weekly journey to the confessional in the little church of Cahuzac is her “_cher pélerinage_;” the little church is the place where she has “_laissé tant de misères_.”",
+      "spans": [
+        {
+          "start": 1298,
+          "end": 1316,
+          "style": "quote",
+          "text": "“_La confession_,”"
+        },
+        {
+          "start": 1348,
+          "end": 1400,
+          "style": "quote",
+          "text": "“_n’est qu’une expansion du repentir dans l’amour_;”"
+        },
+        {
+          "start": 1483,
+          "end": 1503,
+          "style": "quote",
+          "text": "“_cher pélerinage_;”"
+        },
+        {
+          "start": 1549,
+          "end": 1576,
+          "style": "quote",
+          "text": "“_laissé tant de misères_.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“This morning,” she writes on 28th of November, “I was up before daylight, dressed quickly, said my prayers, and started with Marie for Cahuzac. When we got there, the chapel was occupied, which I was not sorry for. I like not to be hurried, and to have time, before I go in, to lay bare my soul before God. This often takes me a long time, because my thoughts are apt to be flying about like these autumn leaves. At ten o’clock I was on my knees, listening to words the most salutary that were ever spoken; and I went away, feeling myself a better being. Every burden thrown off leaves us with a sense of brightness; and when the soul has lain down the load of its sins at God’s feet, it feels as if it had wings. What an admirable thing is confession! What comfort, what light, what strength is given me every time after I have said, _I have sinned_.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 15,
+          "style": "quote",
+          "text": "“This morning,”"
+        },
+        {
+          "start": 48,
+          "end": 853,
+          "style": "quote",
+          "text": "“I was up before daylight, dressed quickly, said my prayers, and started with Marie for Cahuzac. When we got there, the chapel was occupied, which I was not sorry for. I like not to be hurried, and to have time, before I go in, to lay bare my soul before God. This often takes me a long time, because my thoughts are apt to be flying about like these autumn leaves. At ten o’clock I was on my knees, listening to words the most salutary that were ever spoken; and I went away, feeling myself a better being. Every burden thrown off leaves us with a sense of brightness; and when the soul has lain down the load of its sins at God’s feet, it feels as if it had wings. What an admirable thing is confession! What comfort, what light, what strength is given me every time after I have said, _I have sinned_.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This blessing of confession is the greater, she says, “the more the heart of the priest to whom we confide our repentance is like that divine heart which ‘has so loved us.’ This is what attaches me to M. Bories.” M. Bories was the curé of her parish, a man no longer young, and of whose loss, when he was about to leave them, she thus speaks:—",
+      "spans": [
+        {
+          "start": 54,
+          "end": 212,
+          "style": "quote",
+          "text": "“the more the heart of the priest to whom we confide our repentance is like that divine heart which ‘has so loved us.’ This is what attaches me to M. Bories.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“What a grief for me! how much I lose in losing this faithful guide of my conscience, heart, and mind, of my whole self, which God has appointed to be in his charge, and which let itself be in his charge so gladly! He knew the resolves which God had put in my heart, and I had need of his help to follow them. Our new curé cannot supply his place: he is so young! and then he seems so inexperienced, so undecided! It needs firmness to pluck a soul out of the midst of the world, and to uphold it against the assaults of flesh and blood. It is Saturday, my day for going to Cahuzac; I am just going there, perhaps I shall come back more tranquil. God has always given me some good thing there, in that chapel where I have left behind me so many miseries.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 754,
+          "style": "quote",
+          "text": "“What a grief for me! how much I lose in losing this faithful guide of my conscience, heart, and mind, of my whole self, which God has appointed to be in his charge, and which let itself be in his charge so gladly! He knew the resolves which God had put in my heart, and I had need of his help to follow them. Our new curé cannot supply his place: he is so young! and then he seems so inexperienced, so undecided! It needs firmness to pluck a soul out of the midst of the world, and to uphold it against the assaults of flesh and blood. It is Saturday, my day for going to Cahuzac; I am just going there, perhaps I shall come back more tranquil. God has always given me some good thing there, in that chapel where I have left behind me so many miseries.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Such is confession for her when the priest is worthy; and, when he is not worthy, she knows how to separate the man from the office:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "“To-day I am going to do something which I dislike; but I will do it, with God’s help. Do not think I am on my way to the stake; it is only that I am going to confess to a priest in whom I have not confidence, but who is the only one here. In this act of religion the man must always be separated from the priest, and sometimes the man must be annihilated.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 357,
+          "style": "quote",
+          "text": "“To-day I am going to do something which I dislike; but I will do it, with God’s help. Do not think I am on my way to the stake; it is only that I am going to confess to a priest in whom I have not confidence, but who is the only one here. In this act of religion the man must always be separated from the priest, and sometimes the man must be annihilated.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The same clear sense, the same freedom from superstition, shows itself in all her religious life. She tells us, to be sure, how once, when she was a little girl, she stained a new frock, and on praying, in her alarm, to an image of the Virgin which hung in her room, saw the stains vanish: even the austerest Protestant will not judge such Mariolatry as this very harshly. But, in general, the Virgin Mary fills in the religious parts of her journal no prominent place; it is Jesus, not Mary. “Oh, how well has Jesus said: ‘Come unto me, all ye that labor and are heavy laden.’ It is only there, only in the bosom of God, that we can rightly weep, rightly rid ourselves of our burden.” And again: “The mystery of suffering makes one grasp the belief of something to be expiated, something to be won. I see it in Jesus Christ, the Man of Sorrow. _It was necessary that the Son of Man should suffer._ That is all we know in the troubles and calamities of life.”",
+      "spans": [
+        {
+          "start": 493,
+          "end": 685,
+          "style": "quote",
+          "text": "“Oh, how well has Jesus said: ‘Come unto me, all ye that labor and are heavy laden.’ It is only there, only in the bosom of God, that we can rightly weep, rightly rid ourselves of our burden.”"
+        },
+        {
+          "start": 697,
+          "end": 959,
+          "style": "quote",
+          "text": "“The mystery of suffering makes one grasp the belief of something to be expiated, something to be won. I see it in Jesus Christ, the Man of Sorrow. _It was necessary that the Son of Man should suffer._ That is all we know in the troubles and calamities of life.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And who has ever spoken of justification more impressively and piously than Mdlle. de Guérin speaks of it, when, after reckoning the number of minutes she has lived, she exclaims:—"
+    },
+    {
+      "type": "blockquote",
+      "text": "“My God, what have we done with all these minutes of ours, which thou, too, wilt one day reckon? Will there be any of them to count for eternal life? will there be many of them? will there be one of them? ‘If thou, O Lord, wilt be extreme to mark what is done amiss, O Lord, who may abide it!’ This close scrutiny of our time may well make us tremble, all of us who have advanced more than a few steps in life; for God will judge us otherwise than as he judges the lilies of the field. I have never been able to understand the security of those who placed their whole reliance, in presenting themselves before God, upon a good conduct in the ordinary relations of human life. As if all our duties were confined within the narrow sphere of this world! To be a good parent, a good child, a good citizen, a good brother or sister, is not enough to procure entrance into the kingdom of heaven. God demands other things besides these kindly social virtues of him whom he means to crown with an eternity of glory.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 1008,
+          "style": "quote",
+          "text": "“My God, what have we done with all these minutes of ours, which thou, too, wilt one day reckon? Will there be any of them to count for eternal life? will there be many of them? will there be one of them? ‘If thou, O Lord, wilt be extreme to mark what is done amiss, O Lord, who may abide it!’ This close scrutiny of our time may well make us tremble, all of us who have advanced more than a few steps in life; for God will judge us otherwise than as he judges the lilies of the field. I have never been able to understand the security of those who placed their whole reliance, in presenting themselves before God, upon a good conduct in the ordinary relations of human life. As if all our duties were confined within the narrow sphere of this world! To be a good parent, a good child, a good citizen, a good brother or sister, is not enough to procure entrance into the kingdom of heaven. God demands other things besides these kindly social virtues of him whom he means to crown with an eternity of glory.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And, with this zeal for the spirit and power of religion, what prudence in her counsels of religious practice; what discernment, what measure! She has been speaking of the charm of the _Lives of the Saints_, and she goes on:—",
+      "spans": [
+        {
+          "start": 185,
+          "end": 206,
+          "style": "em",
+          "text": "_Lives of the Saints_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Notwithstanding this, the _Lives of the Saints_ seem to me, for a great many people, dangerous reading. I would not recommend them to a young girl, or even to some women who are no longer young. What one reads has such power over one’s feelings; and these, even in seeking God, sometimes go astray. Alas, we have seen it in poor C.’s case. What care one ought to take with a young person; with what she reads, what she writes, her society, her prayers,—all of them matters which demand a mother’s tender watchfulness! I remember many things I did at fourteen, which my mother, had she lived, would not have let me do. I would have done anything for God’s sake; I would have cast myself into an oven, and assuredly things like that are not God’s will; He is not pleased by the hurt one does to one’s health through that ardent but ill-regulated piety which, while it impairs the body, often leaves many a fault flourishing. And, therefore, Saint François de Sales used to say to the nuns who asked his leave to go bare-foot: ‘Change your brains and keep your shoes.’”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 1067,
+          "style": "quote",
+          "text": "“Notwithstanding this, the _Lives of the Saints_ seem to me, for a great many people, dangerous reading. I would not recommend them to a young girl, or even to some women who are no longer young. What one reads has such power over one’s feelings; and these, even in seeking God, sometimes go astray. Alas, we have seen it in poor C.’s case. What care one ought to take with a young person; with what she reads, what she writes, her society, her prayers,—all of them matters which demand a mother’s tender watchfulness! I remember many things I did at fourteen, which my mother, had she lived, would not have let me do. I would have done anything for God’s sake; I would have cast myself into an oven, and assuredly things like that are not God’s will; He is not pleased by the hurt one does to one’s health through that ardent but ill-regulated piety which, while it impairs the body, often leaves many a fault flourishing. And, therefore, Saint François de Sales used to say to the nuns who asked his leave to go bare-foot: ‘Change your brains and keep your shoes.’”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Meanwhile Maurice, in a five years’ absence, and amid the distractions of Paris, lost, or seemed to his sister to lose, something of his fondness for his home and its inmates: he certainly lost his early religious habits and feelings. It is on this latter loss that Mdlle. de Guérin’s journal oftenest touches,—with infinite delicacy, but with infinite anguish:—"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Oh, the agony of being in fear for a soul’s salvation, who can describe it! That which caused our Saviour the keenest suffering, in the agony of his Passion, was not so much the thought of the torments he was to endure, as the thought that these torments would be of no avail for a multitude of sinners; for all those who set themselves against their redemption, or who do not care for it. The mere anticipation of this obstinacy and this heedlessness has power to make sorrowful, even unto death, the divine Son of Man. And this feeling all Christian souls, according to the measure of faith and love granted them, more or less share.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 637,
+          "style": "quote",
+          "text": "“Oh, the agony of being in fear for a soul’s salvation, who can describe it! That which caused our Saviour the keenest suffering, in the agony of his Passion, was not so much the thought of the torments he was to endure, as the thought that these torments would be of no avail for a multitude of sinners; for all those who set themselves against their redemption, or who do not care for it. The mere anticipation of this obstinacy and this heedlessness has power to make sorrowful, even unto death, the divine Son of Man. And this feeling all Christian souls, according to the measure of faith and love granted them, more or less share.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Maurice returned to Le Cayla in the summer of 1837, and passed six months there. This meeting entirely restored the union between him and his family. “These six months with us,” writes his sister, “he ill, and finding himself so loved by us all, had entirely reattached him to us. Five years without seeing us, had perhaps made him a little lose sight of our affection for him; having found it again, he met it with all the strength of his own. He had so firmly renewed, before he left us, all family-ties, that nothing but death could have broken them.” The separation in religious matters between the brother and sister gradually diminished, and before Maurice died it had ceased. I have elsewhere spoken of Maurice’s religious feeling and his character. It is probable that his divergence from his sister in this sphere of religion was never so wide as she feared, and that his reunion with her was never so complete as she hoped. “His errors were passed,” she says, “his illusions were cleared away; by the call of his nature, by original disposition, he had come back to sentiments of order. I knew all, I followed each of his steps; out of the fiery sphere of the passions (which held him but a little moment) I saw him pass into the sphere of the Christian life. It was a beautiful soul, the soul of Maurice.” But the illness which had caused his return to Le Cayla reappeared after he got back to Paris in the winter of 1837-8. Again he seemed to recover; and his marriage with a young Creole lady, Mdlle. Caroline de Gervain, took place in the autumn of 1838. At the end of September in that year Mdlle. de Guérin had joined her brother in Paris; she was present at his marriage, and stayed with him and his wife for some months afterwards. Her journal recommences in April 1839. Zealously as she promoted her brother’s marriage, cordial as were her relations with her sister-in-law, it is evident that a sense of loss, of loneliness, invades her, and sometimes weighs her down. She writes in her journal on the 4th of May:—",
+      "spans": [
+        {
+          "start": 150,
+          "end": 177,
+          "style": "quote",
+          "text": "“These six months with us,”"
+        },
+        {
+          "start": 197,
+          "end": 554,
+          "style": "quote",
+          "text": "“he ill, and finding himself so loved by us all, had entirely reattached him to us. Five years without seeing us, had perhaps made him a little lose sight of our affection for him; having found it again, he met it with all the strength of his own. He had so firmly renewed, before he left us, all family-ties, that nothing but death could have broken them.”"
+        },
+        {
+          "start": 934,
+          "end": 959,
+          "style": "quote",
+          "text": "“His errors were passed,”"
+        },
+        {
+          "start": 970,
+          "end": 1316,
+          "style": "quote",
+          "text": "“his illusions were cleared away; by the call of his nature, by original disposition, he had come back to sentiments of order. I knew all, I followed each of his steps; out of the fiery sphere of the passions (which held him but a little moment) I saw him pass into the sphere of the Christian life. It was a beautiful soul, the soul of Maurice.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“God knows when we shall see one another again! My own Maurice, must it be our lot to live apart, to find that this marriage which I had so much share in bringing about, which I hoped would keep us so much together, leaves us more asunder than ever? For the present and for the future, this troubles me more than I can say. My sympathies, my inclinations, carry me more towards you than towards any other member of our family. I have the misfortune to be fonder of you than of anything else in the world, and my heart had from of old built in you its happiness. Youth gone and life declining, I looked forward to quitting the scene with Maurice. At any time of life a great affection is a great happiness; the spirit comes to take refuge in it entirely. O delight and joy which will never be your sister’s portion! Only in the direction of God shall I find an issue for my heart to love as it has the notion of loving, as it has the power of loving.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 950,
+          "style": "quote",
+          "text": "“God knows when we shall see one another again! My own Maurice, must it be our lot to live apart, to find that this marriage which I had so much share in bringing about, which I hoped would keep us so much together, leaves us more asunder than ever? For the present and for the future, this troubles me more than I can say. My sympathies, my inclinations, carry me more towards you than towards any other member of our family. I have the misfortune to be fonder of you than of anything else in the world, and my heart had from of old built in you its happiness. Youth gone and life declining, I looked forward to quitting the scene with Maurice. At any time of life a great affection is a great happiness; the spirit comes to take refuge in it entirely. O delight and joy which will never be your sister’s portion! Only in the direction of God shall I find an issue for my heart to love as it has the notion of loving, as it has the power of loving.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For such complainings, in which there is undoubtedly something morbid,—complainings which she herself blamed, to which she seldom gave way, but which, in presenting her character, it is not just to put wholly out of sight,—she was called by the news of an alarming return of her brother’s illness. For some days the entries in the journal show her agony of apprehension. “He coughs, he coughs still! Those words keep echoing forever in my ears, and pursue me wherever I go; I cannot look at the leaves on the trees without thinking that the winter will come, and then the consumptive die.” She went to him, and brought him back by slow stages to Le Cayla, dying. He died on the 19th of July 1839.",
+      "spans": [
+        {
+          "start": 371,
+          "end": 589,
+          "style": "quote",
+          "text": "“He coughs, he coughs still! Those words keep echoing forever in my ears, and pursue me wherever I go; I cannot look at the leaves on the trees without thinking that the winter will come, and then the consumptive die.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Thenceforward the energy of life ebbed in her; but the main chords of her being, the chord of affection, the chord of religious longing, the chord of intelligence, the chord of sorrow, gave, so long as they answered to the touch at all, a deeper and finer sound than ever. Always she saw before her, “that beloved pale face;” “that beautiful head, with all its different expressions, smiling, suffering, dying,” regarded her always:—",
+      "spans": [
+        {
+          "start": 300,
+          "end": 325,
+          "style": "quote",
+          "text": "“that beloved pale face;”"
+        },
+        {
+          "start": 326,
+          "end": 411,
+          "style": "quote",
+          "text": "“that beautiful head, with all its different expressions, smiling, suffering, dying,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“I have seen his coffin in the same room, in the same spot where I remember seeing, when I was a very little girl, his cradle, when I was brought home from Gaillac, where I was then staying, for his christening. This christening was a grand one, full of rejoicing, more than that of any of the rest of us; specially marked. I enjoyed myself greatly, and went back to Gaillac next day, charmed with my new little brother. Two years afterwards I came home, and brought with me a frock for him of my own making. I dressed him in the frock, and took him out with me along by the warren at the north of the house, and there he walked a few steps alone,—his first walking alone,—and I ran with delight to tell my mother the news: ‘Maurice, Maurice has begun to walk by himself!’—Recollections which, coming back to-day, break one’s heart.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 833,
+          "style": "quote",
+          "text": "“I have seen his coffin in the same room, in the same spot where I remember seeing, when I was a very little girl, his cradle, when I was brought home from Gaillac, where I was then staying, for his christening. This christening was a grand one, full of rejoicing, more than that of any of the rest of us; specially marked. I enjoyed myself greatly, and went back to Gaillac next day, charmed with my new little brother. Two years afterwards I came home, and brought with me a frock for him of my own making. I dressed him in the frock, and took him out with me along by the warren at the north of the house, and there he walked a few steps alone,—his first walking alone,—and I ran with delight to tell my mother the news: ‘Maurice, Maurice has begun to walk by himself!’—Recollections which, coming back to-day, break one’s heart.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The shortness and suffering of her brother’s life filled her with an agony of pity. “Poor beloved soul, you have had hardly any happiness here below; your life has been so short, your repose so rare. O God, uphold me, establish my heart in thy faith! Alas, I have too little of this supporting me! How we have gazed at him and loved him, and kissed him,—his wife, and we, his sisters; he lying lifeless in his bed, his head on the pillow as if he were asleep! Then we followed him to the churchyard, to the grave, to his last resting-place, and prayed over him, and wept over him; and we are here again, and I am writing to him again, as if he were staying away from home, as if he were in Paris. My beloved one, can it be, shall we never see one another again on earth?”",
+      "spans": [
+        {
+          "start": 84,
+          "end": 771,
+          "style": "quote",
+          "text": "“Poor beloved soul, you have had hardly any happiness here below; your life has been so short, your repose so rare. O God, uphold me, establish my heart in thy faith! Alas, I have too little of this supporting me! How we have gazed at him and loved him, and kissed him,—his wife, and we, his sisters; he lying lifeless in his bed, his head on the pillow as if he were asleep! Then we followed him to the churchyard, to the grave, to his last resting-place, and prayed over him, and wept over him; and we are here again, and I am writing to him again, as if he were staying away from home, as if he were in Paris. My beloved one, can it be, shall we never see one another again on earth?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But in heaven?—and here, though love and hope finally prevailed, the very passion of the sister’s longing sometimes inspired torturing inquietudes:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "“I am broken down with misery. I want to see him. Every moment I pray to God to grant me this grace. Heaven, the world of spirits, is it so far from us? O depth, O mystery of the other life which separates us! I, who was so eagerly anxious about him, who wanted so to know all that happened to him,—wherever he may be now, it is over! I follow him unto the three abodes; I stop wistfully before the place of bliss, I pass on to the place of suffering,—to the gulf of fire. My God, my God, no! Not there let my brother be! not there! And he is not: his soul, the soul of Maurice, among the lost ... horrible fear, no! But in purgatory, where the soul is cleansed by suffering, where the failings of the heart are expiated, the doubtings of the spirit, the half-yieldings to evil? Perhaps my brother is there and suffers, and calls to us amidst his anguish of repentance, as he used to call to us amidst his bodily suffering: ‘Help me, you who love me.’ Yes, beloved one, by prayer. I will go and pray; prayer has been such a power to me, and I will pray to the end. Prayer! Oh! and prayer for the dead; it is the dew of purgatory.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 1130,
+          "style": "quote",
+          "text": "“I am broken down with misery. I want to see him. Every moment I pray to God to grant me this grace. Heaven, the world of spirits, is it so far from us? O depth, O mystery of the other life which separates us! I, who was so eagerly anxious about him, who wanted so to know all that happened to him,—wherever he may be now, it is over! I follow him unto the three abodes; I stop wistfully before the place of bliss, I pass on to the place of suffering,—to the gulf of fire. My God, my God, no! Not there let my brother be! not there! And he is not: his soul, the soul of Maurice, among the lost ... horrible fear, no! But in purgatory, where the soul is cleansed by suffering, where the failings of the heart are expiated, the doubtings of the spirit, the half-yieldings to evil? Perhaps my brother is there and suffers, and calls to us amidst his anguish of repentance, as he used to call to us amidst his bodily suffering: ‘Help me, you who love me.’ Yes, beloved one, by prayer. I will go and pray; prayer has been such a power to me, and I will pray to the end. Prayer! Oh! and prayer for the dead; it is the dew of purgatory.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Often, alas, the gracious dew would not fall; the air of her soul was parched; the arid wind, which was somewhere in the depths of her being, blew. She marks in her journal the 1st of May, “this return of the loveliest month in the year,” only to keep up the old habit; even the mouth of May can no longer give her any pleasure: “_Tout est changé_—all is changed.” She is crushed by “the misery which has nothing good in it, the tearless, dry misery, which bruises the heart like a hammer.”",
+      "spans": [
+        {
+          "start": 189,
+          "end": 238,
+          "style": "quote",
+          "text": "“this return of the loveliest month in the year,”"
+        },
+        {
+          "start": 329,
+          "end": 364,
+          "style": "quote",
+          "text": "“_Tout est changé_—all is changed.”"
+        },
+        {
+          "start": 383,
+          "end": 490,
+          "style": "quote",
+          "text": "“the misery which has nothing good in it, the tearless, dry misery, which bruises the heart like a hammer.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“I am dying to everything. I am dying of a slow moral agony, a condition of unutterable suffering. Lie there, my poor journal! be forgotten with all this world which is fading away from me. I will write here no more until I come to life again, until God re-awakens me out of this tomb in which my soul lies buried. Maurice, my beloved! it was not thus with me when I had _you_! The thought of Maurice could revive me from the most profound depression: to have him in the world was enough for me. With Maurice, to be buried alive would have not seemed dull to me.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 563,
+          "style": "quote",
+          "text": "“I am dying to everything. I am dying of a slow moral agony, a condition of unutterable suffering. Lie there, my poor journal! be forgotten with all this world which is fading away from me. I will write here no more until I come to life again, until God re-awakens me out of this tomb in which my soul lies buried. Maurice, my beloved! it was not thus with me when I had _you_! The thought of Maurice could revive me from the most profound depression: to have him in the world was enough for me. With Maurice, to be buried alive would have not seemed dull to me.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And, as a burden to this funeral strain, the old _vide et néant_ of Bossuet, profound, solemn, sterile:—",
+      "spans": [
+        {
+          "start": 49,
+          "end": 64,
+          "style": "em",
+          "text": "_vide et néant_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“So beautiful in the morning, and in the evening, _that!_ how the thought disenchants one, and turns one from the world! I can understand that Spanish grandee who, after lifting up the winding-sheet of a beautiful queen, threw himself into the cloister and became a great saint. I would have all my friends at La Trappe, in the interest of their eternal welfare. Not that in the world one cannot be saved, not that there are not in the world duties to be discharged as sacred and as beautiful as there are in the cloister, but....”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 531,
+          "style": "quote",
+          "text": "“So beautiful in the morning, and in the evening, _that!_ how the thought disenchants one, and turns one from the world! I can understand that Spanish grandee who, after lifting up the winding-sheet of a beautiful queen, threw himself into the cloister and became a great saint. I would have all my friends at La Trappe, in the interest of their eternal welfare. Not that in the world one cannot be saved, not that there are not in the world duties to be discharged as sacred and as beautiful as there are in the cloister, but....”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And there she stops, and a day or two afterwards her journal comes to an end. A few fragments, a few letters carry us on a little later, but after the 22d of August 1845 there is nothing. To make known her brother’s genius to the world was the one task she set herself after his death; in 1840 came Madame Sand’s noble tribute to him in the _Révue des Deux Mondes_; then followed projects of raising a yet more enduring monument to his fame, by collecting and publishing his scattered compositions; these projects I have already said, were baffled;—Mdlle. de Guérin’s letter of the 22d of August 1845 relates to this disappointment. In silence, during nearly three years more, she faded away at Le Cayla. She died on the 31st of May 1848.",
+      "spans": [
+        {
+          "start": 341,
+          "end": 364,
+          "style": "em",
+          "text": "_Révue des Deux Mondes_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "M. Trebutien has accomplished the pious task in which Mdlle. de Guérin was baffled, and has established Maurice’s fame; by publishing this journal he has established Eugénie’s also. She was very different from her brother; but she too, like him, had that in her which preserves a reputation. Her soul had the same characteristic quality as his talent,—_distinction_. Of this quality the world is impatient; it chafes against it, rails at it, insults it, hates it;—it ends by receiving its influence, and by undergoing its law. This quality at last inexorably corrects the world’s blunders, and fixes the world’s ideals. It procures that the popular poet shall not finally pass for a Pindar, nor the popular historian for a Tacitus, nor the popular preacher for a Bossuet. To the circle of spirits marked by this rare quality, Maurice and Eugénie de Guérin belong; they will take their place in the sky which these inhabit, and shine close to one another, _lucida sidera_.",
+      "spans": [
+        {
+          "start": 352,
+          "end": 365,
+          "style": "em",
+          "text": "_distinction_"
+        },
+        {
+          "start": 955,
+          "end": 970,
+          "style": "em",
+          "text": "_lucida sidera_"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "V.",
+      "lines": [
+        "V."
+      ]
+    }
+  ],
+  "reading_markdown": "_This ought ye to have done, and not to have left the other undone._\n\nI have said that the present tendency of Catholicism,—the Catholicism of the main body of the Catholic clergy and laity,—seems likely to exaggerate rather than to remove all that in this form of religion is most repugnant to reason; but this Catholicism was not that of Mdlle. de Guérin. The insufficiency of her Catholicism comes from a doctrine which Protestantism, too, has adopted, although Protestantism, from its inherent element of freedom, may find it easier to escape from it; a doctrine with a certain attraction for all noble natures, but, in the modern world at any rate, incurably sterile,—the doctrine of the emptiness and nothingness of human life, of the superiority of renouncement to activity, of quietism to energy; the doctrine which makes effort for things on this side of the grave a folly, and joy in things on this side of the grave a sin. But her Catholicism is remarkably free from the faults which Protestants commonly think inseparable from Catholicism; the relation to the priest, the practice of confession, assume, when she speaks of them, an aspect which is not that under which Exeter Hall knows them, but which,—unless one is of the number of those who prefer regarding that by which men and nations die to regarding that by which they live,—one is glad to study. “_La confession_,” she says twice in her journal, “_n’est qu’une expansion du repentir dans l’amour_;” and her weekly journey to the confessional in the little church of Cahuzac is her “_cher pélerinage_;” the little church is the place where she has “_laissé tant de misères_.”\n\n> “This morning,” she writes on 28th of November, “I was up before daylight, dressed quickly, said my prayers, and started with Marie for Cahuzac. When we got there, the chapel was occupied, which I was not sorry for. I like not to be hurried, and to have time, before I go in, to lay bare my soul before God. This often takes me a long time, because my thoughts are apt to be flying about like these autumn leaves. At ten o’clock I was on my knees, listening to words the most salutary that were ever spoken; and I went away, feeling myself a better being. Every burden thrown off leaves us with a sense of brightness; and when the soul has lain down the load of its sins at God’s feet, it feels as if it had wings. What an admirable thing is confession! What comfort, what light, what strength is given me every time after I have said, _I have sinned_.”\n\nThis blessing of confession is the greater, she says, “the more the heart of the priest to whom we confide our repentance is like that divine heart which ‘has so loved us.’ This is what attaches me to M. Bories.” M. Bories was the curé of her parish, a man no longer young, and of whose loss, when he was about to leave them, she thus speaks:—\n\n“What a grief for me! how much I lose in losing this faithful guide of my conscience, heart, and mind, of my whole self, which God has appointed to be in his charge, and which let itself be in his charge so gladly! He knew the resolves which God had put in my heart, and I had need of his help to follow them. Our new curé cannot supply his place: he is so young! and then he seems so inexperienced, so undecided! It needs firmness to pluck a soul out of the midst of the world, and to uphold it against the assaults of flesh and blood. It is Saturday, my day for going to Cahuzac; I am just going there, perhaps I shall come back more tranquil. God has always given me some good thing there, in that chapel where I have left behind me so many miseries.”\n\nSuch is confession for her when the priest is worthy; and, when he is not worthy, she knows how to separate the man from the office:—\n\n“To-day I am going to do something which I dislike; but I will do it, with God’s help. Do not think I am on my way to the stake; it is only that I am going to confess to a priest in whom I have not confidence, but who is the only one here. In this act of religion the man must always be separated from the priest, and sometimes the man must be annihilated.”\n\nThe same clear sense, the same freedom from superstition, shows itself in all her religious life. She tells us, to be sure, how once, when she was a little girl, she stained a new frock, and on praying, in her alarm, to an image of the Virgin which hung in her room, saw the stains vanish: even the austerest Protestant will not judge such Mariolatry as this very harshly. But, in general, the Virgin Mary fills in the religious parts of her journal no prominent place; it is Jesus, not Mary. “Oh, how well has Jesus said: ‘Come unto me, all ye that labor and are heavy laden.’ It is only there, only in the bosom of God, that we can rightly weep, rightly rid ourselves of our burden.” And again: “The mystery of suffering makes one grasp the belief of something to be expiated, something to be won. I see it in Jesus Christ, the Man of Sorrow. _It was necessary that the Son of Man should suffer._ That is all we know in the troubles and calamities of life.”\n\nAnd who has ever spoken of justification more impressively and piously than Mdlle. de Guérin speaks of it, when, after reckoning the number of minutes she has lived, she exclaims:—\n\n> “My God, what have we done with all these minutes of ours, which thou, too, wilt one day reckon? Will there be any of them to count for eternal life? will there be many of them? will there be one of them? ‘If thou, O Lord, wilt be extreme to mark what is done amiss, O Lord, who may abide it!’ This close scrutiny of our time may well make us tremble, all of us who have advanced more than a few steps in life; for God will judge us otherwise than as he judges the lilies of the field. I have never been able to understand the security of those who placed their whole reliance, in presenting themselves before God, upon a good conduct in the ordinary relations of human life. As if all our duties were confined within the narrow sphere of this world! To be a good parent, a good child, a good citizen, a good brother or sister, is not enough to procure entrance into the kingdom of heaven. God demands other things besides these kindly social virtues of him whom he means to crown with an eternity of glory.”\n\nAnd, with this zeal for the spirit and power of religion, what prudence in her counsels of religious practice; what discernment, what measure! She has been speaking of the charm of the _Lives of the Saints_, and she goes on:—\n\n> “Notwithstanding this, the _Lives of the Saints_ seem to me, for a great many people, dangerous reading. I would not recommend them to a young girl, or even to some women who are no longer young. What one reads has such power over one’s feelings; and these, even in seeking God, sometimes go astray. Alas, we have seen it in poor C.’s case. What care one ought to take with a young person; with what she reads, what she writes, her society, her prayers,—all of them matters which demand a mother’s tender watchfulness! I remember many things I did at fourteen, which my mother, had she lived, would not have let me do. I would have done anything for God’s sake; I would have cast myself into an oven, and assuredly things like that are not God’s will; He is not pleased by the hurt one does to one’s health through that ardent but ill-regulated piety which, while it impairs the body, often leaves many a fault flourishing. And, therefore, Saint François de Sales used to say to the nuns who asked his leave to go bare-foot: ‘Change your brains and keep your shoes.’”\n\nMeanwhile Maurice, in a five years’ absence, and amid the distractions of Paris, lost, or seemed to his sister to lose, something of his fondness for his home and its inmates: he certainly lost his early religious habits and feelings. It is on this latter loss that Mdlle. de Guérin’s journal oftenest touches,—with infinite delicacy, but with infinite anguish:—\n\n> “Oh, the agony of being in fear for a soul’s salvation, who can describe it! That which caused our Saviour the keenest suffering, in the agony of his Passion, was not so much the thought of the torments he was to endure, as the thought that these torments would be of no avail for a multitude of sinners; for all those who set themselves against their redemption, or who do not care for it. The mere anticipation of this obstinacy and this heedlessness has power to make sorrowful, even unto death, the divine Son of Man. And this feeling all Christian souls, according to the measure of faith and love granted them, more or less share.”\n\nMaurice returned to Le Cayla in the summer of 1837, and passed six months there. This meeting entirely restored the union between him and his family. “These six months with us,” writes his sister, “he ill, and finding himself so loved by us all, had entirely reattached him to us. Five years without seeing us, had perhaps made him a little lose sight of our affection for him; having found it again, he met it with all the strength of his own. He had so firmly renewed, before he left us, all family-ties, that nothing but death could have broken them.” The separation in religious matters between the brother and sister gradually diminished, and before Maurice died it had ceased. I have elsewhere spoken of Maurice’s religious feeling and his character. It is probable that his divergence from his sister in this sphere of religion was never so wide as she feared, and that his reunion with her was never so complete as she hoped. “His errors were passed,” she says, “his illusions were cleared away; by the call of his nature, by original disposition, he had come back to sentiments of order. I knew all, I followed each of his steps; out of the fiery sphere of the passions (which held him but a little moment) I saw him pass into the sphere of the Christian life. It was a beautiful soul, the soul of Maurice.” But the illness which had caused his return to Le Cayla reappeared after he got back to Paris in the winter of 1837-8. Again he seemed to recover; and his marriage with a young Creole lady, Mdlle. Caroline de Gervain, took place in the autumn of 1838. At the end of September in that year Mdlle. de Guérin had joined her brother in Paris; she was present at his marriage, and stayed with him and his wife for some months afterwards. Her journal recommences in April 1839. Zealously as she promoted her brother’s marriage, cordial as were her relations with her sister-in-law, it is evident that a sense of loss, of loneliness, invades her, and sometimes weighs her down. She writes in her journal on the 4th of May:—\n\n> “God knows when we shall see one another again! My own Maurice, must it be our lot to live apart, to find that this marriage which I had so much share in bringing about, which I hoped would keep us so much together, leaves us more asunder than ever? For the present and for the future, this troubles me more than I can say. My sympathies, my inclinations, carry me more towards you than towards any other member of our family. I have the misfortune to be fonder of you than of anything else in the world, and my heart had from of old built in you its happiness. Youth gone and life declining, I looked forward to quitting the scene with Maurice. At any time of life a great affection is a great happiness; the spirit comes to take refuge in it entirely. O delight and joy which will never be your sister’s portion! Only in the direction of God shall I find an issue for my heart to love as it has the notion of loving, as it has the power of loving.”\n\nFor such complainings, in which there is undoubtedly something morbid,—complainings which she herself blamed, to which she seldom gave way, but which, in presenting her character, it is not just to put wholly out of sight,—she was called by the news of an alarming return of her brother’s illness. For some days the entries in the journal show her agony of apprehension. “He coughs, he coughs still! Those words keep echoing forever in my ears, and pursue me wherever I go; I cannot look at the leaves on the trees without thinking that the winter will come, and then the consumptive die.” She went to him, and brought him back by slow stages to Le Cayla, dying. He died on the 19th of July 1839.\n\nThenceforward the energy of life ebbed in her; but the main chords of her being, the chord of affection, the chord of religious longing, the chord of intelligence, the chord of sorrow, gave, so long as they answered to the touch at all, a deeper and finer sound than ever. Always she saw before her, “that beloved pale face;” “that beautiful head, with all its different expressions, smiling, suffering, dying,” regarded her always:—\n\n“I have seen his coffin in the same room, in the same spot where I remember seeing, when I was a very little girl, his cradle, when I was brought home from Gaillac, where I was then staying, for his christening. This christening was a grand one, full of rejoicing, more than that of any of the rest of us; specially marked. I enjoyed myself greatly, and went back to Gaillac next day, charmed with my new little brother. Two years afterwards I came home, and brought with me a frock for him of my own making. I dressed him in the frock, and took him out with me along by the warren at the north of the house, and there he walked a few steps alone,—his first walking alone,—and I ran with delight to tell my mother the news: ‘Maurice, Maurice has begun to walk by himself!’—Recollections which, coming back to-day, break one’s heart.”\n\nThe shortness and suffering of her brother’s life filled her with an agony of pity. “Poor beloved soul, you have had hardly any happiness here below; your life has been so short, your repose so rare. O God, uphold me, establish my heart in thy faith! Alas, I have too little of this supporting me! How we have gazed at him and loved him, and kissed him,—his wife, and we, his sisters; he lying lifeless in his bed, his head on the pillow as if he were asleep! Then we followed him to the churchyard, to the grave, to his last resting-place, and prayed over him, and wept over him; and we are here again, and I am writing to him again, as if he were staying away from home, as if he were in Paris. My beloved one, can it be, shall we never see one another again on earth?”\n\nBut in heaven?—and here, though love and hope finally prevailed, the very passion of the sister’s longing sometimes inspired torturing inquietudes:—\n\n“I am broken down with misery. I want to see him. Every moment I pray to God to grant me this grace. Heaven, the world of spirits, is it so far from us? O depth, O mystery of the other life which separates us! I, who was so eagerly anxious about him, who wanted so to know all that happened to him,—wherever he may be now, it is over! I follow him unto the three abodes; I stop wistfully before the place of bliss, I pass on to the place of suffering,—to the gulf of fire. My God, my God, no! Not there let my brother be! not there! And he is not: his soul, the soul of Maurice, among the lost ... horrible fear, no! But in purgatory, where the soul is cleansed by suffering, where the failings of the heart are expiated, the doubtings of the spirit, the half-yieldings to evil? Perhaps my brother is there and suffers, and calls to us amidst his anguish of repentance, as he used to call to us amidst his bodily suffering: ‘Help me, you who love me.’ Yes, beloved one, by prayer. I will go and pray; prayer has been such a power to me, and I will pray to the end. Prayer! Oh! and prayer for the dead; it is the dew of purgatory.”\n\nOften, alas, the gracious dew would not fall; the air of her soul was parched; the arid wind, which was somewhere in the depths of her being, blew. She marks in her journal the 1st of May, “this return of the loveliest month in the year,” only to keep up the old habit; even the mouth of May can no longer give her any pleasure: “_Tout est changé_—all is changed.” She is crushed by “the misery which has nothing good in it, the tearless, dry misery, which bruises the heart like a hammer.”\n\n“I am dying to everything. I am dying of a slow moral agony, a condition of unutterable suffering. Lie there, my poor journal! be forgotten with all this world which is fading away from me. I will write here no more until I come to life again, until God re-awakens me out of this tomb in which my soul lies buried. Maurice, my beloved! it was not thus with me when I had _you_! The thought of Maurice could revive me from the most profound depression: to have him in the world was enough for me. With Maurice, to be buried alive would have not seemed dull to me.”\n\nAnd, as a burden to this funeral strain, the old _vide et néant_ of Bossuet, profound, solemn, sterile:—\n\n> “So beautiful in the morning, and in the evening, _that!_ how the thought disenchants one, and turns one from the world! I can understand that Spanish grandee who, after lifting up the winding-sheet of a beautiful queen, threw himself into the cloister and became a great saint. I would have all my friends at La Trappe, in the interest of their eternal welfare. Not that in the world one cannot be saved, not that there are not in the world duties to be discharged as sacred and as beautiful as there are in the cloister, but....”\n\nAnd there she stops, and a day or two afterwards her journal comes to an end. A few fragments, a few letters carry us on a little later, but after the 22d of August 1845 there is nothing. To make known her brother’s genius to the world was the one task she set herself after his death; in 1840 came Madame Sand’s noble tribute to him in the _Révue des Deux Mondes_; then followed projects of raising a yet more enduring monument to his fame, by collecting and publishing his scattered compositions; these projects I have already said, were baffled;—Mdlle. de Guérin’s letter of the 22d of August 1845 relates to this disappointment. In silence, during nearly three years more, she faded away at Le Cayla. She died on the 31st of May 1848.\n\nM. Trebutien has accomplished the pious task in which Mdlle. de Guérin was baffled, and has established Maurice’s fame; by publishing this journal he has established Eugénie’s also. She was very different from her brother; but she too, like him, had that in her which preserves a reputation. Her soul had the same characteristic quality as his talent,—_distinction_. Of this quality the world is impatient; it chafes against it, rails at it, insults it, hates it;—it ends by receiving its influence, and by undergoing its law. This quality at last inexorably corrects the world’s blunders, and fixes the world’s ideals. It procures that the popular poet shall not finally pass for a Pindar, nor the popular historian for a Tacitus, nor the popular preacher for a Bossuet. To the circle of spirits marked by this rare quality, Maurice and Eugénie de Guérin belong; they will take their place in the sky which these inhabit, and shine close to one another, _lucida sidera_.\n\nV.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 287,
+    "text": "_This ought ye to have done, and not to have left the other undone._"
+  },
+  "word_count": 3536,
+  "block_count": 29
+}

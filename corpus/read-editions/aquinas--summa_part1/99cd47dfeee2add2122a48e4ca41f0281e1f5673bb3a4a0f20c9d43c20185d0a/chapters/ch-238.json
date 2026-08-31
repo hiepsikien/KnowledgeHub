@@ -1,0 +1,701 @@
+{
+  "chapter_id": "ch-238",
+  "title": "HOW ANGELS ACT ON BODIES (In Four Articles)",
+  "block_start": 7890,
+  "block_end": 7944,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "HOW ANGELS ACT ON BODIES (In Four Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 25,
+          "end": 43,
+          "style": "paren_cite",
+          "text": "(In Four Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We now consider how the angels preside over the corporeal creatures. Under this head there are four points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) Whether the corporeal creature is governed by the angels?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) Whether the corporeal creature obeys the mere will of the angels?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) Whether the angels by their own power can immediately move bodies locally?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) Whether the good or bad angels can work miracles?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 110, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 110, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Corporeal Creature Is Governed by the Angels?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the corporeal creature is not governed by angels. For whatever possesses a determinate mode of action, needs not to be governed by any superior power; for we require to be governed lest we do what we ought not. But corporeal things have their actions determined by the nature divinely bestowed upon them. Therefore they do not need the government of angels."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the lowest things are ruled by the superior. But some corporeal things are inferior, and others are superior. Therefore they need not be governed by the angels."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the different orders of the angels are distinguished by different offices. But if corporeal creatures were ruled by the angels, there would be as many angelic offices as there are species of things. So also there would be as many orders of angels as there are species of things; which is against what is laid down above (Q. 108, A. 2). Therefore the corporeal creature is not governed by angels.",
+      "spans": [
+        {
+          "start": 337,
+          "end": 351,
+          "style": "paren_cite",
+          "text": "(Q. 108, A. 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (De Trin. iii, 4) that \"all bodies are ruled by the rational spirit of life\"; and Gregory says (Dial. iv, 6), that \"in this visible world nothing takes place without the agency of the invisible creature.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 51,
+          "style": "paren_cite",
+          "text": "(De Trin. iii, 4)"
+        },
+        {
+          "start": 57,
+          "end": 110,
+          "style": "quote",
+          "text": "\"all bodies are ruled by the rational spirit of life\""
+        },
+        {
+          "start": 129,
+          "end": 142,
+          "style": "paren_cite",
+          "text": "(Dial. iv, 6)"
+        },
+        {
+          "start": 149,
+          "end": 238,
+          "style": "quote",
+          "text": "\"in this visible world nothing takes place without the agency of the invisible creature.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ It is generally found both in human affairs and in natural things that every particular power is governed and ruled by the universal power; as, for example, the bailiff's power is governed by the power of the king. Among the angels also, as explained above (Q. 55, A. 3; Q. 108, A. 1), the superior angels who preside over the inferior possess a more universal knowledge. Now it is manifest that the power of any individual body is more particular than the power of any spiritual substance; for every corporeal form is a form individualized by matter, and determined to the \"here and now\"; whereas immaterial forms are absolute and intelligible. Therefore, as the inferior angels who have the less universal forms, are ruled by the superior; so are all corporeal things ruled by the angels. This is not only laid down by the holy doctors, but also by all philosophers who admit the existence of incorporeal substances.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 274,
+          "end": 301,
+          "style": "paren_aside",
+          "text": "(Q. 55, A. 3; Q. 108, A. 1)"
+        },
+        {
+          "start": 591,
+          "end": 605,
+          "style": "quote",
+          "text": "\"here and now\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Corporeal things have determinate actions; but they exercise such actions only according as they are moved; because it belongs to a body not to act unless moved. Hence a corporeal creature must be moved by a spiritual creature."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The reason alleged is according to the opinion of Aristotle who laid down (Metaph. xi, 8) that the heavenly bodies are moved by spiritual substances; the number of which he endeavored to assign according to the number of motions apparent in the heavenly bodies. But he did not say that there were any spiritual substances with immediate rule over the inferior bodies, except perhaps human souls; and this was because he did not consider that any operations were exercised in the inferior bodies except the natural ones for which the movement of the heavenly bodies sufficed. But because we assert that many things are done in the inferior bodies besides the natural corporeal actions, for which the movements of the heavenly bodies are not sufficient; therefore in our opinion we must assert that the angels possess an immediate presidency not only over the heavenly bodies, but also over the inferior bodies.",
+      "spans": [
+        {
+          "start": 88,
+          "end": 103,
+          "style": "paren_cite",
+          "text": "(Metaph. xi, 8)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Philosophers have held different opinions about immaterial substances. For Plato laid down that immaterial substances were types and species of sensible bodies; and that some were more universal than others; and so he held that immaterial substances preside immediately over all sensible bodies, and different ones over different bodies. But Aristotle held that immaterial substances are not the species of sensible bodies, but something higher and more universal; and so he did not attribute to them any immediate presiding over single bodies, but only over the universal agents, the heavenly bodies. Avicenna followed a middle course. For he agreed with Plato in supposing some spiritual substance to preside immediately in the sphere of active and passive elements; because, as Plato also said, he held that the forms of these sensible things are derived from immaterial substances. But he differed from Plato because he supposed only one immaterial substance to preside over all inferior bodies, which he called the \"active intelligence.\"",
+      "spans": [
+        {
+          "start": 1034,
+          "end": 1056,
+          "style": "quote",
+          "text": "\"active intelligence.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The holy doctors held with the Platonists that different spiritual substances were placed over corporeal things. For Augustine says (QQ. 83, qu. 79): \"Every visible thing in this world has an angelic power placed over it\"; and Damascene says (De Fide Orth. ii, 4): \"The devil was one of the angelic powers who presided over the terrestrial order\"; and Origen says on the text, \"When the ass saw the angel\" (Num. 22:23), that \"the world has need of angels who preside over beasts, and over the birth of animals, and trees, and plants, and over the increase of all other things\" (Hom. xiv in Num.). The reason of this, however, is not that an angel is more fitted by his nature to preside over animals than over plants; because each angel, even the least, has a higher and more universal power than any kind of corporeal things: the reason is to be sought in the order of Divine wisdom, Who places different rulers over different things. Nor does it follow that there are more than nine orders of angels, because, as above expounded (Q. 108, A. 2), the orders are distinguished by their general offices. Hence as according to Gregory all the angels whose proper office it is to preside over the demons are of the order of the \"powers\"; so to the order of the \"virtues\" do those angels seem to belong who preside over purely corporeal creatures; for by their ministration miracles are sometimes performed.",
+      "spans": [
+        {
+          "start": 132,
+          "end": 148,
+          "style": "paren_cite",
+          "text": "(QQ. 83, qu. 79)"
+        },
+        {
+          "start": 150,
+          "end": 221,
+          "style": "quote",
+          "text": "\"Every visible thing in this world has an angelic power placed over it\""
+        },
+        {
+          "start": 242,
+          "end": 263,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 4)"
+        },
+        {
+          "start": 265,
+          "end": 346,
+          "style": "quote",
+          "text": "\"The devil was one of the angelic powers who presided over the terrestrial order\""
+        },
+        {
+          "start": 377,
+          "end": 405,
+          "style": "quote",
+          "text": "\"When the ass saw the angel\""
+        },
+        {
+          "start": 406,
+          "end": 418,
+          "style": "paren_cite",
+          "text": "(Num. 22:23)"
+        },
+        {
+          "start": 425,
+          "end": 576,
+          "style": "quote",
+          "text": "\"the world has need of angels who preside over beasts, and over the birth of animals, and trees, and plants, and over the increase of all other things\""
+        },
+        {
+          "start": 577,
+          "end": 595,
+          "style": "paren_cite",
+          "text": "(Hom. xiv in Num.)"
+        },
+        {
+          "start": 1031,
+          "end": 1045,
+          "style": "paren_cite",
+          "text": "(Q. 108, A. 2)"
+        },
+        {
+          "start": 1224,
+          "end": 1232,
+          "style": "quote",
+          "text": "\"powers\""
+        },
+        {
+          "start": 1257,
+          "end": 1266,
+          "style": "quote",
+          "text": "\"virtues\""
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 110, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[I, Q. 110, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Corporeal Matter Obeys the Mere Will of an Angel?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that corporeal matter obeys the mere will of an angel. For the power of an angel excels the power of the soul. But corporeal matter obeys a conception of the soul; for the body of man is changed by a conception of the soul as regards heat and cold, and sometimes even as regards health and sickness. Therefore much more is corporeal matter changed by a conception of an angel."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, whatever can be done by an inferior power, can be done by a superior power. Now the power of an angel is superior to corporeal power. But a body by its power is able to transform corporeal matter; as appears when fire begets fire. Therefore much more efficaciously can an angel by his power transform corporeal matter."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, all corporeal nature is under angelic administration, as appears above (A. 1), and thus it appears that bodies are as instruments to the angels, for an instrument is essentially a mover moved. Now in effects there is something that is due to the power of their principal agents, and which cannot be due to the power of the instrument; and this it is that takes the principal place in the effect. For example, digestion is due to the force of natural heat, which is the instrument of the nutritive soul: but that living flesh is thus generated is due to the power of the soul. Again the cutting of the wood is from the saw; but that it assumes the length the form of a bed is from the design of the [joiner's] art. Therefore the substantial form which takes the principal place in the corporeal effects, is due to the angelic power. Therefore matter obeys the angels in receiving its form.",
+      "spans": [
+        {
+          "start": 88,
+          "end": 94,
+          "style": "paren_cite",
+          "text": "(A. 1)"
+        },
+        {
+          "start": 715,
+          "end": 725,
+          "style": "bracket_note",
+          "text": "[joiner's]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says \"It is not to be thought, that this visible matter obeys these rebel angels; for it obeys God alone.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 135,
+          "style": "quote",
+          "text": "\"It is not to be thought, that this visible matter obeys these rebel angels; for it obeys God alone.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The Platonists [*Phaedo. xlix: Tim. (Did.) vol. ii, p. 218] asserted that the forms which are in matter are caused by immaterial forms, because they said that the material forms are participations of immaterial forms. Avicenna followed them in this opinion to some extent, for he said that all forms which are in matter proceed from the concept of the _intellect;_ and that corporeal agents only dispose [matter] for the forms. They seem to have been deceived on this point, through supposing a form to be something made _per se,_ so that it would be the effect of a formal principle. But, as the Philosopher proves (Metaph. vii, Did. vi, 8), what is made, properly speaking, is the _composite:_ for this properly speaking, is, as it were, what subsists. Whereas the form is called a being, not as that which is, but as that by which something is; and consequently neither is a form, properly speaking, made; for that is made which is; since to be is nothing but the way to existence.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 32,
+          "end": 76,
+          "style": "bracket_note",
+          "text": "[*Phaedo. xlix: Tim. (Did.) vol. ii, p. 218]"
+        },
+        {
+          "start": 369,
+          "end": 381,
+          "style": "em",
+          "text": "_intellect;_"
+        },
+        {
+          "start": 421,
+          "end": 429,
+          "style": "bracket_note",
+          "text": "[matter]"
+        },
+        {
+          "start": 538,
+          "end": 547,
+          "style": "em",
+          "text": "_per se,_"
+        },
+        {
+          "start": 633,
+          "end": 658,
+          "style": "paren_cite",
+          "text": "(Metaph. vii, Did. vi, 8)"
+        },
+        {
+          "start": 700,
+          "end": 712,
+          "style": "em",
+          "text": "_composite:_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Now it is manifest that what is made is like to the maker, forasmuch as every agent makes its like. So whatever makes natural things, has a likeness to the composite; either because it is composite itself, as when fire begets fire, or because the whole \"composite\" as to both matter and form is within its power; and this belongs to God alone. Therefore every informing of matter is either immediately from God, or form some corporeal agent; but not immediately from an angel.",
+      "spans": [
+        {
+          "start": 253,
+          "end": 264,
+          "style": "quote",
+          "text": "\"composite\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Our soul is united to the body as the form; and so it is not surprising for the body to be formally changed by the soul's concept; especially as the movement of the sensitive appetite, which is accompanied with a certain bodily change, is subject to the command of reason. An angel, however, has not the same connection with natural bodies; and hence the argument does not hold."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Whatever an inferior power can do, that a superior power can do, not in the same way, but in a more excellent way; for example, the intellect knows sensible things in a more excellent way than sense knows them. So an angel can change corporeal matter in a more excellent way than can corporeal agents, that is by moving the corporeal agents themselves, as being the superior cause."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: There is nothing to prevent some natural effect taking place by angelic power, for which the power of corporeal agents would not suffice. This, however, is not to obey an angel's will (as neither does matter obey the mere will of a cook, when by regulating the fire according to the prescription of his art he produces a dish that the fire could not have produced by itself); since to reduce matter to the act of the substantial form does not exceed the power of a corporeal agent; for it is natural for like to make like.",
+      "spans": [
+        {
+          "start": 198,
+          "end": 388,
+          "style": "paren_cite",
+          "text": "(as neither does matter obey the mere will of a cook, when by regulating the fire according to the prescription of his art he produces a dish that the fire could not have produced by itself)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 110, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 110, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Bodies Obey the Angels As Regards Local Motion?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that bodies do not obey the angels in local motion. For the local motion of natural bodies follows on their forms. But the angels do not cause the forms of natural bodies, as stated above (A. 2). Therefore neither can they cause in them local motion.",
+      "spans": [
+        {
+          "start": 215,
+          "end": 221,
+          "style": "paren_cite",
+          "text": "(A. 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the Philosopher (Phys. viii, 7) proves that local motion is the first of all movements. But the angels cannot cause other movements by a formal change of the matter. Therefore neither can they cause local motion.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 48,
+          "style": "paren_cite",
+          "text": "(Phys. viii, 7)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the corporeal members obey the concept of the soul as regards local movement, as having in themselves some principle of life. In natural bodies, however, there is no vital principle. Therefore they do not obey the angels in local motion."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (De Trin. iii, 8,9) that the angels use corporeal seed to produce certain effects. But they cannot do this without causing local movement. Therefore bodies obey them in local motion.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 53,
+          "style": "paren_cite",
+          "text": "(De Trin. iii, 8,9)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As Dionysius says (Div. Nom. vii): \"Divine wisdom has joined the ends of the first to the principles of the second.\" Hence it is clear that the inferior nature at its highest point is in conjunction with superior nature. Now corporeal nature is below the spiritual nature. But among all corporeal movements the most perfect is local motion, as the Philosopher proves (Phys. viii, 7). The reason of this is that what is moved locally is not as such in potentiality to anything intrinsic, but only to something extrinsic--that is, to place. Therefore the corporeal nature has a natural aptitude to be moved immediately by the spiritual nature as regards place. Hence also the philosophers asserted that the supreme bodies are moved locally by the spiritual substances; whence we see that the soul moves the body first and chiefly by a local motion.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 35,
+          "end": 50,
+          "style": "paren_cite",
+          "text": "(Div. Nom. vii)"
+        },
+        {
+          "start": 52,
+          "end": 133,
+          "style": "quote",
+          "text": "\"Divine wisdom has joined the ends of the first to the principles of the second.\""
+        },
+        {
+          "start": 384,
+          "end": 399,
+          "style": "paren_cite",
+          "text": "(Phys. viii, 7)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: There are in bodies other local movements besides those which result from the forms; for instance, the ebb and flow of the sea does not follow from the substantial form of the water, but from the influence of the moon; and much more can local movements result from the power of spiritual substances."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The angels, by causing local motion, as the first motion, can thereby cause other movements; that is, by employing corporeal agents to produce these effects, as a workman employs fire to soften iron."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The power of an angel is not so limited as is the power of the soul. Hence the motive power of the soul is limited to the body united to it, which is vivified by it, and by which it can move other things. But an angel's power is not limited to any body; hence it can move locally bodies not joined to it."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 110, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[I, Q. 110, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Angels Can Work Miracles?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the angels can work miracles. For Gregory says (Hom. xxxiv in Evang.): \"Those spirits are called virtues by whom signs and miracles are usually done.\"",
+      "spans": [
+        {
+          "start": 79,
+          "end": 101,
+          "style": "paren_cite",
+          "text": "(Hom. xxxiv in Evang.)"
+        },
+        {
+          "start": 103,
+          "end": 182,
+          "style": "quote",
+          "text": "\"Those spirits are called virtues by whom signs and miracles are usually done.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, Augustine says (QQ. 83, qu. 79) that \"magicians work miracles by private contracts; good Christians by public justice, bad Christians by the signs of public justice.\" But magicians work miracles because they are \"heard by the demons,\" as he says elsewhere in the same work [*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine]. Therefore the demons can work miracles. Therefore much more can the good angels.",
+      "spans": [
+        {
+          "start": 32,
+          "end": 48,
+          "style": "paren_cite",
+          "text": "(QQ. 83, qu. 79)"
+        },
+        {
+          "start": 54,
+          "end": 183,
+          "style": "quote",
+          "text": "\"magicians work miracles by private contracts; good Christians by public justice, bad Christians by the signs of public justice.\""
+        },
+        {
+          "start": 229,
+          "end": 251,
+          "style": "quote",
+          "text": "\"heard by the demons,\""
+        },
+        {
+          "start": 290,
+          "end": 374,
+          "style": "bracket_note",
+          "text": "[*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, Augustine says in the same work [*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine] that \"it is not absurd to believe that all the things we see happen may be brought about by the lower powers that dwell in our atmosphere.\" But when an effect of natural causes is produced outside the order of the natural cause, we call it a miracle, as, for instance, when anyone is cured of a fever without the operation of nature. Therefore the angels and demons can work miracles.",
+      "spans": [
+        {
+          "start": 49,
+          "end": 133,
+          "style": "bracket_note",
+          "text": "[*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine]"
+        },
+        {
+          "start": 139,
+          "end": 273,
+          "style": "quote",
+          "text": "\"it is not absurd to believe that all the things we see happen may be brought about by the lower powers that dwell in our atmosphere.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, superior power is not subject to the order of an inferior cause. But corporeal nature is inferior to an angel. Therefore an angel can work outside the order of corporeal agents; which is to work miracles."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ It is written of God (Ps. 135:4): \"Who alone doth great wonders.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 51,
+          "style": "paren_cite",
+          "text": "(Ps. 135:4)"
+        },
+        {
+          "start": 53,
+          "end": 84,
+          "style": "quote",
+          "text": "\"Who alone doth great wonders.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ A miracle properly so called is when something is done outside the order of nature. But it is not enough for a miracle if something is done outside the order of any particular nature; for otherwise anyone would perform a miracle by throwing a stone upwards, as such a thing is outside the order of the stone's nature. So for a miracle is required that it be against the order of the whole created nature. But God alone can do this, because, whatever an angel or any other creature does by its own power, is according to the order of created nature; and thus it is not a miracle. Hence God alone can work miracles.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Some angels are said to work miracles; either because God works miracles at their request, in the same way as holy men are said to work miracles; or because they exercise a kind of ministry in the miracles which take place; as in collecting the dust in the general resurrection, or by doing something of that kind."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Properly speaking, as said above, miracles are those things which are done outside the order of the whole created nature. But as we do not know all the power of created nature, it follows that when anything is done outside the order of created nature by a power unknown to us, it is called a miracle as regards ourselves. So when the demons do anything of their own natural power, these things are called \"miracles\" not in an absolute sense, but in reference to ourselves. In this way the magicians work miracles through the demons; and these are said to be done by \"private contracts,\" forasmuch as every power of the creature, in the universe, may be compared to the power of a private person in a city. Hence when a magician does anything by compact with the devil, this is done as it were by private contract. On the other hand, the Divine justice is in the whole universe as the public law is in the city. Therefore good Christians, so far as they work miracles by Divine justice, are said to work miracles by \"public justice\": but bad Christians by the \"signs of public justice,\" as by invoking the name of Christ, or by making use of other sacred signs.",
+      "spans": [
+        {
+          "start": 419,
+          "end": 429,
+          "style": "quote",
+          "text": "\"miracles\""
+        },
+        {
+          "start": 580,
+          "end": 600,
+          "style": "quote",
+          "text": "\"private contracts,\""
+        },
+        {
+          "start": 1029,
+          "end": 1045,
+          "style": "quote",
+          "text": "\"public justice\""
+        },
+        {
+          "start": 1073,
+          "end": 1099,
+          "style": "quote",
+          "text": "\"signs of public justice,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Spiritual powers are able to effect whatever happens in this visible world, by employing corporeal seeds by local movement."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: Although the angels can do something which is outside the order of corporeal nature, yet they cannot do anything outside the whole created order, which is essential to a miracle, as above explained."
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "HOW ANGELS ACT ON BODIES (In Four Articles)\n\nWe now consider how the angels preside over the corporeal creatures. Under this head there are four points of inquiry:\n\n(1) Whether the corporeal creature is governed by the angels?\n\n(2) Whether the corporeal creature obeys the mere will of the angels?\n\n(3) Whether the angels by their own power can immediately move bodies locally?\n\n(4) Whether the good or bad angels can work miracles?\n\n---\n\nFIRST ARTICLE [I, Q. 110, Art. 1]\n\nWhether the Corporeal Creature Is Governed by the Angels?\n\nObjection 1: It would seem that the corporeal creature is not governed by angels. For whatever possesses a determinate mode of action, needs not to be governed by any superior power; for we require to be governed lest we do what we ought not. But corporeal things have their actions determined by the nature divinely bestowed upon them. Therefore they do not need the government of angels.\n\nObj. 2: Further, the lowest things are ruled by the superior. But some corporeal things are inferior, and others are superior. Therefore they need not be governed by the angels.\n\nObj. 3: Further, the different orders of the angels are distinguished by different offices. But if corporeal creatures were ruled by the angels, there would be as many angelic offices as there are species of things. So also there would be as many orders of angels as there are species of things; which is against what is laid down above (Q. 108, A. 2). Therefore the corporeal creature is not governed by angels.\n\n_On the contrary,_ Augustine says (De Trin. iii, 4) that \"all bodies are ruled by the rational spirit of life\"; and Gregory says (Dial. iv, 6), that \"in this visible world nothing takes place without the agency of the invisible creature.\"\n\n_I answer that,_ It is generally found both in human affairs and in natural things that every particular power is governed and ruled by the universal power; as, for example, the bailiff's power is governed by the power of the king. Among the angels also, as explained above (Q. 55, A. 3; Q. 108, A. 1), the superior angels who preside over the inferior possess a more universal knowledge. Now it is manifest that the power of any individual body is more particular than the power of any spiritual substance; for every corporeal form is a form individualized by matter, and determined to the \"here and now\"; whereas immaterial forms are absolute and intelligible. Therefore, as the inferior angels who have the less universal forms, are ruled by the superior; so are all corporeal things ruled by the angels. This is not only laid down by the holy doctors, but also by all philosophers who admit the existence of incorporeal substances.\n\nReply Obj. 1: Corporeal things have determinate actions; but they exercise such actions only according as they are moved; because it belongs to a body not to act unless moved. Hence a corporeal creature must be moved by a spiritual creature.\n\nReply Obj. 2: The reason alleged is according to the opinion of Aristotle who laid down (Metaph. xi, 8) that the heavenly bodies are moved by spiritual substances; the number of which he endeavored to assign according to the number of motions apparent in the heavenly bodies. But he did not say that there were any spiritual substances with immediate rule over the inferior bodies, except perhaps human souls; and this was because he did not consider that any operations were exercised in the inferior bodies except the natural ones for which the movement of the heavenly bodies sufficed. But because we assert that many things are done in the inferior bodies besides the natural corporeal actions, for which the movements of the heavenly bodies are not sufficient; therefore in our opinion we must assert that the angels possess an immediate presidency not only over the heavenly bodies, but also over the inferior bodies.\n\nReply Obj. 3: Philosophers have held different opinions about immaterial substances. For Plato laid down that immaterial substances were types and species of sensible bodies; and that some were more universal than others; and so he held that immaterial substances preside immediately over all sensible bodies, and different ones over different bodies. But Aristotle held that immaterial substances are not the species of sensible bodies, but something higher and more universal; and so he did not attribute to them any immediate presiding over single bodies, but only over the universal agents, the heavenly bodies. Avicenna followed a middle course. For he agreed with Plato in supposing some spiritual substance to preside immediately in the sphere of active and passive elements; because, as Plato also said, he held that the forms of these sensible things are derived from immaterial substances. But he differed from Plato because he supposed only one immaterial substance to preside over all inferior bodies, which he called the \"active intelligence.\"\n\nThe holy doctors held with the Platonists that different spiritual substances were placed over corporeal things. For Augustine says (QQ. 83, qu. 79): \"Every visible thing in this world has an angelic power placed over it\"; and Damascene says (De Fide Orth. ii, 4): \"The devil was one of the angelic powers who presided over the terrestrial order\"; and Origen says on the text, \"When the ass saw the angel\" (Num. 22:23), that \"the world has need of angels who preside over beasts, and over the birth of animals, and trees, and plants, and over the increase of all other things\" (Hom. xiv in Num.). The reason of this, however, is not that an angel is more fitted by his nature to preside over animals than over plants; because each angel, even the least, has a higher and more universal power than any kind of corporeal things: the reason is to be sought in the order of Divine wisdom, Who places different rulers over different things. Nor does it follow that there are more than nine orders of angels, because, as above expounded (Q. 108, A. 2), the orders are distinguished by their general offices. Hence as according to Gregory all the angels whose proper office it is to preside over the demons are of the order of the \"powers\"; so to the order of the \"virtues\" do those angels seem to belong who preside over purely corporeal creatures; for by their ministration miracles are sometimes performed.\n\n---\n\nSECOND ARTICLE [I, Q. 110, Art. 2]\n\nWhether Corporeal Matter Obeys the Mere Will of an Angel?\n\nObjection 1: It would seem that corporeal matter obeys the mere will of an angel. For the power of an angel excels the power of the soul. But corporeal matter obeys a conception of the soul; for the body of man is changed by a conception of the soul as regards heat and cold, and sometimes even as regards health and sickness. Therefore much more is corporeal matter changed by a conception of an angel.\n\nObj. 2: Further, whatever can be done by an inferior power, can be done by a superior power. Now the power of an angel is superior to corporeal power. But a body by its power is able to transform corporeal matter; as appears when fire begets fire. Therefore much more efficaciously can an angel by his power transform corporeal matter.\n\nObj. 3: Further, all corporeal nature is under angelic administration, as appears above (A. 1), and thus it appears that bodies are as instruments to the angels, for an instrument is essentially a mover moved. Now in effects there is something that is due to the power of their principal agents, and which cannot be due to the power of the instrument; and this it is that takes the principal place in the effect. For example, digestion is due to the force of natural heat, which is the instrument of the nutritive soul: but that living flesh is thus generated is due to the power of the soul. Again the cutting of the wood is from the saw; but that it assumes the length the form of a bed is from the design of the [joiner's] art. Therefore the substantial form which takes the principal place in the corporeal effects, is due to the angelic power. Therefore matter obeys the angels in receiving its form.\n\n_On the contrary,_ Augustine says \"It is not to be thought, that this visible matter obeys these rebel angels; for it obeys God alone.\"\n\n_I answer that,_ The Platonists [*Phaedo. xlix: Tim. (Did.) vol. ii, p. 218] asserted that the forms which are in matter are caused by immaterial forms, because they said that the material forms are participations of immaterial forms. Avicenna followed them in this opinion to some extent, for he said that all forms which are in matter proceed from the concept of the _intellect;_ and that corporeal agents only dispose [matter] for the forms. They seem to have been deceived on this point, through supposing a form to be something made _per se,_ so that it would be the effect of a formal principle. But, as the Philosopher proves (Metaph. vii, Did. vi, 8), what is made, properly speaking, is the _composite:_ for this properly speaking, is, as it were, what subsists. Whereas the form is called a being, not as that which is, but as that by which something is; and consequently neither is a form, properly speaking, made; for that is made which is; since to be is nothing but the way to existence.\n\nNow it is manifest that what is made is like to the maker, forasmuch as every agent makes its like. So whatever makes natural things, has a likeness to the composite; either because it is composite itself, as when fire begets fire, or because the whole \"composite\" as to both matter and form is within its power; and this belongs to God alone. Therefore every informing of matter is either immediately from God, or form some corporeal agent; but not immediately from an angel.\n\nReply Obj. 1: Our soul is united to the body as the form; and so it is not surprising for the body to be formally changed by the soul's concept; especially as the movement of the sensitive appetite, which is accompanied with a certain bodily change, is subject to the command of reason. An angel, however, has not the same connection with natural bodies; and hence the argument does not hold.\n\nReply Obj. 2: Whatever an inferior power can do, that a superior power can do, not in the same way, but in a more excellent way; for example, the intellect knows sensible things in a more excellent way than sense knows them. So an angel can change corporeal matter in a more excellent way than can corporeal agents, that is by moving the corporeal agents themselves, as being the superior cause.\n\nReply Obj. 3: There is nothing to prevent some natural effect taking place by angelic power, for which the power of corporeal agents would not suffice. This, however, is not to obey an angel's will (as neither does matter obey the mere will of a cook, when by regulating the fire according to the prescription of his art he produces a dish that the fire could not have produced by itself); since to reduce matter to the act of the substantial form does not exceed the power of a corporeal agent; for it is natural for like to make like.\n\n---\n\nTHIRD ARTICLE [I, Q. 110, Art. 3]\n\nWhether Bodies Obey the Angels As Regards Local Motion?\n\nObjection 1: It would seem that bodies do not obey the angels in local motion. For the local motion of natural bodies follows on their forms. But the angels do not cause the forms of natural bodies, as stated above (A. 2). Therefore neither can they cause in them local motion.\n\nObj. 2: Further, the Philosopher (Phys. viii, 7) proves that local motion is the first of all movements. But the angels cannot cause other movements by a formal change of the matter. Therefore neither can they cause local motion.\n\nObj. 3: Further, the corporeal members obey the concept of the soul as regards local movement, as having in themselves some principle of life. In natural bodies, however, there is no vital principle. Therefore they do not obey the angels in local motion.\n\n_On the contrary,_ Augustine says (De Trin. iii, 8,9) that the angels use corporeal seed to produce certain effects. But they cannot do this without causing local movement. Therefore bodies obey them in local motion.\n\n_I answer that,_ As Dionysius says (Div. Nom. vii): \"Divine wisdom has joined the ends of the first to the principles of the second.\" Hence it is clear that the inferior nature at its highest point is in conjunction with superior nature. Now corporeal nature is below the spiritual nature. But among all corporeal movements the most perfect is local motion, as the Philosopher proves (Phys. viii, 7). The reason of this is that what is moved locally is not as such in potentiality to anything intrinsic, but only to something extrinsic--that is, to place. Therefore the corporeal nature has a natural aptitude to be moved immediately by the spiritual nature as regards place. Hence also the philosophers asserted that the supreme bodies are moved locally by the spiritual substances; whence we see that the soul moves the body first and chiefly by a local motion.\n\nReply Obj. 1: There are in bodies other local movements besides those which result from the forms; for instance, the ebb and flow of the sea does not follow from the substantial form of the water, but from the influence of the moon; and much more can local movements result from the power of spiritual substances.\n\nReply Obj. 2: The angels, by causing local motion, as the first motion, can thereby cause other movements; that is, by employing corporeal agents to produce these effects, as a workman employs fire to soften iron.\n\nReply Obj. 3: The power of an angel is not so limited as is the power of the soul. Hence the motive power of the soul is limited to the body united to it, which is vivified by it, and by which it can move other things. But an angel's power is not limited to any body; hence it can move locally bodies not joined to it.\n\n---\n\nFOURTH ARTICLE [I, Q. 110, Art. 4]\n\nWhether Angels Can Work Miracles?\n\nObjection 1: It would seem that the angels can work miracles. For Gregory says (Hom. xxxiv in Evang.): \"Those spirits are called virtues by whom signs and miracles are usually done.\"\n\nObj. 2: Further, Augustine says (QQ. 83, qu. 79) that \"magicians work miracles by private contracts; good Christians by public justice, bad Christians by the signs of public justice.\" But magicians work miracles because they are \"heard by the demons,\" as he says elsewhere in the same work [*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine]. Therefore the demons can work miracles. Therefore much more can the good angels.\n\nObj. 3: Further, Augustine says in the same work [*Cf. Liber xxi, Sentent., sent. 4: among the supposititious works of St. Augustine] that \"it is not absurd to believe that all the things we see happen may be brought about by the lower powers that dwell in our atmosphere.\" But when an effect of natural causes is produced outside the order of the natural cause, we call it a miracle, as, for instance, when anyone is cured of a fever without the operation of nature. Therefore the angels and demons can work miracles.\n\nObj. 4: Further, superior power is not subject to the order of an inferior cause. But corporeal nature is inferior to an angel. Therefore an angel can work outside the order of corporeal agents; which is to work miracles.\n\n_On the contrary,_ It is written of God (Ps. 135:4): \"Who alone doth great wonders.\"\n\n_I answer that,_ A miracle properly so called is when something is done outside the order of nature. But it is not enough for a miracle if something is done outside the order of any particular nature; for otherwise anyone would perform a miracle by throwing a stone upwards, as such a thing is outside the order of the stone's nature. So for a miracle is required that it be against the order of the whole created nature. But God alone can do this, because, whatever an angel or any other creature does by its own power, is according to the order of created nature; and thus it is not a miracle. Hence God alone can work miracles.\n\nReply Obj. 1: Some angels are said to work miracles; either because God works miracles at their request, in the same way as holy men are said to work miracles; or because they exercise a kind of ministry in the miracles which take place; as in collecting the dust in the general resurrection, or by doing something of that kind.\n\nReply Obj. 2: Properly speaking, as said above, miracles are those things which are done outside the order of the whole created nature. But as we do not know all the power of created nature, it follows that when anything is done outside the order of created nature by a power unknown to us, it is called a miracle as regards ourselves. So when the demons do anything of their own natural power, these things are called \"miracles\" not in an absolute sense, but in reference to ourselves. In this way the magicians work miracles through the demons; and these are said to be done by \"private contracts,\" forasmuch as every power of the creature, in the universe, may be compared to the power of a private person in a city. Hence when a magician does anything by compact with the devil, this is done as it were by private contract. On the other hand, the Divine justice is in the whole universe as the public law is in the city. Therefore good Christians, so far as they work miracles by Divine justice, are said to work miracles by \"public justice\": but bad Christians by the \"signs of public justice,\" as by invoking the name of Christ, or by making use of other sacred signs.\n\nReply Obj. 3: Spiritual powers are able to effect whatever happens in this visible world, by employing corporeal seeds by local movement.\n\nReply Obj. 4: Although the angels can do something which is outside the order of corporeal nature, yet they cannot do anything outside the whole created order, which is essential to a miracle, as above explained.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 7890,
+    "text": "HOW ANGELS ACT ON BODIES (In Four Articles)"
+  },
+  "word_count": 3127,
+  "block_count": 55
+}

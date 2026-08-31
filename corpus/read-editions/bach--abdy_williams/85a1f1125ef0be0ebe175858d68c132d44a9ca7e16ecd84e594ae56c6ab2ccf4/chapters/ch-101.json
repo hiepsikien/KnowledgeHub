@@ -1,0 +1,72 @@
+{
+  "chapter_id": "ch-101",
+  "title": "_Fantasia in G minor (215)._",
+  "block_start": 1285,
+  "block_end": 1288,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Fantasia in G minor (215)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "em",
+          "text": "_Fantasia in G minor (215)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Capriccio in E (215)._      “In honour of J. C. Bach of Ohrdruf.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 23,
+          "style": "em",
+          "text": "_Capriccio in E (215)._"
+        },
+        {
+          "start": 29,
+          "end": 66,
+          "style": "quote",
+          "text": "“In honour of J. C. Bach of Ohrdruf.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Fantasia con imitazione in B minor (216)._      It is doubtful whether this is intended for organ or pedal harpsichord.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "em",
+          "text": "_Fantasia con imitazione in B minor (216)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sonata in D (216)._      Modelled on Kuhnau.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "em",
+          "text": "_Sonata in D (216)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Fantasia in G minor (215)._\n\n_Capriccio in E (215)._      “In honour of J. C. Bach of Ohrdruf.”\n\n_Fantasia con imitazione in B minor (216)._      It is doubtful whether this is intended for organ or pedal harpsichord.\n\n> _Sonata in D (216)._      Modelled on Kuhnau.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1285,
+    "text": "_Fantasia in G minor (215)._"
+  },
+  "word_count": 47,
+  "block_count": 4
+}

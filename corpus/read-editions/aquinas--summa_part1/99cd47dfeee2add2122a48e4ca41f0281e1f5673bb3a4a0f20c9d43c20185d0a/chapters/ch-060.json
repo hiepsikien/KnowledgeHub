@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-060",
+  "title": "QUESTION 27",
+  "block_start": 2187,
+  "block_end": 2187,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 27",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 27",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 2187,
+    "text": "QUESTION 27"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

@@ -1,0 +1,42 @@
+{
+  "chapter_id": "ch-097",
+  "title": "_Prelude and Fugue in A minor (211)._",
+  "block_start": 1277,
+  "block_end": 1278,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Prelude and Fugue in A minor (211)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Prelude and Fugue in A minor (211)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Fantasia and Fugue in D (211)._      The fantasia is in five movements.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 32,
+          "style": "em",
+          "text": "_Fantasia and Fugue in D (211)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Prelude and Fugue in A minor (211)._\n\n_Fantasia and Fugue in D (211)._      The fantasia is in five movements.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1277,
+    "text": "_Prelude and Fugue in A minor (211)._"
+  },
+  "word_count": 21,
+  "block_count": 2
+}

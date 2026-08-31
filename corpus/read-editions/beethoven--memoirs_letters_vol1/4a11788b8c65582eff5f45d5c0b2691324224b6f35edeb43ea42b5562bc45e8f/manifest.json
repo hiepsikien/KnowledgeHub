@@ -1,0 +1,64 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "beethoven--memoirs_letters_vol1",
+  "title": "Beethoven's Letters 1790-1826, Volume 1",
+  "language": "en",
+  "content_hash": "4a11788b8c65582eff5f45d5c0b2691324224b6f35edeb43ea42b5562bc45e8f",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 2 marker (all_caps_section).",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "ref_parser_version": "1.7",
+  "chapter_count": 3,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        1942
+      ],
+      "word_count": 308,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "PREFACE",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1943,
+        12697
+      ],
+      "word_count": 1817,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "LA TOUR DE PERLZ--LAKE OF GENEVA,",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        12698,
+        326153
+      ],
+      "word_count": 56803,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T04:15:46+00:00"
+}

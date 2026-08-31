@@ -1,0 +1,34 @@
+{
+  "chapter_id": "ch-012",
+  "title": "SCHUMANN By ANNIE W. PATTERSON.",
+  "block_start": 30,
+  "block_end": 31,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "SCHUMANN By ANNIE W. PATTERSON.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[_Second Edition._",
+      "spans": [
+        {
+          "start": 1,
+          "end": 18,
+          "style": "em",
+          "text": "_Second Edition._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "SCHUMANN By ANNIE W. PATTERSON.\n\n[_Second Edition._",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 30,
+    "text": "SCHUMANN By ANNIE W. PATTERSON."
+  },
+  "word_count": 8,
+  "block_count": 2
+}

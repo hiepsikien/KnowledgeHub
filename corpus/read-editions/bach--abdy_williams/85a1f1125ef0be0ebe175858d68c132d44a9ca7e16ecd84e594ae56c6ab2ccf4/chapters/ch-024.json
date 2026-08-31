@@ -1,0 +1,66 @@
+{
+  "chapter_id": "ch-024",
+  "title": "JOHANN SEBASTIAN, 1685-1750.",
+  "block_start": 79,
+  "block_end": 83,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "JOHANN SEBASTIAN, 1685-1750.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sons of_ Joh. Christoph (No. 12).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "style": "em",
+          "text": "_Sons of_"
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "style": "paren_cite",
+          "text": "(No. 12)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "27. JOH. ERNST, 1683-173--. 28. JOH. CHRISTOPH, 1689-1736."
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sons of_ Joh. Christoph (No. 13).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "style": "em",
+          "text": "_Sons of_"
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "style": "paren_cite",
+          "text": "(No. 13)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "29. JOH. NICOLAUS, 1669-1740. 30. JOH. CHRISTOPH ... 31. JOH."
+    }
+  ],
+  "reading_markdown": "JOHANN SEBASTIAN, 1685-1750.\n\n> _Sons of_ Joh. Christoph (No. 12).\n\n27. JOH. ERNST, 1683-173--. 28. JOH. CHRISTOPH, 1689-1736.\n\n> _Sons of_ Joh. Christoph (No. 13).\n\n29. JOH. NICOLAUS, 1669-1740. 30. JOH. CHRISTOPH ... 31. JOH.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 79,
+    "text": "JOHANN SEBASTIAN, 1685-1750."
+  },
+  "word_count": 32,
+  "block_count": 5
+}

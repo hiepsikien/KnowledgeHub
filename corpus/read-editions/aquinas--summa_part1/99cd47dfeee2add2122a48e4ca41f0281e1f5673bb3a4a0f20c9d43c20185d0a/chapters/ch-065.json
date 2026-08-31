@@ -1,0 +1,1563 @@
+{
+  "chapter_id": "ch-065",
+  "title": "THE DIVINE PERSONS (In Four Articles)",
+  "block_start": 2317,
+  "block_end": 2389,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "THE DIVINE PERSONS (In Four Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 19,
+          "end": 37,
+          "style": "paren_cite",
+          "text": "(In Four Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Having premised what have appeared necessary notions concerning the processions and the relations, we must now approach the subject of the persons."
+    },
+    {
+      "type": "paragraph",
+      "text": "First, we shall consider the persons absolutely, and then comparatively as regards each other. We must consider the persons absolutely first in common; and then singly."
+    },
+    {
+      "type": "paragraph",
+      "text": "The general consideration of the persons seemingly involves four points:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) The signification of this word \"person\";",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 35,
+          "end": 43,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) the number of the persons;",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) what is involved in the number of persons, or is opposed thereto; as diversity, and similitude, and the like; and",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) what belongs to our knowledge of the persons.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Four subjects of inquiry are comprised in the first point:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) The definition of \"person.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 22,
+          "end": 31,
+          "style": "quote",
+          "text": "\"person.\""
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) The comparison of person to essence, subsistence, and hypostasis.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) Whether the name of person is becoming to God?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) What does it signify in Him?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 29, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 29, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Definition of \"Person\"",
+      "spans": [
+        {
+          "start": 18,
+          "end": 26,
+          "style": "quote",
+          "text": "\"Person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the definition of person given by Boethius (De Duab. Nat.) is insufficient--that is, \"a person is an individual substance of a rational nature.\" For nothing singular can be subject to definition. But \"person\" signifies something singular. Therefore person is improperly defined.",
+      "spans": [
+        {
+          "start": 75,
+          "end": 90,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        },
+        {
+          "start": 117,
+          "end": 176,
+          "style": "quote",
+          "text": "\"a person is an individual substance of a rational nature.\""
+        },
+        {
+          "start": 232,
+          "end": 240,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, substance as placed above in the definition of person, is either first substance, or second substance. If it is the former, the word \"individual\" is superfluous, because first substance is individual substance; if it stands for second substance, the word \"individual\" is false, for there is contradiction of terms; since second substances are the genera or species. Therefore this definition is incorrect.",
+      "spans": [
+        {
+          "start": 150,
+          "end": 162,
+          "style": "quote",
+          "text": "\"individual\""
+        },
+        {
+          "start": 272,
+          "end": 284,
+          "style": "quote",
+          "text": "\"individual\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, an intentional term must not be included in the definition of a thing. For to define a man as \"a species of animal\" would not be a correct definition; since man is the name of a thing, and species is a name of an intention. Therefore, since person is the name of a thing (for it signifies a substance of a rational nature), the word \"individual\" which is an intentional name comes improperly into the definition.",
+      "spans": [
+        {
+          "start": 111,
+          "end": 132,
+          "style": "quote",
+          "text": "\"a species of animal\""
+        },
+        {
+          "start": 288,
+          "end": 339,
+          "style": "paren_aside",
+          "text": "(for it signifies a substance of a rational nature)"
+        },
+        {
+          "start": 350,
+          "end": 362,
+          "style": "quote",
+          "text": "\"individual\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, \"Nature is the principle of motion and rest, in those things in which it is essentially, and not accidentally,\" as Aristotle says (Phys. ii). But person exists in things immovable, as in God, and in the angels. Therefore the word \"nature\" ought not to enter into the definition of person, but the word should rather be \"essence.\"",
+      "spans": [
+        {
+          "start": 17,
+          "end": 128,
+          "style": "quote",
+          "text": "\"Nature is the principle of motion and rest, in those things in which it is essentially, and not accidentally,\""
+        },
+        {
+          "start": 147,
+          "end": 157,
+          "style": "paren_cite",
+          "text": "(Phys. ii)"
+        },
+        {
+          "start": 247,
+          "end": 255,
+          "style": "quote",
+          "text": "\"nature\""
+        },
+        {
+          "start": 336,
+          "end": 346,
+          "style": "quote",
+          "text": "\"essence.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, the separated soul is an individual substance of the rational nature; but it is not a person. Therefore person is not properly defined as above."
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Although the universal and particular exist in every genus, nevertheless, in a certain special way, the individual belongs to the genus of substance. For substance is individualized by itself; whereas the accidents are individualized by the subject, which is the substance; since this particular whiteness is called \"this,\" because it exists in this particular subject. And so it is reasonable that the individuals of the genus substance should have a special name of their own; for they are called \"hypostases,\" or first substances.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 333,
+          "end": 340,
+          "style": "quote",
+          "text": "\"this,\""
+        },
+        {
+          "start": 516,
+          "end": 529,
+          "style": "quote",
+          "text": "\"hypostases,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Further still, in a more special and perfect way, the particular and the individual are found in the rational substances which have dominion over their own actions; and which are not only made to act, like others; but which can act of themselves; for actions belong to singulars. Therefore also the individuals of the rational nature have a special name even among other substances; and this name is \"person.\"",
+      "spans": [
+        {
+          "start": 400,
+          "end": 409,
+          "style": "quote",
+          "text": "\"person.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Thus the term \"individual substance\" is placed in the definition of person, as signifying the singular in the genus of substance; and the term \"rational nature\" is added, as signifying the singular in rational substances.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 36,
+          "style": "quote",
+          "text": "\"individual substance\""
+        },
+        {
+          "start": 143,
+          "end": 160,
+          "style": "quote",
+          "text": "\"rational nature\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Although this or that singular may not be definable, yet what belongs to the general idea of singularity can be defined; and so the Philosopher (De Praedic., cap. De substantia) gives a definition of first substance; and in this way Boethius defines person.",
+      "spans": [
+        {
+          "start": 158,
+          "end": 191,
+          "style": "paren_cite",
+          "text": "(De Praedic., cap. De substantia)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: In the opinion of some, the term \"substance\" in the definition of person stands for first substance, which is the hypostasis; nor is the term \"individual\" superfluously added, forasmuch as by the name of hypostasis or first substance the idea of universality and of part is excluded. For we do not say that man in general is an hypostasis, nor that the hand is since it is only a part. But where \"individual\" is added, the idea of assumptibility is excluded from person; for the human nature in Christ is not a person, since it is assumed by a greater--that is, by the Word of God. It is, however, better to say that substance is here taken in a general sense, as divided into first and second, and when \"individual\" is added, it is restricted to first substance.",
+      "spans": [
+        {
+          "start": 47,
+          "end": 58,
+          "style": "quote",
+          "text": "\"substance\""
+        },
+        {
+          "start": 156,
+          "end": 168,
+          "style": "quote",
+          "text": "\"individual\""
+        },
+        {
+          "start": 410,
+          "end": 422,
+          "style": "quote",
+          "text": "\"individual\""
+        },
+        {
+          "start": 718,
+          "end": 730,
+          "style": "quote",
+          "text": "\"individual\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Substantial differences being unknown to us, or at least unnamed by us, it is sometimes necessary to use accidental differences in the place of substantial; as, for example, we may say that fire is a simple, hot, and dry body: for proper accidents are the effects of substantial forms, and make them known. Likewise, terms expressive of intention can be used in defining realities if used to signify things which are unnamed. And so the term \"individual\" is placed in the definition of person to signify the mode of subsistence which belongs to particular substances.",
+      "spans": [
+        {
+          "start": 456,
+          "end": 468,
+          "style": "quote",
+          "text": "\"individual\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: According to the Philosopher (Metaph. v, 5), the word \"nature\" was first used to signify the generation of living things, which is called nativity. And because this kind of generation comes from an intrinsic principle, this term is extended to signify the intrinsic principle of any kind of movement. In this sense he defines \"nature\" (Phys. ii, 3). And since this kind of principle is either formal or material, both matter and form are commonly called nature. And as the essence of anything is completed by the form; so the essence of anything, signified by the definition, is commonly called nature. And here nature is taken in that sense. Hence Boethius says (De Duab. Nat.) that, \"nature is the specific difference giving its form to each thing,\" for the specific difference completes the definition, and is derived from the special form of a thing. So in the definition of \"person,\" which means the singular in a determined genus, it is more correct to use the term \"nature\" than \"essence,\" because the latter is taken from being, which is most common.",
+      "spans": [
+        {
+          "start": 43,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(Metaph. v, 5)"
+        },
+        {
+          "start": 68,
+          "end": 76,
+          "style": "quote",
+          "text": "\"nature\""
+        },
+        {
+          "start": 340,
+          "end": 348,
+          "style": "quote",
+          "text": "\"nature\""
+        },
+        {
+          "start": 349,
+          "end": 362,
+          "style": "paren_cite",
+          "text": "(Phys. ii, 3)"
+        },
+        {
+          "start": 677,
+          "end": 692,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        },
+        {
+          "start": 699,
+          "end": 765,
+          "style": "quote",
+          "text": "\"nature is the specific difference giving its form to each thing,\""
+        },
+        {
+          "start": 893,
+          "end": 902,
+          "style": "quote",
+          "text": "\"person,\""
+        },
+        {
+          "start": 986,
+          "end": 994,
+          "style": "quote",
+          "text": "\"nature\""
+        },
+        {
+          "start": 1000,
+          "end": 1010,
+          "style": "quote",
+          "text": "\"essence,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: The soul is a part of the human species; and so, although it may exist in a separate state, yet since it ever retains its nature of unibility, it cannot be called an individual substance, which is the hypostasis or first substance, as neither can the hand nor any other part of man; thus neither the definition nor the name of person belongs to it."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 29, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 29, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether \"Person\" Is the Same As Hypostasis, Subsistence, and Essence?",
+      "spans": [
+        {
+          "start": 8,
+          "end": 16,
+          "style": "quote",
+          "text": "\"Person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that \"person\" is the same as \"hypostasis,\" \"subsistence,\" and \"essence.\" For Boethius says (De Duab. Nat.) that \"the Greeks called the individual substance of the rational nature by the name hypostasis.\" But this with us signifies \"person.\" Therefore \"person\" is altogether the same as \"hypostasis.\"",
+      "spans": [
+        {
+          "start": 32,
+          "end": 40,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 56,
+          "end": 69,
+          "style": "quote",
+          "text": "\"hypostasis,\""
+        },
+        {
+          "start": 70,
+          "end": 84,
+          "style": "quote",
+          "text": "\"subsistence,\""
+        },
+        {
+          "start": 89,
+          "end": 99,
+          "style": "quote",
+          "text": "\"essence.\""
+        },
+        {
+          "start": 118,
+          "end": 133,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        },
+        {
+          "start": 139,
+          "end": 230,
+          "style": "quote",
+          "text": "\"the Greeks called the individual substance of the rational nature by the name hypostasis.\""
+        },
+        {
+          "start": 258,
+          "end": 267,
+          "style": "quote",
+          "text": "\"person.\""
+        },
+        {
+          "start": 278,
+          "end": 286,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 313,
+          "end": 326,
+          "style": "quote",
+          "text": "\"hypostasis.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, as we say there are three persons in God, so we say there are three subsistences in God; which implies that \"person\" and \"subsistence\" have the same meaning. Therefore \"person\" and \"subsistence\" mean the same.",
+      "spans": [
+        {
+          "start": 125,
+          "end": 133,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 138,
+          "end": 151,
+          "style": "quote",
+          "text": "\"subsistence\""
+        },
+        {
+          "start": 185,
+          "end": 193,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 198,
+          "end": 211,
+          "style": "quote",
+          "text": "\"subsistence\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, Boethius says (Com. Praed.) that the Greek _ousia,_ which means essence, signifies a being composed of matter and form. Now that which is composed of matter and form is the individual substance called \"hypostasis\" and \"person.\" Therefore all the aforesaid names seem to have the same meaning.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 44,
+          "style": "paren_cite",
+          "text": "(Com. Praed.)"
+        },
+        {
+          "start": 60,
+          "end": 68,
+          "style": "em",
+          "text": "_ousia,_"
+        },
+        {
+          "start": 218,
+          "end": 230,
+          "style": "quote",
+          "text": "\"hypostasis\""
+        },
+        {
+          "start": 235,
+          "end": 244,
+          "style": "quote",
+          "text": "\"person.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: _On the contrary,_ Boethius says (De Duab. Nat.) that genera and species only subsist; whereas individuals are not only subsistent, but also substand. But subsistences are so called from subsisting, as substance or hypostasis is so called from substanding. Therefore, since genera and species are not hypostases or persons, these are not the same as subsistences.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 26,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 41,
+          "end": 56,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, Boethius says (Com. Praed.) that matter is called hypostasis, and form is called _ousiosis_--that is, subsistence. But neither form nor matter can be called person. Therefore person differs from the others.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 44,
+          "style": "paren_cite",
+          "text": "(Com. Praed.)"
+        },
+        {
+          "start": 98,
+          "end": 108,
+          "style": "em",
+          "text": "_ousiosis_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ According to the Philosopher (Metaph. v), substance is twofold. In one sense it means the quiddity of a thing, signified by its definition, and thus we say that the definition means the substance of a thing; in which sense substance is called by the Greeks _ousia,_ what we may call \"essence.\" In another sense substance means a subject or _suppositum,_ which subsists in the genus of substance. To this, taken in a general sense, can be applied a name expressive of an intention; and thus it is called _suppositum._ It is also called by three names signifying a reality--that is, \"a thing of nature,\" \"subsistence,\" and \"hypostasis,\" according to a threefold consideration of the substance thus named. For, as it exists in itself and not in another, it is called \"subsistence\"; as we say that those things subsist which exist in themselves, and not in another. As it underlies some common nature, it is called \"a thing of nature\"; as, for instance, this particular man is a human natural thing. As it underlies the accidents, it is called \"hypostasis,\" or \"substance.\" What these three names signify in common to the whole genus of substances, this name \"person\" signifies in the genus of rational substances.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 46,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(Metaph. v)"
+        },
+        {
+          "start": 274,
+          "end": 282,
+          "style": "em",
+          "text": "_ousia,_"
+        },
+        {
+          "start": 300,
+          "end": 310,
+          "style": "quote",
+          "text": "\"essence.\""
+        },
+        {
+          "start": 357,
+          "end": 370,
+          "style": "em",
+          "text": "_suppositum,_"
+        },
+        {
+          "start": 520,
+          "end": 533,
+          "style": "em",
+          "text": "_suppositum._"
+        },
+        {
+          "start": 598,
+          "end": 618,
+          "style": "quote",
+          "text": "\"a thing of nature,\""
+        },
+        {
+          "start": 619,
+          "end": 633,
+          "style": "quote",
+          "text": "\"subsistence,\""
+        },
+        {
+          "start": 638,
+          "end": 651,
+          "style": "quote",
+          "text": "\"hypostasis,\""
+        },
+        {
+          "start": 781,
+          "end": 794,
+          "style": "quote",
+          "text": "\"subsistence\""
+        },
+        {
+          "start": 928,
+          "end": 947,
+          "style": "quote",
+          "text": "\"a thing of nature\""
+        },
+        {
+          "start": 1057,
+          "end": 1070,
+          "style": "quote",
+          "text": "\"hypostasis,\""
+        },
+        {
+          "start": 1074,
+          "end": 1086,
+          "style": "quote",
+          "text": "\"substance.\""
+        },
+        {
+          "start": 1172,
+          "end": 1180,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Among the Greeks the term \"hypostasis,\" taken in the strict interpretation of the word, signifies any individual of the genus substance; but in the usual way of speaking, it means the individual of the rational nature, by reason of the excellence of that nature.",
+      "spans": [
+        {
+          "start": 40,
+          "end": 53,
+          "style": "quote",
+          "text": "\"hypostasis,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: As we say \"three persons\" plurally in God, and \"three subsistences,\" so the Greeks say \"three hypostases.\" But because the word \"substance,\" which, properly speaking, corresponds in meaning to \"hypostasis,\" is used among us in an equivocal sense, since it sometimes means essence, and sometimes means hypostasis, in order to avoid any occasion of error, it was thought preferable to use \"subsistence\" for hypostasis, rather than \"substance.\"",
+      "spans": [
+        {
+          "start": 24,
+          "end": 39,
+          "style": "quote",
+          "text": "\"three persons\""
+        },
+        {
+          "start": 61,
+          "end": 82,
+          "style": "quote",
+          "text": "\"three subsistences,\""
+        },
+        {
+          "start": 101,
+          "end": 120,
+          "style": "quote",
+          "text": "\"three hypostases.\""
+        },
+        {
+          "start": 142,
+          "end": 154,
+          "style": "quote",
+          "text": "\"substance,\""
+        },
+        {
+          "start": 207,
+          "end": 220,
+          "style": "quote",
+          "text": "\"hypostasis,\""
+        },
+        {
+          "start": 401,
+          "end": 414,
+          "style": "quote",
+          "text": "\"subsistence\""
+        },
+        {
+          "start": 443,
+          "end": 455,
+          "style": "quote",
+          "text": "\"substance.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Strictly speaking, the essence is what is expressed by the definition. Now, the definition comprises the principles of the species, but not the individual principles. Hence in things composed of matter and form, the essence signifies not only the form, nor only the matter, but what is composed of matter and the common form, as the principles of the species. But what is composed of this matter and this form has the nature of hypostasis and person. For soul, flesh, and bone belong to the nature of man; whereas this soul, this flesh and this bone belong to the nature of this man. Therefore hypostasis and person add the individual principles to the idea of essence; nor are these identified with the essence in things composed of matter and form, as we said above when treating of divine simplicity (Q. 3, A. 3).",
+      "spans": [
+        {
+          "start": 817,
+          "end": 829,
+          "style": "paren_cite",
+          "text": "(Q. 3, A. 3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: Boethius says that genera and species subsist, inasmuch as it belongs to some individual things to subsist, from the fact that they belong to genera and species comprised in the predicament of substance, but not because the species and genera themselves subsist; except in the opinion of Plato, who asserted that the species of things subsisted separately from singular things. To substand, however, belongs to the same individual things in relation to the accidents, which are outside the essence of genera and species."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: The individual composed of matter and form substands in relation to accident from the very nature of matter. Hence Boethius says (De Trin.): \"A simple form cannot be a subject.\" Its self-subsistence is derived from the nature of its form, which does not supervene to the things subsisting, but gives actual existence to the matter and makes it subsist as an individual. On this account, therefore, he ascribes hypostasis to matter, and _ousiosis,_ or subsistence, to the form, because the matter is the principle of substanding, and form is the principle of subsisting.",
+      "spans": [
+        {
+          "start": 143,
+          "end": 153,
+          "style": "paren_cite",
+          "text": "(De Trin.)"
+        },
+        {
+          "start": 155,
+          "end": 191,
+          "style": "quote",
+          "text": "\"A simple form cannot be a subject.\""
+        },
+        {
+          "start": 450,
+          "end": 461,
+          "style": "em",
+          "text": "_ousiosis,_"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 29, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 29, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Word \"Person\" Should Be Said of God?",
+      "spans": [
+        {
+          "start": 17,
+          "end": 25,
+          "style": "quote",
+          "text": "\"Person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the name \"person\" should not be said of God. For Dionysius says (Div. Nom.): \"No one should ever dare to say or think anything of the supersubstantial and hidden Divinity, beyond what has been divinely expressed to us by the oracles.\" But the name \"person\" is not expressed to us in the Old or New Testament. Therefore \"person\" is not to be applied to God.",
+      "spans": [
+        {
+          "start": 41,
+          "end": 49,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 96,
+          "end": 107,
+          "style": "paren_cite",
+          "text": "(Div. Nom.)"
+        },
+        {
+          "start": 109,
+          "end": 266,
+          "style": "quote",
+          "text": "\"No one should ever dare to say or think anything of the supersubstantial and hidden Divinity, beyond what has been divinely expressed to us by the oracles.\""
+        },
+        {
+          "start": 280,
+          "end": 288,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 351,
+          "end": 359,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, Boethius says (De Duab. Nat.): \"The word person seems to be taken from those persons who represented men in comedies and tragedies. For person comes from sounding through [personando], since a greater volume of sound is produced through the cavity in the mask. These \"persons\" or masks the Greeks called _prosopa,_ as they were placed on the face and covered the features before the eyes.\" This, however, can apply to God only in a metaphorical sense. Therefore the word \"person\" is only applied to God metaphorically.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 46,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        },
+        {
+          "start": 188,
+          "end": 200,
+          "style": "bracket_note",
+          "text": "[personando]"
+        },
+        {
+          "start": 284,
+          "end": 293,
+          "style": "quote",
+          "text": "\"persons\""
+        },
+        {
+          "start": 321,
+          "end": 331,
+          "style": "em",
+          "text": "_prosopa,_"
+        },
+        {
+          "start": 488,
+          "end": 496,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, every person is a hypostasis. But the word \"hypostasis\" does not apply to God, since, as Boethius says (De Duab. Nat.), it signifies what is the subject of accidents, which do not exist in God. Jerome also says (Ep. ad Damas.) that, \"in this word hypostasis, poison lurks in honey.\" Therefore the word \"person\" should not be said of God.",
+      "spans": [
+        {
+          "start": 60,
+          "end": 72,
+          "style": "quote",
+          "text": "\"hypostasis\""
+        },
+        {
+          "start": 120,
+          "end": 135,
+          "style": "paren_cite",
+          "text": "(De Duab. Nat.)"
+        },
+        {
+          "start": 228,
+          "end": 243,
+          "style": "paren_cite",
+          "text": "(Ep. ad Damas.)"
+        },
+        {
+          "start": 250,
+          "end": 299,
+          "style": "quote",
+          "text": "\"in this word hypostasis, poison lurks in honey.\""
+        },
+        {
+          "start": 319,
+          "end": 327,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, if a definition is denied of anything, the thing defined is also denied of it. But the definition of \"person,\" as given above, does not apply to God. Both because reason implies a discursive knowledge, which does not apply to God, as we proved above (Q. 14, A. 12); and thus God cannot be said to have \"a rational nature.\" And also because God cannot be called an individual substance, since the principle of individuation is matter; while God is immaterial: nor is He the subject of accidents, so as to be called a substance. Therefore the word \"person\" ought not to be attributed to God.",
+      "spans": [
+        {
+          "start": 118,
+          "end": 127,
+          "style": "quote",
+          "text": "\"person,\""
+        },
+        {
+          "start": 267,
+          "end": 281,
+          "style": "paren_cite",
+          "text": "(Q. 14, A. 12)"
+        },
+        {
+          "start": 319,
+          "end": 339,
+          "style": "quote",
+          "text": "\"a rational nature.\""
+        },
+        {
+          "start": 563,
+          "end": 571,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ In the Creed of Athanasius we say: \"One is the person of the Father, another of the Son, another of the Holy Ghost.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 54,
+          "end": 135,
+          "style": "quote",
+          "text": "\"One is the person of the Father, another of the Son, another of the Holy Ghost.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ \"Person\" signifies what is most perfect in all nature--that is, a subsistent individual of a rational nature. Hence, since everything that is perfect must be attributed to God, forasmuch as His essence contains every perfection, this name \"person\" is fittingly applied to God; not, however, as it is applied to creatures, but in a more excellent way; as other names also, which, while giving them to creatures, we attribute to God; as we showed above when treating of the names of God (Q. 13, A. 2).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 17,
+          "end": 25,
+          "style": "quote",
+          "text": "\"Person\""
+        },
+        {
+          "start": 256,
+          "end": 264,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 502,
+          "end": 515,
+          "style": "paren_cite",
+          "text": "(Q. 13, A. 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Although the word \"person\" is not found applied to God in Scripture, either in the Old or New Testament, nevertheless what the word signifies is found to be affirmed of God in many places of Scripture; as that He is the supreme self-subsisting being, and the most perfectly intelligent being. If we could speak of God only in the very terms themselves of Scripture, it would follow that no one could speak about God in any but the original language of the Old or New Testament. The urgency of confuting heretics made it necessary to find new words to express the ancient faith about God. Nor is such a kind of novelty to be shunned; since it is by no means profane, for it does not lead us astray from the sense of Scripture. The Apostle warns us to avoid \"profane novelties of words\" (1 Tim. 6:20).",
+      "spans": [
+        {
+          "start": 32,
+          "end": 40,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 770,
+          "end": 798,
+          "style": "quote",
+          "text": "\"profane novelties of words\""
+        },
+        {
+          "start": 799,
+          "end": 812,
+          "style": "paren_cite",
+          "text": "(1 Tim. 6:20)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Although this name \"person\" may not belong to God as regards the origin of the term, nevertheless it excellently belongs to God in its objective meaning. For as famous men were represented in comedies and tragedies, the name \"person\" was given to signify those who held high dignity. Hence, those who held high rank in the Church came to be called \"persons.\" Thence by some the definition of person is given as \"hypostasis distinct by reason of dignity.\" And because subsistence in a rational nature is of high dignity, therefore every individual of the rational nature is called a \"person.\" Now the dignity of the divine nature excels every other dignity; and thus the name \"person\" pre-eminently belongs to God.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 41,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 239,
+          "end": 247,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 362,
+          "end": 372,
+          "style": "quote",
+          "text": "\"persons.\""
+        },
+        {
+          "start": 425,
+          "end": 468,
+          "style": "quote",
+          "text": "\"hypostasis distinct by reason of dignity.\""
+        },
+        {
+          "start": 596,
+          "end": 605,
+          "style": "quote",
+          "text": "\"person.\""
+        },
+        {
+          "start": 689,
+          "end": 697,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The word \"hypostasis\" does not apply to God as regards its source of origin, since He does not underlie accidents; but it applies to Him in its objective sense, for it is imposed to signify the subsistence. Jerome said that \"poison lurks in this word,\" forasmuch as before it was fully understood by the Latins, the heretics used this term to deceive the simple, to make people profess many essences as they profess several hypostases, inasmuch as the word \"substance,\" which corresponds to hypostasis in Greek, is commonly taken amongst us to mean essence.",
+      "spans": [
+        {
+          "start": 23,
+          "end": 35,
+          "style": "quote",
+          "text": "\"hypostasis\""
+        },
+        {
+          "start": 238,
+          "end": 266,
+          "style": "quote",
+          "text": "\"poison lurks in this word,\""
+        },
+        {
+          "start": 471,
+          "end": 483,
+          "style": "quote",
+          "text": "\"substance,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: It may be said that God has a rational _nature,_ if reason be taken to mean, not discursive thought, but in a general sense, an intelligent nature. But God cannot be called an \"individual\" in the sense that His individuality comes from matter; but only in the sense which implies incommunicability. \"Substance\" can be applied to God in the sense of signifying self-subsistence. There are some, however, who say that the definition of Boethius, quoted above (A. 1), is not a definition of person in the sense we use when speaking of persons in God. Therefore Richard of St. Victor amends this definition by adding that \"Person\" in God is \"the incommunicable existence of the divine nature.\"",
+      "spans": [
+        {
+          "start": 53,
+          "end": 62,
+          "style": "em",
+          "text": "_nature,_"
+        },
+        {
+          "start": 190,
+          "end": 202,
+          "style": "quote",
+          "text": "\"individual\""
+        },
+        {
+          "start": 313,
+          "end": 324,
+          "style": "quote",
+          "text": "\"Substance\""
+        },
+        {
+          "start": 471,
+          "end": 477,
+          "style": "paren_cite",
+          "text": "(A. 1)"
+        },
+        {
+          "start": 632,
+          "end": 640,
+          "style": "quote",
+          "text": "\"Person\""
+        },
+        {
+          "start": 651,
+          "end": 703,
+          "style": "quote",
+          "text": "\"the incommunicable existence of the divine nature.\""
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 29, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 29, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether This Word \"Person\" Signifies Relation?",
+      "spans": [
+        {
+          "start": 18,
+          "end": 26,
+          "style": "quote",
+          "text": "\"Person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that this word \"person,\" as applied to God, does not signify relation, but substance. For Augustine says (De Trin. vii, 6): \"When we speak of the person of the Father, we mean nothing else but the substance of the Father, for person is said in regard to Himself, and not in regard to the Son.\"",
+      "spans": [
+        {
+          "start": 42,
+          "end": 51,
+          "style": "quote",
+          "text": "\"person,\""
+        },
+        {
+          "start": 132,
+          "end": 149,
+          "style": "paren_cite",
+          "text": "(De Trin. vii, 6)"
+        },
+        {
+          "start": 151,
+          "end": 320,
+          "style": "quote",
+          "text": "\"When we speak of the person of the Father, we mean nothing else but the substance of the Father, for person is said in regard to Himself, and not in regard to the Son.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the interrogation \"What?\" refers to essence. But, as Augustine says: \"When we say there are three who bear witness in heaven, the Father, the Word, and the Holy Ghost, and it is asked, Three what? the answer is, Three persons.\" Therefore person signifies essence.",
+      "spans": [
+        {
+          "start": 35,
+          "end": 42,
+          "style": "quote",
+          "text": "\"What?\""
+        },
+        {
+          "start": 86,
+          "end": 244,
+          "style": "quote",
+          "text": "\"When we say there are three who bear witness in heaven, the Father, the Word, and the Holy Ghost, and it is asked, Three what? the answer is, Three persons.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: According to the Philosopher (Metaph. iv), the meaning of a word is its definition. But the definition of \"person\" is this: \"The individual substance of the rational nature,\" as above stated. Therefore \"person\" signifies substance.",
+      "spans": [
+        {
+          "start": 37,
+          "end": 49,
+          "style": "paren_cite",
+          "text": "(Metaph. iv)"
+        },
+        {
+          "start": 114,
+          "end": 122,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 132,
+          "end": 182,
+          "style": "quote",
+          "text": "\"The individual substance of the rational nature,\""
+        },
+        {
+          "start": 210,
+          "end": 218,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, person in men and angels does not signify relation, but something absolute. Therefore, if in God it signified relation, it would bear an equivocal meaning in God, in man, and in angels."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Boethius says (De Trin.) that \"every word that refers to the persons signifies relation.\" But no word belongs to person more strictly than the very word \"person\" itself. Therefore this word \"person\" signifies relation.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 33,
+          "end": 43,
+          "style": "paren_cite",
+          "text": "(De Trin.)"
+        },
+        {
+          "start": 49,
+          "end": 108,
+          "style": "quote",
+          "text": "\"every word that refers to the persons signifies relation.\""
+        },
+        {
+          "start": 172,
+          "end": 180,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 209,
+          "end": 217,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ A difficulty arises concerning the meaning of this word \"person\" in God, from the fact that it is predicated plurally of the Three in contrast to the nature of the names belonging to the essence; nor does it in itself refer to another, as do the words which express relation.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 73,
+          "end": 81,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Hence some have thought that this word \"person\" of itself expresses absolutely the divine essence; as this name \"God\" and this word \"Wise\"; but that to meet heretical attack, it was ordained by conciliar decree that it was to be taken in a relative sense, and especially in the plural, or with the addition of a distinguishing adjective; as when we say, \"Three persons,\" or, \"one is the person of the Father, another of the Son,\" etc. Used, however, in the singular, it may be either absolute or relative. But this does not seem to be a satisfactory explanation; for, if this word \"person,\" by force of its own signification, expresses the divine essence only, it follows that forasmuch as we speak of \"three persons,\" so far from the heretics being silenced, they had still more reason to argue. Seeing this, others maintained that this word \"person\" in God signifies both the essence and the relation. Some of these said that it signifies directly the essence, and relation indirectly, forasmuch as \"person\" means as it were \"by itself one\" [per se una]; and unity belongs to the essence. And what is \"by itself\" implies relation indirectly; for the Father is understood to exist \"by Himself,\" as relatively distinct from the Son. Others, however, said, on the contrary, that it signifies relation directly; and essence indirectly; forasmuch as in the definition of \"person\" the term nature is mentioned indirectly; and these come nearer to the truth.",
+      "spans": [
+        {
+          "start": 39,
+          "end": 47,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 112,
+          "end": 117,
+          "style": "quote",
+          "text": "\"God\""
+        },
+        {
+          "start": 132,
+          "end": 138,
+          "style": "quote",
+          "text": "\"Wise\""
+        },
+        {
+          "start": 354,
+          "end": 370,
+          "style": "quote",
+          "text": "\"Three persons,\""
+        },
+        {
+          "start": 375,
+          "end": 429,
+          "style": "quote",
+          "text": "\"one is the person of the Father, another of the Son,\""
+        },
+        {
+          "start": 581,
+          "end": 590,
+          "style": "quote",
+          "text": "\"person,\""
+        },
+        {
+          "start": 702,
+          "end": 718,
+          "style": "quote",
+          "text": "\"three persons,\""
+        },
+        {
+          "start": 843,
+          "end": 851,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 1001,
+          "end": 1009,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 1027,
+          "end": 1042,
+          "style": "quote",
+          "text": "\"by itself one\""
+        },
+        {
+          "start": 1043,
+          "end": 1055,
+          "style": "bracket_cite",
+          "text": "[per se una]"
+        },
+        {
+          "start": 1103,
+          "end": 1114,
+          "style": "quote",
+          "text": "\"by itself\""
+        },
+        {
+          "start": 1182,
+          "end": 1195,
+          "style": "quote",
+          "text": "\"by Himself,\""
+        },
+        {
+          "start": 1368,
+          "end": 1376,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "To determine the question, we must consider that something may be included in the meaning of a less common term, which is not included in the more common term; as \"rational\" is included in the meaning of \"man,\" and not in the meaning of \"animal.\" So that it is one thing to ask the meaning of the word animal, and another to ask its meaning when the animal in question is man. Also, it is one thing to ask the meaning of this word \"person\" in general; and another to ask the meaning of \"person\" as applied to God. For \"person\" in general signifies the individual substance of a rational figure. The individual in itself is undivided, but is distinct from others. Therefore \"person\" in any nature signifies what is distinct in that nature: thus in human nature it signifies this flesh, these bones, and this soul, which are the individuating principles of a man, and which, though not belonging to \"person\" in general, nevertheless do belong to the meaning of a particular human person.",
+      "spans": [
+        {
+          "start": 163,
+          "end": 173,
+          "style": "quote",
+          "text": "\"rational\""
+        },
+        {
+          "start": 204,
+          "end": 210,
+          "style": "quote",
+          "text": "\"man,\""
+        },
+        {
+          "start": 237,
+          "end": 246,
+          "style": "quote",
+          "text": "\"animal.\""
+        },
+        {
+          "start": 431,
+          "end": 439,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 486,
+          "end": 494,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 518,
+          "end": 526,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 673,
+          "end": 681,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 897,
+          "end": 905,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Now distinction in God is only by relation of origin, as stated above (Q. 28, AA. 2, 3), while relation in God is not as an accident in a subject, but is the divine essence itself; and so it is subsistent, for the divine essence subsists. Therefore, as the Godhead is God so the divine paternity is God the Father, Who is a divine person. Therefore a divine person signifies a relation as subsisting. And this is to signify relation by way of substance, and such a relation is a hypostasis subsisting in the divine nature, although in truth that which subsists in the divine nature is the divine nature itself. Thus it is true to say that the name \"person\" signifies relation directly, and the essence indirectly; not, however, the relation as such, but as expressed by way of a hypostasis. So likewise it signifies directly the essence, and indirectly the relation, inasmuch as the essence is the same as the hypostasis: while in God the hypostasis is expressed as distinct by the relation: and thus relation, as such, enters into the notion of the person indirectly. Thus we can say that this signification of the word \"person\" was not clearly perceived before it was attacked by heretics. Hence, this word \"person\" was used just as any other absolute term. But afterwards it was applied to express relation, as it lent itself to that signification, so that this word \"person\" means relation not only by use and custom, according to the first opinion, but also by force of its own proper signification.",
+      "spans": [
+        {
+          "start": 70,
+          "end": 87,
+          "style": "paren_cite",
+          "text": "(Q. 28, AA. 2, 3)"
+        },
+        {
+          "start": 648,
+          "end": 656,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 1121,
+          "end": 1129,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 1209,
+          "end": 1217,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 1370,
+          "end": 1378,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: This word \"person\" is said in respect to itself, not to another; forasmuch as it signifies relation not as such, but by way of a substance--which is a hypostasis. In that sense Augustine says that it signifies the essence, inasmuch as in God essence is the same as the hypostasis, because in God what He is, and whereby He is are the same.",
+      "spans": [
+        {
+          "start": 24,
+          "end": 32,
+          "style": "quote",
+          "text": "\"person\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The term \"what\" refers sometimes to the nature expressed by the definition, as when we ask; What is man? and we answer: A mortal rational animal. Sometimes it refers to the _suppositum,_ as when we ask, What swims in the sea? and answer, A fish. So to those who ask, Three what? we answer, Three persons.",
+      "spans": [
+        {
+          "start": 23,
+          "end": 29,
+          "style": "quote",
+          "text": "\"what\""
+        },
+        {
+          "start": 187,
+          "end": 200,
+          "style": "em",
+          "text": "_suppositum,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: In God the individual--i.e. distinct and incommunicable substance--includes the idea of relation, as above explained."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: The different sense of the less common term does not produce equivocation in the more common. Although a horse and an ass have their own proper definitions, nevertheless they agree univocally in animal, because the common definition of animal applies to both. So it does not follow that, although relation is contained in the signification of divine person, but not in that of an angelic or of a human person, the word \"person\" is used in an equivocal sense. Though neither is it applied univocally, since nothing can be said univocally of God and creatures (Q. 13, A. 5).",
+      "spans": [
+        {
+          "start": 433,
+          "end": 441,
+          "style": "quote",
+          "text": "\"person\""
+        },
+        {
+          "start": 572,
+          "end": 585,
+          "style": "paren_cite",
+          "text": "(Q. 13, A. 5)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "THE DIVINE PERSONS (In Four Articles)\n\nHaving premised what have appeared necessary notions concerning the processions and the relations, we must now approach the subject of the persons.\n\nFirst, we shall consider the persons absolutely, and then comparatively as regards each other. We must consider the persons absolutely first in common; and then singly.\n\nThe general consideration of the persons seemingly involves four points:\n\n(1) The signification of this word \"person\";\n\n(2) the number of the persons;\n\n(3) what is involved in the number of persons, or is opposed thereto; as diversity, and similitude, and the like; and\n\n(4) what belongs to our knowledge of the persons.\n\nFour subjects of inquiry are comprised in the first point:\n\n(1) The definition of \"person.\"\n\n(2) The comparison of person to essence, subsistence, and hypostasis.\n\n(3) Whether the name of person is becoming to God?\n\n(4) What does it signify in Him?\n\n---\n\nFIRST ARTICLE [I, Q. 29, Art. 1]\n\nThe Definition of \"Person\"\n\nObjection 1: It would seem that the definition of person given by Boethius (De Duab. Nat.) is insufficient--that is, \"a person is an individual substance of a rational nature.\" For nothing singular can be subject to definition. But \"person\" signifies something singular. Therefore person is improperly defined.\n\nObj. 2: Further, substance as placed above in the definition of person, is either first substance, or second substance. If it is the former, the word \"individual\" is superfluous, because first substance is individual substance; if it stands for second substance, the word \"individual\" is false, for there is contradiction of terms; since second substances are the genera or species. Therefore this definition is incorrect.\n\nObj. 3: Further, an intentional term must not be included in the definition of a thing. For to define a man as \"a species of animal\" would not be a correct definition; since man is the name of a thing, and species is a name of an intention. Therefore, since person is the name of a thing (for it signifies a substance of a rational nature), the word \"individual\" which is an intentional name comes improperly into the definition.\n\nObj. 4: Further, \"Nature is the principle of motion and rest, in those things in which it is essentially, and not accidentally,\" as Aristotle says (Phys. ii). But person exists in things immovable, as in God, and in the angels. Therefore the word \"nature\" ought not to enter into the definition of person, but the word should rather be \"essence.\"\n\nObj. 5: Further, the separated soul is an individual substance of the rational nature; but it is not a person. Therefore person is not properly defined as above.\n\n_I answer that,_ Although the universal and particular exist in every genus, nevertheless, in a certain special way, the individual belongs to the genus of substance. For substance is individualized by itself; whereas the accidents are individualized by the subject, which is the substance; since this particular whiteness is called \"this,\" because it exists in this particular subject. And so it is reasonable that the individuals of the genus substance should have a special name of their own; for they are called \"hypostases,\" or first substances.\n\nFurther still, in a more special and perfect way, the particular and the individual are found in the rational substances which have dominion over their own actions; and which are not only made to act, like others; but which can act of themselves; for actions belong to singulars. Therefore also the individuals of the rational nature have a special name even among other substances; and this name is \"person.\"\n\nThus the term \"individual substance\" is placed in the definition of person, as signifying the singular in the genus of substance; and the term \"rational nature\" is added, as signifying the singular in rational substances.\n\nReply Obj. 1: Although this or that singular may not be definable, yet what belongs to the general idea of singularity can be defined; and so the Philosopher (De Praedic., cap. De substantia) gives a definition of first substance; and in this way Boethius defines person.\n\nReply Obj. 2: In the opinion of some, the term \"substance\" in the definition of person stands for first substance, which is the hypostasis; nor is the term \"individual\" superfluously added, forasmuch as by the name of hypostasis or first substance the idea of universality and of part is excluded. For we do not say that man in general is an hypostasis, nor that the hand is since it is only a part. But where \"individual\" is added, the idea of assumptibility is excluded from person; for the human nature in Christ is not a person, since it is assumed by a greater--that is, by the Word of God. It is, however, better to say that substance is here taken in a general sense, as divided into first and second, and when \"individual\" is added, it is restricted to first substance.\n\nReply Obj. 3: Substantial differences being unknown to us, or at least unnamed by us, it is sometimes necessary to use accidental differences in the place of substantial; as, for example, we may say that fire is a simple, hot, and dry body: for proper accidents are the effects of substantial forms, and make them known. Likewise, terms expressive of intention can be used in defining realities if used to signify things which are unnamed. And so the term \"individual\" is placed in the definition of person to signify the mode of subsistence which belongs to particular substances.\n\nReply Obj. 4: According to the Philosopher (Metaph. v, 5), the word \"nature\" was first used to signify the generation of living things, which is called nativity. And because this kind of generation comes from an intrinsic principle, this term is extended to signify the intrinsic principle of any kind of movement. In this sense he defines \"nature\" (Phys. ii, 3). And since this kind of principle is either formal or material, both matter and form are commonly called nature. And as the essence of anything is completed by the form; so the essence of anything, signified by the definition, is commonly called nature. And here nature is taken in that sense. Hence Boethius says (De Duab. Nat.) that, \"nature is the specific difference giving its form to each thing,\" for the specific difference completes the definition, and is derived from the special form of a thing. So in the definition of \"person,\" which means the singular in a determined genus, it is more correct to use the term \"nature\" than \"essence,\" because the latter is taken from being, which is most common.\n\nReply Obj. 5: The soul is a part of the human species; and so, although it may exist in a separate state, yet since it ever retains its nature of unibility, it cannot be called an individual substance, which is the hypostasis or first substance, as neither can the hand nor any other part of man; thus neither the definition nor the name of person belongs to it.\n\n---\n\nSECOND ARTICLE [I, Q. 29, Art. 2]\n\nWhether \"Person\" Is the Same As Hypostasis, Subsistence, and Essence?\n\nObjection 1: It would seem that \"person\" is the same as \"hypostasis,\" \"subsistence,\" and \"essence.\" For Boethius says (De Duab. Nat.) that \"the Greeks called the individual substance of the rational nature by the name hypostasis.\" But this with us signifies \"person.\" Therefore \"person\" is altogether the same as \"hypostasis.\"\n\nObj. 2: Further, as we say there are three persons in God, so we say there are three subsistences in God; which implies that \"person\" and \"subsistence\" have the same meaning. Therefore \"person\" and \"subsistence\" mean the same.\n\nObj. 3: Further, Boethius says (Com. Praed.) that the Greek _ousia,_ which means essence, signifies a being composed of matter and form. Now that which is composed of matter and form is the individual substance called \"hypostasis\" and \"person.\" Therefore all the aforesaid names seem to have the same meaning.\n\nObj. 4: _On the contrary,_ Boethius says (De Duab. Nat.) that genera and species only subsist; whereas individuals are not only subsistent, but also substand. But subsistences are so called from subsisting, as substance or hypostasis is so called from substanding. Therefore, since genera and species are not hypostases or persons, these are not the same as subsistences.\n\nObj. 5: Further, Boethius says (Com. Praed.) that matter is called hypostasis, and form is called _ousiosis_--that is, subsistence. But neither form nor matter can be called person. Therefore person differs from the others.\n\n_I answer that,_ According to the Philosopher (Metaph. v), substance is twofold. In one sense it means the quiddity of a thing, signified by its definition, and thus we say that the definition means the substance of a thing; in which sense substance is called by the Greeks _ousia,_ what we may call \"essence.\" In another sense substance means a subject or _suppositum,_ which subsists in the genus of substance. To this, taken in a general sense, can be applied a name expressive of an intention; and thus it is called _suppositum._ It is also called by three names signifying a reality--that is, \"a thing of nature,\" \"subsistence,\" and \"hypostasis,\" according to a threefold consideration of the substance thus named. For, as it exists in itself and not in another, it is called \"subsistence\"; as we say that those things subsist which exist in themselves, and not in another. As it underlies some common nature, it is called \"a thing of nature\"; as, for instance, this particular man is a human natural thing. As it underlies the accidents, it is called \"hypostasis,\" or \"substance.\" What these three names signify in common to the whole genus of substances, this name \"person\" signifies in the genus of rational substances.\n\nReply Obj. 1: Among the Greeks the term \"hypostasis,\" taken in the strict interpretation of the word, signifies any individual of the genus substance; but in the usual way of speaking, it means the individual of the rational nature, by reason of the excellence of that nature.\n\nReply Obj. 2: As we say \"three persons\" plurally in God, and \"three subsistences,\" so the Greeks say \"three hypostases.\" But because the word \"substance,\" which, properly speaking, corresponds in meaning to \"hypostasis,\" is used among us in an equivocal sense, since it sometimes means essence, and sometimes means hypostasis, in order to avoid any occasion of error, it was thought preferable to use \"subsistence\" for hypostasis, rather than \"substance.\"\n\nReply Obj. 3: Strictly speaking, the essence is what is expressed by the definition. Now, the definition comprises the principles of the species, but not the individual principles. Hence in things composed of matter and form, the essence signifies not only the form, nor only the matter, but what is composed of matter and the common form, as the principles of the species. But what is composed of this matter and this form has the nature of hypostasis and person. For soul, flesh, and bone belong to the nature of man; whereas this soul, this flesh and this bone belong to the nature of this man. Therefore hypostasis and person add the individual principles to the idea of essence; nor are these identified with the essence in things composed of matter and form, as we said above when treating of divine simplicity (Q. 3, A. 3).\n\nReply Obj. 4: Boethius says that genera and species subsist, inasmuch as it belongs to some individual things to subsist, from the fact that they belong to genera and species comprised in the predicament of substance, but not because the species and genera themselves subsist; except in the opinion of Plato, who asserted that the species of things subsisted separately from singular things. To substand, however, belongs to the same individual things in relation to the accidents, which are outside the essence of genera and species.\n\nReply Obj. 5: The individual composed of matter and form substands in relation to accident from the very nature of matter. Hence Boethius says (De Trin.): \"A simple form cannot be a subject.\" Its self-subsistence is derived from the nature of its form, which does not supervene to the things subsisting, but gives actual existence to the matter and makes it subsist as an individual. On this account, therefore, he ascribes hypostasis to matter, and _ousiosis,_ or subsistence, to the form, because the matter is the principle of substanding, and form is the principle of subsisting.\n\n---\n\nTHIRD ARTICLE [I, Q. 29, Art. 3]\n\nWhether the Word \"Person\" Should Be Said of God?\n\nObjection 1: It would seem that the name \"person\" should not be said of God. For Dionysius says (Div. Nom.): \"No one should ever dare to say or think anything of the supersubstantial and hidden Divinity, beyond what has been divinely expressed to us by the oracles.\" But the name \"person\" is not expressed to us in the Old or New Testament. Therefore \"person\" is not to be applied to God.\n\nObj. 2: Further, Boethius says (De Duab. Nat.): \"The word person seems to be taken from those persons who represented men in comedies and tragedies. For person comes from sounding through [personando], since a greater volume of sound is produced through the cavity in the mask. These \"persons\" or masks the Greeks called _prosopa,_ as they were placed on the face and covered the features before the eyes.\" This, however, can apply to God only in a metaphorical sense. Therefore the word \"person\" is only applied to God metaphorically.\n\nObj. 3: Further, every person is a hypostasis. But the word \"hypostasis\" does not apply to God, since, as Boethius says (De Duab. Nat.), it signifies what is the subject of accidents, which do not exist in God. Jerome also says (Ep. ad Damas.) that, \"in this word hypostasis, poison lurks in honey.\" Therefore the word \"person\" should not be said of God.\n\nObj. 4: Further, if a definition is denied of anything, the thing defined is also denied of it. But the definition of \"person,\" as given above, does not apply to God. Both because reason implies a discursive knowledge, which does not apply to God, as we proved above (Q. 14, A. 12); and thus God cannot be said to have \"a rational nature.\" And also because God cannot be called an individual substance, since the principle of individuation is matter; while God is immaterial: nor is He the subject of accidents, so as to be called a substance. Therefore the word \"person\" ought not to be attributed to God.\n\n_On the contrary,_ In the Creed of Athanasius we say: \"One is the person of the Father, another of the Son, another of the Holy Ghost.\"\n\n_I answer that,_ \"Person\" signifies what is most perfect in all nature--that is, a subsistent individual of a rational nature. Hence, since everything that is perfect must be attributed to God, forasmuch as His essence contains every perfection, this name \"person\" is fittingly applied to God; not, however, as it is applied to creatures, but in a more excellent way; as other names also, which, while giving them to creatures, we attribute to God; as we showed above when treating of the names of God (Q. 13, A. 2).\n\nReply Obj. 1: Although the word \"person\" is not found applied to God in Scripture, either in the Old or New Testament, nevertheless what the word signifies is found to be affirmed of God in many places of Scripture; as that He is the supreme self-subsisting being, and the most perfectly intelligent being. If we could speak of God only in the very terms themselves of Scripture, it would follow that no one could speak about God in any but the original language of the Old or New Testament. The urgency of confuting heretics made it necessary to find new words to express the ancient faith about God. Nor is such a kind of novelty to be shunned; since it is by no means profane, for it does not lead us astray from the sense of Scripture. The Apostle warns us to avoid \"profane novelties of words\" (1 Tim. 6:20).\n\nReply Obj. 2: Although this name \"person\" may not belong to God as regards the origin of the term, nevertheless it excellently belongs to God in its objective meaning. For as famous men were represented in comedies and tragedies, the name \"person\" was given to signify those who held high dignity. Hence, those who held high rank in the Church came to be called \"persons.\" Thence by some the definition of person is given as \"hypostasis distinct by reason of dignity.\" And because subsistence in a rational nature is of high dignity, therefore every individual of the rational nature is called a \"person.\" Now the dignity of the divine nature excels every other dignity; and thus the name \"person\" pre-eminently belongs to God.\n\nReply Obj. 3: The word \"hypostasis\" does not apply to God as regards its source of origin, since He does not underlie accidents; but it applies to Him in its objective sense, for it is imposed to signify the subsistence. Jerome said that \"poison lurks in this word,\" forasmuch as before it was fully understood by the Latins, the heretics used this term to deceive the simple, to make people profess many essences as they profess several hypostases, inasmuch as the word \"substance,\" which corresponds to hypostasis in Greek, is commonly taken amongst us to mean essence.\n\nReply Obj. 4: It may be said that God has a rational _nature,_ if reason be taken to mean, not discursive thought, but in a general sense, an intelligent nature. But God cannot be called an \"individual\" in the sense that His individuality comes from matter; but only in the sense which implies incommunicability. \"Substance\" can be applied to God in the sense of signifying self-subsistence. There are some, however, who say that the definition of Boethius, quoted above (A. 1), is not a definition of person in the sense we use when speaking of persons in God. Therefore Richard of St. Victor amends this definition by adding that \"Person\" in God is \"the incommunicable existence of the divine nature.\"\n\n---\n\nFOURTH ARTICLE [I, Q. 29, Art. 4]\n\nWhether This Word \"Person\" Signifies Relation?\n\nObjection 1: It would seem that this word \"person,\" as applied to God, does not signify relation, but substance. For Augustine says (De Trin. vii, 6): \"When we speak of the person of the Father, we mean nothing else but the substance of the Father, for person is said in regard to Himself, and not in regard to the Son.\"\n\nObj. 2: Further, the interrogation \"What?\" refers to essence. But, as Augustine says: \"When we say there are three who bear witness in heaven, the Father, the Word, and the Holy Ghost, and it is asked, Three what? the answer is, Three persons.\" Therefore person signifies essence.\n\nObj. 3: According to the Philosopher (Metaph. iv), the meaning of a word is its definition. But the definition of \"person\" is this: \"The individual substance of the rational nature,\" as above stated. Therefore \"person\" signifies substance.\n\nObj. 4: Further, person in men and angels does not signify relation, but something absolute. Therefore, if in God it signified relation, it would bear an equivocal meaning in God, in man, and in angels.\n\n_On the contrary,_ Boethius says (De Trin.) that \"every word that refers to the persons signifies relation.\" But no word belongs to person more strictly than the very word \"person\" itself. Therefore this word \"person\" signifies relation.\n\n_I answer that,_ A difficulty arises concerning the meaning of this word \"person\" in God, from the fact that it is predicated plurally of the Three in contrast to the nature of the names belonging to the essence; nor does it in itself refer to another, as do the words which express relation.\n\nHence some have thought that this word \"person\" of itself expresses absolutely the divine essence; as this name \"God\" and this word \"Wise\"; but that to meet heretical attack, it was ordained by conciliar decree that it was to be taken in a relative sense, and especially in the plural, or with the addition of a distinguishing adjective; as when we say, \"Three persons,\" or, \"one is the person of the Father, another of the Son,\" etc. Used, however, in the singular, it may be either absolute or relative. But this does not seem to be a satisfactory explanation; for, if this word \"person,\" by force of its own signification, expresses the divine essence only, it follows that forasmuch as we speak of \"three persons,\" so far from the heretics being silenced, they had still more reason to argue. Seeing this, others maintained that this word \"person\" in God signifies both the essence and the relation. Some of these said that it signifies directly the essence, and relation indirectly, forasmuch as \"person\" means as it were \"by itself one\" [per se una]; and unity belongs to the essence. And what is \"by itself\" implies relation indirectly; for the Father is understood to exist \"by Himself,\" as relatively distinct from the Son. Others, however, said, on the contrary, that it signifies relation directly; and essence indirectly; forasmuch as in the definition of \"person\" the term nature is mentioned indirectly; and these come nearer to the truth.\n\nTo determine the question, we must consider that something may be included in the meaning of a less common term, which is not included in the more common term; as \"rational\" is included in the meaning of \"man,\" and not in the meaning of \"animal.\" So that it is one thing to ask the meaning of the word animal, and another to ask its meaning when the animal in question is man. Also, it is one thing to ask the meaning of this word \"person\" in general; and another to ask the meaning of \"person\" as applied to God. For \"person\" in general signifies the individual substance of a rational figure. The individual in itself is undivided, but is distinct from others. Therefore \"person\" in any nature signifies what is distinct in that nature: thus in human nature it signifies this flesh, these bones, and this soul, which are the individuating principles of a man, and which, though not belonging to \"person\" in general, nevertheless do belong to the meaning of a particular human person.\n\nNow distinction in God is only by relation of origin, as stated above (Q. 28, AA. 2, 3), while relation in God is not as an accident in a subject, but is the divine essence itself; and so it is subsistent, for the divine essence subsists. Therefore, as the Godhead is God so the divine paternity is God the Father, Who is a divine person. Therefore a divine person signifies a relation as subsisting. And this is to signify relation by way of substance, and such a relation is a hypostasis subsisting in the divine nature, although in truth that which subsists in the divine nature is the divine nature itself. Thus it is true to say that the name \"person\" signifies relation directly, and the essence indirectly; not, however, the relation as such, but as expressed by way of a hypostasis. So likewise it signifies directly the essence, and indirectly the relation, inasmuch as the essence is the same as the hypostasis: while in God the hypostasis is expressed as distinct by the relation: and thus relation, as such, enters into the notion of the person indirectly. Thus we can say that this signification of the word \"person\" was not clearly perceived before it was attacked by heretics. Hence, this word \"person\" was used just as any other absolute term. But afterwards it was applied to express relation, as it lent itself to that signification, so that this word \"person\" means relation not only by use and custom, according to the first opinion, but also by force of its own proper signification.\n\nReply Obj. 1: This word \"person\" is said in respect to itself, not to another; forasmuch as it signifies relation not as such, but by way of a substance--which is a hypostasis. In that sense Augustine says that it signifies the essence, inasmuch as in God essence is the same as the hypostasis, because in God what He is, and whereby He is are the same.\n\nReply Obj. 2: The term \"what\" refers sometimes to the nature expressed by the definition, as when we ask; What is man? and we answer: A mortal rational animal. Sometimes it refers to the _suppositum,_ as when we ask, What swims in the sea? and answer, A fish. So to those who ask, Three what? we answer, Three persons.\n\nReply Obj. 3: In God the individual--i.e. distinct and incommunicable substance--includes the idea of relation, as above explained.\n\nReply Obj. 4: The different sense of the less common term does not produce equivocation in the more common. Although a horse and an ass have their own proper definitions, nevertheless they agree univocally in animal, because the common definition of animal applies to both. So it does not follow that, although relation is contained in the signification of divine person, but not in that of an angelic or of a human person, the word \"person\" is used in an equivocal sense. Though neither is it applied univocally, since nothing can be said univocally of God and creatures (Q. 13, A. 5).\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 2317,
+    "text": "THE DIVINE PERSONS (In Four Articles)"
+  },
+  "word_count": 4244,
+  "block_count": 73
+}

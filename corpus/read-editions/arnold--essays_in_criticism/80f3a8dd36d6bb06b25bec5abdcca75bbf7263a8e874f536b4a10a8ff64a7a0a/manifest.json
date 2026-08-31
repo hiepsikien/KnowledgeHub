@@ -1,0 +1,273 @@
+{
+  "package_version": "1",
+  "edition_format": "ref/1",
+  "work_id": "arnold--essays_in_criticism",
+  "title": "Essays in Criticism",
+  "language": "en",
+  "pipeline": "same_language",
+  "edition_hash": "80f3a8dd36d6bb06b25bec5abdcca75bbf7263a8e874f536b4a10a8ff64a7a0a",
+  "content_hash": "00352fc1f9d9df365a69cc9b466fee6f3e3998467083dbaeb28396734a091c31",
+  "content_kind": "mixed",
+  "source_family": "gutenberg",
+  "block_count": 1295,
+  "chapter_count": 22,
+  "chapters": [
+    {
+      "chapter_id": "ch-000-front",
+      "title": "Front matter",
+      "block_range": [
+        0,
+        5
+      ],
+      "word_count": 137,
+      "block_count": 6,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-001",
+      "title": "ESSAYS IN CRITICISM",
+      "block_range": [
+        6,
+        7
+      ],
+      "word_count": 3,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-002",
+      "title": "By MATTHEW ARNOLD",
+      "block_range": [
+        8,
+        12
+      ],
+      "word_count": 24,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-003",
+      "title": "_FIRST AND SECOND SERIES COMPLETE_",
+      "block_range": [
+        13,
+        16
+      ],
+      "word_count": 18,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-004",
+      "title": "PREFACE.",
+      "block_range": [
+        17,
+        77
+      ],
+      "word_count": 13156,
+      "block_count": 61,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-005",
+      "title": "THE LITERARY INFLUENCE OF ACADEMIES.",
+      "block_range": [
+        78,
+        148
+      ],
+      "word_count": 10326,
+      "block_count": 71,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-006",
+      "title": "MAURICE DE GUÉRIN.",
+      "block_range": [
+        149,
+        226
+      ],
+      "word_count": 9718,
+      "block_count": 78,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-007",
+      "title": "“THE CENTAUR.",
+      "block_range": [
+        227,
+        233
+      ],
+      "word_count": 1479,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-008",
+      "title": "EUGÉNIE DE GUÉRIN.",
+      "block_range": [
+        234,
+        286
+      ],
+      "word_count": 6204,
+      "block_count": 53,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-009",
+      "title": "_This ought ye to have done, and not to have left the other undone._",
+      "block_range": [
+        287,
+        315
+      ],
+      "word_count": 3536,
+      "block_count": 29,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-010",
+      "title": "HEINRICH HEINE.",
+      "block_range": [
+        316,
+        390
+      ],
+      "word_count": 10116,
+      "block_count": 75,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-011",
+      "title": "PAGAN AND MEDIÆVAL RELIGIOUS SENTIMENT.",
+      "block_range": [
+        391,
+        426
+      ],
+      "word_count": 7652,
+      "block_count": 36,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-012",
+      "title": "A PERSIAN PASSION PLAY.",
+      "block_range": [
+        427,
+        494
+      ],
+      "word_count": 14243,
+      "block_count": 68,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-013",
+      "title": "_saugrenu_, so on this reproach we must pause for a moment. _Saugrenu_ is a rather vulgar French word, but, like many other vulgar words, very expressive; used as an epithet for a judgment, it means something like",
+      "block_range": [
+        495,
+        567
+      ],
+      "word_count": 8421,
+      "block_count": 73,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-014",
+      "title": "SPINOZA AND THE BIBLE.",
+      "block_range": [
+        568,
+        607
+      ],
+      "word_count": 9893,
+      "block_count": 40,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-015",
+      "title": "MARCUS AURELIUS.",
+      "block_range": [
+        608,
+        622
+      ],
+      "word_count": 2250,
+      "block_count": 15,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-016",
+      "title": "_Dialectics_, and to say “_Hellenes_ and Romans” instead of “_Greeks_ and Romans.” And why, too,—the name of Antoninus being preoccupied by",
+      "block_range": [
+        623,
+        677
+      ],
+      "word_count": 7450,
+      "block_count": 55,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-017",
+      "title": "THE STUDY OF POETRY.[24]",
+      "block_range": [
+        678,
+        839
+      ],
+      "word_count": 12261,
+      "block_count": 162,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-018",
+      "title": "THOMAS GRAY.",
+      "block_range": [
+        840,
+        903
+      ],
+      "word_count": 5834,
+      "block_count": 64,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-019",
+      "title": "JOHN KEATS.[36]",
+      "block_range": [
+        904,
+        949
+      ],
+      "word_count": 4183,
+      "block_count": 46,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-020",
+      "title": "WORDSWORTH.[37]",
+      "block_range": [
+        950,
+        1158
+      ],
+      "word_count": 23407,
+      "block_count": 209,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-021",
+      "title": "COUNT LEO TOLSTOI.[46]",
+      "block_range": [
+        1159,
+        1294
+      ],
+      "word_count": 15788,
+      "block_count": 136,
+      "qa_status": "pending"
+    }
+  ],
+  "quotation_profile": {
+    "footnote_style": "bracket",
+    "footnote_count": 48,
+    "bracket_notes": 13,
+    "paren_cites": 52,
+    "paren_quotes": 1,
+    "paren_asides": 60,
+    "inline_quotes": 1247,
+    "italic_spans": 680,
+    "list_markers": 0,
+    "detector": "rule"
+  },
+  "ref_parser_version": "1.7",
+  "created_at": "2026-08-29T17:47:26+00:00",
+  "updated_at": "2026-08-29T17:47:26+00:00"
+}

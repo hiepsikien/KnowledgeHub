@@ -1,0 +1,76 @@
+{
+  "chapter_id": "ch-010",
+  "title": "BOOK IX",
+  "block_start": 789,
+  "block_end": 792,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "BOOK IX",
+      "level": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "[1] “Neither the Son of man, that He should _repent_.” Numbers xxiii. 19.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[1]"
+        },
+        {
+          "start": 4,
+          "end": 54,
+          "style": "quote",
+          "text": "“Neither the Son of man, that He should _repent_.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“In a few instances the Second Intention, or Philosophical employment of a Term, is more extensive than the First Intention, or popular use.” Whately, Logic, iii. 10.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 141,
+          "style": "quote",
+          "text": "“In a few instances the Second Intention, or Philosophical employment of a Term, is more extensive than the First Intention, or popular use.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[2] “I have sometimes considered in what troublesome case is that Chamberlain in an Inn who being but one is to give attendance to many guests. For suppose them all in one chamber, yet, if one shall command him to come to the window, and the other to the table, and another to the bed, and another to the chimney, and another to come upstairs, and another to go downstairs, and all in the same instant, how would he be distracted to please them all? And yet such is the sad condition of nay soul by nature, not only a servant but a slave unto sin. Pride calls me to the window, gluttony to the table, wantonness to the bed, laziness to the chimney, ambition commands me to go upstairs, and covetousness to come down. Vices, I see, are as well contrary to themselves as to Virtue.” (Fuller’s Good Thoughts in Bad Times. Mix’t Contemplations, viii.)",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[2]"
+        },
+        {
+          "start": 4,
+          "end": 780,
+          "style": "quote",
+          "text": "“I have sometimes considered in what troublesome case is that Chamberlain in an Inn who being but one is to give attendance to many guests. For suppose them all in one chamber, yet, if one shall command him to come to the window, and the other to the table, and another to the bed, and another to the chimney, and another to come upstairs, and another to go downstairs, and all in the same instant, how would he be distracted to please them all? And yet such is the sad condition of nay soul by nature, not only a servant but a slave unto sin. Pride calls me to the window, gluttony to the table, wantonness to the bed, laziness to the chimney, ambition commands me to go upstairs, and covetousness to come down. Vices, I see, are as well contrary to themselves as to Virtue.”"
+        },
+        {
+          "start": 781,
+          "end": 847,
+          "style": "paren_aside",
+          "text": "(Fuller’s Good Thoughts in Bad Times. Mix’t Contemplations, viii.)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "BOOK IX\n\n[1] “Neither the Son of man, that He should _repent_.” Numbers xxiii. 19.\n\n> “In a few instances the Second Intention, or Philosophical employment of a Term, is more extensive than the First Intention, or popular use.” Whately, Logic, iii. 10.\n\n[2] “I have sometimes considered in what troublesome case is that Chamberlain in an Inn who being but one is to give attendance to many guests. For suppose them all in one chamber, yet, if one shall command him to come to the window, and the other to the table, and another to the bed, and another to the chimney, and another to come upstairs, and another to go downstairs, and all in the same instant, how would he be distracted to please them all? And yet such is the sad condition of nay soul by nature, not only a servant but a slave unto sin. Pride calls me to the window, gluttony to the table, wantonness to the bed, laziness to the chimney, ambition commands me to go upstairs, and covetousness to come down. Vices, I see, are as well contrary to themselves as to Virtue.” (Fuller’s Good Thoughts in Bad Times. Mix’t Contemplations, viii.)",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 789,
+    "text": "BOOK IX"
+  },
+  "word_count": 200,
+  "block_count": 4
+}

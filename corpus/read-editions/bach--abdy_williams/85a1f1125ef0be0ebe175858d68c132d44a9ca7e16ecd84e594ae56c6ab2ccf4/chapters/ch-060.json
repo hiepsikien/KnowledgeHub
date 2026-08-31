@@ -1,0 +1,70 @@
+{
+  "chapter_id": "ch-060",
+  "title": "FOOTNOTES:",
+  "block_start": 738,
+  "block_end": 741,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FOOTNOTES:",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[63] A considerable portion of this chapter is from an article by A. F. Rochlitz in the _Allg. Musik Zeitung_, 1831.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[63]"
+        },
+        {
+          "start": 88,
+          "end": 109,
+          "style": "em",
+          "text": "_Allg. Musik Zeitung_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[64] See Conrad E. F. “Echt oder unecht? Zur Lucas Passion.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[64]"
+        },
+        {
+          "start": 22,
+          "end": 60,
+          "style": "quote",
+          "text": "“Echt oder unecht? Zur Lucas Passion.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[65] P. 115.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[65]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FOOTNOTES:\n\n[63] A considerable portion of this chapter is from an article by A. F. Rochlitz in the _Allg. Musik Zeitung_, 1831.\n\n[64] See Conrad E. F. “Echt oder unecht? Zur Lucas Passion.”\n\n[65] P. 115.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 738,
+    "text": "FOOTNOTES:"
+  },
+  "word_count": 36,
+  "block_count": 4
+}

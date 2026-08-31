@@ -1,0 +1,50 @@
+{
+  "chapter_id": "ch-038",
+  "title": "RESOLVITUR.",
+  "block_start": 259,
+  "block_end": 262,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "RESOLVITUR.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "“He must explain his conduct within eight days. That scholar Rambach (the choir prefect) now appear, and be reproved for the disorders which up to this time have taken place between the scholars and the organist of the New Church.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 231,
+          "style": "quote",
+          "text": "“He must explain his conduct within eight days. That scholar Rambach (the choir prefect) now appear, and be reproved for the disorders which up to this time have taken place between the scholars and the organist of the New Church.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "ILLE."
+    },
+    {
+      "type": "blockquote",
+      "text": "“The organist, Bach, played for too long a time, but after this was notified to him, by the Herr Superintendent, he at once went quite to the opposite extreme and has made it too short.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 186,
+          "style": "quote",
+          "text": "“The organist, Bach, played for too long a time, but after this was notified to him, by the Herr Superintendent, he at once went quite to the opposite extreme and has made it too short.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "RESOLVITUR.\n\n> “He must explain his conduct within eight days. That scholar Rambach (the choir prefect) now appear, and be reproved for the disorders which up to this time have taken place between the scholars and the organist of the New Church.”\n\nILLE.\n\n> “The organist, Bach, played for too long a time, but after this was notified to him, by the Herr Superintendent, he at once went quite to the opposite extreme and has made it too short.”",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 259,
+    "text": "RESOLVITUR."
+  },
+  "word_count": 77,
+  "block_count": 4
+}

@@ -1,0 +1,100 @@
+{
+  "chapter_id": "ch-002",
+  "title": "By MATTHEW ARNOLD",
+  "block_start": 8,
+  "block_end": 12,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "By MATTHEW ARNOLD",
+      "level": 2
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Author of “MEROPE: A TRAGEDY,” “THE POPULAR EDUCATION OF FRANCE,” “CULTURE AND ANARCHY,” “POEMS,” etc., etc.  [leaf]   [leaf]",
+      "spans": [
+        {
+          "start": 10,
+          "end": 30,
+          "style": "quote",
+          "text": "“MEROPE: A TRAGEDY,”"
+        },
+        {
+          "start": 31,
+          "end": 65,
+          "style": "quote",
+          "text": "“THE POPULAR EDUCATION OF FRANCE,”"
+        },
+        {
+          "start": 66,
+          "end": 88,
+          "style": "quote",
+          "text": "“CULTURE AND ANARCHY,”"
+        },
+        {
+          "start": 89,
+          "end": 97,
+          "style": "quote",
+          "text": "“POEMS,”"
+        },
+        {
+          "start": 110,
+          "end": 116,
+          "style": "bracket_note",
+          "text": "[leaf]"
+        },
+        {
+          "start": 119,
+          "end": 125,
+          "style": "bracket_note",
+          "text": "[leaf]"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "[leaf]   [leaf]",
+      "lines": [
+        "[leaf]   [leaf]"
+      ],
+      "spans": [
+        {
+          "start": 0,
+          "end": 6,
+          "style": "bracket_note",
+          "text": "[leaf]"
+        },
+        {
+          "start": 9,
+          "end": 15,
+          "style": "bracket_note",
+          "text": "[leaf]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "style": "bracket_note",
+          "text": "[Illustration]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "By MATTHEW ARNOLD\n\n---\n\nAuthor of “MEROPE: A TRAGEDY,” “THE POPULAR EDUCATION OF FRANCE,” “CULTURE AND ANARCHY,” “POEMS,” etc., etc.  [leaf]   [leaf]\n\n[leaf]   [leaf]\n\n[Illustration]",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 8,
+    "text": "By MATTHEW ARNOLD"
+  },
+  "word_count": 24,
+  "block_count": 5
+}

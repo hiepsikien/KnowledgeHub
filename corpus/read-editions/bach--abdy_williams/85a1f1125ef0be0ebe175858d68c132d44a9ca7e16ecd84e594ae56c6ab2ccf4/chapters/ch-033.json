@@ -1,0 +1,26 @@
+{
+  "chapter_id": "ch-033",
+  "title": "THE TEN COMMANDMENTS.",
+  "block_start": 193,
+  "block_end": 194,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "THE TEN COMMANDMENTS.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "Mensch willt du leben seliglich.]"
+    }
+  ],
+  "reading_markdown": "THE TEN COMMANDMENTS.\n\nMensch willt du leben seliglich.]",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 193,
+    "text": "THE TEN COMMANDMENTS."
+  },
+  "word_count": 8,
+  "block_count": 2
+}

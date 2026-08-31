@@ -1,0 +1,1804 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "aquinas--summa_part1",
+  "title": "Summa Theologica, Part I (Prima Pars)",
+  "language": "en",
+  "content_hash": "c9443221a31768991db4bbe37e6ed035b278143a6728af64dc8ba0cf8e79154d",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 118 marker (question).",
+  "content_kind": "prose",
+  "source_family": "scholastic",
+  "ref_parser_version": "1.7",
+  "chapter_count": 119,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        3636
+      ],
+      "word_count": 621,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "QUESTION 1",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        3637,
+        38916
+      ],
+      "word_count": 6060,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "QUESTION 2",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        38917,
+        56091
+      ],
+      "word_count": 3046,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-003",
+      "title": "QUESTION 3",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        56092,
+        87823
+      ],
+      "word_count": 5687,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-004",
+      "title": "QUESTION 4",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        87824,
+        100836
+      ],
+      "word_count": 2294,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-005",
+      "title": "QUESTION 5",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        100837,
+        125010
+      ],
+      "word_count": 4264,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-006",
+      "title": "QUESTION 6",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        125011,
+        137434
+      ],
+      "word_count": 2230,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-007",
+      "title": "QUESTION 7",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        137435,
+        154655
+      ],
+      "word_count": 2944,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-008",
+      "title": "QUESTION 8",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        154656,
+        173220
+      ],
+      "word_count": 3457,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-009",
+      "title": "QUESTION 9",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        173221,
+        183371
+      ],
+      "word_count": 1752,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-010",
+      "title": "QUESTION 10",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        183372,
+        210623
+      ],
+      "word_count": 4745,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-011",
+      "title": "QUESTION 11",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        210624,
+        226910
+      ],
+      "word_count": 2926,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-012",
+      "title": "QUESTION 12",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        226911,
+        283547
+      ],
+      "word_count": 10348,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-013",
+      "title": "QUESTION 13",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        283548,
+        346238
+      ],
+      "word_count": 10983,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-014",
+      "title": "QUESTION 14",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        346239,
+        420476
+      ],
+      "word_count": 13108,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-015",
+      "title": "QUESTION 15",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        420477,
+        433975
+      ],
+      "word_count": 2470,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-016",
+      "title": "QUESTION 16",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        433976,
+        464910
+      ],
+      "word_count": 5628,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-017",
+      "title": "QUESTION 17",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        464911,
+        482270
+      ],
+      "word_count": 3094,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-018",
+      "title": "QUESTION 18",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        482271,
+        502644
+      ],
+      "word_count": 3680,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-019",
+      "title": "QUESTION 19",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        502645,
+        556064
+      ],
+      "word_count": 9751,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-020",
+      "title": "QUESTION 20",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        556065,
+        576616
+      ],
+      "word_count": 3773,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-021",
+      "title": "QUESTION 21",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        576617,
+        592540
+      ],
+      "word_count": 2914,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-022",
+      "title": "QUESTION 22",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        592541,
+        614604
+      ],
+      "word_count": 3789,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-023",
+      "title": "QUESTION 23",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        614605,
+        656788
+      ],
+      "word_count": 7407,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-024",
+      "title": "QUESTION 24",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        656789,
+        667626
+      ],
+      "word_count": 2043,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-025",
+      "title": "QUESTION 25",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        667627,
+        698924
+      ],
+      "word_count": 5719,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-026",
+      "title": "QUESTION 26",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        698925,
+        708132
+      ],
+      "word_count": 1616,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-027",
+      "title": "QUESTION 27",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        708133,
+        729271
+      ],
+      "word_count": 3701,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-028",
+      "title": "QUESTION 28",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        729272,
+        749697
+      ],
+      "word_count": 3544,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-029",
+      "title": "QUESTION 29",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        749698,
+        774708
+      ],
+      "word_count": 4251,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-030",
+      "title": "QUESTION 30",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        774709,
+        794860
+      ],
+      "word_count": 3516,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-031",
+      "title": "QUESTION 31",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        794861,
+        815108
+      ],
+      "word_count": 3655,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-032",
+      "title": "QUESTION 32",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        815109,
+        839113
+      ],
+      "word_count": 4260,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-033",
+      "title": "QUESTION 33",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        839114,
+        860188
+      ],
+      "word_count": 3769,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-034",
+      "title": "QUESTION 34",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        860189,
+        879465
+      ],
+      "word_count": 3493,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-035",
+      "title": "QUESTION 35",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        879466,
+        886508
+      ],
+      "word_count": 1302,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-036",
+      "title": "QUESTION 36",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        886509,
+        918486
+      ],
+      "word_count": 5870,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-037",
+      "title": "QUESTION 37",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        918487,
+        933202
+      ],
+      "word_count": 2718,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-038",
+      "title": "QUESTION 38",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        933203,
+        941038
+      ],
+      "word_count": 1490,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-039",
+      "title": "QUESTION 39",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        941039,
+        993659
+      ],
+      "word_count": 9357,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-040",
+      "title": "QUESTION 40",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        993660,
+        1014558
+      ],
+      "word_count": 3462,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-041",
+      "title": "QUESTION 41",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1014559,
+        1046272
+      ],
+      "word_count": 5757,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-042",
+      "title": "QUESTION 42",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1046273,
+        1074560
+      ],
+      "word_count": 5086,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-043",
+      "title": "QUESTION 43",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1074561,
+        1108174
+      ],
+      "word_count": 6097,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-044",
+      "title": "QUESTION 44",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1108175,
+        1124792
+      ],
+      "word_count": 2868,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-045",
+      "title": "QUESTION 45",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1124793,
+        1163019
+      ],
+      "word_count": 6726,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-046",
+      "title": "QUESTION 46",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1163020,
+        1189393
+      ],
+      "word_count": 4733,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-047",
+      "title": "QUESTION 47",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1189394,
+        1204625
+      ],
+      "word_count": 2708,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-048",
+      "title": "QUESTION 48",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1204626,
+        1231420
+      ],
+      "word_count": 4904,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-049",
+      "title": "QUESTION 49",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1231421,
+        1247918
+      ],
+      "word_count": 3105,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-050",
+      "title": "QUESTION 50",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1247919,
+        1274688
+      ],
+      "word_count": 4566,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-051",
+      "title": "QUESTION 51",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1274689,
+        1291311
+      ],
+      "word_count": 2960,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-052",
+      "title": "QUESTION 52",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1291312,
+        1300553
+      ],
+      "word_count": 1725,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-053",
+      "title": "QUESTION 53",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1300554,
+        1320177
+      ],
+      "word_count": 3539,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-054",
+      "title": "QUESTION 54",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1320178,
+        1338872
+      ],
+      "word_count": 3286,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-055",
+      "title": "QUESTION 55",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1338873,
+        1353490
+      ],
+      "word_count": 2538,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-056",
+      "title": "QUESTION 56",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1353491,
+        1367469
+      ],
+      "word_count": 2478,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-057",
+      "title": "QUESTION 57",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1367470,
+        1392931
+      ],
+      "word_count": 4480,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-058",
+      "title": "QUESTION 58",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1392932,
+        1421173
+      ],
+      "word_count": 4882,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-059",
+      "title": "QUESTION 59",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1421174,
+        1439359
+      ],
+      "word_count": 3173,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-060",
+      "title": "QUESTION 60",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1439360,
+        1461306
+      ],
+      "word_count": 3967,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-061",
+      "title": "QUESTION 61",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1461307,
+        1473917
+      ],
+      "word_count": 2205,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-062",
+      "title": "QUESTION 62",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1473918,
+        1510689
+      ],
+      "word_count": 6565,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-063",
+      "title": "QUESTION 63",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1510690,
+        1550851
+      ],
+      "word_count": 7313,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-064",
+      "title": "QUESTION 64",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1550852,
+        1573701
+      ],
+      "word_count": 4095,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-065",
+      "title": "QUESTION 65",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1573702,
+        1595260
+      ],
+      "word_count": 3755,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-066",
+      "title": "QUESTION 66",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1595261,
+        1623608
+      ],
+      "word_count": 4878,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-067",
+      "title": "QUESTION 67",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1623609,
+        1643380
+      ],
+      "word_count": 3524,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-068",
+      "title": "QUESTION 68",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1643381,
+        1667287
+      ],
+      "word_count": 4243,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-069",
+      "title": "QUESTION 69",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1667288,
+        1682215
+      ],
+      "word_count": 2655,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-070",
+      "title": "QUESTION 70",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1682216,
+        1703967
+      ],
+      "word_count": 3901,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-071",
+      "title": "QUESTION 71",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1703968,
+        1710151
+      ],
+      "word_count": 1089,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-072",
+      "title": "QUESTION 72",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1710152,
+        1717080
+      ],
+      "word_count": 1211,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-073",
+      "title": "QUESTION 73",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1717081,
+        1729561
+      ],
+      "word_count": 2267,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-074",
+      "title": "QUESTION 74",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1729562,
+        1751807
+      ],
+      "word_count": 4011,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-075",
+      "title": "QUESTION 75",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1751808,
+        1788228
+      ],
+      "word_count": 6504,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-076",
+      "title": "QUESTION 76",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1788229,
+        1853937
+      ],
+      "word_count": 11774,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-077",
+      "title": "QUESTION 77",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1853938,
+        1891648
+      ],
+      "word_count": 6791,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-078",
+      "title": "QUESTION 78",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1891649,
+        1924095
+      ],
+      "word_count": 5576,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-079",
+      "title": "QUESTION 79",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1924096,
+        1986685
+      ],
+      "word_count": 10809,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-080",
+      "title": "QUESTION 80",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1986686,
+        1994264
+      ],
+      "word_count": 1269,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-081",
+      "title": "QUESTION 81",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        1994265,
+        2008182
+      ],
+      "word_count": 2305,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-082",
+      "title": "QUESTION 82",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2008183,
+        2031864
+      ],
+      "word_count": 4191,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-083",
+      "title": "QUESTION 83",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2031865,
+        2048699
+      ],
+      "word_count": 3029,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-084",
+      "title": "QUESTION 84",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2048700,
+        2100857
+      ],
+      "word_count": 8939,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-085",
+      "title": "QUESTION 85",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2100858,
+        2150087
+      ],
+      "word_count": 8322,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-086",
+      "title": "QUESTION 86",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2150088,
+        2166498
+      ],
+      "word_count": 2773,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-087",
+      "title": "QUESTION 87",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2166499,
+        2185771
+      ],
+      "word_count": 3446,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-088",
+      "title": "QUESTION 88",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2185772,
+        2205345
+      ],
+      "word_count": 3312,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-089",
+      "title": "QUESTION 89",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2205346,
+        2239860
+      ],
+      "word_count": 5977,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-090",
+      "title": "QUESTION 90",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2239861,
+        2255185
+      ],
+      "word_count": 2746,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-091",
+      "title": "QUESTION 91",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2255186,
+        2277085
+      ],
+      "word_count": 3971,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-092",
+      "title": "QUESTION 92",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2277086,
+        2292029
+      ],
+      "word_count": 2685,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-093",
+      "title": "QUESTION 93",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2292030,
+        2337146
+      ],
+      "word_count": 8340,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-094",
+      "title": "QUESTION 94",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2337147,
+        2358438
+      ],
+      "word_count": 3846,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-095",
+      "title": "QUESTION 95",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2358439,
+        2376926
+      ],
+      "word_count": 3273,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-096",
+      "title": "QUESTION 96",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2376927,
+        2392650
+      ],
+      "word_count": 2823,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-097",
+      "title": "QUESTION 97",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2392651,
+        2408247
+      ],
+      "word_count": 2784,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-098",
+      "title": "QUESTION 98",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2408248,
+        2419200
+      ],
+      "word_count": 1860,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-099",
+      "title": "QUESTION 99",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2419201,
+        2427104
+      ],
+      "word_count": 1395,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-100",
+      "title": "QUESTION 100",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2427105,
+        2435032
+      ],
+      "word_count": 1373,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-101",
+      "title": "QUESTION 101",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2435033,
+        2440899
+      ],
+      "word_count": 1033,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-102",
+      "title": "QUESTION 102",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2440900,
+        2456199
+      ],
+      "word_count": 2722,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-103",
+      "title": "QUESTION 103",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2456200,
+        2485482
+      ],
+      "word_count": 5229,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-104",
+      "title": "QUESTION 104",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2485483,
+        2505867
+      ],
+      "word_count": 3647,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-105",
+      "title": "QUESTION 105",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2505868,
+        2537675
+      ],
+      "word_count": 5732,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-106",
+      "title": "QUESTION 106",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2537676,
+        2555227
+      ],
+      "word_count": 3033,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-107",
+      "title": "QUESTION 107",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2555228,
+        2570574
+      ],
+      "word_count": 2785,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-108",
+      "title": "QUESTION 108",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2570575,
+        2615930
+      ],
+      "word_count": 7841,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-109",
+      "title": "QUESTION 109",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2615931,
+        2627116
+      ],
+      "word_count": 1965,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-110",
+      "title": "QUESTION 110",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2627117,
+        2645084
+      ],
+      "word_count": 3134,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-111",
+      "title": "QUESTION 111",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2645085,
+        2661354
+      ],
+      "word_count": 2852,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-112",
+      "title": "QUESTION 112",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2661355,
+        2678546
+      ],
+      "word_count": 3021,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-113",
+      "title": "QUESTION 113",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2678547,
+        2706062
+      ],
+      "word_count": 4928,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-114",
+      "title": "QUESTION 114",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2706063,
+        2723757
+      ],
+      "word_count": 3268,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-115",
+      "title": "QUESTION 115",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2723758,
+        2770614
+      ],
+      "word_count": 8148,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-116",
+      "title": "QUESTION 117",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2770615,
+        2790876
+      ],
+      "word_count": 3583,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-117",
+      "title": "QUESTION 118",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2790877,
+        2812114
+      ],
+      "word_count": 3795,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-118",
+      "title": "QUESTION 119",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2812115,
+        2831951
+      ],
+      "word_count": 3546,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T04:01:33+00:00"
+}

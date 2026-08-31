@@ -1,0 +1,1349 @@
+{
+  "chapter_id": "ch-001",
+  "title": "INTRODUCTION",
+  "block_start": 3,
+  "block_end": 49,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "INTRODUCTION",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "The _Ethics_ of Aristotle is one half of a single treatise of which his _Politics_ is the other half. Both deal with one and the same subject. This subject is what Aristotle calls in one place the “philosophy of human affairs;” but more frequently Political or Social Science. In the two works taken together we have their author’s whole theory of human conduct or practical activity, that is, of all human activity which is not directed merely to knowledge or truth. The two parts of this treatise are mutually complementary, but in a literary sense each is independent and self-contained. The proem to the _Ethics_ is an introduction to the whole subject, not merely to the first part; the last chapter of the _Ethics_ points forward to the _Politics_, and sketches for that part of the treatise the order of enquiry to be pursued (an order which in the actual treatise is not adhered to).",
+      "spans": [
+        {
+          "start": 4,
+          "end": 12,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 72,
+          "end": 82,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 197,
+          "end": 227,
+          "style": "quote",
+          "text": "“philosophy of human affairs;”"
+        },
+        {
+          "start": 608,
+          "end": 616,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 712,
+          "end": 720,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 743,
+          "end": 753,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 833,
+          "end": 890,
+          "style": "paren_aside",
+          "text": "(an order which in the actual treatise is not adhered to)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The principle of distribution of the subject-matter between the two works is far from obvious, and has been much debated. Not much can be gathered from their titles, which in any case were not given to them by their author. Nor do these titles suggest any very compact unity in the works to which they are applied: the plural forms, which survive so oddly in English (Ethic_s_, Politic_s_), were intended to indicate the treatment within a single work of a _group_ of connected questions. The unity of the first group arises from their centring round the topic of character, that of the second from their connection with the existence and life of the city or state. We have thus to regard the _Ethics_ as dealing with one group of problems and the _Politics_ with a second, both falling within the wide compass of Political Science. Each of these groups falls into sub-groups which roughly correspond to the several books in each work. The tendency to take up one by one the various problems which had suggested themselves in the wide field obscures both the unity of the subject-matter and its proper articulation. But it is to be remembered that what is offered us is avowedly rather an enquiry than an exposition of hard and fast doctrine.",
+      "spans": [
+        {
+          "start": 367,
+          "end": 389,
+          "style": "paren_cite",
+          "text": "(Ethic_s_, Politic_s_)"
+        },
+        {
+          "start": 457,
+          "end": 464,
+          "style": "em",
+          "text": "_group_"
+        },
+        {
+          "start": 693,
+          "end": 701,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 748,
+          "end": 758,
+          "style": "em",
+          "text": "_Politics_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Nevertheless each work aims at a relative completeness, and it is important to observe the relation of each to the other. The distinction is not that the one treats of Moral and the other of Political Philosophy, nor again that the one deals with the moral activity of the individual and the other with that of the State, nor once more that the one gives us the theory of human conduct, while the other discusses its application in practice, though not all of these misinterpretations are equally erroneous. The clue to the right interpretation is given by Aristotle himself, where in the last chapter of the _Ethics_ he is paving the way for the _Politics_. In the _Ethics_ he has not confined himself to the abstract or isolated individual, but has always thought of him, or we might say, in his social and political context, with a given nature due to race and heredity and in certain surroundings. So viewing him he has studied the nature and formation of his character—all that he can make himself or be made by others to be. Especially he has investigated the various admirable forms of human character and the mode of their production. But all this, though it brings more clearly before us what goodness or virtue is, and how it is to be reached, remains mere theory or talk. By itself it does not enable us to become, or to help others to become, good. For this it is necessary to bring into play the great force of the Political Community or State, of which the main instrument is Law. Hence arises the demand for the necessary complement to the _Ethics, i.e._, a treatise devoted to the questions which centre round the enquiry; by what organisation of social or political forces, by what laws or institutions can we best secure the greatest amount of good character?",
+      "spans": [
+        {
+          "start": 609,
+          "end": 617,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 647,
+          "end": 657,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 666,
+          "end": 674,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 1555,
+          "end": 1569,
+          "style": "em",
+          "text": "_Ethics, i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We must, however, remember that the production of good character is not the end of either individual or state action: that is the aim of the one and the other because good character is the indispensable condition and chief determinant of happiness, itself the goal of all human doing. The end of all action, individual or collective, is the greatest happiness of the greatest number. There is, Aristotle insists, no difference of kind between the good of one and the good of many or all. The sole difference is one of amount or scale. This does not mean simply that the State exists to secure in larger measure the objects of degree which the isolated individual attempts, but is too feeble, to secure without it. On the contrary, it rather insists that whatever goods society alone enables a man to secure have always had to the individual—whether he realised it or not—the value which, when so secured, he recognises them to possess. The best and happiest life for the individual is that which the State renders possible, and this it does mainly by revealing to him the value of new objects of desire and educating him to appreciate them. To Aristotle or to Plato the State is, above all, a large and powerful educative agency which gives the individual increased opportunities of self-development and greater capacities for the enjoyment of life."
+    },
+    {
+      "type": "paragraph",
+      "text": "Looking forward, then, to the life of the State as that which aids support, and combines the efforts of the individual to obtain happiness, Aristotle draws no hard and fast distinction between the spheres of action of Man as individual and Man as citizen. Nor does the division of his discussion into the _Ethics_ and the _Politics_ rest upon any such distinction. The distinction implied is rather between two stages in the life of the civilised man—the stage of preparation for the full life of the adult citizen, and the stage of the actual exercise or enjoyment of citizenship. Hence the _Ethics_, where his attention is directed upon the formation of character, is largely and centrally a treatise on Moral Education. It discusses especially those admirable human qualities which fit a man for life in an organised civic community, which makes him “a good citizen,” and considers how they can be fostered or created and their opposites prevented.",
+      "spans": [
+        {
+          "start": 305,
+          "end": 313,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 322,
+          "end": 332,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 592,
+          "end": 600,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 853,
+          "end": 870,
+          "style": "quote",
+          "text": "“a good citizen,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This is the kernel of the _Ethics_, and all the rest is subordinate to this main interest and purpose. Yet “the rest” is not irrelevant; the whole situation in which character grows and operates is concretely conceived. There is a basis of what we should call Psychology, sketched in firm outlines, the deeper presuppositions and the wider issues of human character and conduct are not ignored, and there is no little of what we should call Metaphysics. But neither the Psychology nor the Metaphysics is elaborated, and only so much is brought forward as appears necessary to put the main facts in their proper perspective and setting. It is this combination of width of outlook with close observation of the concrete facts of conduct which gives its abiding value to the work, and justifies the view of it as containing Aristotle’s Moral Philosophy. Nor is it important merely as summing up the moral judgments and speculations of an age now long past. It seizes and dwells upon those elements and features in human practice which are most essential and permanent, and it is small wonder that so much in it survives in our own ways of regarding conduct and speaking of it. Thus it still remains one of the classics of Moral Philosophy, nor is its value likely soon to be exhausted.",
+      "spans": [
+        {
+          "start": 26,
+          "end": 34,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 107,
+          "end": 117,
+          "style": "quote",
+          "text": "“the rest”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "As was pointed out above, the proem (Book I., cc. i-iii.) is a prelude to the treatment of the whole subject covered by the _Ethics_ and the _Politics_ together. It sets forth the purpose of the enquiry, describes the spirit in which it is to be undertaken and what ought to be the expectation of the reader, and lastly states the necessary conditions of studying it with profit. The aim of it is the acquisition and propagation of a certain kind of knowledge (science), but this knowledge and the thinking which brings it about are subsidiary to a practical end. The knowledge aimed at is of what is best for man and of the conditions of its realisation. Such knowledge is that which in its consumate form we find in great statesmen, enabling them to organise and administer their states and regulate by law the life of the citizens to their advantage and happiness, but it is the same kind of knowledge which on a smaller scale secures success in the management of the family or of private life.",
+      "spans": [
+        {
+          "start": 36,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(Book I., cc. i-iii.)"
+        },
+        {
+          "start": 124,
+          "end": 132,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 141,
+          "end": 151,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 460,
+          "end": 469,
+          "style": "paren_cite",
+          "text": "(science)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is characteristic of such knowledge that it should be deficient in “exactness,” in precision of statement, and closeness of logical concatenation. We must not look for a mathematics of conduct. The subject-matter of Human Conduct is not governed by necessary and uniform laws. But this does not mean that it is subject to no laws. There are general principles at work in it, and these can be formulated in “rules,” which rules can be systematised or unified. It is all-important to remember that practical or moral rules are only general and always admit of exceptions, and that they arise not from the mere complexity of the facts, but from the liability of the facts to a certain unpredictable variation. At their very best, practical rules state probabilities, not certainties; a relative constancy of connection is all that exists, but it is enough to serve as a guide in life. Aristotle here holds the balance between a misleading hope of reducing the subject-matter of conduct to a few simple rigorous abstract principles, with conclusions necessarily issuing from them, and the view that it is the field of operation of inscrutable forces acting without predictable regularity. He does not pretend to find in it absolute uniformities, or to deduce the details from his principles. Hence, too, he insists on the necessity of experience as the source or test of all that he has to say. Moral experience—the actual possession and exercise of good character—is necessary truly to understand moral principles and profitably to apply them. The mere intellectual apprehension of them is not possible, or if possible, profitless.",
+      "spans": [
+        {
+          "start": 70,
+          "end": 82,
+          "style": "quote",
+          "text": "“exactness,”"
+        },
+        {
+          "start": 409,
+          "end": 417,
+          "style": "quote",
+          "text": "“rules,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The _Ethics_ is addressed to students who are presumed both to have enough general education to appreciate these points, and also to have a solid foundation of good habits. More than that is not required for the profitable study of it.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 12,
+          "style": "em",
+          "text": "_Ethics_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If the discussion of the nature and formation of character be regarded as the central topic of the _Ethics_, the contents of Book I., cc. iv.-xii. may be considered as still belonging to the introduction and setting, but these chapters contain matter of profound importance and have exercised an enormous influence upon subsequent thought. They lay down a principle which governs all Greek thought about human life, viz. that it is only intelligible when viewed as directed towards some end or good. This is the Greek way of expressing that all human life involves an ideal element—something which it is not yet and which under certain conditions it is to be. In that sense Greek Moral Philosophy is essentially idealistic. Further it is always assumed that all human practical activity is directed or “oriented” to a _single_ end, and that that end is knowable or definable in advance of its realisation. To know it is not merely a matter of speculative interest, it is of the highest practical moment for only in the light of it can life be duly guided, and particularly only so can the state be properly organised and administered. This explains the stress laid throughout by Greek Moral Philosophy upon the necessity of knowledge as a condition of the best life. This knowledge is not, though it includes knowledge of the nature of man and his circumstances, it is knowledge of what is best—of man’s supreme end or good.",
+      "spans": [
+        {
+          "start": 99,
+          "end": 107,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 802,
+          "end": 812,
+          "style": "quote",
+          "text": "“oriented”"
+        },
+        {
+          "start": 818,
+          "end": 826,
+          "style": "em",
+          "text": "_single_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But this end is not conceived as presented to him by a superior power nor even as something which _ought_ to be. The presentation of the Moral Ideal as Duty is almost absent. From the outset it is identified with the object of desire, of what we not merely judge desirable but actually do desire, or that which would, if realised, satisfy human desire. In fact it is what we all, wise and simple, agree in naming “Happiness” (Welfare or Well-being)",
+      "spans": [
+        {
+          "start": 98,
+          "end": 105,
+          "style": "em",
+          "text": "_ought_"
+        },
+        {
+          "start": 413,
+          "end": 424,
+          "style": "quote",
+          "text": "“Happiness”"
+        },
+        {
+          "start": 425,
+          "end": 448,
+          "style": "paren_cite",
+          "text": "(Welfare or Well-being)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In what then does happiness consist? Aristotle summarily sets aside the more or less popular identifications of it with abundance of physical pleasures, with political power and honour, with the mere possession of such superior gifts or attainments as normally entitle men to these, with wealth. None of these can constitute the end or good of man as such. On the other hand, he rejects his master Plato’s conception of a good which is the end of the whole universe, or at least dismisses it as irrelevant to his present enquiry. The good towards which all human desires and practical activities are directed must be one conformable to man’s special nature and circumstances and attainable by his efforts. There is in Aristotle’s theory of human conduct no trace of Plato’s “other worldliness”, he brings the moral ideal in Bacon’s phrase down to “right earth”—and so closer to the facts and problems of actual human living. Turning from criticism of others he states his own positive view of Happiness, and, though he avowedly states it merely in outline his account is pregnant with significance. Human Happiness lies in activity or energising, and that in a way peculiar to man with his given nature and his given circumstances, it is not theoretical, but practical: it is the activity not of reason but still of a being who possesses reason and applies it, and it presupposes in that being the development, and not merely the natural possession, of certain relevant powers and capacities. The last is the prime condition of successful living and therefore of satisfaction, but Aristotle does not ignore other conditions, such as length of life, wealth and good luck, the absence or diminution of which render happiness not impossible, but difficult of attainment.",
+      "spans": [
+        {
+          "start": 774,
+          "end": 793,
+          "style": "quote",
+          "text": "“other worldliness”"
+        },
+        {
+          "start": 847,
+          "end": 860,
+          "style": "quote",
+          "text": "“right earth”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is interesting to compare this account of Happiness with Mill’s in _Utilitarianism_. Mill’s is much the less consistent: at times he distinguishes and at times he identifies, happiness, pleasure, contentment, and satisfaction. He wavers between belief in its general attainability and an absence of hopefulness. He mixes up in an arbitrary way such ingredients as “not expecting more from life than it is capable of bestowing,” “mental cultivation,” “improved laws,” etc., and in fact leaves the whole conception vague, blurred, and uncertain. Aristotle draws the outline with a firmer hand and presents a more definite ideal. He allows for the influence on happiness of conditions only partly, if at all, within the control of man, but he clearly makes the man positive determinant of man’s happiness he in himself, and more particularly in what he makes directly of his own nature, and so indirectly of his circumstances. “‘Tis in ourselves that we are thus or thus” But once more this does not involve an artificial or abstract isolation of the individual moral agent from his relation to other persons or things from his context in society and nature, nor ignore the relative dependence of his life upon a favourable environment.",
+      "spans": [
+        {
+          "start": 70,
+          "end": 86,
+          "style": "em",
+          "text": "_Utilitarianism_"
+        },
+        {
+          "start": 367,
+          "end": 430,
+          "style": "quote",
+          "text": "“not expecting more from life than it is capable of bestowing,”"
+        },
+        {
+          "start": 431,
+          "end": 452,
+          "style": "quote",
+          "text": "“mental cultivation,”"
+        },
+        {
+          "start": 453,
+          "end": 469,
+          "style": "quote",
+          "text": "“improved laws,”"
+        },
+        {
+          "start": 927,
+          "end": 971,
+          "style": "quote",
+          "text": "“‘Tis in ourselves that we are thus or thus”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The main factor which determines success or failure in human life is the acquisition of certain powers, for Happiness is just the exercise or putting forth of these in actual living, everything else is secondary and subordinate. These powers arise from the due development of certain natural aptitudes which belong (in various degrees) to human nature as such and therefore to all normal human beings. In their developed form they are known as virtues (the Greek means simply “goodnesses,” “perfections,” “excellences,” or “fitnesses”), some of them are physical, but others are psychical, and among the latter some, and these distinctively or peculiarly human, are “rational,” _i e_, presuppose the possession and exercise of mind or intelligence. These last fall into two groups, which Aristotle distinguishes as Goodnesses of Intellect and Goodnesses of Character. They have in common that they all excite in us admiration and praise of their possessors, and that they are not natural endowments, but acquired characteristics But they differ in important ways. (1) the former are excellences or developed powers of the reason as such—of that in us which sees and formulates laws, rules, regularities systems, and is content in the vision of them, while the latter involve a submission or obedience to such rules of something in us which is in itself capricious and irregular, but capable of regulation, viz our instincts and feelings, (2) the former are acquired by study and instruction, the latter by discipline. The latter constitute “character,” each of them as a “moral virtue” (literally “a goodness of character”), and upon them primarily depends the realisation of happiness. This is the case at least for the great majority of men, and for all men their possession is an indispensable basis of the best, _i e_, the most desirable life. They form the chief or central subject-matter of the _Ethics_.",
+      "spans": [
+        {
+          "start": 315,
+          "end": 335,
+          "style": "paren_cite",
+          "text": "(in various degrees)"
+        },
+        {
+          "start": 452,
+          "end": 535,
+          "style": "paren_aside",
+          "text": "(the Greek means simply “goodnesses,” “perfections,” “excellences,” or “fitnesses”)"
+        },
+        {
+          "start": 666,
+          "end": 677,
+          "style": "quote",
+          "text": "“rational,”"
+        },
+        {
+          "start": 678,
+          "end": 683,
+          "style": "em",
+          "text": "_i e_"
+        },
+        {
+          "start": 1064,
+          "end": 1067,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 1438,
+          "end": 1441,
+          "style": "list_marker",
+          "text": "(2)"
+        },
+        {
+          "start": 1540,
+          "end": 1552,
+          "style": "quote",
+          "text": "“character,”"
+        },
+        {
+          "start": 1571,
+          "end": 1585,
+          "style": "quote",
+          "text": "“moral virtue”"
+        },
+        {
+          "start": 1586,
+          "end": 1623,
+          "style": "paren_quote",
+          "text": "(literally “a goodness of character”)"
+        },
+        {
+          "start": 1816,
+          "end": 1821,
+          "style": "em",
+          "text": "_i e_"
+        },
+        {
+          "start": 1901,
+          "end": 1909,
+          "style": "em",
+          "text": "_Ethics_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Perhaps the truest way of conceiving Aristotle’s meaning here is to regard a moral virtue as a form of obedience to a maxim or rule of conduct accepted by the agent as valid for a class of recurrent situations in human life. Such obedience requires knowledge of the rule and acceptance of it _as the rule_ of the agent’s own actions, but not necessarily knowledge of its ground or of its systematic connexion with other similarly known and similarly accepted rules (It may be remarked that the Greek word usually translated “reason,” means in almost all cases in the _Ethics_ such a rule, and not the faculty which apprehends, formulates, considers them).",
+      "spans": [
+        {
+          "start": 292,
+          "end": 305,
+          "style": "em",
+          "text": "_as the rule_"
+        },
+        {
+          "start": 465,
+          "end": 654,
+          "style": "paren_aside",
+          "text": "(It may be remarked that the Greek word usually translated “reason,” means in almost all cases in the _Ethics_ such a rule, and not the faculty which apprehends, formulates, considers them)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The “moral virtues and vices” make up what we call character, and the important questions arise: (1) What is character? and (2) How is it formed? (for character in this sense is not a natural endowment; it is formed or produced). Aristotle deals with these questions in the reverse order. His answers are peculiar and distinctive—not that they are absolutely novel (for they are anticipated in Plato), but that by him they are for the first time distinctly and clearly formulated.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 29,
+          "style": "quote",
+          "text": "“moral virtues and vices”"
+        },
+        {
+          "start": 97,
+          "end": 100,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 124,
+          "end": 127,
+          "style": "list_marker",
+          "text": "(2)"
+        },
+        {
+          "start": 146,
+          "end": 228,
+          "style": "paren_aside",
+          "text": "(for character in this sense is not a natural endowment; it is formed or produced)"
+        },
+        {
+          "start": 365,
+          "end": 400,
+          "style": "paren_aside",
+          "text": "(for they are anticipated in Plato)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "(1.) Character, good or bad, is produced by what Aristotle calls “habituation,” that is, it is the result of the repeated doing of acts which have a similar or common quality. Such repetition acting upon natural aptitudes or propensities gradually fixes them in one or other of two opposite directions, giving them a bias towards good or evil. Hence the several acts which determine goodness or badness of character must be done in a certain way, and thus the formation of good character requires discipline and direction from without. Not that the agent himself contributes nothing to the formation of his character, but that at first he needs guidance. The point is not so much that the process cannot be safely left to Nature, but that it cannot be entrusted to merely intellectual instruction. The process is one of assimilation, largely by imitation and under direction and control. The result is a growing understanding of what is done, a choice of it for its own sake, a fixity and steadiness of purpose. Right acts and feelings become, through habit, easier and more pleasant, and the doing of them a “second nature.” The agent acquires the power of doing them freely, willingly, more and more “of himself.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "paren_aside",
+          "text": "(1.)"
+        },
+        {
+          "start": 65,
+          "end": 79,
+          "style": "quote",
+          "text": "“habituation,”"
+        },
+        {
+          "start": 1109,
+          "end": 1125,
+          "style": "quote",
+          "text": "“second nature.”"
+        },
+        {
+          "start": 1202,
+          "end": 1215,
+          "style": "quote",
+          "text": "“of himself.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But what are “right” acts? In the first place, they are those that conform to a rule—to the right rule, and ultimately to reason. The Greeks never waver from the conviction that in the end moral conduct is essentially reasonable conduct. But there is a more significant way of describing their “rightness,” and here for the first time Aristotle introduces his famous “Doctrine of the Mean.” Reasoning from the analogy of “right” physical acts, he pronounces that rightness always means adaptation or adjustment to the special requirements of a situation. To this adjustment he gives a quantitative interpretation. To do (or to feel) what is right in a given situation is to do or to feel just the amount required—neither more nor less: to do wrong is to do or to feel too much or too little—to fall short of or over-shoot, “a mean” determined by the situation. The repetition of acts which lie in the mean is the cause of the formation of each and every “goodness of character,” and for this “rules” can be given.",
+      "spans": [
+        {
+          "start": 13,
+          "end": 20,
+          "style": "quote",
+          "text": "“right”"
+        },
+        {
+          "start": 294,
+          "end": 306,
+          "style": "quote",
+          "text": "“rightness,”"
+        },
+        {
+          "start": 367,
+          "end": 390,
+          "style": "quote",
+          "text": "“Doctrine of the Mean.”"
+        },
+        {
+          "start": 421,
+          "end": 428,
+          "style": "quote",
+          "text": "“right”"
+        },
+        {
+          "start": 620,
+          "end": 632,
+          "style": "paren_cite",
+          "text": "(or to feel)"
+        },
+        {
+          "start": 823,
+          "end": 831,
+          "style": "quote",
+          "text": "“a mean”"
+        },
+        {
+          "start": 954,
+          "end": 978,
+          "style": "quote",
+          "text": "“goodness of character,”"
+        },
+        {
+          "start": 992,
+          "end": 999,
+          "style": "quote",
+          "text": "“rules”"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) What then is a “moral virtue,” the result of such a process duly",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        },
+        {
+          "start": 19,
+          "end": 34,
+          "style": "quote",
+          "text": "“moral virtue,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "directed? It is no mere mood of feeling, no mere liability to emotion, no mere natural aptitude or endowment, it is a permanent _state_ of the agent’s self, or, as we might in modern phrase put it, of his will, it consists in a steady self-imposed obedience to a rule of action in certain situations which frequently recur in human life. The rule prescribes the control and regulation within limits of the agent’s natural impulses to act and feel thus and thus. The situations fall into groups which constitute the “fields” of the several “moral virtues”, for each there is a rule, conformity to which secures rightness in the individual acts. Thus the moral ideal appears as a code of rules, accepted by the agent, but as yet _to him_ without rational justification and without system or unity. But the rules prescribe no mechanical uniformity: each within its limits permits variety, and the exactly right amount adopted to the requirements of the individual situation (and every actual situation is individual) must be determined by the intuition of the moment. There is no attempt to reduce the rich possibilities of right action to a single monotonous type. On the contrary, there are acknowledged to be many forms of moral virtue, and there is a long list of them, with their correlative vices enumerated.",
+      "spans": [
+        {
+          "start": 128,
+          "end": 135,
+          "style": "em",
+          "text": "_state_"
+        },
+        {
+          "start": 515,
+          "end": 523,
+          "style": "quote",
+          "text": "“fields”"
+        },
+        {
+          "start": 539,
+          "end": 554,
+          "style": "quote",
+          "text": "“moral virtues”"
+        },
+        {
+          "start": 727,
+          "end": 735,
+          "style": "em",
+          "text": "_to him_"
+        },
+        {
+          "start": 971,
+          "end": 1013,
+          "style": "paren_aside",
+          "text": "(and every actual situation is individual)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Doctrine of the Mean here takes a form in which it has impressed subsequent thinkers, but which has less importance than is usually ascribed to it. In the “Table of the Virtues and Vices,” each of the virtues is flanked by two opposite vices, which are respectively the excess and defect of that which in due measure constitutes the virtue. Aristotle tries to show that this is the case in regard to every virtue named and recognised as such, but his treatment is often forced and the endeavour is not very successful. Except as a convenient principle of arrangement of the various forms of praiseworthy or blameworthy characters, generally acknowledged as such by Greek opinion, this form of the doctrine is of no great significance.",
+      "spans": [
+        {
+          "start": 159,
+          "end": 192,
+          "style": "quote",
+          "text": "“Table of the Virtues and Vices,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Books III-V are occupied with a survey of the moral virtues and vices. These seem to have been undertaken in order to verify in detail the general account, but this aim is not kept steadily in view. Nor is there any well-considered principle of classification. What we find is a sort of portrait-gallery of the various types of moral excellence which the Greeks of the author’s age admired and strove to encourage. The discussion is full of acute, interesting and sometimes profound observations. Some of the types are those which are and will be admired at all times, but others are connected with peculiar features of Greek life which have now passed away. The most important is that of Justice or the Just Man, to which we may later return. But the discussion is preceded by an attempt to elucidate some difficult and obscure points in the general account of moral virtue and action (Book III, cc i-v). This section is concerned with the notion of Responsibility. The discussion designedly excludes what we may call the metaphysical issues of the problem, which here present themselves, it moves on the level of thought of the practical man, the statesman, and the legislator. Coercion and ignorance of relevant circumstances render acts involuntary and exempt their doer from responsibility, otherwise the act is voluntary and the agent responsible, choice or preference of what is done, and inner consent to the deed, are to be presumed. Neither passion nor ignorance of the right rule can extenuate responsibility. But there is a difference between acts done voluntarily and acts done of _set_ choice or purpose. The latter imply Deliberation. Deliberation involves thinking, thinking out means to ends: in deliberate acts the whole nature of the agent consents to and enters into the act, and in a peculiar sense they are his, they _are_ him in action, and the most significant evidence of what he is. Aristotle is unable wholly to avoid allusion to the metaphysical difficulties and what he does here say upon them is obscure and unsatisfactory. But he insists upon the importance in moral action of the agent’s inner consent, and on the reality of his individual responsibility. For his present purpose the metaphysical difficulties are irrelevant.",
+      "spans": [
+        {
+          "start": 886,
+          "end": 904,
+          "style": "paren_cite",
+          "text": "(Book III, cc i-v)"
+        },
+        {
+          "start": 1594,
+          "end": 1599,
+          "style": "em",
+          "text": "_set_"
+        },
+        {
+          "start": 1839,
+          "end": 1844,
+          "style": "em",
+          "text": "_are_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The treatment of Justice in Book V has always been a source of great difficulty to students of the _Ethics_. Almost more than any other part of the work it has exercised influence upon mediaeval and modern thought upon the subject. The distinctions and divisions have become part of the stock-in-trade of would be philosophic jurists. And yet, oddly enough, most of these distinctions have been misunderstood and the whole purport of the discussion misconceived. Aristotle is here dealing with justice in a restricted sense viz as that special goodness of character which is required of every adult citizen and which can be produced by early discipline or habituation. It is the temper or habitual attitude demanded of the citizen for the due exercise of his functions as taking part in the administration of the civic community—as a member of the judicature and executive. The Greek citizen was only exceptionally, and at rare intervals if ever, a law-maker while at any moment he might be called upon to act as a judge (juryman or arbitrator) or as an administrator. For the work of a legislator far more than the moral virtue of justice or fairmindedness was necessary, these were requisite to the rarer and higher “intellectual virtue” of practical wisdom. Then here, too, the discussion moves on a low level, and the raising of fundamental problems is excluded. Hence “distributive justice” is concerned not with the large question of the distribution of political power and privileges among the constituent members or classes of the state but with the smaller questions of the distribution among those of casual gains and even with the division among private claimants of a common fund or inheritance, while “corrective justice” is concerned solely with the management of legal redress. The whole treatment is confused by the unhappy attempt to give a precise mathematical form to the principles of justice in the various fields distinguished. Still it remains an interesting first endeavour to give greater exactness to some of the leading conceptions of jurisprudence.",
+      "spans": [
+        {
+          "start": 99,
+          "end": 107,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 1021,
+          "end": 1044,
+          "style": "paren_cite",
+          "text": "(juryman or arbitrator)"
+        },
+        {
+          "start": 1218,
+          "end": 1239,
+          "style": "quote",
+          "text": "“intellectual virtue”"
+        },
+        {
+          "start": 1373,
+          "end": 1395,
+          "style": "quote",
+          "text": "“distributive justice”"
+        },
+        {
+          "start": 1714,
+          "end": 1734,
+          "style": "quote",
+          "text": "“corrective justice”"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Book VI appears to have in view two aims: (1) to describe goodness of\nintellect and discover its highest form or forms; (2) to show how this\nis related to goodness of character, and so to conduct generally. As\nall thinking is either theoretical or practical, goodness of intellect\nhas _two_ supreme forms—Theoretical and Practical Wisdom. The first,\nwhich apprehends the eternal laws of the universe, has no direct\nrelation to human conduct: the second is identical with that master\nscience of human life of which the whole treatise, consisting of the",
+      "spans": [
+        {
+          "start": 42,
+          "end": 45,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 120,
+          "end": 123,
+          "style": "list_marker",
+          "text": "(2)"
+        },
+        {
+          "start": 285,
+          "end": 290,
+          "style": "em",
+          "text": "_two_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Ethics_ and the _Politics_, is an exposition. It is this science which supplies the right rules of conduct Taking them as they emerge in and from practical experience, it formulates them more precisely and organises them into a system where they are all seen to converge upon happiness. The mode in which such knowledge manifests itself is in the power to show that such and such rules of action follow from the very nature of the end or good for man. It presupposes and starts from a clear conception of the end and the wish for it as conceived, and it proceeds by a deduction which is dehberation writ large. In the man of practical wisdom this process has reached its perfect result, and the code of right rules is apprehended as a system with a single principle and so as something wholly rational or reasonable He has not on each occasion to seek and find the right rule applicable to the situation, he produces it at once from within himself, and can at need justify it by exhibiting its rationale, _i.e._ , its connection with the end. This is the consummate form of reason applied to conduct, but there are minor forms of it, less independent or original, but nevertheless of great value, such as the power to think out the proper cause of policy in novel circumstances or the power to see the proper line of treatment to follow in a court of law.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 8,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 17,
+          "end": 27,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 1006,
+          "end": 1012,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The form of the thinking which enters into conduct is that which terminates in the production of a rule which declares some means to the end of life. The process presupposes _(a)_ a clear and just apprehension of the nature of that end—such as the _Ethics_ itself endeavours to supply; _(b)_ a correct perception of the conditions of action, _(a)_ at least is impossible except to a man whose character has been duly formed by discipline; it arises only in a man who has acquired moral virtue. For such action and feeling as forms bad character, blinds the eye of the soul and corrupts the moral principle, and the place of practical wisdom is taken by that parody of itself which Aristotle calls “cleverness”—the “wisdom” of the unscrupulous man of the world. Thus true practical wisdom and true goodness of character are interdependent; neither is genuinely possible or “completely” present without the other. This is Aristotle’s contribution to the discussion of the question, so central in Greek Moral Philosophy, of the relation of the intellectual and the passionate factors in conduct.",
+      "spans": [
+        {
+          "start": 174,
+          "end": 179,
+          "style": "em",
+          "text": "_(a)_"
+        },
+        {
+          "start": 248,
+          "end": 256,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 286,
+          "end": 291,
+          "style": "em",
+          "text": "_(b)_"
+        },
+        {
+          "start": 342,
+          "end": 347,
+          "style": "em",
+          "text": "_(a)_"
+        },
+        {
+          "start": 697,
+          "end": 709,
+          "style": "quote",
+          "text": "“cleverness”"
+        },
+        {
+          "start": 714,
+          "end": 722,
+          "style": "quote",
+          "text": "“wisdom”"
+        },
+        {
+          "start": 872,
+          "end": 884,
+          "style": "quote",
+          "text": "“completely”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Aristotle is not an intuitionist, but he recognises the implication in conduct of a direct and immediate apprehension both of the end and of the character of his circumstances under which it is from moment to moment realised. The directness of such apprehension makes it analogous to sensation or sense-perception; but it is on his view in the end due to the existence or activity in man of that power in him which is the highest thing in his nature, and akin to or identical with the divine nature—mind, or intelligence. It is this which reveals to us what is best for us—the ideal of a happiness which is the object of our real wish and the goal of all our efforts. But beyond and above the practical ideal of what is best _for man_ begins to show itself another and still higher ideal—that of a life not distinctively human or in a narrow sense practical, yet capable of being participated in by man even under the actual circumstances of this world. For a time, however, this further and higher ideal is ignored.",
+      "spans": [
+        {
+          "start": 725,
+          "end": 734,
+          "style": "em",
+          "text": "_for man_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The next book (Book VII.), is concerned partly with moral conditions, in which the agent seems to rise above the level of moral virtue or fall below that of moral vice, but partly and more largely with conditions in which the agent occupies a middle position between the two. Aristotle’s attention is here directed chiefly towards the phenomena of “Incontinence,” weakness of will or imperfect self-control. This condition was to the Greeks a matter of only too frequent experience, but it appeared to them peculiarly difficult to understand. How can a man know what is good or best for him, and yet chronically fail to act upon his knowledge? Socrates was driven to the paradox of denying the possibility, but the facts are too strong for him. Knowledge of the right rule may be present, nay the rightfulness of its authority may be acknowledged, and yet time after time it may be disobeyed; the will may be good and yet overmastered by the force of desire, so that the act done is contrary to the agent’s will. Nevertheless the act may be the agent’s, and the will therefore divided against itself. Aristotle is aware of the seriousness and difficulty of the problem, but in spite of the vividness with which he pictures, and the acuteness with which he analyses, the situation in which such action occurs, it cannot be said that he solves the problem. It is time that he rises above the abstract view of it as a conflict between reason and passion, recognising that passion is involved in the knowledge which in conduct prevails or is overborne, and that the force which leads to the wrong act is not blind or ignorant passion, but always has some reason in it. But he tends to lapse back into the abstraction, and his final account is perplexed and obscure. He finds the source of the phenomenon in the nature of the desire for bodily pleasures, which is not irrational but has something rational in it. Such pleasures are not necessarily or inherently bad, as has sometimes been maintained; on the contrary, they are good, but only in certain amounts or under certain conditions, so that the will is often misled, hesitates, and is lost.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 25,
+          "style": "paren_cite",
+          "text": "(Book VII.)"
+        },
+        {
+          "start": 348,
+          "end": 363,
+          "style": "quote",
+          "text": "“Incontinence,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Books VIII. and IX. (on Friendship) are almost an interruption of the argument. The subject-matter of them was a favourite topic of ancient writers, and the treatment is smoother and more orderly than elsewhere in the _Ethics_. The argument is clear, and may be left without comment to the readers. These books contain a necessary and attractive complement to the somewhat dry account of Greek morality in the preceding books, and there are in them profound reflections on what may be called the metaphysics of friendship or love.",
+      "spans": [
+        {
+          "start": 20,
+          "end": 35,
+          "style": "paren_cite",
+          "text": "(on Friendship)"
+        },
+        {
+          "start": 218,
+          "end": 226,
+          "style": "em",
+          "text": "_Ethics_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "At the beginning of Book X. we return to the topic of Pleasure, which is now regarded from a different point of view. In Book VII. the antagonists were those who over-emphasised the irrationality or badness of Pleasure: here it is rather those who so exaggerate its value as to confuse or identify it with the good or Happiness. But there is offered us in this section much more than criticism of the errors of others. Answers are given both to the psychological question, “What is Pleasure?” and to the ethical question, “What is its value?” Pleasure, we are told, is the natural concomitant and index of perfect activity, distinguishable but inseparable from it—“the activity of a subject at its best acting upon an object at its best.” It is therefore always and in itself a good, but its value rises and falls with that of the activity with which it is conjoined, and which it intensifies and perfects. Hence it follows that the highest and best pleasures are those which accompany the highest and best activity.",
+      "spans": [
+        {
+          "start": 473,
+          "end": 492,
+          "style": "quote",
+          "text": "“What is Pleasure?”"
+        },
+        {
+          "start": 522,
+          "end": 542,
+          "style": "quote",
+          "text": "“What is its value?”"
+        },
+        {
+          "start": 664,
+          "end": 738,
+          "style": "quote",
+          "text": "“the activity of a subject at its best acting upon an object at its best.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Pleasure is, therefore, a necessary element in the best life, but it is not the whole of it nor the principal ingredient. The value of a life depends upon the nature and worth of the activity which it involves; given the maximum of full free action, the maximum of pleasure necessary follows. But on what sort of life is such activity possible? This leads us back to the question, What is happiness? In what life can man find the fullest satisfaction for his desires? To this question Aristotle gives an answer which cannot but surprise us after what has preceded. True Happiness, great satisfaction, cannot be found by man in any form of “practical” life, no, not in the fullest and freest exercise possible of the “moral virtues,” not in the life of the citizen or of the great soldier or statesman. To seek it there is to court failure and disappointment. It is to be found in the life of the onlooker, the disinterested spectator; or, to put it more distinctly, “in the life of the philosopher, the life of scientific and philosophic contemplation.” The highest and most satisfying form of life possible to man is “the contemplative life”; it is only in a secondary sense and for those incapable of their life, that the practical or moral ideal is the best. It is time that such a life is not distinctively human, but it is the privilege of man to partake in it, and such participation, at however rare intervals and for however short a period, is the highest Happiness which human life can offer. All other activities have value only because and in so far as they render _this_ life possible.",
+      "spans": [
+        {
+          "start": 639,
+          "end": 650,
+          "style": "quote",
+          "text": "“practical”"
+        },
+        {
+          "start": 716,
+          "end": 732,
+          "style": "quote",
+          "text": "“moral virtues,”"
+        },
+        {
+          "start": 966,
+          "end": 1053,
+          "style": "quote",
+          "text": "“in the life of the philosopher, the life of scientific and philosophic contemplation.”"
+        },
+        {
+          "start": 1118,
+          "end": 1142,
+          "style": "quote",
+          "text": "“the contemplative life”"
+        },
+        {
+          "start": 1576,
+          "end": 1582,
+          "style": "em",
+          "text": "_this_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But it must not be forgotten that Aristotle conceives of this life as one of intense activity or energising: it is just this which gives it its supremacy. In spite of the almost religious fervour with which he speaks of it (“the most orthodox of his disciples” paraphrases his meaning by describing its content as “the service and vision of God”), it is clear that he identified it with the life of the philosopher, as he understood it, a life of ceaseless intellectual activity in which at least at times all the distractions and disturbances inseparable from practical life seemed to disappear and become as nothing. This ideal was partly an inheritance from the more ardent idealism of his master Plato, but partly it was the expression of personal experience.",
+      "spans": [
+        {
+          "start": 223,
+          "end": 346,
+          "style": "paren_aside",
+          "text": "(“the most orthodox of his disciples” paraphrases his meaning by describing its content as “the service and vision of God”)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The nobility of this ideal cannot be questioned; the conception of the end of man or a life lived for truth—of a life blissfully absorbed in the vision of truth—is a lofty and inspiring one. But we cannot resist certain criticisms upon its presentation by Aristotle: (1) the relation of it to the lower ideal of practice is left somewhat obscure; (2) it is described in such a way as renders its realisation possible only to a gifted few, and under exceptional circumstances; (3) it seems in various ways, as regards its content, to be unnecessarily and unjustifiably limited. But it must be borne in mind that this is a first endeavour to determine its principle, and that similar failures have attended the attempts to describe the “religious” or the “spiritual” ideals of life, which have continually been suggested by the apparently inherent limitations of the “practical” or “moral” life, which is the subject of Moral Philosophy.",
+      "spans": [
+        {
+          "start": 267,
+          "end": 270,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 347,
+          "end": 350,
+          "style": "list_marker",
+          "text": "(2)"
+        },
+        {
+          "start": 476,
+          "end": 479,
+          "style": "list_marker",
+          "text": "(3)"
+        },
+        {
+          "start": 734,
+          "end": 745,
+          "style": "quote",
+          "text": "“religious”"
+        },
+        {
+          "start": 753,
+          "end": 764,
+          "style": "quote",
+          "text": "“spiritual”"
+        },
+        {
+          "start": 865,
+          "end": 876,
+          "style": "quote",
+          "text": "“practical”"
+        },
+        {
+          "start": 880,
+          "end": 887,
+          "style": "quote",
+          "text": "“moral”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Moral Ideal to those who have most deeply reflected on it leads to the thought of an Ideal beyond and above it, which alone gives it meaning, but which seems to escape from definite conception by man. The richness and variety of this Ideal ceaselessly invite, but as ceaselessly defy, our attempts to imprison it in a definite formula or portray it in detailed imagination. Yet the thought of it is and remains inexpungable from our minds."
+    },
+    {
+      "type": "paragraph",
+      "text": "This conception of the best life is not forgotten in the _Politics_ The end of life in the state is itself well-living and well-doing—a life which helps to produce the best life The great agency in the production of such life is the State operating through Law, which is Reason backed by Force. For its greatest efficiency there is required the development of a science of legislation. The main drift of what he says here is that the most desirable thing would be that the best reason of the community should be embodied in its laws. But so far as that is not possible, it still is true that anyone who would make himself and others better must become a miniature legislator—must study the general principles of law, morality, and education. The conception of πολιτικὴ with which he opened the _Ethics_ would serve as a guide to a father educating his children as well as to the legislator legislating for the state. Finding in his predecessors no developed doctrine on this subject, Aristotle proposes himself to undertake the construction of it, and sketches in advance the programme of the _Politics_ in the concluding sentence of the _Ethics_ His ultimate object is to answer the questions, What is the best form of Polity, how should each be constituted, and what laws and customs should it adopt and employ? Not till this answer is given will “the philosophy of human affairs” be complete.",
+      "spans": [
+        {
+          "start": 57,
+          "end": 67,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 794,
+          "end": 802,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 1093,
+          "end": 1103,
+          "style": "em",
+          "text": "_Politics_"
+        },
+        {
+          "start": 1138,
+          "end": 1146,
+          "style": "em",
+          "text": "_Ethics_"
+        },
+        {
+          "start": 1349,
+          "end": 1382,
+          "style": "quote",
+          "text": "“the philosophy of human affairs”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "On looking back it will be seen that the discussion of the central topic of the nature and formation of character has expanded into a Philosophy of Human Conduct, merging at its beginning and end into metaphysics The result is a Moral Philosophy set against a background of Political Theory and general Philosophy. The most characteristic features of this Moral Philosophy are due to the fact of its essentially teleological view of human life and action: (1) Every human activity, but especially every human practical activity, is directed towards a simple End discoverable by reflection, and this End is conceived of as the object of universal human desire, as something to be enjoyed, not as something which ought to be done or enacted. Anstotle’s Moral Philosophy is not hedonistic but it is eudæmomstic, the end is the enjoyment of Happiness, not the fulfilment of Duty. (2) Every human practical activity derives its value from its efficiency as a means to that end, it is good or bad, right or wrong, as it conduces or fails to conduce to Happiness Thus his Moral Philosophy is essentially utilitarian or prudential Right action presupposes Thought or Thinking, partly on the development of a clearer and distincter conception of the end of desire, partly as the deduction from that of rules which state the normally effective conditions of its realisation. The thinking involved in right conduct is calculation—calculation of means to an end fixed by nature and foreknowable Action itself is at its best just the realisation of a scheme preconceived and thought out beforehand, commending itself by its inherent attractiveness or promise of enjoyment.",
+      "spans": [
+        {
+          "start": 456,
+          "end": 459,
+          "style": "list_marker",
+          "text": "(1)"
+        },
+        {
+          "start": 876,
+          "end": 879,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This view has the great advantage of exhibiting morality as essentially reasonable, but the accompanying disadvantage of lowering it into a somewhat prosaic and unideal Prudentialism, nor is it saved from this by the tacking on to it, by a sort of after-thought, of the second and higher Ideal—an addition which ruins the coherence of the account without really transmuting its substance The source of our dissatisfaction with the whole theory lies deeper than in its tendency to identify the end with the maximum of enjoyment or satisfaction, or to regard the goodness or badness of acts and feelings as lying solely in their efficacy to produce such a result It arises from the application to morality of the distinction of means and end For this distinction, for all its plausibility and usefulness in ordinary thought and speech, cannot finally be maintained In morality—and this is vital to its character—everything is both means and end, and so neither in distinction or separation, and all thinking about it which presupposes the finality of this distinction wanders into misconception and error. The thinking which really matters in conduct is not a thinking which imaginatively forecasts ideals which promise to fulfil desire, or calculates means to their attainment—that is sometimes useful, sometimes harmful, and always subordinate, but thinking which reveals to the agent the situation in which he is to act, both, that is, the universal situation on which as man he always and everywhere stands, and the ever-varying and ever-novel situation in which he as this individual, here and now, finds himself. In such knowledge of given or historic fact lie the natural determinants of his conduct, in such knowledge alone lies the condition of his freedom and his good."
+    },
+    {
+      "type": "paragraph",
+      "text": "But this does not mean that Moral Philosophy has not still much to learn from Aristotle’s _Ethics_. The work still remains one of the best introductions to a study of its important subject-matter, it spreads before us a view of the relevant facts, it reduces them to manageable compass and order, it raises some of the central problems, and makes acute and valuable suggestions towards their solution. Above all, it perpetually incites to renewed and independent reflection upon them.",
+      "spans": [
+        {
+          "start": 90,
+          "end": 98,
+          "style": "em",
+          "text": "_Ethics_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "J. A. SMITH"
+    },
+    {
+      "type": "paragraph",
+      "text": "The following is a list of the works of Aristotle:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "First edition of works (with omission of Rhetorica, Poetica, and second book of Economica), 5 vols by Aldus Manutius, Venice, 1495 8, re impression supervised by Erasmus and with certain corrections by Grynaeus (including Rhetorica and Poetica), 1531, 1539, revised 1550, later editions were followed by that of Immanuel Bekker and Brandis (Greek and Latin), 5 vols. The 5th vol contains the Index by Bomtz, 1831-70, Didot edition (Greek and Latin), 5 vols 1848 74",
+      "spans": [
+        {
+          "start": 23,
+          "end": 90,
+          "style": "paren_aside",
+          "text": "(with omission of Rhetorica, Poetica, and second book of Economica)"
+        },
+        {
+          "start": 211,
+          "end": 244,
+          "style": "paren_cite",
+          "text": "(including Rhetorica and Poetica)"
+        },
+        {
+          "start": 340,
+          "end": 357,
+          "style": "paren_cite",
+          "text": "(Greek and Latin)"
+        },
+        {
+          "start": 431,
+          "end": 448,
+          "style": "paren_cite",
+          "text": "(Greek and Latin)"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "ENGLISH TRANSLATIONS Edited by T Taylor, with Porphyry’s Introduction,\n9 vols, 1812, under editorship of J A Smith and W D Ross, II vols,\n1908-31, Loeb editions Ethica, Rhetorica, Poetica, Physica, Politica,\nMetaphysica, 1926-33",
+      "lines": [
+        "ENGLISH TRANSLATIONS Edited by T Taylor, with Porphyry’s Introduction,",
+        "9 vols, 1812, under editorship of J A Smith and W D Ross, II vols,",
+        "1908-31, Loeb editions Ethica, Rhetorica, Poetica, Physica, Politica,",
+        "Metaphysica, 1926-33"
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "Later editions of separate works _De Anima_ Torstrik, 1862,\nTrendelenburg, 2nd edition, 1877, with English translation, L Wallace,\n1882, Biehl, 1884, 1896, with English, R D Hicks, 1907 _Ethica_ J S\nBrewer (Nicomachean), 1836, W E Jelf, 1856, J F T Rogers, 1865, A\nGrant, 1857 8, 1866, 1874, 1885, E Moore, 1871, 1878, 4th edition,\n1890, Ramsauer (Nicomachean), 1878, Susemihl, 1878, 1880, revised by O\nApelt, 1903, A Grant, 1885, I Bywater (Nicomachean), 1890, J Burnet,",
+      "lines": [
+        "Later editions of separate works _De Anima_ Torstrik, 1862,",
+        "Trendelenburg, 2nd edition, 1877, with English translation, L Wallace,",
+        "1882, Biehl, 1884, 1896, with English, R D Hicks, 1907 _Ethica_ J S",
+        "Brewer (Nicomachean), 1836, W E Jelf, 1856, J F T Rogers, 1865, A",
+        "Grant, 1857 8, 1866, 1874, 1885, E Moore, 1871, 1878, 4th edition,",
+        "1890, Ramsauer (Nicomachean), 1878, Susemihl, 1878, 1880, revised by O",
+        "Apelt, 1903, A Grant, 1885, I Bywater (Nicomachean), 1890, J Burnet,"
+      ],
+      "spans": [
+        {
+          "start": 33,
+          "end": 43,
+          "style": "em",
+          "text": "_De Anima_"
+        },
+        {
+          "start": 186,
+          "end": 194,
+          "style": "em",
+          "text": "_Ethica_"
+        },
+        {
+          "start": 206,
+          "end": 219,
+          "style": "paren_cite",
+          "text": "(Nicomachean)"
+        },
+        {
+          "start": 347,
+          "end": 360,
+          "style": "paren_cite",
+          "text": "(Nicomachean)"
+        },
+        {
+          "start": 441,
+          "end": 454,
+          "style": "paren_cite",
+          "text": "(Nicomachean)"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "1900"
+    },
+    {
+      "type": "blockquote",
+      "text": "_Historia Animalium_ Schneider, 1812, Aubert and Wimmer, 1860; Dittmeyer, 1907 _Metaphysica_ Schwegler, 1848, W Christ, 1899 _Organon_ Waitz, 1844 6 _Poetica_ Vahlen, 1867, 1874, with Notes by E Moore, 1875, with English translation by E R Wharton, 1883, 1885, Uberweg, 1870, 1875, with German translation, Susemihl, 1874, Schmidt, 1875, Christ, 1878, I Bywater, 1898, T G Tucker, 1899 _De Republica Athenientium_ Text and facsimile of Papyrus, F G Kenyon, 1891, 3rd edition, 1892, Kaibel and Wilamowitz-Moellendorf, 1891, 3rd edition, 1898, Van Herwerden and Leeuwen (from Kenyon’s text), 1891, Blass, 1892, 1895, 1898, 1903, J E Sandys, 1893 _Politica_ Susemihl, 1872, with German, 1878, 3rd edition, 1882, Susemihl and Hicks, 1894, etc, O Immisch, 1909 _Physica_ C Prantl, 1879 _Rhetorica_ Stahr, 1862, Sprengel (with Latin text), 1867, Cope and Sandys, 1877, Roemer, 1885, 1898 ENGLISH TRANSLATIONS OF ONE OR MORE WORKS De Anima (with Parva Naturalia), by W A Hammond, 1902 Ethica Of Morals to Nicomachus, by E Pargiter, 1745, with Politica by J Gillies, 1797, 1804, 1813, with Rhetorica and Poetica, by T Taylor, 1818, and later editions Nicomachean Ethics, 1819, mainly from text of Bekker by D P Chase, 1847, revised 1861, and later editions, with an introductory essay by G H Lewes (Camelot Classics) 1890, re-edited by J M Mitchell (New Universal Library), 1906, 1910, by R W Browne (Bohn’s Classical Library), 1848, etc, by R Williams, 1869, 1876, by W M Hatch and others (with translation of paraphrase attributed to Andronicus of Rhodes), edited by E Hatch, 1879 by F H Peters, 1881, J E C Welldon, 1892, J Gillies (Lubbock’s Hundred Books) 1893 Historia Animalium, by R Creswell (Bonn’s Classical Library) 1848, with Treatise on Physiognomy, by T Taylor, 1809 Metaphysica, by T Taylor, 1801, by J H M Mahon (Bohn’s Classical Library), 1848 Organon, with Porphyry’s Introduction, by O F Owen (Bohn’s Classical Library), 1848 Posterior Analytics, E Poste, 1850, E S Bourchier, 1901, On Fallacies, E Poste, 1866 Parva Naturaha (Greek and English), by G R T Ross, 1906, with De Anima, by W A Hammond, 1902 Youth and Old Age, Life and Death and Respiration, W Ogle 1897 Poetica, with Notes from the French of D Acier, 1705, by H J Pye, 1788, 1792, T Twining, 1789, 1812, with Preface and Notes by H Hamilton, 1851, Treatise on Rhetorica and Poetica, by T Hobbes (Bohn’s Classical Library), 1850, by Wharton, 1883 (see Greek version), S H Butcher, 1895, 1898, 3rd edition, 1902, E S Bourchier, 1907, by Ingram Bywater, 1909 De Partibus Animalium, W Ogle, 1882 De Republica Athenientium, by E Poste, 1891, F G Kenyon, 1891, T J Dymes, 1891 De Virtutibus et Vitus, by W Bridgman, 1804 Politica, from the French of Regius, 1598, by W Ellis, 1776, 1778, 1888 (Morley’s Universal Library), 1893 (Lubbock’s Hundred Books) by E Walford (with Æconomics, and Life by Dr Gillies), (Bohn’s Classical Library), 1848, J E. C. Welldon, 1883, B Jowett, 1885, with Introduction and Index by H W C Davis, 1905, Books i iii iv (vii) from Bekker’s text by W E Bolland, with Introduction by A Lang, 1877. Problemata (with writings of other philosophers), 1597, 1607, 1680, 1684, etc. Rhetorica, A summary by T Hobbes, 1655 (?), new edition, 1759, by the translators of the Art of Thinking, 1686, 1816, by D M Crimmin, 1812, J Gillies, 1823, Anon 1847, J E C Welldon, 1886, R C Jebb, with Introduction and Supplementary Notes by J E Sandys, 1909 (see under Poetica and Ethica). Secreta Secretorum (supposititious work), Anon 1702, from the Hebrew version by M Gaster, 1907, 1908. Version by Lydgate and Burgh, edited by R Steele (E E T S), 1894, 1898.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "em",
+          "text": "_Historia Animalium_"
+        },
+        {
+          "start": 79,
+          "end": 92,
+          "style": "em",
+          "text": "_Metaphysica_"
+        },
+        {
+          "start": 125,
+          "end": 134,
+          "style": "em",
+          "text": "_Organon_"
+        },
+        {
+          "start": 149,
+          "end": 158,
+          "style": "em",
+          "text": "_Poetica_"
+        },
+        {
+          "start": 386,
+          "end": 413,
+          "style": "em",
+          "text": "_De Republica Athenientium_"
+        },
+        {
+          "start": 568,
+          "end": 588,
+          "style": "paren_quote",
+          "text": "(from Kenyon’s text)"
+        },
+        {
+          "start": 644,
+          "end": 654,
+          "style": "em",
+          "text": "_Politica_"
+        },
+        {
+          "start": 756,
+          "end": 765,
+          "style": "em",
+          "text": "_Physica_"
+        },
+        {
+          "start": 781,
+          "end": 792,
+          "style": "em",
+          "text": "_Rhetorica_"
+        },
+        {
+          "start": 815,
+          "end": 832,
+          "style": "paren_cite",
+          "text": "(with Latin text)"
+        },
+        {
+          "start": 933,
+          "end": 955,
+          "style": "paren_cite",
+          "text": "(with Parva Naturalia)"
+        },
+        {
+          "start": 1290,
+          "end": 1308,
+          "style": "paren_cite",
+          "text": "(Camelot Classics)"
+        },
+        {
+          "start": 1341,
+          "end": 1364,
+          "style": "paren_cite",
+          "text": "(New Universal Library)"
+        },
+        {
+          "start": 1392,
+          "end": 1418,
+          "style": "paren_quote",
+          "text": "(Bohn’s Classical Library)"
+        },
+        {
+          "start": 1482,
+          "end": 1549,
+          "style": "paren_aside",
+          "text": "(with translation of paraphrase attributed to Andronicus of Rhodes)"
+        },
+        {
+          "start": 1627,
+          "end": 1652,
+          "style": "paren_quote",
+          "text": "(Lubbock’s Hundred Books)"
+        },
+        {
+          "start": 1692,
+          "end": 1718,
+          "style": "paren_quote",
+          "text": "(Bonn’s Classical Library)"
+        },
+        {
+          "start": 1820,
+          "end": 1846,
+          "style": "paren_quote",
+          "text": "(Bohn’s Classical Library)"
+        },
+        {
+          "start": 1904,
+          "end": 1930,
+          "style": "paren_quote",
+          "text": "(Bohn’s Classical Library)"
+        },
+        {
+          "start": 2037,
+          "end": 2056,
+          "style": "paren_cite",
+          "text": "(Greek and English)"
+        },
+        {
+          "start": 2370,
+          "end": 2396,
+          "style": "paren_quote",
+          "text": "(Bohn’s Classical Library)"
+        },
+        {
+          "start": 2421,
+          "end": 2440,
+          "style": "paren_cite",
+          "text": "(see Greek version)"
+        },
+        {
+          "start": 2762,
+          "end": 2790,
+          "style": "paren_quote",
+          "text": "(Morley’s Universal Library)"
+        },
+        {
+          "start": 2797,
+          "end": 2822,
+          "style": "paren_quote",
+          "text": "(Lubbock’s Hundred Books)"
+        },
+        {
+          "start": 2836,
+          "end": 2876,
+          "style": "paren_aside",
+          "text": "(with Æconomics, and Life by Dr Gillies)"
+        },
+        {
+          "start": 2878,
+          "end": 2904,
+          "style": "paren_quote",
+          "text": "(Bohn’s Classical Library)"
+        },
+        {
+          "start": 3016,
+          "end": 3021,
+          "style": "paren_cite",
+          "text": "(vii)"
+        },
+        {
+          "start": 3103,
+          "end": 3140,
+          "style": "paren_cite",
+          "text": "(with writings of other philosophers)"
+        },
+        {
+          "start": 3210,
+          "end": 3213,
+          "style": "paren_aside",
+          "text": "(?)"
+        },
+        {
+          "start": 3432,
+          "end": 3462,
+          "style": "paren_cite",
+          "text": "(see under Poetica and Ethica)"
+        },
+        {
+          "start": 3483,
+          "end": 3504,
+          "style": "paren_cite",
+          "text": "(supposititious work)"
+        },
+        {
+          "start": 3615,
+          "end": 3624,
+          "style": "paren_cite",
+          "text": "(E E T S)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "LIFE, ETC J W Blakesley, 1839, A Crichton (Jardine’s Naturalist’s Library), 1843, JS Blackie, Four Phases of Morals, Socrates, Aristotle, etc, 1871, G Grote, Aristotle, edited by A Bain and G C Robertson, 1872, 1880, E Wallace, Outlines of the Philosophy of Aristotle, 1875, 1880, A Grant (Ancient Classics for English readers), 1877, T Davidson, Aristotle and Ancient Educational Ideals (Great Educators), 1892, F Sewall, Swedenborg and Aristotle, 1895, W A Heidel, The Necessary and the Contingent of the Aristotelian System (University of Chicago Contributions to Philosophy), 1896, F W Bain, On the Realisation of the Possible, and the Spirit of Aristotle, 1899, J H Hyslop, The Ethics of the Greek Philosophers, etc (Evolution of Ethics), 1903, M V Williams, Six Essays on the Platonic Theory of Knowledge as expounded in the later dialogues and reviewed by Aristotle, 1908, J M Watson, Aristotle’s Criticism of Plato, 1909 A E Taylor, Aristotle, 1919, W D Ross, Aristotle, 1923.",
+      "spans": [
+        {
+          "start": 42,
+          "end": 74,
+          "style": "paren_quote",
+          "text": "(Jardine’s Naturalist’s Library)"
+        },
+        {
+          "start": 289,
+          "end": 327,
+          "style": "paren_cite",
+          "text": "(Ancient Classics for English readers)"
+        },
+        {
+          "start": 388,
+          "end": 405,
+          "style": "paren_cite",
+          "text": "(Great Educators)"
+        },
+        {
+          "start": 527,
+          "end": 578,
+          "style": "paren_aside",
+          "text": "(University of Chicago Contributions to Philosophy)"
+        },
+        {
+          "start": 721,
+          "end": 742,
+          "style": "paren_cite",
+          "text": "(Evolution of Ethics)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "INTRODUCTION\n\nThe _Ethics_ of Aristotle is one half of a single treatise of which his _Politics_ is the other half. Both deal with one and the same subject. This subject is what Aristotle calls in one place the “philosophy of human affairs;” but more frequently Political or Social Science. In the two works taken together we have their author’s whole theory of human conduct or practical activity, that is, of all human activity which is not directed merely to knowledge or truth. The two parts of this treatise are mutually complementary, but in a literary sense each is independent and self-contained. The proem to the _Ethics_ is an introduction to the whole subject, not merely to the first part; the last chapter of the _Ethics_ points forward to the _Politics_, and sketches for that part of the treatise the order of enquiry to be pursued (an order which in the actual treatise is not adhered to).\n\nThe principle of distribution of the subject-matter between the two works is far from obvious, and has been much debated. Not much can be gathered from their titles, which in any case were not given to them by their author. Nor do these titles suggest any very compact unity in the works to which they are applied: the plural forms, which survive so oddly in English (Ethic_s_, Politic_s_), were intended to indicate the treatment within a single work of a _group_ of connected questions. The unity of the first group arises from their centring round the topic of character, that of the second from their connection with the existence and life of the city or state. We have thus to regard the _Ethics_ as dealing with one group of problems and the _Politics_ with a second, both falling within the wide compass of Political Science. Each of these groups falls into sub-groups which roughly correspond to the several books in each work. The tendency to take up one by one the various problems which had suggested themselves in the wide field obscures both the unity of the subject-matter and its proper articulation. But it is to be remembered that what is offered us is avowedly rather an enquiry than an exposition of hard and fast doctrine.\n\nNevertheless each work aims at a relative completeness, and it is important to observe the relation of each to the other. The distinction is not that the one treats of Moral and the other of Political Philosophy, nor again that the one deals with the moral activity of the individual and the other with that of the State, nor once more that the one gives us the theory of human conduct, while the other discusses its application in practice, though not all of these misinterpretations are equally erroneous. The clue to the right interpretation is given by Aristotle himself, where in the last chapter of the _Ethics_ he is paving the way for the _Politics_. In the _Ethics_ he has not confined himself to the abstract or isolated individual, but has always thought of him, or we might say, in his social and political context, with a given nature due to race and heredity and in certain surroundings. So viewing him he has studied the nature and formation of his character—all that he can make himself or be made by others to be. Especially he has investigated the various admirable forms of human character and the mode of their production. But all this, though it brings more clearly before us what goodness or virtue is, and how it is to be reached, remains mere theory or talk. By itself it does not enable us to become, or to help others to become, good. For this it is necessary to bring into play the great force of the Political Community or State, of which the main instrument is Law. Hence arises the demand for the necessary complement to the _Ethics, i.e._, a treatise devoted to the questions which centre round the enquiry; by what organisation of social or political forces, by what laws or institutions can we best secure the greatest amount of good character?\n\nWe must, however, remember that the production of good character is not the end of either individual or state action: that is the aim of the one and the other because good character is the indispensable condition and chief determinant of happiness, itself the goal of all human doing. The end of all action, individual or collective, is the greatest happiness of the greatest number. There is, Aristotle insists, no difference of kind between the good of one and the good of many or all. The sole difference is one of amount or scale. This does not mean simply that the State exists to secure in larger measure the objects of degree which the isolated individual attempts, but is too feeble, to secure without it. On the contrary, it rather insists that whatever goods society alone enables a man to secure have always had to the individual—whether he realised it or not—the value which, when so secured, he recognises them to possess. The best and happiest life for the individual is that which the State renders possible, and this it does mainly by revealing to him the value of new objects of desire and educating him to appreciate them. To Aristotle or to Plato the State is, above all, a large and powerful educative agency which gives the individual increased opportunities of self-development and greater capacities for the enjoyment of life.\n\nLooking forward, then, to the life of the State as that which aids support, and combines the efforts of the individual to obtain happiness, Aristotle draws no hard and fast distinction between the spheres of action of Man as individual and Man as citizen. Nor does the division of his discussion into the _Ethics_ and the _Politics_ rest upon any such distinction. The distinction implied is rather between two stages in the life of the civilised man—the stage of preparation for the full life of the adult citizen, and the stage of the actual exercise or enjoyment of citizenship. Hence the _Ethics_, where his attention is directed upon the formation of character, is largely and centrally a treatise on Moral Education. It discusses especially those admirable human qualities which fit a man for life in an organised civic community, which makes him “a good citizen,” and considers how they can be fostered or created and their opposites prevented.\n\nThis is the kernel of the _Ethics_, and all the rest is subordinate to this main interest and purpose. Yet “the rest” is not irrelevant; the whole situation in which character grows and operates is concretely conceived. There is a basis of what we should call Psychology, sketched in firm outlines, the deeper presuppositions and the wider issues of human character and conduct are not ignored, and there is no little of what we should call Metaphysics. But neither the Psychology nor the Metaphysics is elaborated, and only so much is brought forward as appears necessary to put the main facts in their proper perspective and setting. It is this combination of width of outlook with close observation of the concrete facts of conduct which gives its abiding value to the work, and justifies the view of it as containing Aristotle’s Moral Philosophy. Nor is it important merely as summing up the moral judgments and speculations of an age now long past. It seizes and dwells upon those elements and features in human practice which are most essential and permanent, and it is small wonder that so much in it survives in our own ways of regarding conduct and speaking of it. Thus it still remains one of the classics of Moral Philosophy, nor is its value likely soon to be exhausted.\n\nAs was pointed out above, the proem (Book I., cc. i-iii.) is a prelude to the treatment of the whole subject covered by the _Ethics_ and the _Politics_ together. It sets forth the purpose of the enquiry, describes the spirit in which it is to be undertaken and what ought to be the expectation of the reader, and lastly states the necessary conditions of studying it with profit. The aim of it is the acquisition and propagation of a certain kind of knowledge (science), but this knowledge and the thinking which brings it about are subsidiary to a practical end. The knowledge aimed at is of what is best for man and of the conditions of its realisation. Such knowledge is that which in its consumate form we find in great statesmen, enabling them to organise and administer their states and regulate by law the life of the citizens to their advantage and happiness, but it is the same kind of knowledge which on a smaller scale secures success in the management of the family or of private life.\n\nIt is characteristic of such knowledge that it should be deficient in “exactness,” in precision of statement, and closeness of logical concatenation. We must not look for a mathematics of conduct. The subject-matter of Human Conduct is not governed by necessary and uniform laws. But this does not mean that it is subject to no laws. There are general principles at work in it, and these can be formulated in “rules,” which rules can be systematised or unified. It is all-important to remember that practical or moral rules are only general and always admit of exceptions, and that they arise not from the mere complexity of the facts, but from the liability of the facts to a certain unpredictable variation. At their very best, practical rules state probabilities, not certainties; a relative constancy of connection is all that exists, but it is enough to serve as a guide in life. Aristotle here holds the balance between a misleading hope of reducing the subject-matter of conduct to a few simple rigorous abstract principles, with conclusions necessarily issuing from them, and the view that it is the field of operation of inscrutable forces acting without predictable regularity. He does not pretend to find in it absolute uniformities, or to deduce the details from his principles. Hence, too, he insists on the necessity of experience as the source or test of all that he has to say. Moral experience—the actual possession and exercise of good character—is necessary truly to understand moral principles and profitably to apply them. The mere intellectual apprehension of them is not possible, or if possible, profitless.\n\nThe _Ethics_ is addressed to students who are presumed both to have enough general education to appreciate these points, and also to have a solid foundation of good habits. More than that is not required for the profitable study of it.\n\nIf the discussion of the nature and formation of character be regarded as the central topic of the _Ethics_, the contents of Book I., cc. iv.-xii. may be considered as still belonging to the introduction and setting, but these chapters contain matter of profound importance and have exercised an enormous influence upon subsequent thought. They lay down a principle which governs all Greek thought about human life, viz. that it is only intelligible when viewed as directed towards some end or good. This is the Greek way of expressing that all human life involves an ideal element—something which it is not yet and which under certain conditions it is to be. In that sense Greek Moral Philosophy is essentially idealistic. Further it is always assumed that all human practical activity is directed or “oriented” to a _single_ end, and that that end is knowable or definable in advance of its realisation. To know it is not merely a matter of speculative interest, it is of the highest practical moment for only in the light of it can life be duly guided, and particularly only so can the state be properly organised and administered. This explains the stress laid throughout by Greek Moral Philosophy upon the necessity of knowledge as a condition of the best life. This knowledge is not, though it includes knowledge of the nature of man and his circumstances, it is knowledge of what is best—of man’s supreme end or good.\n\nBut this end is not conceived as presented to him by a superior power nor even as something which _ought_ to be. The presentation of the Moral Ideal as Duty is almost absent. From the outset it is identified with the object of desire, of what we not merely judge desirable but actually do desire, or that which would, if realised, satisfy human desire. In fact it is what we all, wise and simple, agree in naming “Happiness” (Welfare or Well-being)\n\nIn what then does happiness consist? Aristotle summarily sets aside the more or less popular identifications of it with abundance of physical pleasures, with political power and honour, with the mere possession of such superior gifts or attainments as normally entitle men to these, with wealth. None of these can constitute the end or good of man as such. On the other hand, he rejects his master Plato’s conception of a good which is the end of the whole universe, or at least dismisses it as irrelevant to his present enquiry. The good towards which all human desires and practical activities are directed must be one conformable to man’s special nature and circumstances and attainable by his efforts. There is in Aristotle’s theory of human conduct no trace of Plato’s “other worldliness”, he brings the moral ideal in Bacon’s phrase down to “right earth”—and so closer to the facts and problems of actual human living. Turning from criticism of others he states his own positive view of Happiness, and, though he avowedly states it merely in outline his account is pregnant with significance. Human Happiness lies in activity or energising, and that in a way peculiar to man with his given nature and his given circumstances, it is not theoretical, but practical: it is the activity not of reason but still of a being who possesses reason and applies it, and it presupposes in that being the development, and not merely the natural possession, of certain relevant powers and capacities. The last is the prime condition of successful living and therefore of satisfaction, but Aristotle does not ignore other conditions, such as length of life, wealth and good luck, the absence or diminution of which render happiness not impossible, but difficult of attainment.\n\nIt is interesting to compare this account of Happiness with Mill’s in _Utilitarianism_. Mill’s is much the less consistent: at times he distinguishes and at times he identifies, happiness, pleasure, contentment, and satisfaction. He wavers between belief in its general attainability and an absence of hopefulness. He mixes up in an arbitrary way such ingredients as “not expecting more from life than it is capable of bestowing,” “mental cultivation,” “improved laws,” etc., and in fact leaves the whole conception vague, blurred, and uncertain. Aristotle draws the outline with a firmer hand and presents a more definite ideal. He allows for the influence on happiness of conditions only partly, if at all, within the control of man, but he clearly makes the man positive determinant of man’s happiness he in himself, and more particularly in what he makes directly of his own nature, and so indirectly of his circumstances. “‘Tis in ourselves that we are thus or thus” But once more this does not involve an artificial or abstract isolation of the individual moral agent from his relation to other persons or things from his context in society and nature, nor ignore the relative dependence of his life upon a favourable environment.\n\nThe main factor which determines success or failure in human life is the acquisition of certain powers, for Happiness is just the exercise or putting forth of these in actual living, everything else is secondary and subordinate. These powers arise from the due development of certain natural aptitudes which belong (in various degrees) to human nature as such and therefore to all normal human beings. In their developed form they are known as virtues (the Greek means simply “goodnesses,” “perfections,” “excellences,” or “fitnesses”), some of them are physical, but others are psychical, and among the latter some, and these distinctively or peculiarly human, are “rational,” _i e_, presuppose the possession and exercise of mind or intelligence. These last fall into two groups, which Aristotle distinguishes as Goodnesses of Intellect and Goodnesses of Character. They have in common that they all excite in us admiration and praise of their possessors, and that they are not natural endowments, but acquired characteristics But they differ in important ways. (1) the former are excellences or developed powers of the reason as such—of that in us which sees and formulates laws, rules, regularities systems, and is content in the vision of them, while the latter involve a submission or obedience to such rules of something in us which is in itself capricious and irregular, but capable of regulation, viz our instincts and feelings, (2) the former are acquired by study and instruction, the latter by discipline. The latter constitute “character,” each of them as a “moral virtue” (literally “a goodness of character”), and upon them primarily depends the realisation of happiness. This is the case at least for the great majority of men, and for all men their possession is an indispensable basis of the best, _i e_, the most desirable life. They form the chief or central subject-matter of the _Ethics_.\n\nPerhaps the truest way of conceiving Aristotle’s meaning here is to regard a moral virtue as a form of obedience to a maxim or rule of conduct accepted by the agent as valid for a class of recurrent situations in human life. Such obedience requires knowledge of the rule and acceptance of it _as the rule_ of the agent’s own actions, but not necessarily knowledge of its ground or of its systematic connexion with other similarly known and similarly accepted rules (It may be remarked that the Greek word usually translated “reason,” means in almost all cases in the _Ethics_ such a rule, and not the faculty which apprehends, formulates, considers them).\n\nThe “moral virtues and vices” make up what we call character, and the important questions arise: (1) What is character? and (2) How is it formed? (for character in this sense is not a natural endowment; it is formed or produced). Aristotle deals with these questions in the reverse order. His answers are peculiar and distinctive—not that they are absolutely novel (for they are anticipated in Plato), but that by him they are for the first time distinctly and clearly formulated.\n\n(1.) Character, good or bad, is produced by what Aristotle calls “habituation,” that is, it is the result of the repeated doing of acts which have a similar or common quality. Such repetition acting upon natural aptitudes or propensities gradually fixes them in one or other of two opposite directions, giving them a bias towards good or evil. Hence the several acts which determine goodness or badness of character must be done in a certain way, and thus the formation of good character requires discipline and direction from without. Not that the agent himself contributes nothing to the formation of his character, but that at first he needs guidance. The point is not so much that the process cannot be safely left to Nature, but that it cannot be entrusted to merely intellectual instruction. The process is one of assimilation, largely by imitation and under direction and control. The result is a growing understanding of what is done, a choice of it for its own sake, a fixity and steadiness of purpose. Right acts and feelings become, through habit, easier and more pleasant, and the doing of them a “second nature.” The agent acquires the power of doing them freely, willingly, more and more “of himself.”\n\nBut what are “right” acts? In the first place, they are those that conform to a rule—to the right rule, and ultimately to reason. The Greeks never waver from the conviction that in the end moral conduct is essentially reasonable conduct. But there is a more significant way of describing their “rightness,” and here for the first time Aristotle introduces his famous “Doctrine of the Mean.” Reasoning from the analogy of “right” physical acts, he pronounces that rightness always means adaptation or adjustment to the special requirements of a situation. To this adjustment he gives a quantitative interpretation. To do (or to feel) what is right in a given situation is to do or to feel just the amount required—neither more nor less: to do wrong is to do or to feel too much or too little—to fall short of or over-shoot, “a mean” determined by the situation. The repetition of acts which lie in the mean is the cause of the formation of each and every “goodness of character,” and for this “rules” can be given.\n\n(2) What then is a “moral virtue,” the result of such a process duly\n\ndirected? It is no mere mood of feeling, no mere liability to emotion, no mere natural aptitude or endowment, it is a permanent _state_ of the agent’s self, or, as we might in modern phrase put it, of his will, it consists in a steady self-imposed obedience to a rule of action in certain situations which frequently recur in human life. The rule prescribes the control and regulation within limits of the agent’s natural impulses to act and feel thus and thus. The situations fall into groups which constitute the “fields” of the several “moral virtues”, for each there is a rule, conformity to which secures rightness in the individual acts. Thus the moral ideal appears as a code of rules, accepted by the agent, but as yet _to him_ without rational justification and without system or unity. But the rules prescribe no mechanical uniformity: each within its limits permits variety, and the exactly right amount adopted to the requirements of the individual situation (and every actual situation is individual) must be determined by the intuition of the moment. There is no attempt to reduce the rich possibilities of right action to a single monotonous type. On the contrary, there are acknowledged to be many forms of moral virtue, and there is a long list of them, with their correlative vices enumerated.\n\nThe Doctrine of the Mean here takes a form in which it has impressed subsequent thinkers, but which has less importance than is usually ascribed to it. In the “Table of the Virtues and Vices,” each of the virtues is flanked by two opposite vices, which are respectively the excess and defect of that which in due measure constitutes the virtue. Aristotle tries to show that this is the case in regard to every virtue named and recognised as such, but his treatment is often forced and the endeavour is not very successful. Except as a convenient principle of arrangement of the various forms of praiseworthy or blameworthy characters, generally acknowledged as such by Greek opinion, this form of the doctrine is of no great significance.\n\nBooks III-V are occupied with a survey of the moral virtues and vices. These seem to have been undertaken in order to verify in detail the general account, but this aim is not kept steadily in view. Nor is there any well-considered principle of classification. What we find is a sort of portrait-gallery of the various types of moral excellence which the Greeks of the author’s age admired and strove to encourage. The discussion is full of acute, interesting and sometimes profound observations. Some of the types are those which are and will be admired at all times, but others are connected with peculiar features of Greek life which have now passed away. The most important is that of Justice or the Just Man, to which we may later return. But the discussion is preceded by an attempt to elucidate some difficult and obscure points in the general account of moral virtue and action (Book III, cc i-v). This section is concerned with the notion of Responsibility. The discussion designedly excludes what we may call the metaphysical issues of the problem, which here present themselves, it moves on the level of thought of the practical man, the statesman, and the legislator. Coercion and ignorance of relevant circumstances render acts involuntary and exempt their doer from responsibility, otherwise the act is voluntary and the agent responsible, choice or preference of what is done, and inner consent to the deed, are to be presumed. Neither passion nor ignorance of the right rule can extenuate responsibility. But there is a difference between acts done voluntarily and acts done of _set_ choice or purpose. The latter imply Deliberation. Deliberation involves thinking, thinking out means to ends: in deliberate acts the whole nature of the agent consents to and enters into the act, and in a peculiar sense they are his, they _are_ him in action, and the most significant evidence of what he is. Aristotle is unable wholly to avoid allusion to the metaphysical difficulties and what he does here say upon them is obscure and unsatisfactory. But he insists upon the importance in moral action of the agent’s inner consent, and on the reality of his individual responsibility. For his present purpose the metaphysical difficulties are irrelevant.\n\nThe treatment of Justice in Book V has always been a source of great difficulty to students of the _Ethics_. Almost more than any other part of the work it has exercised influence upon mediaeval and modern thought upon the subject. The distinctions and divisions have become part of the stock-in-trade of would be philosophic jurists. And yet, oddly enough, most of these distinctions have been misunderstood and the whole purport of the discussion misconceived. Aristotle is here dealing with justice in a restricted sense viz as that special goodness of character which is required of every adult citizen and which can be produced by early discipline or habituation. It is the temper or habitual attitude demanded of the citizen for the due exercise of his functions as taking part in the administration of the civic community—as a member of the judicature and executive. The Greek citizen was only exceptionally, and at rare intervals if ever, a law-maker while at any moment he might be called upon to act as a judge (juryman or arbitrator) or as an administrator. For the work of a legislator far more than the moral virtue of justice or fairmindedness was necessary, these were requisite to the rarer and higher “intellectual virtue” of practical wisdom. Then here, too, the discussion moves on a low level, and the raising of fundamental problems is excluded. Hence “distributive justice” is concerned not with the large question of the distribution of political power and privileges among the constituent members or classes of the state but with the smaller questions of the distribution among those of casual gains and even with the division among private claimants of a common fund or inheritance, while “corrective justice” is concerned solely with the management of legal redress. The whole treatment is confused by the unhappy attempt to give a precise mathematical form to the principles of justice in the various fields distinguished. Still it remains an interesting first endeavour to give greater exactness to some of the leading conceptions of jurisprudence.\n\nBook VI appears to have in view two aims: (1) to describe goodness of\nintellect and discover its highest form or forms; (2) to show how this\nis related to goodness of character, and so to conduct generally. As\nall thinking is either theoretical or practical, goodness of intellect\nhas _two_ supreme forms—Theoretical and Practical Wisdom. The first,\nwhich apprehends the eternal laws of the universe, has no direct\nrelation to human conduct: the second is identical with that master\nscience of human life of which the whole treatise, consisting of the\n\n> _Ethics_ and the _Politics_, is an exposition. It is this science which supplies the right rules of conduct Taking them as they emerge in and from practical experience, it formulates them more precisely and organises them into a system where they are all seen to converge upon happiness. The mode in which such knowledge manifests itself is in the power to show that such and such rules of action follow from the very nature of the end or good for man. It presupposes and starts from a clear conception of the end and the wish for it as conceived, and it proceeds by a deduction which is dehberation writ large. In the man of practical wisdom this process has reached its perfect result, and the code of right rules is apprehended as a system with a single principle and so as something wholly rational or reasonable He has not on each occasion to seek and find the right rule applicable to the situation, he produces it at once from within himself, and can at need justify it by exhibiting its rationale, _i.e._ , its connection with the end. This is the consummate form of reason applied to conduct, but there are minor forms of it, less independent or original, but nevertheless of great value, such as the power to think out the proper cause of policy in novel circumstances or the power to see the proper line of treatment to follow in a court of law.\n\nThe form of the thinking which enters into conduct is that which terminates in the production of a rule which declares some means to the end of life. The process presupposes _(a)_ a clear and just apprehension of the nature of that end—such as the _Ethics_ itself endeavours to supply; _(b)_ a correct perception of the conditions of action, _(a)_ at least is impossible except to a man whose character has been duly formed by discipline; it arises only in a man who has acquired moral virtue. For such action and feeling as forms bad character, blinds the eye of the soul and corrupts the moral principle, and the place of practical wisdom is taken by that parody of itself which Aristotle calls “cleverness”—the “wisdom” of the unscrupulous man of the world. Thus true practical wisdom and true goodness of character are interdependent; neither is genuinely possible or “completely” present without the other. This is Aristotle’s contribution to the discussion of the question, so central in Greek Moral Philosophy, of the relation of the intellectual and the passionate factors in conduct.\n\nAristotle is not an intuitionist, but he recognises the implication in conduct of a direct and immediate apprehension both of the end and of the character of his circumstances under which it is from moment to moment realised. The directness of such apprehension makes it analogous to sensation or sense-perception; but it is on his view in the end due to the existence or activity in man of that power in him which is the highest thing in his nature, and akin to or identical with the divine nature—mind, or intelligence. It is this which reveals to us what is best for us—the ideal of a happiness which is the object of our real wish and the goal of all our efforts. But beyond and above the practical ideal of what is best _for man_ begins to show itself another and still higher ideal—that of a life not distinctively human or in a narrow sense practical, yet capable of being participated in by man even under the actual circumstances of this world. For a time, however, this further and higher ideal is ignored.\n\nThe next book (Book VII.), is concerned partly with moral conditions, in which the agent seems to rise above the level of moral virtue or fall below that of moral vice, but partly and more largely with conditions in which the agent occupies a middle position between the two. Aristotle’s attention is here directed chiefly towards the phenomena of “Incontinence,” weakness of will or imperfect self-control. This condition was to the Greeks a matter of only too frequent experience, but it appeared to them peculiarly difficult to understand. How can a man know what is good or best for him, and yet chronically fail to act upon his knowledge? Socrates was driven to the paradox of denying the possibility, but the facts are too strong for him. Knowledge of the right rule may be present, nay the rightfulness of its authority may be acknowledged, and yet time after time it may be disobeyed; the will may be good and yet overmastered by the force of desire, so that the act done is contrary to the agent’s will. Nevertheless the act may be the agent’s, and the will therefore divided against itself. Aristotle is aware of the seriousness and difficulty of the problem, but in spite of the vividness with which he pictures, and the acuteness with which he analyses, the situation in which such action occurs, it cannot be said that he solves the problem. It is time that he rises above the abstract view of it as a conflict between reason and passion, recognising that passion is involved in the knowledge which in conduct prevails or is overborne, and that the force which leads to the wrong act is not blind or ignorant passion, but always has some reason in it. But he tends to lapse back into the abstraction, and his final account is perplexed and obscure. He finds the source of the phenomenon in the nature of the desire for bodily pleasures, which is not irrational but has something rational in it. Such pleasures are not necessarily or inherently bad, as has sometimes been maintained; on the contrary, they are good, but only in certain amounts or under certain conditions, so that the will is often misled, hesitates, and is lost.\n\nBooks VIII. and IX. (on Friendship) are almost an interruption of the argument. The subject-matter of them was a favourite topic of ancient writers, and the treatment is smoother and more orderly than elsewhere in the _Ethics_. The argument is clear, and may be left without comment to the readers. These books contain a necessary and attractive complement to the somewhat dry account of Greek morality in the preceding books, and there are in them profound reflections on what may be called the metaphysics of friendship or love.\n\nAt the beginning of Book X. we return to the topic of Pleasure, which is now regarded from a different point of view. In Book VII. the antagonists were those who over-emphasised the irrationality or badness of Pleasure: here it is rather those who so exaggerate its value as to confuse or identify it with the good or Happiness. But there is offered us in this section much more than criticism of the errors of others. Answers are given both to the psychological question, “What is Pleasure?” and to the ethical question, “What is its value?” Pleasure, we are told, is the natural concomitant and index of perfect activity, distinguishable but inseparable from it—“the activity of a subject at its best acting upon an object at its best.” It is therefore always and in itself a good, but its value rises and falls with that of the activity with which it is conjoined, and which it intensifies and perfects. Hence it follows that the highest and best pleasures are those which accompany the highest and best activity.\n\nPleasure is, therefore, a necessary element in the best life, but it is not the whole of it nor the principal ingredient. The value of a life depends upon the nature and worth of the activity which it involves; given the maximum of full free action, the maximum of pleasure necessary follows. But on what sort of life is such activity possible? This leads us back to the question, What is happiness? In what life can man find the fullest satisfaction for his desires? To this question Aristotle gives an answer which cannot but surprise us after what has preceded. True Happiness, great satisfaction, cannot be found by man in any form of “practical” life, no, not in the fullest and freest exercise possible of the “moral virtues,” not in the life of the citizen or of the great soldier or statesman. To seek it there is to court failure and disappointment. It is to be found in the life of the onlooker, the disinterested spectator; or, to put it more distinctly, “in the life of the philosopher, the life of scientific and philosophic contemplation.” The highest and most satisfying form of life possible to man is “the contemplative life”; it is only in a secondary sense and for those incapable of their life, that the practical or moral ideal is the best. It is time that such a life is not distinctively human, but it is the privilege of man to partake in it, and such participation, at however rare intervals and for however short a period, is the highest Happiness which human life can offer. All other activities have value only because and in so far as they render _this_ life possible.\n\nBut it must not be forgotten that Aristotle conceives of this life as one of intense activity or energising: it is just this which gives it its supremacy. In spite of the almost religious fervour with which he speaks of it (“the most orthodox of his disciples” paraphrases his meaning by describing its content as “the service and vision of God”), it is clear that he identified it with the life of the philosopher, as he understood it, a life of ceaseless intellectual activity in which at least at times all the distractions and disturbances inseparable from practical life seemed to disappear and become as nothing. This ideal was partly an inheritance from the more ardent idealism of his master Plato, but partly it was the expression of personal experience.\n\nThe nobility of this ideal cannot be questioned; the conception of the end of man or a life lived for truth—of a life blissfully absorbed in the vision of truth—is a lofty and inspiring one. But we cannot resist certain criticisms upon its presentation by Aristotle: (1) the relation of it to the lower ideal of practice is left somewhat obscure; (2) it is described in such a way as renders its realisation possible only to a gifted few, and under exceptional circumstances; (3) it seems in various ways, as regards its content, to be unnecessarily and unjustifiably limited. But it must be borne in mind that this is a first endeavour to determine its principle, and that similar failures have attended the attempts to describe the “religious” or the “spiritual” ideals of life, which have continually been suggested by the apparently inherent limitations of the “practical” or “moral” life, which is the subject of Moral Philosophy.\n\nThe Moral Ideal to those who have most deeply reflected on it leads to the thought of an Ideal beyond and above it, which alone gives it meaning, but which seems to escape from definite conception by man. The richness and variety of this Ideal ceaselessly invite, but as ceaselessly defy, our attempts to imprison it in a definite formula or portray it in detailed imagination. Yet the thought of it is and remains inexpungable from our minds.\n\nThis conception of the best life is not forgotten in the _Politics_ The end of life in the state is itself well-living and well-doing—a life which helps to produce the best life The great agency in the production of such life is the State operating through Law, which is Reason backed by Force. For its greatest efficiency there is required the development of a science of legislation. The main drift of what he says here is that the most desirable thing would be that the best reason of the community should be embodied in its laws. But so far as that is not possible, it still is true that anyone who would make himself and others better must become a miniature legislator—must study the general principles of law, morality, and education. The conception of πολιτικὴ with which he opened the _Ethics_ would serve as a guide to a father educating his children as well as to the legislator legislating for the state. Finding in his predecessors no developed doctrine on this subject, Aristotle proposes himself to undertake the construction of it, and sketches in advance the programme of the _Politics_ in the concluding sentence of the _Ethics_ His ultimate object is to answer the questions, What is the best form of Polity, how should each be constituted, and what laws and customs should it adopt and employ? Not till this answer is given will “the philosophy of human affairs” be complete.\n\nOn looking back it will be seen that the discussion of the central topic of the nature and formation of character has expanded into a Philosophy of Human Conduct, merging at its beginning and end into metaphysics The result is a Moral Philosophy set against a background of Political Theory and general Philosophy. The most characteristic features of this Moral Philosophy are due to the fact of its essentially teleological view of human life and action: (1) Every human activity, but especially every human practical activity, is directed towards a simple End discoverable by reflection, and this End is conceived of as the object of universal human desire, as something to be enjoyed, not as something which ought to be done or enacted. Anstotle’s Moral Philosophy is not hedonistic but it is eudæmomstic, the end is the enjoyment of Happiness, not the fulfilment of Duty. (2) Every human practical activity derives its value from its efficiency as a means to that end, it is good or bad, right or wrong, as it conduces or fails to conduce to Happiness Thus his Moral Philosophy is essentially utilitarian or prudential Right action presupposes Thought or Thinking, partly on the development of a clearer and distincter conception of the end of desire, partly as the deduction from that of rules which state the normally effective conditions of its realisation. The thinking involved in right conduct is calculation—calculation of means to an end fixed by nature and foreknowable Action itself is at its best just the realisation of a scheme preconceived and thought out beforehand, commending itself by its inherent attractiveness or promise of enjoyment.\n\nThis view has the great advantage of exhibiting morality as essentially reasonable, but the accompanying disadvantage of lowering it into a somewhat prosaic and unideal Prudentialism, nor is it saved from this by the tacking on to it, by a sort of after-thought, of the second and higher Ideal—an addition which ruins the coherence of the account without really transmuting its substance The source of our dissatisfaction with the whole theory lies deeper than in its tendency to identify the end with the maximum of enjoyment or satisfaction, or to regard the goodness or badness of acts and feelings as lying solely in their efficacy to produce such a result It arises from the application to morality of the distinction of means and end For this distinction, for all its plausibility and usefulness in ordinary thought and speech, cannot finally be maintained In morality—and this is vital to its character—everything is both means and end, and so neither in distinction or separation, and all thinking about it which presupposes the finality of this distinction wanders into misconception and error. The thinking which really matters in conduct is not a thinking which imaginatively forecasts ideals which promise to fulfil desire, or calculates means to their attainment—that is sometimes useful, sometimes harmful, and always subordinate, but thinking which reveals to the agent the situation in which he is to act, both, that is, the universal situation on which as man he always and everywhere stands, and the ever-varying and ever-novel situation in which he as this individual, here and now, finds himself. In such knowledge of given or historic fact lie the natural determinants of his conduct, in such knowledge alone lies the condition of his freedom and his good.\n\nBut this does not mean that Moral Philosophy has not still much to learn from Aristotle’s _Ethics_. The work still remains one of the best introductions to a study of its important subject-matter, it spreads before us a view of the relevant facts, it reduces them to manageable compass and order, it raises some of the central problems, and makes acute and valuable suggestions towards their solution. Above all, it perpetually incites to renewed and independent reflection upon them.\n\nJ. A. SMITH\n\nThe following is a list of the works of Aristotle:—\n\nFirst edition of works (with omission of Rhetorica, Poetica, and second book of Economica), 5 vols by Aldus Manutius, Venice, 1495 8, re impression supervised by Erasmus and with certain corrections by Grynaeus (including Rhetorica and Poetica), 1531, 1539, revised 1550, later editions were followed by that of Immanuel Bekker and Brandis (Greek and Latin), 5 vols. The 5th vol contains the Index by Bomtz, 1831-70, Didot edition (Greek and Latin), 5 vols 1848 74\n\nENGLISH TRANSLATIONS Edited by T Taylor, with Porphyry’s Introduction,\n9 vols, 1812, under editorship of J A Smith and W D Ross, II vols,\n1908-31, Loeb editions Ethica, Rhetorica, Poetica, Physica, Politica,\nMetaphysica, 1926-33\n\nLater editions of separate works _De Anima_ Torstrik, 1862,\nTrendelenburg, 2nd edition, 1877, with English translation, L Wallace,\n1882, Biehl, 1884, 1896, with English, R D Hicks, 1907 _Ethica_ J S\nBrewer (Nicomachean), 1836, W E Jelf, 1856, J F T Rogers, 1865, A\nGrant, 1857 8, 1866, 1874, 1885, E Moore, 1871, 1878, 4th edition,\n1890, Ramsauer (Nicomachean), 1878, Susemihl, 1878, 1880, revised by O\nApelt, 1903, A Grant, 1885, I Bywater (Nicomachean), 1890, J Burnet,\n\n1900\n\n> _Historia Animalium_ Schneider, 1812, Aubert and Wimmer, 1860; Dittmeyer, 1907 _Metaphysica_ Schwegler, 1848, W Christ, 1899 _Organon_ Waitz, 1844 6 _Poetica_ Vahlen, 1867, 1874, with Notes by E Moore, 1875, with English translation by E R Wharton, 1883, 1885, Uberweg, 1870, 1875, with German translation, Susemihl, 1874, Schmidt, 1875, Christ, 1878, I Bywater, 1898, T G Tucker, 1899 _De Republica Athenientium_ Text and facsimile of Papyrus, F G Kenyon, 1891, 3rd edition, 1892, Kaibel and Wilamowitz-Moellendorf, 1891, 3rd edition, 1898, Van Herwerden and Leeuwen (from Kenyon’s text), 1891, Blass, 1892, 1895, 1898, 1903, J E Sandys, 1893 _Politica_ Susemihl, 1872, with German, 1878, 3rd edition, 1882, Susemihl and Hicks, 1894, etc, O Immisch, 1909 _Physica_ C Prantl, 1879 _Rhetorica_ Stahr, 1862, Sprengel (with Latin text), 1867, Cope and Sandys, 1877, Roemer, 1885, 1898 ENGLISH TRANSLATIONS OF ONE OR MORE WORKS De Anima (with Parva Naturalia), by W A Hammond, 1902 Ethica Of Morals to Nicomachus, by E Pargiter, 1745, with Politica by J Gillies, 1797, 1804, 1813, with Rhetorica and Poetica, by T Taylor, 1818, and later editions Nicomachean Ethics, 1819, mainly from text of Bekker by D P Chase, 1847, revised 1861, and later editions, with an introductory essay by G H Lewes (Camelot Classics) 1890, re-edited by J M Mitchell (New Universal Library), 1906, 1910, by R W Browne (Bohn’s Classical Library), 1848, etc, by R Williams, 1869, 1876, by W M Hatch and others (with translation of paraphrase attributed to Andronicus of Rhodes), edited by E Hatch, 1879 by F H Peters, 1881, J E C Welldon, 1892, J Gillies (Lubbock’s Hundred Books) 1893 Historia Animalium, by R Creswell (Bonn’s Classical Library) 1848, with Treatise on Physiognomy, by T Taylor, 1809 Metaphysica, by T Taylor, 1801, by J H M Mahon (Bohn’s Classical Library), 1848 Organon, with Porphyry’s Introduction, by O F Owen (Bohn’s Classical Library), 1848 Posterior Analytics, E Poste, 1850, E S Bourchier, 1901, On Fallacies, E Poste, 1866 Parva Naturaha (Greek and English), by G R T Ross, 1906, with De Anima, by W A Hammond, 1902 Youth and Old Age, Life and Death and Respiration, W Ogle 1897 Poetica, with Notes from the French of D Acier, 1705, by H J Pye, 1788, 1792, T Twining, 1789, 1812, with Preface and Notes by H Hamilton, 1851, Treatise on Rhetorica and Poetica, by T Hobbes (Bohn’s Classical Library), 1850, by Wharton, 1883 (see Greek version), S H Butcher, 1895, 1898, 3rd edition, 1902, E S Bourchier, 1907, by Ingram Bywater, 1909 De Partibus Animalium, W Ogle, 1882 De Republica Athenientium, by E Poste, 1891, F G Kenyon, 1891, T J Dymes, 1891 De Virtutibus et Vitus, by W Bridgman, 1804 Politica, from the French of Regius, 1598, by W Ellis, 1776, 1778, 1888 (Morley’s Universal Library), 1893 (Lubbock’s Hundred Books) by E Walford (with Æconomics, and Life by Dr Gillies), (Bohn’s Classical Library), 1848, J E. C. Welldon, 1883, B Jowett, 1885, with Introduction and Index by H W C Davis, 1905, Books i iii iv (vii) from Bekker’s text by W E Bolland, with Introduction by A Lang, 1877. Problemata (with writings of other philosophers), 1597, 1607, 1680, 1684, etc. Rhetorica, A summary by T Hobbes, 1655 (?), new edition, 1759, by the translators of the Art of Thinking, 1686, 1816, by D M Crimmin, 1812, J Gillies, 1823, Anon 1847, J E C Welldon, 1886, R C Jebb, with Introduction and Supplementary Notes by J E Sandys, 1909 (see under Poetica and Ethica). Secreta Secretorum (supposititious work), Anon 1702, from the Hebrew version by M Gaster, 1907, 1908. Version by Lydgate and Burgh, edited by R Steele (E E T S), 1894, 1898.\n\nLIFE, ETC J W Blakesley, 1839, A Crichton (Jardine’s Naturalist’s Library), 1843, JS Blackie, Four Phases of Morals, Socrates, Aristotle, etc, 1871, G Grote, Aristotle, edited by A Bain and G C Robertson, 1872, 1880, E Wallace, Outlines of the Philosophy of Aristotle, 1875, 1880, A Grant (Ancient Classics for English readers), 1877, T Davidson, Aristotle and Ancient Educational Ideals (Great Educators), 1892, F Sewall, Swedenborg and Aristotle, 1895, W A Heidel, The Necessary and the Contingent of the Aristotelian System (University of Chicago Contributions to Philosophy), 1896, F W Bain, On the Realisation of the Possible, and the Spirit of Aristotle, 1899, J H Hyslop, The Ethics of the Greek Philosophers, etc (Evolution of Ethics), 1903, M V Williams, Six Essays on the Platonic Theory of Knowledge as expounded in the later dialogues and reviewed by Aristotle, 1908, J M Watson, Aristotle’s Criticism of Plato, 1909 A E Taylor, Aristotle, 1919, W D Ross, Aristotle, 1923.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 3,
+    "text": "INTRODUCTION"
+  },
+  "word_count": 8475,
+  "block_count": 47
+}

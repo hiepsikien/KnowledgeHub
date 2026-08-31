@@ -1,0 +1,54 @@
+{
+  "chapter_id": "ch-078",
+  "title": "_Preludes and Fugues (241)._ _In C._",
+  "block_start": 1204,
+  "block_end": 1205,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Preludes and Fugues (241)._ _In C._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "em",
+          "text": "_Preludes and Fugues (241)._"
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "style": "em",
+          "text": "_In C._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_In G._       The subject of the fugue is the same as that of the opening chorus in the cantata, “Ich hatte viel Bekümmernis.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 7,
+          "style": "em",
+          "text": "_In G._"
+        },
+        {
+          "start": 97,
+          "end": 126,
+          "style": "quote",
+          "text": "“Ich hatte viel Bekümmernis.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Preludes and Fugues (241)._ _In C._\n\n_In G._       The subject of the fugue is the same as that of the opening chorus in the cantata, “Ich hatte viel Bekümmernis.”",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1204,
+    "text": "_Preludes and Fugues (241)._ _In C._"
+  },
+  "word_count": 32,
+  "block_count": 2
+}

@@ -1,0 +1,126 @@
+{
+  "chapter_id": "ch-080",
+  "title": "_Prelude and Fugue in C (241)._ _A minor._ _E minor._",
+  "block_start": 1208,
+  "block_end": 1213,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Prelude and Fugue in C (241)._ _A minor._ _E minor._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "em",
+          "text": "_Prelude and Fugue in C (241)._"
+        },
+        {
+          "start": 32,
+          "end": 42,
+          "style": "em",
+          "text": "_A minor._"
+        },
+        {
+          "start": 43,
+          "end": 53,
+          "style": "em",
+          "text": "_E minor._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_B minor._       The Peters’ edition is from the original MS. in the possession of Sir Herbert Oakeley.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 10,
+          "style": "em",
+          "text": "_B minor._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Prelude and Fugue (242) E flat._       From the “Clavierübung.” The fugue, like those of Buxtehude, is in three movements.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 33,
+          "style": "em",
+          "text": "_Prelude and Fugue (242) E flat._"
+        },
+        {
+          "start": 49,
+          "end": 64,
+          "style": "quote",
+          "text": "“Clavierübung.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue (242) in F._       The compass of the pedals in this toccata shows that it must have been written for the organ in the Lutheran Church at Cöthen. (See Glossary “Orgel-büchlein.”) In the Bachgesellschaft edition the toccata is called fantasia.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "em",
+          "text": "_Toccata and Fugue (242) in F._"
+        },
+        {
+          "start": 165,
+          "end": 197,
+          "style": "paren_cite",
+          "text": "(See Glossary “Orgel-büchlein.”)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_In D minor._       Called Dorian from the flat being omitted from the signature. The toccata is called “prelude” in some copies.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 13,
+          "style": "em",
+          "text": "_In D minor._"
+        },
+        {
+          "start": 104,
+          "end": 113,
+          "style": "quote",
+          "text": "“prelude”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Preludes and Fugue (242) in D minor._       The prelude has no pedal part. The fugue is arranged from the earlier violin solo fugue in G minor (228).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 38,
+          "style": "em",
+          "text": "_Preludes and Fugue (242) in D minor._"
+        },
+        {
+          "start": 144,
+          "end": 149,
+          "style": "paren_page",
+          "text": "(228)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Prelude and Fugue in C (241)._ _A minor._ _E minor._\n\n_B minor._       The Peters’ edition is from the original MS. in the possession of Sir Herbert Oakeley.\n\n_Prelude and Fugue (242) E flat._       From the “Clavierübung.” The fugue, like those of Buxtehude, is in three movements.\n\n_Toccata and Fugue (242) in F._       The compass of the pedals in this toccata shows that it must have been written for the organ in the Lutheran Church at Cöthen. (See Glossary “Orgel-büchlein.”) In the Bachgesellschaft edition the toccata is called fantasia.\n\n_In D minor._       Called Dorian from the flat being omitted from the signature. The toccata is called “prelude” in some copies.\n\n_Preludes and Fugue (242) in D minor._       The prelude has no pedal part. The fugue is arranged from the earlier violin solo fugue in G minor (228).",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1208,
+    "text": "_Prelude and Fugue in C (241)._ _A minor._ _E minor._"
+  },
+  "word_count": 144,
+  "block_count": 6
+}

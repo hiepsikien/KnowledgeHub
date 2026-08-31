@@ -1,0 +1,1426 @@
+{
+  "chapter_id": "ch-173",
+  "title": "OF THE INTELLECTUAL POWERS (In Thirteen Articles)",
+  "block_start": 5720,
+  "block_end": 5830,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "OF THE INTELLECTUAL POWERS (In Thirteen Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 27,
+          "end": 49,
+          "style": "paren_cite",
+          "text": "(In Thirteen Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The next question concerns the intellectual powers, under which head there are thirteen points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) Whether the intellect is a power of the soul, or its essence?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) If it be a power, whether it is a passive power?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) If it is a passive power, whether there is an active intellect?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) Whether it is something in the soul?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(5) Whether the active intellect is one in all?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(5)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(6) Whether memory is in the intellect?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(6)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(7) Whether the memory be distinct from the intellect?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(7)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(8) Whether the reason is a distinct power from the intellect?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(8)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(9) Whether the superior and inferior reason are distinct powers?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(9)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(10) Whether the intelligence is distinct from the intellect?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "list_marker",
+          "text": "(10)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(11) Whether the speculative and practical intellect are distinct powers?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "list_marker",
+          "text": "(11)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(12) Whether \"synderesis\" is a power of the intellectual part?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "list_marker",
+          "text": "(12)"
+        },
+        {
+          "start": 13,
+          "end": 25,
+          "style": "quote",
+          "text": "\"synderesis\""
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(13) Whether the conscience is a power of the intellectual part?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "list_marker",
+          "text": "(13)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 79, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Intellect Is a Power of the Soul?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the intellect is not a power of the soul, but the essence of the soul. For the intellect seems to be the same as the mind. Now the mind is not a power of the soul, but the essence; for Augustine says (De Trin. ix, 2): \"Mind and spirit are not relative things, but denominate the essence.\" Therefore the intellect is the essence of the soul.",
+      "spans": [
+        {
+          "start": 232,
+          "end": 248,
+          "style": "paren_cite",
+          "text": "(De Trin. ix, 2)"
+        },
+        {
+          "start": 250,
+          "end": 320,
+          "style": "quote",
+          "text": "\"Mind and spirit are not relative things, but denominate the essence.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, different genera of the soul's powers are not united in some one power, but only in the essence of the soul. Now the appetitive and the intellectual are different genera of the soul's powers as the Philosopher says (De Anima ii, 3), but they are united in the mind, for Augustine (De Trin. x, 11) places the intelligence and will in the mind. Therefore the mind and intellect of man is of the very essence of the soul and not a power thereof.",
+      "spans": [
+        {
+          "start": 232,
+          "end": 248,
+          "style": "paren_cite",
+          "text": "(De Anima ii, 3)"
+        },
+        {
+          "start": 297,
+          "end": 313,
+          "style": "paren_cite",
+          "text": "(De Trin. x, 11)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, according to Gregory, in a homily for the Ascension (xxix in Ev.), \"man understands with the angels.\" But angels are called \"minds\" and \"intellects.\" Therefore the mind and intellect of man are not a power of the soul, but the soul itself.",
+      "spans": [
+        {
+          "start": 69,
+          "end": 82,
+          "style": "paren_cite",
+          "text": "(xxix in Ev.)"
+        },
+        {
+          "start": 84,
+          "end": 118,
+          "style": "quote",
+          "text": "\"man understands with the angels.\""
+        },
+        {
+          "start": 141,
+          "end": 148,
+          "style": "quote",
+          "text": "\"minds\""
+        },
+        {
+          "start": 153,
+          "end": 166,
+          "style": "quote",
+          "text": "\"intellects.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, a substance is intellectual by the fact that it is immaterial. But the soul is immaterial through its essence. Therefore it seems that the soul must be intellectual through its essence."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher assigns the intellectual faculty as a power of the soul (De Anima ii, 3).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 91,
+          "end": 107,
+          "style": "paren_cite",
+          "text": "(De Anima ii, 3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ In accordance with what has been already shown (Q. 54, A. 3; Q. 77, A. 1) it is necessary to say that the intellect is a power of the soul, and not the very essence of the soul. For then alone the essence of that which operates is the immediate principle of operation, when operation itself is its being: for as power is to operation as its act, so is the essence to being. But in God alone His action of understanding is His very Being. Wherefore in God alone is His intellect His essence: while in other intellectual creatures, the intellect is a power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 64,
+          "end": 90,
+          "style": "paren_aside",
+          "text": "(Q. 54, A. 3; Q. 77, A. 1)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Sense is sometimes taken for the power, and sometimes for the sensitive soul; for the sensitive soul takes its name from its chief power, which is sense. And in like manner the intellectual soul is sometimes called intellect, as from its chief power; and thus we read (De Anima i, 4), that the \"intellect is a substance.\" And in this sense also Augustine says that the mind is spirit and essence (De Trin. ix, 2; xiv, 16).",
+      "spans": [
+        {
+          "start": 282,
+          "end": 297,
+          "style": "paren_cite",
+          "text": "(De Anima i, 4)"
+        },
+        {
+          "start": 308,
+          "end": 335,
+          "style": "quote",
+          "text": "\"intellect is a substance.\""
+        },
+        {
+          "start": 410,
+          "end": 435,
+          "style": "paren_aside",
+          "text": "(De Trin. ix, 2; xiv, 16)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The appetitive and intellectual powers are different genera of powers in the soul, by reason of the different formalities of their objects. But the appetitive power agrees partly with the intellectual power and partly with the sensitive in its mode of operation either through a corporeal organ or without it: for appetite follows apprehension. And in this way Augustine puts the will in the mind; and the Philosopher, in the reason (De Anima iii, 9).",
+      "spans": [
+        {
+          "start": 447,
+          "end": 464,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 9)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: In the angels there is no other power besides the intellect, and the will, which follows the intellect. And for this reason an angel is called a \"mind\" or an \"intellect\"; because his whole power consists in this. But the soul has many other powers, such as the sensitive and nutritive powers, and therefore the comparison fails.",
+      "spans": [
+        {
+          "start": 159,
+          "end": 165,
+          "style": "quote",
+          "text": "\"mind\""
+        },
+        {
+          "start": 172,
+          "end": 183,
+          "style": "quote",
+          "text": "\"intellect\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: The immateriality of the created intelligent substance is not its intellect; and through its immateriality it has the power of intelligence. Wherefore it follows not that the intellect is the substance of the soul, but that it is its virtue and power."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 79, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Intellect Is a Passive Power?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the intellect is not a passive power. For everything is passive by its matter, and acts by its form. But the intellectual power results from the immateriality of the intelligent substance. Therefore it seems that the intellect is not a passive power."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the intellectual power is incorruptible, as we have said above (Q. 79, A. 6). But \"if the intellect is passive, it is corruptible\" (De Anima iii, 5). Therefore the intellectual power is not passive.",
+      "spans": [
+        {
+          "start": 80,
+          "end": 93,
+          "style": "paren_cite",
+          "text": "(Q. 79, A. 6)"
+        },
+        {
+          "start": 99,
+          "end": 147,
+          "style": "quote",
+          "text": "\"if the intellect is passive, it is corruptible\""
+        },
+        {
+          "start": 148,
+          "end": 165,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the \"agent is nobler than the patient,\" as Augustine (Gen. ad lit. xii, 16) and Aristotle (De Anima iii, 5) says. But all the powers of the vegetative part are active; yet they are the lowest among the powers of the soul. Much more, therefore, all the intellectual powers, which are the highest, are active.",
+      "spans": [
+        {
+          "start": 21,
+          "end": 56,
+          "style": "quote",
+          "text": "\"agent is nobler than the patient,\""
+        },
+        {
+          "start": 70,
+          "end": 92,
+          "style": "paren_cite",
+          "text": "(Gen. ad lit. xii, 16)"
+        },
+        {
+          "start": 107,
+          "end": 124,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher says (De Anima iii, 4) that \"to understand is in a way to be passive.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 4)"
+        },
+        {
+          "start": 63,
+          "end": 105,
+          "style": "quote",
+          "text": "\"to understand is in a way to be passive.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ To be passive may be taken in three ways. Firstly, in its most strict sense, when from a thing is taken something which belongs to it by virtue either of its nature, or of its proper inclination: as when water loses coolness by heating, and as when a man becomes ill or sad. Secondly, less strictly, a thing is said to be passive, when something, whether suitable or unsuitable, is taken away from it. And in this way not only he who is ill is said to be passive, but also he who is healed; not only he that is sad, but also he that is joyful; or whatever way he be altered or moved. Thirdly, in a wide sense a thing is said to be passive, from the very fact that what is in potentiality to something receives that to which it was in potentiality, without being deprived of anything. And accordingly, whatever passes from potentiality to act, may be said to be passive, even when it is perfected. And thus with us to understand is to be passive. This is clear from the following reason. For the intellect, as we have seen above (Q. 78, A. 1), has an operation extending to universal being. We may therefore see whether the intellect be in act or potentiality by observing first of all the nature of the relation of the intellect to universal being. For we find an intellect whose relation to universal being is that of the act of all being: and such is the Divine intellect, which is the Essence of God, in which originally and virtually, all being pre-exists as in its first cause. And therefore the Divine intellect is not in potentiality, but is pure act. But no created intellect can be an act in relation to the whole universal being; otherwise it would needs be an infinite being. Wherefore every created intellect is not the act of all things intelligible, by reason of its very existence; but is compared to these intelligible things as a potentiality to act.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 1045,
+          "end": 1058,
+          "style": "paren_cite",
+          "text": "(Q. 78, A. 1)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Now, potentiality has a double relation to act. There is a potentiality which is always perfected by its act: as the matter of the heavenly bodies (Q. 58, A. 1). And there is another potentiality which is not always in act, but proceeds from potentiality to act; as we observe in things that are corrupted and generated. Wherefore the angelic intellect is always in act as regards those things which it can understand, by reason of its proximity to the first intellect, which is pure act, as we have said above. But the human intellect, which is the lowest in the order of intelligence and most remote from the perfection of the Divine intellect, is in potentiality with regard to things intelligible, and is at first \"like a clean tablet on which nothing is written,\" as the Philosopher says (De Anima iii, 4). This is made clear from the fact, that at first we are only in potentiality to understand, and afterwards we are made to understand actually. And so it is evident that with us to understand is \"in a way to be passive\"; taking passion in the third sense. And consequently the intellect is a passive power.",
+      "spans": [
+        {
+          "start": 147,
+          "end": 160,
+          "style": "paren_cite",
+          "text": "(Q. 58, A. 1)"
+        },
+        {
+          "start": 718,
+          "end": 768,
+          "style": "quote",
+          "text": "\"like a clean tablet on which nothing is written,\""
+        },
+        {
+          "start": 793,
+          "end": 810,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 4)"
+        },
+        {
+          "start": 1005,
+          "end": 1029,
+          "style": "quote",
+          "text": "\"in a way to be passive\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: This objection is verified of passion in the first and second senses, which belong to primary matter. But in the third sense passion is in anything which is reduced from potentiality to act."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: \"Passive intellect\" is the name given by some to the sensitive appetite, in which are the passions of the soul; which appetite is also called \"rational by participation,\" because it \"obeys the reason\" (Ethic. i, 13). Others give the name of passive intellect to the cogitative power, which is called the \"particular reason.\" And in each case \"passive\" may be taken in the two first senses; forasmuch as this so-called intellect is the act of a corporeal organ. But the intellect which is in potentiality to things intelligible, and which for this reason Aristotle calls the \"possible\" intellect (De Anima iii, 4) is not passive except in the third sense: for it is not an act of a corporeal organ. Hence it is incorruptible.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 33,
+          "style": "quote",
+          "text": "\"Passive intellect\""
+        },
+        {
+          "start": 156,
+          "end": 184,
+          "style": "quote",
+          "text": "\"rational by participation,\""
+        },
+        {
+          "start": 196,
+          "end": 214,
+          "style": "quote",
+          "text": "\"obeys the reason\""
+        },
+        {
+          "start": 215,
+          "end": 229,
+          "style": "paren_cite",
+          "text": "(Ethic. i, 13)"
+        },
+        {
+          "start": 318,
+          "end": 338,
+          "style": "quote",
+          "text": "\"particular reason.\""
+        },
+        {
+          "start": 356,
+          "end": 365,
+          "style": "quote",
+          "text": "\"passive\""
+        },
+        {
+          "start": 588,
+          "end": 598,
+          "style": "quote",
+          "text": "\"possible\""
+        },
+        {
+          "start": 609,
+          "end": 626,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The agent is nobler than the patient, if the action and the passion are referred to the same thing: but not always, if they refer to different things. Now the intellect is a passive power in regard to the whole universal being: while the vegetative power is active in regard to some particular thing, namely, the body as united to the soul. Wherefore nothing prevents such a passive force being nobler than such an active one."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 79, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether There Is an Active Intellect?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that there is no active intellect. For as the senses are to things sensible, so is our intellect to things intelligible. But because sense is in potentiality to things sensible, the sense is not said to be active, but only passive. Therefore, since our intellect is in potentiality to things intelligible, it seems that we cannot say that the intellect is active, but only that it is passive."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, if we say that also in the senses there is something active, such as light: on the contrary, light is required for sight, inasmuch as it makes the medium to be actually luminous; for color of its own nature moves the luminous medium. But in the operation of the intellect there is no appointed medium that has to be brought into act. Therefore there is no necessity for an active intellect."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the likeness of the agent is received into the patient according to the nature of the patient. But the passive intellect is an immaterial power. Therefore its immaterial nature suffices for forms to be received into it immaterially. Now a form is intelligible in act from the very fact that it is immaterial. Therefore there is no need for an active intellect to make the species actually intelligible."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher says (De Anima iii, 5), \"As in every nature, so in the soul is there something by which it becomes all things, and something by which it makes all things.\" Therefore we must admit an active intellect.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 59,
+          "end": 190,
+          "style": "quote",
+          "text": "\"As in every nature, so in the soul is there something by which it becomes all things, and something by which it makes all things.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ According to the opinion of Plato, there is no need for an active intellect in order to make things actually intelligible; but perhaps in order to provide intellectual light to the intellect, as will be explained farther on (A. 4). For Plato supposed that the forms of natural things subsisted apart from matter, and consequently that they are intelligible: since a thing is actually intelligible from the very fact that it is immaterial. And he called such forms \"species or ideas\"; from a participation of which, he said that even corporeal matter was formed, in order that individuals might be naturally established in their proper genera and species: and that our intellect was formed by such participation in order to have knowledge of the genera and species of things. But since Aristotle did not allow that forms of natural things exist apart from matter, and as forms existing in matter are not actually intelligible; it follows that the natures or forms of the sensible things which we understand are not actually intelligible. Now nothing is reduced from potentiality to act except by something in act; as the senses as made actual by what is actually sensible. We must therefore assign on the part of the intellect some power to make things actually intelligible, by abstraction of the species from material conditions. And such is the necessity for an active intellect.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 241,
+          "end": 247,
+          "style": "paren_cite",
+          "text": "(A. 4)"
+        },
+        {
+          "start": 481,
+          "end": 499,
+          "style": "quote",
+          "text": "\"species or ideas\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Sensible things are found in act outside the soul; and hence there is no need for an active sense. Wherefore it is clear that in the nutritive part all the powers are active, whereas in the sensitive part all are passive: but in the intellectual part, there is something active and something passive."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: There are two opinions as to the effect of light. For some say that light is required for sight, in order to make colors actually visible. And according to this the active intellect is required for understanding, in like manner and for the same reason as light is required for seeing. But in the opinion of others, light is required for sight; not for the colors to become actually visible; but in order that the medium may become actually luminous, as the Commentator says on _De Anima_ ii. And according to this, Aristotle's comparison of the active intellect to light is verified in this, that as it is required for understanding, so is light required for seeing; but not for the same reason.",
+      "spans": [
+        {
+          "start": 491,
+          "end": 501,
+          "style": "em",
+          "text": "_De Anima_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: If the agent pre-exist, it may well happen that its likeness is received variously into various things, on account of their dispositions. But if the agent does not pre-exist, the disposition of the recipient has nothing to do with the matter. Now the intelligible in act is not something existing in nature; if we consider the nature of things sensible, which do not subsist apart from matter. And therefore in order to understand them, the immaterial nature of the passive intellect would not suffice but for the presence of the active intellect which makes things actually intelligible by way of abstraction."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 79, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Active Intellect Is Something in the Soul?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the active intellect is not something in the soul. For the effect of the active intellect is to give light for the purpose of understanding. But this is done by something higher than the soul: according to John 1:9, \"He was the true light that enlighteneth every man coming into this world.\" Therefore the active intellect is not something in the soul.",
+      "spans": [
+        {
+          "start": 248,
+          "end": 323,
+          "style": "quote",
+          "text": "\"He was the true light that enlighteneth every man coming into this world.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the Philosopher (De Anima iii, 5) says of the active intellect, \"that it does not sometimes understand and sometimes not understand.\" But our soul does not always understand: sometimes it understands, sometimes it does not understand. Therefore the active intellect is not something in our soul.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 50,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 81,
+          "end": 150,
+          "style": "quote",
+          "text": "\"that it does not sometimes understand and sometimes not understand.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, agent and patient suffice for action. If, therefore, the passive intellect, which is a passive power, is something belonging to the soul; and also the active intellect, which is an active power: it follows that a man would always be able to understand when he wished, which is clearly false. Therefore the active intellect is not something in our soul."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, the Philosopher (De Anima iii, 5) says that the active intellect is a \"substance in actual being.\" But nothing can be in potentiality and in act with regard to the same thing. If, therefore, the passive intellect, which is in potentiality to all things intelligible, is something in the soul, it seems impossible for the active intellect to be also something in our soul.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 50,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 87,
+          "end": 115,
+          "style": "quote",
+          "text": "\"substance in actual being.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, if the active intellect is something in the soul, it must be a power. For it is neither a passion nor a habit; since habits and passions are not in the nature of agents in regard to the passivity of the soul; but rather passion is the very action of the passive power; while habit is something which results from acts. But every power flows from the essence of the soul. It would therefore follow that the active intellect flows from the essence of the soul. And thus it would not be in the soul by way of participation from some higher intellect: which is unfitting. Therefore the active intellect is not something in our soul."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher says (De Anima iii, 5), that \"it is necessary for these differences,\" namely, the passive and active intellect, \"to be in the soul.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 64,
+          "end": 104,
+          "style": "quote",
+          "text": "\"it is necessary for these differences,\""
+        },
+        {
+          "start": 147,
+          "end": 167,
+          "style": "quote",
+          "text": "\"to be in the soul.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The active intellect, of which the Philosopher speaks, is something in the soul. In order to make this evident, we must observe that above the intellectual soul of man we must needs suppose a superior intellect, from which the soul acquires the power of understanding. For what is such by participation, and what is mobile, and what is imperfect always requires the pre-existence of something essentially such, immovable and perfect. Now the human soul is called intellectual by reason of a participation in intellectual power; a sign of which is that it is not wholly intellectual but only in part. Moreover it reaches to the understanding of truth by arguing, with a certain amount of reasoning and movement. Again it has an imperfect understanding; both because it does not understand everything, and because, in those things which it does understand, it passes from potentiality to act. Therefore there must needs be some higher intellect, by which the soul is helped to understand.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Wherefore some held that this intellect, substantially separate, is the active intellect, which by lighting up the phantasms as it were, makes them to be actually intelligible. But, even supposing the existence of such a separate active intellect, it would still be necessary to assign to the human soul some power participating in that superior intellect, by which power the human soul makes things actually intelligible. Just as in other perfect natural things, besides the universal active causes, each one is endowed with its proper powers derived from those universal causes: for the sun alone does not generate man; but in man is the power of begetting man: and in like manner with other perfect animals. Now among these lower things nothing is more perfect than the human soul. Wherefore we must say that in the soul is some power derived from a higher intellect, whereby it is able to light up the phantasms. And we know this by experience, since we perceive that we abstract universal forms from their particular conditions, which is to make them actually intelligible. Now no action belongs to anything except through some principle formally inherent therein; as we have said above of the passive intellect (Q. 76, A. 1). Therefore the power which is the principle of this action must be something in the soul. For this reason Aristotle (De Anima iii, 5) compared the active intellect to light, which is something received into the air: while Plato compared the separate intellect impressing the soul to the sun, as Themistius says in his commentary on _De Anima_ iii. But the separate intellect, according to the teaching of our faith, is God Himself, Who is the soul's Creator, and only beatitude; as will be shown later on (Q. 90, A. 3; I-II, Q. 3, A. 7). Wherefore the human soul derives its intellectual light from Him, according to Ps. 4:7, \"The light of Thy countenance, O Lord, is signed upon us.\"",
+      "spans": [
+        {
+          "start": 1217,
+          "end": 1230,
+          "style": "paren_cite",
+          "text": "(Q. 76, A. 1)"
+        },
+        {
+          "start": 1347,
+          "end": 1364,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 1563,
+          "end": 1573,
+          "style": "em",
+          "text": "_De Anima_"
+        },
+        {
+          "start": 1736,
+          "end": 1767,
+          "style": "paren_aside",
+          "text": "(Q. 90, A. 3; I-II, Q. 3, A. 7)"
+        },
+        {
+          "start": 1857,
+          "end": 1915,
+          "style": "quote",
+          "text": "\"The light of Thy countenance, O Lord, is signed upon us.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: That true light enlightens as a universal cause, from which the human soul derives a particular power, as we have explained."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The Philosopher says those words not of the active intellect, but of the intellect in act: of which he had already said: \"Knowledge in act is the same as the thing.\" Or, if we refer those words to the active intellect, then they are said because it is not owing to the active intellect that sometimes we do, and sometimes we do not understand, but to the intellect which is in potentiality.",
+      "spans": [
+        {
+          "start": 135,
+          "end": 179,
+          "style": "quote",
+          "text": "\"Knowledge in act is the same as the thing.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: If the relation of the active intellect to the passive were that of the active object to a power, as, for instance, of the visible in act to the sight; it would follow that we could understand all things instantly, since the active intellect is that which makes all things (in act). But now the active intellect is not an object, rather is it that whereby the objects are made to be in act: for which, besides the presence of the active intellect, we require the presence of phantasms, the good disposition of the sensitive powers, and practice in this sort of operation; since through one thing understood, other things come to be understood, as from terms are made propositions, and from first principles, conclusions. From this point of view it matters not whether the active intellect is something belonging to the soul, or something separate from the soul.",
+      "spans": [
+        {
+          "start": 287,
+          "end": 295,
+          "style": "paren_cite",
+          "text": "(in act)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: The intellectual soul is indeed actually immaterial, but it is in potentiality to determinate species. On the contrary, phantasms are actual images of certain species, but are immaterial in potentiality. Wherefore nothing prevents one and the same soul, inasmuch as it is actually immaterial, having one power by which it makes things actually immaterial, by abstraction from the conditions of individual matter: which power is called the \"active intellect\"; and another power, receptive of such species, which is called the \"passive intellect\" by reason of its being in potentiality to such species.",
+      "spans": [
+        {
+          "start": 453,
+          "end": 471,
+          "style": "quote",
+          "text": "\"active intellect\""
+        },
+        {
+          "start": 539,
+          "end": 558,
+          "style": "quote",
+          "text": "\"passive intellect\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: Since the essence of the soul is immaterial, created by the supreme intellect, nothing prevents that power which it derives from the supreme intellect, and whereby it abstracts from matter, flowing from the essence of the soul, in the same way as its other powers."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIFTH ARTICLE [I, Q. 79, Art. 5]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 5]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Active Intellect Is One in All?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that there is one active intellect in all. For what is separate from the body is not multiplied according to the number of bodies. But the active intellect is \"separate,\" as the Philosopher says (De Anima iii, 5). Therefore it is not multiplied in the many human bodies, but is one for all men.",
+      "spans": [
+        {
+          "start": 186,
+          "end": 197,
+          "style": "quote",
+          "text": "\"separate,\""
+        },
+        {
+          "start": 222,
+          "end": 239,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the active intellect is the cause of the universal, which is one in many. But that which is the cause of unity is still more itself one. Therefore the active intellect is the same in all."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, all men agree in the first intellectual concepts. But to these they assent by the active intellect. Therefore all agree in one active intellect."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher says (De Anima iii, 5) that the active intellect is as a light. But light is not the same in the various things enlightened. Therefore the same active intellect is not in various men.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The truth about this question depends on what we have already said (A. 4). For if the active intellect were not something belonging to the soul, but were some separate substance, there would be one active intellect for all men. And this is what they mean who hold that there is one active intellect for all. But if the active intellect is something belonging to the soul, as one of its powers, we are bound to say that there are as many active intellects as there are souls, which are multiplied according to the number of men, as we have said above (Q. 76, A. 2). For it is impossible that one same power belong to various substances.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 84,
+          "end": 90,
+          "style": "paren_cite",
+          "text": "(A. 4)"
+        },
+        {
+          "start": 567,
+          "end": 580,
+          "style": "paren_cite",
+          "text": "(Q. 76, A. 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: The Philosopher proves that the active intellect is separate, by the fact that the passive intellect is separate: because, as he says (De Anima iii, 5), \"the agent is more noble than the patient.\" Now the passive intellect is said to be separate, because it is not the act of any corporeal organ. And in the same sense the active intellect is also called \"separate\"; but not as a separate substance.",
+      "spans": [
+        {
+          "start": 148,
+          "end": 165,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 5)"
+        },
+        {
+          "start": 167,
+          "end": 210,
+          "style": "quote",
+          "text": "\"the agent is more noble than the patient.\""
+        },
+        {
+          "start": 369,
+          "end": 379,
+          "style": "quote",
+          "text": "\"separate\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The active intellect is the cause of the universal, by abstracting it from matter. But for this purpose it need not be the same intellect in all intelligent beings; but it must be one in its relationship to all those things from which it abstracts the universal, with respect to which things the universal is one. And this befits the active intellect inasmuch as it is immaterial."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: All things which are of one species enjoy in common the action which accompanies the nature of the species, and consequently the power which is the principle of such action; but not so as that power be identical in all. Now to know the first intelligible principles is the action belonging to the human species. Wherefore all men enjoy in common the power which is the principle of this action: and this power is the active intellect. But there is no need for it to be identical in all. Yet it must be derived by all from one principle. And thus the possession by all men in common of the first principles proves the unity of the separate intellect, which Plato compares to the sun; but not the unity of the active intellect, which Aristotle compares to light."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SIXTH ARTICLE [I, Q. 79, Art. 6]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 6]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Memory Is in the Intellectual Part of the Soul?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that memory is not in the intellectual part of the soul. For Augustine says (De Trin. xii, 2,3,8) that to the higher part of the soul belongs those things which are not \"common to man and beast.\" But memory is common to man and beast, for he says (De Trin. xii, 2, 3, 8) that \"beasts can sense corporeal things through the senses of the body, and commit them to memory.\" Therefore memory does not belong to the intellectual part of the soul.",
+      "spans": [
+        {
+          "start": 103,
+          "end": 124,
+          "style": "paren_cite",
+          "text": "(De Trin. xii, 2,3,8)"
+        },
+        {
+          "start": 196,
+          "end": 222,
+          "style": "quote",
+          "text": "\"common to man and beast.\""
+        },
+        {
+          "start": 274,
+          "end": 297,
+          "style": "paren_aside",
+          "text": "(De Trin. xii, 2, 3, 8)"
+        },
+        {
+          "start": 303,
+          "end": 397,
+          "style": "quote",
+          "text": "\"beasts can sense corporeal things through the senses of the body, and commit them to memory.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, memory is of the past. But the past is said of something with regard to a fixed time. Memory, therefore, knows a thing under a condition of a fixed time; which involves knowledge under the conditions of \"here\" and \"now.\" But this is not the province of the intellect, but of the sense. Therefore memory is not in the intellectual part, but only in the sensitive.",
+      "spans": [
+        {
+          "start": 220,
+          "end": 226,
+          "style": "quote",
+          "text": "\"here\""
+        },
+        {
+          "start": 231,
+          "end": 237,
+          "style": "quote",
+          "text": "\"now.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, in the memory are preserved the species of those things of which we are not actually thinking. But this cannot happen in the intellect, because the intellect is reduced to act by the fact that the intelligible species are received into it. Now the intellect in act implies understanding in act; and therefore the intellect actually understands all things of which it has the species. Therefore the memory is not in the intellectual part."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (De Trin. x, 11) that \"memory, understanding, and will are one mind.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 50,
+          "style": "paren_cite",
+          "text": "(De Trin. x, 11)"
+        },
+        {
+          "start": 56,
+          "end": 103,
+          "style": "quote",
+          "text": "\"memory, understanding, and will are one mind.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Since it is of the nature of the memory to preserve the species of those things which are not actually apprehended, we must first of all consider whether the intelligible species can thus be preserved in the intellect: because Avicenna held that this was impossible. For he admitted that this could happen in the sensitive part, as to some powers, inasmuch as they are acts of corporeal organs, in which certain species may be preserved apart from actual apprehension. But in the intellect, which has no corporeal organ, nothing but what is intelligible exists. Wherefore every thing of which the likeness exists in the intellect must be actually understood. Thus, therefore, according to him, as soon as we cease to understand something actually, the species of that thing ceases to be in our intellect, and if we wish to understand that thing anew, we must turn to the active intellect, which he held to be a separate substance, in order that the intelligible species may thence flow again into our passive intellect. And from the practice and habit of turning to the active intellect there is formed, according to him, a certain aptitude in the passive intellect for turning to the active intellect; which aptitude he calls the habit of knowledge. According, therefore, to this supposition, nothing is preserved in the intellectual part that is not actually understood: wherefore it would not be possible to admit memory in the intellectual part.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But this opinion is clearly opposed to the teaching of Aristotle. For he says (De Anima iii, 4) that, when the passive intellect \"is identified with each thing as knowing it, it is said to be in act,\" and that \"this happens when it can operate of itself. And, even then, it is in potentiality, but not in the same way as before learning and discovering.\" Now, the passive intellect is said to be each thing, inasmuch as it receives the intelligible species of each thing. To the fact, therefore, that it receives the species of intelligible things it owes its being able to operate when it wills, but not so that it be always operating: for even then is it in potentiality in a certain sense, though otherwise than before the act of understanding--namely, in the sense that whoever has habitual knowledge is in potentiality to actual consideration.",
+      "spans": [
+        {
+          "start": 78,
+          "end": 95,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 4)"
+        },
+        {
+          "start": 129,
+          "end": 200,
+          "style": "quote",
+          "text": "\"is identified with each thing as knowing it, it is said to be in act,\""
+        },
+        {
+          "start": 210,
+          "end": 354,
+          "style": "quote",
+          "text": "\"this happens when it can operate of itself. And, even then, it is in potentiality, but not in the same way as before learning and discovering.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The foregoing opinion is also opposed to reason. For what is received into something is received according to the conditions of the recipient. But the intellect is of a more stable nature, and is more immovable than corporeal nature. If, therefore, corporeal matter holds the forms which it receives, not only while it actually does something through them, but also after ceasing to act through them, much more cogent reason is there for the intellect to receive the species unchangeably and lastingly, whether it receive them from things sensible, or derive them from some superior intellect. Thus, therefore, if we take memory only for the power of retaining species, we must say that it is in the intellectual part. But if in the notion of memory we include its object as something past, then the memory is not in the intellectual, but only in the sensitive part, which apprehends individual things. For past, as past, since it signifies being under a condition of fixed time, is something individual."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Memory, if considered as retentive of species, is not common to us and other animals. For species are not retained in the sensitive part of the soul only, but rather in the body and soul united: since the memorative power is the act of some organ. But the intellect in itself is retentive of species, without the association of any corporeal organ. Wherefore the Philosopher says (De Anima iii, 4) that \"the soul is the seat of the species, not the whole soul, but the intellect.\"",
+      "spans": [
+        {
+          "start": 394,
+          "end": 411,
+          "style": "paren_cite",
+          "text": "(De Anima iii, 4)"
+        },
+        {
+          "start": 417,
+          "end": 494,
+          "style": "quote",
+          "text": "\"the soul is the seat of the species, not the whole soul, but the intellect.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The condition of past may be referred to two things--namely, to the object which is known, and to the act of knowledge. These two are found together in the sensitive part, which apprehends something from the fact of its being immuted by a present sensible: wherefore at the same time an animal remembers to have sensed before in the past, and to have sensed some past sensible thing. But as concerns the intellectual part, the past is accidental, and is not in itself a part of the object of the intellect. For the intellect understands man, as man: and to man, as man, it is accidental that he exist in the present, past, or future. But on the part of the act, the condition of past, even as such, may be understood to be in the intellect, as well as in the senses. Because our soul's act of understanding is an individual act, existing in this or that time, inasmuch as a man is said to understand now, or yesterday, or tomorrow. And this is not incompatible with the intellectual nature: for such an act of understanding, though something individual, is yet an immaterial act, as we have said above of the intellect (Q. 76, A. 1); and therefore, as the intellect understands itself, though it be itself an individual intellect, so also it understands its act of understanding, which is an individual act, in the past, present, or future. In this way, then, the notion of memory, in as far as it regards past events, is preserved in the intellect, forasmuch as it understands that it previously understood: but not in the sense that it understands the past as something \"here\" and \"now.\"",
+      "spans": [
+        {
+          "start": 1133,
+          "end": 1146,
+          "style": "paren_cite",
+          "text": "(Q. 76, A. 1)"
+        },
+        {
+          "start": 1586,
+          "end": 1592,
+          "style": "quote",
+          "text": "\"here\""
+        },
+        {
+          "start": 1597,
+          "end": 1603,
+          "style": "quote",
+          "text": "\"now.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The intelligible species is sometimes in the intellect only in potentiality, and then the intellect is said to be in potentiality. Sometimes the intelligible species is in the intellect as regards the ultimate completion of the act, and then it understands in act. And sometimes the intelligible species is in a middle state, between potentiality and act: and then we have habitual knowledge. In this way the intellect retains the species, even when it does not understand in act."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SEVENTH ARTICLE [I, Q. 79, Art. 7]",
+      "spans": [
+        {
+          "start": 16,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 7]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Intellectual Memory Is a Power Distinct from the Intellect?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the intellectual memory is distinct from the intellect. For Augustine (De Trin. x, 11) assigns to the soul memory, understanding, and will. But it is clear that the memory is a distinct power from the will. Therefore it is also distinct from the intellect.",
+      "spans": [
+        {
+          "start": 102,
+          "end": 118,
+          "style": "paren_cite",
+          "text": "(De Trin. x, 11)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, the reason of distinction among the powers in the sensitive part is the same as in the intellectual part. But memory in the sensitive part is distinct from sense, as we have said (Q. 78, A. 4). Therefore memory in the intellectual part is distinct from the intellect.",
+      "spans": [
+        {
+          "start": 196,
+          "end": 209,
+          "style": "paren_cite",
+          "text": "(Q. 78, A. 4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, according to Augustine (De Trin. x, 11; xi, 7), memory, understanding, and will are equal to one another, and one flows from the other. But this could not be if memory and intellect were the same power. Therefore they are not the same power.",
+      "spans": [
+        {
+          "start": 40,
+          "end": 63,
+          "style": "paren_aside",
+          "text": "(De Trin. x, 11; xi, 7)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ From its nature the memory is the treasury or storehouse of species. But the Philosopher (De Anima iii) attributes this to the intellect, as we have said (A. 6, ad 1). Therefore the memory is not another power from the intellect.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 108,
+          "end": 122,
+          "style": "paren_cite",
+          "text": "(De Anima iii)"
+        },
+        {
+          "start": 173,
+          "end": 185,
+          "style": "paren_cite",
+          "text": "(A. 6, ad 1)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As has been said above (Q. 77, A. 3), the powers of the soul are distinguished by the different formal aspects of their objects: since each power is defined in reference to that thing to which it is directed and which is its object. It has also been said above (Q. 59, A. 4) that if any power by its nature be directed to an object according to the common ratio of the object, that power will not be differentiated according to the individual differences of that object: just as the power of sight, which regards its object under the common ratio of color, is not differentiated by differences of black and white. Now, the intellect regards its object under the common ratio of being: since the passive intellect is that \"in which all are in potentiality.\" Wherefore the passive intellect is not differentiated by any difference of being. Nevertheless there is a distinction between the power of the active intellect and of the passive intellect: because as regards the same object, the active power which makes the object to be in act must be distinct from the passive power, which is moved by the object existing in act. Thus the active power is compared to its object as a being in act is to a being in potentiality; whereas the passive power, on the contrary, is compared to its object as being in potentiality is to a being in act. Therefore there can be no other difference of powers in the intellect, but that of passive and active. Wherefore it is clear that memory is not a distinct power from the intellect: for it belongs to the nature of a passive power to retain as well as to receive.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 40,
+          "end": 53,
+          "style": "paren_cite",
+          "text": "(Q. 77, A. 3)"
+        },
+        {
+          "start": 278,
+          "end": 291,
+          "style": "paren_cite",
+          "text": "(Q. 59, A. 4)"
+        },
+        {
+          "start": 738,
+          "end": 773,
+          "style": "quote",
+          "text": "\"in which all are in potentiality.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Although it is said (3 Sent. D, 1) that memory, intellect, and will are three powers, this is not in accordance with the meaning of Augustine, who says expressly (De Trin. xiv) that \"if we take memory, intelligence, and will as always present in the soul, whether we actually attend to them or not, they seem to pertain to the memory only. And by intelligence I mean that by which we understand when actually thinking; and by will I mean that love or affection which unites the child and its parent.\" Wherefore it is clear that Augustine does not take the above three for three powers; but by memory he understands the soul's habit of retention; by intelligence, the act of the intellect; and by will, the act of the will.",
+      "spans": [
+        {
+          "start": 34,
+          "end": 48,
+          "style": "paren_cite",
+          "text": "(3 Sent. D, 1)"
+        },
+        {
+          "start": 176,
+          "end": 190,
+          "style": "paren_cite",
+          "text": "(De Trin. xiv)"
+        },
+        {
+          "start": 196,
+          "end": 514,
+          "style": "quote",
+          "text": "\"if we take memory, intelligence, and will as always present in the soul, whether we actually attend to them or not, they seem to pertain to the memory only. And by intelligence I mean that by which we understand when actually thinking; and by will I mean that love or affection which unites the child and its parent.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Past and present may differentiate the sensitive powers, but not the intellectual powers, for the reason give above."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Intelligence arises from memory, as act from habit; and in this way it is equal to it, but not as a power to a power."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "EIGHTH ARTICLE [I, Q. 79, Art. 8]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 79, Art. 8]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Reason Is Distinct from the Intellect?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the reason is a distinct power from the intellect. For it is stated in _De Spiritu et Anima_ that \"when we wish to rise from lower things to higher, first the sense comes to our aid, then imagination, then reason, then the intellect.\" Therefore the reason is distinct from the intellect, as imagination is from sense.",
+      "spans": [
+        {
+          "start": 103,
+          "end": 124,
+          "style": "em",
+          "text": "_De Spiritu et Anima_"
+        },
+        {
+          "start": 130,
+          "end": 266,
+          "style": "quote",
+          "text": "\"when we wish to rise from lower things to higher, first the sense comes to our aid, then imagination, then reason, then the intellect.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, Boethius says (De Consol. iv, 6), that intellect is compared to reason, as eternity to time. But it does not belong to the same power to be in eternity and to be in time. Therefore reason and intellect are not the same power.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 49,
+          "style": "paren_cite",
+          "text": "(De Consol. iv, 6)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, man has intellect in common with the angels, and sense in common with the brutes. But reason, which is proper to man, whence he is called a rational animal, is a power distinct from sense. Therefore is it equally true to say that it is distinct from the intellect, which properly belongs to the angel: whence they are called intellectual."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (Gen. ad lit. iii, 20) that \"that in which man excels irrational animals is reason, or mind, or intelligence or whatever appropriate name we like to give it.\" Therefore, reason, intellect and mind are one power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 56,
+          "style": "paren_cite",
+          "text": "(Gen. ad lit. iii, 20)"
+        },
+        {
+          "start": 62,
+          "end": 192,
+          "style": "quote",
+          "text": "\"that in which man excels irrational animals is reason, or mind, or intelligence or whatever appropriate name we like to give it.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Reason and intellect in man cannot be distinct powers. We shall understand this clearly if we consider their respective actions. For to understand is simply to apprehend intelligible truth: and to reason is to advance from one thing understood to another, so as to know an intelligible truth. And therefore angels, who according to their nature, possess perfect knowledge of intelligible truth, have no need to advance from one thing to another; but apprehend the truth simply and without mental discussion, as Dionysius says (Div. Nom. vii). But man arrives at the knowledge of intelligible truth by advancing from one thing to another; and therefore he is called rational. Reasoning, therefore, is compared to understanding, as movement is to rest, or acquisition to possession; of which one belongs to the perfect, the other to the imperfect. And since movement always proceeds from something immovable, and ends in something at rest; hence it is that human reasoning, by way of inquiry and discovery, advances from certain things simply understood--namely, the first principles; and, again, by way of judgment returns by analysis to first principles, in the light of which it examines what it has found. Now it is clear that rest and movement are not to be referred to different powers, but to one and the same, even in natural things: since by the same nature a thing is moved towards a certain place, and rests in that place. Much more, therefore, by the same power do we understand and reason: and so it is clear that in man reason and intellect are the same power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 543,
+          "end": 558,
+          "style": "paren_cite",
+          "text": "(Div. Nom. vii)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: That enumeration is made according to the order of actions, not according to the distinction of powers. Moreover, that"
+    }
+  ],
+  "reading_markdown": "OF THE INTELLECTUAL POWERS (In Thirteen Articles)\n\nThe next question concerns the intellectual powers, under which head there are thirteen points of inquiry:\n\n(1) Whether the intellect is a power of the soul, or its essence?\n\n(2) If it be a power, whether it is a passive power?\n\n(3) If it is a passive power, whether there is an active intellect?\n\n(4) Whether it is something in the soul?\n\n(5) Whether the active intellect is one in all?\n\n(6) Whether memory is in the intellect?\n\n(7) Whether the memory be distinct from the intellect?\n\n(8) Whether the reason is a distinct power from the intellect?\n\n(9) Whether the superior and inferior reason are distinct powers?\n\n(10) Whether the intelligence is distinct from the intellect?\n\n(11) Whether the speculative and practical intellect are distinct powers?\n\n(12) Whether \"synderesis\" is a power of the intellectual part?\n\n(13) Whether the conscience is a power of the intellectual part?\n\n---\n\nFIRST ARTICLE [I, Q. 79, Art. 1]\n\nWhether the Intellect Is a Power of the Soul?\n\nObjection 1: It would seem that the intellect is not a power of the soul, but the essence of the soul. For the intellect seems to be the same as the mind. Now the mind is not a power of the soul, but the essence; for Augustine says (De Trin. ix, 2): \"Mind and spirit are not relative things, but denominate the essence.\" Therefore the intellect is the essence of the soul.\n\nObj. 2: Further, different genera of the soul's powers are not united in some one power, but only in the essence of the soul. Now the appetitive and the intellectual are different genera of the soul's powers as the Philosopher says (De Anima ii, 3), but they are united in the mind, for Augustine (De Trin. x, 11) places the intelligence and will in the mind. Therefore the mind and intellect of man is of the very essence of the soul and not a power thereof.\n\nObj. 3: Further, according to Gregory, in a homily for the Ascension (xxix in Ev.), \"man understands with the angels.\" But angels are called \"minds\" and \"intellects.\" Therefore the mind and intellect of man are not a power of the soul, but the soul itself.\n\nObj. 4: Further, a substance is intellectual by the fact that it is immaterial. But the soul is immaterial through its essence. Therefore it seems that the soul must be intellectual through its essence.\n\n_On the contrary,_ The Philosopher assigns the intellectual faculty as a power of the soul (De Anima ii, 3).\n\n_I answer that,_ In accordance with what has been already shown (Q. 54, A. 3; Q. 77, A. 1) it is necessary to say that the intellect is a power of the soul, and not the very essence of the soul. For then alone the essence of that which operates is the immediate principle of operation, when operation itself is its being: for as power is to operation as its act, so is the essence to being. But in God alone His action of understanding is His very Being. Wherefore in God alone is His intellect His essence: while in other intellectual creatures, the intellect is a power.\n\nReply Obj. 1: Sense is sometimes taken for the power, and sometimes for the sensitive soul; for the sensitive soul takes its name from its chief power, which is sense. And in like manner the intellectual soul is sometimes called intellect, as from its chief power; and thus we read (De Anima i, 4), that the \"intellect is a substance.\" And in this sense also Augustine says that the mind is spirit and essence (De Trin. ix, 2; xiv, 16).\n\nReply Obj. 2: The appetitive and intellectual powers are different genera of powers in the soul, by reason of the different formalities of their objects. But the appetitive power agrees partly with the intellectual power and partly with the sensitive in its mode of operation either through a corporeal organ or without it: for appetite follows apprehension. And in this way Augustine puts the will in the mind; and the Philosopher, in the reason (De Anima iii, 9).\n\nReply Obj. 3: In the angels there is no other power besides the intellect, and the will, which follows the intellect. And for this reason an angel is called a \"mind\" or an \"intellect\"; because his whole power consists in this. But the soul has many other powers, such as the sensitive and nutritive powers, and therefore the comparison fails.\n\nReply Obj. 4: The immateriality of the created intelligent substance is not its intellect; and through its immateriality it has the power of intelligence. Wherefore it follows not that the intellect is the substance of the soul, but that it is its virtue and power.\n\n---\n\nSECOND ARTICLE [I, Q. 79, Art. 2]\n\nWhether the Intellect Is a Passive Power?\n\nObjection 1: It would seem that the intellect is not a passive power. For everything is passive by its matter, and acts by its form. But the intellectual power results from the immateriality of the intelligent substance. Therefore it seems that the intellect is not a passive power.\n\nObj. 2: Further, the intellectual power is incorruptible, as we have said above (Q. 79, A. 6). But \"if the intellect is passive, it is corruptible\" (De Anima iii, 5). Therefore the intellectual power is not passive.\n\nObj. 3: Further, the \"agent is nobler than the patient,\" as Augustine (Gen. ad lit. xii, 16) and Aristotle (De Anima iii, 5) says. But all the powers of the vegetative part are active; yet they are the lowest among the powers of the soul. Much more, therefore, all the intellectual powers, which are the highest, are active.\n\n_On the contrary,_ The Philosopher says (De Anima iii, 4) that \"to understand is in a way to be passive.\"\n\n_I answer that,_ To be passive may be taken in three ways. Firstly, in its most strict sense, when from a thing is taken something which belongs to it by virtue either of its nature, or of its proper inclination: as when water loses coolness by heating, and as when a man becomes ill or sad. Secondly, less strictly, a thing is said to be passive, when something, whether suitable or unsuitable, is taken away from it. And in this way not only he who is ill is said to be passive, but also he who is healed; not only he that is sad, but also he that is joyful; or whatever way he be altered or moved. Thirdly, in a wide sense a thing is said to be passive, from the very fact that what is in potentiality to something receives that to which it was in potentiality, without being deprived of anything. And accordingly, whatever passes from potentiality to act, may be said to be passive, even when it is perfected. And thus with us to understand is to be passive. This is clear from the following reason. For the intellect, as we have seen above (Q. 78, A. 1), has an operation extending to universal being. We may therefore see whether the intellect be in act or potentiality by observing first of all the nature of the relation of the intellect to universal being. For we find an intellect whose relation to universal being is that of the act of all being: and such is the Divine intellect, which is the Essence of God, in which originally and virtually, all being pre-exists as in its first cause. And therefore the Divine intellect is not in potentiality, but is pure act. But no created intellect can be an act in relation to the whole universal being; otherwise it would needs be an infinite being. Wherefore every created intellect is not the act of all things intelligible, by reason of its very existence; but is compared to these intelligible things as a potentiality to act.\n\nNow, potentiality has a double relation to act. There is a potentiality which is always perfected by its act: as the matter of the heavenly bodies (Q. 58, A. 1). And there is another potentiality which is not always in act, but proceeds from potentiality to act; as we observe in things that are corrupted and generated. Wherefore the angelic intellect is always in act as regards those things which it can understand, by reason of its proximity to the first intellect, which is pure act, as we have said above. But the human intellect, which is the lowest in the order of intelligence and most remote from the perfection of the Divine intellect, is in potentiality with regard to things intelligible, and is at first \"like a clean tablet on which nothing is written,\" as the Philosopher says (De Anima iii, 4). This is made clear from the fact, that at first we are only in potentiality to understand, and afterwards we are made to understand actually. And so it is evident that with us to understand is \"in a way to be passive\"; taking passion in the third sense. And consequently the intellect is a passive power.\n\nReply Obj. 1: This objection is verified of passion in the first and second senses, which belong to primary matter. But in the third sense passion is in anything which is reduced from potentiality to act.\n\nReply Obj. 2: \"Passive intellect\" is the name given by some to the sensitive appetite, in which are the passions of the soul; which appetite is also called \"rational by participation,\" because it \"obeys the reason\" (Ethic. i, 13). Others give the name of passive intellect to the cogitative power, which is called the \"particular reason.\" And in each case \"passive\" may be taken in the two first senses; forasmuch as this so-called intellect is the act of a corporeal organ. But the intellect which is in potentiality to things intelligible, and which for this reason Aristotle calls the \"possible\" intellect (De Anima iii, 4) is not passive except in the third sense: for it is not an act of a corporeal organ. Hence it is incorruptible.\n\nReply Obj. 3: The agent is nobler than the patient, if the action and the passion are referred to the same thing: but not always, if they refer to different things. Now the intellect is a passive power in regard to the whole universal being: while the vegetative power is active in regard to some particular thing, namely, the body as united to the soul. Wherefore nothing prevents such a passive force being nobler than such an active one.\n\n---\n\nTHIRD ARTICLE [I, Q. 79, Art. 3]\n\nWhether There Is an Active Intellect?\n\nObjection 1: It would seem that there is no active intellect. For as the senses are to things sensible, so is our intellect to things intelligible. But because sense is in potentiality to things sensible, the sense is not said to be active, but only passive. Therefore, since our intellect is in potentiality to things intelligible, it seems that we cannot say that the intellect is active, but only that it is passive.\n\nObj. 2: Further, if we say that also in the senses there is something active, such as light: on the contrary, light is required for sight, inasmuch as it makes the medium to be actually luminous; for color of its own nature moves the luminous medium. But in the operation of the intellect there is no appointed medium that has to be brought into act. Therefore there is no necessity for an active intellect.\n\nObj. 3: Further, the likeness of the agent is received into the patient according to the nature of the patient. But the passive intellect is an immaterial power. Therefore its immaterial nature suffices for forms to be received into it immaterially. Now a form is intelligible in act from the very fact that it is immaterial. Therefore there is no need for an active intellect to make the species actually intelligible.\n\n_On the contrary,_ The Philosopher says (De Anima iii, 5), \"As in every nature, so in the soul is there something by which it becomes all things, and something by which it makes all things.\" Therefore we must admit an active intellect.\n\n_I answer that,_ According to the opinion of Plato, there is no need for an active intellect in order to make things actually intelligible; but perhaps in order to provide intellectual light to the intellect, as will be explained farther on (A. 4). For Plato supposed that the forms of natural things subsisted apart from matter, and consequently that they are intelligible: since a thing is actually intelligible from the very fact that it is immaterial. And he called such forms \"species or ideas\"; from a participation of which, he said that even corporeal matter was formed, in order that individuals might be naturally established in their proper genera and species: and that our intellect was formed by such participation in order to have knowledge of the genera and species of things. But since Aristotle did not allow that forms of natural things exist apart from matter, and as forms existing in matter are not actually intelligible; it follows that the natures or forms of the sensible things which we understand are not actually intelligible. Now nothing is reduced from potentiality to act except by something in act; as the senses as made actual by what is actually sensible. We must therefore assign on the part of the intellect some power to make things actually intelligible, by abstraction of the species from material conditions. And such is the necessity for an active intellect.\n\nReply Obj. 1: Sensible things are found in act outside the soul; and hence there is no need for an active sense. Wherefore it is clear that in the nutritive part all the powers are active, whereas in the sensitive part all are passive: but in the intellectual part, there is something active and something passive.\n\nReply Obj. 2: There are two opinions as to the effect of light. For some say that light is required for sight, in order to make colors actually visible. And according to this the active intellect is required for understanding, in like manner and for the same reason as light is required for seeing. But in the opinion of others, light is required for sight; not for the colors to become actually visible; but in order that the medium may become actually luminous, as the Commentator says on _De Anima_ ii. And according to this, Aristotle's comparison of the active intellect to light is verified in this, that as it is required for understanding, so is light required for seeing; but not for the same reason.\n\nReply Obj. 3: If the agent pre-exist, it may well happen that its likeness is received variously into various things, on account of their dispositions. But if the agent does not pre-exist, the disposition of the recipient has nothing to do with the matter. Now the intelligible in act is not something existing in nature; if we consider the nature of things sensible, which do not subsist apart from matter. And therefore in order to understand them, the immaterial nature of the passive intellect would not suffice but for the presence of the active intellect which makes things actually intelligible by way of abstraction.\n\n---\n\nFOURTH ARTICLE [I, Q. 79, Art. 4]\n\nWhether the Active Intellect Is Something in the Soul?\n\nObjection 1: It would seem that the active intellect is not something in the soul. For the effect of the active intellect is to give light for the purpose of understanding. But this is done by something higher than the soul: according to John 1:9, \"He was the true light that enlighteneth every man coming into this world.\" Therefore the active intellect is not something in the soul.\n\nObj. 2: Further, the Philosopher (De Anima iii, 5) says of the active intellect, \"that it does not sometimes understand and sometimes not understand.\" But our soul does not always understand: sometimes it understands, sometimes it does not understand. Therefore the active intellect is not something in our soul.\n\nObj. 3: Further, agent and patient suffice for action. If, therefore, the passive intellect, which is a passive power, is something belonging to the soul; and also the active intellect, which is an active power: it follows that a man would always be able to understand when he wished, which is clearly false. Therefore the active intellect is not something in our soul.\n\nObj. 4: Further, the Philosopher (De Anima iii, 5) says that the active intellect is a \"substance in actual being.\" But nothing can be in potentiality and in act with regard to the same thing. If, therefore, the passive intellect, which is in potentiality to all things intelligible, is something in the soul, it seems impossible for the active intellect to be also something in our soul.\n\nObj. 5: Further, if the active intellect is something in the soul, it must be a power. For it is neither a passion nor a habit; since habits and passions are not in the nature of agents in regard to the passivity of the soul; but rather passion is the very action of the passive power; while habit is something which results from acts. But every power flows from the essence of the soul. It would therefore follow that the active intellect flows from the essence of the soul. And thus it would not be in the soul by way of participation from some higher intellect: which is unfitting. Therefore the active intellect is not something in our soul.\n\n_On the contrary,_ The Philosopher says (De Anima iii, 5), that \"it is necessary for these differences,\" namely, the passive and active intellect, \"to be in the soul.\"\n\n_I answer that,_ The active intellect, of which the Philosopher speaks, is something in the soul. In order to make this evident, we must observe that above the intellectual soul of man we must needs suppose a superior intellect, from which the soul acquires the power of understanding. For what is such by participation, and what is mobile, and what is imperfect always requires the pre-existence of something essentially such, immovable and perfect. Now the human soul is called intellectual by reason of a participation in intellectual power; a sign of which is that it is not wholly intellectual but only in part. Moreover it reaches to the understanding of truth by arguing, with a certain amount of reasoning and movement. Again it has an imperfect understanding; both because it does not understand everything, and because, in those things which it does understand, it passes from potentiality to act. Therefore there must needs be some higher intellect, by which the soul is helped to understand.\n\nWherefore some held that this intellect, substantially separate, is the active intellect, which by lighting up the phantasms as it were, makes them to be actually intelligible. But, even supposing the existence of such a separate active intellect, it would still be necessary to assign to the human soul some power participating in that superior intellect, by which power the human soul makes things actually intelligible. Just as in other perfect natural things, besides the universal active causes, each one is endowed with its proper powers derived from those universal causes: for the sun alone does not generate man; but in man is the power of begetting man: and in like manner with other perfect animals. Now among these lower things nothing is more perfect than the human soul. Wherefore we must say that in the soul is some power derived from a higher intellect, whereby it is able to light up the phantasms. And we know this by experience, since we perceive that we abstract universal forms from their particular conditions, which is to make them actually intelligible. Now no action belongs to anything except through some principle formally inherent therein; as we have said above of the passive intellect (Q. 76, A. 1). Therefore the power which is the principle of this action must be something in the soul. For this reason Aristotle (De Anima iii, 5) compared the active intellect to light, which is something received into the air: while Plato compared the separate intellect impressing the soul to the sun, as Themistius says in his commentary on _De Anima_ iii. But the separate intellect, according to the teaching of our faith, is God Himself, Who is the soul's Creator, and only beatitude; as will be shown later on (Q. 90, A. 3; I-II, Q. 3, A. 7). Wherefore the human soul derives its intellectual light from Him, according to Ps. 4:7, \"The light of Thy countenance, O Lord, is signed upon us.\"\n\nReply Obj. 1: That true light enlightens as a universal cause, from which the human soul derives a particular power, as we have explained.\n\nReply Obj. 2: The Philosopher says those words not of the active intellect, but of the intellect in act: of which he had already said: \"Knowledge in act is the same as the thing.\" Or, if we refer those words to the active intellect, then they are said because it is not owing to the active intellect that sometimes we do, and sometimes we do not understand, but to the intellect which is in potentiality.\n\nReply Obj. 3: If the relation of the active intellect to the passive were that of the active object to a power, as, for instance, of the visible in act to the sight; it would follow that we could understand all things instantly, since the active intellect is that which makes all things (in act). But now the active intellect is not an object, rather is it that whereby the objects are made to be in act: for which, besides the presence of the active intellect, we require the presence of phantasms, the good disposition of the sensitive powers, and practice in this sort of operation; since through one thing understood, other things come to be understood, as from terms are made propositions, and from first principles, conclusions. From this point of view it matters not whether the active intellect is something belonging to the soul, or something separate from the soul.\n\nReply Obj. 4: The intellectual soul is indeed actually immaterial, but it is in potentiality to determinate species. On the contrary, phantasms are actual images of certain species, but are immaterial in potentiality. Wherefore nothing prevents one and the same soul, inasmuch as it is actually immaterial, having one power by which it makes things actually immaterial, by abstraction from the conditions of individual matter: which power is called the \"active intellect\"; and another power, receptive of such species, which is called the \"passive intellect\" by reason of its being in potentiality to such species.\n\nReply Obj. 5: Since the essence of the soul is immaterial, created by the supreme intellect, nothing prevents that power which it derives from the supreme intellect, and whereby it abstracts from matter, flowing from the essence of the soul, in the same way as its other powers.\n\n---\n\nFIFTH ARTICLE [I, Q. 79, Art. 5]\n\nWhether the Active Intellect Is One in All?\n\nObjection 1: It would seem that there is one active intellect in all. For what is separate from the body is not multiplied according to the number of bodies. But the active intellect is \"separate,\" as the Philosopher says (De Anima iii, 5). Therefore it is not multiplied in the many human bodies, but is one for all men.\n\nObj. 2: Further, the active intellect is the cause of the universal, which is one in many. But that which is the cause of unity is still more itself one. Therefore the active intellect is the same in all.\n\nObj. 3: Further, all men agree in the first intellectual concepts. But to these they assent by the active intellect. Therefore all agree in one active intellect.\n\n_On the contrary,_ The Philosopher says (De Anima iii, 5) that the active intellect is as a light. But light is not the same in the various things enlightened. Therefore the same active intellect is not in various men.\n\n_I answer that,_ The truth about this question depends on what we have already said (A. 4). For if the active intellect were not something belonging to the soul, but were some separate substance, there would be one active intellect for all men. And this is what they mean who hold that there is one active intellect for all. But if the active intellect is something belonging to the soul, as one of its powers, we are bound to say that there are as many active intellects as there are souls, which are multiplied according to the number of men, as we have said above (Q. 76, A. 2). For it is impossible that one same power belong to various substances.\n\nReply Obj. 1: The Philosopher proves that the active intellect is separate, by the fact that the passive intellect is separate: because, as he says (De Anima iii, 5), \"the agent is more noble than the patient.\" Now the passive intellect is said to be separate, because it is not the act of any corporeal organ. And in the same sense the active intellect is also called \"separate\"; but not as a separate substance.\n\nReply Obj. 2: The active intellect is the cause of the universal, by abstracting it from matter. But for this purpose it need not be the same intellect in all intelligent beings; but it must be one in its relationship to all those things from which it abstracts the universal, with respect to which things the universal is one. And this befits the active intellect inasmuch as it is immaterial.\n\nReply Obj. 3: All things which are of one species enjoy in common the action which accompanies the nature of the species, and consequently the power which is the principle of such action; but not so as that power be identical in all. Now to know the first intelligible principles is the action belonging to the human species. Wherefore all men enjoy in common the power which is the principle of this action: and this power is the active intellect. But there is no need for it to be identical in all. Yet it must be derived by all from one principle. And thus the possession by all men in common of the first principles proves the unity of the separate intellect, which Plato compares to the sun; but not the unity of the active intellect, which Aristotle compares to light.\n\n---\n\nSIXTH ARTICLE [I, Q. 79, Art. 6]\n\nWhether Memory Is in the Intellectual Part of the Soul?\n\nObjection 1: It would seem that memory is not in the intellectual part of the soul. For Augustine says (De Trin. xii, 2,3,8) that to the higher part of the soul belongs those things which are not \"common to man and beast.\" But memory is common to man and beast, for he says (De Trin. xii, 2, 3, 8) that \"beasts can sense corporeal things through the senses of the body, and commit them to memory.\" Therefore memory does not belong to the intellectual part of the soul.\n\nObj. 2: Further, memory is of the past. But the past is said of something with regard to a fixed time. Memory, therefore, knows a thing under a condition of a fixed time; which involves knowledge under the conditions of \"here\" and \"now.\" But this is not the province of the intellect, but of the sense. Therefore memory is not in the intellectual part, but only in the sensitive.\n\nObj. 3: Further, in the memory are preserved the species of those things of which we are not actually thinking. But this cannot happen in the intellect, because the intellect is reduced to act by the fact that the intelligible species are received into it. Now the intellect in act implies understanding in act; and therefore the intellect actually understands all things of which it has the species. Therefore the memory is not in the intellectual part.\n\n_On the contrary,_ Augustine says (De Trin. x, 11) that \"memory, understanding, and will are one mind.\"\n\n_I answer that,_ Since it is of the nature of the memory to preserve the species of those things which are not actually apprehended, we must first of all consider whether the intelligible species can thus be preserved in the intellect: because Avicenna held that this was impossible. For he admitted that this could happen in the sensitive part, as to some powers, inasmuch as they are acts of corporeal organs, in which certain species may be preserved apart from actual apprehension. But in the intellect, which has no corporeal organ, nothing but what is intelligible exists. Wherefore every thing of which the likeness exists in the intellect must be actually understood. Thus, therefore, according to him, as soon as we cease to understand something actually, the species of that thing ceases to be in our intellect, and if we wish to understand that thing anew, we must turn to the active intellect, which he held to be a separate substance, in order that the intelligible species may thence flow again into our passive intellect. And from the practice and habit of turning to the active intellect there is formed, according to him, a certain aptitude in the passive intellect for turning to the active intellect; which aptitude he calls the habit of knowledge. According, therefore, to this supposition, nothing is preserved in the intellectual part that is not actually understood: wherefore it would not be possible to admit memory in the intellectual part.\n\nBut this opinion is clearly opposed to the teaching of Aristotle. For he says (De Anima iii, 4) that, when the passive intellect \"is identified with each thing as knowing it, it is said to be in act,\" and that \"this happens when it can operate of itself. And, even then, it is in potentiality, but not in the same way as before learning and discovering.\" Now, the passive intellect is said to be each thing, inasmuch as it receives the intelligible species of each thing. To the fact, therefore, that it receives the species of intelligible things it owes its being able to operate when it wills, but not so that it be always operating: for even then is it in potentiality in a certain sense, though otherwise than before the act of understanding--namely, in the sense that whoever has habitual knowledge is in potentiality to actual consideration.\n\nThe foregoing opinion is also opposed to reason. For what is received into something is received according to the conditions of the recipient. But the intellect is of a more stable nature, and is more immovable than corporeal nature. If, therefore, corporeal matter holds the forms which it receives, not only while it actually does something through them, but also after ceasing to act through them, much more cogent reason is there for the intellect to receive the species unchangeably and lastingly, whether it receive them from things sensible, or derive them from some superior intellect. Thus, therefore, if we take memory only for the power of retaining species, we must say that it is in the intellectual part. But if in the notion of memory we include its object as something past, then the memory is not in the intellectual, but only in the sensitive part, which apprehends individual things. For past, as past, since it signifies being under a condition of fixed time, is something individual.\n\nReply Obj. 1: Memory, if considered as retentive of species, is not common to us and other animals. For species are not retained in the sensitive part of the soul only, but rather in the body and soul united: since the memorative power is the act of some organ. But the intellect in itself is retentive of species, without the association of any corporeal organ. Wherefore the Philosopher says (De Anima iii, 4) that \"the soul is the seat of the species, not the whole soul, but the intellect.\"\n\nReply Obj. 2: The condition of past may be referred to two things--namely, to the object which is known, and to the act of knowledge. These two are found together in the sensitive part, which apprehends something from the fact of its being immuted by a present sensible: wherefore at the same time an animal remembers to have sensed before in the past, and to have sensed some past sensible thing. But as concerns the intellectual part, the past is accidental, and is not in itself a part of the object of the intellect. For the intellect understands man, as man: and to man, as man, it is accidental that he exist in the present, past, or future. But on the part of the act, the condition of past, even as such, may be understood to be in the intellect, as well as in the senses. Because our soul's act of understanding is an individual act, existing in this or that time, inasmuch as a man is said to understand now, or yesterday, or tomorrow. And this is not incompatible with the intellectual nature: for such an act of understanding, though something individual, is yet an immaterial act, as we have said above of the intellect (Q. 76, A. 1); and therefore, as the intellect understands itself, though it be itself an individual intellect, so also it understands its act of understanding, which is an individual act, in the past, present, or future. In this way, then, the notion of memory, in as far as it regards past events, is preserved in the intellect, forasmuch as it understands that it previously understood: but not in the sense that it understands the past as something \"here\" and \"now.\"\n\nReply Obj. 3: The intelligible species is sometimes in the intellect only in potentiality, and then the intellect is said to be in potentiality. Sometimes the intelligible species is in the intellect as regards the ultimate completion of the act, and then it understands in act. And sometimes the intelligible species is in a middle state, between potentiality and act: and then we have habitual knowledge. In this way the intellect retains the species, even when it does not understand in act.\n\n---\n\nSEVENTH ARTICLE [I, Q. 79, Art. 7]\n\nWhether the Intellectual Memory Is a Power Distinct from the Intellect?\n\nObjection 1: It would seem that the intellectual memory is distinct from the intellect. For Augustine (De Trin. x, 11) assigns to the soul memory, understanding, and will. But it is clear that the memory is a distinct power from the will. Therefore it is also distinct from the intellect.\n\nObj. 2: Further, the reason of distinction among the powers in the sensitive part is the same as in the intellectual part. But memory in the sensitive part is distinct from sense, as we have said (Q. 78, A. 4). Therefore memory in the intellectual part is distinct from the intellect.\n\nObj. 3: Further, according to Augustine (De Trin. x, 11; xi, 7), memory, understanding, and will are equal to one another, and one flows from the other. But this could not be if memory and intellect were the same power. Therefore they are not the same power.\n\n_On the contrary,_ From its nature the memory is the treasury or storehouse of species. But the Philosopher (De Anima iii) attributes this to the intellect, as we have said (A. 6, ad 1). Therefore the memory is not another power from the intellect.\n\n_I answer that,_ As has been said above (Q. 77, A. 3), the powers of the soul are distinguished by the different formal aspects of their objects: since each power is defined in reference to that thing to which it is directed and which is its object. It has also been said above (Q. 59, A. 4) that if any power by its nature be directed to an object according to the common ratio of the object, that power will not be differentiated according to the individual differences of that object: just as the power of sight, which regards its object under the common ratio of color, is not differentiated by differences of black and white. Now, the intellect regards its object under the common ratio of being: since the passive intellect is that \"in which all are in potentiality.\" Wherefore the passive intellect is not differentiated by any difference of being. Nevertheless there is a distinction between the power of the active intellect and of the passive intellect: because as regards the same object, the active power which makes the object to be in act must be distinct from the passive power, which is moved by the object existing in act. Thus the active power is compared to its object as a being in act is to a being in potentiality; whereas the passive power, on the contrary, is compared to its object as being in potentiality is to a being in act. Therefore there can be no other difference of powers in the intellect, but that of passive and active. Wherefore it is clear that memory is not a distinct power from the intellect: for it belongs to the nature of a passive power to retain as well as to receive.\n\nReply Obj. 1: Although it is said (3 Sent. D, 1) that memory, intellect, and will are three powers, this is not in accordance with the meaning of Augustine, who says expressly (De Trin. xiv) that \"if we take memory, intelligence, and will as always present in the soul, whether we actually attend to them or not, they seem to pertain to the memory only. And by intelligence I mean that by which we understand when actually thinking; and by will I mean that love or affection which unites the child and its parent.\" Wherefore it is clear that Augustine does not take the above three for three powers; but by memory he understands the soul's habit of retention; by intelligence, the act of the intellect; and by will, the act of the will.\n\nReply Obj. 2: Past and present may differentiate the sensitive powers, but not the intellectual powers, for the reason give above.\n\nReply Obj. 3: Intelligence arises from memory, as act from habit; and in this way it is equal to it, but not as a power to a power.\n\n---\n\nEIGHTH ARTICLE [I, Q. 79, Art. 8]\n\nWhether the Reason Is Distinct from the Intellect?\n\nObjection 1: It would seem that the reason is a distinct power from the intellect. For it is stated in _De Spiritu et Anima_ that \"when we wish to rise from lower things to higher, first the sense comes to our aid, then imagination, then reason, then the intellect.\" Therefore the reason is distinct from the intellect, as imagination is from sense.\n\nObj. 2: Further, Boethius says (De Consol. iv, 6), that intellect is compared to reason, as eternity to time. But it does not belong to the same power to be in eternity and to be in time. Therefore reason and intellect are not the same power.\n\nObj. 3: Further, man has intellect in common with the angels, and sense in common with the brutes. But reason, which is proper to man, whence he is called a rational animal, is a power distinct from sense. Therefore is it equally true to say that it is distinct from the intellect, which properly belongs to the angel: whence they are called intellectual.\n\n_On the contrary,_ Augustine says (Gen. ad lit. iii, 20) that \"that in which man excels irrational animals is reason, or mind, or intelligence or whatever appropriate name we like to give it.\" Therefore, reason, intellect and mind are one power.\n\n_I answer that,_ Reason and intellect in man cannot be distinct powers. We shall understand this clearly if we consider their respective actions. For to understand is simply to apprehend intelligible truth: and to reason is to advance from one thing understood to another, so as to know an intelligible truth. And therefore angels, who according to their nature, possess perfect knowledge of intelligible truth, have no need to advance from one thing to another; but apprehend the truth simply and without mental discussion, as Dionysius says (Div. Nom. vii). But man arrives at the knowledge of intelligible truth by advancing from one thing to another; and therefore he is called rational. Reasoning, therefore, is compared to understanding, as movement is to rest, or acquisition to possession; of which one belongs to the perfect, the other to the imperfect. And since movement always proceeds from something immovable, and ends in something at rest; hence it is that human reasoning, by way of inquiry and discovery, advances from certain things simply understood--namely, the first principles; and, again, by way of judgment returns by analysis to first principles, in the light of which it examines what it has found. Now it is clear that rest and movement are not to be referred to different powers, but to one and the same, even in natural things: since by the same nature a thing is moved towards a certain place, and rests in that place. Much more, therefore, by the same power do we understand and reason: and so it is clear that in man reason and intellect are the same power.\n\nReply Obj. 1: That enumeration is made according to the order of actions, not according to the distinction of powers. Moreover, that",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 5720,
+    "text": "OF THE INTELLECTUAL POWERS (In Thirteen Articles)"
+  },
+  "word_count": 6944,
+  "block_count": 111
+}

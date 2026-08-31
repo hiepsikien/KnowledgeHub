@@ -1,0 +1,33 @@
+{
+  "chapter_id": "ch-142",
+  "title": "TREATISE ON THE WORK OF THE SIX DAYS (QQ. 65-74)",
+  "block_start": 4809,
+  "block_end": 4810,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "TREATISE ON THE WORK OF THE SIX DAYS (QQ. 65-74)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 37,
+          "end": 48,
+          "style": "paren_cite",
+          "text": "(QQ. 65-74)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "TREATISE ON THE WORK OF THE SIX DAYS (QQ. 65-74)\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 4809,
+    "text": "TREATISE ON THE WORK OF THE SIX DAYS (QQ. 65-74)"
+  },
+  "word_count": 10,
+  "block_count": 2
+}

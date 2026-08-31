@@ -1,0 +1,19 @@
+{
+  "chapter_id": "ch-000-front",
+  "title": "Front matter",
+  "block_start": 0,
+  "block_end": 0,
+  "blocks": [
+    {
+      "type": "stanza",
+      "text": "[Illustration:",
+      "lines": [
+        "[Illustration:"
+      ]
+    }
+  ],
+  "reading_markdown": "[Illustration:",
+  "split_hint": null,
+  "word_count": 1,
+  "block_count": 1
+}

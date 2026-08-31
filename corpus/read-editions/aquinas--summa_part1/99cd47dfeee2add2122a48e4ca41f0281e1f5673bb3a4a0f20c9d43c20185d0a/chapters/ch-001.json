@@ -1,0 +1,37 @@
+{
+  "chapter_id": "ch-001",
+  "title": "SUMMA THEOLOGICA FIRST PART",
+  "block_start": 5,
+  "block_end": 7,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "SUMMA THEOLOGICA FIRST PART",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[\"I,\" \"Prima Pars\"]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 19,
+          "style": "bracket_note",
+          "text": "[\"I,\" \"Prima Pars\"]"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "SUMMA THEOLOGICA FIRST PART\n\n[\"I,\" \"Prima Pars\"]\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 5,
+    "text": "SUMMA THEOLOGICA FIRST PART"
+  },
+  "word_count": 7,
+  "block_count": 3
+}

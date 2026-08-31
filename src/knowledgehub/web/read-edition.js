@@ -130,8 +130,16 @@
     const box = $("re-body");
     if (!box) return;
     const blocks = chapter.blocks || [];
-    if (!blocks.length && chapter.source_preview) {
-      box.innerHTML = `<pre class="re-preview">${escapeHtml(chapter.source_preview)}</pre><p class="muted">Chưa parse REF — bấm «Parse REF chương».</p>`;
+    if (!blocks.length && (chapter.source_preview_head || chapter.source_preview)) {
+      const omitted = Number(chapter.source_preview_omitted) || 0;
+      const gap = chapter.source_preview_truncated
+        ? `<p class="preview-gap">… đã rút ${omitted.toLocaleString()} chữ giữa đầu và cuối …</p>`
+        : "";
+      const head = escapeHtml(chapter.source_preview_head || chapter.source_preview);
+      const tail = chapter.source_preview_truncated
+        ? `<pre>${escapeHtml(chapter.source_preview_tail || "")}</pre>`
+        : "";
+      box.innerHTML = `<div class="re-preview"><pre>${head}</pre>${gap}${tail}</div><p class="muted">Chưa parse REF — bấm «Parse REF chương».</p>`;
       return;
     }
     box.innerHTML = blocks
@@ -211,7 +219,9 @@
       const parsed = chapter.micro_status === "complete";
       $("re-detail-meta").textContent = parsed
         ? `${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`
-        : "Chưa parse REF — xem preview nguồn";
+        : chapter.source_preview_truncated
+          ? `Chưa parse REF — preview đầu + cuối (rút ${(Number(chapter.source_preview_omitted) || 0).toLocaleString()} chữ giữa)`
+          : "Chưa parse REF — xem preview nguồn";
       renderChapterBody(chapter);
       const qa = chapter.qa;
       $("re-qa-panel").hidden = !qa;

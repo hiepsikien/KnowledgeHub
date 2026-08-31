@@ -1,0 +1,144 @@
+{
+  "chapter_id": "ch-092",
+  "title": "_Prelude and Fugue in E flat (214)._ _Fugue in B minor (214)._ _Suites in A minor (214)._ _In E flat._ _In G._ _Preludio con Fughetta in F (214)._ _In G._ _Prelude in G (214)._ _The adagio of violin solo sonata in C arranged for clavier (214)._ _Chromatic Fantasia and Fugue in D minor (207)._",
+  "block_start": 1258,
+  "block_end": 1262,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Prelude and Fugue in E flat (214)._ _Fugue in B minor (214)._ _Suites in A minor (214)._ _In E flat._ _In G._ _Preludio con Fughetta in F (214)._ _In G._ _Prelude in G (214)._ _The adagio of violin solo sonata in C arranged for clavier (214)._ _Chromatic Fantasia and Fugue in D minor (207)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "em",
+          "text": "_Prelude and Fugue in E flat (214)._"
+        },
+        {
+          "start": 37,
+          "end": 62,
+          "style": "em",
+          "text": "_Fugue in B minor (214)._"
+        },
+        {
+          "start": 63,
+          "end": 89,
+          "style": "em",
+          "text": "_Suites in A minor (214)._"
+        },
+        {
+          "start": 90,
+          "end": 102,
+          "style": "em",
+          "text": "_In E flat._"
+        },
+        {
+          "start": 103,
+          "end": 110,
+          "style": "em",
+          "text": "_In G._"
+        },
+        {
+          "start": 111,
+          "end": 146,
+          "style": "em",
+          "text": "_Preludio con Fughetta in F (214)._"
+        },
+        {
+          "start": 147,
+          "end": 154,
+          "style": "em",
+          "text": "_In G._"
+        },
+        {
+          "start": 155,
+          "end": 176,
+          "style": "em",
+          "text": "_Prelude in G (214)._"
+        },
+        {
+          "start": 177,
+          "end": 244,
+          "style": "em",
+          "text": "_The adagio of violin solo sonata in C arranged for clavier (214)._"
+        },
+        {
+          "start": 245,
+          "end": 293,
+          "style": "em",
+          "text": "_Chromatic Fantasia and Fugue in D minor (207)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Prelude and Fugue in A minor (207)._      Composed at Cöthen.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Prelude and Fugue in A minor (207)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue in E minor (210)._      The toccata is in three movements.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Toccata and Fugue in E minor (210)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue in F sharp minor (210)._      Allegro moderato, lento, fugue (for three voices) allegro moderato fugue (for four voices).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "em",
+          "text": "_Toccata and Fugue in F sharp minor (210)._"
+        },
+        {
+          "start": 80,
+          "end": 98,
+          "style": "paren_cite",
+          "text": "(for three voices)"
+        },
+        {
+          "start": 122,
+          "end": 139,
+          "style": "paren_cite",
+          "text": "(for four voices)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue in C minor (210)._      The toccata is in two movements--allegro moderato and adagio.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Toccata and Fugue in C minor (210)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Prelude and Fugue in E flat (214)._ _Fugue in B minor (214)._ _Suites in A minor (214)._ _In E flat._ _In G._ _Preludio con Fughetta in F (214)._ _In G._ _Prelude in G (214)._ _The adagio of violin solo sonata in C arranged for clavier (214)._ _Chromatic Fantasia and Fugue in D minor (207)._\n\n_Prelude and Fugue in A minor (207)._      Composed at Cöthen.\n\n_Toccata and Fugue in E minor (210)._      The toccata is in three movements.\n\n_Toccata and Fugue in F sharp minor (210)._      Allegro moderato, lento, fugue (for three voices) allegro moderato fugue (for four voices).\n\n_Toccata and Fugue in C minor (210)._      The toccata is in two movements--allegro moderato and adagio.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1258,
+    "text": "_Prelude and Fugue in E flat (214)._ _Fugue in B minor (214)._ _Suites in A minor (214)._ _In E flat._ _In G._ _Preludio con Fughetta in F (214)._ _In G._ _Prelude in G (214)._ _The adagio of violin solo sonata in C arranged for clavier (214)._ _Chromatic Fantasia and Fugue in D minor (207)._"
+  },
+  "word_count": 128,
+  "block_count": 5
+}

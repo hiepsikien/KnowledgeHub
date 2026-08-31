@@ -1,0 +1,84 @@
+{
+  "chapter_id": "ch-111",
+  "title": "_Six Sonatas for (232 and 233) Violin and Figured Bass._ _Six Sonatas for Flute or Violin and Clavier (234 and 235)._ _Suite in A for Violin and Clavier (236)._ _Sonata in E minor for Violin and Clavier (236)._ _Fugue in G minor for Violin and Clavier (236)._ _Sonata in C for two Violins and Clavier (237)._ _Sonata in G for Flute, Violin and Clavier (237)._",
+  "block_start": 1319,
+  "block_end": 1320,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Six Sonatas for (232 and 233) Violin and Figured Bass._ _Six Sonatas for Flute or Violin and Clavier (234 and 235)._ _Suite in A for Violin and Clavier (236)._ _Sonata in E minor for Violin and Clavier (236)._ _Fugue in G minor for Violin and Clavier (236)._ _Sonata in C for two Violins and Clavier (237)._ _Sonata in G for Flute, Violin and Clavier (237)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 56,
+          "style": "em",
+          "text": "_Six Sonatas for (232 and 233) Violin and Figured Bass._"
+        },
+        {
+          "start": 57,
+          "end": 117,
+          "style": "em",
+          "text": "_Six Sonatas for Flute or Violin and Clavier (234 and 235)._"
+        },
+        {
+          "start": 118,
+          "end": 160,
+          "style": "em",
+          "text": "_Suite in A for Violin and Clavier (236)._"
+        },
+        {
+          "start": 161,
+          "end": 210,
+          "style": "em",
+          "text": "_Sonata in E minor for Violin and Clavier (236)._"
+        },
+        {
+          "start": 211,
+          "end": 259,
+          "style": "em",
+          "text": "_Fugue in G minor for Violin and Clavier (236)._"
+        },
+        {
+          "start": 260,
+          "end": 308,
+          "style": "em",
+          "text": "_Sonata in C for two Violins and Clavier (237)._"
+        },
+        {
+          "start": 309,
+          "end": 359,
+          "style": "em",
+          "text": "_Sonata in G for Flute, Violin and Clavier (237)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Trio for Flute, Violin and Clavier (237)._      From the “Musical Offering”; the clavier part supplied from the figured bass by Kirnberger.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "em",
+          "text": "_Trio for Flute, Violin and Clavier (237)._"
+        },
+        {
+          "start": 58,
+          "end": 76,
+          "style": "quote",
+          "text": "“Musical Offering”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Six Sonatas for (232 and 233) Violin and Figured Bass._ _Six Sonatas for Flute or Violin and Clavier (234 and 235)._ _Suite in A for Violin and Clavier (236)._ _Sonata in E minor for Violin and Clavier (236)._ _Fugue in G minor for Violin and Clavier (236)._ _Sonata in C for two Violins and Clavier (237)._ _Sonata in G for Flute, Violin and Clavier (237)._\n\n_Trio for Flute, Violin and Clavier (237)._      From the “Musical Offering”; the clavier part supplied from the figured bass by Kirnberger.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1319,
+    "text": "_Six Sonatas for (232 and 233) Violin and Figured Bass._ _Six Sonatas for Flute or Violin and Clavier (234 and 235)._ _Suite in A for Violin and Clavier (236)._ _Sonata in E minor for Violin and Clavier (236)._ _Fugue in G minor for Violin and Clavier (236)._ _Sonata in C for two Violins and Clavier (237)._ _Sonata in G for Flute, Violin and Clavier (237)._"
+  },
+  "word_count": 94,
+  "block_count": 2
+}

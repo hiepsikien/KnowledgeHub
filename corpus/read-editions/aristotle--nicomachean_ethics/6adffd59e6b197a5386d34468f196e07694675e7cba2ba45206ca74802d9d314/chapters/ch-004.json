@@ -1,0 +1,894 @@
+{
+  "chapter_id": "ch-004",
+  "title": "Chapter III. Commencing then from the point stated above we will now speak of these",
+  "block_start": 277,
+  "block_end": 325,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Chapter III. Commencing then from the point stated above we will now speak of these",
+      "level": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "Excellences again. Let those faculties whereby the Soul attains truth in Affirmation or Negation, be assumed to be in number five:[10] viz. Art, Knowledge, Practical Wisdom, Science, Intuition: (Supposition and Opinion I do not include, because by these one may go wrong.)",
+      "spans": [
+        {
+          "start": 130,
+          "end": 134,
+          "style": "footnote",
+          "text": "[10]"
+        },
+        {
+          "start": 194,
+          "end": 272,
+          "style": "paren_aside",
+          "text": "(Supposition and Opinion I do not include, because by these one may go wrong.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "What Knowledge is, is plain from the following of considerations, if one is to speak accurately, instead of being led away by resemblances. For we all conceive that what we strictly speaking know, cannot be otherwise than it is, because as to those things which can be otherwise than they are, we are uncertain whether they are or are not, the moment they cease to be within the sphere of our actual observation."
+    },
+    {
+      "type": "paragraph",
+      "text": "So then, whatever comes within the range of Knowledge is by necessity, and therefore eternal, (because all things are so which exist necessarily,) and all eternal things are without beginning, and indestructible.",
+      "spans": [
+        {
+          "start": 94,
+          "end": 146,
+          "style": "paren_aside",
+          "text": "(because all things are so which exist necessarily,)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Again, all Knowledge is thought to be capable of being taught, and what comes within its range capable of being learned. And all teaching is based upon previous knowledge; (a statement you will find in the Analytics also,)[11] for there are two ways of teaching, by Syllogism and by Induction. In fact. Induction is the source of universal propositions, and Syllogism reasons from these universals.[12] Syllogism then may reason from principles which cannot be themselves proved Syllogistically: and therefore must by Induction.",
+      "spans": [
+        {
+          "start": 172,
+          "end": 222,
+          "style": "paren_aside",
+          "text": "(a statement you will find in the Analytics also,)"
+        },
+        {
+          "start": 222,
+          "end": 226,
+          "style": "footnote",
+          "text": "[11]"
+        },
+        {
+          "start": 398,
+          "end": 402,
+          "style": "footnote",
+          "text": "[12]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "So Knowledge is “a state or mental faculty apt to demonstrate syllogistically,” &c. as in the Analytics:[13] because a man, strictly and properly speaking, _knows_, when he establishes his conclusion in a certain way, and the principles are known to him: for if they are not better known to him than the conclusion, such knowledge as he has will be merely accidental.",
+      "spans": [
+        {
+          "start": 16,
+          "end": 79,
+          "style": "quote",
+          "text": "“a state or mental faculty apt to demonstrate syllogistically,”"
+        },
+        {
+          "start": 104,
+          "end": 108,
+          "style": "footnote",
+          "text": "[13]"
+        },
+        {
+          "start": 156,
+          "end": 163,
+          "style": "em",
+          "text": "_knows_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Let thus much be accepted as a definition of Knowledge."
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter IV.\nMatter which may exist otherwise than it actually does in any given\ncase (commonly called Contingent) is of two kinds, that which is the\nobject of Making, and that which is the object of Doing; now Making and\nDoing are two different things (as we show in the exoteric treatise),\nand so that state of mind, conjoined with Reason, which is apt to Do,\nis distinct from that also conjoined with Reason, which is apt to Make:\nand for this reason they are not included one by the other, that is,\nDoing is not Making, nor Making Doing.[14] Now[15] as Architecture is\nan Art, and is the same as “a certain state of mind, conjoined with\nReason, which is apt to Make,” and as there is no Art which is not such\na state, nor any such state which is not an Art, Art, in its strict and\nproper sense, must be “a state of mind, conjoined with true Reason, apt\nto Make.”\nNow all Art has to do with production, and contrivance, and seeing how\nany of those things may be produced which may either be or not be, and\nthe origination of which rests with the maker and not with the thing\nmade.\nAnd, so neither things which exist or come into being necessarily, nor\nthings in the way of nature, come under the province of Art, because\nthese are self-originating. And since Making and Doing are distinct,",
+      "spans": [
+        {
+          "start": 85,
+          "end": 113,
+          "style": "paren_cite",
+          "text": "(commonly called Contingent)"
+        },
+        {
+          "start": 252,
+          "end": 289,
+          "style": "paren_cite",
+          "text": "(as we show in the exoteric treatise)"
+        },
+        {
+          "start": 540,
+          "end": 544,
+          "style": "footnote",
+          "text": "[14]"
+        },
+        {
+          "start": 548,
+          "end": 552,
+          "style": "footnote",
+          "text": "[15]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Art must be concerned with the former and not the latter. And in a certain sense Art and Fortune are concerned with the same things, as, Agathon says by the way,"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Art Fortune loves, and is of her beloved.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "quote",
+          "text": "“Art Fortune loves, and is of her beloved.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "So Art, as has been stated, is “a certain state of mind, apt to Make, conjoined with true Reason;” its absence, on the contrary, is the same state conjoined with false Reason, and both are employed upon Contingent matter.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 98,
+          "style": "quote",
+          "text": "“a certain state of mind, apt to Make, conjoined with true Reason;”"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter V.\nAs for Practical Wisdom, we shall ascertain its nature by examining to\nwhat kind of persons we in common language ascribe it.[16]\nIt is thought then to be the property of the Practically Wise man to be\nable to deliberate well respecting what is good and expedient for\nhimself, not in any definite line,[17] as what is conducive to health\nor strength, but what to living well. A proof of this is that we call\nmen Wise in this or that, when they calculate well with a view to some\ngood end in a case where there is no definite rule. And so, in a\ngeneral way of speaking, the man who is good at deliberation will be",
+      "spans": [
+        {
+          "start": 136,
+          "end": 140,
+          "style": "footnote",
+          "text": "[16]"
+        },
+        {
+          "start": 313,
+          "end": 317,
+          "style": "footnote",
+          "text": "[17]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Practically Wise. Now no man deliberates respecting things which cannot be otherwise than they are, nor such as lie not within the range of his own action: and so, since Knowledge requires strict demonstrative reasoning, of which Contingent matter does not admit (I say Contingent matter, because all matters of deliberation must be Contingent and deliberation cannot take place with respect to things which are Necessarily), Practical Wisdom cannot be Knowledge nor Art; nor the former, because what falls under the province of Doing must be Contingent; not the latter, because Doing and Making are different in kind.",
+      "spans": [
+        {
+          "start": 263,
+          "end": 424,
+          "style": "paren_aside",
+          "text": "(I say Contingent matter, because all matters of deliberation must be Contingent and deliberation cannot take place with respect to things which are Necessarily)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It remains then that it must be “a state of mind true, conjoined with Reason, and apt to Do, having for its object those things which are good or bad for Man:” because of Making something beyond itself is always the object, but cannot be of Doing because the very well-doing is in itself an End.",
+      "spans": [
+        {
+          "start": 32,
+          "end": 159,
+          "style": "quote",
+          "text": "“a state of mind true, conjoined with Reason, and apt to Do, having for its object those things which are good or bad for Man:”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For this reason we think Pericles and men of that stamp to be Practically Wise, because they can see what is good for themselves and for men in general, and we also think those to be such who are skilled in domestic management or civil government. In fact, this is the reason why we call the habit of perfected self-mastery by the name which in Greek it bears, etymologically signifying “that which preserves the Practical Wisdom:” for what it does preserve is the Notion I have mentioned, _i.e._ of one’s own true interest.[18]",
+      "spans": [
+        {
+          "start": 387,
+          "end": 431,
+          "style": "quote",
+          "text": "“that which preserves the Practical Wisdom:”"
+        },
+        {
+          "start": 490,
+          "end": 496,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 524,
+          "end": 528,
+          "style": "footnote",
+          "text": "[18]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For it is not every kind of Notion which the pleasant and the painful corrupt and pervert, as, for instance, that “the three angles of every rectilineal triangle are equal to two right angles,” but only those bearing on moral action.",
+      "spans": [
+        {
+          "start": 114,
+          "end": 193,
+          "style": "quote",
+          "text": "“the three angles of every rectilineal triangle are equal to two right angles,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For the Principles of the matters of moral action are the final cause of them:[19] now to the man who has been corrupted by reason of pleasure or pain the Principle immediately becomes obscured, nor does he see that it is his duty to choose and act in each instance with a view to this final cause and by reason of it: for viciousness has a tendency to destroy the moral Principle: and so Practical Wisdom must be “a state conjoined with reason, true, having human good for its object, and apt to do.”",
+      "spans": [
+        {
+          "start": 78,
+          "end": 82,
+          "style": "footnote",
+          "text": "[19]"
+        },
+        {
+          "start": 414,
+          "end": 501,
+          "style": "quote",
+          "text": "“a state conjoined with reason, true, having human good for its object, and apt to do.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Then again Art admits of degrees of excellence, but Practical Wisdom does not:[20] and in Art he who goes wrong purposely is preferable to him who does so unwittingly,[21] but not so in respect of Practical Wisdom or the other Virtues. It plainly is then an Excellence of a certain kind, and not an Art.",
+      "spans": [
+        {
+          "start": 78,
+          "end": 82,
+          "style": "footnote",
+          "text": "[20]"
+        },
+        {
+          "start": 167,
+          "end": 171,
+          "style": "footnote",
+          "text": "[21]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Now as there are two parts of the Soul which have Reason, it must be the Excellence of the Opinionative [which we called before calculative or deliberative], because both Opinion and Practical Wisdom are exercised upon Contingent matter. And further, it is not simply a state conjoined with Reason, as is proved by the fact that such a state may be forgotten and so lost while Practical Wisdom cannot.",
+      "spans": [
+        {
+          "start": 104,
+          "end": 156,
+          "style": "bracket_note",
+          "text": "[which we called before calculative or deliberative]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter VI.\nNow Knowledge is a conception concerning universals and Necessary\nmatter, and there are of course certain First Principles in all trains\nof demonstrative reasoning (that is of all Knowledge because this is\nconnected with reasoning): that faculty, then, which takes in the first\nprinciples of that which comes under the range of Knowledge, cannot be\neither Knowledge, or Art, or Practical Wisdom: not Knowledge, because\nwhat is the object of Knowledge must be derived from demonstrative\nreasoning; not either of the other two, because they are exercised upon",
+      "spans": [
+        {
+          "start": 176,
+          "end": 243,
+          "style": "paren_aside",
+          "text": "(that is of all Knowledge because this is\nconnected with reasoning)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Contingent matter only. Nor can it be Science which takes in these, because the Scientific Man must in some cases depend on demonstrative Reasoning."
+    },
+    {
+      "type": "paragraph",
+      "text": "It comes then to this: since the faculties whereby we always attain truth and are never deceived when dealing with matter Necessary or even Contingent are Knowledge, Practical Wisdom, Science, and Intuition, and the faculty which takes in First Principles cannot be any of the three first; the last, namely Intuition, must be it which performs this function."
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter VII.\nScience is a term we use principally in two meanings: in the first\nplace, in the Arts we ascribe it to those who carry their arts to the\nhighest accuracy;[22] Phidias, for instance, we call a Scientific or\ncunning sculptor; Polycleitus a Scientific or cunning statuary;\nmeaning, in this instance, nothing else by Science than an excellence\nof art: in the other sense, we think some to be Scientific in a general\nway, not in any particular line or in any particular thing, just as\nHomer says of a man in his Margites; “Him the Gods made neither a\ndigger of the ground, nor ploughman, nor in any other way Scientific.”\nSo it is plain that Science must mean the most accurate of all\nKnowledge; but if so, then the Scientific man must not merely know the\ndeductions from the First Principles but be in possession of truth\nrespecting the First Principles. So that Science must be equivalent to\nIntuition and Knowledge; it is, so to speak, Knowledge of the most\nprecious objects, _with a head on_.[23]\nI say of the most precious things, because it is absurd to suppose\nπολιτικὴ,[24] or Practical Wisdom, to be the highest, unless it can be\nshown that Man is the most excellent of all that exists in the",
+      "spans": [
+        {
+          "start": 167,
+          "end": 171,
+          "style": "footnote",
+          "text": "[22]"
+        },
+        {
+          "start": 987,
+          "end": 1003,
+          "style": "em",
+          "text": "_with a head on_"
+        },
+        {
+          "start": 1004,
+          "end": 1008,
+          "style": "footnote",
+          "text": "[23]"
+        },
+        {
+          "start": 1085,
+          "end": 1089,
+          "style": "footnote",
+          "text": "[24]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Universe. Now if “healthy” and “good” are relative terms, differing when applied to men or to fish, but “white” and “straight” are the same always, men must allow that the Scientific is the same always, but the Practically Wise varies: for whatever provides all things well for itself, to this they would apply the term Practically Wise, and commit these matters to it; which is the reason, by the way, that they call some brutes Practically Wise, such that is as plainly have a faculty of forethought respecting their own subsistence.",
+      "spans": [
+        {
+          "start": 17,
+          "end": 26,
+          "style": "quote",
+          "text": "“healthy”"
+        },
+        {
+          "start": 31,
+          "end": 37,
+          "style": "quote",
+          "text": "“good”"
+        },
+        {
+          "start": 104,
+          "end": 111,
+          "style": "quote",
+          "text": "“white”"
+        },
+        {
+          "start": 116,
+          "end": 126,
+          "style": "quote",
+          "text": "“straight”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And it is quite plain that Science and πολιτικὴ cannot be identical: because if men give the name of Science to that faculty which is employed upon what is expedient for themselves, there will be many instead of one, because there is not one and the same faculty employed on the good of all animals collectively, unless in the same sense as you may say there is one art of healing with respect to all living beings."
+    },
+    {
+      "type": "paragraph",
+      "text": "If it is urged that man is superior to all other animals, that makes no difference: for there are many other things more Godlike in their nature than Man, as, most obviously, the elements of which the Universe is composed.[25]",
+      "spans": [
+        {
+          "start": 222,
+          "end": 226,
+          "style": "footnote",
+          "text": "[25]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is plain then that Science is the union of Knowledge and Intuition, and has for its objects those things which are most precious in their nature. Accordingly, Anexagoras, Thales, and men of that stamp, people call Scientific, but not Practically Wise because they see them ignorant of what concerns themselves; and they say that what they know is quite out of the common run certainly, and wonderful, and hard, and very fine no doubt, but still useless because they do not seek after what is good for them as men."
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter VIII.\nBut Practical Wisdom is employed upon human matters, and such as are\nobjects of deliberation (for we say, that to deliberate well is most\npeculiarly the work of the man who possesses this Wisdom), and no man\ndeliberates about things which cannot be otherwise than they are, nor\nabout any save those that have some definite End and this End good\nresulting from Moral Action; and the man to whom we should give the\nname of Good in Counsel, simply and without modification, is he who in\nthe way of calculation has a capacity for attaining that of practical\ngoods which is the best for Man.\nNor again does Practical Wisdom consist in a knowledge of general\nprinciples only, but it is necessary that one should know also the\nparticular details, because it is apt to act, and action is concerned\nwith details: for which reason sometimes men who have not much\nknowledge are more practical than others who have; among others, they\nwho derive all they know from actual experience: suppose a man to know,\nfor instance, that light meats are easy of digestion and wholesome, but\nnot what kinds of meat are light, he will not produce a healthy state;\nthat man will have a much better chance of doing so, who knows that the\nflesh of birds is light and wholesome. Since then Practical Wisdom is\napt to act, one ought to have both kinds of knowledge, or, if only one,\nthe knowledge of details rather than of Principles. So there will be in\nrespect of Practical Wisdom the distinction of supreme and\nsubordinate.[26]\nFurther: πολιτικὴ and Practical Wisdom are the same mental state, but\nthe point of view is not the same.\nOf Practical Wisdom exerted upon a community that which I would call\nthe Supreme is the faculty of Legislation; the subordinate, which is\nconcerned with the details, generally has the common name πολιτικὴ, and\nits functions are Action and Deliberation (for the particular enactment\nis a matter of action, being the ultimate issue of this branch of\nPractical Wisdom, and therefore people commonly say, that these men\nalone are really engaged in government, because they alone act, filling\nthe same place relatively to legislators, that workmen do to a\nmaster).[27]\nAgain, that is thought to be Practical Wisdom in the most proper sense\nwhich has for its object the interest of the Individual: and this\nusually appropriates the common name: the others are called\nrespectively Domestic Management, Legislation, Executive Government\ndivided into two branches, Deliberative and Judicial.[28] Now of\ncourse, knowledge for one’s self is one kind of knowledge, but it\nadmits of many shades of difference: and it is a common notion that the\nman who knows and busies himself about his own concerns merely is the\nman of Practical Wisdom, while they who extend their solicitude to\nsociety at large are considered meddlesome.\nEuripides has thus embodied this sentiment; “How,” says one of his\nCharacters, “How foolish am I, who whereas I might have shared equally,\nidly numbered among the multitude of the army *** for them that are\nbusy and meddlesome [Jove hates],” because the generality of mankind\nseek their own good and hold that this is their proper business. It is\nthen from this opinion that the notion has arisen that such men are the",
+      "spans": [
+        {
+          "start": 107,
+          "end": 209,
+          "style": "paren_aside",
+          "text": "(for we say, that to deliberate well is most\npeculiarly the work of the man who possesses this Wisdom)"
+        },
+        {
+          "start": 1509,
+          "end": 1513,
+          "style": "footnote",
+          "text": "[26]"
+        },
+        {
+          "start": 1871,
+          "end": 2177,
+          "style": "paren_aside",
+          "text": "(for the particular enactment\nis a matter of action, being the ultimate issue of this branch of\nPractical Wisdom, and therefore people commonly say, that these men\nalone are really engaged in government, because they alone act, filling\nthe same place relatively to legislators, that workmen do to a\nmaster)"
+        },
+        {
+          "start": 2178,
+          "end": 2182,
+          "style": "footnote",
+          "text": "[27]"
+        },
+        {
+          "start": 2501,
+          "end": 2505,
+          "style": "footnote",
+          "text": "[28]"
+        },
+        {
+          "start": 2876,
+          "end": 2882,
+          "style": "quote",
+          "text": "“How,”"
+        },
+        {
+          "start": 3059,
+          "end": 3071,
+          "style": "bracket_note",
+          "text": "[Jove hates]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Practically-Wise. And yet it is just possible that the good of the individual cannot be secured independently of connection with a family or a community. And again, how a man should manage his own affairs is sometimes not quite plain, and must be made a matter of enquiry.[29]",
+      "spans": [
+        {
+          "start": 272,
+          "end": 276,
+          "style": "footnote",
+          "text": "[29]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A corroboration of what I have said is[30] the fact, that the young come to be geometricians, and mathematicians, and Scientific in such matters, but it is not thought that a young man can come to be possessed of Practical Wisdom: now the reason is, that this Wisdom has for its object particular facts, which come to be known from experience, which a young man has not because it is produced only by length of time.",
+      "spans": [
+        {
+          "start": 38,
+          "end": 42,
+          "style": "footnote",
+          "text": "[30]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "By the way, a person might also enquire,[31] why a boy may be made a mathematician but not Scientific or a natural philosopher. Is not this the reason? that mathematics are taken in by the process of abstraction, but the principles of Science[32] and natural philosophy must be gained by experiment; and the latter young men talk of but do not realise, while the nature of the former is plain and clear.",
+      "spans": [
+        {
+          "start": 40,
+          "end": 44,
+          "style": "footnote",
+          "text": "[31]"
+        },
+        {
+          "start": 242,
+          "end": 246,
+          "style": "footnote",
+          "text": "[32]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Again, in matter of practice, error attaches either to the general rule, in the process of deliberation, or to the particular fact: for instance, this would be a general rule, “All water of a certain gravity is bad;” the particular fact, “this water is of that gravity.”",
+      "spans": [
+        {
+          "start": 176,
+          "end": 216,
+          "style": "quote",
+          "text": "“All water of a certain gravity is bad;”"
+        },
+        {
+          "start": 238,
+          "end": 270,
+          "style": "quote",
+          "text": "“this water is of that gravity.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And that Practical Wisdom is not Knowledge is plain, for it has to do with the ultimate issue,[33] as has been said, because every object of action is of this nature.",
+      "spans": [
+        {
+          "start": 94,
+          "end": 98,
+          "style": "footnote",
+          "text": "[33]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "To Intuition it is opposed, for this takes in those principles which cannot be proved by reasoning, while Practical Wisdom is concerned with the ultimate particular fact which cannot be realised by Knowledge but by Sense; I do not mean one of the five senses, but the same by which we take in the mathematical fact, that no rectilineal figure can be contained by less than three lines, i.e. that a triangle is the ultimate figure, because here also is a stopping point."
+    },
+    {
+      "type": "paragraph",
+      "text": "This however is Sense rather than Practical Wisdom, which is of another kind.[34]",
+      "spans": [
+        {
+          "start": 77,
+          "end": 81,
+          "style": "footnote",
+          "text": "[34]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter IX.\nNow the acts of enquiring and deliberating differ, though deliberating\nis a kind of enquiring. We ought to ascertain about Good Counsel\nlikewise what it is, whether a kind of Knowledge, or Opinion, or Happy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Conjecture, or some other kind of faculty. Knowledge it obviously is not, because men do not enquire about what they know, and Good Counsel is a kind of deliberation, and the man who is deliberating is enquiring and calculating."
+    },
+    {
+      "type": "paragraph",
+      "text": "Neither is it Happy Conjecture; because this is independent of reasoning, and a rapid operation; but men deliberate a long time, and it is a common saying that one should execute speedily what has been resolved upon in deliberation, but deliberate slowly."
+    },
+    {
+      "type": "paragraph",
+      "text": "Quick perception of causes[35] again is a different faculty from good counsel, for it is a species of Happy Conjecture. Nor is Good Counsel Opinion of any kind.",
+      "spans": [
+        {
+          "start": 26,
+          "end": 30,
+          "style": "footnote",
+          "text": "[35]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Well then, since he who deliberates ill goes wrong, and he who deliberates well does so rightly, it is clear that Good Counsel is rightness of some kind, but not of Knowledge nor of Opinion: for Knowledge cannot be called right because it cannot be wrong, and Rightness of Opinion is Truth: and again, all which is the object of opinion is definitely marked out.[36]",
+      "spans": [
+        {
+          "start": 362,
+          "end": 366,
+          "style": "footnote",
+          "text": "[36]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Still, however, Good Counsel is not independent of Reason, Does it remain then that it is a rightness of Intellectual Operation simply, because this does not amount to an assertion; and the objection to Opinion was that it is not a process of enquiry but already a definite assertion; whereas whosoever deliberates, whether well or ill, is engaged in enquiry and calculation."
+    },
+    {
+      "type": "paragraph",
+      "text": "Well, Good Counsel is a Rightness of deliberation, and so the first question must regard the nature and objects of deliberation. Now remember Rightness is an equivocal term; we plainly do not mean Rightness of any kind whatever; the ἀκρατὴς, for instance, or the bad man, will obtain by his calculation what he sets before him as an object, and so he may be said to have deliberated _rightly_ in one sense, but will have attained a great evil. Whereas to have deliberated well is thought to be a good, because Good Counsel is Rightness of deliberation of such a nature as is apt to attain good.",
+      "spans": [
+        {
+          "start": 383,
+          "end": 392,
+          "style": "em",
+          "text": "_rightly_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But even this again you may get by false reasoning, and hit upon the right effect though not through right means,[37] your middle term being fallacious: and so neither will this be yet Good Counsel in consequence of which you get what you ought but not through proper means.",
+      "spans": [
+        {
+          "start": 113,
+          "end": 117,
+          "style": "footnote",
+          "text": "[37]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Again, one man may hit on a thing after long deliberation, another quickly. And so that before described will not be yet Good Counsel, but the Rightness must be with reference to what is expedient; and you must have a proper end in view, pursue it in a right manner and right time."
+    },
+    {
+      "type": "paragraph",
+      "text": "Once more. One may deliberate well either generally or towards some particular End.[38] Good counsel in the general then is that which goes right towards that which is the End in a general way of consideration; in particular, that which does so towards some particular End.",
+      "spans": [
+        {
+          "start": 83,
+          "end": 87,
+          "style": "footnote",
+          "text": "[38]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Since then deliberating well is a quality of men possessed of Practical Wisdom, Good Counsel must be “Rightness in respect of what conduces to a given End, of which[39] Practical Wisdom is the true conception.”",
+      "spans": [
+        {
+          "start": 164,
+          "end": 168,
+          "style": "footnote",
+          "text": "[39]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Chapter X.\nThere is too the faculty of Judiciousness, and also its absence, in\nvirtue of which we call men Judicious or the contrary.\nNow Judiciousness is neither entirely identical with Knowledge or\nOpinion (for then all would have been Judicious), nor is it any one\nspecific science, as medical science whose object matter is things\nwholesome; or geometry whose object matter is magnitude: for it has not\nfor its object things which always exist and are immutable, nor of\nthose things which come into being just any which may chance; but those\nin respect of which a man might doubt and deliberate.\nAnd so it has the same object matter as Practical Wisdom; yet the two\nfaculties are not identical, because Practical Wisdom has the capacity\nfor commanding and taking the initiative, for its End is “what one\nshould do or not do:” but Judiciousness is only apt to decide upon\nsuggestions (though we do in Greek put “well” on to the faculty and its\nconcrete noun, these really mean exactly the same as the plain words),\nand Judiciousness is neither the having Practical Wisdom, nor attaining\nit: but just as learning is termed συνιέναι when a man uses his\nknowledge, so judiciousness consists in employing the Opinionative\nfaculty in judging concerning those things which come within the\nprovince of Practical Wisdom, when another enunciates them; and not\njudging merely, but judging well (for εὐ and καλῶς mean exactly the\nsame thing). And the Greek name of this faculty is derived from the use\nof the term συνιέναι in learning: μανθάνειν and συνιέναι being often\nused as synonymous.\nThe faculty called γνώμη,[40] in right of which we call men εὐγνώμονες,\nor say they have γνώμη, is “the right judgment of the equitable man.” A\nproof of which is that we most commonly say that the equitable man has\na tendency to make allowance, and the making allowance in certain cases\nis equitable. And συγγνώμη (the word denoting allowance) is right γνώμη\nhaving a capacity of making equitable decisions, By “right” I mean that\nof the Truthful man.\nChapter XI.\nNow all these mental states[41] tend to the same object, as indeed\ncommon language leads us to expect: I mean, we speak of γνώμη,\nJudiciousness, Practical Wisdom, and Practical Intuition, attributing\nthe possession of γνώμη and Practical Intuition to the same Individuals\nwhom we denominate Practically-Wise and Judicious: because all these\nfaculties are employed upon the extremes,[42] i.e. on particular\ndetails; and in right of his aptitude for deciding on the matters which\ncome within the province of the Practically-Wise, a man is Judicious\nand possessed of good γνώμη; i.e. he is disposed to make allowance, for\nconsiderations of equity are entertained by all good men alike in\ntransactions with their fellows.\nAnd all matters of Moral Action belong to the class of particulars,\notherwise called extremes: for the man of Practical Wisdom must know\nthem, and Judiciousness and γνώμη are concerned with matters of Moral\nActions, which are extremes.\nIntuition, moreover, takes in the extremes at both ends:[43] I mean,\nthe first and last terms must be taken in not by reasoning but by\nIntuition [so that Intuition comes to be of two kinds], and that which\nbelongs to strict demonstrative reasonings takes in immutable, i.e.\nNecessary, first terms; while that which is employed in practical\nmatters takes in the extreme, the Contingent, and the minor\nPremiss:[44] for the minor Premisses are the source of the Final Cause,\nUniversals being made up out of Particulars.[45] To take in these, of\ncourse, we must have Sense, i.e. in other words Practical Intuition.\nAnd for this reason these are thought to be simply gifts of nature; and\nwhereas no man is thought to be Scientific by nature, men are thought\nto have γνώμη, and Judiciousness, and Practical Intuition: a proof of\nwhich is that we think these faculties are a consequence even of\nparticular ages, and this given age has Practical Intuition and γνώμη,\nwe say, as if under the notion that nature is the cause. And thus\nIntuition is both the beginning and end, because the proofs are based\nupon the one kind of extremes and concern the other.\nAnd so[46] one should attend to the undemonstrable dicta and opinions\nof the skilful, the old and the Practically-Wise, no less than to those\nwhich are based on strict reasoning, because they see aright, having\ngained their power of moral vision from experience.\nChapter XII.\nWell, we have now stated the nature and objects of Practical Wisdom and\nScience respectively, and that they belong each to a different part of\nthe Soul. But I can conceive a person questioning their utility.\n“Science,” he would say, “concerns itself with none of the causes of\nhuman happiness (for it has nothing to do with producing anything):\nPractical Wisdom has this recommendation, I grant, but where is the\nneed of it, since its province is those things which are just and\nhonourable, and good for man, and these are the things which the good\nman as such does; but we are not a bit the more apt to do them because\nwe know them, since the Moral Virtues are Habits; just as we are not\nmore apt to be healthy or in good condition from mere knowledge of what\nrelates to these (I mean,[47] of course, things so called not from\ntheir producing health, etc., but from their evidencing it in a\nparticular subject), for we are not more apt to be healthy and in good\ncondition merely from knowing the art of medicine or training.\n“If it be urged that _knowing what is_ good does not by itself make a\nPractically-Wise man but _becoming_ good; still this Wisdom will be no\nuse either to those that are good, and so have it already, or to those\nwho have it not; because it will make no difference to them whether\nthey have it themselves or put themselves under the guidance of others\nwho have; and we might be contented to be in respect of this as in\nrespect of health: for though we wish to be healthy still we do not set\nabout learning the art of healing.\n“Furthermore, it would seem to be strange that, though lower in the\nscale than Science, it is to be its master; which it is, because\nwhatever produces results takes the rule and directs in each matter.”\nThis then is what we are to talk about, for these are the only points\nnow raised.\nNow first we say that being respectively Excellences of different parts\nof the Soul they must be choice-worthy, even on the supposition that\nthey neither of them produce results.\nIn the next place we say that they _do_ produce results; that Science\nmakes Happiness, not as the medical art but as healthiness makes\nhealth:[48] because, being a part of Virtue in its most extensive\nsense, it makes a man happy by being possessed and by working.\nNext, Man’s work _as Man_ is accomplished by virtue of Practical Wisdom\nand Moral Virtue, the latter giving the right aim and direction, the\nformer the right means to its attainment;[49] but of the fourth part of\nthe Soul, the mere nutritive principle, there is no such Excellence,\nbecause nothing is in its power to do or leave undone.[50]\nAs to our not being more apt to do what is noble and just by reason of\npossessing Practical Wisdom, we must begin a little higher up,[51]\ntaking this for our starting-point. As we say that men may do things in\nthemselves just and yet not be just men; for instance, when men do what\nthe laws require of them, either against their will, or by reason of\nignorance or something else, at all events not for the sake of the\nthings themselves; and yet they do what they ought and all that the\ngood man should do; so it seems that to be a good man one must do each\nact in a particular frame of mind, I mean from Moral Choice and for the\nsake of the things themselves which are done. Now it is Virtue which\nmakes the Moral Choice right, but whatever is naturally required to\ncarry out that Choice comes under the province not of Virtue but of a\ndifferent faculty. We must halt, as it were, awhile, and speak more\nclearly on these points.\nThere is then a certain faculty, commonly named Cleverness, of such a\nnature as to be able to do and attain whatever conduces to _any_ given\npurpose: now if that purpose be a good one the faculty is praiseworthy;\nif otherwise, it goes by a name which, denoting strictly the ability,\nimplies the willingness to do _anything_; we accordingly call the\nPractically-Wise Clever, and also those who can and will do\nanything.[52]\nNow Practical Wisdom is not identical with Cleverness, nor is it\nwithout this power of adapting means to ends: but this Eye of the Soul\n(as we may call it) does not attain its proper state without goodness,\nas we have said before and as is quite plain, because the syllogisms\ninto which Moral Action may be analysed have for their Major\nPremiss,[53] “since —— is the End and the Chief Good”[54] (fill up the\nblank with just anything you please, for we merely want to exhibit the\nForm, so that anything will do), but _how_ this blank should be filled\nis seen only by the good man: because Vice distorts the moral vision\nand causes men to be deceived in respect of practical principles.[55]\nIt is clear, therefore, that a man cannot be a Practically-Wise,\nwithout being a good, man.\nWe must enquire again also about Virtue: for it may be divided into\nNatural Virtue and Matured, which two bear to each other a relation\nsimilar to that which Practical Wisdom bears to Cleverness, one not of\nidentity but resemblance. I speak of Natural Virtue, because men hold\nthat each of the moral dispositions attach to us all somehow by nature:\nwe have dispositions[56] towards justice, self-mastery and courage, for\ninstance, immediately from our birth: but still we seek Goodness in its\nhighest sense as something distinct from these, and that these\ndispositions should attach to us in a somewhat different fashion.[57]\nChildren and brutes have these natural states, but then they are\nplainly hurtful unless combined with an intellectual element: at least\nthus much is matter of actual experience and observation, that as a\nstrong body destitute of sight must, if set in motion, fall violently\nbecause it has not sight, so it is also in the case we are considering:\nbut if it can get the intellectual element it then excels in acting.\nJust so the Natural State of Virtue, being like this strong body, will\nthen be Virtue in the highest sense when it too is combined with the\nintellectual element.\nSo that, as in the case of the Opinionative faculty, there are two\nforms, Cleverness and Practical Wisdom; so also in the case of the\nMoral there are two, Natural Virtue and Matured; and of these the\nlatter cannot be formed without Practical Wisdom.[58]\nThis leads some to say that all the Virtues are merely intellectual\nPractical Wisdom, and Socrates was partly right in his enquiry and\npartly wrong: wrong in that he thought all the Virtues were merely\nintellectual Practical Wisdom, right in saying they were not\nindependent of that faculty.\nA proof of which is that now all, in defining Virtue, add on the\n“state” [mentioning also to what standard it has reference, namely\nthat] “which is accordant with Right Reason:” now “right” means in\naccordance with Practical Wisdom. So then all seem to have an\ninstinctive notion that that state which is in accordance with\nPractical Wisdom is Virtue; however, we must make a slight change in\ntheir statement, because that state is Virtue, not merely which is in\naccordance with but which implies the possession of Right Reason;\nwhich, upon such matters, is Practical Wisdom. The difference between\nus and Socrates is this: he thought the Virtues were reasoning\nprocesses (_i.e._ that they were all instances of Knowledge in its\nstrict sense), but we say they imply the possession of Reason.\nFrom what has been said then it is clear that one cannot be, strictly\nspeaking, good without Practical Wisdom nor Practically-Wise without\nmoral goodness.\nAnd by the distinction between Natural and Matured Virtue one can meet\nthe reasoning by which it might be argued “that the Virtues are\nseparable because the same man is not by nature most inclined to all at\nonce so that he will have acquired this one before he has that other:”\nwe would reply that this is possible with respect to the Natural\nVirtues but not with respect to those in right of which a man is\ndenominated simply good: because they will all belong to him together\nwith the one faculty of Practical Wisdom.\nIt is plain too that even had it not been apt to act we should have\nneeded it, because it is the Excellence of a part of the Soul; and that\nthe moral choice cannot be right independently of Practical Wisdom and\nMoral Goodness; because this gives the right End, that causes the doing\nthese things which conduce to the End.",
+      "spans": [
+        {
+          "start": 208,
+          "end": 248,
+          "style": "paren_aside",
+          "text": "(for then all would have been Judicious)"
+        },
+        {
+          "start": 887,
+          "end": 1016,
+          "style": "paren_aside",
+          "text": "(though we do in Greek put “well” on to the faculty and its\nconcrete noun, these really mean exactly the same as the plain words)"
+        },
+        {
+          "start": 1387,
+          "end": 1433,
+          "style": "paren_aside",
+          "text": "(for εὐ and καλῶς mean exactly the\nsame thing)"
+        },
+        {
+          "start": 1608,
+          "end": 1612,
+          "style": "footnote",
+          "text": "[40]"
+        },
+        {
+          "start": 1682,
+          "end": 1724,
+          "style": "quote",
+          "text": "“the right judgment of the equitable man.”"
+        },
+        {
+          "start": 1897,
+          "end": 1926,
+          "style": "paren_cite",
+          "text": "(the word denoting allowance)"
+        },
+        {
+          "start": 1994,
+          "end": 2001,
+          "style": "quote",
+          "text": "“right”"
+        },
+        {
+          "start": 2074,
+          "end": 2078,
+          "style": "footnote",
+          "text": "[41]"
+        },
+        {
+          "start": 2429,
+          "end": 2433,
+          "style": "footnote",
+          "text": "[42]"
+        },
+        {
+          "start": 3057,
+          "end": 3061,
+          "style": "footnote",
+          "text": "[43]"
+        },
+        {
+          "start": 3146,
+          "end": 3190,
+          "style": "bracket_note",
+          "text": "[so that Intuition comes to be of two kinds]"
+        },
+        {
+          "start": 3409,
+          "end": 3413,
+          "style": "footnote",
+          "text": "[44]"
+        },
+        {
+          "start": 3517,
+          "end": 3521,
+          "style": "footnote",
+          "text": "[45]"
+        },
+        {
+          "start": 4155,
+          "end": 4159,
+          "style": "footnote",
+          "text": "[46]"
+        },
+        {
+          "start": 4633,
+          "end": 4643,
+          "style": "quote",
+          "text": "“Science,”"
+        },
+        {
+          "start": 4718,
+          "end": 4768,
+          "style": "paren_aside",
+          "text": "(for it has nothing to do with producing anything)"
+        },
+        {
+          "start": 5211,
+          "end": 5215,
+          "style": "footnote",
+          "text": "[47]"
+        },
+        {
+          "start": 5472,
+          "end": 5489,
+          "style": "em",
+          "text": "_knowing what is_"
+        },
+        {
+          "start": 5546,
+          "end": 5556,
+          "style": "em",
+          "text": "_becoming_"
+        },
+        {
+          "start": 6475,
+          "end": 6479,
+          "style": "em",
+          "text": "_do_"
+        },
+        {
+          "start": 6582,
+          "end": 6586,
+          "style": "footnote",
+          "text": "[48]"
+        },
+        {
+          "start": 6721,
+          "end": 6729,
+          "style": "em",
+          "text": "_as Man_"
+        },
+        {
+          "start": 6886,
+          "end": 6890,
+          "style": "footnote",
+          "text": "[49]"
+        },
+        {
+          "start": 7040,
+          "end": 7044,
+          "style": "footnote",
+          "text": "[50]"
+        },
+        {
+          "start": 7178,
+          "end": 7182,
+          "style": "footnote",
+          "text": "[51]"
+        },
+        {
+          "start": 8103,
+          "end": 8108,
+          "style": "em",
+          "text": "_any_"
+        },
+        {
+          "start": 8287,
+          "end": 8297,
+          "style": "em",
+          "text": "_anything_"
+        },
+        {
+          "start": 8392,
+          "end": 8396,
+          "style": "footnote",
+          "text": "[52]"
+        },
+        {
+          "start": 8533,
+          "end": 8552,
+          "style": "paren_cite",
+          "text": "(as we may call it)"
+        },
+        {
+          "start": 8742,
+          "end": 8746,
+          "style": "footnote",
+          "text": "[53]"
+        },
+        {
+          "start": 8747,
+          "end": 8787,
+          "style": "quote",
+          "text": "“since —— is the End and the Chief Good”"
+        },
+        {
+          "start": 8787,
+          "end": 8791,
+          "style": "footnote",
+          "text": "[54]"
+        },
+        {
+          "start": 8792,
+          "end": 8907,
+          "style": "paren_aside",
+          "text": "(fill up the\nblank with just anything you please, for we merely want to exhibit the\nForm, so that anything will do)"
+        },
+        {
+          "start": 8913,
+          "end": 8918,
+          "style": "em",
+          "text": "_how_"
+        },
+        {
+          "start": 9081,
+          "end": 9085,
+          "style": "footnote",
+          "text": "[55]"
+        },
+        {
+          "start": 9547,
+          "end": 9551,
+          "style": "footnote",
+          "text": "[56]"
+        },
+        {
+          "start": 9799,
+          "end": 9803,
+          "style": "footnote",
+          "text": "[57]"
+        },
+        {
+          "start": 10630,
+          "end": 10634,
+          "style": "footnote",
+          "text": "[58]"
+        },
+        {
+          "start": 10992,
+          "end": 10999,
+          "style": "quote",
+          "text": "“state”"
+        },
+        {
+          "start": 11065,
+          "end": 11104,
+          "style": "quote",
+          "text": "“which is accordant with Right Reason:”"
+        },
+        {
+          "start": 11109,
+          "end": 11116,
+          "style": "quote",
+          "text": "“right”"
+        },
+        {
+          "start": 11599,
+          "end": 11669,
+          "style": "paren_aside",
+          "text": "(_i.e._ that they were all instances of Knowledge in its\nstrict sense)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Then again, it is not Master of Science (i.e. of the superior part of the Soul), just as neither is the healing art Master of health; for it does not make use of it, but looks how it may come to be: so it commands for the sake of it but does not command it.",
+      "spans": [
+        {
+          "start": 40,
+          "end": 79,
+          "style": "paren_cite",
+          "text": "(i.e. of the superior part of the Soul)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The objection is, in fact, about as valid as if a man should say πολιτικὴ governs the gods because it gives orders about all things in the communty."
+    }
+  ],
+  "reading_markdown": "Chapter III. Commencing then from the point stated above we will now speak of these\n\nExcellences again. Let those faculties whereby the Soul attains truth in Affirmation or Negation, be assumed to be in number five:[10] viz. Art, Knowledge, Practical Wisdom, Science, Intuition: (Supposition and Opinion I do not include, because by these one may go wrong.)\n\nWhat Knowledge is, is plain from the following of considerations, if one is to speak accurately, instead of being led away by resemblances. For we all conceive that what we strictly speaking know, cannot be otherwise than it is, because as to those things which can be otherwise than they are, we are uncertain whether they are or are not, the moment they cease to be within the sphere of our actual observation.\n\nSo then, whatever comes within the range of Knowledge is by necessity, and therefore eternal, (because all things are so which exist necessarily,) and all eternal things are without beginning, and indestructible.\n\nAgain, all Knowledge is thought to be capable of being taught, and what comes within its range capable of being learned. And all teaching is based upon previous knowledge; (a statement you will find in the Analytics also,)[11] for there are two ways of teaching, by Syllogism and by Induction. In fact. Induction is the source of universal propositions, and Syllogism reasons from these universals.[12] Syllogism then may reason from principles which cannot be themselves proved Syllogistically: and therefore must by Induction.\n\nSo Knowledge is “a state or mental faculty apt to demonstrate syllogistically,” &c. as in the Analytics:[13] because a man, strictly and properly speaking, _knows_, when he establishes his conclusion in a certain way, and the principles are known to him: for if they are not better known to him than the conclusion, such knowledge as he has will be merely accidental.\n\nLet thus much be accepted as a definition of Knowledge.\n\nChapter IV.\nMatter which may exist otherwise than it actually does in any given\ncase (commonly called Contingent) is of two kinds, that which is the\nobject of Making, and that which is the object of Doing; now Making and\nDoing are two different things (as we show in the exoteric treatise),\nand so that state of mind, conjoined with Reason, which is apt to Do,\nis distinct from that also conjoined with Reason, which is apt to Make:\nand for this reason they are not included one by the other, that is,\nDoing is not Making, nor Making Doing.[14] Now[15] as Architecture is\nan Art, and is the same as “a certain state of mind, conjoined with\nReason, which is apt to Make,” and as there is no Art which is not such\na state, nor any such state which is not an Art, Art, in its strict and\nproper sense, must be “a state of mind, conjoined with true Reason, apt\nto Make.”\nNow all Art has to do with production, and contrivance, and seeing how\nany of those things may be produced which may either be or not be, and\nthe origination of which rests with the maker and not with the thing\nmade.\nAnd, so neither things which exist or come into being necessarily, nor\nthings in the way of nature, come under the province of Art, because\nthese are self-originating. And since Making and Doing are distinct,\n\nArt must be concerned with the former and not the latter. And in a certain sense Art and Fortune are concerned with the same things, as, Agathon says by the way,\n\n> “Art Fortune loves, and is of her beloved.”\n\nSo Art, as has been stated, is “a certain state of mind, apt to Make, conjoined with true Reason;” its absence, on the contrary, is the same state conjoined with false Reason, and both are employed upon Contingent matter.\n\nChapter V.\nAs for Practical Wisdom, we shall ascertain its nature by examining to\nwhat kind of persons we in common language ascribe it.[16]\nIt is thought then to be the property of the Practically Wise man to be\nable to deliberate well respecting what is good and expedient for\nhimself, not in any definite line,[17] as what is conducive to health\nor strength, but what to living well. A proof of this is that we call\nmen Wise in this or that, when they calculate well with a view to some\ngood end in a case where there is no definite rule. And so, in a\ngeneral way of speaking, the man who is good at deliberation will be\n\nPractically Wise. Now no man deliberates respecting things which cannot be otherwise than they are, nor such as lie not within the range of his own action: and so, since Knowledge requires strict demonstrative reasoning, of which Contingent matter does not admit (I say Contingent matter, because all matters of deliberation must be Contingent and deliberation cannot take place with respect to things which are Necessarily), Practical Wisdom cannot be Knowledge nor Art; nor the former, because what falls under the province of Doing must be Contingent; not the latter, because Doing and Making are different in kind.\n\nIt remains then that it must be “a state of mind true, conjoined with Reason, and apt to Do, having for its object those things which are good or bad for Man:” because of Making something beyond itself is always the object, but cannot be of Doing because the very well-doing is in itself an End.\n\nFor this reason we think Pericles and men of that stamp to be Practically Wise, because they can see what is good for themselves and for men in general, and we also think those to be such who are skilled in domestic management or civil government. In fact, this is the reason why we call the habit of perfected self-mastery by the name which in Greek it bears, etymologically signifying “that which preserves the Practical Wisdom:” for what it does preserve is the Notion I have mentioned, _i.e._ of one’s own true interest.[18]\n\nFor it is not every kind of Notion which the pleasant and the painful corrupt and pervert, as, for instance, that “the three angles of every rectilineal triangle are equal to two right angles,” but only those bearing on moral action.\n\nFor the Principles of the matters of moral action are the final cause of them:[19] now to the man who has been corrupted by reason of pleasure or pain the Principle immediately becomes obscured, nor does he see that it is his duty to choose and act in each instance with a view to this final cause and by reason of it: for viciousness has a tendency to destroy the moral Principle: and so Practical Wisdom must be “a state conjoined with reason, true, having human good for its object, and apt to do.”\n\nThen again Art admits of degrees of excellence, but Practical Wisdom does not:[20] and in Art he who goes wrong purposely is preferable to him who does so unwittingly,[21] but not so in respect of Practical Wisdom or the other Virtues. It plainly is then an Excellence of a certain kind, and not an Art.\n\nNow as there are two parts of the Soul which have Reason, it must be the Excellence of the Opinionative [which we called before calculative or deliberative], because both Opinion and Practical Wisdom are exercised upon Contingent matter. And further, it is not simply a state conjoined with Reason, as is proved by the fact that such a state may be forgotten and so lost while Practical Wisdom cannot.\n\nChapter VI.\nNow Knowledge is a conception concerning universals and Necessary\nmatter, and there are of course certain First Principles in all trains\nof demonstrative reasoning (that is of all Knowledge because this is\nconnected with reasoning): that faculty, then, which takes in the first\nprinciples of that which comes under the range of Knowledge, cannot be\neither Knowledge, or Art, or Practical Wisdom: not Knowledge, because\nwhat is the object of Knowledge must be derived from demonstrative\nreasoning; not either of the other two, because they are exercised upon\n\nContingent matter only. Nor can it be Science which takes in these, because the Scientific Man must in some cases depend on demonstrative Reasoning.\n\nIt comes then to this: since the faculties whereby we always attain truth and are never deceived when dealing with matter Necessary or even Contingent are Knowledge, Practical Wisdom, Science, and Intuition, and the faculty which takes in First Principles cannot be any of the three first; the last, namely Intuition, must be it which performs this function.\n\nChapter VII.\nScience is a term we use principally in two meanings: in the first\nplace, in the Arts we ascribe it to those who carry their arts to the\nhighest accuracy;[22] Phidias, for instance, we call a Scientific or\ncunning sculptor; Polycleitus a Scientific or cunning statuary;\nmeaning, in this instance, nothing else by Science than an excellence\nof art: in the other sense, we think some to be Scientific in a general\nway, not in any particular line or in any particular thing, just as\nHomer says of a man in his Margites; “Him the Gods made neither a\ndigger of the ground, nor ploughman, nor in any other way Scientific.”\nSo it is plain that Science must mean the most accurate of all\nKnowledge; but if so, then the Scientific man must not merely know the\ndeductions from the First Principles but be in possession of truth\nrespecting the First Principles. So that Science must be equivalent to\nIntuition and Knowledge; it is, so to speak, Knowledge of the most\nprecious objects, _with a head on_.[23]\nI say of the most precious things, because it is absurd to suppose\nπολιτικὴ,[24] or Practical Wisdom, to be the highest, unless it can be\nshown that Man is the most excellent of all that exists in the\n\nUniverse. Now if “healthy” and “good” are relative terms, differing when applied to men or to fish, but “white” and “straight” are the same always, men must allow that the Scientific is the same always, but the Practically Wise varies: for whatever provides all things well for itself, to this they would apply the term Practically Wise, and commit these matters to it; which is the reason, by the way, that they call some brutes Practically Wise, such that is as plainly have a faculty of forethought respecting their own subsistence.\n\nAnd it is quite plain that Science and πολιτικὴ cannot be identical: because if men give the name of Science to that faculty which is employed upon what is expedient for themselves, there will be many instead of one, because there is not one and the same faculty employed on the good of all animals collectively, unless in the same sense as you may say there is one art of healing with respect to all living beings.\n\nIf it is urged that man is superior to all other animals, that makes no difference: for there are many other things more Godlike in their nature than Man, as, most obviously, the elements of which the Universe is composed.[25]\n\nIt is plain then that Science is the union of Knowledge and Intuition, and has for its objects those things which are most precious in their nature. Accordingly, Anexagoras, Thales, and men of that stamp, people call Scientific, but not Practically Wise because they see them ignorant of what concerns themselves; and they say that what they know is quite out of the common run certainly, and wonderful, and hard, and very fine no doubt, but still useless because they do not seek after what is good for them as men.\n\nChapter VIII.\nBut Practical Wisdom is employed upon human matters, and such as are\nobjects of deliberation (for we say, that to deliberate well is most\npeculiarly the work of the man who possesses this Wisdom), and no man\ndeliberates about things which cannot be otherwise than they are, nor\nabout any save those that have some definite End and this End good\nresulting from Moral Action; and the man to whom we should give the\nname of Good in Counsel, simply and without modification, is he who in\nthe way of calculation has a capacity for attaining that of practical\ngoods which is the best for Man.\nNor again does Practical Wisdom consist in a knowledge of general\nprinciples only, but it is necessary that one should know also the\nparticular details, because it is apt to act, and action is concerned\nwith details: for which reason sometimes men who have not much\nknowledge are more practical than others who have; among others, they\nwho derive all they know from actual experience: suppose a man to know,\nfor instance, that light meats are easy of digestion and wholesome, but\nnot what kinds of meat are light, he will not produce a healthy state;\nthat man will have a much better chance of doing so, who knows that the\nflesh of birds is light and wholesome. Since then Practical Wisdom is\napt to act, one ought to have both kinds of knowledge, or, if only one,\nthe knowledge of details rather than of Principles. So there will be in\nrespect of Practical Wisdom the distinction of supreme and\nsubordinate.[26]\nFurther: πολιτικὴ and Practical Wisdom are the same mental state, but\nthe point of view is not the same.\nOf Practical Wisdom exerted upon a community that which I would call\nthe Supreme is the faculty of Legislation; the subordinate, which is\nconcerned with the details, generally has the common name πολιτικὴ, and\nits functions are Action and Deliberation (for the particular enactment\nis a matter of action, being the ultimate issue of this branch of\nPractical Wisdom, and therefore people commonly say, that these men\nalone are really engaged in government, because they alone act, filling\nthe same place relatively to legislators, that workmen do to a\nmaster).[27]\nAgain, that is thought to be Practical Wisdom in the most proper sense\nwhich has for its object the interest of the Individual: and this\nusually appropriates the common name: the others are called\nrespectively Domestic Management, Legislation, Executive Government\ndivided into two branches, Deliberative and Judicial.[28] Now of\ncourse, knowledge for one’s self is one kind of knowledge, but it\nadmits of many shades of difference: and it is a common notion that the\nman who knows and busies himself about his own concerns merely is the\nman of Practical Wisdom, while they who extend their solicitude to\nsociety at large are considered meddlesome.\nEuripides has thus embodied this sentiment; “How,” says one of his\nCharacters, “How foolish am I, who whereas I might have shared equally,\nidly numbered among the multitude of the army *** for them that are\nbusy and meddlesome [Jove hates],” because the generality of mankind\nseek their own good and hold that this is their proper business. It is\nthen from this opinion that the notion has arisen that such men are the\n\nPractically-Wise. And yet it is just possible that the good of the individual cannot be secured independently of connection with a family or a community. And again, how a man should manage his own affairs is sometimes not quite plain, and must be made a matter of enquiry.[29]\n\nA corroboration of what I have said is[30] the fact, that the young come to be geometricians, and mathematicians, and Scientific in such matters, but it is not thought that a young man can come to be possessed of Practical Wisdom: now the reason is, that this Wisdom has for its object particular facts, which come to be known from experience, which a young man has not because it is produced only by length of time.\n\nBy the way, a person might also enquire,[31] why a boy may be made a mathematician but not Scientific or a natural philosopher. Is not this the reason? that mathematics are taken in by the process of abstraction, but the principles of Science[32] and natural philosophy must be gained by experiment; and the latter young men talk of but do not realise, while the nature of the former is plain and clear.\n\nAgain, in matter of practice, error attaches either to the general rule, in the process of deliberation, or to the particular fact: for instance, this would be a general rule, “All water of a certain gravity is bad;” the particular fact, “this water is of that gravity.”\n\nAnd that Practical Wisdom is not Knowledge is plain, for it has to do with the ultimate issue,[33] as has been said, because every object of action is of this nature.\n\nTo Intuition it is opposed, for this takes in those principles which cannot be proved by reasoning, while Practical Wisdom is concerned with the ultimate particular fact which cannot be realised by Knowledge but by Sense; I do not mean one of the five senses, but the same by which we take in the mathematical fact, that no rectilineal figure can be contained by less than three lines, i.e. that a triangle is the ultimate figure, because here also is a stopping point.\n\nThis however is Sense rather than Practical Wisdom, which is of another kind.[34]\n\nChapter IX.\nNow the acts of enquiring and deliberating differ, though deliberating\nis a kind of enquiring. We ought to ascertain about Good Counsel\nlikewise what it is, whether a kind of Knowledge, or Opinion, or Happy\n\nConjecture, or some other kind of faculty. Knowledge it obviously is not, because men do not enquire about what they know, and Good Counsel is a kind of deliberation, and the man who is deliberating is enquiring and calculating.\n\nNeither is it Happy Conjecture; because this is independent of reasoning, and a rapid operation; but men deliberate a long time, and it is a common saying that one should execute speedily what has been resolved upon in deliberation, but deliberate slowly.\n\nQuick perception of causes[35] again is a different faculty from good counsel, for it is a species of Happy Conjecture. Nor is Good Counsel Opinion of any kind.\n\nWell then, since he who deliberates ill goes wrong, and he who deliberates well does so rightly, it is clear that Good Counsel is rightness of some kind, but not of Knowledge nor of Opinion: for Knowledge cannot be called right because it cannot be wrong, and Rightness of Opinion is Truth: and again, all which is the object of opinion is definitely marked out.[36]\n\nStill, however, Good Counsel is not independent of Reason, Does it remain then that it is a rightness of Intellectual Operation simply, because this does not amount to an assertion; and the objection to Opinion was that it is not a process of enquiry but already a definite assertion; whereas whosoever deliberates, whether well or ill, is engaged in enquiry and calculation.\n\nWell, Good Counsel is a Rightness of deliberation, and so the first question must regard the nature and objects of deliberation. Now remember Rightness is an equivocal term; we plainly do not mean Rightness of any kind whatever; the ἀκρατὴς, for instance, or the bad man, will obtain by his calculation what he sets before him as an object, and so he may be said to have deliberated _rightly_ in one sense, but will have attained a great evil. Whereas to have deliberated well is thought to be a good, because Good Counsel is Rightness of deliberation of such a nature as is apt to attain good.\n\nBut even this again you may get by false reasoning, and hit upon the right effect though not through right means,[37] your middle term being fallacious: and so neither will this be yet Good Counsel in consequence of which you get what you ought but not through proper means.\n\nAgain, one man may hit on a thing after long deliberation, another quickly. And so that before described will not be yet Good Counsel, but the Rightness must be with reference to what is expedient; and you must have a proper end in view, pursue it in a right manner and right time.\n\nOnce more. One may deliberate well either generally or towards some particular End.[38] Good counsel in the general then is that which goes right towards that which is the End in a general way of consideration; in particular, that which does so towards some particular End.\n\nSince then deliberating well is a quality of men possessed of Practical Wisdom, Good Counsel must be “Rightness in respect of what conduces to a given End, of which[39] Practical Wisdom is the true conception.”\n\nChapter X.\nThere is too the faculty of Judiciousness, and also its absence, in\nvirtue of which we call men Judicious or the contrary.\nNow Judiciousness is neither entirely identical with Knowledge or\nOpinion (for then all would have been Judicious), nor is it any one\nspecific science, as medical science whose object matter is things\nwholesome; or geometry whose object matter is magnitude: for it has not\nfor its object things which always exist and are immutable, nor of\nthose things which come into being just any which may chance; but those\nin respect of which a man might doubt and deliberate.\nAnd so it has the same object matter as Practical Wisdom; yet the two\nfaculties are not identical, because Practical Wisdom has the capacity\nfor commanding and taking the initiative, for its End is “what one\nshould do or not do:” but Judiciousness is only apt to decide upon\nsuggestions (though we do in Greek put “well” on to the faculty and its\nconcrete noun, these really mean exactly the same as the plain words),\nand Judiciousness is neither the having Practical Wisdom, nor attaining\nit: but just as learning is termed συνιέναι when a man uses his\nknowledge, so judiciousness consists in employing the Opinionative\nfaculty in judging concerning those things which come within the\nprovince of Practical Wisdom, when another enunciates them; and not\njudging merely, but judging well (for εὐ and καλῶς mean exactly the\nsame thing). And the Greek name of this faculty is derived from the use\nof the term συνιέναι in learning: μανθάνειν and συνιέναι being often\nused as synonymous.\nThe faculty called γνώμη,[40] in right of which we call men εὐγνώμονες,\nor say they have γνώμη, is “the right judgment of the equitable man.” A\nproof of which is that we most commonly say that the equitable man has\na tendency to make allowance, and the making allowance in certain cases\nis equitable. And συγγνώμη (the word denoting allowance) is right γνώμη\nhaving a capacity of making equitable decisions, By “right” I mean that\nof the Truthful man.\nChapter XI.\nNow all these mental states[41] tend to the same object, as indeed\ncommon language leads us to expect: I mean, we speak of γνώμη,\nJudiciousness, Practical Wisdom, and Practical Intuition, attributing\nthe possession of γνώμη and Practical Intuition to the same Individuals\nwhom we denominate Practically-Wise and Judicious: because all these\nfaculties are employed upon the extremes,[42] i.e. on particular\ndetails; and in right of his aptitude for deciding on the matters which\ncome within the province of the Practically-Wise, a man is Judicious\nand possessed of good γνώμη; i.e. he is disposed to make allowance, for\nconsiderations of equity are entertained by all good men alike in\ntransactions with their fellows.\nAnd all matters of Moral Action belong to the class of particulars,\notherwise called extremes: for the man of Practical Wisdom must know\nthem, and Judiciousness and γνώμη are concerned with matters of Moral\nActions, which are extremes.\nIntuition, moreover, takes in the extremes at both ends:[43] I mean,\nthe first and last terms must be taken in not by reasoning but by\nIntuition [so that Intuition comes to be of two kinds], and that which\nbelongs to strict demonstrative reasonings takes in immutable, i.e.\nNecessary, first terms; while that which is employed in practical\nmatters takes in the extreme, the Contingent, and the minor\nPremiss:[44] for the minor Premisses are the source of the Final Cause,\nUniversals being made up out of Particulars.[45] To take in these, of\ncourse, we must have Sense, i.e. in other words Practical Intuition.\nAnd for this reason these are thought to be simply gifts of nature; and\nwhereas no man is thought to be Scientific by nature, men are thought\nto have γνώμη, and Judiciousness, and Practical Intuition: a proof of\nwhich is that we think these faculties are a consequence even of\nparticular ages, and this given age has Practical Intuition and γνώμη,\nwe say, as if under the notion that nature is the cause. And thus\nIntuition is both the beginning and end, because the proofs are based\nupon the one kind of extremes and concern the other.\nAnd so[46] one should attend to the undemonstrable dicta and opinions\nof the skilful, the old and the Practically-Wise, no less than to those\nwhich are based on strict reasoning, because they see aright, having\ngained their power of moral vision from experience.\nChapter XII.\nWell, we have now stated the nature and objects of Practical Wisdom and\nScience respectively, and that they belong each to a different part of\nthe Soul. But I can conceive a person questioning their utility.\n“Science,” he would say, “concerns itself with none of the causes of\nhuman happiness (for it has nothing to do with producing anything):\nPractical Wisdom has this recommendation, I grant, but where is the\nneed of it, since its province is those things which are just and\nhonourable, and good for man, and these are the things which the good\nman as such does; but we are not a bit the more apt to do them because\nwe know them, since the Moral Virtues are Habits; just as we are not\nmore apt to be healthy or in good condition from mere knowledge of what\nrelates to these (I mean,[47] of course, things so called not from\ntheir producing health, etc., but from their evidencing it in a\nparticular subject), for we are not more apt to be healthy and in good\ncondition merely from knowing the art of medicine or training.\n“If it be urged that _knowing what is_ good does not by itself make a\nPractically-Wise man but _becoming_ good; still this Wisdom will be no\nuse either to those that are good, and so have it already, or to those\nwho have it not; because it will make no difference to them whether\nthey have it themselves or put themselves under the guidance of others\nwho have; and we might be contented to be in respect of this as in\nrespect of health: for though we wish to be healthy still we do not set\nabout learning the art of healing.\n“Furthermore, it would seem to be strange that, though lower in the\nscale than Science, it is to be its master; which it is, because\nwhatever produces results takes the rule and directs in each matter.”\nThis then is what we are to talk about, for these are the only points\nnow raised.\nNow first we say that being respectively Excellences of different parts\nof the Soul they must be choice-worthy, even on the supposition that\nthey neither of them produce results.\nIn the next place we say that they _do_ produce results; that Science\nmakes Happiness, not as the medical art but as healthiness makes\nhealth:[48] because, being a part of Virtue in its most extensive\nsense, it makes a man happy by being possessed and by working.\nNext, Man’s work _as Man_ is accomplished by virtue of Practical Wisdom\nand Moral Virtue, the latter giving the right aim and direction, the\nformer the right means to its attainment;[49] but of the fourth part of\nthe Soul, the mere nutritive principle, there is no such Excellence,\nbecause nothing is in its power to do or leave undone.[50]\nAs to our not being more apt to do what is noble and just by reason of\npossessing Practical Wisdom, we must begin a little higher up,[51]\ntaking this for our starting-point. As we say that men may do things in\nthemselves just and yet not be just men; for instance, when men do what\nthe laws require of them, either against their will, or by reason of\nignorance or something else, at all events not for the sake of the\nthings themselves; and yet they do what they ought and all that the\ngood man should do; so it seems that to be a good man one must do each\nact in a particular frame of mind, I mean from Moral Choice and for the\nsake of the things themselves which are done. Now it is Virtue which\nmakes the Moral Choice right, but whatever is naturally required to\ncarry out that Choice comes under the province not of Virtue but of a\ndifferent faculty. We must halt, as it were, awhile, and speak more\nclearly on these points.\nThere is then a certain faculty, commonly named Cleverness, of such a\nnature as to be able to do and attain whatever conduces to _any_ given\npurpose: now if that purpose be a good one the faculty is praiseworthy;\nif otherwise, it goes by a name which, denoting strictly the ability,\nimplies the willingness to do _anything_; we accordingly call the\nPractically-Wise Clever, and also those who can and will do\nanything.[52]\nNow Practical Wisdom is not identical with Cleverness, nor is it\nwithout this power of adapting means to ends: but this Eye of the Soul\n(as we may call it) does not attain its proper state without goodness,\nas we have said before and as is quite plain, because the syllogisms\ninto which Moral Action may be analysed have for their Major\nPremiss,[53] “since —— is the End and the Chief Good”[54] (fill up the\nblank with just anything you please, for we merely want to exhibit the\nForm, so that anything will do), but _how_ this blank should be filled\nis seen only by the good man: because Vice distorts the moral vision\nand causes men to be deceived in respect of practical principles.[55]\nIt is clear, therefore, that a man cannot be a Practically-Wise,\nwithout being a good, man.\nWe must enquire again also about Virtue: for it may be divided into\nNatural Virtue and Matured, which two bear to each other a relation\nsimilar to that which Practical Wisdom bears to Cleverness, one not of\nidentity but resemblance. I speak of Natural Virtue, because men hold\nthat each of the moral dispositions attach to us all somehow by nature:\nwe have dispositions[56] towards justice, self-mastery and courage, for\ninstance, immediately from our birth: but still we seek Goodness in its\nhighest sense as something distinct from these, and that these\ndispositions should attach to us in a somewhat different fashion.[57]\nChildren and brutes have these natural states, but then they are\nplainly hurtful unless combined with an intellectual element: at least\nthus much is matter of actual experience and observation, that as a\nstrong body destitute of sight must, if set in motion, fall violently\nbecause it has not sight, so it is also in the case we are considering:\nbut if it can get the intellectual element it then excels in acting.\nJust so the Natural State of Virtue, being like this strong body, will\nthen be Virtue in the highest sense when it too is combined with the\nintellectual element.\nSo that, as in the case of the Opinionative faculty, there are two\nforms, Cleverness and Practical Wisdom; so also in the case of the\nMoral there are two, Natural Virtue and Matured; and of these the\nlatter cannot be formed without Practical Wisdom.[58]\nThis leads some to say that all the Virtues are merely intellectual\nPractical Wisdom, and Socrates was partly right in his enquiry and\npartly wrong: wrong in that he thought all the Virtues were merely\nintellectual Practical Wisdom, right in saying they were not\nindependent of that faculty.\nA proof of which is that now all, in defining Virtue, add on the\n“state” [mentioning also to what standard it has reference, namely\nthat] “which is accordant with Right Reason:” now “right” means in\naccordance with Practical Wisdom. So then all seem to have an\ninstinctive notion that that state which is in accordance with\nPractical Wisdom is Virtue; however, we must make a slight change in\ntheir statement, because that state is Virtue, not merely which is in\naccordance with but which implies the possession of Right Reason;\nwhich, upon such matters, is Practical Wisdom. The difference between\nus and Socrates is this: he thought the Virtues were reasoning\nprocesses (_i.e._ that they were all instances of Knowledge in its\nstrict sense), but we say they imply the possession of Reason.\nFrom what has been said then it is clear that one cannot be, strictly\nspeaking, good without Practical Wisdom nor Practically-Wise without\nmoral goodness.\nAnd by the distinction between Natural and Matured Virtue one can meet\nthe reasoning by which it might be argued “that the Virtues are\nseparable because the same man is not by nature most inclined to all at\nonce so that he will have acquired this one before he has that other:”\nwe would reply that this is possible with respect to the Natural\nVirtues but not with respect to those in right of which a man is\ndenominated simply good: because they will all belong to him together\nwith the one faculty of Practical Wisdom.\nIt is plain too that even had it not been apt to act we should have\nneeded it, because it is the Excellence of a part of the Soul; and that\nthe moral choice cannot be right independently of Practical Wisdom and\nMoral Goodness; because this gives the right End, that causes the doing\nthese things which conduce to the End.\n\nThen again, it is not Master of Science (i.e. of the superior part of the Soul), just as neither is the healing art Master of health; for it does not make use of it, but looks how it may come to be: so it commands for the sake of it but does not command it.\n\nThe objection is, in fact, about as valid as if a man should say πολιτικὴ governs the gods because it gives orders about all things in the communty.",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 277,
+    "text": "Chapter III. Commencing then from the point stated above we will now speak of these"
+  },
+  "word_count": 5808,
+  "block_count": 49
+}

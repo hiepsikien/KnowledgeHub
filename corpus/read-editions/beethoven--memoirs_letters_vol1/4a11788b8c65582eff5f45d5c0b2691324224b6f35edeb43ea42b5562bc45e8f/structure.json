@@ -1,0 +1,54 @@
+{
+  "structure_version": "1",
+  "ref_parser_version": "1.7",
+  "language": "en",
+  "section_count": 3,
+  "sections": [
+    {
+      "section_id": "sec-000-front",
+      "kind": "front_matter",
+      "title": "Front matter",
+      "subtitle": null,
+      "start_line": 0,
+      "heading_line": 0,
+      "start_char": 0,
+      "end_char": 1942,
+      "word_count": 308,
+      "confidence": 0.85
+    },
+    {
+      "section_id": "sec-001",
+      "kind": "chapter",
+      "title": "PREFACE",
+      "subtitle": null,
+      "start_line": 58,
+      "heading_line": 58,
+      "start_char": 1943,
+      "end_char": 12697,
+      "word_count": 1817,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-002",
+      "kind": "chapter",
+      "title": "LA TOUR DE PERLZ--LAKE OF GENEVA,",
+      "subtitle": null,
+      "start_line": 224,
+      "heading_line": 224,
+      "start_char": 12698,
+      "end_char": 326153,
+      "word_count": 56803,
+      "confidence": 0.92
+    }
+  ],
+  "created_at": "2026-08-31T04:15:46+00:00",
+  "division_level": "all_caps_section",
+  "marker_count": 2,
+  "mode": "markers",
+  "candidate_count": 396,
+  "content_kind": "prose",
+  "summary_vi": "Phân đoạn deterministic từ 2 marker (all_caps_section).",
+  "work_id": "beethoven--memoirs_letters_vol1",
+  "content_hash": "4a11788b8c65582eff5f45d5c0b2691324224b6f35edeb43ea42b5562bc45e8f",
+  "source_family": "gutenberg"
+}

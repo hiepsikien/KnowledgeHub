@@ -1,0 +1,90 @@
+{
+  "chapter_id": "ch-086",
+  "title": "_Seven Chorale-preludes (244)._",
+  "block_start": 1229,
+  "block_end": 1232,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Seven Chorale-preludes (244)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "em",
+          "text": "_Seven Chorale-preludes (244)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sixty-three “Larger and more artistic Chorale-preludes” (245 and 246)._ _Four Concertos for two manuals and pedal (247)._       Arranged from the Violin Concertos of Vivaldi. The originals were, like Handel’s “Concerti grossi,” for four violins, one or two violas, violoncello, bass and continuo.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 72,
+          "style": "em",
+          "text": "_Sixty-three “Larger and more artistic Chorale-preludes” (245 and 246)._"
+        },
+        {
+          "start": 73,
+          "end": 122,
+          "style": "em",
+          "text": "_Four Concertos for two manuals and pedal (247)._"
+        },
+        {
+          "start": 210,
+          "end": 228,
+          "style": "quote",
+          "text": "“Concerti grossi,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Eight small Preludes and Fugues (247)._       For the instruction of his son Friedemann.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 40,
+          "style": "em",
+          "text": "_Eight small Preludes and Fugues (247)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Allabreve pro organo pleno (247)._      Organo pleno means a complete organ, as opposed to a positiv, or one manual instrument. It has the same kind of sense as our expression “Full orchestra,” and does not mean that the full force is to be employed the whole time. _Prelude in C (247)._      Without pedal.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 35,
+          "style": "em",
+          "text": "_Allabreve pro organo pleno (247)._"
+        },
+        {
+          "start": 177,
+          "end": 194,
+          "style": "quote",
+          "text": "“Full orchestra,”"
+        },
+        {
+          "start": 267,
+          "end": 288,
+          "style": "em",
+          "text": "_Prelude in C (247)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Seven Chorale-preludes (244)._\n\n> _Sixty-three “Larger and more artistic Chorale-preludes” (245 and 246)._ _Four Concertos for two manuals and pedal (247)._       Arranged from the Violin Concertos of Vivaldi. The originals were, like Handel’s “Concerti grossi,” for four violins, one or two violas, violoncello, bass and continuo.\n\n_Eight small Preludes and Fugues (247)._       For the instruction of his son Friedemann.\n\n> _Allabreve pro organo pleno (247)._      Organo pleno means a complete organ, as opposed to a positiv, or one manual instrument. It has the same kind of sense as our expression “Full orchestra,” and does not mean that the full force is to be employed the whole time. _Prelude in C (247)._      Without pedal.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1229,
+    "text": "_Seven Chorale-preludes (244)._"
+  },
+  "word_count": 118,
+  "block_count": 4
+}

@@ -1,0 +1,51 @@
+{
+  "chapter_id": "ch-002",
+  "title": "_Reading Jane’s Letters._      _Chap 34._",
+  "block_start": 4,
+  "block_end": 6,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Reading Jane’s Letters._      _Chap 34._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 25,
+          "style": "em",
+          "text": "_Reading Jane’s Letters._"
+        },
+        {
+          "start": 31,
+          "end": 41,
+          "style": "em",
+          "text": "_Chap 34._"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "]",
+      "lines": [
+        "]"
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "PRIDE.\nand",
+      "lines": [
+        "PRIDE.",
+        "and"
+      ]
+    }
+  ],
+  "reading_markdown": "_Reading Jane’s Letters._      _Chap 34._\n\n]\n\nPRIDE.\nand",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 4,
+    "text": "_Reading Jane’s Letters._      _Chap 34._"
+  },
+  "word_count": 10,
+  "block_count": 3
+}

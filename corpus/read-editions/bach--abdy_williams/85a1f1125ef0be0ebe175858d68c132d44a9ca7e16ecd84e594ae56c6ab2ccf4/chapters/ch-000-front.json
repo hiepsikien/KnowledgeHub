@@ -1,0 +1,77 @@
+{
+  "chapter_id": "ch-000-front",
+  "title": "Front matter",
+  "block_start": 0,
+  "block_end": 4,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Note: Project Gutenberg also has an HTML version of this file which includes the original pictorial and musical illustrations."
+    },
+    {
+      "type": "stanza",
+      "text": "See 43650-h.htm or 43650-h.zip: (http://www.gutenberg.org/files/43650/43650-h/43650-h.htm)\nor (http://www.gutenberg.org/files/43650/43650-h.zip)",
+      "lines": [
+        "See 43650-h.htm or 43650-h.zip: (http://www.gutenberg.org/files/43650/43650-h/43650-h.htm)",
+        "or (http://www.gutenberg.org/files/43650/43650-h.zip)"
+      ],
+      "spans": [
+        {
+          "start": 32,
+          "end": 90,
+          "style": "paren_aside",
+          "text": "(http://www.gutenberg.org/files/43650/43650-h/43650-h.htm)"
+        },
+        {
+          "start": 94,
+          "end": 144,
+          "style": "paren_aside",
+          "text": "(http://www.gutenberg.org/files/43650/43650-h.zip)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Images of the original pages are available through Internet Archive/American Libraries. See http://archive.org/details/bach00will Transcriber's Note Text enclosed by underscores is in italics (_italics_).",
+      "spans": [
+        {
+          "start": 192,
+          "end": 203,
+          "style": "paren_cite",
+          "text": "(_italics_)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Text enclosed by tilde characters is in bold face (~bold~).",
+      "spans": [
+        {
+          "start": 50,
+          "end": 58,
+          "style": "paren_cite",
+          "text": "(~bold~)"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "Some characters for musical symbols, such as natural, sharp, and flat, might not display in this UTF-8 text version or in the html version. If so, the reader should consult the iso-8859-1 (Latin-1) text file 43650-8.txt or 43650.zip: http://www.gutenberg.org/files/43650/43650-8.txt or http://www.gutenberg.org/files/43650/43650-8.zip BACH by",
+      "lines": [
+        "Some characters for musical symbols, such as natural, sharp, and flat, might not display in this UTF-8 text version or in the html version. If so, the reader should consult the iso-8859-1 (Latin-1) text file 43650-8.txt or 43650.zip: http://www.gutenberg.org/files/43650/43650-8.txt or http://www.gutenberg.org/files/43650/43650-8.zip BACH by"
+      ],
+      "spans": [
+        {
+          "start": 188,
+          "end": 197,
+          "style": "paren_cite",
+          "text": "(Latin-1)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "Note: Project Gutenberg also has an HTML version of this file which includes the original pictorial and musical illustrations.\n\nSee 43650-h.htm or 43650-h.zip: (http://www.gutenberg.org/files/43650/43650-h/43650-h.htm)\nor (http://www.gutenberg.org/files/43650/43650-h.zip)\n\nImages of the original pages are available through Internet Archive/American Libraries. See http://archive.org/details/bach00will Transcriber's Note Text enclosed by underscores is in italics (_italics_).\n\nText enclosed by tilde characters is in bold face (~bold~).\n\nSome characters for musical symbols, such as natural, sharp, and flat, might not display in this UTF-8 text version or in the html version. If so, the reader should consult the iso-8859-1 (Latin-1) text file 43650-8.txt or 43650.zip: http://www.gutenberg.org/files/43650/43650-8.txt or http://www.gutenberg.org/files/43650/43650-8.zip BACH by",
+  "split_hint": null,
+  "word_count": 140,
+  "block_count": 5
+}

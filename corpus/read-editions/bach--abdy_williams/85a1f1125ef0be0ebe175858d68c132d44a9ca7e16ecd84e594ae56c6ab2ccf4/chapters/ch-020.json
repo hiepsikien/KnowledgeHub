@@ -1,0 +1,44 @@
+{
+  "chapter_id": "ch-020",
+  "title": "JOHANN NICOLAUS, 1653-1682.",
+  "block_start": 62,
+  "block_end": 64,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "JOHANN NICOLAUS, 1653-1682.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sons of_ Christoph (No. 5).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "style": "em",
+          "text": "_Sons of_"
+        },
+        {
+          "start": 20,
+          "end": 27,
+          "style": "paren_cite",
+          "text": "(No. 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "10. GEORG CHRISTOPH, 1642-1697. 11. JOH. AMBROSIUS, 1645-1695. 12."
+    }
+  ],
+  "reading_markdown": "JOHANN NICOLAUS, 1653-1682.\n\n> _Sons of_ Christoph (No. 5).\n\n10. GEORG CHRISTOPH, 1642-1697. 11. JOH. AMBROSIUS, 1645-1695. 12.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 62,
+    "text": "JOHANN NICOLAUS, 1653-1682."
+  },
+  "word_count": 17,
+  "block_count": 3
+}

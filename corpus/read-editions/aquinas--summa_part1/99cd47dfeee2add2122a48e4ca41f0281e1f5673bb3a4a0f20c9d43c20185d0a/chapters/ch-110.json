@@ -1,0 +1,33 @@
+{
+  "chapter_id": "ch-110",
+  "title": "TREATISE ON THE ANGELS (QQ. 50-64)",
+  "block_start": 3779,
+  "block_end": 3780,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "TREATISE ON THE ANGELS (QQ. 50-64)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 23,
+          "end": 34,
+          "style": "paren_cite",
+          "text": "(QQ. 50-64)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "TREATISE ON THE ANGELS (QQ. 50-64)\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 3779,
+    "text": "TREATISE ON THE ANGELS (QQ. 50-64)"
+  },
+  "word_count": 6,
+  "block_count": 2
+}

@@ -1,0 +1,42 @@
+{
+  "chapter_id": "ch-003",
+  "title": "FREDERICK J. CROWEST _LIST OF VOLUMES._ BACH. By C. F. ABDY WILLIAMS.",
+  "block_start": 12,
+  "block_end": 13,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FREDERICK J. CROWEST _LIST OF VOLUMES._ BACH. By C. F. ABDY WILLIAMS.",
+      "level": 2,
+      "spans": [
+        {
+          "start": 21,
+          "end": 39,
+          "style": "em",
+          "text": "_LIST OF VOLUMES._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[_Fourth Edition._",
+      "spans": [
+        {
+          "start": 1,
+          "end": 18,
+          "style": "em",
+          "text": "_Fourth Edition._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FREDERICK J. CROWEST _LIST OF VOLUMES._ BACH. By C. F. ABDY WILLIAMS.\n\n[_Fourth Edition._",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 12,
+    "text": "FREDERICK J. CROWEST _LIST OF VOLUMES._ BACH. By C. F. ABDY WILLIAMS."
+  },
+  "word_count": 16,
+  "block_count": 2
+}

@@ -1,0 +1,94 @@
+{
+  "chapter_id": "ch-037",
+  "title": "DER SUPERINTEND.",
+  "block_start": 250,
+  "block_end": 258,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "DER SUPERINTEND.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "“He had only asked permission for four weeks, but had remained away four times as long as that.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 96,
+          "style": "quote",
+          "text": "“He had only asked permission for four weeks, but had remained away four times as long as that.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "ILLE."
+    },
+    {
+      "type": "paragraph",
+      "text": "“Hopes that the organ would have been played by him whom he had put in, in such a manner that no complaint can be made on that point.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 134,
+          "style": "quote",
+          "text": "“Hopes that the organ would have been played by him whom he had put in, in such a manner that no complaint can be made on that point.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "NOS."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Charge him with having made extraordinary variations in the chorales, and with intermixing many strange sounds, so that thereby the congregation were confounded. He must in the future, when he wishes to introduce some _tonus peregrinus_, continue in it, and not go off too quickly to something else, or, as he had hitherto been in the habit of doing, play a _tonum contrarium_. And then it is very strange that up to this time he has had no rehearsals, because he will not agree with the scholars. Therefore he is to declare whether he will play both figural and choral music with the scholars, since a capellmeister cannot be kept. If he will not do this, let him say so categorically of his own accord, that a change may be made, and some one who will undertake it can be appointed to the post.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 798,
+          "style": "quote",
+          "text": "“Charge him with having made extraordinary variations in the chorales, and with intermixing many strange sounds, so that thereby the congregation were confounded. He must in the future, when he wishes to introduce some _tonus peregrinus_, continue in it, and not go off too quickly to something else, or, as he had hitherto been in the habit of doing, play a _tonum contrarium_. And then it is very strange that up to this time he has had no rehearsals, because he will not agree with the scholars. Therefore he is to declare whether he will play both figural and choral music with the scholars, since a capellmeister cannot be kept. If he will not do this, let him say so categorically of his own accord, that a change may be made, and some one who will undertake it can be appointed to the post.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "ILLE."
+    },
+    {
+      "type": "blockquote",
+      "text": "“If an honest Director be appointed, he will play again.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 57,
+          "style": "quote",
+          "text": "“If an honest Director be appointed, he will play again.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: Explanations Needed]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "bracket_note",
+          "text": "[Sidenote: Explanations Needed]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "DER SUPERINTEND.\n\n> “He had only asked permission for four weeks, but had remained away four times as long as that.”\n\nILLE.\n\n“Hopes that the organ would have been played by him whom he had put in, in such a manner that no complaint can be made on that point.”\n\nNOS.\n\n> “Charge him with having made extraordinary variations in the chorales, and with intermixing many strange sounds, so that thereby the congregation were confounded. He must in the future, when he wishes to introduce some _tonus peregrinus_, continue in it, and not go off too quickly to something else, or, as he had hitherto been in the habit of doing, play a _tonum contrarium_. And then it is very strange that up to this time he has had no rehearsals, because he will not agree with the scholars. Therefore he is to declare whether he will play both figural and choral music with the scholars, since a capellmeister cannot be kept. If he will not do this, let him say so categorically of his own accord, that a change may be made, and some one who will undertake it can be appointed to the post.”\n\nILLE.\n\n> “If an honest Director be appointed, he will play again.”\n\n[Sidenote: Explanations Needed]",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 250,
+    "text": "DER SUPERINTEND."
+  },
+  "word_count": 208,
+  "block_count": 9
+}

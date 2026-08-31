@@ -1,0 +1,226 @@
+{
+  "chapter_id": "ch-070",
+  "title": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”",
+  "block_start": 934,
+  "block_end": 955,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 44,
+          "style": "quote",
+          "text": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“The two public musical concerts or assemblies, which are held here every week, are still flourishing. One is directed by Herr John Sebastian Bach, Capellmeister to the Grand-duke of Weissenfels, Music director of the Churches of St Thomas and St Nicholas; and it takes place in the Coffee-house of Zimmermann, in Catherine Street, every Friday evening from 8 to 10 o’clock; but during the Fair twice a week, namely, Tuesdays and Fridays. The members of these musical concerts consist for the most part of students, and there are always good musicians among them, so that often, as is known, some of them become in time celebrated performers. Every musician is allowed to perform publicly in these musical concerts, and there are usually some among the audience who are able to judge the value of a competent musician.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 819,
+          "style": "quote",
+          "text": "“The two public musical concerts or assemblies, which are held here every week, are still flourishing. One is directed by Herr John Sebastian Bach, Capellmeister to the Grand-duke of Weissenfels, Music director of the Churches of St Thomas and St Nicholas; and it takes place in the Coffee-house of Zimmermann, in Catherine Street, every Friday evening from 8 to 10 o’clock; but during the Fair twice a week, namely, Tuesdays and Fridays. The members of these musical concerts consist for the most part of students, and there are always good musicians among them, so that often, as is known, some of them become in time celebrated performers. Every musician is allowed to perform publicly in these musical concerts, and there are usually some among the audience who are able to judge the value of a competent musician.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Self-criticism_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Self-criticism_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach was a severe critic of his own works. Hilgenfeldt tells us that many of those which did not come up to his ideal of what they should be were cast aside by him, and that such of his youthful works as he considered worth keeping were constantly improved by him and brought to a higher standard. Thus, the first movement of the third organ sonata, which originally belonged to the _Wohltemperirte Clavier_, was altered to the extent of having large portions cut out, and others essentially changed and improved, so that phrases of small significance obtained an importance of which no signs appeared in the earlier composition.",
+      "spans": [
+        {
+          "start": 383,
+          "end": 407,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Teaching_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 22,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Teaching_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "He reserved his teaching for those who could really profit by it, and if he found that a pupil had not sufficient talent, he would, with every kindly courtesy, recommend him not to seek his living by music. The result was that a strong feeling for the dignity and value of art was spread by his pupils, who for the most part attained to important positions in their profession. One of his pupils, Doles, whose name had a place of honour in the old Gewandhaus at Leipsic, was Cantor of St Thomas for thirty-four years (after the death of Harrer), and was held in great esteem as a teacher and composer.",
+      "spans": [
+        {
+          "start": 517,
+          "end": 544,
+          "style": "paren_cite",
+          "text": "(after the death of Harrer)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _A good standing always maintained_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 47,
+          "style": "bracket_note",
+          "text": "[Sidenote: _A good standing always maintained_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Though at no time rich, Bach was never a poor man. The various payments in kind, such as rent-free dwelling, garden produce, etc., were almost sufficient to support him, and to make his salary available for self-improvement, for journeys, and for the education of his children. And that he was able to collect more than eighty theological works, at a time when books were an expensive luxury, and that he could give no less than three clavichords with pedals at once to his son, Joh. Christian, shows that his position was one of comfort."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Recognition on his death_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 38,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Recognition on his death_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Though the Council and the _Leipsic Chronicle_ took little notice of his death, it appears that the Society founded by Mizler caused a funeral ode by the then rector, Dr Ventzky, to be set to music and performed; and he seems to have been much mourned outside Leipsic, as the chief support of serious German music.",
+      "spans": [
+        {
+          "start": 27,
+          "end": 46,
+          "style": "em",
+          "text": "_Leipsic Chronicle_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Not as a composer, but as a performer, however, was he mourned. It was reserved for later generations to fully appreciate what Hilgenfeldt describes as the “spiritual and everlasting” side of his genius. In those days the composer and performer were one and the same person. No one was considered an artist who could only perform, however well, if he could not also compose; and, especially on the organ, good improvisation was considered the chief qualification of a musician. He was expected to be in a position to extemporise at any time and under any conditions a fugue, or a set of variations on any theme given to him; and his ability in this respect was the criterion by which he was judged. It was natural, therefore, that Bach’s fame during his lifetime should rest more on his extempore performances than on his written compositions, which, remaining in manuscript, would probably serve chiefly as models for his pupils to work from.",
+      "spans": [
+        {
+          "start": 156,
+          "end": 183,
+          "style": "quote",
+          "text": "“spiritual and everlasting”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Portraits and Statues_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 35,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Portraits and Statues_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Four portraits of Bach are known to have been painted. One, which seems to have been the first, is a half length picture showing him in a dress coat of the fifth decade of the eighteenth century. It belonged to Kittel, and was kept by him as a kind of sacred possession, only to be shown on special occasions, or as a reward to a diligent pupil. It was in a massive gold frame, and hung behind a curtain over the harpsichord in Kittel’s study. On his death it came into the possession of the church of which he was organist."
+    },
+    {
+      "type": "paragraph",
+      "text": "The second was also a half-length, and belonged to his son Carl Philip Emanuel. It was painted by Hausmann."
+    },
+    {
+      "type": "paragraph",
+      "text": "The third, also by Hausmann, is shown in our frontispiece. It is preserved in the Thomas School, and, according to Becker, was painted on his becoming a member of the Leipsic Musical Society. A fourth, preserved in the Joachimsthal Gymnasium at Berlin, was formerly in the possession of Princess Amalie of Prussia, and seems to have been painted by Geber."
+    },
+    {
+      "type": "paragraph",
+      "text": "A few good copper engravings were made from the various portraits, and a number of bad lithographs from the engravings. Some successful plaster busts have also been made from the pictures."
+    },
+    {
+      "type": "paragraph",
+      "text": "Germany is much given to honouring those of her sons who have distinguished themselves in art by erecting memorials to them in public places: but not till nearly one hundred years after his death was such a monument thought of for Bach. In 1840, Mendelssohn gave an organ recital in the Thomas Church, with the object of opening a fund for this purpose with the proceeds, and on April 23, 1843, a medallion by Knauer was solemnly unveiled on the walls of the Thomas Church. The opportunity was taken of performing many of Bach’s compositions; and amongst those present was the last descendant of the great man, with his wife and two daughters. This was William Bach, then 81 years of age, a son of the Bückeburger Bach."
+    },
+    {
+      "type": "paragraph",
+      "text": "In 1864 a large new organ was erected in the New Church at Arnstadt “in honour of Johann Sebastian Bach,” containing his portrait over the keyboards: and in 1884 a Bach festival was held at Eisenach on the occasion of the unveiling of a fine bronze statue of the composer in the Market-place.",
+      "spans": [
+        {
+          "start": 68,
+          "end": 105,
+          "style": "quote",
+          "text": "“in honour of Johann Sebastian Bach,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Catalogue of Bach’s Vocal Works"
+    },
+    {
+      "type": "blockquote",
+      "text": "_Matthew Passion._      First performed, 1729. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_Matthew Passion._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_St John Passion._       Probably written at Cöthen, and much altered before it received its present form. English edition, published by Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_St John Passion._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_St Luke Passion._      Of doubtful authenticity. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_St Luke Passion._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”\n\n> “The two public musical concerts or assemblies, which are held here every week, are still flourishing. One is directed by Herr John Sebastian Bach, Capellmeister to the Grand-duke of Weissenfels, Music director of the Churches of St Thomas and St Nicholas; and it takes place in the Coffee-house of Zimmermann, in Catherine Street, every Friday evening from 8 to 10 o’clock; but during the Fair twice a week, namely, Tuesdays and Fridays. The members of these musical concerts consist for the most part of students, and there are always good musicians among them, so that often, as is known, some of them become in time celebrated performers. Every musician is allowed to perform publicly in these musical concerts, and there are usually some among the audience who are able to judge the value of a competent musician.”\n\n[Sidenote: _Self-criticism_]\n\nBach was a severe critic of his own works. Hilgenfeldt tells us that many of those which did not come up to his ideal of what they should be were cast aside by him, and that such of his youthful works as he considered worth keeping were constantly improved by him and brought to a higher standard. Thus, the first movement of the third organ sonata, which originally belonged to the _Wohltemperirte Clavier_, was altered to the extent of having large portions cut out, and others essentially changed and improved, so that phrases of small significance obtained an importance of which no signs appeared in the earlier composition.\n\n[Sidenote: _Teaching_]\n\nHe reserved his teaching for those who could really profit by it, and if he found that a pupil had not sufficient talent, he would, with every kindly courtesy, recommend him not to seek his living by music. The result was that a strong feeling for the dignity and value of art was spread by his pupils, who for the most part attained to important positions in their profession. One of his pupils, Doles, whose name had a place of honour in the old Gewandhaus at Leipsic, was Cantor of St Thomas for thirty-four years (after the death of Harrer), and was held in great esteem as a teacher and composer.\n\n[Sidenote: _A good standing always maintained_]\n\nThough at no time rich, Bach was never a poor man. The various payments in kind, such as rent-free dwelling, garden produce, etc., were almost sufficient to support him, and to make his salary available for self-improvement, for journeys, and for the education of his children. And that he was able to collect more than eighty theological works, at a time when books were an expensive luxury, and that he could give no less than three clavichords with pedals at once to his son, Joh. Christian, shows that his position was one of comfort.\n\n[Sidenote: _Recognition on his death_]\n\nThough the Council and the _Leipsic Chronicle_ took little notice of his death, it appears that the Society founded by Mizler caused a funeral ode by the then rector, Dr Ventzky, to be set to music and performed; and he seems to have been much mourned outside Leipsic, as the chief support of serious German music.\n\nNot as a composer, but as a performer, however, was he mourned. It was reserved for later generations to fully appreciate what Hilgenfeldt describes as the “spiritual and everlasting” side of his genius. In those days the composer and performer were one and the same person. No one was considered an artist who could only perform, however well, if he could not also compose; and, especially on the organ, good improvisation was considered the chief qualification of a musician. He was expected to be in a position to extemporise at any time and under any conditions a fugue, or a set of variations on any theme given to him; and his ability in this respect was the criterion by which he was judged. It was natural, therefore, that Bach’s fame during his lifetime should rest more on his extempore performances than on his written compositions, which, remaining in manuscript, would probably serve chiefly as models for his pupils to work from.\n\n[Sidenote: _Portraits and Statues_]\n\nFour portraits of Bach are known to have been painted. One, which seems to have been the first, is a half length picture showing him in a dress coat of the fifth decade of the eighteenth century. It belonged to Kittel, and was kept by him as a kind of sacred possession, only to be shown on special occasions, or as a reward to a diligent pupil. It was in a massive gold frame, and hung behind a curtain over the harpsichord in Kittel’s study. On his death it came into the possession of the church of which he was organist.\n\nThe second was also a half-length, and belonged to his son Carl Philip Emanuel. It was painted by Hausmann.\n\nThe third, also by Hausmann, is shown in our frontispiece. It is preserved in the Thomas School, and, according to Becker, was painted on his becoming a member of the Leipsic Musical Society. A fourth, preserved in the Joachimsthal Gymnasium at Berlin, was formerly in the possession of Princess Amalie of Prussia, and seems to have been painted by Geber.\n\nA few good copper engravings were made from the various portraits, and a number of bad lithographs from the engravings. Some successful plaster busts have also been made from the pictures.\n\nGermany is much given to honouring those of her sons who have distinguished themselves in art by erecting memorials to them in public places: but not till nearly one hundred years after his death was such a monument thought of for Bach. In 1840, Mendelssohn gave an organ recital in the Thomas Church, with the object of opening a fund for this purpose with the proceeds, and on April 23, 1843, a medallion by Knauer was solemnly unveiled on the walls of the Thomas Church. The opportunity was taken of performing many of Bach’s compositions; and amongst those present was the last descendant of the great man, with his wife and two daughters. This was William Bach, then 81 years of age, a son of the Bückeburger Bach.\n\nIn 1864 a large new organ was erected in the New Church at Arnstadt “in honour of Johann Sebastian Bach,” containing his portrait over the keyboards: and in 1884 a Bach festival was held at Eisenach on the occasion of the unveiling of a fine bronze statue of the composer in the Market-place.\n\nCatalogue of Bach’s Vocal Works\n\n> _Matthew Passion._      First performed, 1729. English edition, Novello.\n\n_St John Passion._       Probably written at Cöthen, and much altered before it received its present form. English edition, published by Novello.\n\n> _St Luke Passion._      Of doubtful authenticity. English edition, Novello.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 934,
+    "text": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”"
+  },
+  "word_count": 1136,
+  "block_count": 22
+}

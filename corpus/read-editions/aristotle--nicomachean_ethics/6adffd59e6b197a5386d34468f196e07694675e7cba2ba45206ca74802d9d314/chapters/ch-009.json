@@ -1,0 +1,1515 @@
+{
+  "chapter_id": "ch-009",
+  "title": "chap. viii.)",
+  "block_start": 726,
+  "block_end": 788,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "chap. viii.)",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[33] Particulars are called [Greek: eschata] because they are last arrived at in the deliberative process, but a little further on we have the term applied to first principles, because they stand at one extremity, and facts at the other, of the line of action.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[33]"
+        },
+        {
+          "start": 28,
+          "end": 44,
+          "style": "bracket_note",
+          "text": "[Greek: eschata]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[34] I prefer the reading [Greek: e phronesis], which gives this sense, “Well, as I have said, Practical Wisdom is this kind of sense, and the other we mentioned is different in kind.” In a passage so utterly unimportant, and thrown in almost colloquially, it is not worth while to take much trouble about such a point.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[34]"
+        },
+        {
+          "start": 26,
+          "end": 46,
+          "style": "bracket_note",
+          "text": "[Greek: e phronesis]"
+        },
+        {
+          "start": 72,
+          "end": 184,
+          "style": "quote",
+          "text": "“Well, as I have said, Practical Wisdom is this kind of sense, and the other we mentioned is different in kind.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[35] The definition of it in the Organon (Post Analyt. 1. xxiv.), “a happy conjecture of the middle term without time to consider of it.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[35]"
+        },
+        {
+          "start": 41,
+          "end": 64,
+          "style": "paren_cite",
+          "text": "(Post Analyt. 1. xxiv.)"
+        },
+        {
+          "start": 66,
+          "end": 137,
+          "style": "quote",
+          "text": "“a happy conjecture of the middle term without time to consider of it.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The quaestio states the phenomena, and the middle term the causation the rapid ascertaining of which constitutes [Greek: anchinoia]. All that receives light from the sun is bright on the side next to the sun. The moon receives light from the sun, The moon is bright on the side next the sun. The [Greek: anchinoia] consists in rapidly and correctly accounting for the observed fact, that the moon is bright on the side next to the sun.",
+      "spans": [
+        {
+          "start": 113,
+          "end": 131,
+          "style": "bracket_note",
+          "text": "[Greek: anchinoia]"
+        },
+        {
+          "start": 296,
+          "end": 314,
+          "style": "bracket_note",
+          "text": "[Greek: anchinoia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[36] Opinion is a complete, deliberation an incomplete, mental act.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[36]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[37] The End does not sanctify the Means.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[37]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[38] The meaning is, there is one End including all others; and in this sense [Greek: phronesis] is concerned with means, not Ends but there are also many subordinate Ends which are in fact Means to the Great End of all. Good counsel has reference not merely to the grand End, but to the subordinate Ends which [Greek: phronesis] selects as being right means to the Grand End of all.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[38]"
+        },
+        {
+          "start": 78,
+          "end": 96,
+          "style": "bracket_note",
+          "text": "[Greek: phronesis]"
+        },
+        {
+          "start": 311,
+          "end": 329,
+          "style": "bracket_note",
+          "text": "[Greek: phronesis]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[39] The relative [Greek: on] might be referred to [Greek: sumpheron], but that [Greek: eubonlia] has been already divided into two kinds, and this construction would restrict the name to one of them, namely that [Greek: pros ti telos] as opposed to that [Greek: pros to telos aplos].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[39]"
+        },
+        {
+          "start": 18,
+          "end": 29,
+          "style": "bracket_note",
+          "text": "[Greek: on]"
+        },
+        {
+          "start": 51,
+          "end": 69,
+          "style": "bracket_note",
+          "text": "[Greek: sumpheron]"
+        },
+        {
+          "start": 80,
+          "end": 97,
+          "style": "bracket_note",
+          "text": "[Greek: eubonlia]"
+        },
+        {
+          "start": 213,
+          "end": 235,
+          "style": "bracket_note",
+          "text": "[Greek: pros ti telos]"
+        },
+        {
+          "start": 255,
+          "end": 283,
+          "style": "bracket_note",
+          "text": "[Greek: pros to telos aplos]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[40] We have no term which at all approximates to the meaning of this word, much less will our language admit of the play upon it which connects it with [Greek: suggnomae].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[40]"
+        },
+        {
+          "start": 153,
+          "end": 171,
+          "style": "bracket_note",
+          "text": "[Greek: suggnomae]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[41] Meaning, of course, all those which relate to Moral Action. [Greek: psronaesis ] is equivalent to [Greek: euboulia, ounesis, gnomae, and nous] (in the new sense here given to it).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[41]"
+        },
+        {
+          "start": 65,
+          "end": 85,
+          "style": "bracket_note",
+          "text": "[Greek: psronaesis ]"
+        },
+        {
+          "start": 103,
+          "end": 147,
+          "style": "bracket_note",
+          "text": "[Greek: euboulia, ounesis, gnomae, and nous]"
+        },
+        {
+          "start": 148,
+          "end": 183,
+          "style": "paren_aside",
+          "text": "(in the new sense here given to it)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The faculty which guides us truly in all matters of Moral Action is [Greek: phronaesis], i.e. Reason directed by Goodness or Goodness informed by Reason. But just as every faculty of body and soul is not actually in operation at the same time, though the Man is acting, so proper names are given to the various Functions of Practical Wisdom.",
+      "spans": [
+        {
+          "start": 68,
+          "end": 87,
+          "style": "bracket_note",
+          "text": "[Greek: phronaesis]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Is the [Greek: phronimos] forming plans to attain some particular End? he is then [Greek: euboulos]—is he passing under review the suggestions of others? he is [Greek: sunetos]—is he judging of the acts of others? he admits [Greek: gnomae] to temper the strictness of justness—is he applying general Rules to particular cases? he is exercising [Greek: nous praktikos] or [Greek: agsthaesis]—while in each and all he is [Greek: phronimos]?",
+      "spans": [
+        {
+          "start": 7,
+          "end": 25,
+          "style": "bracket_note",
+          "text": "[Greek: phronimos]"
+        },
+        {
+          "start": 82,
+          "end": 99,
+          "style": "bracket_note",
+          "text": "[Greek: euboulos]"
+        },
+        {
+          "start": 160,
+          "end": 176,
+          "style": "bracket_note",
+          "text": "[Greek: sunetos]"
+        },
+        {
+          "start": 224,
+          "end": 239,
+          "style": "bracket_note",
+          "text": "[Greek: gnomae]"
+        },
+        {
+          "start": 344,
+          "end": 367,
+          "style": "bracket_note",
+          "text": "[Greek: nous praktikos]"
+        },
+        {
+          "start": 371,
+          "end": 390,
+          "style": "bracket_note",
+          "text": "[Greek: agsthaesis]"
+        },
+        {
+          "start": 419,
+          "end": 437,
+          "style": "bracket_note",
+          "text": "[Greek: phronimos]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[42] See note, on p. 140.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[42]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[43] There are cases where we must simply accept or reject without proof: either when Principles are propounded which are prior to all reasoning, or when particular facts are brought before us which are simply matters of [Greek: agsthaesis]. Aristotle here brings both these cases within the province of [Greek: nous], _i.e._ he calls by this name the Faculty which attains Truth in each.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[43]"
+        },
+        {
+          "start": 221,
+          "end": 240,
+          "style": "bracket_note",
+          "text": "[Greek: agsthaesis]"
+        },
+        {
+          "start": 304,
+          "end": 317,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        },
+        {
+          "start": 319,
+          "end": 325,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[44] _i.e._ of the [Greek: syllogisimai ton prakton].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[44]"
+        },
+        {
+          "start": 5,
+          "end": 11,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 19,
+          "end": 52,
+          "style": "bracket_note",
+          "text": "[Greek: syllogisimai ton prakton]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[45] See the note on [Greek: Archae] on p. 4,1 30. As a matter of fact and mental experience the Major Premiss of the Practica Syllogism is wrought into the mind by repeatedly acting upon the Minor Premiss (_i.e._ by [Greek: ethismos]).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[45]"
+        },
+        {
+          "start": 21,
+          "end": 36,
+          "style": "bracket_note",
+          "text": "[Greek: Archae]"
+        },
+        {
+          "start": 206,
+          "end": 235,
+          "style": "paren_cite",
+          "text": "(_i.e._ by [Greek: ethismos])"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "All that is pleasant is to be done, This is pleasant, This is to be done By habitually acting on the Minor Premiss, _i.e._ on the suggestions of [Greek: epithymia], a man comes really to hold the Major Premiss. Aristotle says of the man destitute of all self-control that he is firmly persuaded that it is his proper line to pursue the gratification of his bodily appetites, [Greek: dia to toioytos einai oios diokein aytas]. And his analysis of [Greek: akrasia] (the state of progress towards this utter abandonment to passion) shows that each case of previous good resolution succumbing to temptation is attributable to [Greek: epithymia] suggesting its own Minor Premiss in place of the right one. Book VII. 8 and 5.",
+      "lines": [
+        "All that is pleasant is to be done, This is pleasant, This is to be done By habitually acting on the Minor Premiss, _i.e._ on the suggestions of [Greek: epithymia], a man comes really to hold the Major Premiss. Aristotle says of the man destitute of all self-control that he is firmly persuaded that it is his proper line to pursue the gratification of his bodily appetites, [Greek: dia to toioytos einai oios diokein aytas]. And his analysis of [Greek: akrasia] (the state of progress towards this utter abandonment to passion) shows that each case of previous good resolution succumbing to temptation is attributable to [Greek: epithymia] suggesting its own Minor Premiss in place of the right one. Book VII. 8 and 5."
+      ],
+      "spans": [
+        {
+          "start": 116,
+          "end": 122,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 145,
+          "end": 163,
+          "style": "bracket_note",
+          "text": "[Greek: epithymia]"
+        },
+        {
+          "start": 375,
+          "end": 424,
+          "style": "bracket_note",
+          "text": "[Greek: dia to toioytos einai oios diokein aytas]"
+        },
+        {
+          "start": 446,
+          "end": 462,
+          "style": "bracket_note",
+          "text": "[Greek: akrasia]"
+        },
+        {
+          "start": 463,
+          "end": 528,
+          "style": "paren_aside",
+          "text": "(the state of progress towards this utter abandonment to passion)"
+        },
+        {
+          "start": 622,
+          "end": 640,
+          "style": "bracket_note",
+          "text": "[Greek: epithymia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[46] The _consequentia_ is this:",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[46]"
+        },
+        {
+          "start": 9,
+          "end": 23,
+          "style": "em",
+          "text": "_consequentia_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "There are cases both of principles and facts which cannot admit of reasoning, and must be authoritatively determined by [Greek: nous]. What makes [Greek: nous] to be a true guide? only practice, i.e. Experience, and _therefore_, etc.",
+      "spans": [
+        {
+          "start": 120,
+          "end": 133,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        },
+        {
+          "start": 146,
+          "end": 159,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        },
+        {
+          "start": 216,
+          "end": 227,
+          "style": "em",
+          "text": "_therefore_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[47] This is a note to explain [Greek: hygieina] and [Greek: euektika], he gives these three uses of the term [Greek: hygieinon] in the Topics, I. xiii. 10,",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[47]"
+        },
+        {
+          "start": 31,
+          "end": 48,
+          "style": "bracket_note",
+          "text": "[Greek: hygieina]"
+        },
+        {
+          "start": 53,
+          "end": 70,
+          "style": "bracket_note",
+          "text": "[Greek: euektika]"
+        },
+        {
+          "start": 110,
+          "end": 128,
+          "style": "bracket_note",
+          "text": "[Greek: hygieinon]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "{ [Greek: to men hygieias poiætikon], [Greek: hygieinon legetai] { [Greek: to de phylaktikon], { [Greek: to de sæmantikon].",
+      "spans": [
+        {
+          "start": 2,
+          "end": 36,
+          "style": "bracket_note",
+          "text": "[Greek: to men hygieias poiætikon]"
+        },
+        {
+          "start": 38,
+          "end": 64,
+          "style": "bracket_note",
+          "text": "[Greek: hygieinon legetai]"
+        },
+        {
+          "start": 67,
+          "end": 93,
+          "style": "bracket_note",
+          "text": "[Greek: to de phylaktikon]"
+        },
+        {
+          "start": 97,
+          "end": 122,
+          "style": "bracket_note",
+          "text": "[Greek: to de sæmantikon]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Of course the same will apply to [Greek: euektikon].",
+      "spans": [
+        {
+          "start": 33,
+          "end": 51,
+          "style": "bracket_note",
+          "text": "[Greek: euektikon]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[48] Healthiness is the formal cause of health. Medicine is the efficient cause of health.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[48]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See Book X. chap. iv. [Greek: hosper oud hæ hygieia kai ho iatros homoios aitia esti tou ugiainein].",
+      "spans": [
+        {
+          "start": 22,
+          "end": 99,
+          "style": "bracket_note",
+          "text": "[Greek: hosper oud hæ hygieia kai ho iatros homoios aitia esti tou ugiainein]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[49] [Greek: phronæsis] is here used in a partial sense to signify the Intellectual, as distinct from the Moral, element of Practical Wisdom.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[49]"
+        },
+        {
+          "start": 5,
+          "end": 23,
+          "style": "bracket_note",
+          "text": "[Greek: phronæsis]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[50] This is another case of an observation being thrown in _obiter_, not relevant to, but suggested by, the matter in hand.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[50]"
+        },
+        {
+          "start": 60,
+          "end": 68,
+          "style": "em",
+          "text": "_obiter_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[51] See Book II. chap. iii. and V. xiii.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[51]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[52]The article is supplied at [Greek: panourgous], because the abstract word has just been used expressly in a bad sense. “Up to anything” is the nearest equivalent to [Greek: panourgos], but too nearly approaches to a colloquial vulgarism.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[52]"
+        },
+        {
+          "start": 31,
+          "end": 50,
+          "style": "bracket_note",
+          "text": "[Greek: panourgous]"
+        },
+        {
+          "start": 123,
+          "end": 139,
+          "style": "quote",
+          "text": "“Up to anything”"
+        },
+        {
+          "start": 169,
+          "end": 187,
+          "style": "bracket_note",
+          "text": "[Greek: panourgos]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[53] See the note on [Greek: Archæ] on page 4, l. 30.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[53]"
+        },
+        {
+          "start": 21,
+          "end": 35,
+          "style": "bracket_note",
+          "text": "[Greek: Archæ]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "P. 147, l. 14. And for the Minor, of course,"
+    },
+    {
+      "type": "blockquote",
+      "text": "“This particular action is———.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "quote",
+          "text": "“This particular action is———.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We may paraphrase [Greek: to telos] by [Greek: ti dei prattein—ti gar dei prattein hæ mæ, to telos autæs estin] i.e. [Greek: tæs phronæseos].—(Chap. xi. of this Book.)",
+      "spans": [
+        {
+          "start": 18,
+          "end": 35,
+          "style": "bracket_note",
+          "text": "[Greek: to telos]"
+        },
+        {
+          "start": 39,
+          "end": 111,
+          "style": "bracket_note",
+          "text": "[Greek: ti dei prattein—ti gar dei prattein hæ mæ, to telos autæs estin]"
+        },
+        {
+          "start": 117,
+          "end": 140,
+          "style": "bracket_note",
+          "text": "[Greek: tæs phronæseos]"
+        },
+        {
+          "start": 142,
+          "end": 167,
+          "style": "paren_cite",
+          "text": "(Chap. xi. of this Book.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[55] “Look asquint on the face of truth.” Sir T. Browne, Religio Medici.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[55]"
+        },
+        {
+          "start": 5,
+          "end": 41,
+          "style": "quote",
+          "text": "“Look asquint on the face of truth.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[56] The term [Greek: sophronikoi] must be understood as governing the signification of the other two terms, there being no single Greek term to denote in either case mere dispositions towards these Virtues.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[56]"
+        },
+        {
+          "start": 14,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[Greek: sophronikoi]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[57] Compare the passage at the commencement of Book X. [Greek: nun de phainontai] [Greek: katokochimon ek tæs aretæs].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[57]"
+        },
+        {
+          "start": 56,
+          "end": 82,
+          "style": "bracket_note",
+          "text": "[Greek: nun de phainontai]"
+        },
+        {
+          "start": 83,
+          "end": 118,
+          "style": "bracket_note",
+          "text": "[Greek: katokochimon ek tæs aretæs]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[58] It must be remembered, that [Greek: phronæsis] is used throughout this chapter in two senses, its proper and complete sense of Practical Wisdom, and its incomplete one of merely the Intellectual Element of it.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[58]"
+        },
+        {
+          "start": 33,
+          "end": 51,
+          "style": "bracket_note",
+          "text": "[Greek: phronæsis]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "BOOK VII\n[1] The account of Virtue and Vice hitherto given represents rather\nwhat men _may be_ than what they _are_. In this book we take a\npractical view of Virtue and Vice, in their ordinary, every day\ndevelopment.\n[2] This illustrates the expression, “_Deceits_ of the Flesh.”\n[3] Another reading omits the [Greek:——]; the meaning of the whole\npassage would be exactly the same—it would then run, “if he had been\nconvinced of the rightness of what he does, _i.e._ if he were now\nacting on conviction, he might stop in his course on a change of\nconviction.”\n[4] Major and minor Premises of the [Greek:——] [Greek——]\n[5]Some necessarily implying knowledge of the particular, others not.\n[6] As a modern parallel, take old Trumbull in Scott’s “Red Gauntlet.”\n[7] That is, as I understand it, either the major or the minor premise,\nit is true, that “all that is sweet is pleasant,” it is true also, that\n“this is sweet,” what is contrary to Right Reason is the bringing in\nthis minor to the major _i.e._ the universal maxim, forbidding to\ntaste. Thus, a man goes to a convivial meeting with the maxim in his\nmind “All excess is to be avoided,” at a certain time his [Greek:——]\ntells him “This glass is excess.” As a matter of mere reasoning, he\ncannot help receiving the conclusion “This glass is to be avoided,” and\nsupposing him to be morally sound he would accordingly abstain. But\n[Greek:——], being a simple tendency towards indulgence suggests, in\nplace of the minor premise “This is excess,” its own premise “This is\nsweet,” this again suggests the self-indulgent maxim or principle\n(‘[Greek:——]), “All that is sweet is to be tasted,” and so, by strict\nlogical sequence, proves “This glass is to be tasted.”\nThe solution then of the phænomenon of [Greek:——] is this that\n[Greek:——], by its direct action on the animal nature, swamps the\nsuggestions of Right Reason.\nOn the high ground of Universals, [Greek:——] i.e. [Greek:——] easily\ndefeats [Greek:——]. The [Greek:——], an hour before he is in temptation,\nwould never deliberately prefer the maxim “All that is sweet is to be\ntasted” to “All excess is to be avoided.” The [Greek:——] would.\nHorace has a good comment upon this (II Sat 2):\nQuæ virtus et quanta, bom, sit vivere parvo\nDiscite, _non inter lances mensasque nitentes_\nVerum hic _impransi_ mecum disquirite",
+      "spans": [
+        {
+          "start": 9,
+          "end": 12,
+          "style": "footnote",
+          "text": "[1]"
+        },
+        {
+          "start": 86,
+          "end": 94,
+          "style": "em",
+          "text": "_may be_"
+        },
+        {
+          "start": 110,
+          "end": 115,
+          "style": "em",
+          "text": "_are_"
+        },
+        {
+          "start": 217,
+          "end": 220,
+          "style": "footnote",
+          "text": "[2]"
+        },
+        {
+          "start": 254,
+          "end": 279,
+          "style": "quote",
+          "text": "“_Deceits_ of the Flesh.”"
+        },
+        {
+          "start": 280,
+          "end": 283,
+          "style": "footnote",
+          "text": "[3]"
+        },
+        {
+          "start": 310,
+          "end": 320,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 460,
+          "end": 466,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 560,
+          "end": 563,
+          "style": "footnote",
+          "text": "[4]"
+        },
+        {
+          "start": 596,
+          "end": 606,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 607,
+          "end": 616,
+          "style": "bracket_note",
+          "text": "[Greek——]"
+        },
+        {
+          "start": 617,
+          "end": 620,
+          "style": "footnote",
+          "text": "[5]"
+        },
+        {
+          "start": 687,
+          "end": 690,
+          "style": "footnote",
+          "text": "[6]"
+        },
+        {
+          "start": 742,
+          "end": 757,
+          "style": "quote",
+          "text": "“Red Gauntlet.”"
+        },
+        {
+          "start": 758,
+          "end": 761,
+          "style": "footnote",
+          "text": "[7]"
+        },
+        {
+          "start": 847,
+          "end": 879,
+          "style": "quote",
+          "text": "“all that is sweet is pleasant,”"
+        },
+        {
+          "start": 902,
+          "end": 918,
+          "style": "quote",
+          "text": "“this is sweet,”"
+        },
+        {
+          "start": 995,
+          "end": 1001,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 1111,
+          "end": 1141,
+          "style": "quote",
+          "text": "“All excess is to be avoided,”"
+        },
+        {
+          "start": 1164,
+          "end": 1174,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1185,
+          "end": 1208,
+          "style": "quote",
+          "text": "“This glass is excess.”"
+        },
+        {
+          "start": 1280,
+          "end": 1310,
+          "style": "quote",
+          "text": "“This glass is to be avoided,”"
+        },
+        {
+          "start": 1383,
+          "end": 1393,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1478,
+          "end": 1495,
+          "style": "quote",
+          "text": "“This is excess,”"
+        },
+        {
+          "start": 1587,
+          "end": 1600,
+          "style": "paren_quote",
+          "text": "(‘[Greek:——])"
+        },
+        {
+          "start": 1602,
+          "end": 1638,
+          "style": "quote",
+          "text": "“All that is sweet is to be tasted,”"
+        },
+        {
+          "start": 1682,
+          "end": 1711,
+          "style": "quote",
+          "text": "“This glass is to be tasted.”"
+        },
+        {
+          "start": 1751,
+          "end": 1761,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1775,
+          "end": 1785,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1904,
+          "end": 1914,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1920,
+          "end": 1930,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1946,
+          "end": 1956,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 1962,
+          "end": 1972,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 2091,
+          "end": 2121,
+          "style": "quote",
+          "text": "“All excess is to be avoided.”"
+        },
+        {
+          "start": 2126,
+          "end": 2136,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 2180,
+          "end": 2190,
+          "style": "paren_cite",
+          "text": "(II Sat 2)"
+        },
+        {
+          "start": 2245,
+          "end": 2282,
+          "style": "em",
+          "text": "_non inter lances mensasque nitentes_"
+        },
+        {
+          "start": 2293,
+          "end": 2303,
+          "style": "em",
+          "text": "_impransi_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "Compare also Proverbs XXIII. 31. “Look not thou upon the wine when it is red,” etc.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 78,
+          "style": "quote",
+          "text": "“Look not thou upon the wine when it is red,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[8] As we commonly speak, Metaphysicians. Physiology of course includes Metaphysics.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[8]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[9] [Greek: oron]. Aristotle’s own account of this word (Prior Analyt ii. 1) is [Greek: eis on dialuetai hae protasis], but both in the account of [Greek: nous] and here it seems that the proposition itself is really indicated by it.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[9]"
+        },
+        {
+          "start": 4,
+          "end": 17,
+          "style": "bracket_note",
+          "text": "[Greek: oron]"
+        },
+        {
+          "start": 56,
+          "end": 76,
+          "style": "paren_cite",
+          "text": "(Prior Analyt ii. 1)"
+        },
+        {
+          "start": 80,
+          "end": 118,
+          "style": "bracket_note",
+          "text": "[Greek: eis on dialuetai hae protasis]"
+        },
+        {
+          "start": 147,
+          "end": 160,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[10] The Greek would give “avoids excessive pain,” but this is not true, for the excess of pain would be ground for excuse the warrant for translating as in the text, is the passage occurring just below [Greek: diokei tas uperbolas kai pheugei metrias lupas].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[10]"
+        },
+        {
+          "start": 26,
+          "end": 50,
+          "style": "quote",
+          "text": "“avoids excessive pain,”"
+        },
+        {
+          "start": 203,
+          "end": 258,
+          "style": "bracket_note",
+          "text": "[Greek: diokei tas uperbolas kai pheugei metrias lupas]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[11] Compare Bishop Butler on Particular Propensions, Analogy, Part I",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[11]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "chap v sect. iv.\n[12] That is, they are to the right states as Vice to Virtue.\n[14] Consult in connection with this Chapter the Chapter on [Greek:\norgae] in the Rhetoric, II. 2, and Bishop Butler’s Sermon on\nResentment.\n[15] The reasoning here being somewhat obscure from the concisement of\nexpression, the following exposition of it is subjoined.\nActions of Lust are wrong actions done with pleasure,\nWrong actions done with pleasure are more justly objects of wrath,[*]\nSuch as are more justly objects of wrath are more unjust,\nActions of Lust are more unjust\n[*] [Greek: hubpis] is introduced as the single instance from\nwhich this premiss is proved inductively. See the account of it in\nthe Chapter of the Rhetoric referred to in the preceding note.",
+      "spans": [
+        {
+          "start": 17,
+          "end": 21,
+          "style": "footnote",
+          "text": "[12]"
+        },
+        {
+          "start": 79,
+          "end": 83,
+          "style": "footnote",
+          "text": "[14]"
+        },
+        {
+          "start": 220,
+          "end": 224,
+          "style": "footnote",
+          "text": "[15]"
+        },
+        {
+          "start": 468,
+          "end": 471,
+          "style": "bracket_other",
+          "text": "[*]"
+        },
+        {
+          "start": 562,
+          "end": 565,
+          "style": "bracket_other",
+          "text": "[*]"
+        },
+        {
+          "start": 566,
+          "end": 581,
+          "style": "bracket_note",
+          "text": "[Greek: hubpis]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[16][Greek: ton dae lechthenton]. Considerable difference of opinion exists as to the proper meaning of these words. The emendation which substitutes [Greek: akrataes] for [Greek: akolastos] removes all difficulty, as the clause would then naturally refer to [Greek: ton mae proairoumenon] but Zell adheres to the reading in the text of Bekker, because the authority of MSS and old editions is all on this side.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[16]"
+        },
+        {
+          "start": 4,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[Greek: ton dae lechthenton]"
+        },
+        {
+          "start": 150,
+          "end": 167,
+          "style": "bracket_note",
+          "text": "[Greek: akrataes]"
+        },
+        {
+          "start": 172,
+          "end": 190,
+          "style": "bracket_note",
+          "text": "[Greek: akolastos]"
+        },
+        {
+          "start": 259,
+          "end": 289,
+          "style": "bracket_note",
+          "text": "[Greek: ton mae proairoumenon]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I understand [Greek: mallon] as meant to modify the word [Greek: malakias], which properly denotes that phase of [Greek: akrasia] (not [Greek: akolasia]) which is caused by pain.",
+      "spans": [
+        {
+          "start": 13,
+          "end": 28,
+          "style": "bracket_note",
+          "text": "[Greek: mallon]"
+        },
+        {
+          "start": 57,
+          "end": 74,
+          "style": "bracket_note",
+          "text": "[Greek: malakias]"
+        },
+        {
+          "start": 113,
+          "end": 129,
+          "style": "bracket_note",
+          "text": "[Greek: akrasia]"
+        },
+        {
+          "start": 130,
+          "end": 153,
+          "style": "paren_cite",
+          "text": "(not [Greek: akolasia])"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The [Greek: akolastos] _deliberately_ pursues pleasure and declines pain if there is to be a distinct name for the latter phase, it comes under [Greek: malakia] more nearly than any other term, though perhaps not quite properly.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 22,
+          "style": "bracket_note",
+          "text": "[Greek: akolastos]"
+        },
+        {
+          "start": 23,
+          "end": 37,
+          "style": "em",
+          "text": "_deliberately_"
+        },
+        {
+          "start": 144,
+          "end": 160,
+          "style": "bracket_note",
+          "text": "[Greek: malakia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Or the words may be understood as referring to the class of wrong acts caused by avoidance of pain, whether deliberate or otherwise, and then of course the names of [Greek: malakia] and [Greek: akolasia] may be fitly given respectively.",
+      "spans": [
+        {
+          "start": 165,
+          "end": 181,
+          "style": "bracket_note",
+          "text": "[Greek: malakia]"
+        },
+        {
+          "start": 186,
+          "end": 203,
+          "style": "bracket_note",
+          "text": "[Greek: akolasia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[17] “If we went into a hospital where all were sick or dying, we should think those least ill who were insensible to pain; a physician who knew the whole, would behold them with despair. And there is a mortification of the soul as well as of the body, in which the first symptoms of returning hope are pain and anguish” Sewell, Sermons to Young Men (Sermon xii.)",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[17]"
+        },
+        {
+          "start": 5,
+          "end": 320,
+          "style": "quote",
+          "text": "“If we went into a hospital where all were sick or dying, we should think those least ill who were insensible to pain; a physician who knew the whole, would behold them with despair. And there is a mortification of the soul as well as of the body, in which the first symptoms of returning hope are pain and anguish”"
+        },
+        {
+          "start": 350,
+          "end": 363,
+          "style": "paren_cite",
+          "text": "(Sermon xii.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[18] Before the time of trial comes the man deliberately makes his Moral Choice to act rightly, but, at the moment of acting, the powerful strain of desire makes him contravene this choice his Will does not act in accordance with the affirmation or negation of his Reason. His actions are therefore of the mixed kind. See Book III. chap. i, and note on page 128.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[18]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[19] Let a man be punctual _on principle_ to any one engagement in the day, and he must, as a matter of course, keep all his others in their due places relatively to this one; and so will often wear an appearance of being needlessly punctilious in trifles.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[19]"
+        },
+        {
+          "start": 27,
+          "end": 41,
+          "style": "em",
+          "text": "_on principle_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[20] Because he is destitute of these minor springs of action, which are intended to supply the defects of the higher principle.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[20]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See Bishop Butler’s first Sermon on Compassion, and the conclusion of note on p. 129."
+    },
+    {
+      "type": "metadata",
+      "text": "BOOK VIII\n[1] “Owe no man anything, but to _love_ one another for he that loveth\nanother _hath fulfilled the Law_.” Romans XIII. 8.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 13,
+          "style": "footnote",
+          "text": "[1]"
+        },
+        {
+          "start": 43,
+          "end": 49,
+          "style": "em",
+          "text": "_love_"
+        },
+        {
+          "start": 89,
+          "end": 113,
+          "style": "em",
+          "text": "_hath fulfilled the Law_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[2] [Greek: kerameis]. The Proverb in full is a line from Hesiod, [Greek: kahi keramehus keramei koteei kai tektoni tekton].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[2]"
+        },
+        {
+          "start": 4,
+          "end": 21,
+          "style": "bracket_note",
+          "text": "[Greek: kerameis]"
+        },
+        {
+          "start": 66,
+          "end": 123,
+          "style": "bracket_note",
+          "text": "[Greek: kahi keramehus keramei koteei kai tektoni tekton]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[3] In this sense, therefore, is it sung of Mrs. Gilpin that she",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[3]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“two stone bottles found, To hold the liquor that she _loved_, And keep it safe and sound.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 91,
+          "style": "quote",
+          "text": "“two stone bottles found, To hold the liquor that she _loved_, And keep it safe and sound.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[4] Cardwell’s reading, [Greek: tautae gar omoioi, kai ta loipa] is here adopted, as yielding a better sense than Bekker’s.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[4]"
+        },
+        {
+          "start": 24,
+          "end": 64,
+          "style": "bracket_note",
+          "text": "[Greek: tautae gar omoioi, kai ta loipa]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[5]The Great man will have a right to look for more Friendship than he bestows, but the Good man _can_ feel Friendship only for, and in proportion to, the goodness of the other.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[5]"
+        },
+        {
+          "start": 97,
+          "end": 102,
+          "style": "em",
+          "text": "_can_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[6] See note on page 68, 1. 8.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[6]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[7] See I. Topics, Chap. v. on the various senses of [Greek: tauton].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[7]"
+        },
+        {
+          "start": 53,
+          "end": 68,
+          "style": "bracket_note",
+          "text": "[Greek: tauton]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[8] “For the mutual society, help, and comfort that the one ought to have of the other, both in prosperity and adversity.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[8]"
+        },
+        {
+          "start": 4,
+          "end": 122,
+          "style": "quote",
+          "text": "“For the mutual society, help, and comfort that the one ought to have of the other, both in prosperity and adversity.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[9] Which one would be assuming he was, if one declined to recognise the obligation to requite the favour or kindness.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[9]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "chap. viii.)\n\n[33] Particulars are called [Greek: eschata] because they are last arrived at in the deliberative process, but a little further on we have the term applied to first principles, because they stand at one extremity, and facts at the other, of the line of action.\n\n[34] I prefer the reading [Greek: e phronesis], which gives this sense, “Well, as I have said, Practical Wisdom is this kind of sense, and the other we mentioned is different in kind.” In a passage so utterly unimportant, and thrown in almost colloquially, it is not worth while to take much trouble about such a point.\n\n[35] The definition of it in the Organon (Post Analyt. 1. xxiv.), “a happy conjecture of the middle term without time to consider of it.”\n\nThe quaestio states the phenomena, and the middle term the causation the rapid ascertaining of which constitutes [Greek: anchinoia]. All that receives light from the sun is bright on the side next to the sun. The moon receives light from the sun, The moon is bright on the side next the sun. The [Greek: anchinoia] consists in rapidly and correctly accounting for the observed fact, that the moon is bright on the side next to the sun.\n\n[36] Opinion is a complete, deliberation an incomplete, mental act.\n\n[37] The End does not sanctify the Means.\n\n[38] The meaning is, there is one End including all others; and in this sense [Greek: phronesis] is concerned with means, not Ends but there are also many subordinate Ends which are in fact Means to the Great End of all. Good counsel has reference not merely to the grand End, but to the subordinate Ends which [Greek: phronesis] selects as being right means to the Grand End of all.\n\n[39] The relative [Greek: on] might be referred to [Greek: sumpheron], but that [Greek: eubonlia] has been already divided into two kinds, and this construction would restrict the name to one of them, namely that [Greek: pros ti telos] as opposed to that [Greek: pros to telos aplos].\n\n[40] We have no term which at all approximates to the meaning of this word, much less will our language admit of the play upon it which connects it with [Greek: suggnomae].\n\n[41] Meaning, of course, all those which relate to Moral Action. [Greek: psronaesis ] is equivalent to [Greek: euboulia, ounesis, gnomae, and nous] (in the new sense here given to it).\n\nThe faculty which guides us truly in all matters of Moral Action is [Greek: phronaesis], i.e. Reason directed by Goodness or Goodness informed by Reason. But just as every faculty of body and soul is not actually in operation at the same time, though the Man is acting, so proper names are given to the various Functions of Practical Wisdom.\n\nIs the [Greek: phronimos] forming plans to attain some particular End? he is then [Greek: euboulos]—is he passing under review the suggestions of others? he is [Greek: sunetos]—is he judging of the acts of others? he admits [Greek: gnomae] to temper the strictness of justness—is he applying general Rules to particular cases? he is exercising [Greek: nous praktikos] or [Greek: agsthaesis]—while in each and all he is [Greek: phronimos]?\n\n[42] See note, on p. 140.\n\n[43] There are cases where we must simply accept or reject without proof: either when Principles are propounded which are prior to all reasoning, or when particular facts are brought before us which are simply matters of [Greek: agsthaesis]. Aristotle here brings both these cases within the province of [Greek: nous], _i.e._ he calls by this name the Faculty which attains Truth in each.\n\n[44] _i.e._ of the [Greek: syllogisimai ton prakton].\n\n[45] See the note on [Greek: Archae] on p. 4,1 30. As a matter of fact and mental experience the Major Premiss of the Practica Syllogism is wrought into the mind by repeatedly acting upon the Minor Premiss (_i.e._ by [Greek: ethismos]).\n\nAll that is pleasant is to be done, This is pleasant, This is to be done By habitually acting on the Minor Premiss, _i.e._ on the suggestions of [Greek: epithymia], a man comes really to hold the Major Premiss. Aristotle says of the man destitute of all self-control that he is firmly persuaded that it is his proper line to pursue the gratification of his bodily appetites, [Greek: dia to toioytos einai oios diokein aytas]. And his analysis of [Greek: akrasia] (the state of progress towards this utter abandonment to passion) shows that each case of previous good resolution succumbing to temptation is attributable to [Greek: epithymia] suggesting its own Minor Premiss in place of the right one. Book VII. 8 and 5.\n\n[46] The _consequentia_ is this:\n\nThere are cases both of principles and facts which cannot admit of reasoning, and must be authoritatively determined by [Greek: nous]. What makes [Greek: nous] to be a true guide? only practice, i.e. Experience, and _therefore_, etc.\n\n[47] This is a note to explain [Greek: hygieina] and [Greek: euektika], he gives these three uses of the term [Greek: hygieinon] in the Topics, I. xiii. 10,\n\n{ [Greek: to men hygieias poiætikon], [Greek: hygieinon legetai] { [Greek: to de phylaktikon], { [Greek: to de sæmantikon].\n\nOf course the same will apply to [Greek: euektikon].\n\n[48] Healthiness is the formal cause of health. Medicine is the efficient cause of health.\n\nSee Book X. chap. iv. [Greek: hosper oud hæ hygieia kai ho iatros homoios aitia esti tou ugiainein].\n\n[49] [Greek: phronæsis] is here used in a partial sense to signify the Intellectual, as distinct from the Moral, element of Practical Wisdom.\n\n[50] This is another case of an observation being thrown in _obiter_, not relevant to, but suggested by, the matter in hand.\n\n[51] See Book II. chap. iii. and V. xiii.\n\n[52]The article is supplied at [Greek: panourgous], because the abstract word has just been used expressly in a bad sense. “Up to anything” is the nearest equivalent to [Greek: panourgos], but too nearly approaches to a colloquial vulgarism.\n\n[53] See the note on [Greek: Archæ] on page 4, l. 30.\n\nP. 147, l. 14. And for the Minor, of course,\n\n> “This particular action is———.”\n\nWe may paraphrase [Greek: to telos] by [Greek: ti dei prattein—ti gar dei prattein hæ mæ, to telos autæs estin] i.e. [Greek: tæs phronæseos].—(Chap. xi. of this Book.)\n\n[55] “Look asquint on the face of truth.” Sir T. Browne, Religio Medici.\n\n[56] The term [Greek: sophronikoi] must be understood as governing the signification of the other two terms, there being no single Greek term to denote in either case mere dispositions towards these Virtues.\n\n[57] Compare the passage at the commencement of Book X. [Greek: nun de phainontai] [Greek: katokochimon ek tæs aretæs].\n\n[58] It must be remembered, that [Greek: phronæsis] is used throughout this chapter in two senses, its proper and complete sense of Practical Wisdom, and its incomplete one of merely the Intellectual Element of it.\n\nBOOK VII\n[1] The account of Virtue and Vice hitherto given represents rather\nwhat men _may be_ than what they _are_. In this book we take a\npractical view of Virtue and Vice, in their ordinary, every day\ndevelopment.\n[2] This illustrates the expression, “_Deceits_ of the Flesh.”\n[3] Another reading omits the [Greek:——]; the meaning of the whole\npassage would be exactly the same—it would then run, “if he had been\nconvinced of the rightness of what he does, _i.e._ if he were now\nacting on conviction, he might stop in his course on a change of\nconviction.”\n[4] Major and minor Premises of the [Greek:——] [Greek——]\n[5]Some necessarily implying knowledge of the particular, others not.\n[6] As a modern parallel, take old Trumbull in Scott’s “Red Gauntlet.”\n[7] That is, as I understand it, either the major or the minor premise,\nit is true, that “all that is sweet is pleasant,” it is true also, that\n“this is sweet,” what is contrary to Right Reason is the bringing in\nthis minor to the major _i.e._ the universal maxim, forbidding to\ntaste. Thus, a man goes to a convivial meeting with the maxim in his\nmind “All excess is to be avoided,” at a certain time his [Greek:——]\ntells him “This glass is excess.” As a matter of mere reasoning, he\ncannot help receiving the conclusion “This glass is to be avoided,” and\nsupposing him to be morally sound he would accordingly abstain. But\n[Greek:——], being a simple tendency towards indulgence suggests, in\nplace of the minor premise “This is excess,” its own premise “This is\nsweet,” this again suggests the self-indulgent maxim or principle\n(‘[Greek:——]), “All that is sweet is to be tasted,” and so, by strict\nlogical sequence, proves “This glass is to be tasted.”\nThe solution then of the phænomenon of [Greek:——] is this that\n[Greek:——], by its direct action on the animal nature, swamps the\nsuggestions of Right Reason.\nOn the high ground of Universals, [Greek:——] i.e. [Greek:——] easily\ndefeats [Greek:——]. The [Greek:——], an hour before he is in temptation,\nwould never deliberately prefer the maxim “All that is sweet is to be\ntasted” to “All excess is to be avoided.” The [Greek:——] would.\nHorace has a good comment upon this (II Sat 2):\nQuæ virtus et quanta, bom, sit vivere parvo\nDiscite, _non inter lances mensasque nitentes_\nVerum hic _impransi_ mecum disquirite\n\n> Compare also Proverbs XXIII. 31. “Look not thou upon the wine when it is red,” etc.\n\n[8] As we commonly speak, Metaphysicians. Physiology of course includes Metaphysics.\n\n[9] [Greek: oron]. Aristotle’s own account of this word (Prior Analyt ii. 1) is [Greek: eis on dialuetai hae protasis], but both in the account of [Greek: nous] and here it seems that the proposition itself is really indicated by it.\n\n[10] The Greek would give “avoids excessive pain,” but this is not true, for the excess of pain would be ground for excuse the warrant for translating as in the text, is the passage occurring just below [Greek: diokei tas uperbolas kai pheugei metrias lupas].\n\n[11] Compare Bishop Butler on Particular Propensions, Analogy, Part I\n\nchap v sect. iv.\n[12] That is, they are to the right states as Vice to Virtue.\n[14] Consult in connection with this Chapter the Chapter on [Greek:\norgae] in the Rhetoric, II. 2, and Bishop Butler’s Sermon on\nResentment.\n[15] The reasoning here being somewhat obscure from the concisement of\nexpression, the following exposition of it is subjoined.\nActions of Lust are wrong actions done with pleasure,\nWrong actions done with pleasure are more justly objects of wrath,[*]\nSuch as are more justly objects of wrath are more unjust,\nActions of Lust are more unjust\n[*] [Greek: hubpis] is introduced as the single instance from\nwhich this premiss is proved inductively. See the account of it in\nthe Chapter of the Rhetoric referred to in the preceding note.\n\n[16][Greek: ton dae lechthenton]. Considerable difference of opinion exists as to the proper meaning of these words. The emendation which substitutes [Greek: akrataes] for [Greek: akolastos] removes all difficulty, as the clause would then naturally refer to [Greek: ton mae proairoumenon] but Zell adheres to the reading in the text of Bekker, because the authority of MSS and old editions is all on this side.\n\nI understand [Greek: mallon] as meant to modify the word [Greek: malakias], which properly denotes that phase of [Greek: akrasia] (not [Greek: akolasia]) which is caused by pain.\n\nThe [Greek: akolastos] _deliberately_ pursues pleasure and declines pain if there is to be a distinct name for the latter phase, it comes under [Greek: malakia] more nearly than any other term, though perhaps not quite properly.\n\nOr the words may be understood as referring to the class of wrong acts caused by avoidance of pain, whether deliberate or otherwise, and then of course the names of [Greek: malakia] and [Greek: akolasia] may be fitly given respectively.\n\n[17] “If we went into a hospital where all were sick or dying, we should think those least ill who were insensible to pain; a physician who knew the whole, would behold them with despair. And there is a mortification of the soul as well as of the body, in which the first symptoms of returning hope are pain and anguish” Sewell, Sermons to Young Men (Sermon xii.)\n\n[18] Before the time of trial comes the man deliberately makes his Moral Choice to act rightly, but, at the moment of acting, the powerful strain of desire makes him contravene this choice his Will does not act in accordance with the affirmation or negation of his Reason. His actions are therefore of the mixed kind. See Book III. chap. i, and note on page 128.\n\n[19] Let a man be punctual _on principle_ to any one engagement in the day, and he must, as a matter of course, keep all his others in their due places relatively to this one; and so will often wear an appearance of being needlessly punctilious in trifles.\n\n[20] Because he is destitute of these minor springs of action, which are intended to supply the defects of the higher principle.\n\nSee Bishop Butler’s first Sermon on Compassion, and the conclusion of note on p. 129.\n\nBOOK VIII\n[1] “Owe no man anything, but to _love_ one another for he that loveth\nanother _hath fulfilled the Law_.” Romans XIII. 8.\n\n[2] [Greek: kerameis]. The Proverb in full is a line from Hesiod, [Greek: kahi keramehus keramei koteei kai tektoni tekton].\n\n[3] In this sense, therefore, is it sung of Mrs. Gilpin that she\n\n> “two stone bottles found, To hold the liquor that she _loved_, And keep it safe and sound.”\n\n[4] Cardwell’s reading, [Greek: tautae gar omoioi, kai ta loipa] is here adopted, as yielding a better sense than Bekker’s.\n\n[5]The Great man will have a right to look for more Friendship than he bestows, but the Good man _can_ feel Friendship only for, and in proportion to, the goodness of the other.\n\n[6] See note on page 68, 1. 8.\n\n[7] See I. Topics, Chap. v. on the various senses of [Greek: tauton].\n\n[8] “For the mutual society, help, and comfort that the one ought to have of the other, both in prosperity and adversity.”\n\n[9] Which one would be assuming he was, if one declined to recognise the obligation to requite the favour or kindness.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 726,
+    "text": "chap. viii.)"
+  },
+  "word_count": 2413,
+  "block_count": 63
+}

@@ -1,0 +1,922 @@
+{
+  "chapter_id": "ch-038",
+  "title": "CHAPTER LIII. [Illustration]",
+  "block_start": 1345,
+  "block_end": 1429,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHAPTER LIII. [Illustration]",
+      "level": 1,
+      "spans": [
+        {
+          "start": 14,
+          "end": 28,
+          "style": "bracket_note",
+          "text": "[Illustration]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Mr. Wickham was so perfectly satisfied with this conversation, that he never again distressed himself, or provoked his dear sister Elizabeth, by introducing the subject of it; and she was pleased to find that she had said enough to keep him quiet."
+    },
+    {
+      "type": "paragraph",
+      "text": "The day of his and Lydia’s departure soon came; and Mrs. Bennet was forced to submit to a separation, which, as her husband by no means entered into her scheme of their all going to Newcastle, was likely to continue at least a twelvemonth."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Oh, my dear Lydia,” she cried, “when shall we meet again?” “Oh, Lord! I don’t know. Not these two or three years, perhaps.” “Write to me very often, my dear.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "quote",
+          "text": "“Oh, my dear Lydia,”"
+        },
+        {
+          "start": 32,
+          "end": 59,
+          "style": "quote",
+          "text": "“when shall we meet again?”"
+        },
+        {
+          "start": 60,
+          "end": 124,
+          "style": "quote",
+          "text": "“Oh, Lord! I don’t know. Not these two or three years, perhaps.”"
+        },
+        {
+          "start": 125,
+          "end": 159,
+          "style": "quote",
+          "text": "“Write to me very often, my dear.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“As often as I can. But you know married women have never much time for writing. My sisters may write to _me_. They will have nothing else to do.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 146,
+          "style": "quote",
+          "text": "“As often as I can. But you know married women have never much time for writing. My sisters may write to _me_. They will have nothing else to do.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Mr. Wickham’s adieus were much more affectionate than his wife’s. He smiled, looked handsome, and said many pretty things."
+    },
+    {
+      "type": "paragraph",
+      "text": "“He is as fine a fellow,” said Mr. Bennet, as soon as they were out of the house, “as ever I saw. He simpers, and smirks, and makes love to us all. I am prodigiously proud of him. I defy even Sir William Lucas himself to produce a more valuable son-in-law.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 25,
+          "style": "quote",
+          "text": "“He is as fine a fellow,”"
+        },
+        {
+          "start": 82,
+          "end": 257,
+          "style": "quote",
+          "text": "“as ever I saw. He simpers, and smirks, and makes love to us all. I am prodigiously proud of him. I defy even Sir William Lucas himself to produce a more valuable son-in-law.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The loss of her daughter made Mrs. Bennet very dull for several days."
+    },
+    {
+      "type": "blockquote",
+      "text": "“I often think,” said she, “that there is nothing so bad as parting with one’s friends. One seems so forlorn without them.” “This is the consequence, you see, madam, of marrying a daughter,” said Elizabeth. “It must make you better satisfied that your other four are single.” “It is no such thing. Lydia does not leave me because she is married; but only because her husband’s regiment happens to be so far off. If that had been nearer, she would not have gone so soon.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "quote",
+          "text": "“I often think,”"
+        },
+        {
+          "start": 27,
+          "end": 123,
+          "style": "quote",
+          "text": "“that there is nothing so bad as parting with one’s friends. One seems so forlorn without them.”"
+        },
+        {
+          "start": 124,
+          "end": 190,
+          "style": "quote",
+          "text": "“This is the consequence, you see, madam, of marrying a daughter,”"
+        },
+        {
+          "start": 207,
+          "end": 275,
+          "style": "quote",
+          "text": "“It must make you better satisfied that your other four are single.”"
+        },
+        {
+          "start": 276,
+          "end": 470,
+          "style": "quote",
+          "text": "“It is no such thing. Lydia does not leave me because she is married; but only because her husband’s regiment happens to be so far off. If that had been nearer, she would not have gone so soon.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But the spiritless condition which this event threw her into was shortly relieved, and her mind opened again to the agitation of hope, by an article of news which then began to be in circulation. The housekeeper at Netherfield had received orders to prepare for the arrival of her master, who was coming down in a day or two, to shoot there for several weeks. Mrs. Bennet was quite in the fidgets. She looked at Jane, and smiled, and shook her head, by turns."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Well, well, and so Mr. Bingley is coming down, sister,” (for Mrs. Philips first brought her the news). “Well, so much the better. Not that I care about it, though. He is nothing to us, you know, and I am sure I never want to see him again. But, however, he is very welcome to come to Netherfield, if he likes it. And who knows what _may_ happen? But that is nothing to us. You know, sister, we agreed long ago never to mention a word about it. And so, it is quite certain he is coming?” “You may depend on it,” replied the other, “for Mrs. Nichols was in Meryton last night: I saw her passing by, and went out myself on purpose to know the truth of it; and she told me that it was certainly true. He comes down on Thursday, at the latest, very likely on Wednesday. She was going to the butcher’s, she told me, on purpose to order in some meat on Wednesday, and she has got three couple of ducks just fit to be killed.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 56,
+          "style": "quote",
+          "text": "“Well, well, and so Mr. Bingley is coming down, sister,”"
+        },
+        {
+          "start": 57,
+          "end": 102,
+          "style": "paren_aside",
+          "text": "(for Mrs. Philips first brought her the news)"
+        },
+        {
+          "start": 104,
+          "end": 487,
+          "style": "quote",
+          "text": "“Well, so much the better. Not that I care about it, though. He is nothing to us, you know, and I am sure I never want to see him again. But, however, he is very welcome to come to Netherfield, if he likes it. And who knows what _may_ happen? But that is nothing to us. You know, sister, we agreed long ago never to mention a word about it. And so, it is quite certain he is coming?”"
+        },
+        {
+          "start": 488,
+          "end": 511,
+          "style": "quote",
+          "text": "“You may depend on it,”"
+        },
+        {
+          "start": 531,
+          "end": 919,
+          "style": "quote",
+          "text": "“for Mrs. Nichols was in Meryton last night: I saw her passing by, and went out myself on purpose to know the truth of it; and she told me that it was certainly true. He comes down on Thursday, at the latest, very likely on Wednesday. She was going to the butcher’s, she told me, on purpose to order in some meat on Wednesday, and she has got three couple of ducks just fit to be killed.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Miss Bennet had not been able to hear of his coming without changing colour. It was many months since she had mentioned his name to Elizabeth; but now, as soon as they were alone together, she said,--"
+    },
+    {
+      "type": "paragraph",
+      "text": "“I saw you look at me to-day, Lizzy, when my aunt told us of the present report; and I know I appeared distressed; but don’t imagine it was from any silly cause. I was only confused for the moment, because I felt that I _should_ be looked at. I do assure you that the news does not affect me either with pleasure or pain. I am glad of one thing, that he comes alone; because we shall see the less of him. Not that I am afraid of _myself_, but I dread other people’s remarks.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 475,
+          "style": "quote",
+          "text": "“I saw you look at me to-day, Lizzy, when my aunt told us of the present report; and I know I appeared distressed; but don’t imagine it was from any silly cause. I was only confused for the moment, because I felt that I _should_ be looked at. I do assure you that the news does not affect me either with pleasure or pain. I am glad of one thing, that he comes alone; because we shall see the less of him. Not that I am afraid of _myself_, but I dread other people’s remarks.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth did not know what to make of it. Had she not seen him in Derbyshire, she might have supposed him capable of coming there with no other view than what was acknowledged; but she still thought him partial to Jane, and she wavered as to the greater probability of his coming there _with_ his friend’s permission, or being bold enough to come without it.",
+      "spans": [
+        {
+          "start": 287,
+          "end": 293,
+          "style": "em",
+          "text": "_with_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Yet it is hard,” she sometimes thought, “that this poor man cannot come to a house, which he has legally hired, without raising all this speculation! I _will_ leave him to himself.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 17,
+          "style": "quote",
+          "text": "“Yet it is hard,”"
+        },
+        {
+          "start": 41,
+          "end": 182,
+          "style": "quote",
+          "text": "“that this poor man cannot come to a house, which he has legally hired, without raising all this speculation! I _will_ leave him to himself.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In spite of what her sister declared, and really believed to be her feelings, in the expectation of his arrival, Elizabeth could easily perceive that her spirits were affected by it. They were more disturbed, more unequal, than she had often seen them."
+    },
+    {
+      "type": "paragraph",
+      "text": "The subject which had been so warmly canvassed between their parents, about a twelvemonth ago, was now brought forward again."
+    },
+    {
+      "type": "blockquote",
+      "text": "“As soon as ever Mr. Bingley comes, my dear,” said Mrs. Bennet, “you will wait on him, of course.” “No, no. You forced me into visiting him last year, and promised, if I went to see him, he should marry one of my daughters. But it ended in nothing, and I will not be sent on a fool’s errand again.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 45,
+          "style": "quote",
+          "text": "“As soon as ever Mr. Bingley comes, my dear,”"
+        },
+        {
+          "start": 64,
+          "end": 98,
+          "style": "quote",
+          "text": "“you will wait on him, of course.”"
+        },
+        {
+          "start": 99,
+          "end": 298,
+          "style": "quote",
+          "text": "“No, no. You forced me into visiting him last year, and promised, if I went to see him, he should marry one of my daughters. But it ended in nothing, and I will not be sent on a fool’s errand again.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "His wife represented to him how absolutely necessary such an attention would be from all the neighbouring gentlemen, on his returning to Netherfield."
+    },
+    {
+      "type": "blockquote",
+      "text": "“’Tis an _etiquette_ I despise,” said he. “If he wants our society, let him seek it. He knows where we live. I will not spend _my_ hours in running after my neighbours every time they go away and come back again.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 32,
+          "style": "quote",
+          "text": "“’Tis an _etiquette_ I despise,”"
+        },
+        {
+          "start": 42,
+          "end": 213,
+          "style": "quote",
+          "text": "“If he wants our society, let him seek it. He knows where we live. I will not spend _my_ hours in running after my neighbours every time they go away and come back again.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“Well, all I know is, that it will be abominably rude if you do not wait on him. But, however, that shan’t prevent my asking him to dine here, I am determined. We must have Mrs. Long and the Gouldings soon. That will make thirteen with ourselves, so there will be just room at table for him.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 292,
+          "style": "quote",
+          "text": "“Well, all I know is, that it will be abominably rude if you do not wait on him. But, however, that shan’t prevent my asking him to dine here, I am determined. We must have Mrs. Long and the Gouldings soon. That will make thirteen with ourselves, so there will be just room at table for him.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Consoled by this resolution, she was the better able to bear her husband’s incivility; though it was very mortifying to know that her neighbours might all see Mr. Bingley, in consequence of it, before _they_ did. As the day of his arrival drew near,-- “I begin to be sorry that he comes at all,” said Jane to her sister. “It would be nothing; I could see him with perfect indifference; but I can hardly bear to hear it thus perpetually talked of. My mother means well; but she does not know, no one can know, how much I suffer from what she says. Happy shall I be when his stay at Netherfield is over!”",
+      "spans": [
+        {
+          "start": 201,
+          "end": 207,
+          "style": "em",
+          "text": "_they_"
+        },
+        {
+          "start": 252,
+          "end": 295,
+          "style": "quote",
+          "text": "“I begin to be sorry that he comes at all,”"
+        },
+        {
+          "start": 321,
+          "end": 602,
+          "style": "quote",
+          "text": "“It would be nothing; I could see him with perfect indifference; but I can hardly bear to hear it thus perpetually talked of. My mother means well; but she does not know, no one can know, how much I suffer from what she says. Happy shall I be when his stay at Netherfield is over!”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“I wish I could say anything to comfort you,” replied Elizabeth; “but it is wholly out of my power. You must feel it; and the usual satisfaction of preaching patience to a sufferer is denied me, because you have always so much.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 45,
+          "style": "quote",
+          "text": "“I wish I could say anything to comfort you,”"
+        },
+        {
+          "start": 65,
+          "end": 228,
+          "style": "quote",
+          "text": "“but it is wholly out of my power. You must feel it; and the usual satisfaction of preaching patience to a sufferer is denied me, because you have always so much.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Mr. Bingley arrived. Mrs. Bennet, through the assistance of servants, contrived to have the earliest tidings of it, that the period of anxiety and fretfulness on her side be as long as it could. She counted the days that must intervene before their invitation could be sent--hopeless of seeing him before. But on the third morning after his arrival in Hertfordshire, she saw him from her dressing-room window enter the paddock, and ride towards the house."
+    },
+    {
+      "type": "paragraph",
+      "text": "Her daughters were eagerly called to partake of her joy. Jane resolutely kept her place at the table; but Elizabeth, to satisfy her mother, went to the window--she looked--she saw Mr. Darcy with him, and sat down again by her sister."
+    },
+    {
+      "type": "blockquote",
+      "text": "“There is a gentleman with him, mamma,” said Kitty; “who can it be?” “Some acquaintance or other, my dear, I suppose; I am sure I do not know.” “La!” replied Kitty, “it looks just like that man that used to be with him before. Mr. what’s his name--that tall, proud man.” “Good gracious! Mr. Darcy!--and so it does, I vow. Well, any friend of Mr. Bingley’s will always be welcome here, to be sure; but else I must say that I hate the very sight of him.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 39,
+          "style": "quote",
+          "text": "“There is a gentleman with him, mamma,”"
+        },
+        {
+          "start": 52,
+          "end": 68,
+          "style": "quote",
+          "text": "“who can it be?”"
+        },
+        {
+          "start": 69,
+          "end": 143,
+          "style": "quote",
+          "text": "“Some acquaintance or other, my dear, I suppose; I am sure I do not know.”"
+        },
+        {
+          "start": 144,
+          "end": 149,
+          "style": "quote",
+          "text": "“La!”"
+        },
+        {
+          "start": 165,
+          "end": 270,
+          "style": "quote",
+          "text": "“it looks just like that man that used to be with him before. Mr. what’s his name--that tall, proud man.”"
+        },
+        {
+          "start": 271,
+          "end": 452,
+          "style": "quote",
+          "text": "“Good gracious! Mr. Darcy!--and so it does, I vow. Well, any friend of Mr. Bingley’s will always be welcome here, to be sure; but else I must say that I hate the very sight of him.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Jane looked at Elizabeth with surprise and concern. She knew but little of their meeting in Derbyshire, and therefore felt for the awkwardness which must attend her sister, in seeing him almost for the first time after receiving his explanatory letter. Both sisters were uncomfortable enough. Each felt for the other, and of course for themselves; and their mother talked on of her dislike of Mr. Darcy, and her resolution to be civil to him only as Mr. Bingley’s friend, without being heard by either of them. But Elizabeth had sources of uneasiness which could not yet be suspected by Jane, to whom she had never yet had courage to show Mrs. Gardiner’s letter, or to relate her own change of sentiment towards him. To Jane, he could be only a man whose proposals she had refused, and whose merits she had undervalued; but to her own more extensive information, he was the person to whom the whole family were indebted for the first of benefits, and whom she regarded herself with an interest, if not quite so tender, at least as reasonable and just, as what Jane felt for Bingley. Her astonishment at his coming--at his coming to Netherfield, to Longbourn, and voluntarily seeking her again, was almost equal to what she had known on first witnessing his altered behaviour in Derbyshire."
+    },
+    {
+      "type": "paragraph",
+      "text": "The colour which had been driven from her face returned for half a minute with an additional glow, and a smile of delight added lustre to her eyes, as she thought for that space of time that his affection and wishes must still be unshaken; but she would not be secure."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Let me first see how he behaves,” said she; “it will then be early enough for expectation.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 34,
+          "style": "quote",
+          "text": "“Let me first see how he behaves,”"
+        },
+        {
+          "start": 45,
+          "end": 92,
+          "style": "quote",
+          "text": "“it will then be early enough for expectation.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "She sat intently at work, striving to be composed, and without daring to lift up her eyes, till anxious curiosity carried them to the face of her sister as the servant was approaching the door. Jane looked a little paler than usual, but more sedate than Elizabeth had expected. On the gentlemen’s appearing, her colour increased; yet she received them with tolerable ease, and with a propriety of behaviour equally free from any symptom of resentment, or any unnecessary complaisance."
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth said as little to either as civility would allow, and sat down again to her work, with an eagerness which it did not often command. She had ventured only one glance at Darcy. He looked serious as usual; and, she thought, more as he had been used to look in Hertfordshire, than as she had seen him at Pemberley. But, perhaps, he could not in her mother’s presence be what he was before her uncle and aunt. It was a painful, but not an improbable, conjecture."
+    },
+    {
+      "type": "paragraph",
+      "text": "Bingley she had likewise seen for an instant, and in that short period saw him looking both pleased and embarrassed. He was received by Mrs. Bennet with a degree of civility which made her two daughters ashamed, especially when contrasted with the cold and ceremonious politeness of her courtesy and address of his friend."
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth particularly, who knew that her mother owed to the latter the preservation of her favourite daughter from irremediable infamy, was hurt and distressed to a most painful degree by a distinction so ill applied."
+    },
+    {
+      "type": "paragraph",
+      "text": "Darcy, after inquiring of her how Mr. and Mrs. Gardiner did--a question which she could not answer without confusion--said scarcely anything. He was not seated by her: perhaps that was the reason of his silence; but it had not been so in Derbyshire. There he had talked to her friends when he could not to herself. But now several minutes elapsed, without bringing the sound of his voice; and when occasionally, unable to resist the impulse of curiosity, she raised her eyes to his face, she as often found him looking at Jane as at herself, and frequently on no object but the ground. More thoughtfulness and less anxiety to please, than when they last met, were plainly expressed. She was disappointed, and angry with herself for being so."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Could I expect it to be otherwise?” said she. “Yet why did he come?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "quote",
+          "text": "“Could I expect it to be otherwise?”"
+        },
+        {
+          "start": 47,
+          "end": 69,
+          "style": "quote",
+          "text": "“Yet why did he come?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "She was in no humour for conversation with anyone but himself; and to him she had hardly courage to speak."
+    },
+    {
+      "type": "paragraph",
+      "text": "She inquired after his sister, but could do no more."
+    },
+    {
+      "type": "blockquote",
+      "text": "“It is a long time, Mr. Bingley, since you went away,” said Mrs. Bennet.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 54,
+          "style": "quote",
+          "text": "“It is a long time, Mr. Bingley, since you went away,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "He readily agreed to it."
+    },
+    {
+      "type": "blockquote",
+      "text": "“I began to be afraid you would never come back again. People _did_ say, you meant to quit the place entirely at Michaelmas; but, however, I hope it is not true. A great many changes have happened in the neighbourhood since you went away. Miss Lucas is married and settled: and one of my own daughters. I suppose you have heard of it; indeed, you must have seen it in the papers. It was in the ‘Times’ and the ‘Courier,’ I know; though it was not put in as it ought to be. It was only said, ‘Lately, George Wickham, Esq., to Miss Lydia Bennet,’ without there being a syllable said of her father, or the place where she lived, or anything. It was my brother Gardiner’s drawing up, too, and I wonder how he came to make such an awkward business of it. Did you see it?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 766,
+          "style": "quote",
+          "text": "“I began to be afraid you would never come back again. People _did_ say, you meant to quit the place entirely at Michaelmas; but, however, I hope it is not true. A great many changes have happened in the neighbourhood since you went away. Miss Lucas is married and settled: and one of my own daughters. I suppose you have heard of it; indeed, you must have seen it in the papers. It was in the ‘Times’ and the ‘Courier,’ I know; though it was not put in as it ought to be. It was only said, ‘Lately, George Wickham, Esq., to Miss Lydia Bennet,’ without there being a syllable said of her father, or the place where she lived, or anything. It was my brother Gardiner’s drawing up, too, and I wonder how he came to make such an awkward business of it. Did you see it?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bingley replied that he did, and made his congratulations. Elizabeth dared not lift up her eyes. How Mr. Darcy looked, therefore, she could not tell."
+    },
+    {
+      "type": "blockquote",
+      "text": "“It is a delightful thing, to be sure, to have a daughter well married,” continued her mother; “but at the same time, Mr. Bingley, it is very hard to have her taken away from me. They are gone down to Newcastle, a place quite northward it seems, and there they are to stay, I do not know how long. His regiment is there; for I suppose you have heard of his leaving the ----shire, and of his being gone into the Regulars. Thank heaven! he has _some_ friends, though, perhaps, not so many as he deserves.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 72,
+          "style": "quote",
+          "text": "“It is a delightful thing, to be sure, to have a daughter well married,”"
+        },
+        {
+          "start": 95,
+          "end": 503,
+          "style": "quote",
+          "text": "“but at the same time, Mr. Bingley, it is very hard to have her taken away from me. They are gone down to Newcastle, a place quite northward it seems, and there they are to stay, I do not know how long. His regiment is there; for I suppose you have heard of his leaving the ----shire, and of his being gone into the Regulars. Thank heaven! he has _some_ friends, though, perhaps, not so many as he deserves.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth, who knew this to be levelled at Mr. Darcy, was in such misery of shame that she could hardly keep her seat. It drew from her, however, the exertion of speaking, which nothing else had so effectually done before; and she asked Bingley whether he meant to make any stay in the country at present. A few weeks, he believed."
+    },
+    {
+      "type": "blockquote",
+      "text": "“When you have killed all your own birds, Mr. Bingley,” said her mother, “I beg you will come here and shoot as many as you please on Mr. Bennet’s manor. I am sure he will be vastly happy to oblige you, and will save all the best of the coveys for you.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 55,
+          "style": "quote",
+          "text": "“When you have killed all your own birds, Mr. Bingley,”"
+        },
+        {
+          "start": 73,
+          "end": 253,
+          "style": "quote",
+          "text": "“I beg you will come here and shoot as many as you please on Mr. Bennet’s manor. I am sure he will be vastly happy to oblige you, and will save all the best of the coveys for you.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth’s misery increased at such unnecessary, such officious attention! Were the same fair prospect to arise at present, as had flattered them a year ago, everything, she was persuaded, would be hastening to the same vexatious conclusion. At that instant she felt, that years of happiness could not make Jane or herself amends for moments of such painful confusion."
+    },
+    {
+      "type": "paragraph",
+      "text": "“The first wish of my heart,” said she to herself, “is never more to be in company with either of them. Their society can afford no pleasure that will atone for such wretchedness as this! Let me never see either one or the other again!”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 29,
+          "style": "quote",
+          "text": "“The first wish of my heart,”"
+        },
+        {
+          "start": 51,
+          "end": 236,
+          "style": "quote",
+          "text": "“is never more to be in company with either of them. Their society can afford no pleasure that will atone for such wretchedness as this! Let me never see either one or the other again!”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Yet the misery, for which years of happiness were to offer no compensation, received soon afterwards material relief, from observing how much the beauty of her sister rekindled the admiration of her former lover. When first he came in, he had spoken to her but little, but every five minutes seemed to be giving her more of his attention. He found her as handsome as she had been last year; as good-natured, and as unaffected, though not quite so chatty. Jane was anxious that no difference should be perceived in her at all, and was really persuaded that she talked as much as ever; but her mind was so busily engaged, that she did not always know when she was silent."
+    },
+    {
+      "type": "paragraph",
+      "text": "When the gentlemen rose to go away, Mrs. Bennet was mindful of her intended civility, and they were invited and engaged to dine at Longbourn in a few days’ time."
+    },
+    {
+      "type": "blockquote",
+      "text": "“You are quite a visit in my debt, Mr. Bingley,” she added; “for when you went to town last winter, you promised to take a family dinner with us as soon as you returned. I have not forgot, you see; and I assure you I was very much disappointed that you did not come back and keep your engagement.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 48,
+          "style": "quote",
+          "text": "“You are quite a visit in my debt, Mr. Bingley,”"
+        },
+        {
+          "start": 60,
+          "end": 297,
+          "style": "quote",
+          "text": "“for when you went to town last winter, you promised to take a family dinner with us as soon as you returned. I have not forgot, you see; and I assure you I was very much disappointed that you did not come back and keep your engagement.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bingley looked a little silly at this reflection, and said something of his concern at having been prevented by business. They then went away."
+    },
+    {
+      "type": "paragraph",
+      "text": "Mrs. Bennet had been strongly inclined to ask them to stay and dine there that day; but, though she always kept a very good table, she did not think anything less than two courses could be good enough for a man on whom she had such anxious designs, or satisfy the appetite and pride of one who had ten thousand a year."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Jane happened to look round”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 29,
+          "style": "quote",
+          "text": "“Jane happened to look round”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "]"
+    },
+    {
+      "type": "metadata",
+      "text": "CHAPTER LIV.\n[Illustration]\nAs soon as they were gone, Elizabeth walked out to recover her spirits;\nor, in other words, to dwell without interruption on those subjects\nwhich must deaden them more. Mr. Darcy’s behaviour astonished and vexed\nher.\n“Why, if he came only to be silent, grave, and indifferent,” said she,\n“did he come at all?”\nShe could settle it in no way that gave her pleasure.\n“He could be still amiable, still pleasing to my uncle and aunt, when he\nwas in town; and why not to me? If he fears me, why come hither? If he\nno longer cares for me, why silent? Teasing, teasing man! I will think\nno more about him.”\nHer resolution was for a short time involuntarily kept by the approach\nof her sister, who joined her with a cheerful look which showed her\nbetter satisfied with their visitors than Elizabeth.\n“Now,” said she, “that this first meeting is over, I feel perfectly\neasy. I know my own strength, and I shall never be embarrassed again by\nhis coming. I am glad he dines here on Tuesday. It will then be publicly\nseen, that on both sides we meet only as common and indifferent\nacquaintance.”",
+      "spans": [
+        {
+          "start": 13,
+          "end": 27,
+          "style": "bracket_note",
+          "text": "[Illustration]"
+        },
+        {
+          "start": 245,
+          "end": 305,
+          "style": "quote",
+          "text": "“Why, if he came only to be silent, grave, and indifferent,”"
+        },
+        {
+          "start": 316,
+          "end": 337,
+          "style": "quote",
+          "text": "“did he come at all?”"
+        },
+        {
+          "start": 819,
+          "end": 825,
+          "style": "quote",
+          "text": "“Now,”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Yes, very indifferent, indeed,” said Elizabeth, laughingly. “Oh, Jane! take care.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 32,
+          "style": "quote",
+          "text": "“Yes, very indifferent, indeed,”"
+        },
+        {
+          "start": 61,
+          "end": 83,
+          "style": "quote",
+          "text": "“Oh, Jane! take care.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“My dear Lizzy, you cannot think me so weak as to be in danger now.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 68,
+          "style": "quote",
+          "text": "“My dear Lizzy, you cannot think me so weak as to be in danger now.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“I think you are in very great danger of making him as much in love with you as ever.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 86,
+          "style": "quote",
+          "text": "“I think you are in very great danger of making him as much in love with you as ever.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "They did not see the gentlemen again till Tuesday; and Mrs. Bennet, in the meanwhile, was giving way to all the happy schemes which the good-humour and common politeness of Bingley, in half an hour’s visit, had revived."
+    },
+    {
+      "type": "paragraph",
+      "text": "On Tuesday there was a large party assembled at Longbourn; and the two who were most anxiously expected, to the credit of their punctuality as sportsmen, were in very good time. When they repaired to the dining-room, Elizabeth eagerly watched to see whether Bingley would take the place which, in all their former parties, had belonged to him, by her sister. Her prudent mother, occupied by the same ideas, forbore to invite him to sit by herself. On entering the room, he seemed to hesitate; but Jane happened to look round, and happened to smile: it was decided. He placed himself by her."
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth, with a triumphant sensation, looked towards his friend. He bore it with noble indifference; and she would have imagined that Bingley had received his sanction to be happy, had she not seen his eyes likewise turned towards Mr. Darcy, with an expression of half-laughing alarm."
+    },
+    {
+      "type": "paragraph",
+      "text": "His behaviour to her sister was such during dinnertime as showed an admiration of her, which, though more guarded than formerly, persuaded Elizabeth, that, if left wholly to himself, Jane’s happiness, and his own, would be speedily secured. Though she dared not depend upon the consequence, she yet received pleasure from observing his behaviour. It gave her all the animation that her spirits could boast; for she was in no cheerful humour. Mr. Darcy was almost as far from her as the table could divide them. He was on one side of her mother. She knew how little such a situation would give pleasure to either, or make either appear to advantage. She was not near enough to hear any of their discourse; but she could see how seldom they spoke to each other, and how formal and cold was their manner whenever they did. Her mother’s ungraciousness made the sense of what they owed him more painful to Elizabeth’s mind; and she would, at times, have given anything to be privileged to tell him, that his kindness was neither unknown nor unfelt by the whole of the family."
+    },
+    {
+      "type": "paragraph",
+      "text": "She was in hopes that the evening would afford some opportunity of bringing them together; that the whole of the visit would not pass away without enabling them to enter into something more of conversation, than the mere ceremonious salutation attending his entrance. Anxious and uneasy, the period which passed in the drawing-room before the gentlemen came, was wearisome and dull to a degree that almost made her uncivil. She looked forward to their entrance as the point on which all her chance of pleasure for the evening must depend."
+    },
+    {
+      "type": "paragraph",
+      "text": "“If he does not come to me, _then_,” said she, “I shall give him up for ever.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "quote",
+          "text": "“If he does not come to me, _then_,”"
+        },
+        {
+          "start": 47,
+          "end": 78,
+          "style": "quote",
+          "text": "“I shall give him up for ever.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The gentlemen came; and she thought he looked as if he would have answered her hopes; but, alas! the ladies had crowded round the table, where Miss Bennet was making tea, and Elizabeth pouring out the coffee, in so close a confederacy, that there was not a single vacancy near her which would admit of a chair. And on the gentlemen’s approaching, one of the girls moved closer to her than ever, and said, in a whisper,--"
+    },
+    {
+      "type": "paragraph",
+      "text": "“The men shan’t come and part us, I am determined. We want none of them; do we?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 80,
+          "style": "quote",
+          "text": "“The men shan’t come and part us, I am determined. We want none of them; do we?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Darcy had walked away to another part of the room. She followed him with her eyes, envied everyone to whom he spoke, had scarcely patience enough to help anybody to coffee, and then was enraged against herself for being so silly!"
+    },
+    {
+      "type": "paragraph",
+      "text": "“A man who has once been refused! How could I ever be foolish enough to expect a renewal of his love? Is there one among the sex who would not protest against such a weakness as a second proposal to the same woman? There is no indignity so abhorrent to their feelings.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 269,
+          "style": "quote",
+          "text": "“A man who has once been refused! How could I ever be foolish enough to expect a renewal of his love? Is there one among the sex who would not protest against such a weakness as a second proposal to the same woman? There is no indignity so abhorrent to their feelings.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "She was a little revived, however, by his bringing back his coffee-cup himself; and she seized the opportunity of saying,--"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Is your sister at Pemberley still?” “Yes; she will remain there till Christmas.” “And quite alone? Have all her friends left her?” “Mrs. Annesley is with her. The others have been gone on to Scarborough these three weeks.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "quote",
+          "text": "“Is your sister at Pemberley still?”"
+        },
+        {
+          "start": 37,
+          "end": 81,
+          "style": "quote",
+          "text": "“Yes; she will remain there till Christmas.”"
+        },
+        {
+          "start": 82,
+          "end": 131,
+          "style": "quote",
+          "text": "“And quite alone? Have all her friends left her?”"
+        },
+        {
+          "start": 132,
+          "end": 223,
+          "style": "quote",
+          "text": "“Mrs. Annesley is with her. The others have been gone on to Scarborough these three weeks.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "She could think of nothing more to say; but if he wished to converse with her, he might have better success. He stood by her, however, for some minutes, in silence; and, at last, on the young lady’s whispering to Elizabeth again, he walked away."
+    },
+    {
+      "type": "paragraph",
+      "text": "When the tea things were removed, and the card tables placed, the ladies all rose; and Elizabeth was then hoping to be soon joined by him, when all her views were overthrown, by seeing him fall a victim to her mother’s rapacity for whist players, and in a few moments after seated with the rest of the party. She now lost every expectation of pleasure. They were confined for the evening at different tables; and she had nothing to hope, but that his eyes were so often turned towards her side of the room, as to make him play as unsuccessfully as herself."
+    },
+    {
+      "type": "paragraph",
+      "text": "Mrs. Bennet had designed to keep the two Netherfield gentlemen to supper; but their carriage was, unluckily, ordered before any of the others, and she had no opportunity of detaining them."
+    },
+    {
+      "type": "blockquote",
+      "text": "“Well, girls,” said she, as soon as they were left to themselves, “what say you to the day? I think everything has passed off uncommonly well, I assure you. The dinner was as well dressed as any I ever saw. The venison was roasted to a turn--and everybody said, they never saw so fat a haunch. The soup was fifty times better than what we had at the Lucases’ last week; and even Mr. Darcy acknowledged that the partridges were remarkably well done; and I suppose he has two or three French cooks at least. And, my dear Jane, I never saw you look in greater beauty. Mrs. Long said so too, for I asked her whether you did not. And what do you think she said besides? ‘Ah! Mrs. Bennet, we shall have her at Netherfield at last!’ She did, indeed. I do think Mrs. Long is as good a creature as ever lived--and her nieces are very pretty behaved girls, and not at all handsome: I like them prodigiously.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "style": "quote",
+          "text": "“Well, girls,”"
+        },
+        {
+          "start": 66,
+          "end": 898,
+          "style": "quote",
+          "text": "“what say you to the day? I think everything has passed off uncommonly well, I assure you. The dinner was as well dressed as any I ever saw. The venison was roasted to a turn--and everybody said, they never saw so fat a haunch. The soup was fifty times better than what we had at the Lucases’ last week; and even Mr. Darcy acknowledged that the partridges were remarkably well done; and I suppose he has two or three French cooks at least. And, my dear Jane, I never saw you look in greater beauty. Mrs. Long said so too, for I asked her whether you did not. And what do you think she said besides? ‘Ah! Mrs. Bennet, we shall have her at Netherfield at last!’ She did, indeed. I do think Mrs. Long is as good a creature as ever lived--and her nieces are very pretty behaved girls, and not at all handsome: I like them prodigiously.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“M^{rs}. Long and her nieces.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 30,
+          "style": "quote",
+          "text": "“M^{rs}. Long and her nieces.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "]"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mrs. Bennet, in short, was in very great spirits: she had seen enough of Bingley’s behaviour to Jane to be convinced that she would get him at last; and her expectations of advantage to her family, when in a happy humour, were so far beyond reason, that she was quite disappointed at not seeing him there again the next day, to make his proposals."
+    },
+    {
+      "type": "blockquote",
+      "text": "“It has been a very agreeable day,” said Miss Bennet to Elizabeth. “The party seemed so well selected, so suitable one with the other. I hope we may often meet again.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 35,
+          "style": "quote",
+          "text": "“It has been a very agreeable day,”"
+        },
+        {
+          "start": 67,
+          "end": 167,
+          "style": "quote",
+          "text": "“The party seemed so well selected, so suitable one with the other. I hope we may often meet again.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth smiled."
+    },
+    {
+      "type": "paragraph",
+      "text": "“Lizzy, you must not do so. You must not suspect me. It mortifies me. I assure you that I have now learnt to enjoy his conversation as an agreeable and sensible young man without having a wish beyond it. I am perfectly satisfied, from what his manners now are, that he never had any design of engaging my affection. It is only that he is blessed with greater sweetness of address, and a stronger desire of generally pleasing, than any other man.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 446,
+          "style": "quote",
+          "text": "“Lizzy, you must not do so. You must not suspect me. It mortifies me. I assure you that I have now learnt to enjoy his conversation as an agreeable and sensible young man without having a wish beyond it. I am perfectly satisfied, from what his manners now are, that he never had any design of engaging my affection. It is only that he is blessed with greater sweetness of address, and a stronger desire of generally pleasing, than any other man.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“You are very cruel,” said her sister, “you will not let me smile, and are provoking me to it every moment.” “How hard it is in some cases to be believed! And how impossible in others! But why should you wish to persuade me that I feel more than I acknowledge?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 21,
+          "style": "quote",
+          "text": "“You are very cruel,”"
+        },
+        {
+          "start": 39,
+          "end": 108,
+          "style": "quote",
+          "text": "“you will not let me smile, and are provoking me to it every moment.”"
+        },
+        {
+          "start": 109,
+          "end": 261,
+          "style": "quote",
+          "text": "“How hard it is in some cases to be believed! And how impossible in others! But why should you wish to persuade me that I feel more than I acknowledge?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“That is a question which I hardly know how to answer. We all love to instruct, though we can teach only what is not worth knowing. Forgive me; and if you persist in indifference, do not make _me_ your confidante.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 214,
+          "style": "quote",
+          "text": "“That is a question which I hardly know how to answer. We all love to instruct, though we can teach only what is not worth knowing. Forgive me; and if you persist in indifference, do not make _me_ your confidante.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Lizzy, my dear, I want to speak to you.” ]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 41,
+          "style": "quote",
+          "text": "“Lizzy, my dear, I want to speak to you.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHAPTER LIII. [Illustration]\n\nMr. Wickham was so perfectly satisfied with this conversation, that he never again distressed himself, or provoked his dear sister Elizabeth, by introducing the subject of it; and she was pleased to find that she had said enough to keep him quiet.\n\nThe day of his and Lydia’s departure soon came; and Mrs. Bennet was forced to submit to a separation, which, as her husband by no means entered into her scheme of their all going to Newcastle, was likely to continue at least a twelvemonth.\n\n> “Oh, my dear Lydia,” she cried, “when shall we meet again?” “Oh, Lord! I don’t know. Not these two or three years, perhaps.” “Write to me very often, my dear.”\n\n“As often as I can. But you know married women have never much time for writing. My sisters may write to _me_. They will have nothing else to do.”\n\nMr. Wickham’s adieus were much more affectionate than his wife’s. He smiled, looked handsome, and said many pretty things.\n\n“He is as fine a fellow,” said Mr. Bennet, as soon as they were out of the house, “as ever I saw. He simpers, and smirks, and makes love to us all. I am prodigiously proud of him. I defy even Sir William Lucas himself to produce a more valuable son-in-law.”\n\nThe loss of her daughter made Mrs. Bennet very dull for several days.\n\n> “I often think,” said she, “that there is nothing so bad as parting with one’s friends. One seems so forlorn without them.” “This is the consequence, you see, madam, of marrying a daughter,” said Elizabeth. “It must make you better satisfied that your other four are single.” “It is no such thing. Lydia does not leave me because she is married; but only because her husband’s regiment happens to be so far off. If that had been nearer, she would not have gone so soon.”\n\nBut the spiritless condition which this event threw her into was shortly relieved, and her mind opened again to the agitation of hope, by an article of news which then began to be in circulation. The housekeeper at Netherfield had received orders to prepare for the arrival of her master, who was coming down in a day or two, to shoot there for several weeks. Mrs. Bennet was quite in the fidgets. She looked at Jane, and smiled, and shook her head, by turns.\n\n> “Well, well, and so Mr. Bingley is coming down, sister,” (for Mrs. Philips first brought her the news). “Well, so much the better. Not that I care about it, though. He is nothing to us, you know, and I am sure I never want to see him again. But, however, he is very welcome to come to Netherfield, if he likes it. And who knows what _may_ happen? But that is nothing to us. You know, sister, we agreed long ago never to mention a word about it. And so, it is quite certain he is coming?” “You may depend on it,” replied the other, “for Mrs. Nichols was in Meryton last night: I saw her passing by, and went out myself on purpose to know the truth of it; and she told me that it was certainly true. He comes down on Thursday, at the latest, very likely on Wednesday. She was going to the butcher’s, she told me, on purpose to order in some meat on Wednesday, and she has got three couple of ducks just fit to be killed.”\n\nMiss Bennet had not been able to hear of his coming without changing colour. It was many months since she had mentioned his name to Elizabeth; but now, as soon as they were alone together, she said,--\n\n“I saw you look at me to-day, Lizzy, when my aunt told us of the present report; and I know I appeared distressed; but don’t imagine it was from any silly cause. I was only confused for the moment, because I felt that I _should_ be looked at. I do assure you that the news does not affect me either with pleasure or pain. I am glad of one thing, that he comes alone; because we shall see the less of him. Not that I am afraid of _myself_, but I dread other people’s remarks.”\n\nElizabeth did not know what to make of it. Had she not seen him in Derbyshire, she might have supposed him capable of coming there with no other view than what was acknowledged; but she still thought him partial to Jane, and she wavered as to the greater probability of his coming there _with_ his friend’s permission, or being bold enough to come without it.\n\n> “Yet it is hard,” she sometimes thought, “that this poor man cannot come to a house, which he has legally hired, without raising all this speculation! I _will_ leave him to himself.”\n\nIn spite of what her sister declared, and really believed to be her feelings, in the expectation of his arrival, Elizabeth could easily perceive that her spirits were affected by it. They were more disturbed, more unequal, than she had often seen them.\n\nThe subject which had been so warmly canvassed between their parents, about a twelvemonth ago, was now brought forward again.\n\n> “As soon as ever Mr. Bingley comes, my dear,” said Mrs. Bennet, “you will wait on him, of course.” “No, no. You forced me into visiting him last year, and promised, if I went to see him, he should marry one of my daughters. But it ended in nothing, and I will not be sent on a fool’s errand again.”\n\nHis wife represented to him how absolutely necessary such an attention would be from all the neighbouring gentlemen, on his returning to Netherfield.\n\n> “’Tis an _etiquette_ I despise,” said he. “If he wants our society, let him seek it. He knows where we live. I will not spend _my_ hours in running after my neighbours every time they go away and come back again.”\n\n“Well, all I know is, that it will be abominably rude if you do not wait on him. But, however, that shan’t prevent my asking him to dine here, I am determined. We must have Mrs. Long and the Gouldings soon. That will make thirteen with ourselves, so there will be just room at table for him.”\n\nConsoled by this resolution, she was the better able to bear her husband’s incivility; though it was very mortifying to know that her neighbours might all see Mr. Bingley, in consequence of it, before _they_ did. As the day of his arrival drew near,-- “I begin to be sorry that he comes at all,” said Jane to her sister. “It would be nothing; I could see him with perfect indifference; but I can hardly bear to hear it thus perpetually talked of. My mother means well; but she does not know, no one can know, how much I suffer from what she says. Happy shall I be when his stay at Netherfield is over!”\n\n> “I wish I could say anything to comfort you,” replied Elizabeth; “but it is wholly out of my power. You must feel it; and the usual satisfaction of preaching patience to a sufferer is denied me, because you have always so much.”\n\nMr. Bingley arrived. Mrs. Bennet, through the assistance of servants, contrived to have the earliest tidings of it, that the period of anxiety and fretfulness on her side be as long as it could. She counted the days that must intervene before their invitation could be sent--hopeless of seeing him before. But on the third morning after his arrival in Hertfordshire, she saw him from her dressing-room window enter the paddock, and ride towards the house.\n\nHer daughters were eagerly called to partake of her joy. Jane resolutely kept her place at the table; but Elizabeth, to satisfy her mother, went to the window--she looked--she saw Mr. Darcy with him, and sat down again by her sister.\n\n> “There is a gentleman with him, mamma,” said Kitty; “who can it be?” “Some acquaintance or other, my dear, I suppose; I am sure I do not know.” “La!” replied Kitty, “it looks just like that man that used to be with him before. Mr. what’s his name--that tall, proud man.” “Good gracious! Mr. Darcy!--and so it does, I vow. Well, any friend of Mr. Bingley’s will always be welcome here, to be sure; but else I must say that I hate the very sight of him.”\n\nJane looked at Elizabeth with surprise and concern. She knew but little of their meeting in Derbyshire, and therefore felt for the awkwardness which must attend her sister, in seeing him almost for the first time after receiving his explanatory letter. Both sisters were uncomfortable enough. Each felt for the other, and of course for themselves; and their mother talked on of her dislike of Mr. Darcy, and her resolution to be civil to him only as Mr. Bingley’s friend, without being heard by either of them. But Elizabeth had sources of uneasiness which could not yet be suspected by Jane, to whom she had never yet had courage to show Mrs. Gardiner’s letter, or to relate her own change of sentiment towards him. To Jane, he could be only a man whose proposals she had refused, and whose merits she had undervalued; but to her own more extensive information, he was the person to whom the whole family were indebted for the first of benefits, and whom she regarded herself with an interest, if not quite so tender, at least as reasonable and just, as what Jane felt for Bingley. Her astonishment at his coming--at his coming to Netherfield, to Longbourn, and voluntarily seeking her again, was almost equal to what she had known on first witnessing his altered behaviour in Derbyshire.\n\nThe colour which had been driven from her face returned for half a minute with an additional glow, and a smile of delight added lustre to her eyes, as she thought for that space of time that his affection and wishes must still be unshaken; but she would not be secure.\n\n> “Let me first see how he behaves,” said she; “it will then be early enough for expectation.”\n\nShe sat intently at work, striving to be composed, and without daring to lift up her eyes, till anxious curiosity carried them to the face of her sister as the servant was approaching the door. Jane looked a little paler than usual, but more sedate than Elizabeth had expected. On the gentlemen’s appearing, her colour increased; yet she received them with tolerable ease, and with a propriety of behaviour equally free from any symptom of resentment, or any unnecessary complaisance.\n\nElizabeth said as little to either as civility would allow, and sat down again to her work, with an eagerness which it did not often command. She had ventured only one glance at Darcy. He looked serious as usual; and, she thought, more as he had been used to look in Hertfordshire, than as she had seen him at Pemberley. But, perhaps, he could not in her mother’s presence be what he was before her uncle and aunt. It was a painful, but not an improbable, conjecture.\n\nBingley she had likewise seen for an instant, and in that short period saw him looking both pleased and embarrassed. He was received by Mrs. Bennet with a degree of civility which made her two daughters ashamed, especially when contrasted with the cold and ceremonious politeness of her courtesy and address of his friend.\n\nElizabeth particularly, who knew that her mother owed to the latter the preservation of her favourite daughter from irremediable infamy, was hurt and distressed to a most painful degree by a distinction so ill applied.\n\nDarcy, after inquiring of her how Mr. and Mrs. Gardiner did--a question which she could not answer without confusion--said scarcely anything. He was not seated by her: perhaps that was the reason of his silence; but it had not been so in Derbyshire. There he had talked to her friends when he could not to herself. But now several minutes elapsed, without bringing the sound of his voice; and when occasionally, unable to resist the impulse of curiosity, she raised her eyes to his face, she as often found him looking at Jane as at herself, and frequently on no object but the ground. More thoughtfulness and less anxiety to please, than when they last met, were plainly expressed. She was disappointed, and angry with herself for being so.\n\n> “Could I expect it to be otherwise?” said she. “Yet why did he come?”\n\nShe was in no humour for conversation with anyone but himself; and to him she had hardly courage to speak.\n\nShe inquired after his sister, but could do no more.\n\n> “It is a long time, Mr. Bingley, since you went away,” said Mrs. Bennet.\n\nHe readily agreed to it.\n\n> “I began to be afraid you would never come back again. People _did_ say, you meant to quit the place entirely at Michaelmas; but, however, I hope it is not true. A great many changes have happened in the neighbourhood since you went away. Miss Lucas is married and settled: and one of my own daughters. I suppose you have heard of it; indeed, you must have seen it in the papers. It was in the ‘Times’ and the ‘Courier,’ I know; though it was not put in as it ought to be. It was only said, ‘Lately, George Wickham, Esq., to Miss Lydia Bennet,’ without there being a syllable said of her father, or the place where she lived, or anything. It was my brother Gardiner’s drawing up, too, and I wonder how he came to make such an awkward business of it. Did you see it?”\n\nBingley replied that he did, and made his congratulations. Elizabeth dared not lift up her eyes. How Mr. Darcy looked, therefore, she could not tell.\n\n> “It is a delightful thing, to be sure, to have a daughter well married,” continued her mother; “but at the same time, Mr. Bingley, it is very hard to have her taken away from me. They are gone down to Newcastle, a place quite northward it seems, and there they are to stay, I do not know how long. His regiment is there; for I suppose you have heard of his leaving the ----shire, and of his being gone into the Regulars. Thank heaven! he has _some_ friends, though, perhaps, not so many as he deserves.”\n\nElizabeth, who knew this to be levelled at Mr. Darcy, was in such misery of shame that she could hardly keep her seat. It drew from her, however, the exertion of speaking, which nothing else had so effectually done before; and she asked Bingley whether he meant to make any stay in the country at present. A few weeks, he believed.\n\n> “When you have killed all your own birds, Mr. Bingley,” said her mother, “I beg you will come here and shoot as many as you please on Mr. Bennet’s manor. I am sure he will be vastly happy to oblige you, and will save all the best of the coveys for you.”\n\nElizabeth’s misery increased at such unnecessary, such officious attention! Were the same fair prospect to arise at present, as had flattered them a year ago, everything, she was persuaded, would be hastening to the same vexatious conclusion. At that instant she felt, that years of happiness could not make Jane or herself amends for moments of such painful confusion.\n\n“The first wish of my heart,” said she to herself, “is never more to be in company with either of them. Their society can afford no pleasure that will atone for such wretchedness as this! Let me never see either one or the other again!”\n\nYet the misery, for which years of happiness were to offer no compensation, received soon afterwards material relief, from observing how much the beauty of her sister rekindled the admiration of her former lover. When first he came in, he had spoken to her but little, but every five minutes seemed to be giving her more of his attention. He found her as handsome as she had been last year; as good-natured, and as unaffected, though not quite so chatty. Jane was anxious that no difference should be perceived in her at all, and was really persuaded that she talked as much as ever; but her mind was so busily engaged, that she did not always know when she was silent.\n\nWhen the gentlemen rose to go away, Mrs. Bennet was mindful of her intended civility, and they were invited and engaged to dine at Longbourn in a few days’ time.\n\n> “You are quite a visit in my debt, Mr. Bingley,” she added; “for when you went to town last winter, you promised to take a family dinner with us as soon as you returned. I have not forgot, you see; and I assure you I was very much disappointed that you did not come back and keep your engagement.”\n\nBingley looked a little silly at this reflection, and said something of his concern at having been prevented by business. They then went away.\n\nMrs. Bennet had been strongly inclined to ask them to stay and dine there that day; but, though she always kept a very good table, she did not think anything less than two courses could be good enough for a man on whom she had such anxious designs, or satisfy the appetite and pride of one who had ten thousand a year.\n\n[Illustration:\n\n> “Jane happened to look round”\n\n]\n\nCHAPTER LIV.\n[Illustration]\nAs soon as they were gone, Elizabeth walked out to recover her spirits;\nor, in other words, to dwell without interruption on those subjects\nwhich must deaden them more. Mr. Darcy’s behaviour astonished and vexed\nher.\n“Why, if he came only to be silent, grave, and indifferent,” said she,\n“did he come at all?”\nShe could settle it in no way that gave her pleasure.\n“He could be still amiable, still pleasing to my uncle and aunt, when he\nwas in town; and why not to me? If he fears me, why come hither? If he\nno longer cares for me, why silent? Teasing, teasing man! I will think\nno more about him.”\nHer resolution was for a short time involuntarily kept by the approach\nof her sister, who joined her with a cheerful look which showed her\nbetter satisfied with their visitors than Elizabeth.\n“Now,” said she, “that this first meeting is over, I feel perfectly\neasy. I know my own strength, and I shall never be embarrassed again by\nhis coming. I am glad he dines here on Tuesday. It will then be publicly\nseen, that on both sides we meet only as common and indifferent\nacquaintance.”\n\n> “Yes, very indifferent, indeed,” said Elizabeth, laughingly. “Oh, Jane! take care.”\n\n“My dear Lizzy, you cannot think me so weak as to be in danger now.”\n\n“I think you are in very great danger of making him as much in love with you as ever.”\n\nThey did not see the gentlemen again till Tuesday; and Mrs. Bennet, in the meanwhile, was giving way to all the happy schemes which the good-humour and common politeness of Bingley, in half an hour’s visit, had revived.\n\nOn Tuesday there was a large party assembled at Longbourn; and the two who were most anxiously expected, to the credit of their punctuality as sportsmen, were in very good time. When they repaired to the dining-room, Elizabeth eagerly watched to see whether Bingley would take the place which, in all their former parties, had belonged to him, by her sister. Her prudent mother, occupied by the same ideas, forbore to invite him to sit by herself. On entering the room, he seemed to hesitate; but Jane happened to look round, and happened to smile: it was decided. He placed himself by her.\n\nElizabeth, with a triumphant sensation, looked towards his friend. He bore it with noble indifference; and she would have imagined that Bingley had received his sanction to be happy, had she not seen his eyes likewise turned towards Mr. Darcy, with an expression of half-laughing alarm.\n\nHis behaviour to her sister was such during dinnertime as showed an admiration of her, which, though more guarded than formerly, persuaded Elizabeth, that, if left wholly to himself, Jane’s happiness, and his own, would be speedily secured. Though she dared not depend upon the consequence, she yet received pleasure from observing his behaviour. It gave her all the animation that her spirits could boast; for she was in no cheerful humour. Mr. Darcy was almost as far from her as the table could divide them. He was on one side of her mother. She knew how little such a situation would give pleasure to either, or make either appear to advantage. She was not near enough to hear any of their discourse; but she could see how seldom they spoke to each other, and how formal and cold was their manner whenever they did. Her mother’s ungraciousness made the sense of what they owed him more painful to Elizabeth’s mind; and she would, at times, have given anything to be privileged to tell him, that his kindness was neither unknown nor unfelt by the whole of the family.\n\nShe was in hopes that the evening would afford some opportunity of bringing them together; that the whole of the visit would not pass away without enabling them to enter into something more of conversation, than the mere ceremonious salutation attending his entrance. Anxious and uneasy, the period which passed in the drawing-room before the gentlemen came, was wearisome and dull to a degree that almost made her uncivil. She looked forward to their entrance as the point on which all her chance of pleasure for the evening must depend.\n\n“If he does not come to me, _then_,” said she, “I shall give him up for ever.”\n\nThe gentlemen came; and she thought he looked as if he would have answered her hopes; but, alas! the ladies had crowded round the table, where Miss Bennet was making tea, and Elizabeth pouring out the coffee, in so close a confederacy, that there was not a single vacancy near her which would admit of a chair. And on the gentlemen’s approaching, one of the girls moved closer to her than ever, and said, in a whisper,--\n\n“The men shan’t come and part us, I am determined. We want none of them; do we?”\n\nDarcy had walked away to another part of the room. She followed him with her eyes, envied everyone to whom he spoke, had scarcely patience enough to help anybody to coffee, and then was enraged against herself for being so silly!\n\n“A man who has once been refused! How could I ever be foolish enough to expect a renewal of his love? Is there one among the sex who would not protest against such a weakness as a second proposal to the same woman? There is no indignity so abhorrent to their feelings.”\n\nShe was a little revived, however, by his bringing back his coffee-cup himself; and she seized the opportunity of saying,--\n\n> “Is your sister at Pemberley still?” “Yes; she will remain there till Christmas.” “And quite alone? Have all her friends left her?” “Mrs. Annesley is with her. The others have been gone on to Scarborough these three weeks.”\n\nShe could think of nothing more to say; but if he wished to converse with her, he might have better success. He stood by her, however, for some minutes, in silence; and, at last, on the young lady’s whispering to Elizabeth again, he walked away.\n\nWhen the tea things were removed, and the card tables placed, the ladies all rose; and Elizabeth was then hoping to be soon joined by him, when all her views were overthrown, by seeing him fall a victim to her mother’s rapacity for whist players, and in a few moments after seated with the rest of the party. She now lost every expectation of pleasure. They were confined for the evening at different tables; and she had nothing to hope, but that his eyes were so often turned towards her side of the room, as to make him play as unsuccessfully as herself.\n\nMrs. Bennet had designed to keep the two Netherfield gentlemen to supper; but their carriage was, unluckily, ordered before any of the others, and she had no opportunity of detaining them.\n\n> “Well, girls,” said she, as soon as they were left to themselves, “what say you to the day? I think everything has passed off uncommonly well, I assure you. The dinner was as well dressed as any I ever saw. The venison was roasted to a turn--and everybody said, they never saw so fat a haunch. The soup was fifty times better than what we had at the Lucases’ last week; and even Mr. Darcy acknowledged that the partridges were remarkably well done; and I suppose he has two or three French cooks at least. And, my dear Jane, I never saw you look in greater beauty. Mrs. Long said so too, for I asked her whether you did not. And what do you think she said besides? ‘Ah! Mrs. Bennet, we shall have her at Netherfield at last!’ She did, indeed. I do think Mrs. Long is as good a creature as ever lived--and her nieces are very pretty behaved girls, and not at all handsome: I like them prodigiously.”\n\n[Illustration:\n\n> “M^{rs}. Long and her nieces.”\n\n]\n\nMrs. Bennet, in short, was in very great spirits: she had seen enough of Bingley’s behaviour to Jane to be convinced that she would get him at last; and her expectations of advantage to her family, when in a happy humour, were so far beyond reason, that she was quite disappointed at not seeing him there again the next day, to make his proposals.\n\n> “It has been a very agreeable day,” said Miss Bennet to Elizabeth. “The party seemed so well selected, so suitable one with the other. I hope we may often meet again.”\n\nElizabeth smiled.\n\n“Lizzy, you must not do so. You must not suspect me. It mortifies me. I assure you that I have now learnt to enjoy his conversation as an agreeable and sensible young man without having a wish beyond it. I am perfectly satisfied, from what his manners now are, that he never had any design of engaging my affection. It is only that he is blessed with greater sweetness of address, and a stronger desire of generally pleasing, than any other man.”\n\n> “You are very cruel,” said her sister, “you will not let me smile, and are provoking me to it every moment.” “How hard it is in some cases to be believed! And how impossible in others! But why should you wish to persuade me that I feel more than I acknowledge?”\n\n“That is a question which I hardly know how to answer. We all love to instruct, though we can teach only what is not worth knowing. Forgive me; and if you persist in indifference, do not make _me_ your confidante.”\n\n[Illustration:\n\n> “Lizzy, my dear, I want to speak to you.” ]",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 1345,
+    "text": "CHAPTER LIII. [Illustration]"
+  },
+  "word_count": 4587,
+  "block_count": 85
+}

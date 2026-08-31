@@ -1,0 +1,1294 @@
+{
+  "chapter_id": "ch-006",
+  "title": "MAURICE DE GUÉRIN.",
+  "block_start": 149,
+  "block_end": 226,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "MAURICE DE GUÉRIN.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "I will not presume to say that I now know the French language well; but at a time when I knew it even less well than at present,—some fifteen years ago,—I remember pestering those about me with this sentence, the rhythm of which had lodged itself in my head, and which, with the strangest pronunciation possible, I kept perpetually declaiming: “_Les dieux jaloux ont enfoui quelque part les témoignages de la descendance des choses; mais au bord de quel Océan ont-ils roulé la pierre qui les couvre, ô Macarée!_”",
+      "spans": [
+        {
+          "start": 344,
+          "end": 512,
+          "style": "quote",
+          "text": "“_Les dieux jaloux ont enfoui quelque part les témoignages de la descendance des choses; mais au bord de quel Océan ont-ils roulé la pierre qui les couvre, ô Macarée!_”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These words came from a short composition called the _Centaur_, of which the author, Georges-Maurice de Guérin, died in the year 1839, at the age of twenty-eight, without having published anything. In 1840, Madame Sand brought out the _Centaur_ in the _Revue des Deux Mondes_, with a short notice of its author, and a few extracts from his letters. A year or two afterwards she reprinted these at the end of a volume of her novels; and there it was that I fell in with them. I was so much struck with the _Centaur_ that I waited anxiously to hear something more of its author, and of what he had left; but it was not till the other day—twenty years after the first publication of the _Centaur_ in the _Revue des Deux Mondes_, that my anxiety was satisfied. At the end of 1860 appeared two volumes with the title _Maurice de Guérin_, _Reliquiæ_, containing the _Centaur_, several poems of Guérin, his journals, and a number of his letters, collected and edited by a devoted friend, M. Trebutien, and preceded by a notice of Guérin by the first of living critics, M. Sainte-Beuve.",
+      "spans": [
+        {
+          "start": 53,
+          "end": 62,
+          "style": "em",
+          "text": "_Centaur_"
+        },
+        {
+          "start": 235,
+          "end": 244,
+          "style": "em",
+          "text": "_Centaur_"
+        },
+        {
+          "start": 252,
+          "end": 275,
+          "style": "em",
+          "text": "_Revue des Deux Mondes_"
+        },
+        {
+          "start": 505,
+          "end": 514,
+          "style": "em",
+          "text": "_Centaur_"
+        },
+        {
+          "start": 684,
+          "end": 693,
+          "style": "em",
+          "text": "_Centaur_"
+        },
+        {
+          "start": 701,
+          "end": 724,
+          "style": "em",
+          "text": "_Revue des Deux Mondes_"
+        },
+        {
+          "start": 812,
+          "end": 831,
+          "style": "em",
+          "text": "_Maurice de Guérin_"
+        },
+        {
+          "start": 833,
+          "end": 843,
+          "style": "em",
+          "text": "_Reliquiæ_"
+        },
+        {
+          "start": 860,
+          "end": 869,
+          "style": "em",
+          "text": "_Centaur_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The grand power of poetry is its interpretative power; by which I mean, not a power of drawing out in black and white an explanation of the mystery of the universe, but the power of so dealing with things as to awaken in us a wonderfully full, new, and intimate sense of them, and of our relations with them. When this sense is awakened in us, as to objects without us, we feel ourselves to be in contact with the essential nature of those objects, to be no longer bewildered and oppressed by them, but to have their secret, and to be in harmony with them; and this feeling calms and satisfies us as no other can. Poetry, indeed, interprets in another way besides this; but one of its two ways of interpreting, of exercising its highest power, is by awakening this sense in us. I will not now inquire whether this sense is illusive, whether it can be proved not to be illusive, whether it does absolutely make us possess the real nature of things; all I say is, that poetry can awaken it in us, and that to awaken it is one of the highest powers of poetry. The interpretations of science do not give us this intimate sense of objects as the interpretations of poetry give it; they appeal to a limited faculty, and not to the whole man. It is not Linnæus or Cavendish or Cuvier who gives us the true sense of animals, or water, or plants, who seizes their secret for us, who makes us participate in their life; it is Shakspeare, with his “daffodils That come before the swallow dares, and take The winds of March with beauty;”",
+      "spans": [
+        {
+          "start": 1437,
+          "end": 1525,
+          "style": "quote",
+          "text": "“daffodils That come before the swallow dares, and take The winds of March with beauty;”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "it is Wordsworth, with his “voice ... heard In spring-time from the cuckoo-bird Breaking the silence of the seas Among the farthest Hebrides;”",
+      "spans": [
+        {
+          "start": 27,
+          "end": 142,
+          "style": "quote",
+          "text": "“voice ... heard In spring-time from the cuckoo-bird Breaking the silence of the seas Among the farthest Hebrides;”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "it is Keats, with his “moving waters at their priestlike task Of cold ablution round Earth’s human shores;”",
+      "spans": [
+        {
+          "start": 22,
+          "end": 107,
+          "style": "quote",
+          "text": "“moving waters at their priestlike task Of cold ablution round Earth’s human shores;”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "it is Chateaubriand, with his, “_cîme indéterminée des forêts_;” it is Senancour, with his mountain birch-tree: “_Cette écorce blanche, lisse et crevassée; cette tige agreste; ces branches qui s’inclinent vers la terre; la mobilité des feuilles, et tout cet abandon, simplicité de la nature, attitude des déserts._”",
+      "spans": [
+        {
+          "start": 31,
+          "end": 64,
+          "style": "quote",
+          "text": "“_cîme indéterminée des forêts_;”"
+        },
+        {
+          "start": 112,
+          "end": 315,
+          "style": "quote",
+          "text": "“_Cette écorce blanche, lisse et crevassée; cette tige agreste; ces branches qui s’inclinent vers la terre; la mobilité des feuilles, et tout cet abandon, simplicité de la nature, attitude des déserts._”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Eminent manifestations of this magical power of poetry are very rare and very precious; the compositions of Guérin manifest it, I think, in singular eminence. Not his poems, strictly so called,—his verse,—so much as his prose; his poems in general take for their vehicle that favorite meter of French poetry, the Alexandrine; and, in my judgment, I confess they have thus, as compared with his prose, a great disadvantage to start with. In prose, the character of the vehicle for the composer’s thoughts is not determined beforehand; every composer has to make his own vehicle; and who has ever done this more admirably than the great prose-writers of France,—Pascal, Bossuet, Fénelon, Voltaire? But in verse the composer has (with comparatively narrow liberty of modification) to accept his vehicle ready-made; it is therefore of vital importance to him that he should find at his disposal a vehicle adequate to convey the highest matters of poetry. We may even get a decisive test of the poetical power of a language and nation by ascertaining how far the principal poetical vehicle which they have employed, how far (in plainer words) the established national meter for high poetry, is adequate or inadequate. It seems to me that the established meter of this kind in France,—the Alexandrine,—is inadequate; that as a vehicle for high poetry it is greatly inferior to the hexameter or to the iambics of Greece (for example), or to the blank verse of England. Therefore the man of genius who uses it is at a disadvantage as compared with the man of genius who has for conveying his thoughts a more adequate vehicle, metrical or not. Racine is at a disadvantage as compared with Sophocles or Shakspeare, and he is likewise at a disadvantage as compared with Bossuet.",
+      "spans": [
+        {
+          "start": 726,
+          "end": 777,
+          "style": "paren_aside",
+          "text": "(with comparatively narrow liberty of modification)"
+        },
+        {
+          "start": 1119,
+          "end": 1137,
+          "style": "paren_cite",
+          "text": "(in plainer words)"
+        },
+        {
+          "start": 1413,
+          "end": 1426,
+          "style": "paren_cite",
+          "text": "(for example)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The same may be said of our own poets of the eighteenth century, a century which gave them as the main vehicle for their high poetry a meter inadequate (as much as the French Alexandrine, and nearly in the same way) for this poetry,—the ten-syllable couplet. It is worth remarking, that the English poet of the eighteenth century whose compositions wear best and give one the most entire satisfaction,—Gray,—hardly uses that couplet at all: this abstinence, however, limits Gray’s productions to a few short compositions, and (exquisite as these are) he is a poetical nature repressed and without free issue. For English poetical production on a great scale, for an English poet deploying all the forces of his genius, the ten-syllable couplet was, in the eighteenth century, the established, one may almost say the inevitable, channel. Now this couplet, admirable (as Chaucer uses it) for story-telling not of the epic pitch, and often admirable for a few lines even in poetry of a very high pitch, is for continuous use in poetry of this latter kind inadequate. Pope, in his _Essay on Man_, is thus at a disadvantage compared with Lucretius in his poem on Nature: Lucretius has an adequate vehicle, Pope has not. Nay, though Pope’s genius for didactic poetry was not less than that of Horace, while his satirical power was certainly greater, still one’s taste receives, I cannot but think, a certain satisfaction when one reads the Epistles and Satires of Horace, which it fails to receive when one reads the Satires and Epistles of Pope. Of such avail is the superior adequacy of the vehicle used to compensate even an inferiority of genius in the user! In the same way Pope is at a disadvantage as compared with Addison. The best of Addison’s composition (the “Coverley Papers” in the _Spectator_, for instance) wears better than the best of Pope’s, because Addison has in his prose an intrinsically better vehicle for his genius than Pope in his couplet. But Bacon has no such advantage over Shakspeare; nor has Milton, writing prose (for no contemporary English prose-writer must be matched with Milton except Milton himself), any such advantage over Milton writing verse: indeed, the advantage here is all the other way.",
+      "spans": [
+        {
+          "start": 152,
+          "end": 215,
+          "style": "paren_cite",
+          "text": "(as much as the French Alexandrine, and nearly in the same way)"
+        },
+        {
+          "start": 526,
+          "end": 550,
+          "style": "paren_cite",
+          "text": "(exquisite as these are)"
+        },
+        {
+          "start": 865,
+          "end": 885,
+          "style": "paren_cite",
+          "text": "(as Chaucer uses it)"
+        },
+        {
+          "start": 1077,
+          "end": 1091,
+          "style": "em",
+          "text": "_Essay on Man_"
+        },
+        {
+          "start": 1759,
+          "end": 1815,
+          "style": "paren_aside",
+          "text": "(the “Coverley Papers” in the _Spectator_, for instance)"
+        },
+        {
+          "start": 2039,
+          "end": 2131,
+          "style": "paren_aside",
+          "text": "(for no contemporary English prose-writer must be matched with Milton except Milton himself)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is in the prose remains of Guérin,—his journals, his letters, and the striking composition which I have already mentioned, the _Centaur_,—that his extraordinary gift manifests itself. He has a truly interpretative faculty; the most profound and delicate sense of the life of Nature, and the most exquisite felicity in finding expressions to render that sense. To all who love poetry, Guérin deserves to be something more than a name; and I shall try, in spite of the impossibility of doing justice to such a master of expression by translations, to make English readers see for themselves how gifted an organization his was, and how few artists have received from Nature a more magical faculty of interpreting her.",
+      "spans": [
+        {
+          "start": 130,
+          "end": 139,
+          "style": "em",
+          "text": "_Centaur_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In the winter of the year 1832 there was collected in Brittany, around the well-known Abbé Lamennais, a singular gathering. At a lonely place, La Chênaie, he had founded a religious retreat, to which disciples, attracted by his powers or by his reputation, repaired. Some came with the intention of preparing themselves for the ecclesiastical profession; others merely to profit by the society and discourse of so distinguished a master. Among the inmates were men whose names have since become known to all Europe,—Lacordaire and M. de Montalembert; there were others, who have acquired a reputation, not European, indeed, but considerable,—the Abbé Gerbet, the Abbé Rohrbacher; others, who have never quitted the shade of private life. The winter of 1832 was a period of crisis in the religious world of France: Lamennais’s rupture with Rome, the condemnation of his opinions by the Pope, and his revolt against that condemnation, were imminent. Some of his followers, like Lacordaire, had already resolved not to cross the Rubicon with their leader, not to go into rebellion against Rome; they were preparing to separate from him. The society of La Chênaie was soon to dissolve; but, such as it is shown to us for a moment, with its voluntary character, its simple and severe life in common, its mixture of lay and clerical members, the genius of its chiefs, the sincerity of its disciples,—above all, its paramount fervent interest in matters of spiritual and religious concernment,—it offers a most instructive spectacle. It is not the spectacle we most of us think to find in France, the France we have imagined from common English notions, from the streets of Paris, from novels; it shows us how, wherever there is greatness like that of France, there are, as its foundation, treasures of fervor, pure-mindedness, and spirituality somewhere, whether we know of them or not;—a store of that which Goethe calls _Halt_;—since greatness can never be founded upon frivolity and corruption.",
+      "spans": [
+        {
+          "start": 1916,
+          "end": 1922,
+          "style": "em",
+          "text": "_Halt_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "On the evening of the 18th of December in this year 1832, M. de Lamennais was talking to those assembled in the sitting-room of La Chênaie of his recent journey to Italy. He talked with all his usual animation; “but,” writes one of his hearers, a Breton gentleman, M. de Marzan, “I soon became inattentive and absent, being struck with the reserved attitude of a young stranger some twenty-two years old, pale in face, his black hair already thin over his temples, with a southern eye, in which brightness and melancholy were mingled. He kept himself somewhat aloof, seeming to avoid notice rather than to court it. All the old faces of friends which I found about me at this my re-entry into the circle of La Chênaie failed to occupy me so much as the sight of this stranger, looking on, listening, observing, and saying nothing.”",
+      "spans": [
+        {
+          "start": 211,
+          "end": 217,
+          "style": "quote",
+          "text": "“but,”"
+        },
+        {
+          "start": 279,
+          "end": 831,
+          "style": "quote",
+          "text": "“I soon became inattentive and absent, being struck with the reserved attitude of a young stranger some twenty-two years old, pale in face, his black hair already thin over his temples, with a southern eye, in which brightness and melancholy were mingled. He kept himself somewhat aloof, seeming to avoid notice rather than to court it. All the old faces of friends which I found about me at this my re-entry into the circle of La Chênaie failed to occupy me so much as the sight of this stranger, looking on, listening, observing, and saying nothing.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The unknown was Maurice de Guérin. Of a noble but poor family, having lost his mother at six years old, he had been brought up by his father, a man saddened by his wife’s death, and austerely religious, at the château of Le Cayla, in Languedoc. His childhood was not gay; he had not the society of other boys; and solitude, the sight of his father’s gloom, and the habit of accompanying the curé of the parish on his rounds among the sick and dying, made him prematurely grave and familiar with sorrow. He went to school first at Toulouse, then at the Collège Stanislas at Paris, with a temperament almost as unfit as Shelley’s for common school life. His youth was ardent, sensitive, agitated, and unhappy. In 1832 he procured admission to La Chênaie to brace his spirit by the teaching of Lamennais, and to decide whether his religious feelings would determine themselves into a distinct religious vocation. Strong and deep religious feelings he had, implanted in him by nature, developed in him by the circumstances of his childhood; but he had also (and here is the key to his character) that temperament which opposes itself to the fixedness of a religious vocation, or of any vocation of which fixedness is an essential attribute; a temperament mobile, inconstant, eager, thirsting for new impressions, abhorring rules, aspiring to a “renovation without end;” a temperament common enough among artists, but with which few artists, who have it to the same degree as Guérin, unite a seriousness and a sad intensity like his. After leaving school, and before going to La Chênaie, he had been at home at Le Cayla with his sister Eugénie (a wonderfully gifted person, whose genius so competent a judge as M. Sainte-Beuve is inclined to pronounce even superior to her brother’s) and his sister Eugénie’s friends. With one of these friends he had fallen in love,—a slight and transient fancy, but which had already called his poetical powers into exercise; and his poems and fragments, in a certain green note-book (_le Cahier Vert_) which he long continued to make the depository of his thoughts, and which became famous among his friends, he brought with him to La Chênaie. There he found among the younger members of the Society several who, like himself, had a secret passion for poetry and literature; with these he became intimate, and in his letters and journal we find him occupied, now with a literary commerce established with these friends, now with the fortunes, fast coming to a crisis, of the Society, and now with that for the sake of which he came to La Chênaie,—his religious progress and the state of his soul.",
+      "spans": [
+        {
+          "start": 1053,
+          "end": 1091,
+          "style": "paren_aside",
+          "text": "(and here is the key to his character)"
+        },
+        {
+          "start": 1340,
+          "end": 1365,
+          "style": "quote",
+          "text": "“renovation without end;”"
+        },
+        {
+          "start": 1639,
+          "end": 1778,
+          "style": "paren_aside",
+          "text": "(a wonderfully gifted person, whose genius so competent a judge as M. Sainte-Beuve is inclined to pronounce even superior to her brother’s)"
+        },
+        {
+          "start": 2014,
+          "end": 2032,
+          "style": "paren_cite",
+          "text": "(_le Cahier Vert_)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "On Christmas-day, 1832, having been then three weeks at La Chênaie, he writes thus of it to a friend of his family, M. de Bayne:— “La Chênaie is a sort of oasis in the midst of the steppes of Brittany. In front of the château stretches a very large garden cut in two by a terrace with a lime avenue, at the end of which is a tiny chapel. I am extremely fond of this little oratory, where one breathes a twofold peace,—the peace of solitude and the peace of the Lord. When spring comes we shall walk to prayers between two borders of flowers. On the east side, and only a few yards from the château, sleeps a small mere between two woods, where the birds in warm weather sing all day long; and then,—right, left, on all sides,—woods, woods, everywhere woods. It looks desolate just now that all is bare and the woods are rust-color, and under this Brittany sky, which is always clouded and so low that it seems as if it were going to fall on your head; but as soon as spring comes the sky raises itself up, the woods come to life again, and everything will be full of charm.”",
+      "spans": [
+        {
+          "start": 130,
+          "end": 1074,
+          "style": "quote",
+          "text": "“La Chênaie is a sort of oasis in the midst of the steppes of Brittany. In front of the château stretches a very large garden cut in two by a terrace with a lime avenue, at the end of which is a tiny chapel. I am extremely fond of this little oratory, where one breathes a twofold peace,—the peace of solitude and the peace of the Lord. When spring comes we shall walk to prayers between two borders of flowers. On the east side, and only a few yards from the château, sleeps a small mere between two woods, where the birds in warm weather sing all day long; and then,—right, left, on all sides,—woods, woods, everywhere woods. It looks desolate just now that all is bare and the woods are rust-color, and under this Brittany sky, which is always clouded and so low that it seems as if it were going to fall on your head; but as soon as spring comes the sky raises itself up, the woods come to life again, and everything will be full of charm.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Of what La Chênaie will be when spring comes he has a foretaste on the 3d of March."
+    },
+    {
+      "type": "blockquote",
+      "text": "“To-day” (he writes in his journal) “has enchanted me. For the first time for a long while the sun has shown himself in all his beauty. He has made the buds of the leaves and flowers swell, and he has waked up in me a thousand happy thoughts. The clouds assume more and more their light and graceful shapes, and are sketching, over the blue sky, the most charming fancies. The woods have not yet got their leaves, but they are taking an indescribable air of life and gaiety, which gives them quite a new physiognomy. Everything is getting ready for the great festival of Nature.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 8,
+          "style": "quote",
+          "text": "“To-day”"
+        },
+        {
+          "start": 9,
+          "end": 35,
+          "style": "paren_cite",
+          "text": "(he writes in his journal)"
+        },
+        {
+          "start": 36,
+          "end": 579,
+          "style": "quote",
+          "text": "“has enchanted me. For the first time for a long while the sun has shown himself in all his beauty. He has made the buds of the leaves and flowers swell, and he has waked up in me a thousand happy thoughts. The clouds assume more and more their light and graceful shapes, and are sketching, over the blue sky, the most charming fancies. The woods have not yet got their leaves, but they are taking an indescribable air of life and gaiety, which gives them quite a new physiognomy. Everything is getting ready for the great festival of Nature.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Storm and snow adjourn this festival a little longer. On the 11th of March he writes:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "“It has snowed all night. I have been to look at our primroses; each of them has its small load of snow, and was bowing its head under its burden. These pretty flowers, with their rich yellow color, had a charming effect under their white hoods. I saw whole tufts of them roofed over by a single block of snow; all these laughing flowers thus shrouded and leaning one upon another, made one think of a group of young girls surprised by a shower, and sheltering under a white apron.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 482,
+          "style": "quote",
+          "text": "“It has snowed all night. I have been to look at our primroses; each of them has its small load of snow, and was bowing its head under its burden. These pretty flowers, with their rich yellow color, had a charming effect under their white hoods. I saw whole tufts of them roofed over by a single block of snow; all these laughing flowers thus shrouded and leaning one upon another, made one think of a group of young girls surprised by a shower, and sheltering under a white apron.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The burst of spring comes at last, though late. On the 5th of April we find Guérin “sitting in the sun to penetrate himself to the very marrow with the divine spring.” On the 3d of May, “one can actually _see_ the progress of the green; it has made a start from the garden to the shrubberies, it is getting the upper hand all along the mere; it leaps, one may say, from tree to tree, from thicket to thicket, in the fields and on the hillsides; and I can see it already arrived at the forest edge and beginning to spread itself over the broad back of the forest. Soon it will have overrun everything as far as the eye can reach, and all those wide spaces between here and the horizon will be moving and sounding like one vast sea, a sea of emerald.”",
+      "spans": [
+        {
+          "start": 83,
+          "end": 167,
+          "style": "quote",
+          "text": "“sitting in the sun to penetrate himself to the very marrow with the divine spring.”"
+        },
+        {
+          "start": 186,
+          "end": 749,
+          "style": "quote",
+          "text": "“one can actually _see_ the progress of the green; it has made a start from the garden to the shrubberies, it is getting the upper hand all along the mere; it leaps, one may say, from tree to tree, from thicket to thicket, in the fields and on the hillsides; and I can see it already arrived at the forest edge and beginning to spread itself over the broad back of the forest. Soon it will have overrun everything as far as the eye can reach, and all those wide spaces between here and the horizon will be moving and sounding like one vast sea, a sea of emerald.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Finally, on the 16th of May, he writes to M. de Bayne that “the gloomy and bad days,—bad because they bring temptation by their gloom,—are, thanks to God and the spring, over; and I see approaching a long file of shining and happy days, to do me all the good in the world. This Brittany of ours,” he continues, “gives one the idea of the grayest and most wrinkled old woman possible suddenly changed back by the touch of a fairy’s wand into a girl of twenty, and one of the loveliest in the world; the fine weather has so decked and beautified the dear old country.” He felt, however, the cloudiness and cold of the “dear old country” with all the sensitiveness of a child of the South. “What a difference,” he cries, “between the sky of Brittany, even on the finest day, and the sky of our South! Here the summer has, even on its highdays and holidays, something mournful, overcast, and stinted about it. It is like a miser who is making a show; there is a niggardliness in his magnificence. Give me our Languedoc sky, so bountiful of light, so blue, so largely vaulted!” And somewhat later, complaining of the short and dim sunlight of a February day in Paris, “What a sunshine,” he exclaims, “to gladden eyes accustomed to all the wealth of light of the South!—_aux larges et libérales effusions de lumière du ciel du Midi_.”",
+      "spans": [
+        {
+          "start": 59,
+          "end": 296,
+          "style": "quote",
+          "text": "“the gloomy and bad days,—bad because they bring temptation by their gloom,—are, thanks to God and the spring, over; and I see approaching a long file of shining and happy days, to do me all the good in the world. This Brittany of ours,”"
+        },
+        {
+          "start": 311,
+          "end": 566,
+          "style": "quote",
+          "text": "“gives one the idea of the grayest and most wrinkled old woman possible suddenly changed back by the touch of a fairy’s wand into a girl of twenty, and one of the loveliest in the world; the fine weather has so decked and beautified the dear old country.”"
+        },
+        {
+          "start": 616,
+          "end": 634,
+          "style": "quote",
+          "text": "“dear old country”"
+        },
+        {
+          "start": 687,
+          "end": 707,
+          "style": "quote",
+          "text": "“What a difference,”"
+        },
+        {
+          "start": 718,
+          "end": 1072,
+          "style": "quote",
+          "text": "“between the sky of Brittany, even on the finest day, and the sky of our South! Here the summer has, even on its highdays and holidays, something mournful, overcast, and stinted about it. It is like a miser who is making a show; there is a niggardliness in his magnificence. Give me our Languedoc sky, so bountiful of light, so blue, so largely vaulted!”"
+        },
+        {
+          "start": 1163,
+          "end": 1181,
+          "style": "quote",
+          "text": "“What a sunshine,”"
+        },
+        {
+          "start": 1195,
+          "end": 1328,
+          "style": "quote",
+          "text": "“to gladden eyes accustomed to all the wealth of light of the South!—_aux larges et libérales effusions de lumière du ciel du Midi_.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In the long winter of La Chênaie his great resource was literature. One has often heard that an educated Frenchman’s reading seldom goes much beyond French and Latin, and that he makes the authors in these two languages his sole literary standard. This may or may not be true of Frenchmen in general, but there can be no question as to the width of the reading of Guérin and his friends, and as to the range of their literary sympathies. One of the circle, Hippolyte la Morvonnais,—a poet who published a volume of verse, and died in the prime of life,—had a passionate admiration for Wordsworth, and had even, it is said, made a pilgrimage to Rydal Mount to visit him; and in Guérin’s own reading I find, besides the French names of Bernardin de St. Pierre, Chateaubriand, Lamartine, and Victor Hugo, the names of Homer, Dante, Shakspeare, Milton, and Goethe; and he quotes both from Greek and from English authors in the original. His literary tact is beautifully fine and true. “Every poet,” he writes to his sister, “has his own art of poetry written on the ground of his own soul; there is no other. Be constantly observing Nature in her smallest details, and then write as the current of your thoughts guides you;—that is all.” But with all this freedom from the bondage of forms and rules, Guérin marks with perfect precision the faults of the _free_ French literature of his time,—the _littérature facile_,—and judges the romantic school and its prospects like a master: “that youthful literature which has put forth all its blossom prematurely, and has left itself a helpless prey to the returning frost, stimulated as it has been by the burning sun of our century, by this atmosphere charged with a perilous heat, which has overhastened every sort of development, and will most likely reduce to a handful of grains the harvest of our age.” And the popular authors,—those “whose name appears once and disappears forever, whose books, unwelcome to all serious people, welcome to the rest of the world, to novelty-hunters and novel-readers, fill with vanity these vain souls, and then, falling from hands heavy with the languor of satiety, drop forever into the gulf of oblivion;” and those, more noteworthy, “the writers of books celebrated, and, as works of art, deserving celebrity, but which have in them not one grain of that hidden manna, not one of those sweet and wholesome thoughts which nourish the human soul and refresh it when it is weary,”—these he treats with such severity that he may in some sense be described, as he describes himself, as “invoking with his whole heart a classical restoration.” He is best described, however, not as a partisan of any school, but as an ardent seeker for that mode of expression which is the most natural, happy, and true. He writes to his sister Eugénie:— “I want you to reform your system of composition; it is too loose, too vague, too Lamartinian. Your verse is too sing-song; it does not _talk_ enough. Form for yourself a style of your own, which shall be your real expression. Study the French language by attentive reading, making it your care to remark constructions, turns of expression, delicacies of style, but without ever adopting the manner of any master. In the works of these masters we must learn our language, but we must use it each in our own fashion.”[10]",
+      "spans": [
+        {
+          "start": 981,
+          "end": 994,
+          "style": "quote",
+          "text": "“Every poet,”"
+        },
+        {
+          "start": 1020,
+          "end": 1233,
+          "style": "quote",
+          "text": "“has his own art of poetry written on the ground of his own soul; there is no other. Be constantly observing Nature in her smallest details, and then write as the current of your thoughts guides you;—that is all.”"
+        },
+        {
+          "start": 1351,
+          "end": 1357,
+          "style": "em",
+          "text": "_free_"
+        },
+        {
+          "start": 1393,
+          "end": 1413,
+          "style": "em",
+          "text": "_littérature facile_"
+        },
+        {
+          "start": 1479,
+          "end": 1849,
+          "style": "quote",
+          "text": "“that youthful literature which has put forth all its blossom prematurely, and has left itself a helpless prey to the returning frost, stimulated as it has been by the burning sun of our century, by this atmosphere charged with a perilous heat, which has overhastened every sort of development, and will most likely reduce to a handful of grains the harvest of our age.”"
+        },
+        {
+          "start": 1881,
+          "end": 2187,
+          "style": "quote",
+          "text": "“whose name appears once and disappears forever, whose books, unwelcome to all serious people, welcome to the rest of the world, to novelty-hunters and novel-readers, fill with vanity these vain souls, and then, falling from hands heavy with the languor of satiety, drop forever into the gulf of oblivion;”"
+        },
+        {
+          "start": 2216,
+          "end": 2460,
+          "style": "quote",
+          "text": "“the writers of books celebrated, and, as works of art, deserving celebrity, but which have in them not one grain of that hidden manna, not one of those sweet and wholesome thoughts which nourish the human soul and refresh it when it is weary,”"
+        },
+        {
+          "start": 2564,
+          "end": 2620,
+          "style": "quote",
+          "text": "“invoking with his whole heart a classical restoration.”"
+        },
+        {
+          "start": 2815,
+          "end": 3331,
+          "style": "quote",
+          "text": "“I want you to reform your system of composition; it is too loose, too vague, too Lamartinian. Your verse is too sing-song; it does not _talk_ enough. Form for yourself a style of your own, which shall be your real expression. Study the French language by attentive reading, making it your care to remark constructions, turns of expression, delicacies of style, but without ever adopting the manner of any master. In the works of these masters we must learn our language, but we must use it each in our own fashion.”"
+        },
+        {
+          "start": 3331,
+          "end": 3335,
+          "style": "footnote",
+          "text": "[10]"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Footnote 10:"
+    },
+    {
+      "type": "paragraph",
+      "text": "Part of these extracts date from a time a little after Guérin’s residence at La Chênaie; but already, amidst the readings and conversations of La Chênaie, his literary judgment was perfectly formed."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "It was not, however, to perfect his literary judgment that Guérin came to La Chênaie. The religious feeling, which was as much a part of his essence as the passion for Nature and the literary instinct, shows itself at moments jealous of these its rivals, and alarmed at their predominance. Like all powerful feelings, it wants to exclude every other feeling and to be absolute. One Friday in April, after he has been delighting himself with the shapes of the clouds and the progress of the spring, he suddenly bethinks himself that the day is Good Friday, and exclaims in his diary:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "“My God, what is my soul about that it can thus go running after such fugitive delights on Good Friday, on this day all filled with thy death and our redemption? There is in me I know not what damnable spirit, that awakens in me strong discontents, and is forever prompting me to rebel against the holy exercises and the devout collectedness of soul which are the meet preparation for these great solemnities of our faith. Oh how well can I trace here the old leaven, from which I have not yet perfectly cleared my soul!”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 521,
+          "style": "quote",
+          "text": "“My God, what is my soul about that it can thus go running after such fugitive delights on Good Friday, on this day all filled with thy death and our redemption? There is in me I know not what damnable spirit, that awakens in me strong discontents, and is forever prompting me to rebel against the holy exercises and the devout collectedness of soul which are the meet preparation for these great solemnities of our faith. Oh how well can I trace here the old leaven, from which I have not yet perfectly cleared my soul!”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And again, in a letter to M. de Marzan: “Of what, my God, are we made,” he cries, “that a little verdure and a few trees should be enough to rob us of our tranquillity and to distract us from thy love?” And writing, three days after Easter Sunday, in his journal he records the reception at La Chênaie of a fervent neophyte, in words which seem to convey a covert blame of his own want of fervency:—",
+      "spans": [
+        {
+          "start": 40,
+          "end": 71,
+          "style": "quote",
+          "text": "“Of what, my God, are we made,”"
+        },
+        {
+          "start": 82,
+          "end": 202,
+          "style": "quote",
+          "text": "“that a little verdure and a few trees should be enough to rob us of our tranquillity and to distract us from thy love?”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Three days have passed over our heads since the great festival. One anniversary the less for us yet to spend of the death and resurrection of our Saviour! Every year thus bears away with it its solemn festivals; when will the everlasting festival be here? I have been witness of a most touching sight; François has brought us one of his friends whom he has gained to the faith. This neophyte joined us in our exercises during the Holy week, and on Easter day he received the communion with us. François was in raptures. It is a truly good work which he has thus done. François is quite young, hardly twenty years old; M. de la M. is thirty, and is married. There is something most touching and beautifully simple in M. de la M. letting himself thus be brought to God by quite a young man; and to see friendship, on François’s side, thus doing the work of an Apostle, is not less beautiful and touching.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 904,
+          "style": "quote",
+          "text": "“Three days have passed over our heads since the great festival. One anniversary the less for us yet to spend of the death and resurrection of our Saviour! Every year thus bears away with it its solemn festivals; when will the everlasting festival be here? I have been witness of a most touching sight; François has brought us one of his friends whom he has gained to the faith. This neophyte joined us in our exercises during the Holy week, and on Easter day he received the communion with us. François was in raptures. It is a truly good work which he has thus done. François is quite young, hardly twenty years old; M. de la M. is thirty, and is married. There is something most touching and beautifully simple in M. de la M. letting himself thus be brought to God by quite a young man; and to see friendship, on François’s side, thus doing the work of an Apostle, is not less beautiful and touching.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Admiration for Lamennais worked in the same direction with this feeling. Lamennais never appreciated Guérin; his combative, rigid, despotic nature, of which the characteristic was energy, had no affinity with Guérin’s elusive, undulating, impalpable nature, of which the characteristic was delicacy. He set little store by his new disciple, and could hardly bring himself to understand what others found so remarkable in him, his own genuine feeling towards him being one of indulgent compassion. But the intuition of Guérin, more discerning than the logic of his master, instinctively felt what there was commanding and tragic in Lamennais’s character, different as this was from his own; and some of his notes are among the most interesting records of Lamennais which remain."
+    },
+    {
+      "type": "paragraph",
+      "text": "“‘Do you know what it is,’ M. Féli[11] said to us on the evening of the day before yesterday, ‘which makes man the most suffering of all creatures? It is that he has one foot in the finite and the other in the infinite, and that he is torn asunder, not by four horses, as in the horrible old times, but between two worlds.’ Again he said to us as we heard the clock strike: ‘If that clock knew that it was to be destroyed the next instant, it would still keep striking its hour until that instant arrived. My children, be as the clock; whatever may be going to happen to you, strike always your hour.’”",
+      "spans": [
+        {
+          "start": 34,
+          "end": 38,
+          "style": "footnote",
+          "text": "[11]"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Footnote 11:"
+    },
+    {
+      "type": "paragraph",
+      "text": "The familiar name given to M. de Lamennais by his followers at La Chênaie."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Another time Guérin writes: “To-day M. Féli startled us. He was sitting behind the chapel, under the two Scotch firs; he took his stick and marked out a grave on the turf, and said to Elie, ‘It is there I wish to be buried, but no tombstone! only a simple hillock of grass. Oh, how well I shall be there!’ Elie thought he had a presentiment that his end was near. This is not the first time he has been visited by such a presentiment; when he was setting out for Rome, he said to those here: ‘I do not expect ever to come back to you; you must do the good which I have failed to do.’ He is impatient for death.”",
+      "spans": [
+        {
+          "start": 28,
+          "end": 611,
+          "style": "quote",
+          "text": "“To-day M. Féli startled us. He was sitting behind the chapel, under the two Scotch firs; he took his stick and marked out a grave on the turf, and said to Elie, ‘It is there I wish to be buried, but no tombstone! only a simple hillock of grass. Oh, how well I shall be there!’ Elie thought he had a presentiment that his end was near. This is not the first time he has been visited by such a presentiment; when he was setting out for Rome, he said to those here: ‘I do not expect ever to come back to you; you must do the good which I have failed to do.’ He is impatient for death.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Overpowered by the ascendency of Lamennais, Guérin, in spite of his hesitations, in spite of his confession to himself that, “after a three weeks’ close scrutiny of his soul, in the hope of finding the pearl of a religious vocation hidden in some corner of it,” he had failed to find what he sought, took, at the end of August 1833, a decisive step. He joined the religious order which Lamennais had founded. But at this very moment the deepening displeasure of Rome with Lamennais determined the Bishop of Rennes to break up, in so far as it was a religious congregation, the Society of La Chênaie, to transfer the novices to Ploërmel, and to place them under other superintendence. In September, Lamennais, “who had not yet ceased,” writes M. de Marzan, a faithful Catholic, “to be a Christian and a priest, took leave of his beloved colony of La Chênaie, with the anguish of a general who disbands his army down to the last recruit, and withdraws annihilated from the field of battle.” Guérin went to Ploërmel. But here, in the seclusion of a real religious house, he instantly perceived how alien to a spirit like his,—a spirit which, as he himself says somewhere, “had need of the open air, wanted to see the sun and the flowers,”—was the constraint and the monotony of a monastic life, when Lamennais’s genius was no longer present to enliven this life for him. On the 7th of October he renounced the novitiate, believing himself a partisan of Lamennais in his quarrel with Rome, reproaching the life he had left with demanding passive obedience instead of trying “to put in practice the admirable alliance of order with liberty, and of variety with unity,” and declaring that, for his part, he preferred taking the chances of a life of adventure to submitting himself to be “_garotté par un réglement_,—tied hand and foot by a set of rules.” In real truth, a life of adventure, or rather a life free to wander at its own will, was that to which his nature irresistibly impelled him.",
+      "spans": [
+        {
+          "start": 125,
+          "end": 261,
+          "style": "quote",
+          "text": "“after a three weeks’ close scrutiny of his soul, in the hope of finding the pearl of a religious vocation hidden in some corner of it,”"
+        },
+        {
+          "start": 709,
+          "end": 734,
+          "style": "quote",
+          "text": "“who had not yet ceased,”"
+        },
+        {
+          "start": 777,
+          "end": 988,
+          "style": "quote",
+          "text": "“to be a Christian and a priest, took leave of his beloved colony of La Chênaie, with the anguish of a general who disbands his army down to the last recruit, and withdraws annihilated from the field of battle.”"
+        },
+        {
+          "start": 1169,
+          "end": 1235,
+          "style": "quote",
+          "text": "“had need of the open air, wanted to see the sun and the flowers,”"
+        },
+        {
+          "start": 1570,
+          "end": 1663,
+          "style": "quote",
+          "text": "“to put in practice the admirable alliance of order with liberty, and of variety with unity,”"
+        },
+        {
+          "start": 1781,
+          "end": 1848,
+          "style": "quote",
+          "text": "“_garotté par un réglement_,—tied hand and foot by a set of rules.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For a career of adventure, the inevitable field was Paris. But before this career began, there came a stage, the smoothest, perhaps, and the most happy in the short life of Guérin. M. la Morvonnais, one of his La Chênaie friends,—some years older than Guérin, and married to a wife of singular sweetness and charm,—had a house by the seaside at the mouth of one of the beautiful rivers of Brittany, the Arguenon. He asked Guérin, when he left Ploërmel, to come and stay with him at this place, called Le Val de l’Arguenon, and Guérin spent the winter of 1833-4 there. I grudge every word about Le Val and its inmates which is not Guérin’s own, so charming is the picture drawn of them, so truly does his talent find itself in its best vein as he draws it."
+    },
+    {
+      "type": "blockquote",
+      "text": "“How full of goodness” (he writes in his journal of the 7th of December) “is Providence to me! For fear the sudden passage from the mild and temperate air of a religious life to the torrid clime of the world should be too trying to my soul, it has conducted me, after I have left my sacred shelter, to a house planted on the frontier between the two regions, where, without being in solitude, one is not yet in the world; a house whose windows look on the one side towards the plain where the tumult of men is rocking, on the other towards the wilderness where the servants of God are chanting. I intend to write down the record of my sojourn here, for the days here spent are full of happiness, and I know that in the time to come I shall often turn back to the story of these past felicities. A man, pious, and a poet; a woman, whose spirit is in such perfect sympathy with his that you would say they had but one being between them; a child, called Marie like her mother, and who sends, like a star, the first rays of her love and thought through the white cloud of infancy; a simple life in an old-fashioned house; the ocean, which comes morning and evening to bring us its harmonies; and lastly, a wanderer who descends from Carmel and is going to Babylon, and who has laid down at this threshold his staff and his sandals, to take his seat at the hospitable table;—here is matter to make a biblical poem of, if I could only describe things as I can feel them!”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 22,
+          "style": "quote",
+          "text": "“How full of goodness”"
+        },
+        {
+          "start": 23,
+          "end": 72,
+          "style": "paren_aside",
+          "text": "(he writes in his journal of the 7th of December)"
+        },
+        {
+          "start": 73,
+          "end": 1466,
+          "style": "quote",
+          "text": "“is Providence to me! For fear the sudden passage from the mild and temperate air of a religious life to the torrid clime of the world should be too trying to my soul, it has conducted me, after I have left my sacred shelter, to a house planted on the frontier between the two regions, where, without being in solitude, one is not yet in the world; a house whose windows look on the one side towards the plain where the tumult of men is rocking, on the other towards the wilderness where the servants of God are chanting. I intend to write down the record of my sojourn here, for the days here spent are full of happiness, and I know that in the time to come I shall often turn back to the story of these past felicities. A man, pious, and a poet; a woman, whose spirit is in such perfect sympathy with his that you would say they had but one being between them; a child, called Marie like her mother, and who sends, like a star, the first rays of her love and thought through the white cloud of infancy; a simple life in an old-fashioned house; the ocean, which comes morning and evening to bring us its harmonies; and lastly, a wanderer who descends from Carmel and is going to Babylon, and who has laid down at this threshold his staff and his sandals, to take his seat at the hospitable table;—here is matter to make a biblical poem of, if I could only describe things as I can feel them!”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Every line written by Guérin during this stay at Le Val is worth quoting, but I have only room for one extract more:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“Never” (he writes, a fortnight later, on the 20th of December), “never have I tasted so inwardly and deeply the happiness of home-life. All the little details of this life, which in their succession makes up the day, are to me so many stages of a continuous charm carried from one end of the day to the other. The morning greeting, which in some sort renews the pleasure of the first arrival, for the words with which one meets are almost the same, and the separation at night, through the hours of darkness and uncertainty, does not ill represent longer separations; then breakfast, during which you have the fresh enjoyment of having met together again; the stroll afterwards, when we go out and bid Nature good morning; the return and setting to work in an old paneled chamber looking out on the sea, inaccessible to all the stir of the house, a perfect sanctuary of labor; dinner, to which we are called, not by a bell, which reminds one too much of school or a great house, but by a pleasant voice; the gaiety, the merriment, the talk flitting from one subject to another and never dropping so long as the meal lasts; the crackling fire of dry branches to which we draw our chairs directly afterwards, the kind words that are spoken round the warm flame which sings while we talk; and then, if it is fine, the walk by the seaside, when the sea has for its visitors a mother with her child in her arms, this child’s father and a stranger, each of these two last with a stick in his hand; the rosy lips of the little girl, which keep talking at the same time with the waves,—now and then tears shed by her and cries of childish fright at the edge of the sea; our thoughts, the father’s and mine, as we stand and look at the mother and child smiling at one another, or at the child in tears and the mother trying to comfort it by her caresses and exhortations; the Ocean, going on all the while rolling up his waves and noises; the dead boughs which we go and cut, here and there, out of the copse-wood, to make a quick and bright fire when we get home,—this little taste of the woodman’s calling which brings us closer to Nature and makes us think of M. Féli’s eager fondness for the same work; the hours of study and poetical flow which carry us to supper-time; this meal, which summons us by the same gentle voice as its predecessor, and which is passed amid the same joys, only less loud, because evening sobers everything, tones everything down; then our evening, ushered in by the blaze of a cheerful fire, and which with its alternations of reading and talking brings us at last to bed-time:—to all the charms of a day so spent add the dreams which follow it, and your imagination will still fall far short of these home-joys in their delightful reality.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 7,
+          "style": "quote",
+          "text": "“Never”"
+        },
+        {
+          "start": 8,
+          "end": 63,
+          "style": "paren_aside",
+          "text": "(he writes, a fortnight later, on the 20th of December)"
+        },
+        {
+          "start": 65,
+          "end": 2765,
+          "style": "quote",
+          "text": "“never have I tasted so inwardly and deeply the happiness of home-life. All the little details of this life, which in their succession makes up the day, are to me so many stages of a continuous charm carried from one end of the day to the other. The morning greeting, which in some sort renews the pleasure of the first arrival, for the words with which one meets are almost the same, and the separation at night, through the hours of darkness and uncertainty, does not ill represent longer separations; then breakfast, during which you have the fresh enjoyment of having met together again; the stroll afterwards, when we go out and bid Nature good morning; the return and setting to work in an old paneled chamber looking out on the sea, inaccessible to all the stir of the house, a perfect sanctuary of labor; dinner, to which we are called, not by a bell, which reminds one too much of school or a great house, but by a pleasant voice; the gaiety, the merriment, the talk flitting from one subject to another and never dropping so long as the meal lasts; the crackling fire of dry branches to which we draw our chairs directly afterwards, the kind words that are spoken round the warm flame which sings while we talk; and then, if it is fine, the walk by the seaside, when the sea has for its visitors a mother with her child in her arms, this child’s father and a stranger, each of these two last with a stick in his hand; the rosy lips of the little girl, which keep talking at the same time with the waves,—now and then tears shed by her and cries of childish fright at the edge of the sea; our thoughts, the father’s and mine, as we stand and look at the mother and child smiling at one another, or at the child in tears and the mother trying to comfort it by her caresses and exhortations; the Ocean, going on all the while rolling up his waves and noises; the dead boughs which we go and cut, here and there, out of the copse-wood, to make a quick and bright fire when we get home,—this little taste of the woodman’s calling which brings us closer to Nature and makes us think of M. Féli’s eager fondness for the same work; the hours of study and poetical flow which carry us to supper-time; this meal, which summons us by the same gentle voice as its predecessor, and which is passed amid the same joys, only less loud, because evening sobers everything, tones everything down; then our evening, ushered in by the blaze of a cheerful fire, and which with its alternations of reading and talking brings us at last to bed-time:—to all the charms of a day so spent add the dreams which follow it, and your imagination will still fall far short of these home-joys in their delightful reality.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I said the foregoing should be my last extract, but who could resist this picture of a January evening on the coast of Brittany?—"
+    },
+    {
+      "type": "blockquote",
+      "text": "“All the sky is covered over with gray clouds just silvered at the edges. The sun, who departed a few minutes ago, has left behind him enough light to temper for awhile the black shadows, and to soften down, as it were, the approach of night. The winds are hushed, and the tranquil ocean sends up to me, when I go out on the doorstep to listen, only a melodious murmur, which dies away in the soul like a beautiful wave on the beach. The birds, the first to obey the nocturnal influence, make their way towards the woods, and you hear the rustle of their wings in the clouds. The copses which cover the whole hillside of Le Val, which all the day-time are alive with the chirp of the wren, the laughing whistle of the woodpecker,[12] and the different notes of a multitude of birds, have no longer any sound in their paths and thickets, unless it be the prolonged high call of the blackbirds at play with one another and chasing one another, after all the other birds have their heads safe under their wings. The noise of man, always the last to be silent, dies gradually out over the face of the fields. The general murmur fades away, and one hears hardly a sound except what comes from the villages and hamlets, in which, up till far into the night, there are cries of children and barking of dogs. Silence wraps me round; everything seeks repose except this pen of mine, which perhaps disturbs the rest of some living atom asleep in a crease of my note-book, for it makes its light scratching as it puts down these idle thoughts. Let it stop, then! for all I write, have written, or shall write, will never be worth setting against the sleep of an atom.”",
+      "spans": [
+        {
+          "start": 729,
+          "end": 733,
+          "style": "footnote",
+          "text": "[12]"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Footnote 12:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“The woodpecker _laughs_,” says White of Selborne; and here is Guérin, in Brittany, confirming his testimony.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 26,
+          "style": "quote",
+          "text": "“The woodpecker _laughs_,”"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "On the 1st of February we find him in a lodging at Paris. “I enter the world” (such are the last words written in his journal at Le Val) “with a secret horror.” His outward history for the next five years is soon told. He found himself in Paris, poor, fastidious, and with health which already, no doubt, felt the obscure presence of the malady of which he died—consumption. One of his Brittany acquaintances introduced him to editors, tried to engage him in the periodical literature of Paris; and so unmistakable was Guérin’s talent that even his first essays were immediately accepted. But Guérin’s genius was of a kind which unfitted him to get his bread in this manner. At first he was pleased with the notion of living by his pen; “_je n’ai qu’à écrire_,” he says to his sister,—“I have only got to write.” But to a nature like his, endued with the passion for perfection, the necessity to produce, to produce constantly, to produce whether in the vein or out of the vein, to produce something good or bad or middling, as it may happen, but at all events _something_,—is the most intolerable of tortures. To escape from it he betook himself to that common but most perfidious refuge of men of letters, that refuge to which Goldsmith and poor Hartley Coleridge had betaken themselves before him,—the profession of teaching. In September, 1834, he procured an engagement at the Collège Stanislas, where he had himself been educated. It was vacation-time, and all he had to do was to teach a small class composed of boys who did not go home for the holidays,—in his own words, “scholars left like sick sheep in the fold, while the rest of the flock are frisking in the fields.” After the vacation he was kept on at the college as a supernumerary. “The master of the fifth class has asked for a month’s leave of absence; I am taking his place, and by this work I get one hundred francs (£4). I have been looking about for pupils to give private lessons to, and I have found three or four. Schoolwork and private lessons together fill my day from half-past seven in the morning till half-past nine at night. The college dinner serves me for breakfast, and I go and dine in the evening at twenty-four _sous_, as a young man beginning life should.” To better his position in the hierarchy of public teachers it was necessary that he should take the degree of _agrégé-èslettres_, corresponding to our degree of Master of Arts; and to his heavy work in teaching, there was thus added that of preparing for a severe examination. The drudgery of this life was very irksome to him, although less insupportable than the drudgery of the profession of letters; inasmuch as to a sensitive man like Guérin, to silence his genius is more tolerable than to hackney it. Still the yoke wore him deeply, and he had moments of bitter revolt; he continued, however, to bear it with resolution, and on the whole with patience, for four years. On the 15th of November, 1838, he married a young Creole lady of some fortune, Mademoiselle Caroline de Gervain, “whom,” to use his own words, “Destiny, who loves these surprises, has wafted from the farthest Indies into my arms.” The marriage was happy, and it insured to Guérin liberty and leisure; but now “the blind Fury with the abhorred shears” was hard at hand. Consumption declared itself in him: “I pass my life,” he writes, with his old playfulness and calm, to his sister on the 8th of April, 1839, “within my bed-curtains, and wait patiently enough, thanks to Caro’s[13] goodness, books, and dreams, for the recovery which the sunshine is to bring with it.” In search of this sunshine he was taken to his native country, Languedoc, but in vain. He died at Le Cayla on the 19th of July, 1839.",
+      "spans": [
+        {
+          "start": 58,
+          "end": 77,
+          "style": "quote",
+          "text": "“I enter the world”"
+        },
+        {
+          "start": 78,
+          "end": 136,
+          "style": "paren_aside",
+          "text": "(such are the last words written in his journal at Le Val)"
+        },
+        {
+          "start": 137,
+          "end": 160,
+          "style": "quote",
+          "text": "“with a secret horror.”"
+        },
+        {
+          "start": 737,
+          "end": 761,
+          "style": "quote",
+          "text": "“_je n’ai qu’à écrire_,”"
+        },
+        {
+          "start": 785,
+          "end": 812,
+          "style": "quote",
+          "text": "“I have only got to write.”"
+        },
+        {
+          "start": 1061,
+          "end": 1072,
+          "style": "em",
+          "text": "_something_"
+        },
+        {
+          "start": 1580,
+          "end": 1680,
+          "style": "quote",
+          "text": "“scholars left like sick sheep in the fold, while the rest of the flock are frisking in the fields.”"
+        },
+        {
+          "start": 1750,
+          "end": 2247,
+          "style": "quote",
+          "text": "“The master of the fifth class has asked for a month’s leave of absence; I am taking his place, and by this work I get one hundred francs (£4). I have been looking about for pupils to give private lessons to, and I have found three or four. Schoolwork and private lessons together fill my day from half-past seven in the morning till half-past nine at night. The college dinner serves me for breakfast, and I go and dine in the evening at twenty-four _sous_, as a young man beginning life should.”"
+        },
+        {
+          "start": 2358,
+          "end": 2376,
+          "style": "em",
+          "text": "_agrégé-èslettres_"
+        },
+        {
+          "start": 3037,
+          "end": 3044,
+          "style": "quote",
+          "text": "“whom,”"
+        },
+        {
+          "start": 3067,
+          "end": 3154,
+          "style": "quote",
+          "text": "“Destiny, who loves these surprises, has wafted from the farthest Indies into my arms.”"
+        },
+        {
+          "start": 3233,
+          "end": 3274,
+          "style": "quote",
+          "text": "“the blind Fury with the abhorred shears”"
+        },
+        {
+          "start": 3329,
+          "end": 3346,
+          "style": "quote",
+          "text": "“I pass my life,”"
+        },
+        {
+          "start": 3502,
+          "end": 3506,
+          "style": "footnote",
+          "text": "[13]"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Footnote 13:"
+    },
+    {
+      "type": "paragraph",
+      "text": "His wife."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "The vicissitudes of his inward life during these five years were more considerable. His opinions and tastes underwent great, or what seem to be great, changes. He came to Paris the ardent partisan of Lamennais: even in April, 1834, after Rome had finally condemned Lamennais,—“To-night there will go forth from Paris,” he writes, “with his face set to the west, a man whose every step I would fain follow, and who returns to the desert for which I sigh. M. Féli departs this evening for La Chênaie.” But in October, 1835,—“I assure you,” he writes to his sister, “I am at last weaned from M. de Lamennais; one does not remain a babe and suckling for ever; I am perfectly freed from his influence.” There was a greater change than this. In 1834 the main cause of Guérin’s aversion to the literature of the French romantic school, was that this literature, having had a religious origin, had ceased to be religious: “it has forgotten,” he says, “the house and the admonitions of its Father.” But his friend M. de Marzan tells us of a “deplorable revolution” which, by 1836, had taken place in him. Guérin had become intimate with the chiefs of this very literature; he no longer went to church; “the bond of a common faith, in which our friendship had its birth, existed between us no longer.” Then, again, “this interregnum was not destined to last.” Reconverted to his old faith by suffering and by the pious efforts of his sister Eugénie, Guérin died a Catholic. His feelings about society underwent a like change. After “entering the world with a secret horror,” after congratulating himself when he had been some months at Paris on being “disengaged from the social tumult, out of the reach of those blows which, when I live in the thick of the world, bruise me, irritate me, or utterly crush me,” M. Sainte-Beuve tells us of him, two years afterwards, appearing in society “a man of the world, elegant, even fashionable; a talker who could hold his own against the most brilliant talkers of Paris.”",
+      "spans": [
+        {
+          "start": 276,
+          "end": 318,
+          "style": "quote",
+          "text": "“To-night there will go forth from Paris,”"
+        },
+        {
+          "start": 330,
+          "end": 499,
+          "style": "quote",
+          "text": "“with his face set to the west, a man whose every step I would fain follow, and who returns to the desert for which I sigh. M. Féli departs this evening for La Chênaie.”"
+        },
+        {
+          "start": 522,
+          "end": 537,
+          "style": "quote",
+          "text": "“I assure you,”"
+        },
+        {
+          "start": 563,
+          "end": 697,
+          "style": "quote",
+          "text": "“I am at last weaned from M. de Lamennais; one does not remain a babe and suckling for ever; I am perfectly freed from his influence.”"
+        },
+        {
+          "start": 914,
+          "end": 933,
+          "style": "quote",
+          "text": "“it has forgotten,”"
+        },
+        {
+          "start": 943,
+          "end": 989,
+          "style": "quote",
+          "text": "“the house and the admonitions of its Father.”"
+        },
+        {
+          "start": 1032,
+          "end": 1055,
+          "style": "quote",
+          "text": "“deplorable revolution”"
+        },
+        {
+          "start": 1193,
+          "end": 1291,
+          "style": "quote",
+          "text": "“the bond of a common faith, in which our friendship had its birth, existed between us no longer.”"
+        },
+        {
+          "start": 1305,
+          "end": 1349,
+          "style": "quote",
+          "text": "“this interregnum was not destined to last.”"
+        },
+        {
+          "start": 1522,
+          "end": 1564,
+          "style": "quote",
+          "text": "“entering the world with a secret horror,”"
+        },
+        {
+          "start": 1641,
+          "end": 1800,
+          "style": "quote",
+          "text": "“disengaged from the social tumult, out of the reach of those blows which, when I live in the thick of the world, bruise me, irritate me, or utterly crush me,”"
+        },
+        {
+          "start": 1877,
+          "end": 2002,
+          "style": "quote",
+          "text": "“a man of the world, elegant, even fashionable; a talker who could hold his own against the most brilliant talkers of Paris.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In few natures, however, is there really such essential consistency as in Guérin’s. He says of himself, in the very beginning of his journal: “I owe everything to poetry, for there is no other name to give to the sum total of my thoughts; I owe to it whatever I now have pure, lofty and solid in my soul; I owe to it all my consolations in the past; I shall probably owe to it my future.” Poetry, the poetical instinct, was indeed the basis of his nature; but to say so thus absolutely is not quite enough. One aspect of poetry fascinated Guérin’s imagination and held it prisoner. Poetry is the interpretress of the natural world, and she is the interpretress of the moral world; it was as the interpretress of the natural world that she had Guérin for her mouthpiece. To make magically near and real the life of Nature, and man’s life only so far as it is a part of that Nature, was his faculty; a faculty of naturalistic, not of moral interpretation. This faculty always has for its basis a peculiar temperament, an extraordinary delicacy of organization and susceptibility to impressions; in exercising it the poet is in a great degree passive (Wordsworth thus speaks of a _wise passiveness_); he aspires to be a sort of human Æolian harp, catching and rendering every rustle of Nature. To assist at the evolution of the whole life of the world is his craving, and intimately to feel it all:",
+      "spans": [
+        {
+          "start": 142,
+          "end": 388,
+          "style": "quote",
+          "text": "“I owe everything to poetry, for there is no other name to give to the sum total of my thoughts; I owe to it whatever I now have pure, lofty and solid in my soul; I owe to it all my consolations in the past; I shall probably owe to it my future.”"
+        },
+        {
+          "start": 1148,
+          "end": 1196,
+          "style": "paren_aside",
+          "text": "(Wordsworth thus speaks of a _wise passiveness_)"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "... “The glow, the thrill of life, Where, where do these abound?”",
+      "spans": [
+        {
+          "start": 4,
+          "end": 65,
+          "style": "quote",
+          "text": "“The glow, the thrill of life, Where, where do these abound?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "is what he asks: he resists being riveted and held stationary by any single impression, but would be borne on forever down an enchanted stream. He goes into religion and out of religion into society and out of society, not from the motives which impel men in general, but to feel what it is all like; he is thus hardly a moral agent, and, like the passive and ineffectual Uranus of Keats’s poem, he may say:"
+    },
+    {
+      "type": "blockquote",
+      "text": "... “I am but a voice; My life is but the life of winds and tides; No more than winds and tides can I avail.”",
+      "spans": [
+        {
+          "start": 4,
+          "end": 109,
+          "style": "quote",
+          "text": "“I am but a voice; My life is but the life of winds and tides; No more than winds and tides can I avail.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "He hovers over the tumult of life, but does not really put his hand to it."
+    },
+    {
+      "type": "paragraph",
+      "text": "No one has expressed the aspirations of this temperament better than Guérin himself. In the last year of his life he writes:—"
+    },
+    {
+      "type": "paragraph",
+      "text": "“I return, as you see, to my old brooding over the world of Nature, that line which my thoughts, irresistibly take; a sort of passion which gives me enthusiasm, tears, bursts of joy, and an eternal food for musing; and yet I am neither philosopher nor naturalist, nor anything learned whatsoever. There is one word which is the God of my imagination, the tyrant, I ought rather to say, that fascinates it, lures it onward, gives it work to do without ceasing, and will finally carry it I know not where; the word _life_.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 521,
+          "style": "quote",
+          "text": "“I return, as you see, to my old brooding over the world of Nature, that line which my thoughts, irresistibly take; a sort of passion which gives me enthusiasm, tears, bursts of joy, and an eternal food for musing; and yet I am neither philosopher nor naturalist, nor anything learned whatsoever. There is one word which is the God of my imagination, the tyrant, I ought rather to say, that fascinates it, lures it onward, gives it work to do without ceasing, and will finally carry it I know not where; the word _life_.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And in one place in his journal he says:—"
+    },
+    {
+      "type": "blockquote",
+      "text": "“My imagination welcomes every dream, every impression, without attaching itself to any, and goes on forever seeking something new.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 132,
+          "style": "quote",
+          "text": "“My imagination welcomes every dream, every impression, without attaching itself to any, and goes on forever seeking something new.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "And again in another:—"
+    },
+    {
+      "type": "blockquote",
+      "text": "“The longer I live, and the clearer I discern between true and false in society, the more does the inclination to live, not as a savage or a misanthrope, but as a solitary man on the frontiers of society, on the outskirts of the world, gain strength and grow in me. The birds come and go and make nests around our habitations, they are fellow-citizens of our farms and hamlets with us; but they take their flight in a heaven which is boundless, but the hand of God alone gives and measures to them their daily food, but they build their nests in the heart of the thick bushes, or hang them in the height of the trees. So would I, too, live, hovering round society, and having always at my back a field of liberty vast as the sky.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 730,
+          "style": "quote",
+          "text": "“The longer I live, and the clearer I discern between true and false in society, the more does the inclination to live, not as a savage or a misanthrope, but as a solitary man on the frontiers of society, on the outskirts of the world, gain strength and grow in me. The birds come and go and make nests around our habitations, they are fellow-citizens of our farms and hamlets with us; but they take their flight in a heaven which is boundless, but the hand of God alone gives and measures to them their daily food, but they build their nests in the heart of the thick bushes, or hang them in the height of the trees. So would I, too, live, hovering round society, and having always at my back a field of liberty vast as the sky.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In the same spirit he longed for travel. “When one is a wanderer,” he writes to his sister, “one feels that one fulfils the true condition of humanity.” And the last entry in his journal is,—“The stream of travel is full of delight. Oh, who will set me adrift on this Nile!”",
+      "spans": [
+        {
+          "start": 41,
+          "end": 66,
+          "style": "quote",
+          "text": "“When one is a wanderer,”"
+        },
+        {
+          "start": 92,
+          "end": 152,
+          "style": "quote",
+          "text": "“one feels that one fulfils the true condition of humanity.”"
+        },
+        {
+          "start": 191,
+          "end": 274,
+          "style": "quote",
+          "text": "“The stream of travel is full of delight. Oh, who will set me adrift on this Nile!”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Assuredly it is not in this temperament that the active virtues have their rise. On the contrary, this temperament, considered in itself alone, indisposes for the discharge of them. Something morbid and excessive, as manifested in Guérin, it undoubtedly has. In him, as in Keats, and as in another youth of genius, whose name, but the other day unheard of, Lord Houghton has so gracefully written in the history of English poetry,—David Gray,—the temperament, the talent itself, is deeply influenced by their mysterious malady; the temperament is _devouring_; it uses vital power too hard and too fast, paying the penalty in long hours of unutterable exhaustion and in premature death. The intensity of Guérin’s depression is described to us by Guérin himself with the same incomparable touch with which he describes happier feelings; far oftener than any pleasurable sense of his gift he has “the sense profound, near, immense, of my misery, of my inward poverty.” And again: “My inward misery gains upon me; I no longer dare look within.” And on another day of gloom he does look within, and here is the terrible analysis:—",
+      "spans": [
+        {
+          "start": 547,
+          "end": 558,
+          "style": "em",
+          "text": "_devouring_"
+        },
+        {
+          "start": 893,
+          "end": 965,
+          "style": "quote",
+          "text": "“the sense profound, near, immense, of my misery, of my inward poverty.”"
+        },
+        {
+          "start": 977,
+          "end": 1040,
+          "style": "quote",
+          "text": "“My inward misery gains upon me; I no longer dare look within.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Craving, unquiet, seeing only by glimpses, my spirit is stricken by all those ills which are the sure fruit of a youth doomed never to ripen into manhood. I grow old and wear myself out in the most futile mental strainings, and make no progress. My head seems dying, and when the wind blows I fancy I feel it, as if I were a tree, blowing through a number of withered branches in my top. Study is intolerable to me, or rather it is quite out of my power. Mental work brings on, not drowsiness, but an irritable and nervous disgust which drives me out, I know not where, into the streets and public places. The Spring, whose delights used to come every year stealthily and mysteriously to charm me in my retreat, crushes me this year under a weight of sudden hotness. I should be glad of any event which delivered me from the situation in which I am. If I were free I would embark for some distant country where I could begin life anew.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 937,
+          "style": "quote",
+          "text": "“Craving, unquiet, seeing only by glimpses, my spirit is stricken by all those ills which are the sure fruit of a youth doomed never to ripen into manhood. I grow old and wear myself out in the most futile mental strainings, and make no progress. My head seems dying, and when the wind blows I fancy I feel it, as if I were a tree, blowing through a number of withered branches in my top. Study is intolerable to me, or rather it is quite out of my power. Mental work brings on, not drowsiness, but an irritable and nervous disgust which drives me out, I know not where, into the streets and public places. The Spring, whose delights used to come every year stealthily and mysteriously to charm me in my retreat, crushes me this year under a weight of sudden hotness. I should be glad of any event which delivered me from the situation in which I am. If I were free I would embark for some distant country where I could begin life anew.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Such is this temperament in the frequent hours when the sense of its own weakness and isolation crushes it to the ground. Certainly it was not for Guérin’s happiness, or for Keats’s, as men count happiness, to be as they were. Still the very excess and predominance of their temperament has given to the fruits of their genius a unique brilliancy and flavor. I have said that poetry interprets in two ways; it interprets by expressing with magical felicity the physiognomy and movement of the outward world, and it interprets by expressing, with inspired conviction, the ideas and laws of the inward world of man’s moral and spiritual nature. In other words, poetry is interpretative both by having _natural magic_ in it, and by having _moral profundity_. In both ways it illuminates man; it gives him a satisfying sense of reality; it reconciles him with himself and the universe. Thus Æschylus’s “δράσαντι παθεῖν” and his “ὰνήριθμον γέλασμα” are alike interpretative. Shakspeare interprets both when he says,",
+      "spans": [
+        {
+          "start": 699,
+          "end": 714,
+          "style": "em",
+          "text": "_natural magic_"
+        },
+        {
+          "start": 736,
+          "end": 754,
+          "style": "em",
+          "text": "_moral profundity_"
+        },
+        {
+          "start": 898,
+          "end": 915,
+          "style": "quote",
+          "text": "“δράσαντι παθεῖν”"
+        },
+        {
+          "start": 924,
+          "end": 943,
+          "style": "quote",
+          "text": "“ὰνήριθμον γέλασμα”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Full many a glorious morning have I seen, Flatter the mountain-tops with sovran eye;”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 86,
+          "style": "quote",
+          "text": "“Full many a glorious morning have I seen, Flatter the mountain-tops with sovran eye;”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "and when he says,"
+    },
+    {
+      "type": "blockquote",
+      "text": "“There’s a divinity that shapes our ends, Rough-hew them as we will.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 69,
+          "style": "quote",
+          "text": "“There’s a divinity that shapes our ends, Rough-hew them as we will.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These great poets unite in themselves the faculty of both kinds of interpretation, the naturalistic and the moral. But it is observable that in the poets who unite both kinds, the latter (the moral) usually ends by making itself the master. In Shakspeare the two kinds seem wonderfully to balance one another; but even in him the balance leans; his expression tends to become too little sensuous and simple, too much intellectualized. The same thing may be yet more strongly affirmed of Lucretius and of Wordsworth. In Shelley there is not a balance of the two gifts, nor even a co-existence of them, but there is a passionate straining after them both, and this is what makes Shelley, as a man, so interesting: I will not now inquire how much Shelley achieves as a poet, but whatever he achieves, he in general fails to achieve natural magic in his expression; in Mr. Palgrave’s charming _Treasury_ may be seen a gallery of his failures.[14] But in Keats and Guérin, in whom the faculty of naturalistic interpretation is overpoweringly predominant, the natural magic is perfect; when they speak of the world they speak like Adam naming by divine inspiration the creatures; their expression corresponds with the thing’s essential reality. Even between Keats and Guérin, however, there is a distinction to be drawn. Keats has, above all, a sense of what is pleasurable and open in the life of nature; for him she is the _Alma Parens_: his expression has, therefore, more than Guérin’s, something genial, outward, and sensuous. Guérin has, above all, a sense of what there is adorable and secret in the life of Nature; for him she is the _Magna Parens_; his expression has, therefore, more than Keats’s, something mystic, inward, and profound.",
+      "spans": [
+        {
+          "start": 187,
+          "end": 198,
+          "style": "paren_cite",
+          "text": "(the moral)"
+        },
+        {
+          "start": 889,
+          "end": 899,
+          "style": "em",
+          "text": "_Treasury_"
+        },
+        {
+          "start": 938,
+          "end": 942,
+          "style": "footnote",
+          "text": "[14]"
+        },
+        {
+          "start": 1419,
+          "end": 1432,
+          "style": "em",
+          "text": "_Alma Parens_"
+        },
+        {
+          "start": 1636,
+          "end": 1650,
+          "style": "em",
+          "text": "_Magna Parens_"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "Footnote 14:"
+    },
+    {
+      "type": "paragraph",
+      "text": "Compare, for example, his “Lines Written in the Euganean Hills,” with Keats’s “Ode to Autumn” (_Golden Treasury_, pp. 256, 284). The latter piece _renders_ Nature; the former _tries to render_ her. I will not deny, however, that Shelley has natural magic in his rhythm; what I deny is, that he has it in his language. It always seems to me that the right sphere for Shelley’s genius was the sphere of music, not of poetry; the medium of sounds he can master, but to master the more difficult medium of words he has neither intellectual force enough nor sanity enough.",
+      "spans": [
+        {
+          "start": 26,
+          "end": 64,
+          "style": "quote",
+          "text": "“Lines Written in the Euganean Hills,”"
+        },
+        {
+          "start": 78,
+          "end": 93,
+          "style": "quote",
+          "text": "“Ode to Autumn”"
+        },
+        {
+          "start": 94,
+          "end": 127,
+          "style": "paren_cite",
+          "text": "(_Golden Treasury_, pp. 256, 284)"
+        },
+        {
+          "start": 146,
+          "end": 155,
+          "style": "em",
+          "text": "_renders_"
+        },
+        {
+          "start": 175,
+          "end": 192,
+          "style": "em",
+          "text": "_tries to render_"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "So he lived like a man possessed; with his eye not on his own career, not on the public, not on fame, but on the Isis whose veil he had uplifted. He published nothing: “There is more power and beauty,” he writes, “in the well-kept secret of one’s-self and one’s thoughts, than in the display of a whole heaven that one may have inside one.” “My spirit,” he answers the friends who urge him to write, “is of the home-keeping order, and has no fancy for adventure; literary adventure is above all distasteful to it; for this, indeed (let me say so without the least self-sufficiency), it has a contempt. The literary career seems to me unreal, both in its own essence and in the rewards which one seeks from it, and therefore fatally marred by a secret absurdity.” His acquaintances, and among them distinguished men of letters, full of admiration for the originality and delicacy of his talent, laughed at his self-depreciation, warmly assured him of his powers. He received their assurances with a mournful incredulity, which contrasts curiously with the self-assertion of poor David Gray, whom I just now mentioned. “It seems to me intolerable,” he writes, “to appear to men other than one appears to God. My worst torture at this moment is the over-estimate which generous friends form of me. We are told that at the last judgment the secret of all consciences will be laid bare to the universe; would that mine were so this day, and that every passer-by could see me as I am!” “High above my head,” he says at another time, “far, far away, I seem to hear the murmur of that world of thought and feeling to which I aspire so often, but where I can never attain. I think of those of my own age who have wings strong enough to reach it, but I think of them without jealousy, and as men on earth contemplate the elect and their felicity.” And, criticising his own composition, “When I begin a subject, my self-conceit” (says this exquisite artist) “imagines I am doing wonders; and when I have finished, I see nothing but a wretched made-up imitation, composed of odds and ends of color stolen from other people’s palettes, and tastelessly mixed together on mine.” Such was his _passion for perfection_, his disdain for all poetical work not perfectly adequate and felicitous. The magic of expression, to which by the force of this passion he won his way, will make the name of Maurice de Guérin remembered in literature.",
+      "spans": [
+        {
+          "start": 168,
+          "end": 201,
+          "style": "quote",
+          "text": "“There is more power and beauty,”"
+        },
+        {
+          "start": 213,
+          "end": 340,
+          "style": "quote",
+          "text": "“in the well-kept secret of one’s-self and one’s thoughts, than in the display of a whole heaven that one may have inside one.”"
+        },
+        {
+          "start": 341,
+          "end": 353,
+          "style": "quote",
+          "text": "“My spirit,”"
+        },
+        {
+          "start": 400,
+          "end": 762,
+          "style": "quote",
+          "text": "“is of the home-keeping order, and has no fancy for adventure; literary adventure is above all distasteful to it; for this, indeed (let me say so without the least self-sufficiency), it has a contempt. The literary career seems to me unreal, both in its own essence and in the rewards which one seeks from it, and therefore fatally marred by a secret absurdity.”"
+        },
+        {
+          "start": 1117,
+          "end": 1146,
+          "style": "quote",
+          "text": "“It seems to me intolerable,”"
+        },
+        {
+          "start": 1158,
+          "end": 1479,
+          "style": "quote",
+          "text": "“to appear to men other than one appears to God. My worst torture at this moment is the over-estimate which generous friends form of me. We are told that at the last judgment the secret of all consciences will be laid bare to the universe; would that mine were so this day, and that every passer-by could see me as I am!”"
+        },
+        {
+          "start": 1480,
+          "end": 1501,
+          "style": "quote",
+          "text": "“High above my head,”"
+        },
+        {
+          "start": 1527,
+          "end": 1837,
+          "style": "quote",
+          "text": "“far, far away, I seem to hear the murmur of that world of thought and feeling to which I aspire so often, but where I can never attain. I think of those of my own age who have wings strong enough to reach it, but I think of them without jealousy, and as men on earth contemplate the elect and their felicity.”"
+        },
+        {
+          "start": 1876,
+          "end": 1917,
+          "style": "quote",
+          "text": "“When I begin a subject, my self-conceit”"
+        },
+        {
+          "start": 1918,
+          "end": 1946,
+          "style": "paren_cite",
+          "text": "(says this exquisite artist)"
+        },
+        {
+          "start": 1947,
+          "end": 2163,
+          "style": "quote",
+          "text": "“imagines I am doing wonders; and when I have finished, I see nothing but a wretched made-up imitation, composed of odds and ends of color stolen from other people’s palettes, and tastelessly mixed together on mine.”"
+        },
+        {
+          "start": 2177,
+          "end": 2201,
+          "style": "em",
+          "text": "_passion for perfection_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I have already mentioned the _Centaur_, a sort of prose poem by Guérin, which Madame Sand published after his death. The idea of this composition came to him, M. Sainte-Beuve says, in the course of some visits which he made with his friend, M. Trebutien, a learned antiquarian, to the Museum of Antiquities in the Louvre. The free and wild life which the Greeks expressed by such creations as the Centaur had, as we might well expect, a strong charm for him; under the same inspiration he composed a _Bacchante_, which was meant by him to form part of a prose poem on the adventures of Bacchus in India. Real as was the affinity which Guérin’s nature had for these subjects, I doubt whether, in treating them, he would have found the full and final employment of his talent. But the beauty of his _Centaur_ is extraordinary; in its whole conception and expression this piece has in a wonderful degree that natural magic of which I have said so much, and the rhythm has a charm which bewitches even a foreigner. An old Centaur on his mountain is supposed to relate to Melampus, a human questioner, the life of his youth. Untranslatable as the piece is, I shall conclude with some extracts from it:—",
+      "spans": [
+        {
+          "start": 29,
+          "end": 38,
+          "style": "em",
+          "text": "_Centaur_"
+        },
+        {
+          "start": 500,
+          "end": 511,
+          "style": "em",
+          "text": "_Bacchante_"
+        },
+        {
+          "start": 797,
+          "end": 806,
+          "style": "em",
+          "text": "_Centaur_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "MAURICE DE GUÉRIN.\n\nI will not presume to say that I now know the French language well; but at a time when I knew it even less well than at present,—some fifteen years ago,—I remember pestering those about me with this sentence, the rhythm of which had lodged itself in my head, and which, with the strangest pronunciation possible, I kept perpetually declaiming: “_Les dieux jaloux ont enfoui quelque part les témoignages de la descendance des choses; mais au bord de quel Océan ont-ils roulé la pierre qui les couvre, ô Macarée!_”\n\nThese words came from a short composition called the _Centaur_, of which the author, Georges-Maurice de Guérin, died in the year 1839, at the age of twenty-eight, without having published anything. In 1840, Madame Sand brought out the _Centaur_ in the _Revue des Deux Mondes_, with a short notice of its author, and a few extracts from his letters. A year or two afterwards she reprinted these at the end of a volume of her novels; and there it was that I fell in with them. I was so much struck with the _Centaur_ that I waited anxiously to hear something more of its author, and of what he had left; but it was not till the other day—twenty years after the first publication of the _Centaur_ in the _Revue des Deux Mondes_, that my anxiety was satisfied. At the end of 1860 appeared two volumes with the title _Maurice de Guérin_, _Reliquiæ_, containing the _Centaur_, several poems of Guérin, his journals, and a number of his letters, collected and edited by a devoted friend, M. Trebutien, and preceded by a notice of Guérin by the first of living critics, M. Sainte-Beuve.\n\nThe grand power of poetry is its interpretative power; by which I mean, not a power of drawing out in black and white an explanation of the mystery of the universe, but the power of so dealing with things as to awaken in us a wonderfully full, new, and intimate sense of them, and of our relations with them. When this sense is awakened in us, as to objects without us, we feel ourselves to be in contact with the essential nature of those objects, to be no longer bewildered and oppressed by them, but to have their secret, and to be in harmony with them; and this feeling calms and satisfies us as no other can. Poetry, indeed, interprets in another way besides this; but one of its two ways of interpreting, of exercising its highest power, is by awakening this sense in us. I will not now inquire whether this sense is illusive, whether it can be proved not to be illusive, whether it does absolutely make us possess the real nature of things; all I say is, that poetry can awaken it in us, and that to awaken it is one of the highest powers of poetry. The interpretations of science do not give us this intimate sense of objects as the interpretations of poetry give it; they appeal to a limited faculty, and not to the whole man. It is not Linnæus or Cavendish or Cuvier who gives us the true sense of animals, or water, or plants, who seizes their secret for us, who makes us participate in their life; it is Shakspeare, with his “daffodils That come before the swallow dares, and take The winds of March with beauty;”\n\nit is Wordsworth, with his “voice ... heard In spring-time from the cuckoo-bird Breaking the silence of the seas Among the farthest Hebrides;”\n\nit is Keats, with his “moving waters at their priestlike task Of cold ablution round Earth’s human shores;”\n\nit is Chateaubriand, with his, “_cîme indéterminée des forêts_;” it is Senancour, with his mountain birch-tree: “_Cette écorce blanche, lisse et crevassée; cette tige agreste; ces branches qui s’inclinent vers la terre; la mobilité des feuilles, et tout cet abandon, simplicité de la nature, attitude des déserts._”\n\nEminent manifestations of this magical power of poetry are very rare and very precious; the compositions of Guérin manifest it, I think, in singular eminence. Not his poems, strictly so called,—his verse,—so much as his prose; his poems in general take for their vehicle that favorite meter of French poetry, the Alexandrine; and, in my judgment, I confess they have thus, as compared with his prose, a great disadvantage to start with. In prose, the character of the vehicle for the composer’s thoughts is not determined beforehand; every composer has to make his own vehicle; and who has ever done this more admirably than the great prose-writers of France,—Pascal, Bossuet, Fénelon, Voltaire? But in verse the composer has (with comparatively narrow liberty of modification) to accept his vehicle ready-made; it is therefore of vital importance to him that he should find at his disposal a vehicle adequate to convey the highest matters of poetry. We may even get a decisive test of the poetical power of a language and nation by ascertaining how far the principal poetical vehicle which they have employed, how far (in plainer words) the established national meter for high poetry, is adequate or inadequate. It seems to me that the established meter of this kind in France,—the Alexandrine,—is inadequate; that as a vehicle for high poetry it is greatly inferior to the hexameter or to the iambics of Greece (for example), or to the blank verse of England. Therefore the man of genius who uses it is at a disadvantage as compared with the man of genius who has for conveying his thoughts a more adequate vehicle, metrical or not. Racine is at a disadvantage as compared with Sophocles or Shakspeare, and he is likewise at a disadvantage as compared with Bossuet.\n\nThe same may be said of our own poets of the eighteenth century, a century which gave them as the main vehicle for their high poetry a meter inadequate (as much as the French Alexandrine, and nearly in the same way) for this poetry,—the ten-syllable couplet. It is worth remarking, that the English poet of the eighteenth century whose compositions wear best and give one the most entire satisfaction,—Gray,—hardly uses that couplet at all: this abstinence, however, limits Gray’s productions to a few short compositions, and (exquisite as these are) he is a poetical nature repressed and without free issue. For English poetical production on a great scale, for an English poet deploying all the forces of his genius, the ten-syllable couplet was, in the eighteenth century, the established, one may almost say the inevitable, channel. Now this couplet, admirable (as Chaucer uses it) for story-telling not of the epic pitch, and often admirable for a few lines even in poetry of a very high pitch, is for continuous use in poetry of this latter kind inadequate. Pope, in his _Essay on Man_, is thus at a disadvantage compared with Lucretius in his poem on Nature: Lucretius has an adequate vehicle, Pope has not. Nay, though Pope’s genius for didactic poetry was not less than that of Horace, while his satirical power was certainly greater, still one’s taste receives, I cannot but think, a certain satisfaction when one reads the Epistles and Satires of Horace, which it fails to receive when one reads the Satires and Epistles of Pope. Of such avail is the superior adequacy of the vehicle used to compensate even an inferiority of genius in the user! In the same way Pope is at a disadvantage as compared with Addison. The best of Addison’s composition (the “Coverley Papers” in the _Spectator_, for instance) wears better than the best of Pope’s, because Addison has in his prose an intrinsically better vehicle for his genius than Pope in his couplet. But Bacon has no such advantage over Shakspeare; nor has Milton, writing prose (for no contemporary English prose-writer must be matched with Milton except Milton himself), any such advantage over Milton writing verse: indeed, the advantage here is all the other way.\n\nIt is in the prose remains of Guérin,—his journals, his letters, and the striking composition which I have already mentioned, the _Centaur_,—that his extraordinary gift manifests itself. He has a truly interpretative faculty; the most profound and delicate sense of the life of Nature, and the most exquisite felicity in finding expressions to render that sense. To all who love poetry, Guérin deserves to be something more than a name; and I shall try, in spite of the impossibility of doing justice to such a master of expression by translations, to make English readers see for themselves how gifted an organization his was, and how few artists have received from Nature a more magical faculty of interpreting her.\n\nIn the winter of the year 1832 there was collected in Brittany, around the well-known Abbé Lamennais, a singular gathering. At a lonely place, La Chênaie, he had founded a religious retreat, to which disciples, attracted by his powers or by his reputation, repaired. Some came with the intention of preparing themselves for the ecclesiastical profession; others merely to profit by the society and discourse of so distinguished a master. Among the inmates were men whose names have since become known to all Europe,—Lacordaire and M. de Montalembert; there were others, who have acquired a reputation, not European, indeed, but considerable,—the Abbé Gerbet, the Abbé Rohrbacher; others, who have never quitted the shade of private life. The winter of 1832 was a period of crisis in the religious world of France: Lamennais’s rupture with Rome, the condemnation of his opinions by the Pope, and his revolt against that condemnation, were imminent. Some of his followers, like Lacordaire, had already resolved not to cross the Rubicon with their leader, not to go into rebellion against Rome; they were preparing to separate from him. The society of La Chênaie was soon to dissolve; but, such as it is shown to us for a moment, with its voluntary character, its simple and severe life in common, its mixture of lay and clerical members, the genius of its chiefs, the sincerity of its disciples,—above all, its paramount fervent interest in matters of spiritual and religious concernment,—it offers a most instructive spectacle. It is not the spectacle we most of us think to find in France, the France we have imagined from common English notions, from the streets of Paris, from novels; it shows us how, wherever there is greatness like that of France, there are, as its foundation, treasures of fervor, pure-mindedness, and spirituality somewhere, whether we know of them or not;—a store of that which Goethe calls _Halt_;—since greatness can never be founded upon frivolity and corruption.\n\nOn the evening of the 18th of December in this year 1832, M. de Lamennais was talking to those assembled in the sitting-room of La Chênaie of his recent journey to Italy. He talked with all his usual animation; “but,” writes one of his hearers, a Breton gentleman, M. de Marzan, “I soon became inattentive and absent, being struck with the reserved attitude of a young stranger some twenty-two years old, pale in face, his black hair already thin over his temples, with a southern eye, in which brightness and melancholy were mingled. He kept himself somewhat aloof, seeming to avoid notice rather than to court it. All the old faces of friends which I found about me at this my re-entry into the circle of La Chênaie failed to occupy me so much as the sight of this stranger, looking on, listening, observing, and saying nothing.”\n\nThe unknown was Maurice de Guérin. Of a noble but poor family, having lost his mother at six years old, he had been brought up by his father, a man saddened by his wife’s death, and austerely religious, at the château of Le Cayla, in Languedoc. His childhood was not gay; he had not the society of other boys; and solitude, the sight of his father’s gloom, and the habit of accompanying the curé of the parish on his rounds among the sick and dying, made him prematurely grave and familiar with sorrow. He went to school first at Toulouse, then at the Collège Stanislas at Paris, with a temperament almost as unfit as Shelley’s for common school life. His youth was ardent, sensitive, agitated, and unhappy. In 1832 he procured admission to La Chênaie to brace his spirit by the teaching of Lamennais, and to decide whether his religious feelings would determine themselves into a distinct religious vocation. Strong and deep religious feelings he had, implanted in him by nature, developed in him by the circumstances of his childhood; but he had also (and here is the key to his character) that temperament which opposes itself to the fixedness of a religious vocation, or of any vocation of which fixedness is an essential attribute; a temperament mobile, inconstant, eager, thirsting for new impressions, abhorring rules, aspiring to a “renovation without end;” a temperament common enough among artists, but with which few artists, who have it to the same degree as Guérin, unite a seriousness and a sad intensity like his. After leaving school, and before going to La Chênaie, he had been at home at Le Cayla with his sister Eugénie (a wonderfully gifted person, whose genius so competent a judge as M. Sainte-Beuve is inclined to pronounce even superior to her brother’s) and his sister Eugénie’s friends. With one of these friends he had fallen in love,—a slight and transient fancy, but which had already called his poetical powers into exercise; and his poems and fragments, in a certain green note-book (_le Cahier Vert_) which he long continued to make the depository of his thoughts, and which became famous among his friends, he brought with him to La Chênaie. There he found among the younger members of the Society several who, like himself, had a secret passion for poetry and literature; with these he became intimate, and in his letters and journal we find him occupied, now with a literary commerce established with these friends, now with the fortunes, fast coming to a crisis, of the Society, and now with that for the sake of which he came to La Chênaie,—his religious progress and the state of his soul.\n\nOn Christmas-day, 1832, having been then three weeks at La Chênaie, he writes thus of it to a friend of his family, M. de Bayne:— “La Chênaie is a sort of oasis in the midst of the steppes of Brittany. In front of the château stretches a very large garden cut in two by a terrace with a lime avenue, at the end of which is a tiny chapel. I am extremely fond of this little oratory, where one breathes a twofold peace,—the peace of solitude and the peace of the Lord. When spring comes we shall walk to prayers between two borders of flowers. On the east side, and only a few yards from the château, sleeps a small mere between two woods, where the birds in warm weather sing all day long; and then,—right, left, on all sides,—woods, woods, everywhere woods. It looks desolate just now that all is bare and the woods are rust-color, and under this Brittany sky, which is always clouded and so low that it seems as if it were going to fall on your head; but as soon as spring comes the sky raises itself up, the woods come to life again, and everything will be full of charm.”\n\nOf what La Chênaie will be when spring comes he has a foretaste on the 3d of March.\n\n> “To-day” (he writes in his journal) “has enchanted me. For the first time for a long while the sun has shown himself in all his beauty. He has made the buds of the leaves and flowers swell, and he has waked up in me a thousand happy thoughts. The clouds assume more and more their light and graceful shapes, and are sketching, over the blue sky, the most charming fancies. The woods have not yet got their leaves, but they are taking an indescribable air of life and gaiety, which gives them quite a new physiognomy. Everything is getting ready for the great festival of Nature.”\n\nStorm and snow adjourn this festival a little longer. On the 11th of March he writes:—\n\n“It has snowed all night. I have been to look at our primroses; each of them has its small load of snow, and was bowing its head under its burden. These pretty flowers, with their rich yellow color, had a charming effect under their white hoods. I saw whole tufts of them roofed over by a single block of snow; all these laughing flowers thus shrouded and leaning one upon another, made one think of a group of young girls surprised by a shower, and sheltering under a white apron.”\n\nThe burst of spring comes at last, though late. On the 5th of April we find Guérin “sitting in the sun to penetrate himself to the very marrow with the divine spring.” On the 3d of May, “one can actually _see_ the progress of the green; it has made a start from the garden to the shrubberies, it is getting the upper hand all along the mere; it leaps, one may say, from tree to tree, from thicket to thicket, in the fields and on the hillsides; and I can see it already arrived at the forest edge and beginning to spread itself over the broad back of the forest. Soon it will have overrun everything as far as the eye can reach, and all those wide spaces between here and the horizon will be moving and sounding like one vast sea, a sea of emerald.”\n\nFinally, on the 16th of May, he writes to M. de Bayne that “the gloomy and bad days,—bad because they bring temptation by their gloom,—are, thanks to God and the spring, over; and I see approaching a long file of shining and happy days, to do me all the good in the world. This Brittany of ours,” he continues, “gives one the idea of the grayest and most wrinkled old woman possible suddenly changed back by the touch of a fairy’s wand into a girl of twenty, and one of the loveliest in the world; the fine weather has so decked and beautified the dear old country.” He felt, however, the cloudiness and cold of the “dear old country” with all the sensitiveness of a child of the South. “What a difference,” he cries, “between the sky of Brittany, even on the finest day, and the sky of our South! Here the summer has, even on its highdays and holidays, something mournful, overcast, and stinted about it. It is like a miser who is making a show; there is a niggardliness in his magnificence. Give me our Languedoc sky, so bountiful of light, so blue, so largely vaulted!” And somewhat later, complaining of the short and dim sunlight of a February day in Paris, “What a sunshine,” he exclaims, “to gladden eyes accustomed to all the wealth of light of the South!—_aux larges et libérales effusions de lumière du ciel du Midi_.”\n\nIn the long winter of La Chênaie his great resource was literature. One has often heard that an educated Frenchman’s reading seldom goes much beyond French and Latin, and that he makes the authors in these two languages his sole literary standard. This may or may not be true of Frenchmen in general, but there can be no question as to the width of the reading of Guérin and his friends, and as to the range of their literary sympathies. One of the circle, Hippolyte la Morvonnais,—a poet who published a volume of verse, and died in the prime of life,—had a passionate admiration for Wordsworth, and had even, it is said, made a pilgrimage to Rydal Mount to visit him; and in Guérin’s own reading I find, besides the French names of Bernardin de St. Pierre, Chateaubriand, Lamartine, and Victor Hugo, the names of Homer, Dante, Shakspeare, Milton, and Goethe; and he quotes both from Greek and from English authors in the original. His literary tact is beautifully fine and true. “Every poet,” he writes to his sister, “has his own art of poetry written on the ground of his own soul; there is no other. Be constantly observing Nature in her smallest details, and then write as the current of your thoughts guides you;—that is all.” But with all this freedom from the bondage of forms and rules, Guérin marks with perfect precision the faults of the _free_ French literature of his time,—the _littérature facile_,—and judges the romantic school and its prospects like a master: “that youthful literature which has put forth all its blossom prematurely, and has left itself a helpless prey to the returning frost, stimulated as it has been by the burning sun of our century, by this atmosphere charged with a perilous heat, which has overhastened every sort of development, and will most likely reduce to a handful of grains the harvest of our age.” And the popular authors,—those “whose name appears once and disappears forever, whose books, unwelcome to all serious people, welcome to the rest of the world, to novelty-hunters and novel-readers, fill with vanity these vain souls, and then, falling from hands heavy with the languor of satiety, drop forever into the gulf of oblivion;” and those, more noteworthy, “the writers of books celebrated, and, as works of art, deserving celebrity, but which have in them not one grain of that hidden manna, not one of those sweet and wholesome thoughts which nourish the human soul and refresh it when it is weary,”—these he treats with such severity that he may in some sense be described, as he describes himself, as “invoking with his whole heart a classical restoration.” He is best described, however, not as a partisan of any school, but as an ardent seeker for that mode of expression which is the most natural, happy, and true. He writes to his sister Eugénie:— “I want you to reform your system of composition; it is too loose, too vague, too Lamartinian. Your verse is too sing-song; it does not _talk_ enough. Form for yourself a style of your own, which shall be your real expression. Study the French language by attentive reading, making it your care to remark constructions, turns of expression, delicacies of style, but without ever adopting the manner of any master. In the works of these masters we must learn our language, but we must use it each in our own fashion.”[10]\n\n---\n\nFootnote 10:\n\nPart of these extracts date from a time a little after Guérin’s residence at La Chênaie; but already, amidst the readings and conversations of La Chênaie, his literary judgment was perfectly formed.\n\n---\n\nIt was not, however, to perfect his literary judgment that Guérin came to La Chênaie. The religious feeling, which was as much a part of his essence as the passion for Nature and the literary instinct, shows itself at moments jealous of these its rivals, and alarmed at their predominance. Like all powerful feelings, it wants to exclude every other feeling and to be absolute. One Friday in April, after he has been delighting himself with the shapes of the clouds and the progress of the spring, he suddenly bethinks himself that the day is Good Friday, and exclaims in his diary:—\n\n“My God, what is my soul about that it can thus go running after such fugitive delights on Good Friday, on this day all filled with thy death and our redemption? There is in me I know not what damnable spirit, that awakens in me strong discontents, and is forever prompting me to rebel against the holy exercises and the devout collectedness of soul which are the meet preparation for these great solemnities of our faith. Oh how well can I trace here the old leaven, from which I have not yet perfectly cleared my soul!”\n\nAnd again, in a letter to M. de Marzan: “Of what, my God, are we made,” he cries, “that a little verdure and a few trees should be enough to rob us of our tranquillity and to distract us from thy love?” And writing, three days after Easter Sunday, in his journal he records the reception at La Chênaie of a fervent neophyte, in words which seem to convey a covert blame of his own want of fervency:—\n\n> “Three days have passed over our heads since the great festival. One anniversary the less for us yet to spend of the death and resurrection of our Saviour! Every year thus bears away with it its solemn festivals; when will the everlasting festival be here? I have been witness of a most touching sight; François has brought us one of his friends whom he has gained to the faith. This neophyte joined us in our exercises during the Holy week, and on Easter day he received the communion with us. François was in raptures. It is a truly good work which he has thus done. François is quite young, hardly twenty years old; M. de la M. is thirty, and is married. There is something most touching and beautifully simple in M. de la M. letting himself thus be brought to God by quite a young man; and to see friendship, on François’s side, thus doing the work of an Apostle, is not less beautiful and touching.”\n\nAdmiration for Lamennais worked in the same direction with this feeling. Lamennais never appreciated Guérin; his combative, rigid, despotic nature, of which the characteristic was energy, had no affinity with Guérin’s elusive, undulating, impalpable nature, of which the characteristic was delicacy. He set little store by his new disciple, and could hardly bring himself to understand what others found so remarkable in him, his own genuine feeling towards him being one of indulgent compassion. But the intuition of Guérin, more discerning than the logic of his master, instinctively felt what there was commanding and tragic in Lamennais’s character, different as this was from his own; and some of his notes are among the most interesting records of Lamennais which remain.\n\n“‘Do you know what it is,’ M. Féli[11] said to us on the evening of the day before yesterday, ‘which makes man the most suffering of all creatures? It is that he has one foot in the finite and the other in the infinite, and that he is torn asunder, not by four horses, as in the horrible old times, but between two worlds.’ Again he said to us as we heard the clock strike: ‘If that clock knew that it was to be destroyed the next instant, it would still keep striking its hour until that instant arrived. My children, be as the clock; whatever may be going to happen to you, strike always your hour.’”\n\n---\n\nFootnote 11:\n\nThe familiar name given to M. de Lamennais by his followers at La Chênaie.\n\n---\n\nAnother time Guérin writes: “To-day M. Féli startled us. He was sitting behind the chapel, under the two Scotch firs; he took his stick and marked out a grave on the turf, and said to Elie, ‘It is there I wish to be buried, but no tombstone! only a simple hillock of grass. Oh, how well I shall be there!’ Elie thought he had a presentiment that his end was near. This is not the first time he has been visited by such a presentiment; when he was setting out for Rome, he said to those here: ‘I do not expect ever to come back to you; you must do the good which I have failed to do.’ He is impatient for death.”\n\nOverpowered by the ascendency of Lamennais, Guérin, in spite of his hesitations, in spite of his confession to himself that, “after a three weeks’ close scrutiny of his soul, in the hope of finding the pearl of a religious vocation hidden in some corner of it,” he had failed to find what he sought, took, at the end of August 1833, a decisive step. He joined the religious order which Lamennais had founded. But at this very moment the deepening displeasure of Rome with Lamennais determined the Bishop of Rennes to break up, in so far as it was a religious congregation, the Society of La Chênaie, to transfer the novices to Ploërmel, and to place them under other superintendence. In September, Lamennais, “who had not yet ceased,” writes M. de Marzan, a faithful Catholic, “to be a Christian and a priest, took leave of his beloved colony of La Chênaie, with the anguish of a general who disbands his army down to the last recruit, and withdraws annihilated from the field of battle.” Guérin went to Ploërmel. But here, in the seclusion of a real religious house, he instantly perceived how alien to a spirit like his,—a spirit which, as he himself says somewhere, “had need of the open air, wanted to see the sun and the flowers,”—was the constraint and the monotony of a monastic life, when Lamennais’s genius was no longer present to enliven this life for him. On the 7th of October he renounced the novitiate, believing himself a partisan of Lamennais in his quarrel with Rome, reproaching the life he had left with demanding passive obedience instead of trying “to put in practice the admirable alliance of order with liberty, and of variety with unity,” and declaring that, for his part, he preferred taking the chances of a life of adventure to submitting himself to be “_garotté par un réglement_,—tied hand and foot by a set of rules.” In real truth, a life of adventure, or rather a life free to wander at its own will, was that to which his nature irresistibly impelled him.\n\nFor a career of adventure, the inevitable field was Paris. But before this career began, there came a stage, the smoothest, perhaps, and the most happy in the short life of Guérin. M. la Morvonnais, one of his La Chênaie friends,—some years older than Guérin, and married to a wife of singular sweetness and charm,—had a house by the seaside at the mouth of one of the beautiful rivers of Brittany, the Arguenon. He asked Guérin, when he left Ploërmel, to come and stay with him at this place, called Le Val de l’Arguenon, and Guérin spent the winter of 1833-4 there. I grudge every word about Le Val and its inmates which is not Guérin’s own, so charming is the picture drawn of them, so truly does his talent find itself in its best vein as he draws it.\n\n> “How full of goodness” (he writes in his journal of the 7th of December) “is Providence to me! For fear the sudden passage from the mild and temperate air of a religious life to the torrid clime of the world should be too trying to my soul, it has conducted me, after I have left my sacred shelter, to a house planted on the frontier between the two regions, where, without being in solitude, one is not yet in the world; a house whose windows look on the one side towards the plain where the tumult of men is rocking, on the other towards the wilderness where the servants of God are chanting. I intend to write down the record of my sojourn here, for the days here spent are full of happiness, and I know that in the time to come I shall often turn back to the story of these past felicities. A man, pious, and a poet; a woman, whose spirit is in such perfect sympathy with his that you would say they had but one being between them; a child, called Marie like her mother, and who sends, like a star, the first rays of her love and thought through the white cloud of infancy; a simple life in an old-fashioned house; the ocean, which comes morning and evening to bring us its harmonies; and lastly, a wanderer who descends from Carmel and is going to Babylon, and who has laid down at this threshold his staff and his sandals, to take his seat at the hospitable table;—here is matter to make a biblical poem of, if I could only describe things as I can feel them!”\n\nEvery line written by Guérin during this stay at Le Val is worth quoting, but I have only room for one extract more:\n\n> “Never” (he writes, a fortnight later, on the 20th of December), “never have I tasted so inwardly and deeply the happiness of home-life. All the little details of this life, which in their succession makes up the day, are to me so many stages of a continuous charm carried from one end of the day to the other. The morning greeting, which in some sort renews the pleasure of the first arrival, for the words with which one meets are almost the same, and the separation at night, through the hours of darkness and uncertainty, does not ill represent longer separations; then breakfast, during which you have the fresh enjoyment of having met together again; the stroll afterwards, when we go out and bid Nature good morning; the return and setting to work in an old paneled chamber looking out on the sea, inaccessible to all the stir of the house, a perfect sanctuary of labor; dinner, to which we are called, not by a bell, which reminds one too much of school or a great house, but by a pleasant voice; the gaiety, the merriment, the talk flitting from one subject to another and never dropping so long as the meal lasts; the crackling fire of dry branches to which we draw our chairs directly afterwards, the kind words that are spoken round the warm flame which sings while we talk; and then, if it is fine, the walk by the seaside, when the sea has for its visitors a mother with her child in her arms, this child’s father and a stranger, each of these two last with a stick in his hand; the rosy lips of the little girl, which keep talking at the same time with the waves,—now and then tears shed by her and cries of childish fright at the edge of the sea; our thoughts, the father’s and mine, as we stand and look at the mother and child smiling at one another, or at the child in tears and the mother trying to comfort it by her caresses and exhortations; the Ocean, going on all the while rolling up his waves and noises; the dead boughs which we go and cut, here and there, out of the copse-wood, to make a quick and bright fire when we get home,—this little taste of the woodman’s calling which brings us closer to Nature and makes us think of M. Féli’s eager fondness for the same work; the hours of study and poetical flow which carry us to supper-time; this meal, which summons us by the same gentle voice as its predecessor, and which is passed amid the same joys, only less loud, because evening sobers everything, tones everything down; then our evening, ushered in by the blaze of a cheerful fire, and which with its alternations of reading and talking brings us at last to bed-time:—to all the charms of a day so spent add the dreams which follow it, and your imagination will still fall far short of these home-joys in their delightful reality.”\n\nI said the foregoing should be my last extract, but who could resist this picture of a January evening on the coast of Brittany?—\n\n> “All the sky is covered over with gray clouds just silvered at the edges. The sun, who departed a few minutes ago, has left behind him enough light to temper for awhile the black shadows, and to soften down, as it were, the approach of night. The winds are hushed, and the tranquil ocean sends up to me, when I go out on the doorstep to listen, only a melodious murmur, which dies away in the soul like a beautiful wave on the beach. The birds, the first to obey the nocturnal influence, make their way towards the woods, and you hear the rustle of their wings in the clouds. The copses which cover the whole hillside of Le Val, which all the day-time are alive with the chirp of the wren, the laughing whistle of the woodpecker,[12] and the different notes of a multitude of birds, have no longer any sound in their paths and thickets, unless it be the prolonged high call of the blackbirds at play with one another and chasing one another, after all the other birds have their heads safe under their wings. The noise of man, always the last to be silent, dies gradually out over the face of the fields. The general murmur fades away, and one hears hardly a sound except what comes from the villages and hamlets, in which, up till far into the night, there are cries of children and barking of dogs. Silence wraps me round; everything seeks repose except this pen of mine, which perhaps disturbs the rest of some living atom asleep in a crease of my note-book, for it makes its light scratching as it puts down these idle thoughts. Let it stop, then! for all I write, have written, or shall write, will never be worth setting against the sleep of an atom.”\n\n---\n\nFootnote 12:\n\n> “The woodpecker _laughs_,” says White of Selborne; and here is Guérin, in Brittany, confirming his testimony.\n\n---\n\nOn the 1st of February we find him in a lodging at Paris. “I enter the world” (such are the last words written in his journal at Le Val) “with a secret horror.” His outward history for the next five years is soon told. He found himself in Paris, poor, fastidious, and with health which already, no doubt, felt the obscure presence of the malady of which he died—consumption. One of his Brittany acquaintances introduced him to editors, tried to engage him in the periodical literature of Paris; and so unmistakable was Guérin’s talent that even his first essays were immediately accepted. But Guérin’s genius was of a kind which unfitted him to get his bread in this manner. At first he was pleased with the notion of living by his pen; “_je n’ai qu’à écrire_,” he says to his sister,—“I have only got to write.” But to a nature like his, endued with the passion for perfection, the necessity to produce, to produce constantly, to produce whether in the vein or out of the vein, to produce something good or bad or middling, as it may happen, but at all events _something_,—is the most intolerable of tortures. To escape from it he betook himself to that common but most perfidious refuge of men of letters, that refuge to which Goldsmith and poor Hartley Coleridge had betaken themselves before him,—the profession of teaching. In September, 1834, he procured an engagement at the Collège Stanislas, where he had himself been educated. It was vacation-time, and all he had to do was to teach a small class composed of boys who did not go home for the holidays,—in his own words, “scholars left like sick sheep in the fold, while the rest of the flock are frisking in the fields.” After the vacation he was kept on at the college as a supernumerary. “The master of the fifth class has asked for a month’s leave of absence; I am taking his place, and by this work I get one hundred francs (£4). I have been looking about for pupils to give private lessons to, and I have found three or four. Schoolwork and private lessons together fill my day from half-past seven in the morning till half-past nine at night. The college dinner serves me for breakfast, and I go and dine in the evening at twenty-four _sous_, as a young man beginning life should.” To better his position in the hierarchy of public teachers it was necessary that he should take the degree of _agrégé-èslettres_, corresponding to our degree of Master of Arts; and to his heavy work in teaching, there was thus added that of preparing for a severe examination. The drudgery of this life was very irksome to him, although less insupportable than the drudgery of the profession of letters; inasmuch as to a sensitive man like Guérin, to silence his genius is more tolerable than to hackney it. Still the yoke wore him deeply, and he had moments of bitter revolt; he continued, however, to bear it with resolution, and on the whole with patience, for four years. On the 15th of November, 1838, he married a young Creole lady of some fortune, Mademoiselle Caroline de Gervain, “whom,” to use his own words, “Destiny, who loves these surprises, has wafted from the farthest Indies into my arms.” The marriage was happy, and it insured to Guérin liberty and leisure; but now “the blind Fury with the abhorred shears” was hard at hand. Consumption declared itself in him: “I pass my life,” he writes, with his old playfulness and calm, to his sister on the 8th of April, 1839, “within my bed-curtains, and wait patiently enough, thanks to Caro’s[13] goodness, books, and dreams, for the recovery which the sunshine is to bring with it.” In search of this sunshine he was taken to his native country, Languedoc, but in vain. He died at Le Cayla on the 19th of July, 1839.\n\n---\n\nFootnote 13:\n\nHis wife.\n\n---\n\nThe vicissitudes of his inward life during these five years were more considerable. His opinions and tastes underwent great, or what seem to be great, changes. He came to Paris the ardent partisan of Lamennais: even in April, 1834, after Rome had finally condemned Lamennais,—“To-night there will go forth from Paris,” he writes, “with his face set to the west, a man whose every step I would fain follow, and who returns to the desert for which I sigh. M. Féli departs this evening for La Chênaie.” But in October, 1835,—“I assure you,” he writes to his sister, “I am at last weaned from M. de Lamennais; one does not remain a babe and suckling for ever; I am perfectly freed from his influence.” There was a greater change than this. In 1834 the main cause of Guérin’s aversion to the literature of the French romantic school, was that this literature, having had a religious origin, had ceased to be religious: “it has forgotten,” he says, “the house and the admonitions of its Father.” But his friend M. de Marzan tells us of a “deplorable revolution” which, by 1836, had taken place in him. Guérin had become intimate with the chiefs of this very literature; he no longer went to church; “the bond of a common faith, in which our friendship had its birth, existed between us no longer.” Then, again, “this interregnum was not destined to last.” Reconverted to his old faith by suffering and by the pious efforts of his sister Eugénie, Guérin died a Catholic. His feelings about society underwent a like change. After “entering the world with a secret horror,” after congratulating himself when he had been some months at Paris on being “disengaged from the social tumult, out of the reach of those blows which, when I live in the thick of the world, bruise me, irritate me, or utterly crush me,” M. Sainte-Beuve tells us of him, two years afterwards, appearing in society “a man of the world, elegant, even fashionable; a talker who could hold his own against the most brilliant talkers of Paris.”\n\nIn few natures, however, is there really such essential consistency as in Guérin’s. He says of himself, in the very beginning of his journal: “I owe everything to poetry, for there is no other name to give to the sum total of my thoughts; I owe to it whatever I now have pure, lofty and solid in my soul; I owe to it all my consolations in the past; I shall probably owe to it my future.” Poetry, the poetical instinct, was indeed the basis of his nature; but to say so thus absolutely is not quite enough. One aspect of poetry fascinated Guérin’s imagination and held it prisoner. Poetry is the interpretress of the natural world, and she is the interpretress of the moral world; it was as the interpretress of the natural world that she had Guérin for her mouthpiece. To make magically near and real the life of Nature, and man’s life only so far as it is a part of that Nature, was his faculty; a faculty of naturalistic, not of moral interpretation. This faculty always has for its basis a peculiar temperament, an extraordinary delicacy of organization and susceptibility to impressions; in exercising it the poet is in a great degree passive (Wordsworth thus speaks of a _wise passiveness_); he aspires to be a sort of human Æolian harp, catching and rendering every rustle of Nature. To assist at the evolution of the whole life of the world is his craving, and intimately to feel it all:\n\n> ... “The glow, the thrill of life, Where, where do these abound?”\n\nis what he asks: he resists being riveted and held stationary by any single impression, but would be borne on forever down an enchanted stream. He goes into religion and out of religion into society and out of society, not from the motives which impel men in general, but to feel what it is all like; he is thus hardly a moral agent, and, like the passive and ineffectual Uranus of Keats’s poem, he may say:\n\n> ... “I am but a voice; My life is but the life of winds and tides; No more than winds and tides can I avail.”\n\nHe hovers over the tumult of life, but does not really put his hand to it.\n\nNo one has expressed the aspirations of this temperament better than Guérin himself. In the last year of his life he writes:—\n\n“I return, as you see, to my old brooding over the world of Nature, that line which my thoughts, irresistibly take; a sort of passion which gives me enthusiasm, tears, bursts of joy, and an eternal food for musing; and yet I am neither philosopher nor naturalist, nor anything learned whatsoever. There is one word which is the God of my imagination, the tyrant, I ought rather to say, that fascinates it, lures it onward, gives it work to do without ceasing, and will finally carry it I know not where; the word _life_.”\n\nAnd in one place in his journal he says:—\n\n> “My imagination welcomes every dream, every impression, without attaching itself to any, and goes on forever seeking something new.”\n\nAnd again in another:—\n\n> “The longer I live, and the clearer I discern between true and false in society, the more does the inclination to live, not as a savage or a misanthrope, but as a solitary man on the frontiers of society, on the outskirts of the world, gain strength and grow in me. The birds come and go and make nests around our habitations, they are fellow-citizens of our farms and hamlets with us; but they take their flight in a heaven which is boundless, but the hand of God alone gives and measures to them their daily food, but they build their nests in the heart of the thick bushes, or hang them in the height of the trees. So would I, too, live, hovering round society, and having always at my back a field of liberty vast as the sky.”\n\nIn the same spirit he longed for travel. “When one is a wanderer,” he writes to his sister, “one feels that one fulfils the true condition of humanity.” And the last entry in his journal is,—“The stream of travel is full of delight. Oh, who will set me adrift on this Nile!”\n\nAssuredly it is not in this temperament that the active virtues have their rise. On the contrary, this temperament, considered in itself alone, indisposes for the discharge of them. Something morbid and excessive, as manifested in Guérin, it undoubtedly has. In him, as in Keats, and as in another youth of genius, whose name, but the other day unheard of, Lord Houghton has so gracefully written in the history of English poetry,—David Gray,—the temperament, the talent itself, is deeply influenced by their mysterious malady; the temperament is _devouring_; it uses vital power too hard and too fast, paying the penalty in long hours of unutterable exhaustion and in premature death. The intensity of Guérin’s depression is described to us by Guérin himself with the same incomparable touch with which he describes happier feelings; far oftener than any pleasurable sense of his gift he has “the sense profound, near, immense, of my misery, of my inward poverty.” And again: “My inward misery gains upon me; I no longer dare look within.” And on another day of gloom he does look within, and here is the terrible analysis:—\n\n> “Craving, unquiet, seeing only by glimpses, my spirit is stricken by all those ills which are the sure fruit of a youth doomed never to ripen into manhood. I grow old and wear myself out in the most futile mental strainings, and make no progress. My head seems dying, and when the wind blows I fancy I feel it, as if I were a tree, blowing through a number of withered branches in my top. Study is intolerable to me, or rather it is quite out of my power. Mental work brings on, not drowsiness, but an irritable and nervous disgust which drives me out, I know not where, into the streets and public places. The Spring, whose delights used to come every year stealthily and mysteriously to charm me in my retreat, crushes me this year under a weight of sudden hotness. I should be glad of any event which delivered me from the situation in which I am. If I were free I would embark for some distant country where I could begin life anew.”\n\nSuch is this temperament in the frequent hours when the sense of its own weakness and isolation crushes it to the ground. Certainly it was not for Guérin’s happiness, or for Keats’s, as men count happiness, to be as they were. Still the very excess and predominance of their temperament has given to the fruits of their genius a unique brilliancy and flavor. I have said that poetry interprets in two ways; it interprets by expressing with magical felicity the physiognomy and movement of the outward world, and it interprets by expressing, with inspired conviction, the ideas and laws of the inward world of man’s moral and spiritual nature. In other words, poetry is interpretative both by having _natural magic_ in it, and by having _moral profundity_. In both ways it illuminates man; it gives him a satisfying sense of reality; it reconciles him with himself and the universe. Thus Æschylus’s “δράσαντι παθεῖν” and his “ὰνήριθμον γέλασμα” are alike interpretative. Shakspeare interprets both when he says,\n\n> “Full many a glorious morning have I seen, Flatter the mountain-tops with sovran eye;”\n\nand when he says,\n\n> “There’s a divinity that shapes our ends, Rough-hew them as we will.”\n\nThese great poets unite in themselves the faculty of both kinds of interpretation, the naturalistic and the moral. But it is observable that in the poets who unite both kinds, the latter (the moral) usually ends by making itself the master. In Shakspeare the two kinds seem wonderfully to balance one another; but even in him the balance leans; his expression tends to become too little sensuous and simple, too much intellectualized. The same thing may be yet more strongly affirmed of Lucretius and of Wordsworth. In Shelley there is not a balance of the two gifts, nor even a co-existence of them, but there is a passionate straining after them both, and this is what makes Shelley, as a man, so interesting: I will not now inquire how much Shelley achieves as a poet, but whatever he achieves, he in general fails to achieve natural magic in his expression; in Mr. Palgrave’s charming _Treasury_ may be seen a gallery of his failures.[14] But in Keats and Guérin, in whom the faculty of naturalistic interpretation is overpoweringly predominant, the natural magic is perfect; when they speak of the world they speak like Adam naming by divine inspiration the creatures; their expression corresponds with the thing’s essential reality. Even between Keats and Guérin, however, there is a distinction to be drawn. Keats has, above all, a sense of what is pleasurable and open in the life of nature; for him she is the _Alma Parens_: his expression has, therefore, more than Guérin’s, something genial, outward, and sensuous. Guérin has, above all, a sense of what there is adorable and secret in the life of Nature; for him she is the _Magna Parens_; his expression has, therefore, more than Keats’s, something mystic, inward, and profound.\n\n---\n\nFootnote 14:\n\nCompare, for example, his “Lines Written in the Euganean Hills,” with Keats’s “Ode to Autumn” (_Golden Treasury_, pp. 256, 284). The latter piece _renders_ Nature; the former _tries to render_ her. I will not deny, however, that Shelley has natural magic in his rhythm; what I deny is, that he has it in his language. It always seems to me that the right sphere for Shelley’s genius was the sphere of music, not of poetry; the medium of sounds he can master, but to master the more difficult medium of words he has neither intellectual force enough nor sanity enough.\n\n---\n\nSo he lived like a man possessed; with his eye not on his own career, not on the public, not on fame, but on the Isis whose veil he had uplifted. He published nothing: “There is more power and beauty,” he writes, “in the well-kept secret of one’s-self and one’s thoughts, than in the display of a whole heaven that one may have inside one.” “My spirit,” he answers the friends who urge him to write, “is of the home-keeping order, and has no fancy for adventure; literary adventure is above all distasteful to it; for this, indeed (let me say so without the least self-sufficiency), it has a contempt. The literary career seems to me unreal, both in its own essence and in the rewards which one seeks from it, and therefore fatally marred by a secret absurdity.” His acquaintances, and among them distinguished men of letters, full of admiration for the originality and delicacy of his talent, laughed at his self-depreciation, warmly assured him of his powers. He received their assurances with a mournful incredulity, which contrasts curiously with the self-assertion of poor David Gray, whom I just now mentioned. “It seems to me intolerable,” he writes, “to appear to men other than one appears to God. My worst torture at this moment is the over-estimate which generous friends form of me. We are told that at the last judgment the secret of all consciences will be laid bare to the universe; would that mine were so this day, and that every passer-by could see me as I am!” “High above my head,” he says at another time, “far, far away, I seem to hear the murmur of that world of thought and feeling to which I aspire so often, but where I can never attain. I think of those of my own age who have wings strong enough to reach it, but I think of them without jealousy, and as men on earth contemplate the elect and their felicity.” And, criticising his own composition, “When I begin a subject, my self-conceit” (says this exquisite artist) “imagines I am doing wonders; and when I have finished, I see nothing but a wretched made-up imitation, composed of odds and ends of color stolen from other people’s palettes, and tastelessly mixed together on mine.” Such was his _passion for perfection_, his disdain for all poetical work not perfectly adequate and felicitous. The magic of expression, to which by the force of this passion he won his way, will make the name of Maurice de Guérin remembered in literature.\n\nI have already mentioned the _Centaur_, a sort of prose poem by Guérin, which Madame Sand published after his death. The idea of this composition came to him, M. Sainte-Beuve says, in the course of some visits which he made with his friend, M. Trebutien, a learned antiquarian, to the Museum of Antiquities in the Louvre. The free and wild life which the Greeks expressed by such creations as the Centaur had, as we might well expect, a strong charm for him; under the same inspiration he composed a _Bacchante_, which was meant by him to form part of a prose poem on the adventures of Bacchus in India. Real as was the affinity which Guérin’s nature had for these subjects, I doubt whether, in treating them, he would have found the full and final employment of his talent. But the beauty of his _Centaur_ is extraordinary; in its whole conception and expression this piece has in a wonderful degree that natural magic of which I have said so much, and the rhythm has a charm which bewitches even a foreigner. An old Centaur on his mountain is supposed to relate to Melampus, a human questioner, the life of his youth. Untranslatable as the piece is, I shall conclude with some extracts from it:—",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 149,
+    "text": "MAURICE DE GUÉRIN."
+  },
+  "word_count": 9718,
+  "block_count": 78
+}

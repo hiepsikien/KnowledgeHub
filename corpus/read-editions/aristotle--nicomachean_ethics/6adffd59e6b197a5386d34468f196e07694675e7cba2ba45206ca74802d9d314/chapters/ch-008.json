@@ -1,0 +1,1660 @@
+{
+  "chapter_id": "ch-008",
+  "title": "chap. xii.), and also Bishop Butler’s first Sermon.",
+  "block_start": 649,
+  "block_end": 725,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "chap. xii.), and also Bishop Butler’s first Sermon.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[9] Terms used for persons.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[9]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[10] By [Greek:——] is meant numbers themselves, 4, 20, 50, etc, by [Greek:——] these numbers exemplified, 4 horses, 20 sheep, etc.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[10]"
+        },
+        {
+          "start": 8,
+          "end": 18,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 67,
+          "end": 77,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[11] The profits of a mercantile transaction (say £1000) are to be divided between A and B, in the ratio of 2 to 3 (which is the real point to be settled); then,",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[11]"
+        },
+        {
+          "start": 45,
+          "end": 56,
+          "style": "paren_cite",
+          "text": "(say £1000)"
+        },
+        {
+          "start": 115,
+          "end": 154,
+          "style": "paren_aside",
+          "text": "(which is the real point to be settled)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A : B :: 400 : 600."
+    },
+    {
+      "type": "paragraph",
+      "text": "A : 400 :: B : 600 (permutando, and assuming a value for A and B, so as to make them commensurable with the respectiy sums).",
+      "spans": [
+        {
+          "start": 19,
+          "end": 123,
+          "style": "paren_aside",
+          "text": "(permutando, and assuming a value for A and B, so as to make them commensurable with the respectiy sums)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A+400 : B+600 :: A : B. This represents the actual distribution; its fairness depending entirely on that of the first proportion."
+    },
+    {
+      "type": "paragraph",
+      "text": "[12] _i.e._ where the ratio is that of equality, thus 2 : 2 :: 40 : 40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[12]"
+        },
+        {
+          "start": 5,
+          "end": 11,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[13] Her Majesty’s “Justices.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[13]"
+        },
+        {
+          "start": 19,
+          "end": 30,
+          "style": "quote",
+          "text": "“Justices.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[14] I have omitted the next three lines, as they seem to be out of place here, and to occur much more naturally afterwards; it not being likely that they were originally twice written, one is perhaps at liberty to give Aristotle the benefit of the doubt, and conclude that he put them where they made the best sense.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[14]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[15] This I believe to be the meaning of the passage but do not pretend to be able to get it out of the words.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[15]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[16] This is apparently contrary to what was said before, but not really so. Aristotle does not mean that the man in authority struck wrongfully, but he takes the extreme case of simple Reciprocation, and in the second case, the man who strikes one in authority commits two offences, one against the person (and so far they are equal), and another against the office.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[16]"
+        },
+        {
+          "start": 307,
+          "end": 334,
+          "style": "paren_aside",
+          "text": "(and so far they are equal)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[17] χάρις denotes, 1st, a kindly feeling issuing in a gratuitous act of kindness, 2ndly, the effect of this act of kindness on a generous mind; 3rdly, this effect issuing in a requital of the kindness.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[17]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[18] The Shoemaker would get a house while the Builder only had (say) one pair of shoes, or at all events not so many as he ought to have. Thus the man producing the least valuable ware would get the most valuable, and _vice versa_.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[18]"
+        },
+        {
+          "start": 64,
+          "end": 69,
+          "style": "paren_cite",
+          "text": "(say)"
+        },
+        {
+          "start": 219,
+          "end": 231,
+          "style": "em",
+          "text": "_vice versa_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Adopting, as I have done, the reading which omits [Greek:——] at [Greek:——], we have simply a repetition of the caution, that before Reciprocation is attempted, there must be the same ratio between the wares as between the persons, _i.e._ the ratio of equality.",
+      "spans": [
+        {
+          "start": 50,
+          "end": 60,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 64,
+          "end": 74,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 231,
+          "end": 237,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If we admit [Greek: ou], the meaning may be, that you must not bring into the proportion the difference mentioned above [Greek: eteron kai ouk ison], since for the purposes of commerce all men are equal.",
+      "spans": [
+        {
+          "start": 12,
+          "end": 23,
+          "style": "bracket_note",
+          "text": "[Greek: ou]"
+        },
+        {
+          "start": 120,
+          "end": 148,
+          "style": "bracket_note",
+          "text": "[Greek: eteron kai ouk ison]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Say that the Builder is to the Shoemaker as 10:1. Then there must be the same ratio between the wares, consequently the highest artist will carry off the most valuable wares, thus combining in himself both [Greek: uperochai]. The following are the three cases, given 100 pr. shoes = 1 house.",
+      "spans": [
+        {
+          "start": 206,
+          "end": 224,
+          "style": "bracket_note",
+          "text": "[Greek: uperochai]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Builder : Shoemaker : : 1  pr.  shoes      : 1 house—_wrong_. ——          ——          100 pr. shoes      : 1 house—_right_ ——          ——          10 (100 pr. shoes) : 1 house—_wrong_.",
+      "spans": [
+        {
+          "start": 53,
+          "end": 60,
+          "style": "em",
+          "text": "_wrong_"
+        },
+        {
+          "start": 115,
+          "end": 122,
+          "style": "em",
+          "text": "_right_"
+        },
+        {
+          "start": 150,
+          "end": 165,
+          "style": "paren_cite",
+          "text": "(100 pr. shoes)"
+        },
+        {
+          "start": 176,
+          "end": 183,
+          "style": "em",
+          "text": "_wrong_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[19] [Greek] Compare a similar use of [Greek]. De Interpretatione, II.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[19]"
+        },
+        {
+          "start": 5,
+          "end": 12,
+          "style": "bracket_note",
+          "text": "[Greek]"
+        },
+        {
+          "start": 38,
+          "end": 45,
+          "style": "bracket_note",
+          "text": "[Greek]"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "2. [Greek].\n[20] Every unjust act embodies [Greek: to adikon], which is a violation\nof [Greek: to ison], and so implies a greater and a less share, the\nformer being said to fall to the doer, the latter to the sufferer, of\ninjury.",
+      "spans": [
+        {
+          "start": 3,
+          "end": 10,
+          "style": "bracket_note",
+          "text": "[Greek]"
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "style": "footnote",
+          "text": "[20]"
+        },
+        {
+          "start": 43,
+          "end": 61,
+          "style": "bracket_note",
+          "text": "[Greek: to adikon]"
+        },
+        {
+          "start": 87,
+          "end": 103,
+          "style": "bracket_note",
+          "text": "[Greek: to ison]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[21] This passage certainly occurs awkwardly here. If attached to the close of the preceding Chapter it would leave that Chapter incomplete, for the question is not gone into, but only stated. As the commencement of this Chapter it is yet more out of place; I should propose to insert it at the commencement of the following Chapter, to which it forms an appropriate introduction.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[21]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[22] In a pure democracy men are absolutely, _i.e._ numerically, equal, in other forms only proportionately equal. Thus the meanest British subject is proportionately equal to the Sovereign, that is to say, is as fully secured in his rights as the Sovereign in hers.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[22]"
+        },
+        {
+          "start": 45,
+          "end": 51,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[23] Or, according to Cardwell’s reading ([Greek: kineton ou mentoi pan]) “but amongst ourselves there is Just, which is naturally variable, but certainly all Just is not such.” The sense of the passage is not affected by the reading. In Bekker’s text we must take [Greek: kineton] to mean the same as [Greek: kinoumenon], _i.e._ “we admit there is no Just which has not been sometimes disallowed, still,” etc. With Cardwell’s, [Greek: kineton] will mean “which not only _does_ but naturally _may_ vary.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[23]"
+        },
+        {
+          "start": 41,
+          "end": 73,
+          "style": "paren_cite",
+          "text": "([Greek: kineton ou mentoi pan])"
+        },
+        {
+          "start": 74,
+          "end": 177,
+          "style": "quote",
+          "text": "“but amongst ourselves there is Just, which is naturally variable, but certainly all Just is not such.”"
+        },
+        {
+          "start": 265,
+          "end": 281,
+          "style": "bracket_note",
+          "text": "[Greek: kineton]"
+        },
+        {
+          "start": 302,
+          "end": 321,
+          "style": "bracket_note",
+          "text": "[Greek: kinoumenon]"
+        },
+        {
+          "start": 323,
+          "end": 329,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 330,
+          "end": 405,
+          "style": "quote",
+          "text": "“we admit there is no Just which has not been sometimes disallowed, still,”"
+        },
+        {
+          "start": 428,
+          "end": 444,
+          "style": "bracket_note",
+          "text": "[Greek: kineton]"
+        },
+        {
+          "start": 455,
+          "end": 504,
+          "style": "quote",
+          "text": "“which not only _does_ but naturally _may_ vary.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[24] Murder is unjust by the law of nature, Smuggling by enactment. Therefore any act which can be referred to either of these heads is an unjust act, or, as Bishop Butler phrases it, an act _materially_ unjust. Thus much may be decided without reference to the agent. See the note on page 32, l. 16.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[24]"
+        },
+        {
+          "start": 191,
+          "end": 203,
+          "style": "em",
+          "text": "_materially_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[25] “As distinct from pain or loss.” Bishop Butler’s Sermon on Resentment. See also, Rhet. 11. 2 Def. of [Greek: orgae].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[25]"
+        },
+        {
+          "start": 5,
+          "end": 37,
+          "style": "quote",
+          "text": "“As distinct from pain or loss.”"
+        },
+        {
+          "start": 106,
+          "end": 120,
+          "style": "bracket_note",
+          "text": "[Greek: orgae]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[26] This method of reading the passage is taken from Zell as quoted in Cardwell’s Notes, and seems to yield the best sense. The Paraphrast gives it as follows:",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[26]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“But the aggressor is not ignorant that he began, and so he feels himself to be wrong [and will not acknowledge that he is the aggressor], but the other does not.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 163,
+          "style": "quote",
+          "text": "“But the aggressor is not ignorant that he began, and so he feels himself to be wrong [and will not acknowledge that he is the aggressor], but the other does not.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[27] As when a man is “_justified_ at the Grass Market,” _i.e._ hung.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[27]"
+        },
+        {
+          "start": 22,
+          "end": 56,
+          "style": "quote",
+          "text": "“_justified_ at the Grass Market,”"
+        },
+        {
+          "start": 57,
+          "end": 63,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[28] Where the stock of good is limited, if any individual takes more than his share some one else must have less than his share; where it is infinite, or where there is no good at all this cannot happen.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[28]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[29] The reference is to chap. vii. where it was said that the law views the parties in a case of particular injustice as originally equal, but now unequal, the wrong doer the gainer and the sufferer the loser by the wrong, but in the case above supposed there is but _one_ party.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[29]"
+        },
+        {
+          "start": 268,
+          "end": 273,
+          "style": "em",
+          "text": "_one_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[30] So in the Politics, 1. 2.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[30]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Hae men gar psuchae tou somatos archei despotikaen archaen, o de nous taes orexeos politikaen kai despotikaev._ Compare also Bishop Butler’s account of human nature as a system—of the different authority of certain principles, and specially the supremacy of Conscience.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 112,
+          "style": "em",
+          "text": "_Hae men gar psuchae tou somatos archei despotikaen archaen, o de nous taes orexeos politikaen kai despotikaev._"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "BOOK VI\n[1] I understand the illustration to be taken from the process of\nlowering a weight into its place; a block of marble or stone, for\ninstance, in a building.\n[2] Called for convenience sake Necessary and Contingent matter.\n[3] One man learns Mathematics more easily than another, in common\nlanguage, _he has a turn for_ Mathematics, _i e_ something in his\nmental conformation answers to that science The Phrenologist shows the\nbump denoting this aptitude.\n[4] And therefore the question resolves itself into this, “What is the\nwork of the Speculative, and what of the Practical, faculty of Reason.”",
+      "spans": [
+        {
+          "start": 8,
+          "end": 11,
+          "style": "footnote",
+          "text": "[1]"
+        },
+        {
+          "start": 165,
+          "end": 168,
+          "style": "footnote",
+          "text": "[2]"
+        },
+        {
+          "start": 230,
+          "end": 233,
+          "style": "footnote",
+          "text": "[3]"
+        },
+        {
+          "start": 307,
+          "end": 326,
+          "style": "em",
+          "text": "_he has a turn for_"
+        },
+        {
+          "start": 340,
+          "end": 345,
+          "style": "em",
+          "text": "_i e_"
+        },
+        {
+          "start": 463,
+          "end": 466,
+          "style": "footnote",
+          "text": "[4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "See the description of _apetae_ II. 5.",
+      "spans": [
+        {
+          "start": 23,
+          "end": 31,
+          "style": "em",
+          "text": "_apetae_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[5] _praxis_ is here used in its strict and proper meaning.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[5]"
+        },
+        {
+          "start": 4,
+          "end": 12,
+          "style": "em",
+          "text": "_praxis_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[6] That is to say, the Will waits upon deliberation in which Reason is the judge; when the decision is pronounced, the Will must act accordingly.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[6]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The question at issue always is, _Is this Good?_ because the Will is only moved by an impression of Good; the Decision then will be always _Aye or No_, and the mental hand is put forth to grasp in the former case, and retracted in the later.",
+      "spans": [
+        {
+          "start": 33,
+          "end": 48,
+          "style": "em",
+          "text": "_Is this Good?_"
+        },
+        {
+          "start": 139,
+          "end": 150,
+          "style": "em",
+          "text": "_Aye or No_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "So far as what must take place in _every_ Moral Action, right or wrong, the Machinery of the mind being supposed uninjured but to constitute a good Moral Choice, _i e._. a good Action, the Reason must have said Aye when it ought.",
+      "spans": [
+        {
+          "start": 34,
+          "end": 41,
+          "style": "em",
+          "text": "_every_"
+        },
+        {
+          "start": 162,
+          "end": 168,
+          "style": "em",
+          "text": "_i e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The cases of faulty action will be, either when the Machinery is perfect but wrongly directed, as in the case of a deliberate crime, or when the direction given by the Reason is right but the Will does not move in accordance with that direction, in other words, when the Machinery is out of order; as in the case of the [Greek: akrates]—video meliora proboque, Deteriora sequor.",
+      "spans": [
+        {
+          "start": 320,
+          "end": 336,
+          "style": "bracket_note",
+          "text": "[Greek: akrates]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[7] See the note on [Greek: Arche] on page 4, l. 30.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[7]"
+        },
+        {
+          "start": 20,
+          "end": 34,
+          "style": "bracket_note",
+          "text": "[Greek: Arche]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[8] The cobbler is at his last, why? to make shoes, which are to clothe the feet of someone and the price to be paid, _i.e._ the produce of his industry, is to enable him to support his wife and children; thus his production is subordinate to Moral Action.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[8]"
+        },
+        {
+          "start": 118,
+          "end": 124,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[9] It may be fairly presumed that Aristotle would not thus have varied his phrase without some real difference of meaning. That difference is founded, I think, on the two senses of [Greek: orexis] before alluded to (note, p. 53, l. 33). The first impulse of the mind towards Action may be given either by a vague desire or by the suggestion of Reason. The vague desire passing through the deliberate stage would issue in Moral Choice. Reason must enlist the Will before any Action can take place.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[9]"
+        },
+        {
+          "start": 182,
+          "end": 197,
+          "style": "bracket_note",
+          "text": "[Greek: orexis]"
+        },
+        {
+          "start": 216,
+          "end": 236,
+          "style": "paren_cite",
+          "text": "(note, p. 53, l. 33)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reason ought to be the originator in all cases, as Bishop Butler observes that Conscience should be. If this were so, every act of Moral Choice would be [Greek: orektikos nous].",
+      "spans": [
+        {
+          "start": 153,
+          "end": 176,
+          "style": "bracket_note",
+          "text": "[Greek: orektikos nous]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "But one obvious function of the feelings and passions in our composite nature is to instigate Action, when Reason and Conscience by themselves do not: so that as a matter of fact our Moral Choice is, in general, fairly described as [Greek: orexis dianoetike]. See Bishop Butler’s Sermon II. and the First upon Compassion.",
+      "spans": [
+        {
+          "start": 232,
+          "end": 258,
+          "style": "bracket_note",
+          "text": "[Greek: orexis dianoetike]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[10] The mind attains truth, either for the sake of truth itself ([Greek: aplos]), or for the sake of something further ([Greek: eneka tinos]). If the first then either syllogistically ([Greek: episteme]), non-syllogistically ([Greek: nous]), or by union of the two methods ([Greek: sophla]). If the second, either with a view to _act_ ([Greek: phronesis]), or with a view to _make_ ([Greek: techne]).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[10]"
+        },
+        {
+          "start": 65,
+          "end": 81,
+          "style": "paren_cite",
+          "text": "([Greek: aplos])"
+        },
+        {
+          "start": 120,
+          "end": 142,
+          "style": "paren_cite",
+          "text": "([Greek: eneka tinos])"
+        },
+        {
+          "start": 185,
+          "end": 204,
+          "style": "paren_cite",
+          "text": "([Greek: episteme])"
+        },
+        {
+          "start": 226,
+          "end": 241,
+          "style": "paren_cite",
+          "text": "([Greek: nous])"
+        },
+        {
+          "start": 274,
+          "end": 291,
+          "style": "paren_cite",
+          "text": "([Greek: sophla])"
+        },
+        {
+          "start": 330,
+          "end": 335,
+          "style": "em",
+          "text": "_act_"
+        },
+        {
+          "start": 336,
+          "end": 356,
+          "style": "paren_cite",
+          "text": "([Greek: phronesis])"
+        },
+        {
+          "start": 376,
+          "end": 382,
+          "style": "em",
+          "text": "_make_"
+        },
+        {
+          "start": 383,
+          "end": 400,
+          "style": "paren_cite",
+          "text": "([Greek: techne])"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Otherwise. The mind contemplates Matter Necessary or Contingent. If necessary, Principles ([Greek: nous]), Deductions ([Greek: episteme]), or Mixed ([Greek: sophla]). If Contingent, Action ([Greek: phronesis]), Production ([Greek: techen]). (Giphanius quoted in Cardwell’s notes.)",
+      "spans": [
+        {
+          "start": 90,
+          "end": 105,
+          "style": "paren_cite",
+          "text": "([Greek: nous])"
+        },
+        {
+          "start": 118,
+          "end": 137,
+          "style": "paren_cite",
+          "text": "([Greek: episteme])"
+        },
+        {
+          "start": 148,
+          "end": 165,
+          "style": "paren_cite",
+          "text": "([Greek: sophla])"
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "style": "paren_cite",
+          "text": "([Greek: phronesis])"
+        },
+        {
+          "start": 222,
+          "end": 239,
+          "style": "paren_cite",
+          "text": "([Greek: techen])"
+        },
+        {
+          "start": 241,
+          "end": 280,
+          "style": "paren_quote",
+          "text": "(Giphanius quoted in Cardwell’s notes.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[11] It is the opening statement of the Post Analytics.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[11]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[12] Aristotle in his logical analysis of Induction, Prior. Analytics II. 25, defines it to be “the proving the inherence of the major term in the middle (_i.e._ proving the truth of the major premiss in fig. 1) through the minor term.” He presupposes a Syllogism in the first Figure with an universal affirmative conclusion, which reasons, of course, from an universal, which universal is to be taken as proved by Induction. His doctrine turns upon a canon which he there quotes. “If of one and the same term two others be predicated, one of which is coextensive with that one and the same, the other may be predicated of that which is thus coextensive.” The fact of this coextensiveness must be ascertained by [Greek: nous], in other words, by the Inductive Faculty. We will take Aldrich’s instance. All Magnets attract iron A B C are Magnets A B C attract iron.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[12]"
+        },
+        {
+          "start": 95,
+          "end": 236,
+          "style": "quote",
+          "text": "“the proving the inherence of the major term in the middle (_i.e._ proving the truth of the major premiss in fig. 1) through the minor term.”"
+        },
+        {
+          "start": 481,
+          "end": 655,
+          "style": "quote",
+          "text": "“If of one and the same term two others be predicated, one of which is coextensive with that one and the same, the other may be predicated of that which is thus coextensive.”"
+        },
+        {
+          "start": 712,
+          "end": 725,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Presupposed Syllogism reasoning from an universal."
+    },
+    {
+      "type": "paragraph",
+      "text": "A B C attract iron (Matter of observation and experiment)",
+      "spans": [
+        {
+          "start": 19,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(Matter of observation and experiment)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All Magnets are A B C (Assumed by [Greek: nous], i.e. the Inductive faculty)",
+      "spans": [
+        {
+          "start": 22,
+          "end": 76,
+          "style": "paren_aside",
+          "text": "(Assumed by [Greek: nous], i.e. the Inductive faculty)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All Magnets attract iron (Major premiss of the last Syllogism proved by taking the minor term of that for the middle term of this.)",
+      "spans": [
+        {
+          "start": 25,
+          "end": 131,
+          "style": "paren_aside",
+          "text": "(Major premiss of the last Syllogism proved by taking the minor term of that for the middle term of this.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Or, according to the canon quoted above: A B C are Magnets. A B C attract iron."
+    },
+    {
+      "type": "paragraph",
+      "text": "But [Greek: nous] tells me that the term Magnets is coextensive with the term A B C, therefore of all Magnets I may predicate that they attract iron.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 17,
+          "style": "bracket_note",
+          "text": "[Greek: nous]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Induction is said by Aristotle to be [Greek: hoia phanton], but he says in the same place that for this reason we must _conceive_ ([Greek: noehin]) the term containing the particular Instances (as A B C above) as composed of all the Individuals.",
+      "spans": [
+        {
+          "start": 37,
+          "end": 58,
+          "style": "bracket_note",
+          "text": "[Greek: hoia phanton]"
+        },
+        {
+          "start": 119,
+          "end": 129,
+          "style": "em",
+          "text": "_conceive_"
+        },
+        {
+          "start": 130,
+          "end": 147,
+          "style": "paren_cite",
+          "text": "([Greek: noehin])"
+        },
+        {
+          "start": 193,
+          "end": 209,
+          "style": "paren_cite",
+          "text": "(as A B C above)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If Induction implied actual examination of all particular instances it would cease to be Reasoning at all and sink into repeated acts of Simple Apprehension it is really the bridging over of a chasm, not the steps cut in the rock on either side to enable us to walk down into and again out of it. It is a branch of probable Reasoning, and its validity depends _entirely_ upon the quality of the particular mind which performs it. Rapid Induction has always been a distinguishing mark of Genius the certainty produced by it is Subjective and not Objective. It may be useful to exhibit it Syllogistically, but the Syllogism which exhibits it is either nugatory, or contains a premiss _literally_ false. It will be found useful to compare on the subject of Induction _as the term is used by Aristotle_, Analytica Prior. II 25 26 Analytica Post. I. 1, 3, and I. Topics VI I and X. [13] The reference is made to the Post Analyt I II and it is impossible to understand the account of [Greek: epistaemae] without a perusal of the chapter, the additions to the definition referred to relate to the nature of the premisses from which [Greek: epistaemae] draws its conclusions they are to be “true, first principles incapable of any syllogistic proof, better known than the conclusion, prior to it, and causes of it.” (See the appendix to this Book.)",
+      "spans": [
+        {
+          "start": 360,
+          "end": 370,
+          "style": "em",
+          "text": "_entirely_"
+        },
+        {
+          "start": 682,
+          "end": 693,
+          "style": "em",
+          "text": "_literally_"
+        },
+        {
+          "start": 764,
+          "end": 798,
+          "style": "em",
+          "text": "_as the term is used by Aristotle_"
+        },
+        {
+          "start": 877,
+          "end": 881,
+          "style": "footnote",
+          "text": "[13]"
+        },
+        {
+          "start": 978,
+          "end": 997,
+          "style": "bracket_note",
+          "text": "[Greek: epistaemae]"
+        },
+        {
+          "start": 1125,
+          "end": 1144,
+          "style": "bracket_note",
+          "text": "[Greek: epistaemae]"
+        },
+        {
+          "start": 1182,
+          "end": 1307,
+          "style": "quote",
+          "text": "“true, first principles incapable of any syllogistic proof, better known than the conclusion, prior to it, and causes of it.”"
+        },
+        {
+          "start": 1308,
+          "end": 1340,
+          "style": "paren_cite",
+          "text": "(See the appendix to this Book.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[14] This is the test of correct logical division, that the _membra dividentia_ shall be opposed, _i.e._ not included the one by the other.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[14]"
+        },
+        {
+          "start": 60,
+          "end": 79,
+          "style": "em",
+          "text": "_membra dividentia_"
+        },
+        {
+          "start": 98,
+          "end": 104,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[15] The meaning of the [Greek: hepehi] appears to be this: the appeal is made in the first instance to popular language, just as it the case of [Greek: epistaemae], and will be in those of [Greek: phronaesis] and [Greek: sophia]. We commonly call Architecture an Art, and it is so and so, therefore the name Art and this so and so are somehow connected to prove that connection to be “coextensiveness,” we predicate one of the other and then simply convert the proposition, which is the proper test of any logical definition, or of any specific property. See the Topics,",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[15]"
+        },
+        {
+          "start": 24,
+          "end": 39,
+          "style": "bracket_note",
+          "text": "[Greek: hepehi]"
+        },
+        {
+          "start": 145,
+          "end": 164,
+          "style": "bracket_note",
+          "text": "[Greek: epistaemae]"
+        },
+        {
+          "start": 190,
+          "end": 209,
+          "style": "bracket_note",
+          "text": "[Greek: phronaesis]"
+        },
+        {
+          "start": 214,
+          "end": 229,
+          "style": "bracket_note",
+          "text": "[Greek: sophia]"
+        },
+        {
+          "start": 385,
+          "end": 403,
+          "style": "quote",
+          "text": "“coextensiveness,”"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "1. vi.\n[16] See the parable of the unjust Steward, in which the popular sense\nof [Greek: phronaesis] is strongly brought out; [Greek: ephaenesen ho\nkurios ton oikonomon taes adikias oti phronimos epoiaesen hoti ohi\nviohi tou aionos toutou phronimoteroi, k.t.l.]—Luke xvi. 8.\n[17] Compare the [Greek: aplos] and [Greek: kath’ ekasta pepaideumenos]\nof Book I. chap. 1.\n[18] The two aspects under which Virtue may be considered as claiming\nthe allegiance of moral agents are, that of being right, and that of\nbeing truly expedient, because Conscience and Reasonable Self-Love are\nthe two Principles of our moral constitution naturally supreme and\n“Conscience and Self-Love, _if we understand our true happiness_,\nalways lead us the same way.” Bishop Butler, end of Sermon III.\nAnd again:\n“If by _a sense of interest_ is meant a practical regard to what is\nupon the whole our Happiness this is not only coincident with the\nprinciple of Virtue or Moral Rectitude, but is a part of the idea\nitself. And it is evident this Reasonable Self-Love wants to be\nimproved as really as any principle in our nature. So little cause is\nthere for Moralists to disclaim this principle.” From the note on sect.",
+      "spans": [
+        {
+          "start": 7,
+          "end": 11,
+          "style": "footnote",
+          "text": "[16]"
+        },
+        {
+          "start": 81,
+          "end": 100,
+          "style": "bracket_note",
+          "text": "[Greek: phronaesis]"
+        },
+        {
+          "start": 275,
+          "end": 279,
+          "style": "footnote",
+          "text": "[17]"
+        },
+        {
+          "start": 292,
+          "end": 306,
+          "style": "bracket_note",
+          "text": "[Greek: aplos]"
+        },
+        {
+          "start": 311,
+          "end": 346,
+          "style": "bracket_note",
+          "text": "[Greek: kath’ ekasta pepaideumenos]"
+        },
+        {
+          "start": 367,
+          "end": 371,
+          "style": "footnote",
+          "text": "[18]"
+        },
+        {
+          "start": 671,
+          "end": 708,
+          "style": "em",
+          "text": "_if we understand our true happiness_"
+        },
+        {
+          "start": 792,
+          "end": 813,
+          "style": "em",
+          "text": "_a sense of interest_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "iv. of the chapter on Moral Discipline, Analogy, part I chap. v."
+    },
+    {
+      "type": "paragraph",
+      "text": "[19] See the note on [Greek: Arche] on page 4, l. 30.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[19]"
+        },
+        {
+          "start": 21,
+          "end": 35,
+          "style": "bracket_note",
+          "text": "[Greek: Arche]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The student will find it worth while to compare this passage with the following—Chap. xiii. of this book beginning [Greek: e d’ exis to ommati touto k. t. l]—vii. 4. [Greek: eti kai ode physikos. k.t.l.] vii. 9.—[Greek: ae gar arethae kai ae mochthaeria. k.t.l.]—iii. 7 _ad finem_. [Greek: ei de tis legoi. k.t.l.]",
+      "spans": [
+        {
+          "start": 115,
+          "end": 157,
+          "style": "bracket_note",
+          "text": "[Greek: e d’ exis to ommati touto k. t. l]"
+        },
+        {
+          "start": 166,
+          "end": 203,
+          "style": "bracket_note",
+          "text": "[Greek: eti kai ode physikos. k.t.l.]"
+        },
+        {
+          "start": 212,
+          "end": 262,
+          "style": "bracket_note",
+          "text": "[Greek: ae gar arethae kai ae mochthaeria. k.t.l.]"
+        },
+        {
+          "start": 270,
+          "end": 280,
+          "style": "em",
+          "text": "_ad finem_"
+        },
+        {
+          "start": 282,
+          "end": 314,
+          "style": "bracket_note",
+          "text": "[Greek: ei de tis legoi. k.t.l.]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[20] This is not quite fair. Used in its strict sense, Art does not admit of degrees of excellence any more than Practical Wisdom. In popular language we use the term “wiser man,” as readily as “better artist” really denoting in each case different degrees of approximation to Practical Wisdom and Art respectively, [Greek: dia to ginesthai tous epainous di anaphoras]. I. 12.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[20]"
+        },
+        {
+          "start": 167,
+          "end": 179,
+          "style": "quote",
+          "text": "“wiser man,”"
+        },
+        {
+          "start": 194,
+          "end": 209,
+          "style": "quote",
+          "text": "“better artist”"
+        },
+        {
+          "start": 316,
+          "end": 368,
+          "style": "bracket_note",
+          "text": "[Greek: dia to ginesthai tous epainous di anaphoras]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[21] He would be a _better Chymist_ who should poison intentionally, than he on whose mind the prevailing impression was that “Epsom Salts mean Oxalic Acid, and Syrup of Senna Laudanum.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[21]"
+        },
+        {
+          "start": 19,
+          "end": 35,
+          "style": "em",
+          "text": "_better Chymist_"
+        },
+        {
+          "start": 126,
+          "end": 186,
+          "style": "quote",
+          "text": "“Epsom Salts mean Oxalic Acid, and Syrup of Senna Laudanum.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[22]The term Wisdom is used in our English Translation of the Old Testament in the sense first given to [Greek:——] here. “Then wrought Bezaleel and Ahohab, and every _wise-hearted man, in whom the Lord put wisdom and understanding_ to know how to work all manner of work for the service of the Sanctuary” Exodus xxxvi. i.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[22]"
+        },
+        {
+          "start": 104,
+          "end": 114,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 121,
+          "end": 304,
+          "style": "quote",
+          "text": "“Then wrought Bezaleel and Ahohab, and every _wise-hearted man, in whom the Lord put wisdom and understanding_ to know how to work all manner of work for the service of the Sanctuary”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[23] [Greek:——] and [Greek:——], (in the strict sense, for it is used in many different senses in this book) are different parts of the whole function [Greek:——], [Greek:——] takes in conclusions, drawn by strict reasoning from Principles of a certain kind which [Greek: ——] supplies. It is conceivable that a man might go on gaining these principles by Intuition and never reasoning from them, and so [Greek: ——] might exist independent of [Greek:——], but not this without that. Put the two together, the head to the trunk, and you form the living being [Greek:——]. There are three branches of [Greek:——] according to Greek Philosophy, [Greek:——], [Greek:——], [Greek:——]. Science is perhaps the nearest English term, but we have none really equivalent.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[23]"
+        },
+        {
+          "start": 5,
+          "end": 15,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 20,
+          "end": 30,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 32,
+          "end": 107,
+          "style": "paren_aside",
+          "text": "(in the strict sense, for it is used in many different senses in this book)"
+        },
+        {
+          "start": 150,
+          "end": 160,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 162,
+          "end": 172,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 261,
+          "end": 272,
+          "style": "bracket_note",
+          "text": "[Greek: ——]"
+        },
+        {
+          "start": 400,
+          "end": 411,
+          "style": "bracket_note",
+          "text": "[Greek: ——]"
+        },
+        {
+          "start": 439,
+          "end": 449,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 553,
+          "end": 563,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 593,
+          "end": 603,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 635,
+          "end": 645,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 647,
+          "end": 657,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 659,
+          "end": 669,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[24][Greek:——] is here used in its most extensive sense, [Greek:——] would be its chief Instrument.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[24]"
+        },
+        {
+          "start": 4,
+          "end": 14,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 57,
+          "end": 67,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[25] The faculty concerned with which is [Greek:——].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[25]"
+        },
+        {
+          "start": 41,
+          "end": 51,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[26] In every branch of Moral Action in which Practical Wisdom is employed there will be general principles, and the application of them, but in some branches there are distinct names appropriated to the operations of Practical Wisdom, in others there are not.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[26]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Thus Practical Wisdom, when employed on the general principles of Civil Government, is called Legislation, as administering its particular functions it is called simply Government. In Domestic Management, there are of course general Rules, and also the particular application of them; but here the faculty is called only by one name. So too when Self-Interest is the object of Practical Wisdom."
+    },
+    {
+      "type": "paragraph",
+      "text": "[27] [Greek:——], “our mere Operatives in Public business.” (Chalmers.)",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[27]"
+        },
+        {
+          "start": 5,
+          "end": 15,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 17,
+          "end": 58,
+          "style": "quote",
+          "text": "“our mere Operatives in Public business.”"
+        },
+        {
+          "start": 59,
+          "end": 70,
+          "style": "paren_cite",
+          "text": "(Chalmers.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[28] Practical Wisdom may be employed either respecting Self, (which is [Greek:——] proper) or not-Self, _i.e._ either one’s family=[Greek:——], or one’s community=[Greek:——], but here the supreme and subordinate are distinguished, the former is [Greek:——], the latter [Greek:——] proper, whose functions are deliberation and the administration of justice.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[28]"
+        },
+        {
+          "start": 62,
+          "end": 90,
+          "style": "paren_cite",
+          "text": "(which is [Greek:——] proper)"
+        },
+        {
+          "start": 104,
+          "end": 110,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 131,
+          "end": 141,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 162,
+          "end": 172,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 244,
+          "end": 254,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        },
+        {
+          "start": 267,
+          "end": 277,
+          "style": "bracket_note",
+          "text": "[Greek:——]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[29] But where can this be done, if there be no community? see Horace’s account of the way in which his father made him reap instruction from the examples in the society around him. 1. Sat. iv. 105, etc. See also Bishop Butler, Analogy, part I. chap. v. sect. iii.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[29]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The whole question of the Selfish Morality is treated in Bishop Butler’s first three and the eleventh Sermons, in which he shows the coincidence in _fact_ of enlightened Self-Love and Benevolence _i.e._ love of others. Compare also what is said in the first Book of this treatise, chap. v., about [Greek: autarkeia].",
+      "spans": [
+        {
+          "start": 148,
+          "end": 154,
+          "style": "em",
+          "text": "_fact_"
+        },
+        {
+          "start": 196,
+          "end": 202,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 297,
+          "end": 315,
+          "style": "bracket_note",
+          "text": "[Greek: autarkeia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[30] More truly “implied,” namely, that Practical Wisdom results from experience.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[30]"
+        },
+        {
+          "start": 16,
+          "end": 26,
+          "style": "quote",
+          "text": "“implied,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[31] This observation seems to be introduced, simply because suggested by the last, and not because at all relevant to the matter in hand.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[31]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[32]  An instance of Principles gained [Greek: aisthesei]. (Book 1.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[32]"
+        },
+        {
+          "start": 39,
+          "end": 57,
+          "style": "bracket_note",
+          "text": "[Greek: aisthesei]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "chap. xii.), and also Bishop Butler’s first Sermon.\n\n[9] Terms used for persons.\n\n[10] By [Greek:——] is meant numbers themselves, 4, 20, 50, etc, by [Greek:——] these numbers exemplified, 4 horses, 20 sheep, etc.\n\n[11] The profits of a mercantile transaction (say £1000) are to be divided between A and B, in the ratio of 2 to 3 (which is the real point to be settled); then,\n\nA : B :: 400 : 600.\n\nA : 400 :: B : 600 (permutando, and assuming a value for A and B, so as to make them commensurable with the respectiy sums).\n\nA+400 : B+600 :: A : B. This represents the actual distribution; its fairness depending entirely on that of the first proportion.\n\n[12] _i.e._ where the ratio is that of equality, thus 2 : 2 :: 40 : 40\n\n[13] Her Majesty’s “Justices.”\n\n[14] I have omitted the next three lines, as they seem to be out of place here, and to occur much more naturally afterwards; it not being likely that they were originally twice written, one is perhaps at liberty to give Aristotle the benefit of the doubt, and conclude that he put them where they made the best sense.\n\n[15] This I believe to be the meaning of the passage but do not pretend to be able to get it out of the words.\n\n[16] This is apparently contrary to what was said before, but not really so. Aristotle does not mean that the man in authority struck wrongfully, but he takes the extreme case of simple Reciprocation, and in the second case, the man who strikes one in authority commits two offences, one against the person (and so far they are equal), and another against the office.\n\n[17] χάρις denotes, 1st, a kindly feeling issuing in a gratuitous act of kindness, 2ndly, the effect of this act of kindness on a generous mind; 3rdly, this effect issuing in a requital of the kindness.\n\n[18] The Shoemaker would get a house while the Builder only had (say) one pair of shoes, or at all events not so many as he ought to have. Thus the man producing the least valuable ware would get the most valuable, and _vice versa_.\n\nAdopting, as I have done, the reading which omits [Greek:——] at [Greek:——], we have simply a repetition of the caution, that before Reciprocation is attempted, there must be the same ratio between the wares as between the persons, _i.e._ the ratio of equality.\n\nIf we admit [Greek: ou], the meaning may be, that you must not bring into the proportion the difference mentioned above [Greek: eteron kai ouk ison], since for the purposes of commerce all men are equal.\n\nSay that the Builder is to the Shoemaker as 10:1. Then there must be the same ratio between the wares, consequently the highest artist will carry off the most valuable wares, thus combining in himself both [Greek: uperochai]. The following are the three cases, given 100 pr. shoes = 1 house.\n\nBuilder : Shoemaker : : 1  pr.  shoes      : 1 house—_wrong_. ——          ——          100 pr. shoes      : 1 house—_right_ ——          ——          10 (100 pr. shoes) : 1 house—_wrong_.\n\n[19] [Greek] Compare a similar use of [Greek]. De Interpretatione, II.\n\n2. [Greek].\n[20] Every unjust act embodies [Greek: to adikon], which is a violation\nof [Greek: to ison], and so implies a greater and a less share, the\nformer being said to fall to the doer, the latter to the sufferer, of\ninjury.\n\n[21] This passage certainly occurs awkwardly here. If attached to the close of the preceding Chapter it would leave that Chapter incomplete, for the question is not gone into, but only stated. As the commencement of this Chapter it is yet more out of place; I should propose to insert it at the commencement of the following Chapter, to which it forms an appropriate introduction.\n\n[22] In a pure democracy men are absolutely, _i.e._ numerically, equal, in other forms only proportionately equal. Thus the meanest British subject is proportionately equal to the Sovereign, that is to say, is as fully secured in his rights as the Sovereign in hers.\n\n[23] Or, according to Cardwell’s reading ([Greek: kineton ou mentoi pan]) “but amongst ourselves there is Just, which is naturally variable, but certainly all Just is not such.” The sense of the passage is not affected by the reading. In Bekker’s text we must take [Greek: kineton] to mean the same as [Greek: kinoumenon], _i.e._ “we admit there is no Just which has not been sometimes disallowed, still,” etc. With Cardwell’s, [Greek: kineton] will mean “which not only _does_ but naturally _may_ vary.”\n\n[24] Murder is unjust by the law of nature, Smuggling by enactment. Therefore any act which can be referred to either of these heads is an unjust act, or, as Bishop Butler phrases it, an act _materially_ unjust. Thus much may be decided without reference to the agent. See the note on page 32, l. 16.\n\n[25] “As distinct from pain or loss.” Bishop Butler’s Sermon on Resentment. See also, Rhet. 11. 2 Def. of [Greek: orgae].\n\n[26] This method of reading the passage is taken from Zell as quoted in Cardwell’s Notes, and seems to yield the best sense. The Paraphrast gives it as follows:\n\n> “But the aggressor is not ignorant that he began, and so he feels himself to be wrong [and will not acknowledge that he is the aggressor], but the other does not.”\n\n[27] As when a man is “_justified_ at the Grass Market,” _i.e._ hung.\n\n[28] Where the stock of good is limited, if any individual takes more than his share some one else must have less than his share; where it is infinite, or where there is no good at all this cannot happen.\n\n[29] The reference is to chap. vii. where it was said that the law views the parties in a case of particular injustice as originally equal, but now unequal, the wrong doer the gainer and the sufferer the loser by the wrong, but in the case above supposed there is but _one_ party.\n\n[30] So in the Politics, 1. 2.\n\n> _Hae men gar psuchae tou somatos archei despotikaen archaen, o de nous taes orexeos politikaen kai despotikaev._ Compare also Bishop Butler’s account of human nature as a system—of the different authority of certain principles, and specially the supremacy of Conscience.\n\nBOOK VI\n[1] I understand the illustration to be taken from the process of\nlowering a weight into its place; a block of marble or stone, for\ninstance, in a building.\n[2] Called for convenience sake Necessary and Contingent matter.\n[3] One man learns Mathematics more easily than another, in common\nlanguage, _he has a turn for_ Mathematics, _i e_ something in his\nmental conformation answers to that science The Phrenologist shows the\nbump denoting this aptitude.\n[4] And therefore the question resolves itself into this, “What is the\nwork of the Speculative, and what of the Practical, faculty of Reason.”\n\nSee the description of _apetae_ II. 5.\n\n[5] _praxis_ is here used in its strict and proper meaning.\n\n[6] That is to say, the Will waits upon deliberation in which Reason is the judge; when the decision is pronounced, the Will must act accordingly.\n\nThe question at issue always is, _Is this Good?_ because the Will is only moved by an impression of Good; the Decision then will be always _Aye or No_, and the mental hand is put forth to grasp in the former case, and retracted in the later.\n\nSo far as what must take place in _every_ Moral Action, right or wrong, the Machinery of the mind being supposed uninjured but to constitute a good Moral Choice, _i e._. a good Action, the Reason must have said Aye when it ought.\n\nThe cases of faulty action will be, either when the Machinery is perfect but wrongly directed, as in the case of a deliberate crime, or when the direction given by the Reason is right but the Will does not move in accordance with that direction, in other words, when the Machinery is out of order; as in the case of the [Greek: akrates]—video meliora proboque, Deteriora sequor.\n\n[7] See the note on [Greek: Arche] on page 4, l. 30.\n\n[8] The cobbler is at his last, why? to make shoes, which are to clothe the feet of someone and the price to be paid, _i.e._ the produce of his industry, is to enable him to support his wife and children; thus his production is subordinate to Moral Action.\n\n[9] It may be fairly presumed that Aristotle would not thus have varied his phrase without some real difference of meaning. That difference is founded, I think, on the two senses of [Greek: orexis] before alluded to (note, p. 53, l. 33). The first impulse of the mind towards Action may be given either by a vague desire or by the suggestion of Reason. The vague desire passing through the deliberate stage would issue in Moral Choice. Reason must enlist the Will before any Action can take place.\n\nReason ought to be the originator in all cases, as Bishop Butler observes that Conscience should be. If this were so, every act of Moral Choice would be [Greek: orektikos nous].\n\nBut one obvious function of the feelings and passions in our composite nature is to instigate Action, when Reason and Conscience by themselves do not: so that as a matter of fact our Moral Choice is, in general, fairly described as [Greek: orexis dianoetike]. See Bishop Butler’s Sermon II. and the First upon Compassion.\n\n[10] The mind attains truth, either for the sake of truth itself ([Greek: aplos]), or for the sake of something further ([Greek: eneka tinos]). If the first then either syllogistically ([Greek: episteme]), non-syllogistically ([Greek: nous]), or by union of the two methods ([Greek: sophla]). If the second, either with a view to _act_ ([Greek: phronesis]), or with a view to _make_ ([Greek: techne]).\n\nOtherwise. The mind contemplates Matter Necessary or Contingent. If necessary, Principles ([Greek: nous]), Deductions ([Greek: episteme]), or Mixed ([Greek: sophla]). If Contingent, Action ([Greek: phronesis]), Production ([Greek: techen]). (Giphanius quoted in Cardwell’s notes.)\n\n[11] It is the opening statement of the Post Analytics.\n\n[12] Aristotle in his logical analysis of Induction, Prior. Analytics II. 25, defines it to be “the proving the inherence of the major term in the middle (_i.e._ proving the truth of the major premiss in fig. 1) through the minor term.” He presupposes a Syllogism in the first Figure with an universal affirmative conclusion, which reasons, of course, from an universal, which universal is to be taken as proved by Induction. His doctrine turns upon a canon which he there quotes. “If of one and the same term two others be predicated, one of which is coextensive with that one and the same, the other may be predicated of that which is thus coextensive.” The fact of this coextensiveness must be ascertained by [Greek: nous], in other words, by the Inductive Faculty. We will take Aldrich’s instance. All Magnets attract iron A B C are Magnets A B C attract iron.\n\nPresupposed Syllogism reasoning from an universal.\n\nA B C attract iron (Matter of observation and experiment)\n\nAll Magnets are A B C (Assumed by [Greek: nous], i.e. the Inductive faculty)\n\nAll Magnets attract iron (Major premiss of the last Syllogism proved by taking the minor term of that for the middle term of this.)\n\nOr, according to the canon quoted above: A B C are Magnets. A B C attract iron.\n\nBut [Greek: nous] tells me that the term Magnets is coextensive with the term A B C, therefore of all Magnets I may predicate that they attract iron.\n\nInduction is said by Aristotle to be [Greek: hoia phanton], but he says in the same place that for this reason we must _conceive_ ([Greek: noehin]) the term containing the particular Instances (as A B C above) as composed of all the Individuals.\n\nIf Induction implied actual examination of all particular instances it would cease to be Reasoning at all and sink into repeated acts of Simple Apprehension it is really the bridging over of a chasm, not the steps cut in the rock on either side to enable us to walk down into and again out of it. It is a branch of probable Reasoning, and its validity depends _entirely_ upon the quality of the particular mind which performs it. Rapid Induction has always been a distinguishing mark of Genius the certainty produced by it is Subjective and not Objective. It may be useful to exhibit it Syllogistically, but the Syllogism which exhibits it is either nugatory, or contains a premiss _literally_ false. It will be found useful to compare on the subject of Induction _as the term is used by Aristotle_, Analytica Prior. II 25 26 Analytica Post. I. 1, 3, and I. Topics VI I and X. [13] The reference is made to the Post Analyt I II and it is impossible to understand the account of [Greek: epistaemae] without a perusal of the chapter, the additions to the definition referred to relate to the nature of the premisses from which [Greek: epistaemae] draws its conclusions they are to be “true, first principles incapable of any syllogistic proof, better known than the conclusion, prior to it, and causes of it.” (See the appendix to this Book.)\n\n[14] This is the test of correct logical division, that the _membra dividentia_ shall be opposed, _i.e._ not included the one by the other.\n\n[15] The meaning of the [Greek: hepehi] appears to be this: the appeal is made in the first instance to popular language, just as it the case of [Greek: epistaemae], and will be in those of [Greek: phronaesis] and [Greek: sophia]. We commonly call Architecture an Art, and it is so and so, therefore the name Art and this so and so are somehow connected to prove that connection to be “coextensiveness,” we predicate one of the other and then simply convert the proposition, which is the proper test of any logical definition, or of any specific property. See the Topics,\n\n1. vi.\n[16] See the parable of the unjust Steward, in which the popular sense\nof [Greek: phronaesis] is strongly brought out; [Greek: ephaenesen ho\nkurios ton oikonomon taes adikias oti phronimos epoiaesen hoti ohi\nviohi tou aionos toutou phronimoteroi, k.t.l.]—Luke xvi. 8.\n[17] Compare the [Greek: aplos] and [Greek: kath’ ekasta pepaideumenos]\nof Book I. chap. 1.\n[18] The two aspects under which Virtue may be considered as claiming\nthe allegiance of moral agents are, that of being right, and that of\nbeing truly expedient, because Conscience and Reasonable Self-Love are\nthe two Principles of our moral constitution naturally supreme and\n“Conscience and Self-Love, _if we understand our true happiness_,\nalways lead us the same way.” Bishop Butler, end of Sermon III.\nAnd again:\n“If by _a sense of interest_ is meant a practical regard to what is\nupon the whole our Happiness this is not only coincident with the\nprinciple of Virtue or Moral Rectitude, but is a part of the idea\nitself. And it is evident this Reasonable Self-Love wants to be\nimproved as really as any principle in our nature. So little cause is\nthere for Moralists to disclaim this principle.” From the note on sect.\n\niv. of the chapter on Moral Discipline, Analogy, part I chap. v.\n\n[19] See the note on [Greek: Arche] on page 4, l. 30.\n\nThe student will find it worth while to compare this passage with the following—Chap. xiii. of this book beginning [Greek: e d’ exis to ommati touto k. t. l]—vii. 4. [Greek: eti kai ode physikos. k.t.l.] vii. 9.—[Greek: ae gar arethae kai ae mochthaeria. k.t.l.]—iii. 7 _ad finem_. [Greek: ei de tis legoi. k.t.l.]\n\n[20] This is not quite fair. Used in its strict sense, Art does not admit of degrees of excellence any more than Practical Wisdom. In popular language we use the term “wiser man,” as readily as “better artist” really denoting in each case different degrees of approximation to Practical Wisdom and Art respectively, [Greek: dia to ginesthai tous epainous di anaphoras]. I. 12.\n\n[21] He would be a _better Chymist_ who should poison intentionally, than he on whose mind the prevailing impression was that “Epsom Salts mean Oxalic Acid, and Syrup of Senna Laudanum.”\n\n[22]The term Wisdom is used in our English Translation of the Old Testament in the sense first given to [Greek:——] here. “Then wrought Bezaleel and Ahohab, and every _wise-hearted man, in whom the Lord put wisdom and understanding_ to know how to work all manner of work for the service of the Sanctuary” Exodus xxxvi. i.\n\n[23] [Greek:——] and [Greek:——], (in the strict sense, for it is used in many different senses in this book) are different parts of the whole function [Greek:——], [Greek:——] takes in conclusions, drawn by strict reasoning from Principles of a certain kind which [Greek: ——] supplies. It is conceivable that a man might go on gaining these principles by Intuition and never reasoning from them, and so [Greek: ——] might exist independent of [Greek:——], but not this without that. Put the two together, the head to the trunk, and you form the living being [Greek:——]. There are three branches of [Greek:——] according to Greek Philosophy, [Greek:——], [Greek:——], [Greek:——]. Science is perhaps the nearest English term, but we have none really equivalent.\n\n[24][Greek:——] is here used in its most extensive sense, [Greek:——] would be its chief Instrument.\n\n[25] The faculty concerned with which is [Greek:——].\n\n[26] In every branch of Moral Action in which Practical Wisdom is employed there will be general principles, and the application of them, but in some branches there are distinct names appropriated to the operations of Practical Wisdom, in others there are not.\n\nThus Practical Wisdom, when employed on the general principles of Civil Government, is called Legislation, as administering its particular functions it is called simply Government. In Domestic Management, there are of course general Rules, and also the particular application of them; but here the faculty is called only by one name. So too when Self-Interest is the object of Practical Wisdom.\n\n[27] [Greek:——], “our mere Operatives in Public business.” (Chalmers.)\n\n[28] Practical Wisdom may be employed either respecting Self, (which is [Greek:——] proper) or not-Self, _i.e._ either one’s family=[Greek:——], or one’s community=[Greek:——], but here the supreme and subordinate are distinguished, the former is [Greek:——], the latter [Greek:——] proper, whose functions are deliberation and the administration of justice.\n\n[29] But where can this be done, if there be no community? see Horace’s account of the way in which his father made him reap instruction from the examples in the society around him. 1. Sat. iv. 105, etc. See also Bishop Butler, Analogy, part I. chap. v. sect. iii.\n\nThe whole question of the Selfish Morality is treated in Bishop Butler’s first three and the eleventh Sermons, in which he shows the coincidence in _fact_ of enlightened Self-Love and Benevolence _i.e._ love of others. Compare also what is said in the first Book of this treatise, chap. v., about [Greek: autarkeia].\n\n[30] More truly “implied,” namely, that Practical Wisdom results from experience.\n\n[31] This observation seems to be introduced, simply because suggested by the last, and not because at all relevant to the matter in hand.\n\n[32]  An instance of Principles gained [Greek: aisthesei]. (Book 1.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 649,
+    "text": "chap. xii.), and also Bishop Butler’s first Sermon."
+  },
+  "word_count": 3280,
+  "block_count": 77
+}

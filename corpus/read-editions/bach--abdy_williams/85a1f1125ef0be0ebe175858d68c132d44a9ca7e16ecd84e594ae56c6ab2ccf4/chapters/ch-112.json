@@ -1,0 +1,60 @@
+{
+  "chapter_id": "ch-112",
+  "title": "_Six Sonatas or Suites for the Violoncello (238)._ _Three Sonatas for the Viola da Gamba and Clavier (239)._",
+  "block_start": 1321,
+  "block_end": 1322,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Six Sonatas or Suites for the Violoncello (238)._ _Three Sonatas for the Viola da Gamba and Clavier (239)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 50,
+          "style": "em",
+          "text": "_Six Sonatas or Suites for the Violoncello (238)._"
+        },
+        {
+          "start": 51,
+          "end": 108,
+          "style": "em",
+          "text": "_Three Sonatas for the Viola da Gamba and Clavier (239)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Clavierbuch of Anna Magdalena Bach, 1725._      Contains twenty easy pieces, consisting of minuets, polonaises, rondos, marches, and one song. _Principles of Thorough-bass for his pupils._      Dated 1738, and preserved by J. P. Kellner. It is divided into two parts for beginners and advanced pupils. The author says, “The ultimate end and aim of thorough-bass should only be the glory of God and recreation of the mind. Where these are not kept in view there can be no real music, only an infernal jingling and bellowing.” The complete work is quoted as an appendix in Spitta, vol. iii.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "em",
+          "text": "_Clavierbuch of Anna Magdalena Bach, 1725._"
+        },
+        {
+          "start": 144,
+          "end": 189,
+          "style": "em",
+          "text": "_Principles of Thorough-bass for his pupils._"
+        },
+        {
+          "start": 320,
+          "end": 525,
+          "style": "quote",
+          "text": "“The ultimate end and aim of thorough-bass should only be the glory of God and recreation of the mind. Where these are not kept in view there can be no real music, only an infernal jingling and bellowing.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Six Sonatas or Suites for the Violoncello (238)._ _Three Sonatas for the Viola da Gamba and Clavier (239)._\n\n> _Clavierbuch of Anna Magdalena Bach, 1725._      Contains twenty easy pieces, consisting of minuets, polonaises, rondos, marches, and one song. _Principles of Thorough-bass for his pupils._      Dated 1738, and preserved by J. P. Kellner. It is divided into two parts for beginners and advanced pupils. The author says, “The ultimate end and aim of thorough-bass should only be the glory of God and recreation of the mind. Where these are not kept in view there can be no real music, only an infernal jingling and bellowing.” The complete work is quoted as an appendix in Spitta, vol. iii.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1321,
+    "text": "_Six Sonatas or Suites for the Violoncello (238)._ _Three Sonatas for the Viola da Gamba and Clavier (239)._"
+  },
+  "word_count": 119,
+  "block_count": 2
+}

@@ -1,0 +1,53 @@
+{
+  "chapter_id": "ch-000",
+  "title": "ST. THOMAS AQUINAS SUMMA THEOLOGICA",
+  "block_start": 0,
+  "block_end": 4,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "ST. THOMAS AQUINAS SUMMA THEOLOGICA",
+      "level": 2
+    },
+    {
+      "type": "metadata",
+      "text": "PART I (\"Prima Pars\")\nTranslated by\nFathers of the English Dominican Province\nBENZIGER BROTHERS\nNEW YORK\n_______________________\nDEDICATION\nTo the Blessed Virgin\nMary Immaculate\nSeat of Wisdom\n_______________________\nand in the First Place, Concerning What Belongs to the Essence of the Soul\n76.  Of the Union of Body and Soul\n77.  Of Those Things Which Belong to the Powers of the Soul in General 78.  Of the Specific Powers of the Soul\n79.  Of the Intellectual Powers\n80.  Of the Appetitive Powers in General\n81.  Of the Power of Sensuality\n82.  Of the Will\n83.  Of Free-Will\n84.  How the Soul While United to the Body Understands Corporeal Things Beneath It\n85.  Of the Mode and Order of Understanding\n86.  What Our Intellect Knows in Material Things\n87.  How the Intellectual Soul Knows Itself and All Within Itself 88.  How the Human Soul Knows What Is Above Itself\n89.  Of the Knowledge of the Separated Soul\n90.  Of the First Production of Man's Soul\n91.  The Production of the First Man's Body\n92.  The Production of the Woman\n93.  The End or Term of the Production of Man\n94.  Of the State and Condition of the First Man as Regards His Intellect\n95.  Of Things Pertaining to the First Man's Will--Namely, Grace and Righteousness\n96.  Of the Mastership Belonging to Man in the State of Innocence 97.  Of the Preservation of the Individual in the Primitive State 98.  Of the Preservation of the Species\n99.  Of the Condition of the Offspring As to the Body\n100. Of the Condition of the Offspring As Regards Righteousness 101. Of the Condition of the Offspring As Regards Knowledge 102. Of Man's Abode, Which Is Paradise\nTREATISE ON THE DIVINE GOVERNMENT\n103. Of the Government of Things in General\n104. The Special Effects of the Divine Government\n105. Of the Change of Creatures by God\n106. How One Creature Moves Another\n107. The Speech of the Angels\n108. Of the Angelic Degrees of Hierarchies and Orders\n109. The Ordering of the Bad Angels\n110. How Angels Act on Bodies\n111. The Action of the Angels on Man\n112. The Mission of the Angels\n113. Of the Guardianship of the Good Angels\n114. Of the Assaults of the Demons\n115. Of the Action of the Corporeal Creature\n116. On Fate\n117. Of Things Pertaining to the Action of Man\n118. Of the Production of Man from Man As to the Soul\n119. Of the Propagation of Man As to the Body\n_______________________\nPROLOGUE",
+      "spans": [
+        {
+          "start": 7,
+          "end": 21,
+          "style": "paren_quote",
+          "text": "(\"Prima Pars\")"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Because the Master of Catholic Truth ought not only to teach the proficient, but also to instruct beginners (according to the Apostle: As Unto Little Ones in Christ, I Gave You Milk to Drink, Not Meat-- 1 Cor. iii. 1, 2)--we purpose in this book to treat of whatever belongs to the Christian Religion, in such a way as may tend to the instruction of beginners. We have considered that students in this Science have not seldom been hampered by what they have found written by other authors, partly on account of the multiplication of useless questions, articles, and arguments; partly also because those things that are needful for them to know are not taught according to the order of the subject-matter, but according as the plan of the book might require, or the occasion of the argument offer; partly, too, because frequent repetition brought weariness and confusion to the minds of the readers.",
+      "spans": [
+        {
+          "start": 108,
+          "end": 220,
+          "style": "paren_aside",
+          "text": "(according to the Apostle: As Unto Little Ones in Christ, I Gave You Milk to Drink, Not Meat-- 1 Cor. iii. 1, 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Endeavoring to avoid these and other like faults, we shall try, by God's help, to set forth whatever is included in this Sacred Science as briefly and clearly as the matter itself may allow."
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "ST. THOMAS AQUINAS SUMMA THEOLOGICA\n\nPART I (\"Prima Pars\")\nTranslated by\nFathers of the English Dominican Province\nBENZIGER BROTHERS\nNEW YORK\n_______________________\nDEDICATION\nTo the Blessed Virgin\nMary Immaculate\nSeat of Wisdom\n_______________________\nand in the First Place, Concerning What Belongs to the Essence of the Soul\n76.  Of the Union of Body and Soul\n77.  Of Those Things Which Belong to the Powers of the Soul in General 78.  Of the Specific Powers of the Soul\n79.  Of the Intellectual Powers\n80.  Of the Appetitive Powers in General\n81.  Of the Power of Sensuality\n82.  Of the Will\n83.  Of Free-Will\n84.  How the Soul While United to the Body Understands Corporeal Things Beneath It\n85.  Of the Mode and Order of Understanding\n86.  What Our Intellect Knows in Material Things\n87.  How the Intellectual Soul Knows Itself and All Within Itself 88.  How the Human Soul Knows What Is Above Itself\n89.  Of the Knowledge of the Separated Soul\n90.  Of the First Production of Man's Soul\n91.  The Production of the First Man's Body\n92.  The Production of the Woman\n93.  The End or Term of the Production of Man\n94.  Of the State and Condition of the First Man as Regards His Intellect\n95.  Of Things Pertaining to the First Man's Will--Namely, Grace and Righteousness\n96.  Of the Mastership Belonging to Man in the State of Innocence 97.  Of the Preservation of the Individual in the Primitive State 98.  Of the Preservation of the Species\n99.  Of the Condition of the Offspring As to the Body\n100. Of the Condition of the Offspring As Regards Righteousness 101. Of the Condition of the Offspring As Regards Knowledge 102. Of Man's Abode, Which Is Paradise\nTREATISE ON THE DIVINE GOVERNMENT\n103. Of the Government of Things in General\n104. The Special Effects of the Divine Government\n105. Of the Change of Creatures by God\n106. How One Creature Moves Another\n107. The Speech of the Angels\n108. Of the Angelic Degrees of Hierarchies and Orders\n109. The Ordering of the Bad Angels\n110. How Angels Act on Bodies\n111. The Action of the Angels on Man\n112. The Mission of the Angels\n113. Of the Guardianship of the Good Angels\n114. Of the Assaults of the Demons\n115. Of the Action of the Corporeal Creature\n116. On Fate\n117. Of Things Pertaining to the Action of Man\n118. Of the Production of Man from Man As to the Soul\n119. Of the Propagation of Man As to the Body\n_______________________\nPROLOGUE\n\nBecause the Master of Catholic Truth ought not only to teach the proficient, but also to instruct beginners (according to the Apostle: As Unto Little Ones in Christ, I Gave You Milk to Drink, Not Meat-- 1 Cor. iii. 1, 2)--we purpose in this book to treat of whatever belongs to the Christian Religion, in such a way as may tend to the instruction of beginners. We have considered that students in this Science have not seldom been hampered by what they have found written by other authors, partly on account of the multiplication of useless questions, articles, and arguments; partly also because those things that are needful for them to know are not taught according to the order of the subject-matter, but according as the plan of the book might require, or the occasion of the argument offer; partly, too, because frequent repetition brought weariness and confusion to the minds of the readers.\n\nEndeavoring to avoid these and other like faults, we shall try, by God's help, to set forth whatever is included in this Sacred Science as briefly and clearly as the matter itself may allow.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 0,
+    "text": "ST. THOMAS AQUINAS SUMMA THEOLOGICA"
+  },
+  "word_count": 612,
+  "block_count": 5
+}

@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-166",
+  "title": "QUESTION 76",
+  "block_start": 5376,
+  "block_end": 5376,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 76",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 76",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 5376,
+    "text": "QUESTION 76"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

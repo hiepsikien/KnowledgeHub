@@ -1,0 +1,44 @@
+{
+  "chapter_id": "ch-023",
+  "title": "23. JOH. GEORG, 16-----17----.",
+  "block_start": 76,
+  "block_end": 78,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "23. JOH. GEORG, 16-----17----.",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_Sons of_ Joh. Ambrosius (No. 11).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 9,
+          "style": "em",
+          "text": "_Sons of_"
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "style": "paren_cite",
+          "text": "(No. 11)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "24. JOH. CHRISTOPH, 1671-1721. 25. JOH. JACOB, 1682-171--. 26."
+    }
+  ],
+  "reading_markdown": "23. JOH. GEORG, 16-----17----.\n\n> _Sons of_ Joh. Ambrosius (No. 11).\n\n24. JOH. CHRISTOPH, 1671-1721. 25. JOH. JACOB, 1682-171--. 26.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 76,
+    "text": "23. JOH. GEORG, 16-----17----."
+  },
+  "word_count": 19,
+  "block_count": 3
+}

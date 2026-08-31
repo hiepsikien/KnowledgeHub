@@ -1,0 +1,42 @@
+{
+  "chapter_id": "ch-002",
+  "title": "EDITED BY FREDERICK J. CROWEST.",
+  "block_start": 8,
+  "block_end": 11,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "EDITED BY FREDERICK J. CROWEST.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration: Bach]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "bracket_note",
+          "text": "[Illustration: Bach]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Master Musicians"
+    },
+    {
+      "type": "paragraph",
+      "text": "Edited by"
+    }
+  ],
+  "reading_markdown": "EDITED BY FREDERICK J. CROWEST.\n\n[Illustration: Bach]\n\nThe Master Musicians\n\nEdited by",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 8,
+    "text": "EDITED BY FREDERICK J. CROWEST."
+  },
+  "word_count": 12,
+  "block_count": 4
+}

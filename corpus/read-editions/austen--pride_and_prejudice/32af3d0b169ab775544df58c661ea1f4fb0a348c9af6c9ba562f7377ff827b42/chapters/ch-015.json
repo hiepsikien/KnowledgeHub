@@ -1,0 +1,190 @@
+{
+  "chapter_id": "ch-015",
+  "title": "“WILLIAM COLLINS.”",
+  "block_start": 333,
+  "block_end": 346,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "“WILLIAM COLLINS.”",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "quote",
+          "text": "“WILLIAM COLLINS.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“At four o’clock, therefore, we may expect this peace-making gentleman,” said Mr. Bennet, as he folded up the letter. “He seems to be a most conscientious and polite young man, upon my word; and, I doubt not, will prove a valuable acquaintance, especially if Lady Catherine should be so indulgent as to let him come to us again.” “There is some sense in what he says about the girls, however; and, if he is disposed to make them any amends, I shall not be the person to discourage him.” “Though it is difficult,” said Jane, “to guess in what way he can mean to make us the atonement he thinks our due, the wish is certainly to his credit.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 72,
+          "style": "quote",
+          "text": "“At four o’clock, therefore, we may expect this peace-making gentleman,”"
+        },
+        {
+          "start": 118,
+          "end": 329,
+          "style": "quote",
+          "text": "“He seems to be a most conscientious and polite young man, upon my word; and, I doubt not, will prove a valuable acquaintance, especially if Lady Catherine should be so indulgent as to let him come to us again.”"
+        },
+        {
+          "start": 330,
+          "end": 486,
+          "style": "quote",
+          "text": "“There is some sense in what he says about the girls, however; and, if he is disposed to make them any amends, I shall not be the person to discourage him.”"
+        },
+        {
+          "start": 487,
+          "end": 512,
+          "style": "quote",
+          "text": "“Though it is difficult,”"
+        },
+        {
+          "start": 524,
+          "end": 639,
+          "style": "quote",
+          "text": "“to guess in what way he can mean to make us the atonement he thinks our due, the wish is certainly to his credit.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Elizabeth was chiefly struck with his extraordinary deference for Lady Catherine, and his kind intention of christening, marrying, and burying his parishioners whenever it were required."
+    },
+    {
+      "type": "paragraph",
+      "text": "“He must be an oddity, I think,” said she. “I cannot make him out. There is something very pompous in his style. And what can he mean by apologizing for being next in the entail? We cannot suppose he would help it, if he could. Can he be a sensible man, sir?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 32,
+          "style": "quote",
+          "text": "“He must be an oddity, I think,”"
+        },
+        {
+          "start": 43,
+          "end": 259,
+          "style": "quote",
+          "text": "“I cannot make him out. There is something very pompous in his style. And what can he mean by apologizing for being next in the entail? We cannot suppose he would help it, if he could. Can he be a sensible man, sir?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“No, my dear; I think not. I have great hopes of finding him quite the reverse. There is a mixture of servility and self-importance in his letter which promises well. I am impatient to see him.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 194,
+          "style": "quote",
+          "text": "“No, my dear; I think not. I have great hopes of finding him quite the reverse. There is a mixture of servility and self-importance in his letter which promises well. I am impatient to see him.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“In point of composition,” said Mary, “his letter does not seem defective. The idea of the olive branch perhaps is not wholly new, yet I think it is well expressed.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 26,
+          "style": "quote",
+          "text": "“In point of composition,”"
+        },
+        {
+          "start": 38,
+          "end": 165,
+          "style": "quote",
+          "text": "“his letter does not seem defective. The idea of the olive branch perhaps is not wholly new, yet I think it is well expressed.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "To Catherine and Lydia neither the letter nor its writer were in any degree interesting. It was next to impossible that their cousin should come in a scarlet coat, and it was now some weeks since they had received pleasure from the society of a man in any other colour. As for their mother, Mr. Collins’s letter had done away much of her ill-will, and she was preparing to see him with a degree of composure which astonished her husband and daughters."
+    },
+    {
+      "type": "paragraph",
+      "text": "Mr. Collins was punctual to his time, and was received with great politeness by the whole family. Mr. Bennet indeed said little; but the ladies were ready enough to talk, and Mr. Collins seemed neither in need of encouragement, nor inclined to be silent himself. He was a tall, heavy-looking young man of five-and-twenty. His air was grave and stately, and his manners were very formal. He had not been long seated before he complimented Mrs. Bennet on having so fine a family of daughters, said he had heard much of their beauty, but that, in this instance, fame had fallen short of the truth; and added, that he did not doubt her seeing them all in due time well disposed of in marriage. This gallantry was not much to the taste of some of his hearers; but Mrs. Bennet, who quarrelled with no compliments, answered most readily,--"
+    },
+    {
+      "type": "paragraph",
+      "text": "“You are very kind, sir, I am sure; and I wish with all my heart it may prove so; for else they will be destitute enough. Things are settled so oddly.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 151,
+          "style": "quote",
+          "text": "“You are very kind, sir, I am sure; and I wish with all my heart it may prove so; for else they will be destitute enough. Things are settled so oddly.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“You allude, perhaps, to the entail of this estate.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 52,
+          "style": "quote",
+          "text": "“You allude, perhaps, to the entail of this estate.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“Ah, sir, I do indeed. It is a grievous affair to my poor girls, you must confess. Not that I mean to find fault with _you_, for such things, I know, are all chance in this world. There is no knowing how estates will go when once they come to be entailed.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 256,
+          "style": "quote",
+          "text": "“Ah, sir, I do indeed. It is a grievous affair to my poor girls, you must confess. Not that I mean to find fault with _you_, for such things, I know, are all chance in this world. There is no knowing how estates will go when once they come to be entailed.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“I am very sensible, madam, of the hardship to my fair cousins, and could say much on the subject, but that I am cautious of appearing forward and precipitate. But I can assure the young ladies that I come prepared to admire them. At present I will not say more, but, perhaps, when we are better acquainted----”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 311,
+          "style": "quote",
+          "text": "“I am very sensible, madam, of the hardship to my fair cousins, and could say much on the subject, but that I am cautious of appearing forward and precipitate. But I can assure the young ladies that I come prepared to admire them. At present I will not say more, but, perhaps, when we are better acquainted----”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "He was interrupted by a summons to dinner; and the girls smiled on each other. They were not the only objects of Mr. Collins’s admiration. The hall, the dining-room, and all its furniture, were examined and praised; and his commendation of everything would have touched Mrs. Bennet’s heart, but for the mortifying supposition of his viewing it all as his own future property. The dinner, too, in its turn, was highly admired; and he begged to know to which of his fair cousins the excellence of its cookery was owing. But here he was set right by Mrs. Bennet, who assured him, with some asperity, that they were very well able to keep a good cook, and that her daughters had nothing to do in the kitchen. He begged pardon for having displeased her. In a softened tone she declared herself not at all offended; but he continued to apologize for about a quarter of an hour."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "style": "bracket_note",
+          "text": "[Illustration]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "“WILLIAM COLLINS.”\n\n> “At four o’clock, therefore, we may expect this peace-making gentleman,” said Mr. Bennet, as he folded up the letter. “He seems to be a most conscientious and polite young man, upon my word; and, I doubt not, will prove a valuable acquaintance, especially if Lady Catherine should be so indulgent as to let him come to us again.” “There is some sense in what he says about the girls, however; and, if he is disposed to make them any amends, I shall not be the person to discourage him.” “Though it is difficult,” said Jane, “to guess in what way he can mean to make us the atonement he thinks our due, the wish is certainly to his credit.”\n\nElizabeth was chiefly struck with his extraordinary deference for Lady Catherine, and his kind intention of christening, marrying, and burying his parishioners whenever it were required.\n\n“He must be an oddity, I think,” said she. “I cannot make him out. There is something very pompous in his style. And what can he mean by apologizing for being next in the entail? We cannot suppose he would help it, if he could. Can he be a sensible man, sir?”\n\n“No, my dear; I think not. I have great hopes of finding him quite the reverse. There is a mixture of servility and self-importance in his letter which promises well. I am impatient to see him.”\n\n> “In point of composition,” said Mary, “his letter does not seem defective. The idea of the olive branch perhaps is not wholly new, yet I think it is well expressed.”\n\nTo Catherine and Lydia neither the letter nor its writer were in any degree interesting. It was next to impossible that their cousin should come in a scarlet coat, and it was now some weeks since they had received pleasure from the society of a man in any other colour. As for their mother, Mr. Collins’s letter had done away much of her ill-will, and she was preparing to see him with a degree of composure which astonished her husband and daughters.\n\nMr. Collins was punctual to his time, and was received with great politeness by the whole family. Mr. Bennet indeed said little; but the ladies were ready enough to talk, and Mr. Collins seemed neither in need of encouragement, nor inclined to be silent himself. He was a tall, heavy-looking young man of five-and-twenty. His air was grave and stately, and his manners were very formal. He had not been long seated before he complimented Mrs. Bennet on having so fine a family of daughters, said he had heard much of their beauty, but that, in this instance, fame had fallen short of the truth; and added, that he did not doubt her seeing them all in due time well disposed of in marriage. This gallantry was not much to the taste of some of his hearers; but Mrs. Bennet, who quarrelled with no compliments, answered most readily,--\n\n“You are very kind, sir, I am sure; and I wish with all my heart it may prove so; for else they will be destitute enough. Things are settled so oddly.”\n\n> “You allude, perhaps, to the entail of this estate.”\n\n“Ah, sir, I do indeed. It is a grievous affair to my poor girls, you must confess. Not that I mean to find fault with _you_, for such things, I know, are all chance in this world. There is no knowing how estates will go when once they come to be entailed.”\n\n> “I am very sensible, madam, of the hardship to my fair cousins, and could say much on the subject, but that I am cautious of appearing forward and precipitate. But I can assure the young ladies that I come prepared to admire them. At present I will not say more, but, perhaps, when we are better acquainted----”\n\nHe was interrupted by a summons to dinner; and the girls smiled on each other. They were not the only objects of Mr. Collins’s admiration. The hall, the dining-room, and all its furniture, were examined and praised; and his commendation of everything would have touched Mrs. Bennet’s heart, but for the mortifying supposition of his viewing it all as his own future property. The dinner, too, in its turn, was highly admired; and he begged to know to which of his fair cousins the excellence of its cookery was owing. But here he was set right by Mrs. Bennet, who assured him, with some asperity, that they were very well able to keep a good cook, and that her daughters had nothing to do in the kitchen. He begged pardon for having displeased her. In a softened tone she declared herself not at all offended; but he continued to apologize for about a quarter of an hour.\n\n[Illustration]",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 333,
+    "text": "“WILLIAM COLLINS.”"
+  },
+  "word_count": 806,
+  "block_count": 14
+}

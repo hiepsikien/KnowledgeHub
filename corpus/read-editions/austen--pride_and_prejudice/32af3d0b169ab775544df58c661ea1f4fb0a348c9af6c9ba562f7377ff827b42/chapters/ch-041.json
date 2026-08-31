@@ -1,0 +1,26 @@
+{
+  "chapter_id": "ch-041",
+  "title": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.",
+  "block_start": 1654,
+  "block_end": 1655,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "TOOKS COURT, CHANCERY LANE, LONDON."
+    }
+  ],
+  "reading_markdown": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO.\n\nTOOKS COURT, CHANCERY LANE, LONDON.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1654,
+    "text": "CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO."
+  },
+  "word_count": 11,
+  "block_count": 2
+}

@@ -1,0 +1,183 @@
+{
+  "chapter_id": "ch-073",
+  "title": "FUNERAL ODE",
+  "block_start": 1170,
+  "block_end": 1181,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FUNERAL ODE",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_Lass, Fürstin, lass noch einen Strahl._       Called “Weeping Leipsic.” Written for the death of Princess Christiane Eberhardine, wife of Augustus the Strong.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 40,
+          "style": "em",
+          "text": "_Lass, Fürstin, lass noch einen Strahl._"
+        },
+        {
+          "start": 54,
+          "end": 72,
+          "style": "quote",
+          "text": "“Weeping Leipsic.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "MOTETS"
+    },
+    {
+      "type": "blockquote",
+      "text": "_Jesu meine Freude._       Five voices. English edition, “Jesu, priceless treasure,” Novello. A hymn by Franck in six stanzas.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "em",
+          "text": "_Jesu meine Freude._"
+        },
+        {
+          "start": 57,
+          "end": 84,
+          "style": "quote",
+          "text": "“Jesu, priceless treasure,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Der Geist hilft unsrer Schwachheit auf._       Eight voices. Written for the funeral of the Rector Heinrich Ernesti, 1729. The composer added a figured bass for the organ. English edition, “The Spirit also helpeth us,” Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 41,
+          "style": "em",
+          "text": "_Der Geist hilft unsrer Schwachheit auf._"
+        },
+        {
+          "start": 190,
+          "end": 219,
+          "style": "quote",
+          "text": "“The Spirit also helpeth us,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Furchte dich nicht._       Eight voices. English edition, “Be not afraid,” Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 21,
+          "style": "em",
+          "text": "_Furchte dich nicht._"
+        },
+        {
+          "start": 59,
+          "end": 75,
+          "style": "quote",
+          "text": "“Be not afraid,”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Komm Jesu, komm._       Eight voices.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_Komm Jesu, komm._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Lob und Ehre und Weisheit und Dank._       Eight voices. English edition, “Blessing, Glory and Wisdom,” Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Lob und Ehre und Weisheit und Dank._"
+        },
+        {
+          "start": 75,
+          "end": 104,
+          "style": "quote",
+          "text": "“Blessing, Glory and Wisdom,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Singet dem Herrn ein neues Lied._       Psalm 149, eight voices. English edition, “Sing ye to the Lord,” Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 34,
+          "style": "em",
+          "text": "_Singet dem Herrn ein neues Lied._"
+        },
+        {
+          "start": 83,
+          "end": 105,
+          "style": "quote",
+          "text": "“Sing ye to the Lord,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Ich lasse dich nicht._       Eight voices. This motet is by some attributed to Joh. Christoph Bach. English edition, “I wrestle and pray,” Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 23,
+          "style": "em",
+          "text": "_Ich lasse dich nicht._"
+        },
+        {
+          "start": 118,
+          "end": 139,
+          "style": "quote",
+          "text": "“I wrestle and pray,”"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "A Latin motet for two choruses heard by J. L. Gerber at Christmas, 1767, is lost.",
+      "lines": [
+        "A Latin motet for two choruses heard by J. L. Gerber at Christmas, 1767, is lost."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Lobet den Herrn, alle Heiden._       Psalm 117. Four voices.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 31,
+          "style": "em",
+          "text": "_Lobet den Herrn, alle Heiden._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FUNERAL ODE\n\n> _Lass, Fürstin, lass noch einen Strahl._       Called “Weeping Leipsic.” Written for the death of Princess Christiane Eberhardine, wife of Augustus the Strong.\n\nMOTETS\n\n> _Jesu meine Freude._       Five voices. English edition, “Jesu, priceless treasure,” Novello. A hymn by Franck in six stanzas.\n\n_Der Geist hilft unsrer Schwachheit auf._       Eight voices. Written for the funeral of the Rector Heinrich Ernesti, 1729. The composer added a figured bass for the organ. English edition, “The Spirit also helpeth us,” Novello.\n\n_Furchte dich nicht._       Eight voices. English edition, “Be not afraid,” Novello.\n\n> _Komm Jesu, komm._       Eight voices.\n\n_Lob und Ehre und Weisheit und Dank._       Eight voices. English edition, “Blessing, Glory and Wisdom,” Novello.\n\n_Singet dem Herrn ein neues Lied._       Psalm 149, eight voices. English edition, “Sing ye to the Lord,” Novello.\n\n_Ich lasse dich nicht._       Eight voices. This motet is by some attributed to Joh. Christoph Bach. English edition, “I wrestle and pray,” Novello.\n\nA Latin motet for two choruses heard by J. L. Gerber at Christmas, 1767, is lost.\n\n_Lobet den Herrn, alle Heiden._       Psalm 117. Four voices.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1170,
+    "text": "FUNERAL ODE"
+  },
+  "word_count": 185,
+  "block_count": 12
+}

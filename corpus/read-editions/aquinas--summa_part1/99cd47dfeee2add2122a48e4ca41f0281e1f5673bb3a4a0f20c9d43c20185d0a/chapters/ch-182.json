@@ -1,0 +1,771 @@
+{
+  "chapter_id": "ch-182",
+  "title": "OF FREE-WILL (In Four Articles)",
+  "block_start": 6031,
+  "block_end": 6087,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "OF FREE-WILL (In Four Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 13,
+          "end": 31,
+          "style": "paren_cite",
+          "text": "(In Four Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We now inquire concerning free-will. Under this head there are four points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) Whether man has free-will?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) What is free-will--a power, an act, or a habit?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) If it is a power, is it appetitive or cognitive?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) If it is appetitive, is it the same power as the will, or distinct?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 83, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 83, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Man Has Free-Will?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that man has not free-will. For whoever has free-will does what he wills. But man does not what he wills; for it is written (Rom. 7:19): \"For the good which I will I do not, but the evil which I will not, that I do.\" Therefore man has not free-will.",
+      "spans": [
+        {
+          "start": 151,
+          "end": 162,
+          "style": "paren_cite",
+          "text": "(Rom. 7:19)"
+        },
+        {
+          "start": 164,
+          "end": 243,
+          "style": "quote",
+          "text": "\"For the good which I will I do not, but the evil which I will not, that I do.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, whoever has free-will has in his power to will or not to will, to do or not to do. But this is not in man's power: for it is written (Rom. 9:16): \"It is not of him that willeth\"--namely, to will--\"nor of him that runneth\"--namely, to run. Therefore man has not free-will.",
+      "spans": [
+        {
+          "start": 150,
+          "end": 161,
+          "style": "paren_cite",
+          "text": "(Rom. 9:16)"
+        },
+        {
+          "start": 163,
+          "end": 194,
+          "style": "quote",
+          "text": "\"It is not of him that willeth\""
+        },
+        {
+          "start": 213,
+          "end": 238,
+          "style": "quote",
+          "text": "\"nor of him that runneth\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, what is \"free is cause of itself,\" as the Philosopher says (Metaph. i, 2). Therefore what is moved by another is not free. But God moves the will, for it is written (Prov. 21:1): \"The heart of the king is in the hand of the Lord; whithersoever He will He shall turn it\" and (Phil. 2:13): \"It is God Who worketh in you both to will and to accomplish.\" Therefore man has not free-will.",
+      "spans": [
+        {
+          "start": 25,
+          "end": 51,
+          "style": "quote",
+          "text": "\"free is cause of itself,\""
+        },
+        {
+          "start": 76,
+          "end": 90,
+          "style": "paren_cite",
+          "text": "(Metaph. i, 2)"
+        },
+        {
+          "start": 182,
+          "end": 194,
+          "style": "paren_cite",
+          "text": "(Prov. 21:1)"
+        },
+        {
+          "start": 196,
+          "end": 286,
+          "style": "quote",
+          "text": "\"The heart of the king is in the hand of the Lord; whithersoever He will He shall turn it\""
+        },
+        {
+          "start": 291,
+          "end": 303,
+          "style": "paren_cite",
+          "text": "(Phil. 2:13)"
+        },
+        {
+          "start": 305,
+          "end": 367,
+          "style": "quote",
+          "text": "\"It is God Who worketh in you both to will and to accomplish.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, whoever has free-will is master of his own actions. But man is not master of his own actions: for it is written (Jer. 10:23): \"The way of a man is not his: neither is it in a man to walk.\" Therefore man has not free-will.",
+      "spans": [
+        {
+          "start": 129,
+          "end": 141,
+          "style": "paren_cite",
+          "text": "(Jer. 10:23)"
+        },
+        {
+          "start": 143,
+          "end": 205,
+          "style": "quote",
+          "text": "\"The way of a man is not his: neither is it in a man to walk.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, the Philosopher says (Ethic. iii, 5): \"According as each one is, such does the end seem to him.\" But it is not in our power to be of one quality or another; for this comes to us from nature. Therefore it is natural to us to follow some particular end, and therefore we are not free in so doing.",
+      "spans": [
+        {
+          "start": 38,
+          "end": 53,
+          "style": "paren_cite",
+          "text": "(Ethic. iii, 5)"
+        },
+        {
+          "start": 55,
+          "end": 113,
+          "style": "quote",
+          "text": "\"According as each one is, such does the end seem to him.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ It is written (Ecclus. 15:14): \"God made man from the beginning, and left him in the hand of his own counsel\"; and the gloss adds: \"That is of his free-will.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 33,
+          "end": 48,
+          "style": "paren_cite",
+          "text": "(Ecclus. 15:14)"
+        },
+        {
+          "start": 50,
+          "end": 128,
+          "style": "quote",
+          "text": "\"God made man from the beginning, and left him in the hand of his own counsel\""
+        },
+        {
+          "start": 150,
+          "end": 177,
+          "style": "quote",
+          "text": "\"That is of his free-will.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Man has free-will: otherwise counsels, exhortations, commands, prohibitions, rewards, and punishments would be in vain. In order to make this evident, we must observe that some things act without judgment; as a stone moves downwards; and in like manner all things which lack knowledge. And some act from judgment, but not a free judgment; as brute animals. For the sheep, seeing the wolf, judges it a thing to be shunned, from a natural and not a free judgment, because it judges, not from reason, but from natural instinct. And the same thing is to be said of any judgment of brute animals. But man acts from judgment, because by his apprehensive power he judges that something should be avoided or sought. But because this judgment, in the case of some particular act, is not from a natural instinct, but from some act of comparison in the reason, therefore he acts from free judgment and retains the power of being inclined to various things. For reason in contingent matters may follow opposite courses, as we see in dialectic syllogisms and rhetorical arguments. Now particular operations are contingent, and therefore in such matters the judgment of reason may follow opposite courses, and is not determinate to one. And forasmuch as man is rational is it necessary that man have a free-will.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: As we have said above (Q. 81, A. 3, ad 2), the sensitive appetite, though it obeys the reason, yet in a given case can resist by desiring what the reason forbids. This is therefore the good which man does not when he wishes--namely, \"not to desire against reason,\" as Augustine says.",
+      "spans": [
+        {
+          "start": 36,
+          "end": 55,
+          "style": "paren_aside",
+          "text": "(Q. 81, A. 3, ad 2)"
+        },
+        {
+          "start": 247,
+          "end": 278,
+          "style": "quote",
+          "text": "\"not to desire against reason,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Those words of the Apostle are not to be taken as though man does not wish or does not run of his free-will, but because the free-will is not sufficient thereto unless it be moved and helped by God."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Free-will is the cause of its own movement, because by his free-will man moves himself to act. But it does not of necessity belong to liberty that what is free should be the first cause of itself, as neither for one thing to be cause of another need it be the first cause. God, therefore, is the first cause, Who moves causes both natural and voluntary. And just as by moving natural causes He does not prevent their acts being natural, so by moving voluntary causes He does not deprive their actions of being voluntary: but rather is He the cause of this very thing in them; for He operates in each thing according to its own nature."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: \"Man's way\" is said \"not to be his\" in the execution of his choice, wherein he may be impeded, whether he will or not. The choice itself, however, is in us, but presupposes the help of God.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 25,
+          "style": "quote",
+          "text": "\"Man's way\""
+        },
+        {
+          "start": 34,
+          "end": 49,
+          "style": "quote",
+          "text": "\"not to be his\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: Quality in man is of two kinds: natural and adventitious. Now the natural quality may be in the intellectual part, or in the body and its powers. From the very fact, therefore, that man is such by virtue of a natural quality which is in the intellectual part, he naturally desires his last end, which is happiness. Which desire, indeed, is a natural desire, and is not subject to free-will, as is clear from what we have said above (Q. 82, AA. 1, 2). But on the part of the body and its powers man may be such by virtue of a natural quality, inasmuch as he is of such a temperament or disposition due to any impression whatever produced by corporeal causes, which cannot affect the intellectual part, since it is not the act of a corporeal organ. And such as a man is by virtue of a corporeal quality, such also does his end seem to him, because from such a disposition a man is inclined to choose or reject something. But these inclinations are subject to the judgment of reason, which the lower appetite obeys, as we have said (Q. 81, A. 3). Wherefore this is in no way prejudicial to free-will.",
+      "spans": [
+        {
+          "start": 446,
+          "end": 463,
+          "style": "paren_cite",
+          "text": "(Q. 82, AA. 1, 2)"
+        },
+        {
+          "start": 1043,
+          "end": 1056,
+          "style": "paren_cite",
+          "text": "(Q. 81, A. 3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The adventitious qualities are habits and passions, by virtue of which a man is inclined to one thing rather than to another. And yet even these inclinations are subject to the judgment of reason. Such qualities, too, are subject to reason, as it is in our power either to acquire them, whether by causing them or disposing ourselves to them, or to reject them. And so there is nothing in this that is repugnant to free-will."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 83, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 83, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Free-Will Is a Power?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that free-will is not a power. For free-will is nothing but a free judgment. But judgment denominates an act, not a power. Therefore free-will is not a power."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, free-will is defined as \"the faculty of the will and reason.\" But faculty denominates a facility of power, which is due to a habit. Therefore free-will is a habit. Moreover Bernard says (De Gratia et Lib. Arb. 1,2) that free-will is \"the soul's habit of disposing of itself.\" Therefore it is not a power.",
+      "spans": [
+        {
+          "start": 41,
+          "end": 78,
+          "style": "quote",
+          "text": "\"the faculty of the will and reason.\""
+        },
+        {
+          "start": 203,
+          "end": 231,
+          "style": "paren_aside",
+          "text": "(De Gratia et Lib. Arb. 1,2)"
+        },
+        {
+          "start": 250,
+          "end": 292,
+          "style": "quote",
+          "text": "\"the soul's habit of disposing of itself.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, no natural power is forfeited through sin. But free-will is forfeited through sin; for Augustine says that \"man, by abusing free-will, loses both it and himself.\" Therefore free-will is not a power.",
+      "spans": [
+        {
+          "start": 124,
+          "end": 179,
+          "style": "quote",
+          "text": "\"man, by abusing free-will, loses both it and himself.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Nothing but a power, seemingly, is the subject of a habit. But free-will is the subject of grace, by the help of which it chooses what is good. Therefore free-will is a power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Although free-will [*Liberum arbitrium--i.e. free judgment] in its strict sense denotes an act, in the common manner of speaking we call free-will, that which is the principle of the act by which man judges freely. Now in us the principle of an act is both power and habit; for we say that we know something both by knowledge and by the intellectual power. Therefore free-will must be either a power or a habit, or a power with a habit. That it is neither a habit nor a power together with a habit, can be clearly proved in two ways. First of all, because, if it is a habit, it must be a natural habit; for it is natural to man to have a free-will. But there is not natural habit in us with respect to those things which come under free-will: for we are naturally inclined to those things of which we have natural habits--for instance, to assent to first principles: while those things to which we are naturally inclined are not subject to free-will, as we have said of the desire of happiness (Q. 82, AA. 1, 2). Wherefore it is against the very notion of free-will that it should be a natural habit. And that it should be a non-natural habit is against its nature. Therefore in no sense is it a habit.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 36,
+          "end": 76,
+          "style": "bracket_note",
+          "text": "[*Liberum arbitrium--i.e. free judgment]"
+        },
+        {
+          "start": 1011,
+          "end": 1028,
+          "style": "paren_cite",
+          "text": "(Q. 82, AA. 1, 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Secondly, this is clear because habits are defined as that \"by reason of which we are well or ill disposed with regard to actions and passions\" (Ethic. ii, 5); for by temperance we are well-disposed as regards concupiscences, and by intemperance ill-disposed: and by knowledge we are well-disposed to the act of the intellect when we know the truth, and by the contrary ill-disposed. But the free-will is indifferent to good and evil choice: wherefore it is impossible for free-will to be a habit. Therefore it is a power.",
+      "spans": [
+        {
+          "start": 59,
+          "end": 143,
+          "style": "quote",
+          "text": "\"by reason of which we are well or ill disposed with regard to actions and passions\""
+        },
+        {
+          "start": 144,
+          "end": 158,
+          "style": "paren_cite",
+          "text": "(Ethic. ii, 5)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: It is not unusual for a power to be named from its act. And so from this act, which is a free judgment, is named the power which is the principle of this act. Otherwise, if free-will denominated an act, it would not always remain in man."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Faculty sometimes denominates a power ready for operation, and in this sense faculty is used in the definition of free-will. But Bernard takes habit, not as divided against power, but as signifying a certain aptitude by which a man has some sort of relation to an act. And this may be both by a power and by a habit: for by a power man is, as it were, empowered to do the action, and by the habit he is apt to act well or ill."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Man is said to have lost free-will by falling into sin, not as to natural liberty, which is freedom from coercion, but as regards freedom from fault and unhappiness. Of this we shall treat later in the treatise on Morals in the second part of this work (I-II, Q. 85, seqq.; Q. 109).",
+      "spans": [
+        {
+          "start": 267,
+          "end": 295,
+          "style": "paren_aside",
+          "text": "(I-II, Q. 85, seqq.; Q. 109)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 83, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 83, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Free-will Is an Appetitive Power?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that free-will is not an appetitive, but a cognitive power. For Damascene (De Fide Orth. ii, 27) says that \"free-will straightway accompanies the rational nature.\" But reason is a cognitive power. Therefore free-will is a cognitive power.",
+      "spans": [
+        {
+          "start": 101,
+          "end": 123,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 27)"
+        },
+        {
+          "start": 134,
+          "end": 190,
+          "style": "quote",
+          "text": "\"free-will straightway accompanies the rational nature.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, free-will is so called as though it were a free judgment. But to judge is an act of a cognitive power. Therefore free-will is a cognitive power."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the principal function of free-will is to choose. But choice seems to belong to knowledge, because it implies a certain comparison of one thing to another, which belongs to the cognitive power. Therefore free-will is a cognitive power."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ The Philosopher says (Ethic. iii, 3) that choice is \"the desire of those things which are in us.\" But desire is an act of the appetitive power: therefore choice is also. But free-will is that by which we choose. Therefore free-will is an appetitive power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 40,
+          "end": 55,
+          "style": "paren_cite",
+          "text": "(Ethic. iii, 3)"
+        },
+        {
+          "start": 71,
+          "end": 116,
+          "style": "quote",
+          "text": "\"the desire of those things which are in us.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The proper act of free-will is choice: for we say that we have a free-will because we can take one thing while refusing another; and this is to choose. Therefore we must consider the nature of free-will, by considering the nature of choice. Now two things concur in choice: one on the part of the cognitive power, the other on the part of the appetitive power. On the part of the cognitive power, counsel is required, by which we judge one thing to be preferred to another: and on the part of the appetitive power, it is required that the appetite should accept the judgment of counsel. Therefore Aristotle (Ethic. vi, 2) leaves it in doubt whether choice belongs principally to the appetitive or the cognitive power: since he says that choice is either \"an appetitive intellect or an intellectual appetite.\" But (Ethic. iii, 3) he inclines to its being an intellectual appetite when he describes choice as \"a desire proceeding from counsel.\" And the reason of this is because the proper object of choice is the means to the end: and this, as such, is in the nature of that good which is called useful: wherefore since good, as such, is the object of the appetite, it follows that choice is principally an act of the appetitive power. And thus free-will is an appetitive power.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 624,
+          "end": 638,
+          "style": "paren_cite",
+          "text": "(Ethic. vi, 2)"
+        },
+        {
+          "start": 771,
+          "end": 825,
+          "style": "quote",
+          "text": "\"an appetitive intellect or an intellectual appetite.\""
+        },
+        {
+          "start": 830,
+          "end": 845,
+          "style": "paren_cite",
+          "text": "(Ethic. iii, 3)"
+        },
+        {
+          "start": 924,
+          "end": 959,
+          "style": "quote",
+          "text": "\"a desire proceeding from counsel.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: The appetitive powers accompany the apprehensive, and in this sense Damascene says that free-will straightway accompanies the rational power."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Judgment, as it were, concludes and terminates counsel. Now counsel is terminated, first, by the judgment of reason; secondly, by the acceptation of the appetite: whence the Philosopher (Ethic. iii, 3) says that, \"having formed a judgment by counsel, we desire in accordance with that counsel.\" And in this sense choice itself is a judgment from which free-will takes its name.",
+      "spans": [
+        {
+          "start": 200,
+          "end": 215,
+          "style": "paren_cite",
+          "text": "(Ethic. iii, 3)"
+        },
+        {
+          "start": 227,
+          "end": 308,
+          "style": "quote",
+          "text": "\"having formed a judgment by counsel, we desire in accordance with that counsel.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: This comparison which is implied in the choice belongs to the preceding counsel, which is an act of reason. For though the appetite does not make comparisons, yet forasmuch as it is moved by the apprehensive power which does compare, it has some likeness of comparison by choosing one in preference to another."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 83, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 83, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Free-will Is a Power Distinct from the Will?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that free-will is a power distinct from the will. For Damascene says (De Fide Orth. ii, 22) that _thelesis_ is one thing and _boulesis_ another. But _thelesis_ is the will, while _boulesis_ seems to be the free-will, because _boulesis,_ according to him, is will as concerning an object by way of comparison between two things. Therefore it seems that free-will is a distinct power from the will.",
+      "spans": [
+        {
+          "start": 96,
+          "end": 118,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. ii, 22)"
+        },
+        {
+          "start": 124,
+          "end": 134,
+          "style": "em",
+          "text": "_thelesis_"
+        },
+        {
+          "start": 152,
+          "end": 162,
+          "style": "em",
+          "text": "_boulesis_"
+        },
+        {
+          "start": 176,
+          "end": 186,
+          "style": "em",
+          "text": "_thelesis_"
+        },
+        {
+          "start": 206,
+          "end": 216,
+          "style": "em",
+          "text": "_boulesis_"
+        },
+        {
+          "start": 252,
+          "end": 263,
+          "style": "em",
+          "text": "_boulesis,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, powers are known by their acts. But choice, which is the act of free-will, is distinct from the act of willing, because \"the act of the will regards the end, whereas choice regards the means to the end\" (Ethic. iii, 2). Therefore free-will is a distinct power from the will.",
+      "spans": [
+        {
+          "start": 137,
+          "end": 219,
+          "style": "quote",
+          "text": "\"the act of the will regards the end, whereas choice regards the means to the end\""
+        },
+        {
+          "start": 220,
+          "end": 235,
+          "style": "paren_cite",
+          "text": "(Ethic. iii, 2)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, the will is the intellectual appetite. But in the intellect there are two powers--the active and the passive. Therefore, also on the part of the intellectual appetite, there must be another power besides the will. And this, seemingly, can only be free-will. Therefore free-will is a distinct power from the will."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Damascene says (De Fide Orth. iii, 14) free-will is nothing else than the will.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 57,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. iii, 14)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The appetitive powers must be proportionate to the apprehensive powers, as we have said above (Q. 64, A. 2). Now, as on the part of the intellectual apprehension we have intellect and reason, so on the part of the intellectual appetite we have will, and free-will which is nothing else but the power of choice. And this is clear from their relations to their respective objects and acts. For the act of _understanding_ implies the simple acceptation of something; whence we say that we understand first principles, which are known of themselves without any comparison. But to _reason,_ properly speaking, is to come from one thing to the knowledge of another: wherefore, properly speaking, we reason about conclusions, which are known from the principles. In like manner on the part of the appetite to \"will\" implies the simple appetite for something: wherefore the will is said to regard the end, which is desired for itself. But to \"choose\" is to desire something for the sake of obtaining something else: wherefore, properly speaking, it regards the means to the end. Now, in matters of knowledge, the principles are related to the conclusion to which we assent on account of the principles: just as, in appetitive matters, the end is related to the means, which is desired on account of the end. Wherefore it is evident that as the intellect is to reason, so is the will to the power of choice, which is free-will. But it has been shown above (Q. 79, A. 8) that it belongs to the same power both to understand and to reason, even as it belongs to the same power to be at rest and to be in movement. Wherefore it belongs also to the same power to will and to choose: and on this account the will and the free-will are not two powers, but one.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 111,
+          "end": 124,
+          "style": "paren_cite",
+          "text": "(Q. 64, A. 2)"
+        },
+        {
+          "start": 420,
+          "end": 435,
+          "style": "em",
+          "text": "_understanding_"
+        },
+        {
+          "start": 593,
+          "end": 602,
+          "style": "em",
+          "text": "_reason,_"
+        },
+        {
+          "start": 819,
+          "end": 825,
+          "style": "quote",
+          "text": "\"will\""
+        },
+        {
+          "start": 951,
+          "end": 959,
+          "style": "quote",
+          "text": "\"choose\""
+        },
+        {
+          "start": 1464,
+          "end": 1477,
+          "style": "paren_cite",
+          "text": "(Q. 79, A. 8)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: _Boulesis_ is distinct from _thelesis_ on account of a distinction, not of powers, but of acts.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 24,
+          "style": "em",
+          "text": "_Boulesis_"
+        },
+        {
+          "start": 42,
+          "end": 52,
+          "style": "em",
+          "text": "_thelesis_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Choice and will--that is, the act of willing--are different acts: yet they belong to the same power, as also to understand and to reason, as we have said."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The intellect is compared to the will as moving the will. And therefore there is no need to distinguish in the will an active and a passive will."
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "OF FREE-WILL (In Four Articles)\n\nWe now inquire concerning free-will. Under this head there are four points of inquiry:\n\n(1) Whether man has free-will?\n\n(2) What is free-will--a power, an act, or a habit?\n\n(3) If it is a power, is it appetitive or cognitive?\n\n(4) If it is appetitive, is it the same power as the will, or distinct?\n\n---\n\nFIRST ARTICLE [I, Q. 83, Art. 1]\n\nWhether Man Has Free-Will?\n\nObjection 1: It would seem that man has not free-will. For whoever has free-will does what he wills. But man does not what he wills; for it is written (Rom. 7:19): \"For the good which I will I do not, but the evil which I will not, that I do.\" Therefore man has not free-will.\n\nObj. 2: Further, whoever has free-will has in his power to will or not to will, to do or not to do. But this is not in man's power: for it is written (Rom. 9:16): \"It is not of him that willeth\"--namely, to will--\"nor of him that runneth\"--namely, to run. Therefore man has not free-will.\n\nObj. 3: Further, what is \"free is cause of itself,\" as the Philosopher says (Metaph. i, 2). Therefore what is moved by another is not free. But God moves the will, for it is written (Prov. 21:1): \"The heart of the king is in the hand of the Lord; whithersoever He will He shall turn it\" and (Phil. 2:13): \"It is God Who worketh in you both to will and to accomplish.\" Therefore man has not free-will.\n\nObj. 4: Further, whoever has free-will is master of his own actions. But man is not master of his own actions: for it is written (Jer. 10:23): \"The way of a man is not his: neither is it in a man to walk.\" Therefore man has not free-will.\n\nObj. 5: Further, the Philosopher says (Ethic. iii, 5): \"According as each one is, such does the end seem to him.\" But it is not in our power to be of one quality or another; for this comes to us from nature. Therefore it is natural to us to follow some particular end, and therefore we are not free in so doing.\n\n_On the contrary,_ It is written (Ecclus. 15:14): \"God made man from the beginning, and left him in the hand of his own counsel\"; and the gloss adds: \"That is of his free-will.\"\n\n_I answer that,_ Man has free-will: otherwise counsels, exhortations, commands, prohibitions, rewards, and punishments would be in vain. In order to make this evident, we must observe that some things act without judgment; as a stone moves downwards; and in like manner all things which lack knowledge. And some act from judgment, but not a free judgment; as brute animals. For the sheep, seeing the wolf, judges it a thing to be shunned, from a natural and not a free judgment, because it judges, not from reason, but from natural instinct. And the same thing is to be said of any judgment of brute animals. But man acts from judgment, because by his apprehensive power he judges that something should be avoided or sought. But because this judgment, in the case of some particular act, is not from a natural instinct, but from some act of comparison in the reason, therefore he acts from free judgment and retains the power of being inclined to various things. For reason in contingent matters may follow opposite courses, as we see in dialectic syllogisms and rhetorical arguments. Now particular operations are contingent, and therefore in such matters the judgment of reason may follow opposite courses, and is not determinate to one. And forasmuch as man is rational is it necessary that man have a free-will.\n\nReply Obj. 1: As we have said above (Q. 81, A. 3, ad 2), the sensitive appetite, though it obeys the reason, yet in a given case can resist by desiring what the reason forbids. This is therefore the good which man does not when he wishes--namely, \"not to desire against reason,\" as Augustine says.\n\nReply Obj. 2: Those words of the Apostle are not to be taken as though man does not wish or does not run of his free-will, but because the free-will is not sufficient thereto unless it be moved and helped by God.\n\nReply Obj. 3: Free-will is the cause of its own movement, because by his free-will man moves himself to act. But it does not of necessity belong to liberty that what is free should be the first cause of itself, as neither for one thing to be cause of another need it be the first cause. God, therefore, is the first cause, Who moves causes both natural and voluntary. And just as by moving natural causes He does not prevent their acts being natural, so by moving voluntary causes He does not deprive their actions of being voluntary: but rather is He the cause of this very thing in them; for He operates in each thing according to its own nature.\n\nReply Obj. 4: \"Man's way\" is said \"not to be his\" in the execution of his choice, wherein he may be impeded, whether he will or not. The choice itself, however, is in us, but presupposes the help of God.\n\nReply Obj. 5: Quality in man is of two kinds: natural and adventitious. Now the natural quality may be in the intellectual part, or in the body and its powers. From the very fact, therefore, that man is such by virtue of a natural quality which is in the intellectual part, he naturally desires his last end, which is happiness. Which desire, indeed, is a natural desire, and is not subject to free-will, as is clear from what we have said above (Q. 82, AA. 1, 2). But on the part of the body and its powers man may be such by virtue of a natural quality, inasmuch as he is of such a temperament or disposition due to any impression whatever produced by corporeal causes, which cannot affect the intellectual part, since it is not the act of a corporeal organ. And such as a man is by virtue of a corporeal quality, such also does his end seem to him, because from such a disposition a man is inclined to choose or reject something. But these inclinations are subject to the judgment of reason, which the lower appetite obeys, as we have said (Q. 81, A. 3). Wherefore this is in no way prejudicial to free-will.\n\nThe adventitious qualities are habits and passions, by virtue of which a man is inclined to one thing rather than to another. And yet even these inclinations are subject to the judgment of reason. Such qualities, too, are subject to reason, as it is in our power either to acquire them, whether by causing them or disposing ourselves to them, or to reject them. And so there is nothing in this that is repugnant to free-will.\n\n---\n\nSECOND ARTICLE [I, Q. 83, Art. 2]\n\nWhether Free-Will Is a Power?\n\nObjection 1: It would seem that free-will is not a power. For free-will is nothing but a free judgment. But judgment denominates an act, not a power. Therefore free-will is not a power.\n\nObj. 2: Further, free-will is defined as \"the faculty of the will and reason.\" But faculty denominates a facility of power, which is due to a habit. Therefore free-will is a habit. Moreover Bernard says (De Gratia et Lib. Arb. 1,2) that free-will is \"the soul's habit of disposing of itself.\" Therefore it is not a power.\n\nObj. 3: Further, no natural power is forfeited through sin. But free-will is forfeited through sin; for Augustine says that \"man, by abusing free-will, loses both it and himself.\" Therefore free-will is not a power.\n\n_On the contrary,_ Nothing but a power, seemingly, is the subject of a habit. But free-will is the subject of grace, by the help of which it chooses what is good. Therefore free-will is a power.\n\n_I answer that,_ Although free-will [*Liberum arbitrium--i.e. free judgment] in its strict sense denotes an act, in the common manner of speaking we call free-will, that which is the principle of the act by which man judges freely. Now in us the principle of an act is both power and habit; for we say that we know something both by knowledge and by the intellectual power. Therefore free-will must be either a power or a habit, or a power with a habit. That it is neither a habit nor a power together with a habit, can be clearly proved in two ways. First of all, because, if it is a habit, it must be a natural habit; for it is natural to man to have a free-will. But there is not natural habit in us with respect to those things which come under free-will: for we are naturally inclined to those things of which we have natural habits--for instance, to assent to first principles: while those things to which we are naturally inclined are not subject to free-will, as we have said of the desire of happiness (Q. 82, AA. 1, 2). Wherefore it is against the very notion of free-will that it should be a natural habit. And that it should be a non-natural habit is against its nature. Therefore in no sense is it a habit.\n\nSecondly, this is clear because habits are defined as that \"by reason of which we are well or ill disposed with regard to actions and passions\" (Ethic. ii, 5); for by temperance we are well-disposed as regards concupiscences, and by intemperance ill-disposed: and by knowledge we are well-disposed to the act of the intellect when we know the truth, and by the contrary ill-disposed. But the free-will is indifferent to good and evil choice: wherefore it is impossible for free-will to be a habit. Therefore it is a power.\n\nReply Obj. 1: It is not unusual for a power to be named from its act. And so from this act, which is a free judgment, is named the power which is the principle of this act. Otherwise, if free-will denominated an act, it would not always remain in man.\n\nReply Obj. 2: Faculty sometimes denominates a power ready for operation, and in this sense faculty is used in the definition of free-will. But Bernard takes habit, not as divided against power, but as signifying a certain aptitude by which a man has some sort of relation to an act. And this may be both by a power and by a habit: for by a power man is, as it were, empowered to do the action, and by the habit he is apt to act well or ill.\n\nReply Obj. 3: Man is said to have lost free-will by falling into sin, not as to natural liberty, which is freedom from coercion, but as regards freedom from fault and unhappiness. Of this we shall treat later in the treatise on Morals in the second part of this work (I-II, Q. 85, seqq.; Q. 109).\n\n---\n\nTHIRD ARTICLE [I, Q. 83, Art. 3]\n\nWhether Free-will Is an Appetitive Power?\n\nObjection 1: It would seem that free-will is not an appetitive, but a cognitive power. For Damascene (De Fide Orth. ii, 27) says that \"free-will straightway accompanies the rational nature.\" But reason is a cognitive power. Therefore free-will is a cognitive power.\n\nObj. 2: Further, free-will is so called as though it were a free judgment. But to judge is an act of a cognitive power. Therefore free-will is a cognitive power.\n\nObj. 3: Further, the principal function of free-will is to choose. But choice seems to belong to knowledge, because it implies a certain comparison of one thing to another, which belongs to the cognitive power. Therefore free-will is a cognitive power.\n\n_On the contrary,_ The Philosopher says (Ethic. iii, 3) that choice is \"the desire of those things which are in us.\" But desire is an act of the appetitive power: therefore choice is also. But free-will is that by which we choose. Therefore free-will is an appetitive power.\n\n_I answer that,_ The proper act of free-will is choice: for we say that we have a free-will because we can take one thing while refusing another; and this is to choose. Therefore we must consider the nature of free-will, by considering the nature of choice. Now two things concur in choice: one on the part of the cognitive power, the other on the part of the appetitive power. On the part of the cognitive power, counsel is required, by which we judge one thing to be preferred to another: and on the part of the appetitive power, it is required that the appetite should accept the judgment of counsel. Therefore Aristotle (Ethic. vi, 2) leaves it in doubt whether choice belongs principally to the appetitive or the cognitive power: since he says that choice is either \"an appetitive intellect or an intellectual appetite.\" But (Ethic. iii, 3) he inclines to its being an intellectual appetite when he describes choice as \"a desire proceeding from counsel.\" And the reason of this is because the proper object of choice is the means to the end: and this, as such, is in the nature of that good which is called useful: wherefore since good, as such, is the object of the appetite, it follows that choice is principally an act of the appetitive power. And thus free-will is an appetitive power.\n\nReply Obj. 1: The appetitive powers accompany the apprehensive, and in this sense Damascene says that free-will straightway accompanies the rational power.\n\nReply Obj. 2: Judgment, as it were, concludes and terminates counsel. Now counsel is terminated, first, by the judgment of reason; secondly, by the acceptation of the appetite: whence the Philosopher (Ethic. iii, 3) says that, \"having formed a judgment by counsel, we desire in accordance with that counsel.\" And in this sense choice itself is a judgment from which free-will takes its name.\n\nReply Obj. 3: This comparison which is implied in the choice belongs to the preceding counsel, which is an act of reason. For though the appetite does not make comparisons, yet forasmuch as it is moved by the apprehensive power which does compare, it has some likeness of comparison by choosing one in preference to another.\n\n---\n\nFOURTH ARTICLE [I, Q. 83, Art. 4]\n\nWhether Free-will Is a Power Distinct from the Will?\n\nObjection 1: It would seem that free-will is a power distinct from the will. For Damascene says (De Fide Orth. ii, 22) that _thelesis_ is one thing and _boulesis_ another. But _thelesis_ is the will, while _boulesis_ seems to be the free-will, because _boulesis,_ according to him, is will as concerning an object by way of comparison between two things. Therefore it seems that free-will is a distinct power from the will.\n\nObj. 2: Further, powers are known by their acts. But choice, which is the act of free-will, is distinct from the act of willing, because \"the act of the will regards the end, whereas choice regards the means to the end\" (Ethic. iii, 2). Therefore free-will is a distinct power from the will.\n\nObj. 3: Further, the will is the intellectual appetite. But in the intellect there are two powers--the active and the passive. Therefore, also on the part of the intellectual appetite, there must be another power besides the will. And this, seemingly, can only be free-will. Therefore free-will is a distinct power from the will.\n\n_On the contrary,_ Damascene says (De Fide Orth. iii, 14) free-will is nothing else than the will.\n\n_I answer that,_ The appetitive powers must be proportionate to the apprehensive powers, as we have said above (Q. 64, A. 2). Now, as on the part of the intellectual apprehension we have intellect and reason, so on the part of the intellectual appetite we have will, and free-will which is nothing else but the power of choice. And this is clear from their relations to their respective objects and acts. For the act of _understanding_ implies the simple acceptation of something; whence we say that we understand first principles, which are known of themselves without any comparison. But to _reason,_ properly speaking, is to come from one thing to the knowledge of another: wherefore, properly speaking, we reason about conclusions, which are known from the principles. In like manner on the part of the appetite to \"will\" implies the simple appetite for something: wherefore the will is said to regard the end, which is desired for itself. But to \"choose\" is to desire something for the sake of obtaining something else: wherefore, properly speaking, it regards the means to the end. Now, in matters of knowledge, the principles are related to the conclusion to which we assent on account of the principles: just as, in appetitive matters, the end is related to the means, which is desired on account of the end. Wherefore it is evident that as the intellect is to reason, so is the will to the power of choice, which is free-will. But it has been shown above (Q. 79, A. 8) that it belongs to the same power both to understand and to reason, even as it belongs to the same power to be at rest and to be in movement. Wherefore it belongs also to the same power to will and to choose: and on this account the will and the free-will are not two powers, but one.\n\nReply Obj. 1: _Boulesis_ is distinct from _thelesis_ on account of a distinction, not of powers, but of acts.\n\nReply Obj. 2: Choice and will--that is, the act of willing--are different acts: yet they belong to the same power, as also to understand and to reason, as we have said.\n\nReply Obj. 3: The intellect is compared to the will as moving the will. And therefore there is no need to distinguish in the will an active and a passive will.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 6031,
+    "text": "OF FREE-WILL (In Four Articles)"
+  },
+  "word_count": 3022,
+  "block_count": 57
+}

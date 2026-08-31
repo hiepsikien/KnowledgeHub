@@ -1,0 +1,296 @@
+{
+  "chapter_id": "ch-014",
+  "title": "THIRD ARTICLE [I. Q. 6, Art. 3]",
+  "block_start": 429,
+  "block_end": 449,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "THIRD ARTICLE [I. Q. 6, Art. 3]",
+      "level": 2,
+      "spans": [
+        {
+          "start": 14,
+          "end": 31,
+          "style": "bracket_note",
+          "text": "[I. Q. 6, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether to Be Essentially Good Belongs to God Alone?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It seems that to be essentially good does not belong to God alone. For as _one_ is convertible with _being,_ so is _good;_ as we said above (Q. 5, A. 1). But every being is one essentially, as appears from the Philosopher (Metaph. iv); therefore every being is good essentially.",
+      "spans": [
+        {
+          "start": 87,
+          "end": 92,
+          "style": "em",
+          "text": "_one_"
+        },
+        {
+          "start": 113,
+          "end": 121,
+          "style": "em",
+          "text": "_being,_"
+        },
+        {
+          "start": 128,
+          "end": 135,
+          "style": "em",
+          "text": "_good;_"
+        },
+        {
+          "start": 153,
+          "end": 165,
+          "style": "paren_cite",
+          "text": "(Q. 5, A. 1)"
+        },
+        {
+          "start": 235,
+          "end": 247,
+          "style": "paren_cite",
+          "text": "(Metaph. iv)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, if good is what all things desire, since being itself is desired by all, then the being of each thing is its good. But everything is a being essentially; therefore every being is good essentially."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, everything is good by its own goodness. Therefore if there is anything which is not good essentially, it is necessary to say that its goodness is not its own essence. Therefore its goodness, since it is a being, must be good; and if it is good by some other goodness, the same question applies to that goodness also; therefore we must either proceed to infinity, or come to some goodness which is not good by any other goodness. Therefore the first supposition holds good. Therefore everything is good essentially."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Boethius says (De Hebdom.), that \"all things but God are good by participation.\" Therefore they are not good essentially.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 33,
+          "end": 45,
+          "style": "paren_cite",
+          "text": "(De Hebdom.)"
+        },
+        {
+          "start": 52,
+          "end": 99,
+          "style": "quote",
+          "text": "\"all things but God are good by participation.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ God alone is good essentially. For everything is called good according to its perfection. Now perfection of a thing is threefold: first, according to the constitution of its own being; secondly, in respect of any accidents being added as necessary for its perfect operation; thirdly, perfection consists in the attaining to something else as the end. Thus, for instance, the first perfection of fire consists in its existence, which it has through its own substantial form; its secondary perfection consists in heat, lightness and dryness, and the like; its third perfection is to rest in its own place. This triple perfection belongs to no creature by its own essence; it belongs to God only, in Whom alone essence is existence; in Whom there are no accidents; since whatever belongs to others accidentally belongs to Him essentially; as, to be powerful, wise and the like, as appears from what is stated above (Q. 3, A. 6); and He is not directed to anything else as to an end, but is Himself the last end of all things. Hence it is manifest that God alone has every kind of perfection by His own essence; therefore He Himself alone is good essentially.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 929,
+          "end": 941,
+          "style": "paren_cite",
+          "text": "(Q. 3, A. 6)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: \"One\" does not include the idea of perfection, but only of indivision, which belongs to everything according to its own essence. Now the essences of simple things are undivided both actually and potentially, but the essences of compounds are undivided only actually; and therefore everything must be one essentially, but not good essentially, as was shown above.",
+      "spans": [
+        {
+          "start": 14,
+          "end": 19,
+          "style": "quote",
+          "text": "\"One\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Although everything is good in that it has being, yet the essence of a creature is not very being; and therefore it does not follow that a creature is good essentially."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The goodness of a creature is not its very essence, but something superadded; it is either its existence, or some added perfection, or the order to its end. Still, the goodness itself thus added is good, just as it is being. But for this reason is it called being because by it something has being, not because it itself has being through something else: hence for this reason is it called good because by it something is good, and not because it itself has some other goodness whereby it is good."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FOURTH ARTICLE [I, Q. 6, Art. 4]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 6, Art. 4]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether All Things Are Good by the Divine Goodness?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It seems that all things are good by the divine goodness. For Augustine says (De Trin. viii), \"This and that are good; take away this and that, and see good itself if thou canst; and so thou shalt see God, good not by any other good, but the good of every good.\" But everything is good by its own good; therefore everything is good by that very good which is God.",
+      "spans": [
+        {
+          "start": 90,
+          "end": 105,
+          "style": "paren_cite",
+          "text": "(De Trin. viii)"
+        },
+        {
+          "start": 107,
+          "end": 275,
+          "style": "quote",
+          "text": "\"This and that are good; take away this and that, and see good itself if thou canst; and so thou shalt see God, good not by any other good, but the good of every good.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, as Boethius says (De Hebdom.), all things are called good, accordingly as they are directed to God, and this is by reason of the divine goodness; therefore all things are good by the divine goodness.",
+      "spans": [
+        {
+          "start": 34,
+          "end": 46,
+          "style": "paren_cite",
+          "text": "(De Hebdom.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ All things are good, inasmuch as they have being. But they are not called beings through the divine being, but through their own being; therefore all things are not good by the divine goodness, but by their own goodness.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As regards relative things, we must admit extrinsic denomination; as, a thing is denominated \"placed\" from \"place,\" and \"measured\" from \"measure.\" But as regards absolute things opinions differ. Plato held the existence of separate ideas (Q. 84, A. 4) of all things, and that individuals were denominated by them as participating in the separate ideas; for instance, that Socrates is called man according to the separate idea of man. Now just as he laid down separate ideas of man and horse which he called absolute man and absolute horse, so likewise he laid down separate ideas of \"being\" and of \"one,\" and these he called absolute being and absolute oneness; and by participation of these, everything was called \"being\" or \"one\"; and what was thus absolute being and absolute one, he said was the supreme good. And because good is convertible with being, as one is also; he called God the absolute good, from whom all things are called good by way of participation.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 110,
+          "end": 118,
+          "style": "quote",
+          "text": "\"placed\""
+        },
+        {
+          "start": 124,
+          "end": 132,
+          "style": "quote",
+          "text": "\"place,\""
+        },
+        {
+          "start": 137,
+          "end": 147,
+          "style": "quote",
+          "text": "\"measured\""
+        },
+        {
+          "start": 153,
+          "end": 163,
+          "style": "quote",
+          "text": "\"measure.\""
+        },
+        {
+          "start": 255,
+          "end": 268,
+          "style": "paren_cite",
+          "text": "(Q. 84, A. 4)"
+        },
+        {
+          "start": 600,
+          "end": 607,
+          "style": "quote",
+          "text": "\"being\""
+        },
+        {
+          "start": 615,
+          "end": 621,
+          "style": "quote",
+          "text": "\"one,\""
+        },
+        {
+          "start": 732,
+          "end": 739,
+          "style": "quote",
+          "text": "\"being\""
+        },
+        {
+          "start": 743,
+          "end": 748,
+          "style": "quote",
+          "text": "\"one\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Although this opinion appears to be unreasonable in affirming separate ideas of natural things as subsisting of themselves--as Aristotle argues in many ways--still, it is absolutely true that there is first something which is essentially being and essentially good, which we call God, as appears from what is shown above (Q. 2, A. 3), and Aristotle agrees with this. Hence from the first being, essentially such, and good, everything can be called good and a being, inasmuch as it participates in it by way of a certain assimilation which is far removed and defective; as appears from the above (Q. 4, A. 3).",
+      "spans": [
+        {
+          "start": 321,
+          "end": 333,
+          "style": "paren_cite",
+          "text": "(Q. 2, A. 3)"
+        },
+        {
+          "start": 595,
+          "end": 607,
+          "style": "paren_cite",
+          "text": "(Q. 4, A. 3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Everything is therefore called good from the divine goodness, as from the first exemplary effective and final principle of all goodness. Nevertheless, everything is called good by reason of the similitude of the divine goodness belonging to it, which is formally its own goodness, whereby it is denominated good. And so of all things there is one goodness, and yet many goodnesses."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is a sufficient Reply to the Objections."
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "THIRD ARTICLE [I. Q. 6, Art. 3]\n\nWhether to Be Essentially Good Belongs to God Alone?\n\nObjection 1: It seems that to be essentially good does not belong to God alone. For as _one_ is convertible with _being,_ so is _good;_ as we said above (Q. 5, A. 1). But every being is one essentially, as appears from the Philosopher (Metaph. iv); therefore every being is good essentially.\n\nObj. 2: Further, if good is what all things desire, since being itself is desired by all, then the being of each thing is its good. But everything is a being essentially; therefore every being is good essentially.\n\nObj. 3: Further, everything is good by its own goodness. Therefore if there is anything which is not good essentially, it is necessary to say that its goodness is not its own essence. Therefore its goodness, since it is a being, must be good; and if it is good by some other goodness, the same question applies to that goodness also; therefore we must either proceed to infinity, or come to some goodness which is not good by any other goodness. Therefore the first supposition holds good. Therefore everything is good essentially.\n\n_On the contrary,_ Boethius says (De Hebdom.), that \"all things but God are good by participation.\" Therefore they are not good essentially.\n\n_I answer that,_ God alone is good essentially. For everything is called good according to its perfection. Now perfection of a thing is threefold: first, according to the constitution of its own being; secondly, in respect of any accidents being added as necessary for its perfect operation; thirdly, perfection consists in the attaining to something else as the end. Thus, for instance, the first perfection of fire consists in its existence, which it has through its own substantial form; its secondary perfection consists in heat, lightness and dryness, and the like; its third perfection is to rest in its own place. This triple perfection belongs to no creature by its own essence; it belongs to God only, in Whom alone essence is existence; in Whom there are no accidents; since whatever belongs to others accidentally belongs to Him essentially; as, to be powerful, wise and the like, as appears from what is stated above (Q. 3, A. 6); and He is not directed to anything else as to an end, but is Himself the last end of all things. Hence it is manifest that God alone has every kind of perfection by His own essence; therefore He Himself alone is good essentially.\n\nReply Obj. 1: \"One\" does not include the idea of perfection, but only of indivision, which belongs to everything according to its own essence. Now the essences of simple things are undivided both actually and potentially, but the essences of compounds are undivided only actually; and therefore everything must be one essentially, but not good essentially, as was shown above.\n\nReply Obj. 2: Although everything is good in that it has being, yet the essence of a creature is not very being; and therefore it does not follow that a creature is good essentially.\n\nReply Obj. 3: The goodness of a creature is not its very essence, but something superadded; it is either its existence, or some added perfection, or the order to its end. Still, the goodness itself thus added is good, just as it is being. But for this reason is it called being because by it something has being, not because it itself has being through something else: hence for this reason is it called good because by it something is good, and not because it itself has some other goodness whereby it is good.\n\n---\n\nFOURTH ARTICLE [I, Q. 6, Art. 4]\n\nWhether All Things Are Good by the Divine Goodness?\n\nObjection 1: It seems that all things are good by the divine goodness. For Augustine says (De Trin. viii), \"This and that are good; take away this and that, and see good itself if thou canst; and so thou shalt see God, good not by any other good, but the good of every good.\" But everything is good by its own good; therefore everything is good by that very good which is God.\n\nObj. 2: Further, as Boethius says (De Hebdom.), all things are called good, accordingly as they are directed to God, and this is by reason of the divine goodness; therefore all things are good by the divine goodness.\n\n_On the contrary,_ All things are good, inasmuch as they have being. But they are not called beings through the divine being, but through their own being; therefore all things are not good by the divine goodness, but by their own goodness.\n\n_I answer that,_ As regards relative things, we must admit extrinsic denomination; as, a thing is denominated \"placed\" from \"place,\" and \"measured\" from \"measure.\" But as regards absolute things opinions differ. Plato held the existence of separate ideas (Q. 84, A. 4) of all things, and that individuals were denominated by them as participating in the separate ideas; for instance, that Socrates is called man according to the separate idea of man. Now just as he laid down separate ideas of man and horse which he called absolute man and absolute horse, so likewise he laid down separate ideas of \"being\" and of \"one,\" and these he called absolute being and absolute oneness; and by participation of these, everything was called \"being\" or \"one\"; and what was thus absolute being and absolute one, he said was the supreme good. And because good is convertible with being, as one is also; he called God the absolute good, from whom all things are called good by way of participation.\n\nAlthough this opinion appears to be unreasonable in affirming separate ideas of natural things as subsisting of themselves--as Aristotle argues in many ways--still, it is absolutely true that there is first something which is essentially being and essentially good, which we call God, as appears from what is shown above (Q. 2, A. 3), and Aristotle agrees with this. Hence from the first being, essentially such, and good, everything can be called good and a being, inasmuch as it participates in it by way of a certain assimilation which is far removed and defective; as appears from the above (Q. 4, A. 3).\n\nEverything is therefore called good from the divine goodness, as from the first exemplary effective and final principle of all goodness. Nevertheless, everything is called good by reason of the similitude of the divine goodness belonging to it, which is formally its own goodness, whereby it is denominated good. And so of all things there is one goodness, and yet many goodnesses.\n\nThis is a sufficient Reply to the Objections.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 429,
+    "text": "THIRD ARTICLE [I. Q. 6, Art. 3]"
+  },
+  "word_count": 1125,
+  "block_count": 21
+}

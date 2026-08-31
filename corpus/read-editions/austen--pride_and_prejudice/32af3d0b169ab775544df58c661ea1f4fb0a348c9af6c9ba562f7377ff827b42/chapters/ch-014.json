@@ -1,0 +1,210 @@
+{
+  "chapter_id": "ch-014",
+  "title": "CHAPTER XIII",
+  "block_start": 317,
+  "block_end": 332,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHAPTER XIII",
+      "level": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "style": "bracket_note",
+          "text": "[Illustration]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“I hope, my dear,” said Mr. Bennet to his wife, as they were at breakfast the next morning, “that you have ordered a good dinner to-day, because I have reason to expect an addition to our family party.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "quote",
+          "text": "“I hope, my dear,”"
+        },
+        {
+          "start": 92,
+          "end": 202,
+          "style": "quote",
+          "text": "“that you have ordered a good dinner to-day, because I have reason to expect an addition to our family party.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“Who do you mean, my dear? I know of nobody that is coming, I am sure, unless Charlotte Lucas should happen to call in; and I hope _my_ dinners are good enough for her. I do not believe she often sees such at home.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 215,
+          "style": "quote",
+          "text": "“Who do you mean, my dear? I know of nobody that is coming, I am sure, unless Charlotte Lucas should happen to call in; and I hope _my_ dinners are good enough for her. I do not believe she often sees such at home.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“The person of whom I speak is a gentleman and a stranger.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 59,
+          "style": "quote",
+          "text": "“The person of whom I speak is a gentleman and a stranger.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Mrs. Bennet’s eyes sparkled. “A gentleman and a stranger! It is Mr. Bingley, I am sure. Why, Jane--you never dropped a word of this--you sly thing! Well, I am sure I shall be extremely glad to see Mr. Bingley. But--good Lord! how unlucky! there is not a bit of fish to be got to-day. Lydia, my love, ring the bell. I must speak to Hill this moment.”",
+      "spans": [
+        {
+          "start": 29,
+          "end": 349,
+          "style": "quote",
+          "text": "“A gentleman and a stranger! It is Mr. Bingley, I am sure. Why, Jane--you never dropped a word of this--you sly thing! Well, I am sure I shall be extremely glad to see Mr. Bingley. But--good Lord! how unlucky! there is not a bit of fish to be got to-day. Lydia, my love, ring the bell. I must speak to Hill this moment.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“It is _not_ Mr. Bingley,” said her husband; “it is a person whom I never saw in the whole course of my life.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 26,
+          "style": "quote",
+          "text": "“It is _not_ Mr. Bingley,”"
+        },
+        {
+          "start": 45,
+          "end": 110,
+          "style": "quote",
+          "text": "“it is a person whom I never saw in the whole course of my life.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This roused a general astonishment; and he had the pleasure of being eagerly questioned by his wife and five daughters at once."
+    },
+    {
+      "type": "paragraph",
+      "text": "After amusing himself some time with their curiosity, he thus explained:--“About a month ago I received this letter, and about a fortnight ago I answered it; for I thought it a case of some delicacy, and requiring early attention. It is from my cousin, Mr. Collins, who, when I am dead, may turn you all out of this house as soon as he pleases.”",
+      "spans": [
+        {
+          "start": 74,
+          "end": 345,
+          "style": "quote",
+          "text": "“About a month ago I received this letter, and about a fortnight ago I answered it; for I thought it a case of some delicacy, and requiring early attention. It is from my cousin, Mr. Collins, who, when I am dead, may turn you all out of this house as soon as he pleases.”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Oh, my dear,” cried his wife, “I cannot bear to hear that mentioned. Pray do not talk of that odious man. I do think it is the hardest thing in the world, that your estate should be entailed away from your own children; and I am sure, if I had been you, I should have tried long ago to do something or other about it.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 14,
+          "style": "quote",
+          "text": "“Oh, my dear,”"
+        },
+        {
+          "start": 31,
+          "end": 319,
+          "style": "quote",
+          "text": "“I cannot bear to hear that mentioned. Pray do not talk of that odious man. I do think it is the hardest thing in the world, that your estate should be entailed away from your own children; and I am sure, if I had been you, I should have tried long ago to do something or other about it.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Jane and Elizabeth attempted to explain to her the nature of an entail. They had often attempted it before: but it was a subject on which Mrs. Bennet was beyond the reach of reason; and she continued to rail bitterly against the cruelty of settling an estate away from a family of five daughters, in favour of a man whom nobody cared anything about."
+    },
+    {
+      "type": "blockquote",
+      "text": "“It certainly is a most iniquitous affair,” said Mr. Bennet; “and nothing can clear Mr. Collins from the guilt of inheriting Longbourn. But if you will listen to his letter, you may, perhaps, be a little softened by his manner of expressing himself.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "quote",
+          "text": "“It certainly is a most iniquitous affair,”"
+        },
+        {
+          "start": 61,
+          "end": 250,
+          "style": "quote",
+          "text": "“and nothing can clear Mr. Collins from the guilt of inheriting Longbourn. But if you will listen to his letter, you may, perhaps, be a little softened by his manner of expressing himself.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“No, that I am sure I shall not: and I think it was very impertinent of him to write to you at all, and very hypocritical. I hate such false friends. Why could not he keep on quarrelling with you, as his father did before him?”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 227,
+          "style": "quote",
+          "text": "“No, that I am sure I shall not: and I think it was very impertinent of him to write to you at all, and very hypocritical. I hate such false friends. Why could not he keep on quarrelling with you, as his father did before him?”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Why, indeed, he does seem to have had some filial scruples on that head, as you will hear.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 92,
+          "style": "quote",
+          "text": "“Why, indeed, he does seem to have had some filial scruples on that head, as you will hear.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "/* RIGHT “Hunsford, near Westerham, Kent, _15th October_. */",
+      "spans": [
+        {
+          "start": 42,
+          "end": 56,
+          "style": "em",
+          "text": "_15th October_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Dear Sir, “The disagreement subsisting between yourself and my late honoured father always gave me much uneasiness; and, since I have had the misfortune to lose him, I have frequently wished to heal the breach: but, for some time, I was kept back by my own doubts, fearing lest it might seem disrespectful to his memory for me to be on good terms with anyone with whom it had always pleased him to be at variance.”--‘There, Mrs. Bennet.’--“My mind, however, is now made up on the subject; for, having received ordination at Easter, I have been so fortunate as to be distinguished by the patronage of the Right Honourable Lady Catherine de Bourgh, widow of Sir Lewis de Bourgh, whose bounty and beneficence has preferred me to the valuable rectory of this parish, where it shall be my earnest endeavour to demean myself with grateful respect towards her Ladyship, and be ever ready to perform those rites and ceremonies which are instituted by the Church of England. As a clergyman, moreover, I feel it my duty to promote and establish the blessing of peace in all families within the reach of my influence; and on these grounds I flatter myself that my present overtures of good-will are highly commendable, and that the circumstance of my being next in the entail of Longbourn estate will be kindly overlooked on your side, and not lead you to reject the offered olive branch. I cannot be otherwise than concerned at being the means of injuring your amiable daughters, and beg leave to apologize for it, as well as to assure you of my readiness to make them every possible amends; but of this hereafter. If you should have no objection to receive me into your house, I propose myself the satisfaction of waiting on you and your family, Monday, November 18th, by four o’clock, and shall probably trespass on your hospitality till the Saturday se’nnight following, which I can do without any inconvenience, as Lady Catherine is far from objecting to my occasional absence on a Sunday, provided that some other clergyman is engaged to do the duty of the day. I remain, dear sir, with respectful compliments to your lady and daughters, your well-wisher and friend,",
+      "spans": [
+        {
+          "start": 0,
+          "end": 415,
+          "style": "quote",
+          "text": "“Dear Sir, “The disagreement subsisting between yourself and my late honoured father always gave me much uneasiness; and, since I have had the misfortune to lose him, I have frequently wished to heal the breach: but, for some time, I was kept back by my own doubts, fearing lest it might seem disrespectful to his memory for me to be on good terms with anyone with whom it had always pleased him to be at variance.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHAPTER XIII\n\n[Illustration]\n\n> “I hope, my dear,” said Mr. Bennet to his wife, as they were at breakfast the next morning, “that you have ordered a good dinner to-day, because I have reason to expect an addition to our family party.”\n\n“Who do you mean, my dear? I know of nobody that is coming, I am sure, unless Charlotte Lucas should happen to call in; and I hope _my_ dinners are good enough for her. I do not believe she often sees such at home.”\n\n> “The person of whom I speak is a gentleman and a stranger.”\n\nMrs. Bennet’s eyes sparkled. “A gentleman and a stranger! It is Mr. Bingley, I am sure. Why, Jane--you never dropped a word of this--you sly thing! Well, I am sure I shall be extremely glad to see Mr. Bingley. But--good Lord! how unlucky! there is not a bit of fish to be got to-day. Lydia, my love, ring the bell. I must speak to Hill this moment.”\n\n> “It is _not_ Mr. Bingley,” said her husband; “it is a person whom I never saw in the whole course of my life.”\n\nThis roused a general astonishment; and he had the pleasure of being eagerly questioned by his wife and five daughters at once.\n\nAfter amusing himself some time with their curiosity, he thus explained:--“About a month ago I received this letter, and about a fortnight ago I answered it; for I thought it a case of some delicacy, and requiring early attention. It is from my cousin, Mr. Collins, who, when I am dead, may turn you all out of this house as soon as he pleases.”\n\n> “Oh, my dear,” cried his wife, “I cannot bear to hear that mentioned. Pray do not talk of that odious man. I do think it is the hardest thing in the world, that your estate should be entailed away from your own children; and I am sure, if I had been you, I should have tried long ago to do something or other about it.”\n\nJane and Elizabeth attempted to explain to her the nature of an entail. They had often attempted it before: but it was a subject on which Mrs. Bennet was beyond the reach of reason; and she continued to rail bitterly against the cruelty of settling an estate away from a family of five daughters, in favour of a man whom nobody cared anything about.\n\n> “It certainly is a most iniquitous affair,” said Mr. Bennet; “and nothing can clear Mr. Collins from the guilt of inheriting Longbourn. But if you will listen to his letter, you may, perhaps, be a little softened by his manner of expressing himself.”\n\n“No, that I am sure I shall not: and I think it was very impertinent of him to write to you at all, and very hypocritical. I hate such false friends. Why could not he keep on quarrelling with you, as his father did before him?”\n\n> “Why, indeed, he does seem to have had some filial scruples on that head, as you will hear.”\n\n/* RIGHT “Hunsford, near Westerham, Kent, _15th October_. */\n\n> “Dear Sir, “The disagreement subsisting between yourself and my late honoured father always gave me much uneasiness; and, since I have had the misfortune to lose him, I have frequently wished to heal the breach: but, for some time, I was kept back by my own doubts, fearing lest it might seem disrespectful to his memory for me to be on good terms with anyone with whom it had always pleased him to be at variance.”--‘There, Mrs. Bennet.’--“My mind, however, is now made up on the subject; for, having received ordination at Easter, I have been so fortunate as to be distinguished by the patronage of the Right Honourable Lady Catherine de Bourgh, widow of Sir Lewis de Bourgh, whose bounty and beneficence has preferred me to the valuable rectory of this parish, where it shall be my earnest endeavour to demean myself with grateful respect towards her Ladyship, and be ever ready to perform those rites and ceremonies which are instituted by the Church of England. As a clergyman, moreover, I feel it my duty to promote and establish the blessing of peace in all families within the reach of my influence; and on these grounds I flatter myself that my present overtures of good-will are highly commendable, and that the circumstance of my being next in the entail of Longbourn estate will be kindly overlooked on your side, and not lead you to reject the offered olive branch. I cannot be otherwise than concerned at being the means of injuring your amiable daughters, and beg leave to apologize for it, as well as to assure you of my readiness to make them every possible amends; but of this hereafter. If you should have no objection to receive me into your house, I propose myself the satisfaction of waiting on you and your family, Monday, November 18th, by four o’clock, and shall probably trespass on your hospitality till the Saturday se’nnight following, which I can do without any inconvenience, as Lady Catherine is far from objecting to my occasional absence on a Sunday, provided that some other clergyman is engaged to do the duty of the day. I remain, dear sir, with respectful compliments to your lady and daughters, your well-wisher and friend,",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 317,
+    "text": "CHAPTER XIII"
+  },
+  "word_count": 896,
+  "block_count": 16
+}

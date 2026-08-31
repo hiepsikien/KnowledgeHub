@@ -1,0 +1,181 @@
+{
+  "chapter_id": "ch-003",
+  "title": "CHAPTER IV",
+  "block_start": 38,
+  "block_end": 50,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHAPTER IV",
+      "level": 1
+    },
+    {
+      "type": "blockquote",
+      "text": "_The Portuguese have no right of sovereignty over the East Indies by title of war_ Since it is clear, (as Victoria also says),[37] from the refutation of any claim to title from the Pope’s Donation, that the Spaniards when they sailed to those distant lands did not carry with them any right to occupy them as provinces, only one kind of title remains to be considered, namely, that based upon war. But even if this title could be justified, it would not serve to establish sovereignty, except by right of conquest, that is to say, occupation would be a prerequisite. But the Portuguese were as far as possible from occupation of those lands. They were not even at war with most of the peoples whom the Dutch visited. So therefore no legal claim could be established there by the Portuguese, because even if they had suffered wrongs from the East Indians, it might reasonably be considered by the long peace and friendly commercial relations that those injuries had been forgiven.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 82,
+          "style": "em",
+          "text": "_The Portuguese have no right of sovereignty over the East Indies by title of war_"
+        },
+        {
+          "start": 102,
+          "end": 125,
+          "style": "paren_cite",
+          "text": "(as Victoria also says)"
+        },
+        {
+          "start": 126,
+          "end": 130,
+          "style": "footnote",
+          "text": "[37]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Indeed there was no pretext at all for going to war. For those who force war upon barbarous peoples, as the Spaniards did upon the aborigines of America, commonly allege one of two pretexts: either that they have been refused the right to trade, or that the barbarians are unwilling to acknowledge the doctrines of the True Faith. But as the Portuguese actually obtained from the East Indians the right to trade,[38] they have, on that score at least, no",
+      "spans": [
+        {
+          "start": 412,
+          "end": 416,
+          "style": "footnote",
+          "text": "[38]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "grounds of complaint. Nor is there any better justification for the other pretext than the one alleged by the Greeks against the barbarians, to which Boëthius makes the following allusion:"
+    },
+    {
+      "type": "blockquote",
+      "text": "“_Unjust and cruel wars they wage, And haste with flying darts the death to meet or deal."
+    },
+    {
+      "type": "stanza",
+      "text": "No right nor reason can they show; ’Tis but because their lands and laws are not the same._”[39]",
+      "lines": [
+        "No right nor reason can they show; ’Tis but because their lands and laws are not the same._”[39]"
+      ],
+      "spans": [
+        {
+          "start": 92,
+          "end": 96,
+          "style": "footnote",
+          "text": "[39]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Moreover the verdict of Thomas Aquinas, of the Council of Toledo, of Gregory, and of nearly all theologians, canonists, and jurists, is as follows:[40] However persuasively and sufficiently the True Faith has been preached to the heathen--former subjects of Christian princes or apostates are quite another question--if they are unwilling to heed it, that is not sufficient cause to justify war upon them, or to despoil them of their goods.[41]",
+      "spans": [
+        {
+          "start": 147,
+          "end": 151,
+          "style": "footnote",
+          "text": "[40]"
+        },
+        {
+          "start": 440,
+          "end": 444,
+          "style": "footnote",
+          "text": "[41]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is worth while on this point to quote the actual words of Cajetan:[42] ‘There are some infidels who are neither in law nor in fact under the temporal jurisdiction of Christian princes; just as there were pagans who were never, subjects of the Roman Empire, and yet who inhabit lands where the name of Christ was never heard. Now their rulers, though heathen, are legitimate rulers, whether the people live under a monarchical or a democratic régime. They are not to be deprived of sovereignty over their possessions",
+      "spans": [
+        {
+          "start": 69,
+          "end": 73,
+          "style": "footnote",
+          "text": "[42]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "because of their unbelief, since sovereignty is a matter of positive law, and unbelief is a matter of divine law, which cannot annul positive law, as has been argued above. In fact I know of no law against such unbelievers as regards their temporal possessions. Against them no King, no Emperor, not even the Roman Church, can declare war for the purpose of occupying their lands, or of subjecting them to temporal sway. For there is no just cause for war, since Jesus Christ the King of Kings, to whom all power was given in heaven and on earth, sent out for the conquest of the world not armed soldiers, but holy disciples, “as sheep in the midst of wolves.” Nor do I read in the Old Testament, when possession had to be obtained by force of arms, that the Israelites waged war on any heathen land because of the unbelief of its inhabitants; but it was because the heathen refused them the right of innocent passage, or attacked them, as the Midianites did; or it was to recover the possessions which had been bestowed upon them by divine bounty. Wherefore we should be most miserable sinners if we should attempt to extend the religion of Jesus Christ by such means. Nor should we be their lawful rulers, but, on the contrary, we should be committing great robberies, and be compelled to make restitution as unjust conquerors and invaders. There must be sent to them as preachers, good men to convert them to God by their teaching and example; not men who will oppress them, despoil them, subdue and proselytize them, and “make them twofold more the children of hell than themselves,”* after the manner of the Pharisees’.",
+      "spans": [
+        {
+          "start": 626,
+          "end": 660,
+          "style": "quote",
+          "text": "“as sheep in the midst of wolves.”"
+        },
+        {
+          "start": 1525,
+          "end": 1587,
+          "style": "quote",
+          "text": "“make them twofold more the children of hell than themselves,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "* [Matthew XXIII, 15].",
+      "spans": [
+        {
+          "start": 2,
+          "end": 21,
+          "style": "bracket_note",
+          "text": "[Matthew XXIII, 15]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Indeed I have often heard that it has been decreed by the Council of Spain, and by the Churchmen, especially the Dominicans, that the Americans (Aztecs and Indians) should be converted to the Faith by the preaching of the Word alone, and not by war, and even that their liberty of which they had been robbed in the name of religion should be restored. This policy is said to have received the approval of Pope Paul III, and of Emperor Charles V, King of the Spains.",
+      "spans": [
+        {
+          "start": 144,
+          "end": 164,
+          "style": "paren_cite",
+          "text": "(Aztecs and Indians)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I pass over the fact that the Portuguese in most places do not further the extension of the faith, or indeed, pay any attention to it at all, since they are alive only to the acquisition of wealth. Nay, the very thing that is true of them, is the very thing which has been written of the Spaniards in America by a Spaniard, namely, that nothing is heard of miracles or wonders or examples of devout and religious life such as might convert others to the same faith, but on the other hand no end of scandals, of crimes, of impious deeds."
+    },
+    {
+      "type": "paragraph",
+      "text": "Wherefore, since both possession and a title of possession are lacking, and since the property and the sovereignty of the East Indies ought not to be considered as if they had previously been _res nullius_, and since, as they belong to the East Indians, they could not have been acquired legally by other persons, it follows that the East Indian nations in question are not the chattels of the Portuguese, but are free men and _sui juris_. This is not denied even by the Spanish jurists themselves.[43]",
+      "spans": [
+        {
+          "start": 192,
+          "end": 205,
+          "style": "em",
+          "text": "_res nullius_"
+        },
+        {
+          "start": 427,
+          "end": 438,
+          "style": "em",
+          "text": "_sui juris_"
+        },
+        {
+          "start": 498,
+          "end": 502,
+          "style": "footnote",
+          "text": "[43]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHAPTER IV\n\n> _The Portuguese have no right of sovereignty over the East Indies by title of war_ Since it is clear, (as Victoria also says),[37] from the refutation of any claim to title from the Pope’s Donation, that the Spaniards when they sailed to those distant lands did not carry with them any right to occupy them as provinces, only one kind of title remains to be considered, namely, that based upon war. But even if this title could be justified, it would not serve to establish sovereignty, except by right of conquest, that is to say, occupation would be a prerequisite. But the Portuguese were as far as possible from occupation of those lands. They were not even at war with most of the peoples whom the Dutch visited. So therefore no legal claim could be established there by the Portuguese, because even if they had suffered wrongs from the East Indians, it might reasonably be considered by the long peace and friendly commercial relations that those injuries had been forgiven.\n\nIndeed there was no pretext at all for going to war. For those who force war upon barbarous peoples, as the Spaniards did upon the aborigines of America, commonly allege one of two pretexts: either that they have been refused the right to trade, or that the barbarians are unwilling to acknowledge the doctrines of the True Faith. But as the Portuguese actually obtained from the East Indians the right to trade,[38] they have, on that score at least, no\n\ngrounds of complaint. Nor is there any better justification for the other pretext than the one alleged by the Greeks against the barbarians, to which Boëthius makes the following allusion:\n\n> “_Unjust and cruel wars they wage, And haste with flying darts the death to meet or deal.\n\nNo right nor reason can they show; ’Tis but because their lands and laws are not the same._”[39]\n\nMoreover the verdict of Thomas Aquinas, of the Council of Toledo, of Gregory, and of nearly all theologians, canonists, and jurists, is as follows:[40] However persuasively and sufficiently the True Faith has been preached to the heathen--former subjects of Christian princes or apostates are quite another question--if they are unwilling to heed it, that is not sufficient cause to justify war upon them, or to despoil them of their goods.[41]\n\nIt is worth while on this point to quote the actual words of Cajetan:[42] ‘There are some infidels who are neither in law nor in fact under the temporal jurisdiction of Christian princes; just as there were pagans who were never, subjects of the Roman Empire, and yet who inhabit lands where the name of Christ was never heard. Now their rulers, though heathen, are legitimate rulers, whether the people live under a monarchical or a democratic régime. They are not to be deprived of sovereignty over their possessions\n\nbecause of their unbelief, since sovereignty is a matter of positive law, and unbelief is a matter of divine law, which cannot annul positive law, as has been argued above. In fact I know of no law against such unbelievers as regards their temporal possessions. Against them no King, no Emperor, not even the Roman Church, can declare war for the purpose of occupying their lands, or of subjecting them to temporal sway. For there is no just cause for war, since Jesus Christ the King of Kings, to whom all power was given in heaven and on earth, sent out for the conquest of the world not armed soldiers, but holy disciples, “as sheep in the midst of wolves.” Nor do I read in the Old Testament, when possession had to be obtained by force of arms, that the Israelites waged war on any heathen land because of the unbelief of its inhabitants; but it was because the heathen refused them the right of innocent passage, or attacked them, as the Midianites did; or it was to recover the possessions which had been bestowed upon them by divine bounty. Wherefore we should be most miserable sinners if we should attempt to extend the religion of Jesus Christ by such means. Nor should we be their lawful rulers, but, on the contrary, we should be committing great robberies, and be compelled to make restitution as unjust conquerors and invaders. There must be sent to them as preachers, good men to convert them to God by their teaching and example; not men who will oppress them, despoil them, subdue and proselytize them, and “make them twofold more the children of hell than themselves,”* after the manner of the Pharisees’.\n\n* [Matthew XXIII, 15].\n\nIndeed I have often heard that it has been decreed by the Council of Spain, and by the Churchmen, especially the Dominicans, that the Americans (Aztecs and Indians) should be converted to the Faith by the preaching of the Word alone, and not by war, and even that their liberty of which they had been robbed in the name of religion should be restored. This policy is said to have received the approval of Pope Paul III, and of Emperor Charles V, King of the Spains.\n\nI pass over the fact that the Portuguese in most places do not further the extension of the faith, or indeed, pay any attention to it at all, since they are alive only to the acquisition of wealth. Nay, the very thing that is true of them, is the very thing which has been written of the Spaniards in America by a Spaniard, namely, that nothing is heard of miracles or wonders or examples of devout and religious life such as might convert others to the same faith, but on the other hand no end of scandals, of crimes, of impious deeds.\n\nWherefore, since both possession and a title of possession are lacking, and since the property and the sovereignty of the East Indies ought not to be considered as if they had previously been _res nullius_, and since, as they belong to the East Indians, they could not have been acquired legally by other persons, it follows that the East Indian nations in question are not the chattels of the Portuguese, but are free men and _sui juris_. This is not denied even by the Spanish jurists themselves.[43]",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 38,
+    "text": "CHAPTER IV"
+  },
+  "word_count": 1051,
+  "block_count": 13
+}

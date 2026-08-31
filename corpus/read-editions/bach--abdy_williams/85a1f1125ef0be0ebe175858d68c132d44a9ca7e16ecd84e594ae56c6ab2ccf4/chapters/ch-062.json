@@ -1,0 +1,136 @@
+{
+  "chapter_id": "ch-062",
+  "title": "FOOTNOTES:",
+  "block_start": 789,
+  "block_end": 798,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FOOTNOTES:",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[66] Afterwards the firm of C. F. Peters, Leipsic.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[66]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[67] See Forkel, p. 64.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[67]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[68] P. 56.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[68]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[69] Father of the author of Gerber’s Lexicon.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[69]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[70] Gerber was a Thuringian.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[70]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[71] P. 38.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[71]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[72] Forkel, pp. 40, 41.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[72]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[73] See page 49.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[73]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[74] In addition to the above-mentioned professional pupils, all amateurs living near obtained at least a few lessons from “so great and celebrated a man.”--Forkel, p. 42.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[74]"
+        },
+        {
+          "start": 123,
+          "end": 155,
+          "style": "quote",
+          "text": "“so great and celebrated a man.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FOOTNOTES:\n\n[66] Afterwards the firm of C. F. Peters, Leipsic.\n\n[67] See Forkel, p. 64.\n\n[68] P. 56.\n\n[69] Father of the author of Gerber’s Lexicon.\n\n[70] Gerber was a Thuringian.\n\n[71] P. 38.\n\n[72] Forkel, pp. 40, 41.\n\n[73] See page 49.\n\n[74] In addition to the above-mentioned professional pupils, all amateurs living near obtained at least a few lessons from “so great and celebrated a man.”--Forkel, p. 42.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 789,
+    "text": "FOOTNOTES:"
+  },
+  "word_count": 72,
+  "block_count": 10
+}

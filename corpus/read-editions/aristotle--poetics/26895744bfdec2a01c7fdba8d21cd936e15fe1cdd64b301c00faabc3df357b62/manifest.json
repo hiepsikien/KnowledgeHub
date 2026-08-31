@@ -1,0 +1,56 @@
+{
+  "package_version": "1",
+  "edition_format": "ref/1",
+  "work_id": "aristotle--poetics",
+  "title": "The Poetics of Aristotle",
+  "language": "en",
+  "pipeline": "same_language",
+  "edition_hash": "26895744bfdec2a01c7fdba8d21cd936e15fe1cdd64b301c00faabc3df357b62",
+  "content_hash": "3d0100ec20b93c814b07e0032b94582e649f4e7508b77959cb1d08a4fa6bb470",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "block_count": 134,
+  "chapter_count": 2,
+  "chapters": [
+    {
+      "chapter_id": "ch-000",
+      "title": "THE POETICS OF ARISTOTLE",
+      "block_range": [
+        0,
+        18
+      ],
+      "word_count": 351,
+      "block_count": 19,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-001",
+      "title": "ARISTOTLE'S POETICS",
+      "block_range": [
+        19,
+        133
+      ],
+      "word_count": 14816,
+      "block_count": 115,
+      "qa_status": "pending"
+    }
+  ],
+  "quotation_profile": {
+    "footnote_style": "none",
+    "footnote_count": 0,
+    "bracket_notes": 2,
+    "paren_cites": 20,
+    "paren_quotes": 0,
+    "paren_asides": 7,
+    "inline_quotes": 0,
+    "italic_spans": 0,
+    "list_markers": 0,
+    "detector": "rule"
+  },
+  "ref_parser_version": "1.7",
+  "ref_mode": "llm_hybrid",
+  "llm_relabel": true,
+  "llm_segment_count": 26,
+  "created_at": "2026-08-30T15:00:13+00:00",
+  "updated_at": "2026-08-30T15:00:13+00:00"
+}

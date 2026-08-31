@@ -1,0 +1,544 @@
+{
+  "chapter_id": "ch-052",
+  "title": "Chapter VIII",
+  "block_start": 560,
+  "block_end": 609,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Chapter VIII",
+      "level": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "The Cantatas and the Chorale"
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Characteristics of Bach’s Music_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 45,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Characteristics of Bach’s Music_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The prevailing characteristics in Bach’s compositions are intense earnestness of purpose, and, in his church music, a deep religious feeling, too deep for the ordinary everyday person to appreciate; an absolute absence of anything extraneous, such as concessions to singers and performers, or to the fashion of the day. When Bach writes florid or highly ornamental passages, they are not intended merely to exhibit the skill of the performer--their most important purpose is the exact expression of the words or emotions in hand. In this he and Beethoven were at one. Their difficulties of execution arise from the necessities of artistic expression, and such difficulties will be found in all the truest and best art, the art that lives beyond the fashion of the hour."
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach, like Beethoven, suffered from the influx of a superficial kind of music which so easily captivates an unthinking public."
+    },
+    {
+      "type": "paragraph",
+      "text": "The proximity of the Dresden Court, with its Italian Opera Company and the opening of an opera-house in Leipsic itself, had much the same effect in attracting the Leipsic public away from the solidity and severity of the cantor (whom, all the same, they never ceased to respect) as the Rossini fever had in the beginning of the nineteenth century at Vienna with regard to Beethoven’s music. Bach, however, was in a worse position than Beethoven, for he lived and worked in a small circle of German towns, and only in the domain of church music. Teutonic to the backbone, he expressed his thoughts in his own way without swerving to the right or left. He never had occasion to try and please any but a North German public, and he mostly endeavoured only to please himself, and promote the “glory of God” in his own way, by adhering strictly to what his genius told him was right; and posterity has endorsed his views.",
+      "spans": [
+        {
+          "start": 228,
+          "end": 278,
+          "style": "paren_aside",
+          "text": "(whom, all the same, they never ceased to respect)"
+        },
+        {
+          "start": 788,
+          "end": 802,
+          "style": "quote",
+          "text": "“glory of God”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Beethoven, on the other hand, lived at a time when communications between countries were beginning to be more rapid and frequent. The French Revolution, and the constant wars brought about by the ambition of Napoleon, though temporarily hostile to the actual practice of art, had the effect of making whatever art was produced more cosmopolitan, and therefore more easily appreciated outside the artist’s country. Thus Beethoven’s music soon became known in England: and at the very time when the Rossini fever was causing him to be forgotten in Vienna (the town of his adoption) the English Philharmonic Society was negotiating with the great composer for the composition of a symphony, and these negotiations, as is well known, resulted in the production of the greatest symphony the world has yet seen.",
+      "spans": [
+        {
+          "start": 553,
+          "end": 579,
+          "style": "paren_cite",
+          "text": "(the town of his adoption)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Bach and Handel_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 29,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Bach and Handel_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is customary to compare the two musical giants of the first half of the eighteenth century, Handel and Bach. Both were born in the same year, 1685, Handel being the senior by one month only: both were natives of small German towns, within a few miles of each other. Both received their earliest musical education in Germany, but with the difference that Bach, coming of a family of professional musicians, there was never any thought of bringing him up to any other profession, while Handel’s father, a surgeon, had all the prejudices of his time and profession against music, and did his best to stifle his son’s proclivities, till they became too strong for him to longer withstand."
+    },
+    {
+      "type": "paragraph",
+      "text": "After early childhood the ways of the composers were widely different. While Bach was painfully acquiring the technique of his art, by making long journeys on foot to hear and get instruction from eminent German organists, by practising assiduously day and night, and by copying all the best music he could lay hands on, Handel was playing the violin and harpsichord in the German opera conducted by Keiser at Hamburg."
+    },
+    {
+      "type": "paragraph",
+      "text": "At the age of twenty-one Handel went to Italy and remained there three years studying, and successfully composing operas for the Italians, who called him “Il caro Sassone,”--“the dear Saxon.” At twenty-one Bach was organist of a small and unimportant German town, still working hard to improve his technical powers in every direction. Everyone knows that Handel made his first reputation as a composer of Italian operas which are completely forgotten, and not till he was fifty-five years old did he begin that series of oratorios or sacred dramas by which he is immortalised. Bach, on the other hand, making the organ and the chorale his starting point, continued all his life to compose sacred music--“church music” as it was called, and never wrote for the theatre. Handel, domiciled in England, knew his public and knew them so well that he wrote works which not only became popular at once, but have never ceased to be popular. Bach either did not know, or did not care to please his public, and wrote far above their heads, so that for a time after his death he was forgotten entirely: only when Mozart, and afterwards Mendelssohn, became acquainted with the wonders of his genius did the public, almost against their will, begin to appreciate what a giant had been on the earth in those days.[56]",
+      "spans": [
+        {
+          "start": 154,
+          "end": 172,
+          "style": "quote",
+          "text": "“Il caro Sassone,”"
+        },
+        {
+          "start": 174,
+          "end": 191,
+          "style": "quote",
+          "text": "“the dear Saxon.”"
+        },
+        {
+          "start": 703,
+          "end": 717,
+          "style": "quote",
+          "text": "“church music”"
+        },
+        {
+          "start": 1299,
+          "end": 1303,
+          "style": "footnote",
+          "text": "[56]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Ein feste Burg_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Ein feste Burg_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach’s place in Lutheran Church history is very important. He is connected directly with the Reformation through the chorale, which Luther so much encouraged as a means of spreading the new views of religion. Bach was a strict Lutheran; and the chorale, or hymn to be sung by the congregation, was perhaps the most important expression of Lutheran religious feeling. The words will explain this perhaps better than anything else, if we take an example at random from the Leipziger Gesangbuch, in literal prose translation--_e.g._ No. 171: “A strong castle is our God; a good defence and weapon; he freely helps us in all trouble that can meet us. The ancient wicked enemy is in earnest; his cruel armour is great power and much deceit: there is none like him on the earth.",
+      "spans": [
+        {
+          "start": 523,
+          "end": 529,
+          "style": "em",
+          "text": "_e.g._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“We can do nothing of our own power, we are soon lost: but there fights for us the right man, whom God himself has chosen. Dost thou ask his name? Jesus Christ is his name, the Lord of Sabaoth. There is no other God; he is bound to win the day."
+    },
+    {
+      "type": "paragraph",
+      "text": "“And if the world were full of devils, who would devour us, we need not fear much, for we shall conquer. The prince of this world, however sour he may appear, can do nothing against us: a word is able to slay him,” &c.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 214,
+          "style": "quote",
+          "text": "“And if the world were full of devils, who would devour us, we need not fear much, for we shall conquer. The prince of this world, however sour he may appear, can do nothing against us: a word is able to slay him,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: A Notable Chorale]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 29,
+          "style": "bracket_note",
+          "text": "[Sidenote: A Notable Chorale]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This is one of the chorales assigned to the Festival of the Reformation, and one can imagine with what force it would appeal to those disposed towards Luther’s teaching. Its well-known melody was composed by Luther, and it was used by Bach as the foundation of a cantata which is considered by Zelter to have been composed in celebration of the 200th anniversary of the Reformation in 1717, but the composer re-arranged it in 1730. The orchestra contains three trumpets, one flute, two oboes, one oboe di caccia, two violins, viola, violoncello, organ and figured bass."
+    },
+    {
+      "type": "paragraph",
+      "text": "The first chorus set to the words of the first verse has the following vigorous opening, the orchestra playing an independent accompaniment. (For convenience of English readers we quote from Novello’s octavo edition.)",
+      "spans": [
+        {
+          "start": 141,
+          "end": 217,
+          "style": "paren_aside",
+          "text": "(For convenience of English readers we quote from Novello’s octavo edition.)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: A stronghold sure our God re-]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 38,
+          "style": "bracket_note",
+          "text": "[Music: A stronghold sure our God re-]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music:"
+    },
+    {
+      "type": "stanza",
+      "text": "A stronghold sure our God remains, A shield and hope unfailing ][57]",
+      "lines": [
+        "A stronghold sure our God remains, A shield and hope unfailing ][57]"
+      ],
+      "spans": [
+        {
+          "start": 64,
+          "end": 68,
+          "style": "footnote",
+          "text": "[57]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This is worked in bold fugato (both chorus and orchestra taking the subject or the counter-subject), for thirty-six bars, which are then repeated, note for note, to the words: “In need His help our freedom gains, o’er all we fear prevailing.”",
+      "spans": [
+        {
+          "start": 30,
+          "end": 99,
+          "style": "paren_aside",
+          "text": "(both chorus and orchestra taking the subject or the counter-subject)"
+        },
+        {
+          "start": 176,
+          "end": 242,
+          "style": "quote",
+          "text": "“In need His help our freedom gains, o’er all we fear prevailing.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A short quotation may serve to give some idea of the fulness of the writing and the boldness of the counterpoint, of which the effect, when sung with proper energy, is overwhelming."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: In need his help our freedom gains]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 43,
+          "style": "bracket_note",
+          "text": "[Music: In need his help our freedom gains]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The words “our old malignant foe” follow, with the new fugue subject",
+      "spans": [
+        {
+          "start": 10,
+          "end": 33,
+          "style": "quote",
+          "text": "“our old malignant foe”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: Our old malignant foe]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 30,
+          "style": "bracket_note",
+          "text": "[Music: Our old malignant foe]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "occupying twenty-four bars."
+    },
+    {
+      "type": "paragraph",
+      "text": "Then"
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music:"
+    },
+    {
+      "type": "paragraph",
+      "text": "Would fain work us woe would fain]"
+    },
+    {
+      "type": "paragraph",
+      "text": "&c. treated fugato for twenty bars; and each line is worked in the same way."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: A Massive Chorus]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "bracket_note",
+          "text": "[Sidenote: A Massive Chorus]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The whole chorus is 221 bars in length, and is a masterpiece of massive choral and orchestral writing, in keeping with the sentiment of the words. It opens with three trumpets, drums, violoncello, and organ manual, the pedal being silent for the first twenty-three bars. At the twenty-fourth bar (the first quoted on page 97) the pedal enters with the 16 feet Posaune, and makes a bold canon of eight bars, with the melody played in the highest register of the trumpet. The canon concludes with a drum passage on the dominant; and fresh canons between trumpet and pedal occur at bars 49, 88, 122, 147, 178 and 200.",
+      "spans": [
+        {
+          "start": 296,
+          "end": 325,
+          "style": "paren_aside",
+          "text": "(the first quoted on page 97)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These seven canons are all formed on the musical phrases of the tune: and one might almost look upon the chorus as a gigantic “choral-vorspiel” with long vocal and instrumental interludes between the phrases given out by the trumpets and pedal.",
+      "spans": [
+        {
+          "start": 126,
+          "end": 143,
+          "style": "quote",
+          "text": "“choral-vorspiel”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: A Florid Duet]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 25,
+          "style": "bracket_note",
+          "text": "[Sidenote: A Florid Duet]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The second verse is set as a duet for treble and bass, still in the key of D. After a ritornello, the bass enters with the words “all men born of God our Father, at the last will Jesus gather,” set to exceedingly florid passages, above which floats the melody in the treble voice.",
+      "spans": [
+        {
+          "start": 129,
+          "end": 193,
+          "style": "quote",
+          "text": "“all men born of God our Father, at the last will Jesus gather,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music:"
+    },
+    {
+      "type": "stanza",
+      "text": "Our utmost might is all in men, All men born of God our]",
+      "lines": [
+        "Our utmost might is all in men, All men born of God our]"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A bass recitative, commenting on the preceding sentiments follows, and then a treble aria, “Within my heart of hearts, Lord Jesus, make thy dwelling.” In the fifth number the whole chorus sings the melody in unison, now changed to 6/8 time, and with a very florid accompaniment.",
+      "spans": [
+        {
+          "start": 91,
+          "end": 150,
+          "style": "quote",
+          "text": "“Within my heart of hearts, Lord Jesus, make thy dwelling.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: If all the world with fiends were filled.]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 50,
+          "style": "bracket_note",
+          "text": "[Music: If all the world with fiends were filled.]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This is followed by a tenor recitative, “Then close beside Thy Saviour’s blood-besprinkled banner, my soul remain,” &c., a duet for alto and tenor, “How blessed then are they, who still on God are calling;” and the cantata concludes with the chorale simply harmonised in four parts, “That word shall still in strength abide,” in the form familiar to English congregations.",
+      "spans": [
+        {
+          "start": 40,
+          "end": 115,
+          "style": "quote",
+          "text": "“Then close beside Thy Saviour’s blood-besprinkled banner, my soul remain,”"
+        },
+        {
+          "start": 148,
+          "end": 206,
+          "style": "quote",
+          "text": "“How blessed then are they, who still on God are calling;”"
+        },
+        {
+          "start": 283,
+          "end": 325,
+          "style": "quote",
+          "text": "“That word shall still in strength abide,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Fertility of Invention_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Fertility of Invention_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We have given a fairly full description of this fine cantata in order to show our readers what is meant when it is said that Bach based his church music essentially on chorale. Most of the cantatas are constructed in the same kind of way, _i.e._ a chorale is used as the chief subject. But that Bach did not merely work on a fixed model is shown by the fact that no two of the one hundred and ninety cantatas published by the Bachgesellschaft are alike. Nothing astonishes us more than the enormous fertility of invention shown in these wonderful works, the variety of detail, and yet the unity of purpose. The one idea of the composer was the religious effect to be obtained by the highest efforts of art devoted to the service of God. Except in Germany, they are rarely heard in their proper place as part of the church service: but the mere reading through of the scores produces a most profound effect, and creates a perpetual astonishment in the reader at the enormous resources of the composer.",
+      "spans": [
+        {
+          "start": 239,
+          "end": 245,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach is generally considered as the greatest composer for the organ, but his organ works, wonderful as they are, seem small in comparison with these marvellous cantatas, all different and yet all connected, as it were, by an underlying unity of purpose."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _The Choral-vorspiel_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[Sidenote: _The Choral-vorspiel_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach took the melody of “Ein feste Burg” for one of his finest choral-vorspiele (Peters, 245, No. 22). This is a particularly interesting composition, since it is the only chorale in which we obtain any clue to Bach’s methods of registering. In Walther’s MS. are given a few indications “a 3 clav.” for three manuals. The left hand is to begin with the fagott, sixteen feet, and the right hand on the choir with the “sesquialtera.” The piece was doubtless intended for the organ at Mühlhausen which was renovated and enlarged under Bach’s directions, and which had three manuals, containing on one a sixteen feet “fagott,” and on another a combination producing a “good sesquialtera tone.” It is one of the larger choral-vorspiele, containing fifty-eight bars.",
+      "spans": [
+        {
+          "start": 24,
+          "end": 40,
+          "style": "quote",
+          "text": "“Ein feste Burg”"
+        },
+        {
+          "start": 80,
+          "end": 101,
+          "style": "paren_cite",
+          "text": "(Peters, 245, No. 22)"
+        },
+        {
+          "start": 287,
+          "end": 298,
+          "style": "quote",
+          "text": "“a 3 clav.”"
+        },
+        {
+          "start": 416,
+          "end": 431,
+          "style": "quote",
+          "text": "“sesquialtera.”"
+        },
+        {
+          "start": 613,
+          "end": 622,
+          "style": "quote",
+          "text": "“fagott,”"
+        },
+        {
+          "start": 664,
+          "end": 689,
+          "style": "quote",
+          "text": "“good sesquialtera tone.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It is worth while noticing how Bach, in this, and all other choral-vorspiele, does not adhere literally to the notes of the melody, but introduces ornamental passages, or lengthens and shortens notes to serve his purpose, or introduces the subject in augmentation and diminution. This was the regular custom amongst German organists. The choral-vorspiel is, in its simplest form, merely intended to prepare the congregation for the melody that is to be sung, but instead of a mere bald playing through of the tune, as is usual in English churches, the organist was expected to use his art in elaborating it."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: ‘Surprising Variations’]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 35,
+          "style": "bracket_note",
+          "text": "[Sidenote: ‘Surprising Variations’]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach, in his younger days, was accused of over-elaborating, not only the vorspiele, but the accompaniment. It was a fault of youth, and hardly called for the official censure that the Council at Arnstadt thought fit to administer. He was practically his own teacher. If he had been under the guidance of an older and more experienced organist, he would undoubtedly have curbed his zeal for “surprising variations.”",
+      "spans": [
+        {
+          "start": 390,
+          "end": 414,
+          "style": "quote",
+          "text": "“surprising variations.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "At that time he seems to have lost sight of the fact that he was expected to accompany the congregation. He forgot all about them, and gave free rein to his imagination so that the “congregation were confounded.” And well they might be, by the following example of his accompaniment.",
+      "spans": [
+        {
+          "start": 181,
+          "end": 212,
+          "style": "quote",
+          "text": "“congregation were confounded.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "Chapter VIII\n\nThe Cantatas and the Chorale\n\n[Sidenote: _Characteristics of Bach’s Music_]\n\nThe prevailing characteristics in Bach’s compositions are intense earnestness of purpose, and, in his church music, a deep religious feeling, too deep for the ordinary everyday person to appreciate; an absolute absence of anything extraneous, such as concessions to singers and performers, or to the fashion of the day. When Bach writes florid or highly ornamental passages, they are not intended merely to exhibit the skill of the performer--their most important purpose is the exact expression of the words or emotions in hand. In this he and Beethoven were at one. Their difficulties of execution arise from the necessities of artistic expression, and such difficulties will be found in all the truest and best art, the art that lives beyond the fashion of the hour.\n\nBach, like Beethoven, suffered from the influx of a superficial kind of music which so easily captivates an unthinking public.\n\nThe proximity of the Dresden Court, with its Italian Opera Company and the opening of an opera-house in Leipsic itself, had much the same effect in attracting the Leipsic public away from the solidity and severity of the cantor (whom, all the same, they never ceased to respect) as the Rossini fever had in the beginning of the nineteenth century at Vienna with regard to Beethoven’s music. Bach, however, was in a worse position than Beethoven, for he lived and worked in a small circle of German towns, and only in the domain of church music. Teutonic to the backbone, he expressed his thoughts in his own way without swerving to the right or left. He never had occasion to try and please any but a North German public, and he mostly endeavoured only to please himself, and promote the “glory of God” in his own way, by adhering strictly to what his genius told him was right; and posterity has endorsed his views.\n\nBeethoven, on the other hand, lived at a time when communications between countries were beginning to be more rapid and frequent. The French Revolution, and the constant wars brought about by the ambition of Napoleon, though temporarily hostile to the actual practice of art, had the effect of making whatever art was produced more cosmopolitan, and therefore more easily appreciated outside the artist’s country. Thus Beethoven’s music soon became known in England: and at the very time when the Rossini fever was causing him to be forgotten in Vienna (the town of his adoption) the English Philharmonic Society was negotiating with the great composer for the composition of a symphony, and these negotiations, as is well known, resulted in the production of the greatest symphony the world has yet seen.\n\n[Sidenote: _Bach and Handel_]\n\nIt is customary to compare the two musical giants of the first half of the eighteenth century, Handel and Bach. Both were born in the same year, 1685, Handel being the senior by one month only: both were natives of small German towns, within a few miles of each other. Both received their earliest musical education in Germany, but with the difference that Bach, coming of a family of professional musicians, there was never any thought of bringing him up to any other profession, while Handel’s father, a surgeon, had all the prejudices of his time and profession against music, and did his best to stifle his son’s proclivities, till they became too strong for him to longer withstand.\n\nAfter early childhood the ways of the composers were widely different. While Bach was painfully acquiring the technique of his art, by making long journeys on foot to hear and get instruction from eminent German organists, by practising assiduously day and night, and by copying all the best music he could lay hands on, Handel was playing the violin and harpsichord in the German opera conducted by Keiser at Hamburg.\n\nAt the age of twenty-one Handel went to Italy and remained there three years studying, and successfully composing operas for the Italians, who called him “Il caro Sassone,”--“the dear Saxon.” At twenty-one Bach was organist of a small and unimportant German town, still working hard to improve his technical powers in every direction. Everyone knows that Handel made his first reputation as a composer of Italian operas which are completely forgotten, and not till he was fifty-five years old did he begin that series of oratorios or sacred dramas by which he is immortalised. Bach, on the other hand, making the organ and the chorale his starting point, continued all his life to compose sacred music--“church music” as it was called, and never wrote for the theatre. Handel, domiciled in England, knew his public and knew them so well that he wrote works which not only became popular at once, but have never ceased to be popular. Bach either did not know, or did not care to please his public, and wrote far above their heads, so that for a time after his death he was forgotten entirely: only when Mozart, and afterwards Mendelssohn, became acquainted with the wonders of his genius did the public, almost against their will, begin to appreciate what a giant had been on the earth in those days.[56]\n\n[Sidenote: _Ein feste Burg_]\n\nBach’s place in Lutheran Church history is very important. He is connected directly with the Reformation through the chorale, which Luther so much encouraged as a means of spreading the new views of religion. Bach was a strict Lutheran; and the chorale, or hymn to be sung by the congregation, was perhaps the most important expression of Lutheran religious feeling. The words will explain this perhaps better than anything else, if we take an example at random from the Leipziger Gesangbuch, in literal prose translation--_e.g._ No. 171: “A strong castle is our God; a good defence and weapon; he freely helps us in all trouble that can meet us. The ancient wicked enemy is in earnest; his cruel armour is great power and much deceit: there is none like him on the earth.\n\n> “We can do nothing of our own power, we are soon lost: but there fights for us the right man, whom God himself has chosen. Dost thou ask his name? Jesus Christ is his name, the Lord of Sabaoth. There is no other God; he is bound to win the day.\n\n“And if the world were full of devils, who would devour us, we need not fear much, for we shall conquer. The prince of this world, however sour he may appear, can do nothing against us: a word is able to slay him,” &c.\n\n[Sidenote: A Notable Chorale]\n\nThis is one of the chorales assigned to the Festival of the Reformation, and one can imagine with what force it would appeal to those disposed towards Luther’s teaching. Its well-known melody was composed by Luther, and it was used by Bach as the foundation of a cantata which is considered by Zelter to have been composed in celebration of the 200th anniversary of the Reformation in 1717, but the composer re-arranged it in 1730. The orchestra contains three trumpets, one flute, two oboes, one oboe di caccia, two violins, viola, violoncello, organ and figured bass.\n\nThe first chorus set to the words of the first verse has the following vigorous opening, the orchestra playing an independent accompaniment. (For convenience of English readers we quote from Novello’s octavo edition.)\n\n[Music: A stronghold sure our God re-]\n\n[Music:\n\nA stronghold sure our God remains, A shield and hope unfailing ][57]\n\nThis is worked in bold fugato (both chorus and orchestra taking the subject or the counter-subject), for thirty-six bars, which are then repeated, note for note, to the words: “In need His help our freedom gains, o’er all we fear prevailing.”\n\nA short quotation may serve to give some idea of the fulness of the writing and the boldness of the counterpoint, of which the effect, when sung with proper energy, is overwhelming.\n\n[Music: In need his help our freedom gains]\n\nThe words “our old malignant foe” follow, with the new fugue subject\n\n[Music: Our old malignant foe]\n\noccupying twenty-four bars.\n\nThen\n\n[Music:\n\nWould fain work us woe would fain]\n\n&c. treated fugato for twenty bars; and each line is worked in the same way.\n\n[Sidenote: A Massive Chorus]\n\nThe whole chorus is 221 bars in length, and is a masterpiece of massive choral and orchestral writing, in keeping with the sentiment of the words. It opens with three trumpets, drums, violoncello, and organ manual, the pedal being silent for the first twenty-three bars. At the twenty-fourth bar (the first quoted on page 97) the pedal enters with the 16 feet Posaune, and makes a bold canon of eight bars, with the melody played in the highest register of the trumpet. The canon concludes with a drum passage on the dominant; and fresh canons between trumpet and pedal occur at bars 49, 88, 122, 147, 178 and 200.\n\nThese seven canons are all formed on the musical phrases of the tune: and one might almost look upon the chorus as a gigantic “choral-vorspiel” with long vocal and instrumental interludes between the phrases given out by the trumpets and pedal.\n\n[Sidenote: A Florid Duet]\n\nThe second verse is set as a duet for treble and bass, still in the key of D. After a ritornello, the bass enters with the words “all men born of God our Father, at the last will Jesus gather,” set to exceedingly florid passages, above which floats the melody in the treble voice.\n\n[Music:\n\nOur utmost might is all in men, All men born of God our]\n\nA bass recitative, commenting on the preceding sentiments follows, and then a treble aria, “Within my heart of hearts, Lord Jesus, make thy dwelling.” In the fifth number the whole chorus sings the melody in unison, now changed to 6/8 time, and with a very florid accompaniment.\n\n[Music: If all the world with fiends were filled.]\n\nThis is followed by a tenor recitative, “Then close beside Thy Saviour’s blood-besprinkled banner, my soul remain,” &c., a duet for alto and tenor, “How blessed then are they, who still on God are calling;” and the cantata concludes with the chorale simply harmonised in four parts, “That word shall still in strength abide,” in the form familiar to English congregations.\n\n[Sidenote: _Fertility of Invention_]\n\nWe have given a fairly full description of this fine cantata in order to show our readers what is meant when it is said that Bach based his church music essentially on chorale. Most of the cantatas are constructed in the same kind of way, _i.e._ a chorale is used as the chief subject. But that Bach did not merely work on a fixed model is shown by the fact that no two of the one hundred and ninety cantatas published by the Bachgesellschaft are alike. Nothing astonishes us more than the enormous fertility of invention shown in these wonderful works, the variety of detail, and yet the unity of purpose. The one idea of the composer was the religious effect to be obtained by the highest efforts of art devoted to the service of God. Except in Germany, they are rarely heard in their proper place as part of the church service: but the mere reading through of the scores produces a most profound effect, and creates a perpetual astonishment in the reader at the enormous resources of the composer.\n\nBach is generally considered as the greatest composer for the organ, but his organ works, wonderful as they are, seem small in comparison with these marvellous cantatas, all different and yet all connected, as it were, by an underlying unity of purpose.\n\n[Sidenote: _The Choral-vorspiel_]\n\nBach took the melody of “Ein feste Burg” for one of his finest choral-vorspiele (Peters, 245, No. 22). This is a particularly interesting composition, since it is the only chorale in which we obtain any clue to Bach’s methods of registering. In Walther’s MS. are given a few indications “a 3 clav.” for three manuals. The left hand is to begin with the fagott, sixteen feet, and the right hand on the choir with the “sesquialtera.” The piece was doubtless intended for the organ at Mühlhausen which was renovated and enlarged under Bach’s directions, and which had three manuals, containing on one a sixteen feet “fagott,” and on another a combination producing a “good sesquialtera tone.” It is one of the larger choral-vorspiele, containing fifty-eight bars.\n\nIt is worth while noticing how Bach, in this, and all other choral-vorspiele, does not adhere literally to the notes of the melody, but introduces ornamental passages, or lengthens and shortens notes to serve his purpose, or introduces the subject in augmentation and diminution. This was the regular custom amongst German organists. The choral-vorspiel is, in its simplest form, merely intended to prepare the congregation for the melody that is to be sung, but instead of a mere bald playing through of the tune, as is usual in English churches, the organist was expected to use his art in elaborating it.\n\n[Sidenote: ‘Surprising Variations’]\n\nBach, in his younger days, was accused of over-elaborating, not only the vorspiele, but the accompaniment. It was a fault of youth, and hardly called for the official censure that the Council at Arnstadt thought fit to administer. He was practically his own teacher. If he had been under the guidance of an older and more experienced organist, he would undoubtedly have curbed his zeal for “surprising variations.”\n\nAt that time he seems to have lost sight of the fact that he was expected to accompany the congregation. He forgot all about them, and gave free rein to his imagination so that the “congregation were confounded.” And well they might be, by the following example of his accompaniment.",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 560,
+    "text": "Chapter VIII"
+  },
+  "word_count": 2321,
+  "block_count": 50
+}

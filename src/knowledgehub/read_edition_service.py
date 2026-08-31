@@ -30,6 +30,42 @@ from .edition.read_edition_steps import (
 from .edition.serialize import blocks_to_markdown
 from .paths import corpus_root
 
+# Pending-section CMS preview: double the old 2000-char head-only cap.
+SOURCE_PREVIEW_MAX = 4000
+SOURCE_PREVIEW_HEAD = 2000
+SOURCE_PREVIEW_TAIL = 2000
+
+
+def head_tail_preview(
+    text: str,
+    *,
+    max_chars: int = SOURCE_PREVIEW_MAX,
+    head_chars: int = SOURCE_PREVIEW_HEAD,
+    tail_chars: int = SOURCE_PREVIEW_TAIL,
+) -> dict[str, Any]:
+    """Head + tail excerpt; omit the middle when longer than max_chars."""
+    body = text or ""
+    n = len(body)
+    if n <= max_chars:
+        return {
+            "source_preview": body,
+            "source_preview_head": body,
+            "source_preview_tail": "",
+            "source_preview_truncated": False,
+            "source_preview_omitted": 0,
+        }
+    head = body[:head_chars]
+    tail = body[-tail_chars:]
+    omitted = max(0, n - head_chars - tail_chars)
+    marker = f"\n\n[… omitted {omitted} chars …]\n\n"
+    return {
+        "source_preview": f"{head}{marker}{tail}",
+        "source_preview_head": head,
+        "source_preview_tail": tail,
+        "source_preview_truncated": True,
+        "source_preview_omitted": omitted,
+    }
+
 
 def _map_error(exc: Exception) -> ValueError:
     if isinstance(exc, (ReadEditionError, ReadEditionStepError)):
@@ -128,6 +164,7 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
         if not section:
             raise ValueError(f"Unknown chapter: {chapter_id}")
         text, _, _ = resolve_stripped_source(work_id, corpus=root)
+        slice_text = section_source_slice(text, section)
         chapter = {
             "chapter_id": chapter_id,
             "title": section.get("title"),
@@ -135,7 +172,7 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
             "kind": section.get("kind"),
             "char_range": [section.get("start_char"), section.get("end_char")],
             "micro_status": "pending",
-            "source_preview": section_source_slice(text, section)[:2000],
+            **head_tail_preview(slice_text),
             "blocks": [],
             "reading_markdown": "",
         }

@@ -1,0 +1,2820 @@
+{
+  "chapter_id": "ch-072",
+  "title": "CHURCH CANTATAS _The numbers refer to the Bachgesellschaft Edition._",
+  "block_start": 962,
+  "block_end": 1169,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "CHURCH CANTATAS _The numbers refer to the Bachgesellschaft Edition._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 16,
+          "end": 68,
+          "style": "em",
+          "text": "_The numbers refer to the Bachgesellschaft Edition._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "2       _Ach Gott vom Himmel sieh darein._ Second Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 42,
+          "style": "em",
+          "text": "_Ach Gott vom Himmel sieh darein._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "3       _Ach Gott, wie manches Herzeleid._ Second Sunday after Epiphany. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 42,
+          "style": "em",
+          "text": "_Ach Gott, wie manches Herzeleid._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "58       _Ach Gott, wie manches Herzeleid._ Second Sunday after Christmas. Solo Cantata for soprano and bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Ach Gott, wie manches Herzeleid._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "135       _Ach Herr, mich armen Sünder._ Third Sunday after Trinity. Chorale Cantata, Leipsic.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 40,
+          "style": "em",
+          "text": "_Ach Herr, mich armen Sünder._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "162       _Ach, ich sehe, itzt, da ich._ Twentieth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 40,
+          "style": "em",
+          "text": "_Ach, ich sehe, itzt, da ich._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "114       _Ach, lieben Christen, seid getrost._ Seventeenth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 47,
+          "style": "em",
+          "text": "_Ach, lieben Christen, seid getrost._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "26       _Ach wie flüchtig, ach wie nichtig!_ Twenty-fourth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Ach wie flüchtig, ach wie nichtig!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "33       _Allein zu dir, Herr Jesu Christ._ Thirteenth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Allein zu dir, Herr Jesu Christ._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "72       _Alles nur nach Gottes Willen._ Third Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Alles nur nach Gottes Willen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "68       _Also hat Gott die Welt geliebt._ Tuesday in Whitsun-week. English edition, “God so loved the World,” Novello.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Also hat Gott die Welt geliebt._"
+        },
+        {
+          "start": 85,
+          "end": 110,
+          "style": "quote",
+          "text": "“God so loved the World,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "42       _Am Abend aber desselbigen Sabbaths._ First Sunday after Easter (Quasimodogeniti).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Am Abend aber desselbigen Sabbaths._"
+        },
+        {
+          "start": 73,
+          "end": 90,
+          "style": "paren_cite",
+          "text": "(Quasimodogeniti)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "186       _Arg’re dich, o Seele nicht._ Seventh Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 39,
+          "style": "em",
+          "text": "_Arg’re dich, o Seele nicht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "128       _Auf Christi Himmelfahrt allein._ Ascension Day.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 43,
+          "style": "em",
+          "text": "_Auf Christi Himmelfahrt allein._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "131       _Aus der Tiefe rufe ich, Herr, zu dir._ Composed for Dr. G. C. Gilmar, Pastor of Mühlhausen.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 49,
+          "style": "em",
+          "text": "_Aus der Tiefe rufe ich, Herr, zu dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "38       _Aus tiefer Noth schrei ich zu dir._ Twenty-first Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Aus tiefer Noth schrei ich zu dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "131       _Aus tiefer Noth schrei ich zu dir._ Composed at Mühlhausen about 1707.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 46,
+          "style": "em",
+          "text": "_Aus tiefer Noth schrei ich zu dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "185       _Barmherziges Herze, der._ Fourth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 36,
+          "style": "em",
+          "text": "_Barmherziges Herze, der._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "132       _Bereitet die Wege, bereitet._ For no special season. Weimar, 1715. Words by Salomo Franck.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 40,
+          "style": "em",
+          "text": "_Bereitet die Wege, bereitet._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "87       _Bisher habt ihr nichts gebeten in meinem Namen._ Fifth Sunday after Easter.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 58,
+          "style": "em",
+          "text": "_Bisher habt ihr nichts gebeten in meinem Namen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "6       _Bleib’ bei uns, denn es will Abend._ Tuesday in Easter Week. English edition, “Bide with us,” Novello.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Bleib’ bei uns, denn es will Abend._"
+        },
+        {
+          "start": 87,
+          "end": 102,
+          "style": "quote",
+          "text": "“Bide with us,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "39       _Brich dem Hungrigen dein Brot!_ First Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 41,
+          "style": "em",
+          "text": "_Brich dem Hungrigen dein Brot!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "148       _Bringet dem Herrn Ehre._ Seventeenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 35,
+          "style": "em",
+          "text": "_Bringet dem Herrn Ehre._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "63      _Christen, ätzet diesen Tag._ Christmas.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 37,
+          "style": "em",
+          "text": "_Christen, ätzet diesen Tag._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "4      _Christ lag in Todesbanden._ Easter Day.",
+      "spans": [
+        {
+          "start": 7,
+          "end": 35,
+          "style": "em",
+          "text": "_Christ lag in Todesbanden._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "121      _Christum wir sollen loben schon._ Christmas. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Christum wir sollen loben schon._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "7      _Christ unser Herr zum Jordan kam._ St John’s Day. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 7,
+          "end": 42,
+          "style": "em",
+          "text": "_Christ unser Herr zum Jordan kam._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "95      _Christus, der ist mein Leben._ Sixteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Christus, der ist mein Leben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "141      _Das ist je gewisslich wahr._ Third Sunday in Advent.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 38,
+          "style": "em",
+          "text": "_Das ist je gewisslich wahr._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "122      _Das neu gebor’ne Kindelein._ First Sunday after Christmas. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 38,
+          "style": "em",
+          "text": "_Das neu gebor’ne Kindelein._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "40      _Dazu ist erscheinen der Sohn._ Christmas.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Dazu ist erscheinen der Sohn._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "195      _Dem Gerechten muss das Licht._ Wedding Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Dem Gerechten muss das Licht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "15      _Denn du wirst meine Seele nicht in Hölle lassen._ Monday in Easter Week. Composed at Arnstadt, probably in 1704. See p. 27.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 58,
+          "style": "em",
+          "text": "_Denn du wirst meine Seele nicht in Hölle lassen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "157      _Der Friede sei mit dir._ Purification; also for Easter.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 34,
+          "style": "em",
+          "text": "_Der Friede sei mit dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "196      _Der Herr denket an uns._ Wedding Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 34,
+          "style": "em",
+          "text": "_Der Herr denket an uns._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "112      _Der Herr ist mein getreuer Hirt._ Second Sunday after Easter (Misericordias).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Der Herr ist mein getreuer Hirt._"
+        },
+        {
+          "start": 71,
+          "end": 86,
+          "style": "paren_cite",
+          "text": "(Misericordias)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "31      _Der Himmel lacht, die Erde jubiliret._ Monday in Easter Week. One of the few cantatas containing a chorus for five voices. The instrumental introduction is called “Sonata.”",
+      "spans": [
+        {
+          "start": 8,
+          "end": 47,
+          "style": "em",
+          "text": "_Der Himmel lacht, die Erde jubiliret._"
+        },
+        {
+          "start": 172,
+          "end": 181,
+          "style": "quote",
+          "text": "“Sonata.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "75      _Die Elenden sollen essen._ First Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_Die Elenden sollen essen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "76      _Die Himmel erzählen die Ehre._ Second Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Die Himmel erzählen die Ehre._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "116      _Du Friedensfürst, Herr Jesu Christ._ Twenty-fifth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Du Friedensfürst, Herr Jesu Christ._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "104      _Du Hirte Israel, höre._ Second Sunday after Easter (Misericordias). English edition, “Thou Guide of Israel,” Novello.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 33,
+          "style": "em",
+          "text": "_Du Hirte Israel, höre._"
+        },
+        {
+          "start": 61,
+          "end": 76,
+          "style": "paren_cite",
+          "text": "(Misericordias)"
+        },
+        {
+          "start": 95,
+          "end": 118,
+          "style": "quote",
+          "text": "“Thou Guide of Israel,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "77      _Du sollst Gott, deinen Herren, lieben._ Thirteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 48,
+          "style": "em",
+          "text": "_Du sollst Gott, deinen Herren, lieben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "23      _Du wahrer Gott und Davids Sohn._ Quinquagesima (Estomihi).",
+      "spans": [
+        {
+          "start": 8,
+          "end": 41,
+          "style": "em",
+          "text": "_Du wahrer Gott und Davids Sohn._"
+        },
+        {
+          "start": 56,
+          "end": 66,
+          "style": "paren_cite",
+          "text": "(Estomihi)"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Ehre sei dir Gott gesungen._ Part V. of Christmas  oratorio. English edition, Novello. _Ehre sei Gott in der Höhe._ Christmas. Incomplete. 80      _Ein feste Burg ist unser Gott._ Reformation Festival, English edition, “A Stronghold Sure,” Novello. Composed 1717, when Bach went to Cöthen. This was the first cantata published in the nineteenth century. It was also arranged to Latin words, beginning, “Gaudete, omnes populi.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 29,
+          "style": "em",
+          "text": "_Ehre sei dir Gott gesungen._"
+        },
+        {
+          "start": 88,
+          "end": 116,
+          "style": "em",
+          "text": "_Ehre sei Gott in der Höhe._"
+        },
+        {
+          "start": 148,
+          "end": 180,
+          "style": "em",
+          "text": "_Ein feste Burg ist unser Gott._"
+        },
+        {
+          "start": 220,
+          "end": 240,
+          "style": "quote",
+          "text": "“A Stronghold Sure,”"
+        },
+        {
+          "start": 403,
+          "end": 427,
+          "style": "quote",
+          "text": "“Gaudete, omnes populi.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "134      _Ein Herz, das Seinen._ Wednesday in Easter Week. Cöthen, between 1717 and 1723.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 32,
+          "style": "em",
+          "text": "_Ein Herz, das Seinen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "24      _Ein ungefärbt Gemüthe._ Fourth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 32,
+          "style": "em",
+          "text": "_Ein ungefärbt Gemüthe._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "136      _Erforsche mich Gott, und erfahre._ Eighth Sunday after Trinity. Leipsic, 1737 or 1738.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Erforsche mich Gott, und erfahre._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "66      _Erfreut euch, ihr Herzen!_ Tuesday in Easter Week.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_Erfreut euch, ihr Herzen!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "83      _Erfreute Zeit im neuen Bunde._ Purification.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Erfreute Zeit im neuen Bunde._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "126      _Erhalt’ uns, Herr, bei deinem Wort._ Sexagesima. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Erhalt’ uns, Herr, bei deinem Wort._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "173      _Erhöhtes Fleisch und Blut._ Tuesday in Whitsun-week. The music was originally written for a Serenade for the birthday of Prince Leopold of Cöthen. The MS. Serenade is in the Royal Library at Berlin.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 37,
+          "style": "em",
+          "text": "_Erhöhtes Fleisch und Blut._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "175      _Er rufet seinen Schafen mit._ Wednesday in Whitsun-week. Solo Cantata for tenor and bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Er rufet seinen Schafen mit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "172      _Erschallet,ihr Lieder._ Whitsunday.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 33,
+          "style": "em",
+          "text": "_Erschallet,ihr Lieder._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "184      _Erwünschtes Freudenlicht._ Wednesday in Whitsun-week.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 36,
+          "style": "em",
+          "text": "_Erwünschtes Freudenlicht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "19      _Es erbub sich ein Streit._ Michaelmas Day.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_Es erbub sich ein Streit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "9      _Es ist das Heil uns kommen her._ Sixth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 7,
+          "end": 40,
+          "style": "em",
+          "text": "_Es ist das Heil uns kommen her._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "45      _Es ist dir gesagt, Mensch, was gut ist._ Eighth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 49,
+          "style": "em",
+          "text": "_Es ist dir gesagt, Mensch, was gut ist._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "176      _Es ist ein trotzig und verzagt Ding._ Trinity Sunday.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 47,
+          "style": "em",
+          "text": "_Es ist ein trotzig und verzagt Ding._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "108      _Es ist euch gut, dass ich hingehe._ Fourth Sunday after Easter (Cantata).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Es ist euch gut, dass ich hingehe._"
+        },
+        {
+          "start": 73,
+          "end": 82,
+          "style": "paren_cite",
+          "text": "(Cantata)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "25      _Es ist nichts Gesundes an meinem Leibe._ Fourteenth Sunday after Trinity. Edition with English words, “Lo, there is no soundness within my body.” Rieter-Biedermann.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 49,
+          "style": "em",
+          "text": "_Es ist nichts Gesundes an meinem Leibe._"
+        },
+        {
+          "start": 111,
+          "end": 154,
+          "style": "quote",
+          "text": "“Lo, there is no soundness within my body.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "90      _Es reifet euch ein schrecklich._ Twenty-fifth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 41,
+          "style": "em",
+          "text": "_Es reifet euch ein schrecklich._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "187      _Es wartet Alles auf dich._ Seventh Sunday after Trinity, 1737. Music is used for Mass in G minor.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 36,
+          "style": "em",
+          "text": "_Es wartet Alles auf dich._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Fallt mit Danken._ Part IV. of Christmas oratorio. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 19,
+          "style": "em",
+          "text": "_Fallt mit Danken._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "52      _Falsche Welt, dir trau._ Twenty-third Sunday after Trinity. Solo Cantata for soprano.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 33,
+          "style": "em",
+          "text": "_Falsche Welt, dir trau._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "30      _Freue dich, erlöste Schaar._ St John’s Day, originally a “Dramma per Musica” in honour of the Saxon Minister, Von Hennicke. Composed in 1737, and arranged as a church cantata, 1738, after Bach had received the title of Court Composer. It is in the “Lombardic” style introduced by Vivaldi, consisting of frequent syncopation.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 37,
+          "style": "em",
+          "text": "_Freue dich, erlöste Schaar._"
+        },
+        {
+          "start": 66,
+          "end": 85,
+          "style": "quote",
+          "text": "“Dramma per Musica”"
+        },
+        {
+          "start": 257,
+          "end": 268,
+          "style": "quote",
+          "text": "“Lombardic”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "35      _Geist und Seele wird._ Twelfth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 31,
+          "style": "em",
+          "text": "_Geist und Seele wird._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "129      _Gelobet sei der Herr, mein Gott._ Trinity Sunday.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Gelobet sei der Herr, mein Gott._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "91      _Gelobet seist du, Jesus Christ._ Christmas. Chorale Cantata. Words by Martin Luther.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 41,
+          "style": "em",
+          "text": "_Gelobet seist du, Jesus Christ._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "18      _Gleich wie der Regen und._ Sexagesima. The orchestration is unusual, consisting of four violas, fagotto, violoncello and organ.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_Gleich wie der Regen und._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "191      _Gloria in excelsis Deo._ Christmas. Rearranged from the B minor Mass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 34,
+          "style": "em",
+          "text": "_Gloria in excelsis Deo._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "79      _Gott der Herr, ist Sonn’ und Schild._ Reformation Festival.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 46,
+          "style": "em",
+          "text": "_Gott der Herr, ist Sonn’ und Schild._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "106      _Gottes Zeit ist die allerbeste Zeit._ For no special season. English edition, “God’s time is the best,” Novello. Called “Actus tragicus,” probably a funeral cantata. Mühlhausen about 1708.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 47,
+          "style": "em",
+          "text": "_Gottes Zeit ist die allerbeste Zeit._"
+        },
+        {
+          "start": 88,
+          "end": 113,
+          "style": "quote",
+          "text": "“God’s time is the best,”"
+        },
+        {
+          "start": 130,
+          "end": 147,
+          "style": "quote",
+          "text": "“Actus tragicus,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "43      _Gott fähret auf mit Jauchzen._ Ascension Day. English version, “God goeth up with shouting,” Novello.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Gott fähret auf mit Jauchzen._"
+        },
+        {
+          "start": 72,
+          "end": 101,
+          "style": "quote",
+          "text": "“God goeth up with shouting,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "71      _Gott ist mein König._ Election of Town Council at Mühlhausen, 1708. See p. 36.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 30,
+          "style": "em",
+          "text": "_Gott ist mein König._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "191      _Gott ist uns’re Zuversicht._. Wedding Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 38,
+          "style": "em",
+          "text": "_Gott ist uns’re Zuversicht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "28      _Gottlob! nun geht das Jahr._ First Sunday after Christmas.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 37,
+          "style": "em",
+          "text": "_Gottlob! nun geht das Jahr._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "120      _Gott, man lobet dich in der Stille._ Election of Town Council at Leipsic. In the score the letters J.J. (Jesu juva) frequently occur.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Gott, man lobet dich in der Stille._"
+        },
+        {
+          "start": 114,
+          "end": 125,
+          "style": "paren_cite",
+          "text": "(Jesu juva)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "169      _Gott soll allein mein Herze._ Eighteenth Sunday after Trinity. For alto solo.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Gott soll allein mein Herze._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "171      _Gott, wie dein Name, so ist auch dein Ruhm._ Circumcision. The first chorus occurs with modifications as part of the “Credo” of the B minor Mass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 54,
+          "style": "em",
+          "text": "_Gott, wie dein Name, so ist auch dein Ruhm._"
+        },
+        {
+          "start": 127,
+          "end": 134,
+          "style": "quote",
+          "text": "“Credo”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "67      _Halt’ im Gedächtnis Jesum Christ._ First Sunday after Easter (Quasimodogeniti). Edition with English words, “Hold in remembrance Jesus Christ,” Rieter-Biedermann.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Halt’ im Gedächtnis Jesum Christ._"
+        },
+        {
+          "start": 70,
+          "end": 87,
+          "style": "paren_cite",
+          "text": "(Quasimodogeniti)"
+        },
+        {
+          "start": 117,
+          "end": 152,
+          "style": "quote",
+          "text": "“Hold in remembrance Jesus Christ,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "96      _Herr Christ, der ein’ge Gottes Sohn._ Eighteenth Sunday after Trinity. Chorale Cantata. Words by Elizabeth Creutzinger.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 46,
+          "style": "em",
+          "text": "_Herr Christ, der ein’ge Gottes Sohn._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "102      _Herr, deine Augen sehen nach dem._ Tenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Herr, deine Augen sehen nach dem._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "105      _Herr, gehe nicht in’s Gericht._ Ninth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 41,
+          "style": "em",
+          "text": "_Herr, gehe nicht in’s Gericht._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Herr Gott, Beherrscher aller Dinge._ Wedding Cantata. Incomplete.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Herr Gott, Beherrscher aller Dinge._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "130      _Herr Gott, dich loben alle wir._ Michaelmas Day.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Herr Gott, dich loben alle wir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "16      _Herr Gott, dich loben wir._ Circumcision. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 36,
+          "style": "em",
+          "text": "_Herr Gott, dich loben wir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "113      _Herr Jesu Christ, du höchstes Gut._ Eleventh Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Herr Jesu Christ, du höchstes Gut._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "127      _Herr Jesu Christ, wahr’r Mensch und Gott._ Quinquagesima (Estomihi). Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 52,
+          "style": "em",
+          "text": "_Herr Jesu Christ, wahr’r Mensch und Gott._"
+        },
+        {
+          "start": 67,
+          "end": 77,
+          "style": "paren_cite",
+          "text": "(Estomihi)"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Herrscher des Himmels._ Part III. of Christmas oratorio. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 24,
+          "style": "em",
+          "text": "_Herrscher des Himmels._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Herr, wenn die stolzen Feinde schnauben._ Part VI. of Christmas oratorio. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 42,
+          "style": "em",
+          "text": "_Herr, wenn die stolzen Feinde schnauben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "73      _Herr, wie du willt, so schick’s mit mir!_ Third Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 50,
+          "style": "em",
+          "text": "_Herr, wie du willt, so schick’s mit mir!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "147      _Herz und Mund und That und Leben._ The return of Mary from Egypt.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Herz und Mund und That und Leben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "182      _Himmelskönig, sei willkommen._ Annunciation. Originally composed for Palm Sunday.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Himmelskönig, sei willkommen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "194      _Höchst erwünschtes Freudenfest._ Dedication of the organ at Störmthal.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Höchst erwünschtes Freudenfest._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "55      _Ich armer Mensch, ich Sündenknecht._ Twenty-second Sunday after Trinity. For tenor solo.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Ich armer Mensch, ich Sündenknecht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "85      _Ich bin ein guter Hirt._ Second Sunday after Easter (Misericordias).",
+      "spans": [
+        {
+          "start": 8,
+          "end": 33,
+          "style": "em",
+          "text": "_Ich bin ein guter Hirt._"
+        },
+        {
+          "start": 61,
+          "end": 76,
+          "style": "paren_cite",
+          "text": "(Misericordias)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "84      _Ich bin vergnügt mit meinem Glücke._ Septuagesima.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Ich bin vergnügt mit meinem Glücke._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "48      _Ich elender Mensch wer wird mich._ Nineteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Ich elender Mensch wer wird mich._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "133      _Ich freue mich in dir._ Christmas. Chorale Cantata. Leipsic, 1737.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 33,
+          "style": "em",
+          "text": "_Ich freue mich in dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "49      _Ich geh’ und suche mit._ Twentieth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 33,
+          "style": "em",
+          "text": "_Ich geh’ und suche mit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "109      _Ich glaube lieber Herr, hilf meinem._ Twenty-first Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 47,
+          "style": "em",
+          "text": "_Ich glaube lieber Herr, hilf meinem._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "82      _Ich habe genug._ Purification.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 25,
+          "style": "em",
+          "text": "_Ich habe genug._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "188      _Ich habe meine Zuversicht._ Twenty-first Sunday after Trinity. The copyist directs that the “organ concerto” of “Wir müssen durch viel Trübsal” in D minor (arranged from the Clavecin Concerto in that key) is to be used as an “introduction.” Words by Picander.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 37,
+          "style": "em",
+          "text": "_Ich habe meine Zuversicht._"
+        },
+        {
+          "start": 102,
+          "end": 118,
+          "style": "quote",
+          "text": "“organ concerto”"
+        },
+        {
+          "start": 122,
+          "end": 153,
+          "style": "quote",
+          "text": "“Wir müssen durch viel Trübsal”"
+        },
+        {
+          "start": 165,
+          "end": 214,
+          "style": "paren_aside",
+          "text": "(arranged from the Clavecin Concerto in that key)"
+        },
+        {
+          "start": 235,
+          "end": 250,
+          "style": "quote",
+          "text": "“introduction.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "92      _Ich hab’ in Gottes Herz und Sinn._ Septuagesima. Chorale Cantata. Words by Paul Gerhardt.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Ich hab’ in Gottes Herz und Sinn._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "21      _Ich hatte viel Bekümmernis._ “Per ogni tempi,” “For all times.” English edition, “My spirit was in heaviness,” Novello. Composed on his being made concert-meister at Weimar, and performed there on the third Sunday after Trinity, 1714.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 37,
+          "style": "em",
+          "text": "_Ich hatte viel Bekümmernis._"
+        },
+        {
+          "start": 38,
+          "end": 55,
+          "style": "quote",
+          "text": "“Per ogni tempi,”"
+        },
+        {
+          "start": 56,
+          "end": 72,
+          "style": "quote",
+          "text": "“For all times.”"
+        },
+        {
+          "start": 90,
+          "end": 119,
+          "style": "quote",
+          "text": "“My spirit was in heaviness,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "162      _Ich, ich sehe, jetzt da ich zur Hochzeit gehe._ Solo Cantata for soprano, alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 57,
+          "style": "em",
+          "text": "_Ich, ich sehe, jetzt da ich zur Hochzeit gehe._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "158      _Ich lasse dich nicht, du segnest._ Purification. Solo Cantata for tenor and bass. The violetta occurs in the score.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Ich lasse dich nicht, du segnest._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "174      _Ich liebe den Höchsten von ganzem._ Whitsunday. Solo Cantata for alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Ich liebe den Höchsten von ganzem._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "177      _Ich ruf zu dir, Herr Jesu Christ._ Fourth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Ich ruf zu dir, Herr Jesu Christ._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "156      _Ich steh’ mit einem Fuss im Grabe._ Third Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Ich steh’ mit einem Fuss im Grabe._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "160      _Ich weiss, dass mein Erlöser._ Monday in Easter Week.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Ich weiss, dass mein Erlöser._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "56      _Ich will den Kreuzstab gerne tragen._ Nineteenth Sunday after Trinity. For bass solo.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 46,
+          "style": "em",
+          "text": "_Ich will den Kreuzstab gerne tragen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "164      _Ihr, die ihr euch von Christo._ Thirteenth Sunday after Trinity. Solo Cantata for soprano, alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 41,
+          "style": "em",
+          "text": "_Ihr, die ihr euch von Christo._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "167      _Ihr Menschen, rühmet Gottes._ St John’s Day. Solo Cantata for soprano, alto, tenor and bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Ihr Menschen, rühmet Gottes._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "193      _Ihr Pforten zu Zion._ Election of Town Council.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 31,
+          "style": "em",
+          "text": "_Ihr Pforten zu Zion._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "103      _Ihr werdet weinen und heulen._ Third Sunday after Easter (Jubilate).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Ihr werdet weinen und heulen._"
+        },
+        {
+          "start": 67,
+          "end": 77,
+          "style": "paren_cite",
+          "text": "(Jubilate)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "97      _In allen meinen Thaten._ For no special season. Words by Dr Paul Flemming.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 33,
+          "style": "em",
+          "text": "_In allen meinen Thaten._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Jauchzet, frohlocket._ Christmas oratorio. Part I., English version, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 23,
+          "style": "em",
+          "text": "_Jauchzet, frohlocket._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "51      _Jauchzet Gott in allen Landen._ Fifteenth Sunday after Trinity. Solo Cantata for soprano.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 40,
+          "style": "em",
+          "text": "_Jauchzet Gott in allen Landen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "78      _Jesu, der du meine Seele._ Fourteenth Sunday after Trinity. In this cantata the ground bass of the “Crucifixus” of the B minor Mass is used. Edition with English words, “Jesu, Saviour, who by dying,” Rieter-Biedermann.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_Jesu, der du meine Seele._"
+        },
+        {
+          "start": 108,
+          "end": 120,
+          "style": "quote",
+          "text": "“Crucifixus”"
+        },
+        {
+          "start": 178,
+          "end": 208,
+          "style": "quote",
+          "text": "“Jesu, Saviour, who by dying,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "41      _Jesu, nun sei gepreiset._ Circumcision. Chorale Cantata. English edition, “Jesus, now will we praise Thee,” Novello.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 34,
+          "style": "em",
+          "text": "_Jesu, nun sei gepreiset._"
+        },
+        {
+          "start": 83,
+          "end": 116,
+          "style": "quote",
+          "text": "“Jesus, now will we praise Thee,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "22      _Jesus nahm zu sich die Zwölfe._ Quinquagesima (Estomihi). Bach’s test piece for the Leipsic post after the death of Kuhnau. Performed there, February 7th, 1723.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 40,
+          "style": "em",
+          "text": "_Jesus nahm zu sich die Zwölfe._"
+        },
+        {
+          "start": 55,
+          "end": 65,
+          "style": "paren_cite",
+          "text": "(Estomihi)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "81      _Jesus schläft, was soll ich hoffen?_ Fourth Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Jesus schläft, was soll ich hoffen?_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "161      _Komm du süsse Todesstunde!_ Purification; also for the Sixteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 37,
+          "style": "em",
+          "text": "_Komm du süsse Todesstunde!_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Kommt, eilet, lauft._ Easter oratorio.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 22,
+          "style": "em",
+          "text": "_Kommt, eilet, lauft._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "181      _Leicht gesinnte Flattergeister._ Sexagesima.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Leicht gesinnte Flattergeister._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "8      _Liebster Gott, wann werd’ ich sterben._ Sixteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 7,
+          "end": 47,
+          "style": "em",
+          "text": "_Liebster Gott, wann werd’ ich sterben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "123      _Liebster Immanuel, Herzog der Frommen._ Epiphany. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 49,
+          "style": "em",
+          "text": "_Liebster Immanuel, Herzog der Frommen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "32      _Liebster Jesu, mein Verlangen._ First Sunday after Epiphany. Called “Dialogue.” Solo Cantata for soprano and bass.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 40,
+          "style": "em",
+          "text": "_Liebster Jesu, mein Verlangen._"
+        },
+        {
+          "start": 77,
+          "end": 88,
+          "style": "quote",
+          "text": "“Dialogue.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "137      _Lobe den Herren, den Mächtigen._ Twelfth Sunday after Trinity. Leipsic, between 1742 and 1747. Words by Joachim Neander.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Lobe den Herren, den Mächtigen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "69      _Lobe den Herrn meine Seele!_ Twelfth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 37,
+          "style": "em",
+          "text": "_Lobe den Herrn meine Seele!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "143      _Lobe den Herrn meine Seele._ New Year’s Day.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 38,
+          "style": "em",
+          "text": "_Lobe den Herrn meine Seele._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "11      _Lobet Gott in seinen Reichen._ Ascension Day. Called by Bach “oratorium festo ascensionis Christi.” Part of this cantata is used in the B minor Mass.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Lobet Gott in seinen Reichen._"
+        },
+        {
+          "start": 70,
+          "end": 108,
+          "style": "quote",
+          "text": "“oratorium festo ascensionis Christi.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "115      _Mache dich, mein Geist, bereit._ Twenty-second Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Mache dich, mein Geist, bereit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "149      _Man singet mit Freuden vom Sieg._ Michaelmas Day.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Man singet mit Freuden vom Sieg._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "124      _Meinen Jesum lass’ ich nicht._ First Sunday after Epiphany. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Meinen Jesum lass’ ich nicht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "10      _Meine Seel’ erhebt den Herren._ Return of Mary from Egypt. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 40,
+          "style": "em",
+          "text": "_Meine Seel’ erhebt den Herren._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "189      _Meine Seele rühmt und preist._ For no special season.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Meine Seele rühmt und preist._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "13      _Meine Seufzer meine Thränen._ Second Sunday after Epiphany. Solo Cantata for soprano, alto, tenor and bass voices, accompanied by wind instruments and organ, no strings being used.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 38,
+          "style": "em",
+          "text": "_Meine Seufzer meine Thränen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "155      _Mein Gott, wie lang’._ Second Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 32,
+          "style": "em",
+          "text": "_Mein Gott, wie lang’._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "154      _Mein liebster Jesus ist verloren._ First Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Mein liebster Jesus ist verloren._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "125      _Mit Fried’ und Freud’ ich fahr’ dahin._ Purification. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 49,
+          "style": "em",
+          "text": "_Mit Fried’ und Freud’ ich fahr’ dahin._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "150      _Nach dir, Herr, verlanget mich._ For no special season.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Nach dir, Herr, verlanget mich._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "101      _Nimm’ von uns Herr, du treuer Gott._ Tenth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Nimm’ von uns Herr, du treuer Gott._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "144      _Nimm, was dein ist, und gehe hin!_ Septuagesima.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Nimm, was dein ist, und gehe hin!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "192      _Nun danket alle Gott._ For no special season.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 32,
+          "style": "em",
+          "text": "_Nun danket alle Gott._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "50      _Nun ist das Heil und die Kraft._ For no special season.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 41,
+          "style": "em",
+          "text": "_Nun ist das Heil und die Kraft._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "61      _Nun komm, der Heiden Heiland._ First Sunday in Advent. First composition in A minor. Inside the cover of this cantata Bach has written the order of the service for the morning of Advent Sunday, 1714, at Leipsic. See p. 44.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Nun komm, der Heiden Heiland._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "62      _Nun komm, der Heiden Heiland._ First Sunday in Advent. Chorale Cantata. Second composition in B minor.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 39,
+          "style": "em",
+          "text": "_Nun komm, der Heiden Heiland._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "163      _Nur Jedem das Seine!_ Twenty-third Sunday after Trinity. Solo Cantata for soprano, alto, tenor and bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 31,
+          "style": "em",
+          "text": "_Nur Jedem das Seine!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "34      _O ewiges Feuer, o Ursprung der Liebe._ Whitsunday. English edition, “O Light Everlasting,” Novello.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 47,
+          "style": "em",
+          "text": "_O ewiges Feuer, o Ursprung der Liebe._"
+        },
+        {
+          "start": 77,
+          "end": 99,
+          "style": "quote",
+          "text": "“O Light Everlasting,”"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_O ewiges Feuer._ Wedding Cantata. Incomplete.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 17,
+          "style": "em",
+          "text": "_O ewiges Feuer._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "20      _O Ewigkeit du Donnerwort._ First Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_O Ewigkeit du Donnerwort._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "60      _O Ewigkeit du Donnerwort._ Twenty-fourth Sunday after Trinity. Solo Cantata for alto, tenor and bass.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 35,
+          "style": "em",
+          "text": "_O Ewigkeit du Donnerwort._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "165      _O heil’ges Geist- und Wasserbad._ Trinity Sunday. Solo Cantata for soprano, alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_O heil’ges Geist- und Wasserbad._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "118      _O Jesu Christ mein’s Lebenslicht._ The accompaniment is for two litui, cornet and three trombones; no strings or organ. It was probably intended for the open air (perhaps for a funeral) as it is the only cantata with no continuo part.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_O Jesu Christ mein’s Lebenslicht._"
+        },
+        {
+          "start": 172,
+          "end": 195,
+          "style": "paren_cite",
+          "text": "(perhaps for a funeral)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "119      _Preise Jerusalem den Herrn._ Performed in the Nicolai Church on August 30, 1723, at the election of Town Council. It was also performed by Mendelssohn on the unveiling of the Bach Memorial at Leipsic, April 23, 1843.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 38,
+          "style": "em",
+          "text": "_Preise Jerusalem den Herrn._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "46      _Schauet doch und sehet._ Tenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 33,
+          "style": "em",
+          "text": "_Schauet doch und sehet._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "153      _Schau’ liebe Gott wie meine Feinde._ Second Sunday after Christmas.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 46,
+          "style": "em",
+          "text": "_Schau’ liebe Gott wie meine Feinde._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "53      _Schlage doch! gewünschste Stunde._ Funeral Cantata for alto solo.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Schlage doch! gewünschste Stunde._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "180      _Schmücke dich o liebe Seele._ Twentieth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Schmücke dich o liebe Seele._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "36      _Schwingt freudig euch empor._ First Sunday in Advent.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 38,
+          "style": "em",
+          "text": "_Schwingt freudig euch empor._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "64      _Sehet welch’ eine Liebe._ Christmas.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 34,
+          "style": "em",
+          "text": "_Sehet welch’ eine Liebe._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "159      _Sehet, wir geh’n hinauf._ Quinquagesima (Estomihi).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 35,
+          "style": "em",
+          "text": "_Sehet, wir geh’n hinauf._"
+        },
+        {
+          "start": 50,
+          "end": 60,
+          "style": "paren_cite",
+          "text": "(Estomihi)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "117      _Sei Lob und Ehr’ dem höchsten Gut._ For no special season.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Sei Lob und Ehr’ dem höchsten Gut._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "57      _Selig ist der Mann._ Christmas. Solo Cantata for soprano and bass.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 29,
+          "style": "em",
+          "text": "_Selig ist der Mann._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "88      _Siehe ich will viel Fischer._ Fifth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 38,
+          "style": "em",
+          "text": "_Siehe ich will viel Fischer._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "179      _Siehe zu dass deine Gottesfurcht nicht._ Eleventh Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 50,
+          "style": "em",
+          "text": "_Siehe zu dass deine Gottesfurcht nicht._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "65      _Sie werden aus Saba alle kommen._ Epiphany. Edition with English words, “They all shall come from Saba,” Rieter-Biedermann.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 42,
+          "style": "em",
+          "text": "_Sie werden aus Saba alle kommen._"
+        },
+        {
+          "start": 81,
+          "end": 113,
+          "style": "quote",
+          "text": "“They all shall come from Saba,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "44      _Sie werden Euch in den Bann thun._ Sunday after Ascension Day (Exaudi).",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Sie werden Euch in den Bann thun._"
+        },
+        {
+          "start": 71,
+          "end": 79,
+          "style": "paren_cite",
+          "text": "(Exaudi)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "183      _Sie werden Euch in den Bann thun._ Sunday after Ascension Day (Exaudi).",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Sie werden Euch in den Bann thun._"
+        },
+        {
+          "start": 72,
+          "end": 80,
+          "style": "paren_cite",
+          "text": "(Exaudi)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "190      _Singet dem Herrn ein neues Lied._ Circumcision. Incomplete. Performed 25th of June 1730, at the second Jubilee celebration of the Augsburg Confession.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Singet dem Herrn ein neues Lied._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "145      _So du mit deinem Munde bekennest._ Easter Day, and Wednesday in Easter Week.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_So du mit deinem Munde bekennest._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "151      _Süsser Trost, mein Jesus kömmt._ Christmas.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 42,
+          "style": "em",
+          "text": "_Süsser Trost, mein Jesus kömmt._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "168      _Thue Rechnung Donnerwort._ Ninth Sunday after Trinity. Solo Cantata for soprano, alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 36,
+          "style": "em",
+          "text": "_Thue Rechnung Donnerwort._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "152      _Tritt auf die Glauben’s Bahn._ First Sunday after Christmas.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 40,
+          "style": "em",
+          "text": "_Tritt auf die Glauben’s Bahn._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Und es waren Hirten auf dem Felde._ Part II. Christmas oratorio. English edition, Novello.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 36,
+          "style": "em",
+          "text": "_Und es waren Hirten auf dem Felde._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "110      _Unser Mund sei voll Lachens._ Christmas.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Unser Mund sei voll Lachens._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "142      _Uns ist ein Kind geboren._ Christmas.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 36,
+          "style": "em",
+          "text": "_Uns ist ein Kind geboren._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "170      _Vergnügte Ruh’ beliebte._ Sixth Sunday after Trinity. For alto solo.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 35,
+          "style": "em",
+          "text": "_Vergnügte Ruh’ beliebte._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "140      _Wachet auf, ruft uns die Stimme._ Twenty-seventh Sunday after Trinity. Leipsic, 1742. Words by P. Nicolai.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Wachet auf, ruft uns die Stimme._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "70      _Wachet, betet, seid bereit allezeit._ Twentieth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 46,
+          "style": "em",
+          "text": "_Wachet, betet, seid bereit allezeit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "86      _Warlich ich sage euch._ Rogation Sunday.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 32,
+          "style": "em",
+          "text": "_Warlich ich sage euch._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "14      _Wär’ Gott nicht mit uns diese Zeit._ Fourth Sunday after Epiphany.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Wär’ Gott nicht mit uns diese Zeit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "138      _Warum betrübst du dich mein Herz._ Fifteenth Sunday after Trinity. Leipsic, 1737. Words by Hans Sachs.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Warum betrübst du dich mein Herz._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "94      _Was frag’ ich nach der Welt!_ Ninth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 38,
+          "style": "em",
+          "text": "_Was frag’ ich nach der Welt!_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "98      _Was Gott thut das ist wohlgethan._ Twenty-first Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 43,
+          "style": "em",
+          "text": "_Was Gott thut das ist wohlgethan._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "99      _Was Gott thut, das ist wohlgethan._ Fifteenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 44,
+          "style": "em",
+          "text": "_Was Gott thut, das ist wohlgethan._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "100      _Was Gott thut, das ist wohlgethan._ For no special season. Words by S. Rudigast.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Was Gott thut, das ist wohlgethan._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "111      _Was mein Gott will das g’sche all’ zeit._ Third Sunday after Epiphany. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 51,
+          "style": "em",
+          "text": "_Was mein Gott will das g’sche all’ zeit._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "89      _Was soll ich aus dir machen._ Twenty-second Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 38,
+          "style": "em",
+          "text": "_Was soll ich aus dir machen._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "107      _Was willst du dich betrüben._ Seventh Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 39,
+          "style": "em",
+          "text": "_Was willst du dich betrüben._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "12      _Weinen, klagen, sorgen, zagen._ Third Sunday after Easter (Jubilate). The opening chorus is on the same ground bass as the “Crucifixus” of the B minor Mass.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 40,
+          "style": "em",
+          "text": "_Weinen, klagen, sorgen, zagen._"
+        },
+        {
+          "start": 67,
+          "end": 77,
+          "style": "paren_cite",
+          "text": "(Jubilate)"
+        },
+        {
+          "start": 132,
+          "end": 144,
+          "style": "quote",
+          "text": "“Crucifixus”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "37      _Wer da glaubet und getauft wird._ Ascension Day.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 42,
+          "style": "em",
+          "text": "_Wer da glaubet und getauft wird._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "17       _Wer Dank opfert der preiset mich._ Fourteenth Sunday after Trinity. Edition with English words, “Whoso offereth praise,” Reiter-Biedermann.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Wer Dank opfert der preiset mich._"
+        },
+        {
+          "start": 106,
+          "end": 130,
+          "style": "quote",
+          "text": "“Whoso offereth praise,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "59       _Wer mich liebet der wird mein._ Whitsunday.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 41,
+          "style": "em",
+          "text": "_Wer mich liebet der wird mein._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "74       _Wer mich liebet der wird mein._ Whitsunday. Solo Cantata for soprano and bass.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 41,
+          "style": "em",
+          "text": "_Wer mich liebet der wird mein._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "93       _Wer nur den lieben Gott lässt walten._ Fifth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 48,
+          "style": "em",
+          "text": "_Wer nur den lieben Gott lässt walten._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "47       _Wer sich selbst erhöht der soll._ Seventeenth Sunday after Trinity.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 43,
+          "style": "em",
+          "text": "_Wer sich selbst erhöht der soll._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "27       _Wer weiss wie nahe mir mein Ende._ Sixteenth Sunday after Trinity. English edition, “When will God recall my spirit,” Novello.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 44,
+          "style": "em",
+          "text": "_Wer weiss wie nahe mir mein Ende._"
+        },
+        {
+          "start": 94,
+          "end": 127,
+          "style": "quote",
+          "text": "“When will God recall my spirit,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "54       _Widerstehe doch der Sünde._ For no special season. Alto solo.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 37,
+          "style": "em",
+          "text": "_Widerstehe doch der Sünde._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "1       _Wie Schön leuchtet der Morgenstern._ Annunciation. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 45,
+          "style": "em",
+          "text": "_Wie Schön leuchtet der Morgenstern._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "29       _Wir danken dir, Gott, wir danken dir._ Election of Town Council at Leipsic, 1737.",
+      "spans": [
+        {
+          "start": 9,
+          "end": 48,
+          "style": "em",
+          "text": "_Wir danken dir, Gott, wir danken dir._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "146       _Wir müssen durch viel Trübsal._ Third Sunday after Easter (Jubilate).",
+      "spans": [
+        {
+          "start": 10,
+          "end": 42,
+          "style": "em",
+          "text": "_Wir müssen durch viel Trübsal._"
+        },
+        {
+          "start": 69,
+          "end": 79,
+          "style": "paren_cite",
+          "text": "(Jubilate)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "166       _Wo gehest du hin?_ Fourth Sunday after Easter (Cantate). Solo Cantata for alto, tenor, bass.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 29,
+          "style": "em",
+          "text": "_Wo gehest du hin?_"
+        },
+        {
+          "start": 57,
+          "end": 66,
+          "style": "paren_cite",
+          "text": "(Cantate)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "178       _Wo Gott der Herr nicht bei uns hält._ Eighth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 48,
+          "style": "em",
+          "text": "_Wo Gott der Herr nicht bei uns hält._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "139       _Wohl dem der sich auf seinen Gott._ Twenty-third Sunday after Trinity. Chorale Cantata, Leipsic, between 1737 and 1744.",
+      "spans": [
+        {
+          "start": 10,
+          "end": 46,
+          "style": "em",
+          "text": "_Wohl dem der sich auf seinen Gott._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "5       _Wo soll ich fliehen hin._ Nineteenth Sunday after Trinity. Chorale Cantata.",
+      "spans": [
+        {
+          "start": 8,
+          "end": 34,
+          "style": "em",
+          "text": "_Wo soll ich fliehen hin._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "CHURCH CANTATAS _The numbers refer to the Bachgesellschaft Edition._\n\n2       _Ach Gott vom Himmel sieh darein._ Second Sunday after Trinity. Chorale Cantata.\n\n3       _Ach Gott, wie manches Herzeleid._ Second Sunday after Epiphany. Chorale Cantata.\n\n58       _Ach Gott, wie manches Herzeleid._ Second Sunday after Christmas. Solo Cantata for soprano and bass.\n\n135       _Ach Herr, mich armen Sünder._ Third Sunday after Trinity. Chorale Cantata, Leipsic.\n\n162       _Ach, ich sehe, itzt, da ich._ Twentieth Sunday after Trinity.\n\n114       _Ach, lieben Christen, seid getrost._ Seventeenth Sunday after Trinity. Chorale Cantata.\n\n26       _Ach wie flüchtig, ach wie nichtig!_ Twenty-fourth Sunday after Trinity. Chorale Cantata.\n\n33       _Allein zu dir, Herr Jesu Christ._ Thirteenth Sunday after Trinity. Chorale Cantata.\n\n72       _Alles nur nach Gottes Willen._ Third Sunday after Epiphany.\n\n68       _Also hat Gott die Welt geliebt._ Tuesday in Whitsun-week. English edition, “God so loved the World,” Novello.\n\n42       _Am Abend aber desselbigen Sabbaths._ First Sunday after Easter (Quasimodogeniti).\n\n186       _Arg’re dich, o Seele nicht._ Seventh Sunday after Trinity.\n\n128       _Auf Christi Himmelfahrt allein._ Ascension Day.\n\n131       _Aus der Tiefe rufe ich, Herr, zu dir._ Composed for Dr. G. C. Gilmar, Pastor of Mühlhausen.\n\n38       _Aus tiefer Noth schrei ich zu dir._ Twenty-first Sunday after Trinity. Chorale Cantata.\n\n131       _Aus tiefer Noth schrei ich zu dir._ Composed at Mühlhausen about 1707.\n\n185       _Barmherziges Herze, der._ Fourth Sunday after Trinity.\n\n132       _Bereitet die Wege, bereitet._ For no special season. Weimar, 1715. Words by Salomo Franck.\n\n87       _Bisher habt ihr nichts gebeten in meinem Namen._ Fifth Sunday after Easter.\n\n6       _Bleib’ bei uns, denn es will Abend._ Tuesday in Easter Week. English edition, “Bide with us,” Novello.\n\n39       _Brich dem Hungrigen dein Brot!_ First Sunday after Trinity.\n\n148       _Bringet dem Herrn Ehre._ Seventeenth Sunday after Trinity.\n\n63      _Christen, ätzet diesen Tag._ Christmas.\n\n4      _Christ lag in Todesbanden._ Easter Day.\n\n121      _Christum wir sollen loben schon._ Christmas. Chorale Cantata.\n\n7      _Christ unser Herr zum Jordan kam._ St John’s Day. Chorale Cantata.\n\n95      _Christus, der ist mein Leben._ Sixteenth Sunday after Trinity.\n\n141      _Das ist je gewisslich wahr._ Third Sunday in Advent.\n\n122      _Das neu gebor’ne Kindelein._ First Sunday after Christmas. Chorale Cantata.\n\n40      _Dazu ist erscheinen der Sohn._ Christmas.\n\n195      _Dem Gerechten muss das Licht._ Wedding Cantata.\n\n15      _Denn du wirst meine Seele nicht in Hölle lassen._ Monday in Easter Week. Composed at Arnstadt, probably in 1704. See p. 27.\n\n157      _Der Friede sei mit dir._ Purification; also for Easter.\n\n196      _Der Herr denket an uns._ Wedding Cantata.\n\n112      _Der Herr ist mein getreuer Hirt._ Second Sunday after Easter (Misericordias).\n\n31      _Der Himmel lacht, die Erde jubiliret._ Monday in Easter Week. One of the few cantatas containing a chorus for five voices. The instrumental introduction is called “Sonata.”\n\n75      _Die Elenden sollen essen._ First Sunday after Trinity.\n\n76      _Die Himmel erzählen die Ehre._ Second Sunday after Trinity.\n\n116      _Du Friedensfürst, Herr Jesu Christ._ Twenty-fifth Sunday after Trinity. Chorale Cantata.\n\n104      _Du Hirte Israel, höre._ Second Sunday after Easter (Misericordias). English edition, “Thou Guide of Israel,” Novello.\n\n77      _Du sollst Gott, deinen Herren, lieben._ Thirteenth Sunday after Trinity.\n\n23      _Du wahrer Gott und Davids Sohn._ Quinquagesima (Estomihi).\n\n> _Ehre sei dir Gott gesungen._ Part V. of Christmas  oratorio. English edition, Novello. _Ehre sei Gott in der Höhe._ Christmas. Incomplete. 80      _Ein feste Burg ist unser Gott._ Reformation Festival, English edition, “A Stronghold Sure,” Novello. Composed 1717, when Bach went to Cöthen. This was the first cantata published in the nineteenth century. It was also arranged to Latin words, beginning, “Gaudete, omnes populi.”\n\n134      _Ein Herz, das Seinen._ Wednesday in Easter Week. Cöthen, between 1717 and 1723.\n\n24      _Ein ungefärbt Gemüthe._ Fourth Sunday after Trinity.\n\n136      _Erforsche mich Gott, und erfahre._ Eighth Sunday after Trinity. Leipsic, 1737 or 1738.\n\n66      _Erfreut euch, ihr Herzen!_ Tuesday in Easter Week.\n\n83      _Erfreute Zeit im neuen Bunde._ Purification.\n\n126      _Erhalt’ uns, Herr, bei deinem Wort._ Sexagesima. Chorale Cantata.\n\n173      _Erhöhtes Fleisch und Blut._ Tuesday in Whitsun-week. The music was originally written for a Serenade for the birthday of Prince Leopold of Cöthen. The MS. Serenade is in the Royal Library at Berlin.\n\n175      _Er rufet seinen Schafen mit._ Wednesday in Whitsun-week. Solo Cantata for tenor and bass.\n\n172      _Erschallet,ihr Lieder._ Whitsunday.\n\n184      _Erwünschtes Freudenlicht._ Wednesday in Whitsun-week.\n\n19      _Es erbub sich ein Streit._ Michaelmas Day.\n\n9      _Es ist das Heil uns kommen her._ Sixth Sunday after Trinity.\n\n45      _Es ist dir gesagt, Mensch, was gut ist._ Eighth Sunday after Trinity.\n\n176      _Es ist ein trotzig und verzagt Ding._ Trinity Sunday.\n\n108      _Es ist euch gut, dass ich hingehe._ Fourth Sunday after Easter (Cantata).\n\n25      _Es ist nichts Gesundes an meinem Leibe._ Fourteenth Sunday after Trinity. Edition with English words, “Lo, there is no soundness within my body.” Rieter-Biedermann.\n\n90      _Es reifet euch ein schrecklich._ Twenty-fifth Sunday after Trinity.\n\n187      _Es wartet Alles auf dich._ Seventh Sunday after Trinity, 1737. Music is used for Mass in G minor.\n\n> _Fallt mit Danken._ Part IV. of Christmas oratorio. English edition, Novello.\n\n52      _Falsche Welt, dir trau._ Twenty-third Sunday after Trinity. Solo Cantata for soprano.\n\n30      _Freue dich, erlöste Schaar._ St John’s Day, originally a “Dramma per Musica” in honour of the Saxon Minister, Von Hennicke. Composed in 1737, and arranged as a church cantata, 1738, after Bach had received the title of Court Composer. It is in the “Lombardic” style introduced by Vivaldi, consisting of frequent syncopation.\n\n35      _Geist und Seele wird._ Twelfth Sunday after Trinity.\n\n129      _Gelobet sei der Herr, mein Gott._ Trinity Sunday.\n\n91      _Gelobet seist du, Jesus Christ._ Christmas. Chorale Cantata. Words by Martin Luther.\n\n18      _Gleich wie der Regen und._ Sexagesima. The orchestration is unusual, consisting of four violas, fagotto, violoncello and organ.\n\n191      _Gloria in excelsis Deo._ Christmas. Rearranged from the B minor Mass.\n\n79      _Gott der Herr, ist Sonn’ und Schild._ Reformation Festival.\n\n106      _Gottes Zeit ist die allerbeste Zeit._ For no special season. English edition, “God’s time is the best,” Novello. Called “Actus tragicus,” probably a funeral cantata. Mühlhausen about 1708.\n\n43      _Gott fähret auf mit Jauchzen._ Ascension Day. English version, “God goeth up with shouting,” Novello.\n\n71      _Gott ist mein König._ Election of Town Council at Mühlhausen, 1708. See p. 36.\n\n191      _Gott ist uns’re Zuversicht._. Wedding Cantata.\n\n28      _Gottlob! nun geht das Jahr._ First Sunday after Christmas.\n\n120      _Gott, man lobet dich in der Stille._ Election of Town Council at Leipsic. In the score the letters J.J. (Jesu juva) frequently occur.\n\n169      _Gott soll allein mein Herze._ Eighteenth Sunday after Trinity. For alto solo.\n\n171      _Gott, wie dein Name, so ist auch dein Ruhm._ Circumcision. The first chorus occurs with modifications as part of the “Credo” of the B minor Mass.\n\n67      _Halt’ im Gedächtnis Jesum Christ._ First Sunday after Easter (Quasimodogeniti). Edition with English words, “Hold in remembrance Jesus Christ,” Rieter-Biedermann.\n\n96      _Herr Christ, der ein’ge Gottes Sohn._ Eighteenth Sunday after Trinity. Chorale Cantata. Words by Elizabeth Creutzinger.\n\n102      _Herr, deine Augen sehen nach dem._ Tenth Sunday after Trinity.\n\n105      _Herr, gehe nicht in’s Gericht._ Ninth Sunday after Trinity.\n\n> _Herr Gott, Beherrscher aller Dinge._ Wedding Cantata. Incomplete.\n\n130      _Herr Gott, dich loben alle wir._ Michaelmas Day.\n\n16      _Herr Gott, dich loben wir._ Circumcision. Chorale Cantata.\n\n113      _Herr Jesu Christ, du höchstes Gut._ Eleventh Sunday after Trinity. Chorale Cantata.\n\n127      _Herr Jesu Christ, wahr’r Mensch und Gott._ Quinquagesima (Estomihi). Chorale Cantata.\n\n> _Herrscher des Himmels._ Part III. of Christmas oratorio. English edition, Novello.\n\n_Herr, wenn die stolzen Feinde schnauben._ Part VI. of Christmas oratorio. English edition, Novello.\n\n73      _Herr, wie du willt, so schick’s mit mir!_ Third Sunday after Epiphany.\n\n147      _Herz und Mund und That und Leben._ The return of Mary from Egypt.\n\n182      _Himmelskönig, sei willkommen._ Annunciation. Originally composed for Palm Sunday.\n\n194      _Höchst erwünschtes Freudenfest._ Dedication of the organ at Störmthal.\n\n55      _Ich armer Mensch, ich Sündenknecht._ Twenty-second Sunday after Trinity. For tenor solo.\n\n85      _Ich bin ein guter Hirt._ Second Sunday after Easter (Misericordias).\n\n84      _Ich bin vergnügt mit meinem Glücke._ Septuagesima.\n\n48      _Ich elender Mensch wer wird mich._ Nineteenth Sunday after Trinity.\n\n133      _Ich freue mich in dir._ Christmas. Chorale Cantata. Leipsic, 1737.\n\n49      _Ich geh’ und suche mit._ Twentieth Sunday after Trinity.\n\n109      _Ich glaube lieber Herr, hilf meinem._ Twenty-first Sunday after Trinity.\n\n82      _Ich habe genug._ Purification.\n\n188      _Ich habe meine Zuversicht._ Twenty-first Sunday after Trinity. The copyist directs that the “organ concerto” of “Wir müssen durch viel Trübsal” in D minor (arranged from the Clavecin Concerto in that key) is to be used as an “introduction.” Words by Picander.\n\n92      _Ich hab’ in Gottes Herz und Sinn._ Septuagesima. Chorale Cantata. Words by Paul Gerhardt.\n\n21      _Ich hatte viel Bekümmernis._ “Per ogni tempi,” “For all times.” English edition, “My spirit was in heaviness,” Novello. Composed on his being made concert-meister at Weimar, and performed there on the third Sunday after Trinity, 1714.\n\n162      _Ich, ich sehe, jetzt da ich zur Hochzeit gehe._ Solo Cantata for soprano, alto, tenor, bass.\n\n158      _Ich lasse dich nicht, du segnest._ Purification. Solo Cantata for tenor and bass. The violetta occurs in the score.\n\n174      _Ich liebe den Höchsten von ganzem._ Whitsunday. Solo Cantata for alto, tenor, bass.\n\n177      _Ich ruf zu dir, Herr Jesu Christ._ Fourth Sunday after Trinity. Chorale Cantata.\n\n156      _Ich steh’ mit einem Fuss im Grabe._ Third Sunday after Epiphany.\n\n160      _Ich weiss, dass mein Erlöser._ Monday in Easter Week.\n\n56      _Ich will den Kreuzstab gerne tragen._ Nineteenth Sunday after Trinity. For bass solo.\n\n164      _Ihr, die ihr euch von Christo._ Thirteenth Sunday after Trinity. Solo Cantata for soprano, alto, tenor, bass.\n\n167      _Ihr Menschen, rühmet Gottes._ St John’s Day. Solo Cantata for soprano, alto, tenor and bass.\n\n193      _Ihr Pforten zu Zion._ Election of Town Council.\n\n103      _Ihr werdet weinen und heulen._ Third Sunday after Easter (Jubilate).\n\n97      _In allen meinen Thaten._ For no special season. Words by Dr Paul Flemming.\n\n_Jauchzet, frohlocket._ Christmas oratorio. Part I., English version, Novello.\n\n51      _Jauchzet Gott in allen Landen._ Fifteenth Sunday after Trinity. Solo Cantata for soprano.\n\n78      _Jesu, der du meine Seele._ Fourteenth Sunday after Trinity. In this cantata the ground bass of the “Crucifixus” of the B minor Mass is used. Edition with English words, “Jesu, Saviour, who by dying,” Rieter-Biedermann.\n\n41      _Jesu, nun sei gepreiset._ Circumcision. Chorale Cantata. English edition, “Jesus, now will we praise Thee,” Novello.\n\n22      _Jesus nahm zu sich die Zwölfe._ Quinquagesima (Estomihi). Bach’s test piece for the Leipsic post after the death of Kuhnau. Performed there, February 7th, 1723.\n\n81      _Jesus schläft, was soll ich hoffen?_ Fourth Sunday after Epiphany.\n\n161      _Komm du süsse Todesstunde!_ Purification; also for the Sixteenth Sunday after Trinity.\n\n> _Kommt, eilet, lauft._ Easter oratorio.\n\n181      _Leicht gesinnte Flattergeister._ Sexagesima.\n\n8      _Liebster Gott, wann werd’ ich sterben._ Sixteenth Sunday after Trinity.\n\n123      _Liebster Immanuel, Herzog der Frommen._ Epiphany. Chorale Cantata.\n\n32      _Liebster Jesu, mein Verlangen._ First Sunday after Epiphany. Called “Dialogue.” Solo Cantata for soprano and bass.\n\n137      _Lobe den Herren, den Mächtigen._ Twelfth Sunday after Trinity. Leipsic, between 1742 and 1747. Words by Joachim Neander.\n\n69      _Lobe den Herrn meine Seele!_ Twelfth Sunday after Trinity.\n\n143      _Lobe den Herrn meine Seele._ New Year’s Day.\n\n11      _Lobet Gott in seinen Reichen._ Ascension Day. Called by Bach “oratorium festo ascensionis Christi.” Part of this cantata is used in the B minor Mass.\n\n115      _Mache dich, mein Geist, bereit._ Twenty-second Sunday after Trinity. Chorale Cantata.\n\n149      _Man singet mit Freuden vom Sieg._ Michaelmas Day.\n\n124      _Meinen Jesum lass’ ich nicht._ First Sunday after Epiphany. Chorale Cantata.\n\n10      _Meine Seel’ erhebt den Herren._ Return of Mary from Egypt. Chorale Cantata.\n\n189      _Meine Seele rühmt und preist._ For no special season.\n\n13      _Meine Seufzer meine Thränen._ Second Sunday after Epiphany. Solo Cantata for soprano, alto, tenor and bass voices, accompanied by wind instruments and organ, no strings being used.\n\n155      _Mein Gott, wie lang’._ Second Sunday after Epiphany.\n\n154      _Mein liebster Jesus ist verloren._ First Sunday after Epiphany.\n\n125      _Mit Fried’ und Freud’ ich fahr’ dahin._ Purification. Chorale Cantata.\n\n150      _Nach dir, Herr, verlanget mich._ For no special season.\n\n101      _Nimm’ von uns Herr, du treuer Gott._ Tenth Sunday after Trinity. Chorale Cantata.\n\n144      _Nimm, was dein ist, und gehe hin!_ Septuagesima.\n\n192      _Nun danket alle Gott._ For no special season.\n\n50      _Nun ist das Heil und die Kraft._ For no special season.\n\n61      _Nun komm, der Heiden Heiland._ First Sunday in Advent. First composition in A minor. Inside the cover of this cantata Bach has written the order of the service for the morning of Advent Sunday, 1714, at Leipsic. See p. 44.\n\n62      _Nun komm, der Heiden Heiland._ First Sunday in Advent. Chorale Cantata. Second composition in B minor.\n\n163      _Nur Jedem das Seine!_ Twenty-third Sunday after Trinity. Solo Cantata for soprano, alto, tenor and bass.\n\n34      _O ewiges Feuer, o Ursprung der Liebe._ Whitsunday. English edition, “O Light Everlasting,” Novello.\n\n> _O ewiges Feuer._ Wedding Cantata. Incomplete.\n\n20      _O Ewigkeit du Donnerwort._ First Sunday after Trinity.\n\n60      _O Ewigkeit du Donnerwort._ Twenty-fourth Sunday after Trinity. Solo Cantata for alto, tenor and bass.\n\n165      _O heil’ges Geist- und Wasserbad._ Trinity Sunday. Solo Cantata for soprano, alto, tenor, bass.\n\n118      _O Jesu Christ mein’s Lebenslicht._ The accompaniment is for two litui, cornet and three trombones; no strings or organ. It was probably intended for the open air (perhaps for a funeral) as it is the only cantata with no continuo part.\n\n119      _Preise Jerusalem den Herrn._ Performed in the Nicolai Church on August 30, 1723, at the election of Town Council. It was also performed by Mendelssohn on the unveiling of the Bach Memorial at Leipsic, April 23, 1843.\n\n46      _Schauet doch und sehet._ Tenth Sunday after Trinity.\n\n153      _Schau’ liebe Gott wie meine Feinde._ Second Sunday after Christmas.\n\n53      _Schlage doch! gewünschste Stunde._ Funeral Cantata for alto solo.\n\n180      _Schmücke dich o liebe Seele._ Twentieth Sunday after Trinity. Chorale Cantata.\n\n36      _Schwingt freudig euch empor._ First Sunday in Advent.\n\n64      _Sehet welch’ eine Liebe._ Christmas.\n\n159      _Sehet, wir geh’n hinauf._ Quinquagesima (Estomihi).\n\n117      _Sei Lob und Ehr’ dem höchsten Gut._ For no special season.\n\n57      _Selig ist der Mann._ Christmas. Solo Cantata for soprano and bass.\n\n88      _Siehe ich will viel Fischer._ Fifth Sunday after Trinity.\n\n179      _Siehe zu dass deine Gottesfurcht nicht._ Eleventh Sunday after Trinity.\n\n65      _Sie werden aus Saba alle kommen._ Epiphany. Edition with English words, “They all shall come from Saba,” Rieter-Biedermann.\n\n44      _Sie werden Euch in den Bann thun._ Sunday after Ascension Day (Exaudi).\n\n183      _Sie werden Euch in den Bann thun._ Sunday after Ascension Day (Exaudi).\n\n190      _Singet dem Herrn ein neues Lied._ Circumcision. Incomplete. Performed 25th of June 1730, at the second Jubilee celebration of the Augsburg Confession.\n\n145      _So du mit deinem Munde bekennest._ Easter Day, and Wednesday in Easter Week.\n\n151      _Süsser Trost, mein Jesus kömmt._ Christmas.\n\n168      _Thue Rechnung Donnerwort._ Ninth Sunday after Trinity. Solo Cantata for soprano, alto, tenor, bass.\n\n152      _Tritt auf die Glauben’s Bahn._ First Sunday after Christmas.\n\n> _Und es waren Hirten auf dem Felde._ Part II. Christmas oratorio. English edition, Novello.\n\n110      _Unser Mund sei voll Lachens._ Christmas.\n\n142      _Uns ist ein Kind geboren._ Christmas.\n\n170      _Vergnügte Ruh’ beliebte._ Sixth Sunday after Trinity. For alto solo.\n\n140      _Wachet auf, ruft uns die Stimme._ Twenty-seventh Sunday after Trinity. Leipsic, 1742. Words by P. Nicolai.\n\n70      _Wachet, betet, seid bereit allezeit._ Twentieth Sunday after Trinity.\n\n86      _Warlich ich sage euch._ Rogation Sunday.\n\n14      _Wär’ Gott nicht mit uns diese Zeit._ Fourth Sunday after Epiphany.\n\n138      _Warum betrübst du dich mein Herz._ Fifteenth Sunday after Trinity. Leipsic, 1737. Words by Hans Sachs.\n\n94      _Was frag’ ich nach der Welt!_ Ninth Sunday after Trinity. Chorale Cantata.\n\n98      _Was Gott thut das ist wohlgethan._ Twenty-first Sunday after Trinity.\n\n99      _Was Gott thut, das ist wohlgethan._ Fifteenth Sunday after Trinity.\n\n100      _Was Gott thut, das ist wohlgethan._ For no special season. Words by S. Rudigast.\n\n111      _Was mein Gott will das g’sche all’ zeit._ Third Sunday after Epiphany. Chorale Cantata.\n\n89      _Was soll ich aus dir machen._ Twenty-second Sunday after Trinity.\n\n107      _Was willst du dich betrüben._ Seventh Sunday after Trinity.\n\n12      _Weinen, klagen, sorgen, zagen._ Third Sunday after Easter (Jubilate). The opening chorus is on the same ground bass as the “Crucifixus” of the B minor Mass.\n\n37      _Wer da glaubet und getauft wird._ Ascension Day.\n\n17       _Wer Dank opfert der preiset mich._ Fourteenth Sunday after Trinity. Edition with English words, “Whoso offereth praise,” Reiter-Biedermann.\n\n59       _Wer mich liebet der wird mein._ Whitsunday.\n\n74       _Wer mich liebet der wird mein._ Whitsunday. Solo Cantata for soprano and bass.\n\n93       _Wer nur den lieben Gott lässt walten._ Fifth Sunday after Trinity.\n\n47       _Wer sich selbst erhöht der soll._ Seventeenth Sunday after Trinity.\n\n27       _Wer weiss wie nahe mir mein Ende._ Sixteenth Sunday after Trinity. English edition, “When will God recall my spirit,” Novello.\n\n54       _Widerstehe doch der Sünde._ For no special season. Alto solo.\n\n1       _Wie Schön leuchtet der Morgenstern._ Annunciation. Chorale Cantata.\n\n29       _Wir danken dir, Gott, wir danken dir._ Election of Town Council at Leipsic, 1737.\n\n146       _Wir müssen durch viel Trübsal._ Third Sunday after Easter (Jubilate).\n\n166       _Wo gehest du hin?_ Fourth Sunday after Easter (Cantate). Solo Cantata for alto, tenor, bass.\n\n178       _Wo Gott der Herr nicht bei uns hält._ Eighth Sunday after Trinity. Chorale Cantata.\n\n139       _Wohl dem der sich auf seinen Gott._ Twenty-third Sunday after Trinity. Chorale Cantata, Leipsic, between 1737 and 1744.\n\n5       _Wo soll ich fliehen hin._ Nineteenth Sunday after Trinity. Chorale Cantata.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 962,
+    "text": "CHURCH CANTATAS _The numbers refer to the Bachgesellschaft Edition._"
+  },
+  "word_count": 3117,
+  "block_count": 208
+}

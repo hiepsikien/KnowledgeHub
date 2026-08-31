@@ -1,0 +1,403 @@
+{
+  "chapter_id": "ch-078",
+  "title": "OF THE IMAGE (In Two Articles)",
+  "block_start": 2693,
+  "block_end": 2721,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "OF THE IMAGE (In Two Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 13,
+          "end": 30,
+          "style": "paren_cite",
+          "text": "(In Two Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We next inquire concerning the image: about which there are two points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) Whether Image in God is said personally?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) Whether this name belongs to the Son alone?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 35, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 35, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether Image in God Is Said Personally?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that image is not said personally of God. For Augustine (Fulgentius, De Fide ad Petrum i) says, \"The Godhead of the Holy Trinity and the Image whereunto man is made are one.\" Therefore Image is said of God essentially, and not personally.",
+      "spans": [
+        {
+          "start": 83,
+          "end": 116,
+          "style": "paren_aside",
+          "text": "(Fulgentius, De Fide ad Petrum i)"
+        },
+        {
+          "start": 123,
+          "end": 201,
+          "style": "quote",
+          "text": "\"The Godhead of the Holy Trinity and the Image whereunto man is made are one.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, Hilary says (De Synod.): \"An image is a like species of that which it represents.\" But species or form is said of God essentially. Therefore so also is Image.",
+      "spans": [
+        {
+          "start": 29,
+          "end": 40,
+          "style": "paren_cite",
+          "text": "(De Synod.)"
+        },
+        {
+          "start": 42,
+          "end": 99,
+          "style": "quote",
+          "text": "\"An image is a like species of that which it represents.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, Image is derived from imitation, which implies \"before\" and \"after.\" But in the divine persons there is no \"before\" and \"after.\" Therefore Image cannot be a personal name in God.",
+      "spans": [
+        {
+          "start": 64,
+          "end": 72,
+          "style": "quote",
+          "text": "\"before\""
+        },
+        {
+          "start": 77,
+          "end": 85,
+          "style": "quote",
+          "text": "\"after.\""
+        },
+        {
+          "start": 124,
+          "end": 132,
+          "style": "quote",
+          "text": "\"before\""
+        },
+        {
+          "start": 137,
+          "end": 145,
+          "style": "quote",
+          "text": "\"after.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (De Trin. vii, 1): \"What is more absurd than to say that an image is referred to itself?\" Therefore the Image in God is a relation, and is thus a personal name.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 51,
+          "style": "paren_cite",
+          "text": "(De Trin. vii, 1)"
+        },
+        {
+          "start": 53,
+          "end": 123,
+          "style": "quote",
+          "text": "\"What is more absurd than to say that an image is referred to itself?\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Image includes the idea of similitude. Still, not any kind of similitude suffices for the notion of image, but only similitude of species, or at least of some specific sign. In corporeal things the specific sign consists chiefly in the figure. For we see that the species of different animals are of different figures; but not of different colors. Hence if the color of anything is depicted on a wall, this is not called an image unless the figure is likewise depicted. Further, neither the similitude of species or of figure is enough for an image, which requires also the idea of origin; because, as Augustine says (QQ. lxxxiii, qu. 74): \"One egg is not the image of another, because it is not derived from it.\" Therefore for a true image it is required that one proceeds from another like to it in species, or at least in specific sign. Now whatever imports procession or origin in God, belongs to the persons. Hence the name \"Image\" is a personal name.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 634,
+          "end": 655,
+          "style": "paren_cite",
+          "text": "(QQ. lxxxiii, qu. 74)"
+        },
+        {
+          "start": 657,
+          "end": 730,
+          "style": "quote",
+          "text": "\"One egg is not the image of another, because it is not derived from it.\""
+        },
+        {
+          "start": 946,
+          "end": 953,
+          "style": "quote",
+          "text": "\"Image\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Image, properly speaking, means whatever proceeds forth in likeness to another. That to the likeness of which anything proceeds, is properly speaking called the exemplar, and is improperly called the image. Nevertheless Augustine (Fulgentius) uses the name of Image in this sense when he says that the divine nature of the Holy Trinity is the Image to whom man was made.",
+      "spans": [
+        {
+          "start": 244,
+          "end": 256,
+          "style": "paren_cite",
+          "text": "(Fulgentius)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: species, as mentioned by Hilary in the definition of image, means the form derived from one thing to another. In this sense image is said to be the species of anything, as that which is assimilated to anything is called its form, inasmuch as it has a like form."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Imitation in God does not signify posteriority, but only assimilation."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 35, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 35, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether the Name of Image Is Proper to the Son?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It would seem that the name of Image is not proper to the Son; because, as Damascene says (De Fide Orth. i, 18), \"The Holy Ghost is the Image of the Son.\" Therefore Image does not belong to the Son alone.",
+      "spans": [
+        {
+          "start": 103,
+          "end": 124,
+          "style": "paren_cite",
+          "text": "(De Fide Orth. i, 18)"
+        },
+        {
+          "start": 126,
+          "end": 167,
+          "style": "quote",
+          "text": "\"The Holy Ghost is the Image of the Son.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, similitude in expression belongs to the nature of an image, as Augustine says (QQ. lxxxiii, qu. 74). But this belongs to the Holy Ghost, Who proceeds from another by way of similitude. Therefore the Holy Ghost is an Image; and so to be Image does not belong to the Son alone.",
+      "spans": [
+        {
+          "start": 95,
+          "end": 116,
+          "style": "paren_cite",
+          "text": "(QQ. lxxxiii, qu. 74)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, man is also called the image of God, according to 1 Cor. 11:7, \"The man ought not to cover his head, for he is the image and the glory of God.\" Therefore Image is not proper to the Son.",
+      "spans": [
+        {
+          "start": 80,
+          "end": 160,
+          "style": "quote",
+          "text": "\"The man ought not to cover his head, for he is the image and the glory of God.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Augustine says (De Trin. vi, 2): \"The Son alone is the Image of the Father.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 34,
+          "end": 50,
+          "style": "paren_cite",
+          "text": "(De Trin. vi, 2)"
+        },
+        {
+          "start": 52,
+          "end": 95,
+          "style": "quote",
+          "text": "\"The Son alone is the Image of the Father.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The Greek Doctors commonly say that the Holy Ghost is the Image of both the Father and of the Son; but the Latin Doctors attribute the name Image to the Son alone. For it is not found in the canonical Scripture except as applied to the Son; as in the words, \"Who is the Image of the invisible God, the firstborn of creatures\" (Col. 1:15) and again: \"Who being the brightness of His glory, and the figure of His substance.\" (Heb. 1:3).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 275,
+          "end": 342,
+          "style": "quote",
+          "text": "\"Who is the Image of the invisible God, the firstborn of creatures\""
+        },
+        {
+          "start": 343,
+          "end": 354,
+          "style": "paren_cite",
+          "text": "(Col. 1:15)"
+        },
+        {
+          "start": 366,
+          "end": 439,
+          "style": "quote",
+          "text": "\"Who being the brightness of His glory, and the figure of His substance.\""
+        },
+        {
+          "start": 440,
+          "end": 450,
+          "style": "paren_cite",
+          "text": "(Heb. 1:3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Some explain this by the fact that the Son agrees with the Father, not in nature only, but also in the notion of principle: whereas the Holy Ghost agrees neither with the Son, nor with the Father in any notion. This, however, does not seem to suffice. Because as it is not by reason of the relations that we consider either equality or inequality in God, as Augustine says (De Trin. v, 6), so neither (by reason thereof do we consider) that similitude which is essential to image. Hence others say that the Holy Ghost cannot be called the Image of the Son, because there cannot be an image of an image; nor of the Father, because again the image must be immediately related to that which it is the image; and the Holy Ghost is related to the Father through the Son; nor again is He the Image of the Father and the Son, because then there would be one image of two; which is impossible. Hence it follows that the Holy Ghost is in no way an Image. But this is no proof: for the Father and the Son are one principle of the Holy Ghost, as we shall explain further on (Q. 36, A. 4). Hence there is nothing to prevent there being one Image of the Father and of the Son, inasmuch as they are one; since even man is one image of the whole Trinity.",
+      "spans": [
+        {
+          "start": 373,
+          "end": 388,
+          "style": "paren_cite",
+          "text": "(De Trin. v, 6)"
+        },
+        {
+          "start": 401,
+          "end": 435,
+          "style": "paren_aside",
+          "text": "(by reason thereof do we consider)"
+        },
+        {
+          "start": 1063,
+          "end": 1076,
+          "style": "paren_cite",
+          "text": "(Q. 36, A. 4)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Therefore we must explain the matter otherwise by saying that, as the Holy Ghost, although by His procession He receives the nature of the Father, as the Son also receives it, nevertheless is not said to be \"born\"; so, although He receives the likeness of the Father, He is not called the Image; because the Son proceeds as word, and it is essential to word to be like species with that whence it proceeds; whereas this does not essentially belong to love, although it may belong to that love which is the Holy Ghost, inasmuch as He is the divine love.",
+      "spans": [
+        {
+          "start": 207,
+          "end": 213,
+          "style": "quote",
+          "text": "\"born\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Damascene and the other Greek Doctors commonly employ the term image as meaning a perfect similitude."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: Although the Holy Ghost is like to the Father and the Son, still it does not follow that He is the Image, as above explained."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: The image of a thing may be found in something in two ways. In one way it is found in something of the same specific nature; as the image of the king is found in his son. In another way it is found in something of a different nature, as the king's image on the coin. In the first sense the Son is the Image of the Father; in the second sense man is called the image of God; and therefore in order to express the imperfect character of the divine image in man, man is not simply called the image, but \"to the image,\" whereby is expressed a certain movement of tendency to perfection. But it cannot be said that the Son of God is \"to the image,\" because He is the perfect Image of the Father.",
+      "spans": [
+        {
+          "start": 514,
+          "end": 529,
+          "style": "quote",
+          "text": "\"to the image,\""
+        },
+        {
+          "start": 642,
+          "end": 657,
+          "style": "quote",
+          "text": "\"to the image,\""
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "OF THE IMAGE (In Two Articles)\n\nWe next inquire concerning the image: about which there are two points of inquiry:\n\n(1) Whether Image in God is said personally?\n\n(2) Whether this name belongs to the Son alone?\n\n---\n\nFIRST ARTICLE [I, Q. 35, Art. 1]\n\nWhether Image in God Is Said Personally?\n\nObjection 1: It would seem that image is not said personally of God. For Augustine (Fulgentius, De Fide ad Petrum i) says, \"The Godhead of the Holy Trinity and the Image whereunto man is made are one.\" Therefore Image is said of God essentially, and not personally.\n\nObj. 2: Further, Hilary says (De Synod.): \"An image is a like species of that which it represents.\" But species or form is said of God essentially. Therefore so also is Image.\n\nObj. 3: Further, Image is derived from imitation, which implies \"before\" and \"after.\" But in the divine persons there is no \"before\" and \"after.\" Therefore Image cannot be a personal name in God.\n\n_On the contrary,_ Augustine says (De Trin. vii, 1): \"What is more absurd than to say that an image is referred to itself?\" Therefore the Image in God is a relation, and is thus a personal name.\n\n_I answer that,_ Image includes the idea of similitude. Still, not any kind of similitude suffices for the notion of image, but only similitude of species, or at least of some specific sign. In corporeal things the specific sign consists chiefly in the figure. For we see that the species of different animals are of different figures; but not of different colors. Hence if the color of anything is depicted on a wall, this is not called an image unless the figure is likewise depicted. Further, neither the similitude of species or of figure is enough for an image, which requires also the idea of origin; because, as Augustine says (QQ. lxxxiii, qu. 74): \"One egg is not the image of another, because it is not derived from it.\" Therefore for a true image it is required that one proceeds from another like to it in species, or at least in specific sign. Now whatever imports procession or origin in God, belongs to the persons. Hence the name \"Image\" is a personal name.\n\nReply Obj. 1: Image, properly speaking, means whatever proceeds forth in likeness to another. That to the likeness of which anything proceeds, is properly speaking called the exemplar, and is improperly called the image. Nevertheless Augustine (Fulgentius) uses the name of Image in this sense when he says that the divine nature of the Holy Trinity is the Image to whom man was made.\n\nReply Obj. 2: species, as mentioned by Hilary in the definition of image, means the form derived from one thing to another. In this sense image is said to be the species of anything, as that which is assimilated to anything is called its form, inasmuch as it has a like form.\n\nReply Obj. 3: Imitation in God does not signify posteriority, but only assimilation.\n\n---\n\nSECOND ARTICLE [I, Q. 35, Art. 2]\n\nWhether the Name of Image Is Proper to the Son?\n\nObjection 1: It would seem that the name of Image is not proper to the Son; because, as Damascene says (De Fide Orth. i, 18), \"The Holy Ghost is the Image of the Son.\" Therefore Image does not belong to the Son alone.\n\nObj. 2: Further, similitude in expression belongs to the nature of an image, as Augustine says (QQ. lxxxiii, qu. 74). But this belongs to the Holy Ghost, Who proceeds from another by way of similitude. Therefore the Holy Ghost is an Image; and so to be Image does not belong to the Son alone.\n\nObj. 3: Further, man is also called the image of God, according to 1 Cor. 11:7, \"The man ought not to cover his head, for he is the image and the glory of God.\" Therefore Image is not proper to the Son.\n\n_On the contrary,_ Augustine says (De Trin. vi, 2): \"The Son alone is the Image of the Father.\"\n\n_I answer that,_ The Greek Doctors commonly say that the Holy Ghost is the Image of both the Father and of the Son; but the Latin Doctors attribute the name Image to the Son alone. For it is not found in the canonical Scripture except as applied to the Son; as in the words, \"Who is the Image of the invisible God, the firstborn of creatures\" (Col. 1:15) and again: \"Who being the brightness of His glory, and the figure of His substance.\" (Heb. 1:3).\n\nSome explain this by the fact that the Son agrees with the Father, not in nature only, but also in the notion of principle: whereas the Holy Ghost agrees neither with the Son, nor with the Father in any notion. This, however, does not seem to suffice. Because as it is not by reason of the relations that we consider either equality or inequality in God, as Augustine says (De Trin. v, 6), so neither (by reason thereof do we consider) that similitude which is essential to image. Hence others say that the Holy Ghost cannot be called the Image of the Son, because there cannot be an image of an image; nor of the Father, because again the image must be immediately related to that which it is the image; and the Holy Ghost is related to the Father through the Son; nor again is He the Image of the Father and the Son, because then there would be one image of two; which is impossible. Hence it follows that the Holy Ghost is in no way an Image. But this is no proof: for the Father and the Son are one principle of the Holy Ghost, as we shall explain further on (Q. 36, A. 4). Hence there is nothing to prevent there being one Image of the Father and of the Son, inasmuch as they are one; since even man is one image of the whole Trinity.\n\nTherefore we must explain the matter otherwise by saying that, as the Holy Ghost, although by His procession He receives the nature of the Father, as the Son also receives it, nevertheless is not said to be \"born\"; so, although He receives the likeness of the Father, He is not called the Image; because the Son proceeds as word, and it is essential to word to be like species with that whence it proceeds; whereas this does not essentially belong to love, although it may belong to that love which is the Holy Ghost, inasmuch as He is the divine love.\n\nReply Obj. 1: Damascene and the other Greek Doctors commonly employ the term image as meaning a perfect similitude.\n\nReply Obj. 2: Although the Holy Ghost is like to the Father and the Son, still it does not follow that He is the Image, as above explained.\n\nReply Obj. 3: The image of a thing may be found in something in two ways. In one way it is found in something of the same specific nature; as the image of the king is found in his son. In another way it is found in something of a different nature, as the king's image on the coin. In the first sense the Son is the Image of the Father; in the second sense man is called the image of God; and therefore in order to express the imperfect character of the divine image in man, man is not simply called the image, but \"to the image,\" whereby is expressed a certain movement of tendency to perfection. But it cannot be said that the Son of God is \"to the image,\" because He is the perfect Image of the Father.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 2693,
+    "text": "OF THE IMAGE (In Two Articles)"
+  },
+  "word_count": 1297,
+  "block_count": 29
+}

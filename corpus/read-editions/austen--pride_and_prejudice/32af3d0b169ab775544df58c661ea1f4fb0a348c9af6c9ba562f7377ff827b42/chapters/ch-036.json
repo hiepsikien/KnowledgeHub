@@ -1,0 +1,88 @@
+{
+  "chapter_id": "ch-036",
+  "title": "_this_; though I doubt whether _his_ reserve, or _anybody’s_ reserve can be answerable for the event. But in spite of all this fine talking, my dear Lizzy, you may rest perfectly assured that your uncle would never have yielded, if we had not given him credit for _another interest_ in the affair. When all this was resolved on, he returned again to his friends, who were still staying at",
+  "block_start": 1327,
+  "block_end": 1329,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_this_; though I doubt whether _his_ reserve, or _anybody’s_ reserve can be answerable for the event. But in spite of all this fine talking, my dear Lizzy, you may rest perfectly assured that your uncle would never have yielded, if we had not given him credit for _another interest_ in the affair. When all this was resolved on, he returned again to his friends, who were still staying at",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 6,
+          "style": "em",
+          "text": "_this_"
+        },
+        {
+          "start": 31,
+          "end": 36,
+          "style": "em",
+          "text": "_his_"
+        },
+        {
+          "start": 49,
+          "end": 60,
+          "style": "em",
+          "text": "_anybody’s_"
+        },
+        {
+          "start": 264,
+          "end": 282,
+          "style": "em",
+          "text": "_another interest_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Pemberley; but it was agreed that he should be in London once more when the wedding took place, and all money matters were then to receive the last finish. I believe I have now told you everything. It is a relation which you tell me is to give you great surprise; I hope at least it will not afford you any displeasure. Lydia came to us, and Wickham had constant admission to the house. _He_ was exactly what he had been when I knew him in Hertfordshire; but I would not tell you how little I was satisfied with _her_ behaviour while she stayed with us, if I had not perceived, by Jane’s letter last Wednesday, that her conduct on coming home was exactly of a piece with it, and therefore what I now tell you can give you no fresh pain. I talked to her repeatedly in the most serious manner, representing to her the wickedness of what she had done, and all the unhappiness she had brought on her family. If she heard me, it was by good luck, for I am sure she did not listen. I was sometimes quite provoked; but then I recollected my dear Elizabeth and Jane, and for their sakes had patience with her. Mr. Darcy was punctual in his return, and, as Lydia informed you, attended the wedding. He dined with us the next day, and was to leave town again on Wednesday or Thursday. Will you be very angry with me, my dear Lizzy, if I take this opportunity of saying (what I was never bold enough to say before) how much I like him? His behaviour to us has, in every respect, been as pleasing as when we were in Derbyshire. His understanding and opinions all please me; he wants nothing but a little more liveliness, and _that_, if he marry _prudently_, his wife may teach him. I thought him very sly; he hardly ever mentioned your name. But slyness seems the fashion. Pray forgive me, if I have been very presuming, or at least do not punish me so far as to exclude me from P. I shall never be quite happy till I have been all round the park. A low phaeton with a nice little pair of ponies would be the very thing. But I must write no more. The children have been wanting me this half hour.",
+      "spans": [
+        {
+          "start": 387,
+          "end": 391,
+          "style": "em",
+          "text": "_He_"
+        },
+        {
+          "start": 512,
+          "end": 517,
+          "style": "em",
+          "text": "_her_"
+        },
+        {
+          "start": 1359,
+          "end": 1403,
+          "style": "paren_aside",
+          "text": "(what I was never bold enough to say before)"
+        },
+        {
+          "start": 1613,
+          "end": 1619,
+          "style": "em",
+          "text": "_that_"
+        },
+        {
+          "start": 1633,
+          "end": 1644,
+          "style": "em",
+          "text": "_prudently_"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Yours, very sincerely,"
+    }
+  ],
+  "reading_markdown": "_this_; though I doubt whether _his_ reserve, or _anybody’s_ reserve can be answerable for the event. But in spite of all this fine talking, my dear Lizzy, you may rest perfectly assured that your uncle would never have yielded, if we had not given him credit for _another interest_ in the affair. When all this was resolved on, he returned again to his friends, who were still staying at\n\nPemberley; but it was agreed that he should be in London once more when the wedding took place, and all money matters were then to receive the last finish. I believe I have now told you everything. It is a relation which you tell me is to give you great surprise; I hope at least it will not afford you any displeasure. Lydia came to us, and Wickham had constant admission to the house. _He_ was exactly what he had been when I knew him in Hertfordshire; but I would not tell you how little I was satisfied with _her_ behaviour while she stayed with us, if I had not perceived, by Jane’s letter last Wednesday, that her conduct on coming home was exactly of a piece with it, and therefore what I now tell you can give you no fresh pain. I talked to her repeatedly in the most serious manner, representing to her the wickedness of what she had done, and all the unhappiness she had brought on her family. If she heard me, it was by good luck, for I am sure she did not listen. I was sometimes quite provoked; but then I recollected my dear Elizabeth and Jane, and for their sakes had patience with her. Mr. Darcy was punctual in his return, and, as Lydia informed you, attended the wedding. He dined with us the next day, and was to leave town again on Wednesday or Thursday. Will you be very angry with me, my dear Lizzy, if I take this opportunity of saying (what I was never bold enough to say before) how much I like him? His behaviour to us has, in every respect, been as pleasing as when we were in Derbyshire. His understanding and opinions all please me; he wants nothing but a little more liveliness, and _that_, if he marry _prudently_, his wife may teach him. I thought him very sly; he hardly ever mentioned your name. But slyness seems the fashion. Pray forgive me, if I have been very presuming, or at least do not punish me so far as to exclude me from P. I shall never be quite happy till I have been all round the park. A low phaeton with a nice little pair of ponies would be the very thing. But I must write no more. The children have been wanting me this half hour.\n\n> “Yours, very sincerely,",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1327,
+    "text": "_this_; though I doubt whether _his_ reserve, or _anybody’s_ reserve can be answerable for the event. But in spite of all this fine talking, my dear Lizzy, you may rest perfectly assured that your uncle would never have yielded, if we had not given him credit for _another interest_ in the affair. When all this was resolved on, he returned again to his friends, who were still staying at"
+  },
+  "word_count": 475,
+  "block_count": 3
+}

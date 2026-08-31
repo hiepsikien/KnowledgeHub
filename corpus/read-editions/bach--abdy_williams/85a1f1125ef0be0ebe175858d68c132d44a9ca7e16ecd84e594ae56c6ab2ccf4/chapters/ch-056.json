@@ -1,0 +1,236 @@
+{
+  "chapter_id": "ch-056",
+  "title": "_Bars 14 to 17._",
+  "block_start": 644,
+  "block_end": 657,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Bars 14 to 17._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_Bars 14 to 17._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Es ist nichts Gesundes an meinem]"
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: meinem Leibe]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 21,
+          "style": "bracket_note",
+          "text": "[Music: meinem Leibe]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The above quotation is only a specimen of what is found throughout a long chorus, all the sections of the chorale being introduced in turn, with a never-ceasing flow of counterpoint in the voice parts, accompanied in the same way by strings."
+    },
+    {
+      "type": "paragraph",
+      "text": "If we examine the voice parts we shall find that they practically amount to a double canon, the tenor imitating the bass, the treble imitating the alto. But the canon is not carried out with an iron-bound rule which would crush all beauty out of the music; on the contrary, the imitations are quite free and unconstrained. Each voice must have its melody, even if collisions occur now and then, such as between alto and tenor bar 15, last quaver: alto and bass just previously to this: the consecutive sevenths in the treble and alto bar 16, third and fourth quavers, or the entry of the tenor on F♮ bar 17, against the F♯ in the bass. This rough and healthy vigour is thoroughly characteristic; the parts must express themselves by their melody; if they happen occasionally to collide, this is of much less importance than that their vigorous melody should be sacrificed in order to sweeten the harmony."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: Technical Skill]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 27,
+          "style": "bracket_note",
+          "text": "[Sidenote: Technical Skill]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The string accompaniment must also take its part. The instruments are all treated as individuals, not merely as filling up harmonies. Therefore they do not reiterate one note in each chord, but move about. The wind instruments play in four part harmony which is complete in itself. It might perhaps appear that this is merely a display of learning and contrapuntal skill, but a close examination of Bach’s most elaborate works will reveal the fact that the greater the contrapuntal task he sets himself, the more expressive is the music. Such choruses exhibit the highest possible technical skill, but all this is as nothing compared to the wonderfully artistic effect that the composition as a whole produces."
+    },
+    {
+      "type": "paragraph",
+      "text": "In some cases Bach writes an organ obbligato part in addition to the “continuo,” or figured bass. Thus the opening symphony of “Wir danken dir, Gott, wir danken dir,” composed for the election of the Town Council at Leipsic in 1737, consists of the “Prelude” of the violin solo suite No. 6 transposed to D, [Music]",
+      "spans": [
+        {
+          "start": 69,
+          "end": 80,
+          "style": "quote",
+          "text": "“continuo,”"
+        },
+        {
+          "start": 127,
+          "end": 166,
+          "style": "quote",
+          "text": "“Wir danken dir, Gott, wir danken dir,”"
+        },
+        {
+          "start": 249,
+          "end": 258,
+          "style": "quote",
+          "text": "“Prelude”"
+        },
+        {
+          "start": 307,
+          "end": 314,
+          "style": "bracket_note",
+          "text": "[Music]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "on the obbligato organ, with accompaniments for three trumpets, drums, two oboes, strings and continuo (to be played on another organ[59]).",
+      "spans": [
+        {
+          "start": 133,
+          "end": 137,
+          "style": "footnote",
+          "text": "[59]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach seems to have tried every kind of experiment with his orchestra. For instance in “Freue dich erlöste Schaar” an aria is accompanied by a flute, a muted violin, the rest of the strings pizzicato, and the organ part to be played staccato. One peculiarity, however, of his orchestration is that the combination of instruments he chooses for a particular movement remains the same throughout. Rests occur in the parts, but there is no variety of treatment within the movement. Thus in the above-mentioned aria the lower strings having begun pizzicato play pizzicato throughout, the first violins remain muted throughout, and the organ plays staccato throughout. Again, in the opening chorus of “Es ist nichts gesundes,” referred to above, the wind never plays anything but the chorale in four parts. Of variety there is plenty, but it is not produced by modern methods.",
+      "spans": [
+        {
+          "start": 86,
+          "end": 113,
+          "style": "quote",
+          "text": "“Freue dich erlöste Schaar”"
+        },
+        {
+          "start": 695,
+          "end": 720,
+          "style": "quote",
+          "text": "“Es ist nichts gesundes,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach was just as careful in the choice of instruments for his particular effects as in the choice of stops in organ playing. Many of the instruments he used are now obsolete, and their intonation must have been very faulty. Yet if they had the particular tone colour he considered fitting he would not hesitate to employ them, to the exclusion of, or together with, the more manageable instruments such as the violin, viola, oboe, &c. Amongst the obsolete instruments he employed to accompany the voices in his cantatas and Passion music were violoncello piccolo,[60] viola da gamba,[60] taille,[61] viola d’amore,[60] cornet,[60] oboe d’amore,[62] oboe da caccia,[60] lituus,[60] violetta,[60] violino piccolo.[60]",
+      "spans": [
+        {
+          "start": 563,
+          "end": 567,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 583,
+          "end": 587,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 595,
+          "end": 599,
+          "style": "footnote",
+          "text": "[61]"
+        },
+        {
+          "start": 614,
+          "end": 618,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 626,
+          "end": 630,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 644,
+          "end": 648,
+          "style": "footnote",
+          "text": "[62]"
+        },
+        {
+          "start": 664,
+          "end": 668,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 676,
+          "end": 680,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 690,
+          "end": 694,
+          "style": "footnote",
+          "text": "[60]"
+        },
+        {
+          "start": 711,
+          "end": 715,
+          "style": "footnote",
+          "text": "[60]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: Cantatas]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "bracket_note",
+          "text": "[Sidenote: Cantatas]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Some of the cantatas are called solo cantatas; they consist of a series of movements usually founded on a chorale, for one or more solo voices, and contain no choruses, though occasionally a chorale is to be sung by the congregation."
+    },
+    {
+      "type": "paragraph",
+      "text": "The cantatas are often called by Bach “Concertos.” Thus “Bereitet die Wege” for fourth Sunday in Advent is entitled “Concerto à 9, 1 oboe, 2 violini, 1 viola, 1 violoncello, soprano, alto, tenor, bass, col basso per organo di J. S. Bach.”",
+      "spans": [
+        {
+          "start": 38,
+          "end": 50,
+          "style": "quote",
+          "text": "“Concertos.”"
+        },
+        {
+          "start": 56,
+          "end": 75,
+          "style": "quote",
+          "text": "“Bereitet die Wege”"
+        },
+        {
+          "start": 116,
+          "end": 238,
+          "style": "quote",
+          "text": "“Concerto à 9, 1 oboe, 2 violini, 1 viola, 1 violoncello, soprano, alto, tenor, bass, col basso per organo di J. S. Bach.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Bars 14 to 17._\n\nEs ist nichts Gesundes an meinem]\n\n[Music: meinem Leibe]\n\nThe above quotation is only a specimen of what is found throughout a long chorus, all the sections of the chorale being introduced in turn, with a never-ceasing flow of counterpoint in the voice parts, accompanied in the same way by strings.\n\nIf we examine the voice parts we shall find that they practically amount to a double canon, the tenor imitating the bass, the treble imitating the alto. But the canon is not carried out with an iron-bound rule which would crush all beauty out of the music; on the contrary, the imitations are quite free and unconstrained. Each voice must have its melody, even if collisions occur now and then, such as between alto and tenor bar 15, last quaver: alto and bass just previously to this: the consecutive sevenths in the treble and alto bar 16, third and fourth quavers, or the entry of the tenor on F♮ bar 17, against the F♯ in the bass. This rough and healthy vigour is thoroughly characteristic; the parts must express themselves by their melody; if they happen occasionally to collide, this is of much less importance than that their vigorous melody should be sacrificed in order to sweeten the harmony.\n\n[Sidenote: Technical Skill]\n\nThe string accompaniment must also take its part. The instruments are all treated as individuals, not merely as filling up harmonies. Therefore they do not reiterate one note in each chord, but move about. The wind instruments play in four part harmony which is complete in itself. It might perhaps appear that this is merely a display of learning and contrapuntal skill, but a close examination of Bach’s most elaborate works will reveal the fact that the greater the contrapuntal task he sets himself, the more expressive is the music. Such choruses exhibit the highest possible technical skill, but all this is as nothing compared to the wonderfully artistic effect that the composition as a whole produces.\n\nIn some cases Bach writes an organ obbligato part in addition to the “continuo,” or figured bass. Thus the opening symphony of “Wir danken dir, Gott, wir danken dir,” composed for the election of the Town Council at Leipsic in 1737, consists of the “Prelude” of the violin solo suite No. 6 transposed to D, [Music]\n\non the obbligato organ, with accompaniments for three trumpets, drums, two oboes, strings and continuo (to be played on another organ[59]).\n\nBach seems to have tried every kind of experiment with his orchestra. For instance in “Freue dich erlöste Schaar” an aria is accompanied by a flute, a muted violin, the rest of the strings pizzicato, and the organ part to be played staccato. One peculiarity, however, of his orchestration is that the combination of instruments he chooses for a particular movement remains the same throughout. Rests occur in the parts, but there is no variety of treatment within the movement. Thus in the above-mentioned aria the lower strings having begun pizzicato play pizzicato throughout, the first violins remain muted throughout, and the organ plays staccato throughout. Again, in the opening chorus of “Es ist nichts gesundes,” referred to above, the wind never plays anything but the chorale in four parts. Of variety there is plenty, but it is not produced by modern methods.\n\nBach was just as careful in the choice of instruments for his particular effects as in the choice of stops in organ playing. Many of the instruments he used are now obsolete, and their intonation must have been very faulty. Yet if they had the particular tone colour he considered fitting he would not hesitate to employ them, to the exclusion of, or together with, the more manageable instruments such as the violin, viola, oboe, &c. Amongst the obsolete instruments he employed to accompany the voices in his cantatas and Passion music were violoncello piccolo,[60] viola da gamba,[60] taille,[61] viola d’amore,[60] cornet,[60] oboe d’amore,[62] oboe da caccia,[60] lituus,[60] violetta,[60] violino piccolo.[60]\n\n[Sidenote: Cantatas]\n\nSome of the cantatas are called solo cantatas; they consist of a series of movements usually founded on a chorale, for one or more solo voices, and contain no choruses, though occasionally a chorale is to be sung by the congregation.\n\nThe cantatas are often called by Bach “Concertos.” Thus “Bereitet die Wege” for fourth Sunday in Advent is entitled “Concerto à 9, 1 oboe, 2 violini, 1 viola, 1 violoncello, soprano, alto, tenor, bass, col basso per organo di J. S. Bach.”",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 644,
+    "text": "_Bars 14 to 17._"
+  },
+  "word_count": 765,
+  "block_count": 14
+}

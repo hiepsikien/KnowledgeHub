@@ -1,0 +1,499 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "bach--abdy_williams",
+  "title": "Bach (Abdy Williams)",
+  "language": "en",
+  "content_hash": "87bab6e20b837a2cd01cf170cd6fe856512758d6efd786b3665aed3720aab2c6",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 31 marker (chapter).",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "ref_parser_version": "1.7",
+  "chapter_count": 32,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        2347
+      ],
+      "word_count": 325,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "Preface",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        2348,
+        4681
+      ],
+      "word_count": 397,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "CHAPTER III",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        4682,
+        5176
+      ],
+      "word_count": 52,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-003",
+      "title": "CHAPTER IV",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        5177,
+        5525
+      ],
+      "word_count": 43,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-004",
+      "title": "CHAPTER V",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        5526,
+        5949
+      ],
+      "word_count": 57,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-005",
+      "title": "CHAPTER VI",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        5950,
+        6447
+      ],
+      "word_count": 58,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-006",
+      "title": "CHAPTER VII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        6448,
+        6876
+      ],
+      "word_count": 50,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-007",
+      "title": "CHAPTER VIII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        6877,
+        6966
+      ],
+      "word_count": 8,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-008",
+      "title": "CHAPTER IX",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        6967,
+        7054
+      ],
+      "word_count": 10,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-009",
+      "title": "CHAPTER X",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        7055,
+        7211
+      ],
+      "word_count": 19,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-010",
+      "title": "CHAPTER XI",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        7212,
+        7369
+      ],
+      "word_count": 16,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-011",
+      "title": "CHAPTER XII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        7370,
+        7518
+      ],
+      "word_count": 14,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-012",
+      "title": "CHAPTER XIII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        7519,
+        7676
+      ],
+      "word_count": 15,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-013",
+      "title": "CHAPTER XIV",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        7677,
+        9280
+      ],
+      "word_count": 145,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-014",
+      "title": "Chapter I",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        9281,
+        38690
+      ],
+      "word_count": 4831,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-015",
+      "title": "Chapter II",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        38691,
+        59355
+      ],
+      "word_count": 3554,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-016",
+      "title": "Chapter III",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        59356,
+        81636
+      ],
+      "word_count": 3838,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-017",
+      "title": "Chapter IV",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        81637,
+        98805
+      ],
+      "word_count": 2950,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-018",
+      "title": "Chapter V",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        98806,
+        127578
+      ],
+      "word_count": 4987,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-019",
+      "title": "Chapter VI",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        127579,
+        139477
+      ],
+      "word_count": 2063,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-020",
+      "title": "Chapter VII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        139478,
+        151411
+      ],
+      "word_count": 2121,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-021",
+      "title": "Chapter VIII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        151412,
+        177581
+      ],
+      "word_count": 4441,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-022",
+      "title": "Chapter IX",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        177582,
+        199908
+      ],
+      "word_count": 3819,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-023",
+      "title": "Chapter X",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        199909,
+        218772
+      ],
+      "word_count": 3236,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-024",
+      "title": "Chapter XI",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        218773,
+        230179
+      ],
+      "word_count": 1964,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-025",
+      "title": "Introduction to vol. vii. of the Bach Gesellschaft Edition.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        230180,
+        230240
+      ],
+      "word_count": 9,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-026",
+      "title": "Chapter XII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        230241,
+        240476
+      ],
+      "word_count": 1757,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-027",
+      "title": "Chapter XIII",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        240477,
+        254925
+      ],
+      "word_count": 2146,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-028",
+      "title": "Chapter XIV",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        254926,
+        298427
+      ],
+      "word_count": 6859,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-029",
+      "title": "Part II. (2 and 1b)._      For clavichord. See p. 131.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        298428,
+        300248
+      ],
+      "word_count": 311,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-030",
+      "title": "Part II. The work is entitled “an overture after French taste,",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        300249,
+        326580
+      ],
+      "word_count": 4255,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-031",
+      "title": "introduction, followed by a fugue or fugato, and concluding with a slow",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        326581,
+        340387
+      ],
+      "word_count": 2334,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T03:58:54+00:00"
+}

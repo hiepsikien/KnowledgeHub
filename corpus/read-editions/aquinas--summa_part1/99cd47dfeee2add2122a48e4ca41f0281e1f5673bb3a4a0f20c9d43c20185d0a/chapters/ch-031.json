@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-031",
+  "title": "QUESTION 13",
+  "block_start": 924,
+  "block_end": 924,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 13",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 13",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 924,
+    "text": "QUESTION 13"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

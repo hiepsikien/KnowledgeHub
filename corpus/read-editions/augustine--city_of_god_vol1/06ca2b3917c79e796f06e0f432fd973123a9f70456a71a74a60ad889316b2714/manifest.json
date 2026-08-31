@@ -1,0 +1,184 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "augustine--city_of_god_vol1",
+  "title": "The City of God — Volume I",
+  "language": "en",
+  "content_hash": "06ca2b3917c79e796f06e0f432fd973123a9f70456a71a74a60ad889316b2714",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 10 marker (book).",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "ref_parser_version": "1.7",
+  "chapter_count": 11,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        1368
+      ],
+      "word_count": 114,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "BOOK IV.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        1369,
+        1547
+      ],
+      "word_count": 19,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "BOOK V.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        1548,
+        1725
+      ],
+      "word_count": 20,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-003",
+      "title": "BOOK VI.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        1726,
+        1973
+      ],
+      "word_count": 26,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-004",
+      "title": "BOOK VII.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        1974,
+        2152
+      ],
+      "word_count": 21,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-005",
+      "title": "BOOK VIII.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        2153,
+        2393
+      ],
+      "word_count": 31,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-006",
+      "title": "BOOK IX.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        2394,
+        2569
+      ],
+      "word_count": 17,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-007",
+      "title": "BOOK X.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        2570,
+        2679
+      ],
+      "word_count": 7,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-008",
+      "title": "BOOK XI.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        2680,
+        2987
+      ],
+      "word_count": 34,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-009",
+      "title": "BOOK XII.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        2988,
+        3098
+      ],
+      "word_count": 16,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-010",
+      "title": "BOOK XIII.",
+      "subtitle": null,
+      "kind": "book",
+      "char_range": [
+        3099,
+        1312849
+      ],
+      "word_count": 232389,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T04:12:20+00:00"
+}

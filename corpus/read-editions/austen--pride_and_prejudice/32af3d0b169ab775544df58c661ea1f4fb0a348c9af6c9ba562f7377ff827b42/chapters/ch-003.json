@@ -1,0 +1,48 @@
+{
+  "chapter_id": "ch-003",
+  "title": "PREJUDICE by",
+  "block_start": 7,
+  "block_end": 10,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "PREJUDICE by",
+      "level": 2
+    },
+    {
+      "type": "stanza",
+      "text": "Jane Austen, with a Preface by George Saintsbury and Illustrations by Hugh Thomson [Illustration: 1894]",
+      "lines": [
+        "Jane Austen, with a Preface by George Saintsbury and Illustrations by Hugh Thomson [Illustration: 1894]"
+      ],
+      "spans": [
+        {
+          "start": 83,
+          "end": 103,
+          "style": "bracket_note",
+          "text": "[Illustration: 1894]"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "Ruskin       156. Charing House.        Cross Road.",
+      "lines": [
+        "Ruskin       156. Charing House.        Cross Road."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "London George Allen."
+    }
+  ],
+  "reading_markdown": "PREJUDICE by\n\nJane Austen, with a Preface by George Saintsbury and Illustrations by Hugh Thomson [Illustration: 1894]\n\nRuskin       156. Charing House.        Cross Road.\n\nLondon George Allen.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 7,
+    "text": "PREJUDICE by"
+  },
+  "word_count": 26,
+  "block_count": 4
+}

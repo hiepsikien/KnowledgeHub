@@ -1,0 +1,36 @@
+{
+  "chapter_id": "ch-001",
+  "title": "GEORGE ALLEN PUBLISHER 156 CHARING CROSS ROAD LONDON RUSKIN HOUSE",
+  "block_start": 1,
+  "block_end": 3,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "GEORGE ALLEN PUBLISHER 156 CHARING CROSS ROAD LONDON RUSKIN HOUSE",
+      "level": 2
+    },
+    {
+      "type": "stanza",
+      "text": "]",
+      "lines": [
+        "]"
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "[Illustration:",
+      "lines": [
+        "[Illustration:"
+      ]
+    }
+  ],
+  "reading_markdown": "GEORGE ALLEN PUBLISHER 156 CHARING CROSS ROAD LONDON RUSKIN HOUSE\n\n]\n\n[Illustration:",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1,
+    "text": "GEORGE ALLEN PUBLISHER 156 CHARING CROSS ROAD LONDON RUSKIN HOUSE"
+  },
+  "word_count": 11,
+  "block_count": 3
+}

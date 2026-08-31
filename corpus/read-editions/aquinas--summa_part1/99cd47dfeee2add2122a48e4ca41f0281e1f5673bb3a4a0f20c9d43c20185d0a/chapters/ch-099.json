@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-099",
+  "title": "QUESTION 45",
+  "block_start": 3405,
+  "block_end": 3405,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 45",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 45",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 3405,
+    "text": "QUESTION 45"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

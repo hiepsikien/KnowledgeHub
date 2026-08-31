@@ -1,0 +1,94 @@
+{
+  "chapter_id": "ch-051",
+  "title": "FOOTNOTES:",
+  "block_start": 553,
+  "block_end": 559,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FOOTNOTES:",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[50] See Glossary.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[50]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[51] These pianos were made in the years 1746-7 after the invention of Cristofori of Florence, who was the first to use the hammer action. This action, however, did not suit Bach’s touch, and though he praised the tone, he does not appear to have become possessed of one. The writer was shown one of the above-mentioned Silbermann pianos in the Palace of Sanssouci at Potsdam in 1884.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[51]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[52] See page 79.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[52]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[53] It can be found in Bitter, vol. ii. p. 317, Spitta, vol. iii. p. 231, and elsewhere.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[53]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[54] h being the German term for B♮.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[54]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[55] This story may or may not be true--we give it for what it is worth.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[55]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FOOTNOTES:\n\n[50] See Glossary.\n\n[51] These pianos were made in the years 1746-7 after the invention of Cristofori of Florence, who was the first to use the hammer action. This action, however, did not suit Bach’s touch, and though he praised the tone, he does not appear to have become possessed of one. The writer was shown one of the above-mentioned Silbermann pianos in the Palace of Sanssouci at Potsdam in 1884.\n\n[52] See page 79.\n\n[53] It can be found in Bitter, vol. ii. p. 317, Spitta, vol. iii. p. 231, and elsewhere.\n\n[54] h being the German term for B♮.\n\n[55] This story may or may not be true--we give it for what it is worth.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 553,
+    "text": "FOOTNOTES:"
+  },
+  "word_count": 119,
+  "block_count": 7
+}

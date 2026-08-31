@@ -1,0 +1,304 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "arnold--essays_in_criticism",
+  "title": "Essays in Criticism",
+  "language": "en",
+  "content_hash": "00352fc1f9d9df365a69cc9b466fee6f3e3998467083dbaeb28396734a091c31",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 18 marker (roman_section).",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "ref_parser_version": "1.7",
+  "chapter_count": 19,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        76309
+      ],
+      "word_count": 13337,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "II.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        76310,
+        135520
+      ],
+      "word_count": 10326,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "III.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        135521,
+        198527
+      ],
+      "word_count": 11197,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-003",
+      "title": "IV.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        198528,
+        252113
+      ],
+      "word_count": 9740,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-004",
+      "title": "V.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        252114,
+        309249
+      ],
+      "word_count": 10116,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-005",
+      "title": "VI.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        309250,
+        352113
+      ],
+      "word_count": 7652,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-006",
+      "title": "VII.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        352114,
+        416367
+      ],
+      "word_count": 11329,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-007",
+      "title": "VIII.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        416368,
+        480340
+      ],
+      "word_count": 11335,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-008",
+      "title": "IX.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        480341,
+        537493
+      ],
+      "word_count": 9893,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-009",
+      "title": "X.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        537494,
+        592563
+      ],
+      "word_count": 9700,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-010",
+      "title": "I.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        592564,
+        651310
+      ],
+      "word_count": 10100,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-011",
+      "title": "XII.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        651311,
+        663644
+      ],
+      "word_count": 2161,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-012",
+      "title": "III.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        663645,
+        696887
+      ],
+      "word_count": 5834,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-013",
+      "title": "IV.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        696888,
+        720514
+      ],
+      "word_count": 4183,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-014",
+      "title": "V.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        720515,
+        763167
+      ],
+      "word_count": 7372,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-015",
+      "title": "VI.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        763168,
+        805657
+      ],
+      "word_count": 7435,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-016",
+      "title": "VII.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        805658,
+        855072
+      ],
+      "word_count": 8600,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-017",
+      "title": "VIII.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        855073,
+        904592
+      ],
+      "word_count": 8713,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-018",
+      "title": "IX.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        904593,
+        947832
+      ],
+      "word_count": 7076,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T04:10:13+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "chapter_id": "ch-018",
+  "title": "C. F. ABDY WILLIAMS. BRADFIELD,",
+  "block_start": 55,
+  "block_end": 56,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "C. F. ABDY WILLIAMS. BRADFIELD,",
+      "level": 2
+    },
+    {
+      "type": "blockquote",
+      "text": "_December 1899_.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 15,
+          "style": "em",
+          "text": "_December 1899_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "C. F. ABDY WILLIAMS. BRADFIELD,\n\n> _December 1899_.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 55,
+    "text": "C. F. ABDY WILLIAMS. BRADFIELD,"
+  },
+  "word_count": 7,
+  "block_count": 2
+}

@@ -1,0 +1,57 @@
+{
+  "chapter_id": "ch-015",
+  "title": "_All rights reserved_",
+  "block_start": 36,
+  "block_end": 41,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_All rights reserved_",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 21,
+          "style": "em",
+          "text": "_All rights reserved_"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "[Illustration: _Published with the permission of the proprietors of the original engraving Breitkopf and Härtel in Leipsic._",
+      "spans": [
+        {
+          "start": 15,
+          "end": 124,
+          "style": "em",
+          "text": "_Published with the permission of the proprietors of the original engraving Breitkopf and Härtel in Leipsic._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Joh. Seb. Bach.]"
+    },
+    {
+      "type": "paragraph",
+      "text": "BACH"
+    },
+    {
+      "type": "paragraph",
+      "text": "by"
+    }
+  ],
+  "reading_markdown": "_All rights reserved_\n\n---\n\n[Illustration: _Published with the permission of the proprietors of the original engraving Breitkopf and Härtel in Leipsic._\n\nJoh. Seb. Bach.]\n\nBACH\n\nby",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 36,
+    "text": "_All rights reserved_"
+  },
+  "word_count": 26,
+  "block_count": 6
+}

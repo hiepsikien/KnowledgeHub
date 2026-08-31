@@ -1,0 +1,123 @@
+{
+  "chapter_id": "ch-094",
+  "title": "_In D._",
+  "block_start": 1265,
+  "block_end": 1272,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_In D._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 7,
+          "style": "em",
+          "text": "_In D._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Capriccio sopra la lontananza del suo fratello dilettissimo (208)._      See p. 28.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 68,
+          "style": "em",
+          "text": "_Capriccio sopra la lontananza del suo fratello dilettissimo (208)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue in D minor (210)._      The toccata contains three movements--allegro moderato, allegro, adagio.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Toccata and Fugue in D minor (210)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Four Duets (208)._      For right and left hand.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 19,
+          "style": "em",
+          "text": "_Four Duets (208)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_A Prelude with Fugue on the notes B, A, C, H (212)._      Apocryphal.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 53,
+          "style": "em",
+          "text": "_A Prelude with Fugue on the notes B, A, C, H (212)._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Six Partitas in B flat, C minor, A minor, D, G, E minor (205)._      From the Clavierübung, Part I. _Concerto “in the Italian style” (207)._      From the Clavierübung,",
+      "spans": [
+        {
+          "start": 0,
+          "end": 64,
+          "style": "em",
+          "text": "_Six Partitas in B flat, C minor, A minor, D, G, E minor (205)._"
+        },
+        {
+          "start": 101,
+          "end": 141,
+          "style": "em",
+          "text": "_Concerto “in the Italian style” (207)._"
+        }
+      ]
+    },
+    {
+      "type": "metadata",
+      "text": "Part II.\n_Suite in B minor (208) or Partita._      From the Clavierübung,\nPart II. The work is entitled “an overture after French taste,\nfor a clavicymbal with two manuals.”\n_Air with thirty variations for harpsichord with two manuals",
+      "spans": [
+        {
+          "start": 9,
+          "end": 45,
+          "style": "em",
+          "text": "_Suite in B minor (208) or Partita._"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "(209)._      From the Clavierübung. The theme is in the bass. The work was composed for his clever pupil, J. T. Goldberg, at the request of Baron Kayserling, who presented Bach with a snuff-box containing one hundred louis d’or in return for it.",
+      "lines": [
+        "(209)._      From the Clavierübung. The theme is in the bass. The work was composed for his clever pupil, J. T. Goldberg, at the request of Baron Kayserling, who presented Bach with a snuff-box containing one hundred louis d’or in return for it."
+      ],
+      "spans": [
+        {
+          "start": 0,
+          "end": 5,
+          "style": "paren_page",
+          "text": "(209)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_In D._\n\n> _Capriccio sopra la lontananza del suo fratello dilettissimo (208)._      See p. 28.\n\n_Toccata and Fugue in D minor (210)._      The toccata contains three movements--allegro moderato, allegro, adagio.\n\n> _Four Duets (208)._      For right and left hand.\n\n_A Prelude with Fugue on the notes B, A, C, H (212)._      Apocryphal.\n\n> _Six Partitas in B flat, C minor, A minor, D, G, E minor (205)._      From the Clavierübung, Part I. _Concerto “in the Italian style” (207)._      From the Clavierübung,\n\nPart II.\n_Suite in B minor (208) or Partita._      From the Clavierübung,\nPart II. The work is entitled “an overture after French taste,\nfor a clavicymbal with two manuals.”\n_Air with thirty variations for harpsichord with two manuals\n\n(209)._      From the Clavierübung. The theme is in the bass. The work was composed for his clever pupil, J. T. Goldberg, at the request of Baron Kayserling, who presented Bach with a snuff-box containing one hundred louis d’or in return for it.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1265,
+    "text": "_In D._"
+  },
+  "word_count": 168,
+  "block_count": 8
+}

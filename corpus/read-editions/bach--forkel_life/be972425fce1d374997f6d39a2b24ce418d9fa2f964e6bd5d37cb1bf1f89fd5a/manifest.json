@@ -1,0 +1,413 @@
+{
+  "package_version": "2",
+  "pipeline": "two_step",
+  "work_id": "bach--forkel_life",
+  "title": "Johann Sebastian Bach: His Life, Art, and Work",
+  "language": "en",
+  "content_hash": "be972425fce1d374997f6d39a2b24ce418d9fa2f964e6bd5d37cb1bf1f89fd5a",
+  "macro_status": "complete",
+  "macro_mode": "markers",
+  "macro_model": null,
+  "macro_summary_vi": "Phân đoạn deterministic từ 25 marker (chapter).",
+  "content_kind": "prose",
+  "source_family": "gutenberg",
+  "ref_parser_version": "1.7",
+  "chapter_count": 26,
+  "chapters": [
+    {
+      "chapter_id": "sec-000-front",
+      "title": "Front matter",
+      "subtitle": null,
+      "kind": "front_matter",
+      "char_range": [
+        0,
+        885
+      ],
+      "word_count": 134,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.85
+    },
+    {
+      "chapter_id": "sec-001",
+      "title": "INTRODUCTION",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        886,
+        28062
+      ],
+      "word_count": 4570,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-002",
+      "title": "CHAPTER I. THE FAMILY OF BACH",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        28063,
+        34283
+      ],
+      "word_count": 1027,
+      "micro_status": "complete",
+      "block_count": 8,
+      "qa_status": "pending",
+      "confidence": 0.92,
+      "ref_mode": "llm_hybrid",
+      "edition_hash": "25472e222d71c967f19fbf49cb46ddd25f4231a4d832047a4e8df0dfbe256b5c"
+    },
+    {
+      "chapter_id": "sec-003",
+      "title": "CHAPTER II. THE CAREER OF BACH",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        34284,
+        48420
+      ],
+      "word_count": 2449,
+      "micro_status": "complete",
+      "block_count": 15,
+      "qa_status": "pending",
+      "confidence": 0.92,
+      "ref_mode": "llm_hybrid",
+      "edition_hash": "566828107ce82ff763444c73f584989e45c779080eb6370b11f16e63a5f5495d"
+    },
+    {
+      "chapter_id": "sec-004",
+      "title": "CHAPTER IIA.(113) BACH AT LEIPZIG, 1723-1750",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        48421,
+        74394
+      ],
+      "word_count": 4323,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-005",
+      "title": "CHAPTER III. BACH AS A CLAVIER PLAYER",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        74395,
+        87408
+      ],
+      "word_count": 2252,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-006",
+      "title": "CHAPTER IV.  BACH THE ORGANIST",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        87409,
+        97457
+      ],
+      "word_count": 1711,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-007",
+      "title": "Preface.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        97458,
+        97467
+      ],
+      "word_count": 1,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-008",
+      "title": "CHAPTER V. BACH THE COMPOSER",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        97468,
+        109504
+      ],
+      "word_count": 2039,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-009",
+      "title": "CHAPTER VI. BACH THE COMPOSER (CONTINUED)",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        109505,
+        122805
+      ],
+      "word_count": 2219,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-010",
+      "title": "CHAPTER VII. BACH AS A TEACHER",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        122806,
+        137469
+      ],
+      "word_count": 2473,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-011",
+      "title": "CHAPTER VIII.  PERSONAL CHARACTERISTICS",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        137470,
+        145244
+      ],
+      "word_count": 1352,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-012",
+      "title": "CHAPTER IX. BACH’S COMPOSITIONS",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        145245,
+        172110
+      ],
+      "word_count": 4246,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-013",
+      "title": "CHAPTER X.  BACH’S MANUSCRIPTS",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        172111,
+        176997
+      ],
+      "word_count": 847,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-014",
+      "title": "CHAPTER XI. THE GENIUS OF BACH",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        176998,
+        184368
+      ],
+      "word_count": 1250,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-015",
+      "title": "APPENDIX I. CHRONOLOGICAL CATALOGUE OF BACH’S COMPOSITIONS",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        184369,
+        196371
+      ],
+      "word_count": 1908,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-016",
+      "title": "APPENDIX II. THE CHURCH CANTATAS ARRANGED CHRONOLOGICALLY",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        196372,
+        236243
+      ],
+      "word_count": 6688,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-017",
+      "title": "APPENDIX III.  THE BACHGESELLSCHAFT EDITIONS OF BACH’S WORKS",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        236244,
+        324339
+      ],
+      "word_count": 12472,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-018",
+      "title": "Part V. no. 5: Oboe d’amore).",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        324340,
+        339459
+      ],
+      "word_count": 1976,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-019",
+      "title": "APPENDIX IV. BIBLIOGRAPHY OF BACH LITERATURE",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        339460,
+        350003
+      ],
+      "word_count": 1460,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-020",
+      "title": "APPENDIX V.  A COLLATION OF THE NOVELLO AND PETERS EDITIONS OF THE ORGAN",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        350004,
+        365480
+      ],
+      "word_count": 2426,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-021",
+      "title": "Book 244: the figured Choral (Herr Christ, der ein’ge Gottes-Sohn)",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        365481,
+        365657
+      ],
+      "word_count": 29,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-022",
+      "title": "Book 246: the Variant texts on pp. 86-103 (excepting the B version",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        365658,
+        365780
+      ],
+      "word_count": 18,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-023",
+      "title": "Book 2067: the Choral Preludes on pp. 39 (Auf meinen lichen Gott),",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        365781,
+        366097
+      ],
+      "word_count": 51,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-024",
+      "title": "APPENDIX VI. GENEALOGY OF THE FAMILY OF BACH",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        366098,
+        471065
+      ],
+      "word_count": 17094,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    },
+    {
+      "chapter_id": "sec-025",
+      "title": "Appendix II. of B.G. XXXVI.",
+      "subtitle": null,
+      "kind": "chapter",
+      "char_range": [
+        471066,
+        479262
+      ],
+      "word_count": 1422,
+      "micro_status": "pending",
+      "block_count": null,
+      "qa_status": "pending",
+      "confidence": 0.92
+    }
+  ],
+  "updated_at": "2026-08-31T06:37:28+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "chapter_id": "ch-004",
+  "title": "BEETHOVEN. By F. J. CROWEST.",
+  "block_start": 14,
+  "block_end": 15,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "BEETHOVEN. By F. J. CROWEST.",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[_Eighth Edition._",
+      "spans": [
+        {
+          "start": 1,
+          "end": 18,
+          "style": "em",
+          "text": "_Eighth Edition._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "BEETHOVEN. By F. J. CROWEST.\n\n[_Eighth Edition._",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 14,
+    "text": "BEETHOVEN. By F. J. CROWEST."
+  },
+  "word_count": 8,
+  "block_count": 2
+}

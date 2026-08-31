@@ -1,0 +1,1296 @@
+{
+  "package_version": "1",
+  "edition_format": "ref/1",
+  "work_id": "bach--abdy_williams",
+  "title": "Bach (Abdy Williams)",
+  "language": "en",
+  "pipeline": "same_language",
+  "edition_hash": "85a1f1125ef0be0ebe175858d68c132d44a9ca7e16ecd84e594ae56c6ab2ccf4",
+  "content_hash": "87bab6e20b837a2cd01cf170cd6fe856512758d6efd786b3665aed3720aab2c6",
+  "content_kind": "mixed",
+  "source_family": "gutenberg",
+  "block_count": 1465,
+  "chapter_count": 115,
+  "chapters": [
+    {
+      "chapter_id": "ch-000-front",
+      "title": "Front matter",
+      "block_range": [
+        0,
+        4
+      ],
+      "word_count": 140,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-001",
+      "title": "C. F. ABDY WILLIAMS",
+      "block_range": [
+        5,
+        7
+      ],
+      "word_count": 7,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-002",
+      "title": "EDITED BY FREDERICK J. CROWEST.",
+      "block_range": [
+        8,
+        11
+      ],
+      "word_count": 12,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-003",
+      "title": "FREDERICK J. CROWEST _LIST OF VOLUMES._ BACH. By C. F. ABDY WILLIAMS.",
+      "block_range": [
+        12,
+        13
+      ],
+      "word_count": 16,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-004",
+      "title": "BEETHOVEN. By F. J. CROWEST.",
+      "block_range": [
+        14,
+        15
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-005",
+      "title": "BRAHMS. By J. LAWRENCE ERB.",
+      "block_range": [
+        16,
+        17
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-006",
+      "title": "CHOPIN. By J. CUTHBERT HADDEN.",
+      "block_range": [
+        18,
+        19
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-007",
+      "title": "HANDEL. By C. F. ABDY WILLIAMS.",
+      "block_range": [
+        20,
+        21
+      ],
+      "word_count": 9,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-008",
+      "title": "HAYDN. By J. CUTHBERT HADDEN.",
+      "block_range": [
+        22,
+        23
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-009",
+      "title": "MENDELSSOHN. By STEPHEN S. STRATTON.",
+      "block_range": [
+        24,
+        25
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-010",
+      "title": "MOZART. By E. J. BREAKSPEARE.",
+      "block_range": [
+        26,
+        27
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-011",
+      "title": "SCHUBERT. By E. DUNCAN.",
+      "block_range": [
+        28,
+        29
+      ],
+      "word_count": 7,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-012",
+      "title": "SCHUMANN By ANNIE W. PATTERSON.",
+      "block_range": [
+        30,
+        31
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-013",
+      "title": "TCHAIKOVSKY. By EDWIN EVANS.",
+      "block_range": [
+        32,
+        33
+      ],
+      "word_count": 7,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-014",
+      "title": "WAGNER. By C. A. LIDGEY.",
+      "block_range": [
+        34,
+        35
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-015",
+      "title": "_All rights reserved_",
+      "block_range": [
+        36,
+        41
+      ],
+      "word_count": 26,
+      "block_count": 6,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-016",
+      "title": "C. F. ABDY WILLIAMS",
+      "block_range": [
+        42,
+        48
+      ],
+      "word_count": 37,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-017",
+      "title": "Preface",
+      "block_range": [
+        49,
+        54
+      ],
+      "word_count": 390,
+      "block_count": 6,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-018",
+      "title": "C. F. ABDY WILLIAMS. BRADFIELD,",
+      "block_range": [
+        55,
+        56
+      ],
+      "word_count": 7,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-019",
+      "title": "CHAPTER III",
+      "block_range": [
+        57,
+        61
+      ],
+      "word_count": 982,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-020",
+      "title": "JOHANN NICOLAUS, 1653-1682.",
+      "block_range": [
+        62,
+        64
+      ],
+      "word_count": 17,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-021",
+      "title": "JOH. CHRISTOPH, 1645-1694.",
+      "block_range": [
+        65,
+        72
+      ],
+      "word_count": 52,
+      "block_count": 8,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-022",
+      "title": "20. JOH. NICOLAUS, 1682-174--.",
+      "block_range": [
+        73,
+        75
+      ],
+      "word_count": 18,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-023",
+      "title": "23. JOH. GEORG, 16-----17----.",
+      "block_range": [
+        76,
+        78
+      ],
+      "word_count": 19,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-024",
+      "title": "JOHANN SEBASTIAN, 1685-1750.",
+      "block_range": [
+        79,
+        83
+      ],
+      "word_count": 32,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-025",
+      "title": "FRIEDRICH ... 32. JOH. MICHAEL ...",
+      "block_range": [
+        84,
+        88
+      ],
+      "word_count": 35,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-026",
+      "title": "36. JOH. GÜNTHER ...",
+      "block_range": [
+        89,
+        93
+      ],
+      "word_count": 27,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-027",
+      "title": "40. WILHELM HIERONYMUS, 17 ...",
+      "block_range": [
+        94,
+        96
+      ],
+      "word_count": 20,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-028",
+      "title": "HEINRICH ...",
+      "block_range": [
+        97,
+        184
+      ],
+      "word_count": 3963,
+      "block_count": 88,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-029",
+      "title": "THE LORD’S PRAYER.",
+      "block_range": [
+        185,
+        186
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-030",
+      "title": "THE CREED.",
+      "block_range": [
+        187,
+        188
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-031",
+      "title": "EASTER SONG.",
+      "block_range": [
+        189,
+        190
+      ],
+      "word_count": 6,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-032",
+      "title": "BAPTISM SONG.",
+      "block_range": [
+        191,
+        192
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-033",
+      "title": "THE TEN COMMANDMENTS.",
+      "block_range": [
+        193,
+        194
+      ],
+      "word_count": 8,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-034",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        195,
+        201
+      ],
+      "word_count": 115,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-035",
+      "title": "Chapter II",
+      "block_range": [
+        202,
+        231
+      ],
+      "word_count": 1716,
+      "block_count": 30,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-036",
+      "title": "OBERWERK (GREAT).",
+      "block_range": [
+        232,
+        249
+      ],
+      "word_count": 703,
+      "block_count": 18,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-037",
+      "title": "DER SUPERINTEND.",
+      "block_range": [
+        250,
+        258
+      ],
+      "word_count": 208,
+      "block_count": 9,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-038",
+      "title": "RESOLVITUR.",
+      "block_range": [
+        259,
+        262
+      ],
+      "word_count": 77,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-039",
+      "title": "THE CONSISTORY.",
+      "block_range": [
+        263,
+        271
+      ],
+      "word_count": 350,
+      "block_count": 9,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-040",
+      "title": "THE CONSISTORY.",
+      "block_range": [
+        272,
+        279
+      ],
+      "word_count": 221,
+      "block_count": 8,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-041",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        280,
+        296
+      ],
+      "word_count": 279,
+      "block_count": 17,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-042",
+      "title": "Chapter III",
+      "block_range": [
+        297,
+        350
+      ],
+      "word_count": 3683,
+      "block_count": 54,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-043",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        351,
+        359
+      ],
+      "word_count": 155,
+      "block_count": 9,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-044",
+      "title": "Chapter IV",
+      "block_range": [
+        360,
+        404
+      ],
+      "word_count": 2859,
+      "block_count": 45,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-045",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        405,
+        413
+      ],
+      "word_count": 91,
+      "block_count": 9,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-046",
+      "title": "Chapter V",
+      "block_range": [
+        414,
+        491
+      ],
+      "word_count": 4807,
+      "block_count": 78,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-047",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        492,
+        501
+      ],
+      "word_count": 180,
+      "block_count": 10,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-048",
+      "title": "Chapter VI",
+      "block_range": [
+        502,
+        523
+      ],
+      "word_count": 1955,
+      "block_count": 22,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-049",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        524,
+        526
+      ],
+      "word_count": 108,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-050",
+      "title": "Chapter VII",
+      "block_range": [
+        527,
+        552
+      ],
+      "word_count": 2002,
+      "block_count": 26,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-051",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        553,
+        559
+      ],
+      "word_count": 119,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-052",
+      "title": "Chapter VIII",
+      "block_range": [
+        560,
+        609
+      ],
+      "word_count": 2321,
+      "block_count": 50,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-053",
+      "title": "[Music: “WER NUR DEN LIEBEN GOTT LÄSST WALTEN.” _From the Leipziger Gesangbuch. As sung._",
+      "block_range": [
+        610,
+        611
+      ],
+      "word_count": 27,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-054",
+      "title": "[Music: BACH’S METHOD OF ACCOMPANYING WHEN AT ARNSTADT. _Peters 244, Variante zu No. 52._",
+      "block_range": [
+        612,
+        641
+      ],
+      "word_count": 1192,
+      "block_count": 30,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-055",
+      "title": "[Music: FROM THE CANTATA “ES IST NICHTS GESUNDES AN MEINEM LEIBE.” NO.",
+      "block_range": [
+        642,
+        643
+      ],
+      "word_count": 13,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-056",
+      "title": "_Bars 14 to 17._",
+      "block_range": [
+        644,
+        657
+      ],
+      "word_count": 765,
+      "block_count": 14,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-057",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        658,
+        666
+      ],
+      "word_count": 123,
+      "block_count": 9,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-058",
+      "title": "Chapter IX",
+      "block_range": [
+        667,
+        693
+      ],
+      "word_count": 1746,
+      "block_count": 27,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-059",
+      "title": "part in high tenor for the Evangelist. Two violins, four violas and bass always accompany him. The hymns are directed only to have their melodies sung, the remaining parts being played by the strings.",
+      "block_range": [
+        694,
+        737
+      ],
+      "word_count": 2037,
+      "block_count": 44,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-060",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        738,
+        741
+      ],
+      "word_count": 36,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-061",
+      "title": "Chapter X",
+      "block_range": [
+        742,
+        788
+      ],
+      "word_count": 3164,
+      "block_count": 47,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-062",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        789,
+        798
+      ],
+      "word_count": 72,
+      "block_count": 10,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-063",
+      "title": "Chapter XI",
+      "block_range": [
+        799,
+        839
+      ],
+      "word_count": 1950,
+      "block_count": 41,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-064",
+      "title": "FOOTNOTES: [75] P. 144.",
+      "block_range": [
+        840,
+        841
+      ],
+      "word_count": 23,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-065",
+      "title": "Chapter XII",
+      "block_range": [
+        842,
+        877
+      ],
+      "word_count": 1570,
+      "block_count": 36,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-066",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        878,
+        881
+      ],
+      "word_count": 187,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-067",
+      "title": "Chapter XIII",
+      "block_range": [
+        882,
+        913
+      ],
+      "word_count": 2025,
+      "block_count": 32,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-068",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        914,
+        920
+      ],
+      "word_count": 121,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-069",
+      "title": "Chapter XIV",
+      "block_range": [
+        921,
+        933
+      ],
+      "word_count": 725,
+      "block_count": 13,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-070",
+      "title": "“NOTICE OF THE MUSICAL CONCERTS AT LEIPSIC.”",
+      "block_range": [
+        934,
+        955
+      ],
+      "word_count": 1136,
+      "block_count": 22,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-071",
+      "title": "_Mass in B minor._ „       _F._",
+      "block_range": [
+        956,
+        961
+      ],
+      "word_count": 116,
+      "block_count": 6,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-072",
+      "title": "CHURCH CANTATAS _The numbers refer to the Bachgesellschaft Edition._",
+      "block_range": [
+        962,
+        1169
+      ],
+      "word_count": 3117,
+      "block_count": 208,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-073",
+      "title": "FUNERAL ODE",
+      "block_range": [
+        1170,
+        1181
+      ],
+      "word_count": 185,
+      "block_count": 12,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-074",
+      "title": "SECULAR CANTATAS",
+      "block_range": [
+        1182,
+        1183
+      ],
+      "word_count": 75,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-075",
+      "title": "_Was mir behagt, ist nur die muntre Jagd._",
+      "block_range": [
+        1184,
+        1188
+      ],
+      "word_count": 51,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-076",
+      "title": "_Mit Gnaden bekröne der Himmel die Zeiten._",
+      "block_range": [
+        1189,
+        1195
+      ],
+      "word_count": 141,
+      "block_count": 7,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-077",
+      "title": "WORKS KNOWN TO BE LOST",
+      "block_range": [
+        1196,
+        1203
+      ],
+      "word_count": 222,
+      "block_count": 8,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-078",
+      "title": "_Preludes and Fugues (241)._ _In C._",
+      "block_range": [
+        1204,
+        1205
+      ],
+      "word_count": 32,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-079",
+      "title": "_In A._",
+      "block_range": [
+        1206,
+        1207
+      ],
+      "word_count": 51,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-080",
+      "title": "_Prelude and Fugue in C (241)._ _A minor._ _E minor._",
+      "block_range": [
+        1208,
+        1213
+      ],
+      "word_count": 144,
+      "block_count": 6,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-081",
+      "title": "_In G minor._ _Fantasia and Fugue (242) in C minor._",
+      "block_range": [
+        1214,
+        1216
+      ],
+      "word_count": 117,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-082",
+      "title": "_Prelude and double Fugue (242) in A minor._ _Prelude and Fugue (242) in E minor._ _Prelude and Fugue (243) in C major._ _In G._",
+      "block_range": [
+        1217,
+        1218
+      ],
+      "word_count": 70,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-083",
+      "title": "_Toccata and Fugue in D minor (243)._",
+      "block_range": [
+        1219,
+        1221
+      ],
+      "word_count": 60,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-084",
+      "title": "_In G minor._",
+      "block_range": [
+        1222,
+        1226
+      ],
+      "word_count": 96,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-085",
+      "title": "_Prelude in A minor (243)._ _Fifty-six short Chorale-preludes (244)._ _Three sets of Chorale Variations called “Partite” (244)._",
+      "block_range": [
+        1227,
+        1228
+      ],
+      "word_count": 36,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-086",
+      "title": "_Seven Chorale-preludes (244)._",
+      "block_range": [
+        1229,
+        1232
+      ],
+      "word_count": 118,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-087",
+      "title": "_In G “pro organo pleno” (247)._",
+      "block_range": [
+        1233,
+        1236
+      ],
+      "word_count": 48,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-088",
+      "title": "_Fugue in G minor (247)._",
+      "block_range": [
+        1237,
+        1238
+      ],
+      "word_count": 37,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-089",
+      "title": "_Fugue in G (2067)._",
+      "block_range": [
+        1239,
+        1240
+      ],
+      "word_count": 38,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-090",
+      "title": "_Fugue in G (2067)._ _Fugue in D (2067)._",
+      "block_range": [
+        1241,
+        1242
+      ],
+      "word_count": 18,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-091",
+      "title": "_Trio for two manuals and pedal in C minor (2067)._ _Aria in F for two manuals and pedal (2067)._ _Eleven Chorale-preludes (2067)._ ORCHESTRA",
+      "block_range": [
+        1243,
+        1257
+      ],
+      "word_count": 284,
+      "block_count": 15,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-092",
+      "title": "_Prelude and Fugue in E flat (214)._ _Fugue in B minor (214)._ _Suites in A minor (214)._ _In E flat._ _In G._ _Preludio con Fughetta in F (214)._ _In G._ _Prelude in G (214)._ _The adagio of violin solo sonata in C arranged for clavier (214)._ _Chromatic Fantasia and Fugue in D minor (207)._",
+      "block_range": [
+        1258,
+        1262
+      ],
+      "word_count": 128,
+      "block_count": 5,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-093",
+      "title": "_Fantasia and Fugue in A minor (208)._",
+      "block_range": [
+        1263,
+        1264
+      ],
+      "word_count": 27,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-094",
+      "title": "_In D._",
+      "block_range": [
+        1265,
+        1272
+      ],
+      "word_count": 168,
+      "block_count": 8,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-095",
+      "title": "_Six little Preludes (200)._ _Little two-part Fugue in C minor (200)._ _Fifteen two-part Inventions (201)._ _Fifteen three-part Inventions; also called Symphonies (202)._",
+      "block_range": [
+        1273,
+        1274
+      ],
+      "word_count": 41,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-096",
+      "title": "_Six large Suites called the English Suites (203)._",
+      "block_range": [
+        1275,
+        1276
+      ],
+      "word_count": 23,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-097",
+      "title": "_Prelude and Fugue in A minor (211)._",
+      "block_range": [
+        1277,
+        1278
+      ],
+      "word_count": 21,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-098",
+      "title": "_Prelude and Fughetta in D minor (200)._ _     „           „      E minor (200)._ _Prelude and Fugue in A minor (200)._ _Two Fantasias in C minor (207, 212)._ _Two Fugues in C (200)._ _Two Fugues in D minor (212)._ _Fugues in A major (212)._ _   „      E minor._ _   „      A minor._",
+      "block_range": [
+        1279,
+        1280
+      ],
+      "word_count": 85,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-099",
+      "title": "_Part of a Suite in F minor (212)._ _Unfinished Fugue in C minor (212)._",
+      "block_range": [
+        1281,
+        1282
+      ],
+      "word_count": 43,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-100",
+      "title": "_Fantasia in A minor (215)._ _Air varied in G minor (215)._",
+      "block_range": [
+        1283,
+        1284
+      ],
+      "word_count": 38,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-101",
+      "title": "_Fantasia in G minor (215)._",
+      "block_range": [
+        1285,
+        1288
+      ],
+      "word_count": 47,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-102",
+      "title": "_Two Fugues in A (216)._ _Three Minuets (216)._ _Minuet in G minor (1959)._ _Adagio and Presto in D minor (1959)._ _Prelude in E flat (1959)._",
+      "block_range": [
+        1289,
+        1291
+      ],
+      "word_count": 58,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-103",
+      "title": "_Sarabande with 16 Partite._ _Passacaille in D minor._ _Suite in B flat._",
+      "block_range": [
+        1292,
+        1293
+      ],
+      "word_count": 16,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-104",
+      "title": "_Courante_  } _in A._",
+      "block_range": [
+        1294,
+        1295
+      ],
+      "word_count": 23,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-105",
+      "title": "_Fantasia and Fugue in D minor._ _Fugue in G minor._ _Scherzo in D minor._ _Andante in G minor._",
+      "block_range": [
+        1296,
+        1298
+      ],
+      "word_count": 39,
+      "block_count": 3,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-106",
+      "title": "_In C._ _„  E minor._ _„  G._ _„  D._ _„  (a) E minor._ _„  (b) E minor._",
+      "block_range": [
+        1299,
+        1300
+      ],
+      "word_count": 24,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-107",
+      "title": "_In A._ _„  G._",
+      "block_range": [
+        1301,
+        1302
+      ],
+      "word_count": 24,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-108",
+      "title": "_Prelude and Fugue in A minor._ _Concerto and Fugue in C minor._ _Prelude in B minor._",
+      "block_range": [
+        1303,
+        1304
+      ],
+      "word_count": 30,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-109",
+      "title": "_Toccata quasi fantasia con fuga, A major._ _Partie, A major._ _Allemande in C minor._ _Gigue, F minor._ _Allemande and Courante, A major._ _Allemande in A minor._ _Two Fantasias and Fughettas._ _An Unfinished Fugue in E minor._ KEYED INSTRUMENTS WITH ACCOMPANIMENT.",
+      "block_range": [
+        1305,
+        1314
+      ],
+      "word_count": 307,
+      "block_count": 10,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-110",
+      "title": "FOR OTHER INSTRUMENTS.",
+      "block_range": [
+        1315,
+        1318
+      ],
+      "word_count": 150,
+      "block_count": 4,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-111",
+      "title": "_Six Sonatas for (232 and 233) Violin and Figured Bass._ _Six Sonatas for Flute or Violin and Clavier (234 and 235)._ _Suite in A for Violin and Clavier (236)._ _Sonata in E minor for Violin and Clavier (236)._ _Fugue in G minor for Violin and Clavier (236)._ _Sonata in C for two Violins and Clavier (237)._ _Sonata in G for Flute, Violin and Clavier (237)._",
+      "block_range": [
+        1319,
+        1320
+      ],
+      "word_count": 94,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-112",
+      "title": "_Six Sonatas or Suites for the Violoncello (238)._ _Three Sonatas for the Viola da Gamba and Clavier (239)._",
+      "block_range": [
+        1321,
+        1322
+      ],
+      "word_count": 119,
+      "block_count": 2,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-113",
+      "title": "FOOTNOTES:",
+      "block_range": [
+        1323,
+        1422
+      ],
+      "word_count": 2956,
+      "block_count": 100,
+      "qa_status": "pending"
+    },
+    {
+      "chapter_id": "ch-114",
+      "title": "part contained 150 “concentus selectissimas” of from five to ten parts. Published 1603 and 1621 by Bodenschatz, Cantor of Schulpforta, and Pastor at Rehausen. A complete catalogue is given in Groves’",
+      "block_range": [
+        1423,
+        1464
+      ],
+      "word_count": 2381,
+      "block_count": 42,
+      "qa_status": "pending"
+    }
+  ],
+  "quotation_profile": {
+    "footnote_style": "bracket",
+    "footnote_count": 183,
+    "bracket_notes": 194,
+    "paren_cites": 247,
+    "paren_quotes": 3,
+    "paren_asides": 38,
+    "inline_quotes": 449,
+    "italic_spans": 570,
+    "list_markers": 4,
+    "detector": "rule"
+  },
+  "ref_parser_version": "1.7",
+  "created_at": "2026-08-29T17:38:34+00:00",
+  "updated_at": "2026-08-29T17:38:34+00:00"
+}

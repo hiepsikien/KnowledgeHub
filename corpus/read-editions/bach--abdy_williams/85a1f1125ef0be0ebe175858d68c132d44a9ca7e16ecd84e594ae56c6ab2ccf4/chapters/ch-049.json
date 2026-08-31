@@ -1,0 +1,88 @@
+{
+  "chapter_id": "ch-049",
+  "title": "FOOTNOTES:",
+  "block_start": 524,
+  "block_end": 526,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FOOTNOTES:",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[48] A rough estimate of this difference may be made thus: The Council paid 60 thalers = £9 a year for a “dwelling” for Bach during the alterations to the Thomas School. Such a “dwelling” or “flat” would now cost about £60 a year. An income of £100 in those days would therefore represent the purchasing power of about £630 now: not a large sum on which to give nineteen children a first-class education, and send two to the university.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[48]"
+        },
+        {
+          "start": 105,
+          "end": 115,
+          "style": "quote",
+          "text": "“dwelling”"
+        },
+        {
+          "start": 177,
+          "end": 187,
+          "style": "quote",
+          "text": "“dwelling”"
+        },
+        {
+          "start": 191,
+          "end": 197,
+          "style": "quote",
+          "text": "“flat”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[49] For his installation Bach composed a cantata “Thomana sass annoch betrübt”--“St Thomas School was still in grief.” From the _Leipsic Chronicle_, 1734, quoted in _Centralblatt_, 1884.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[49]"
+        },
+        {
+          "start": 50,
+          "end": 79,
+          "style": "quote",
+          "text": "“Thomana sass annoch betrübt”"
+        },
+        {
+          "start": 81,
+          "end": 119,
+          "style": "quote",
+          "text": "“St Thomas School was still in grief.”"
+        },
+        {
+          "start": 129,
+          "end": 148,
+          "style": "em",
+          "text": "_Leipsic Chronicle_"
+        },
+        {
+          "start": 166,
+          "end": 180,
+          "style": "em",
+          "text": "_Centralblatt_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FOOTNOTES:\n\n[48] A rough estimate of this difference may be made thus: The Council paid 60 thalers = £9 a year for a “dwelling” for Bach during the alterations to the Thomas School. Such a “dwelling” or “flat” would now cost about £60 a year. An income of £100 in those days would therefore represent the purchasing power of about £630 now: not a large sum on which to give nineteen children a first-class education, and send two to the university.\n\n[49] For his installation Bach composed a cantata “Thomana sass annoch betrübt”--“St Thomas School was still in grief.” From the _Leipsic Chronicle_, 1734, quoted in _Centralblatt_, 1884.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 524,
+    "text": "FOOTNOTES:"
+  },
+  "word_count": 108,
+  "block_count": 3
+}

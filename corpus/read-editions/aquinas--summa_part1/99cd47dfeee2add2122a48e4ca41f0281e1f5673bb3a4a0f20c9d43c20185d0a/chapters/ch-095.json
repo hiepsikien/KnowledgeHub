@@ -1,0 +1,33 @@
+{
+  "chapter_id": "ch-095",
+  "title": "TREATISE ON THE CREATION (QQ. 44-49)",
+  "block_start": 3335,
+  "block_end": 3336,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "TREATISE ON THE CREATION (QQ. 44-49)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 25,
+          "end": 36,
+          "style": "paren_cite",
+          "text": "(QQ. 44-49)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "TREATISE ON THE CREATION (QQ. 44-49)\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 3335,
+    "text": "TREATISE ON THE CREATION (QQ. 44-49)"
+  },
+  "word_count": 6,
+  "block_count": 2
+}

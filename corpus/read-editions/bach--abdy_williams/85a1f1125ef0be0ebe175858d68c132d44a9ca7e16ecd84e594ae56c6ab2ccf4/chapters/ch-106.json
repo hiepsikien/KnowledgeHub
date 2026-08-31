@@ -1,0 +1,72 @@
+{
+  "chapter_id": "ch-106",
+  "title": "_In C._ _„  E minor._ _„  G._ _„  D._ _„  (a) E minor._ _„  (b) E minor._",
+  "block_start": 1299,
+  "block_end": 1300,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_In C._ _„  E minor._ _„  G._ _„  D._ _„  (a) E minor._ _„  (b) E minor._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 7,
+          "style": "em",
+          "text": "_In C._"
+        },
+        {
+          "start": 8,
+          "end": 21,
+          "style": "em",
+          "text": "_„  E minor._"
+        },
+        {
+          "start": 22,
+          "end": 29,
+          "style": "em",
+          "text": "_„  G._"
+        },
+        {
+          "start": 30,
+          "end": 37,
+          "style": "em",
+          "text": "_„  D._"
+        },
+        {
+          "start": 38,
+          "end": 55,
+          "style": "em",
+          "text": "_„  (a) E minor._"
+        },
+        {
+          "start": 56,
+          "end": 73,
+          "style": "em",
+          "text": "_„  (b) E minor._"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "_Chaconnes_--",
+      "spans": [
+        {
+          "start": 0,
+          "end": 11,
+          "style": "em",
+          "text": "_Chaconnes_"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_In C._ _„  E minor._ _„  G._ _„  D._ _„  (a) E minor._ _„  (b) E minor._\n\n> _Chaconnes_--",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1299,
+    "text": "_In C._ _„  E minor._ _„  G._ _„  D._ _„  (a) E minor._ _„  (b) E minor._"
+  },
+  "word_count": 24,
+  "block_count": 2
+}

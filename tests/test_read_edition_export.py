@@ -14,7 +14,7 @@ from knowledgehub.edition.read_edition import (
 )
 from knowledgehub.edition.read_edition_steps import parse_micro_chapter, run_macro_step
 from knowledgehub.edition.ref import build_read_edition
-from knowledgehub.read_edition_service import edition_for_publish
+from knowledgehub.read_edition_service import edition_for_publish, head_tail_preview
 from knowledgehub.server import create_app
 from test_catalog import _mini_corpus
 
@@ -116,7 +116,10 @@ def test_read_edition_api(client):
 
     preview = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}")
     assert preview.status_code == 200
-    assert preview.json().get("micro_status") == "pending"
+    pending = preview.json()
+    assert pending.get("micro_status") == "pending"
+    assert "source_preview" in pending
+    assert "source_preview_truncated" in pending
 
     parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
     assert parsed.status_code == 200
@@ -199,3 +202,25 @@ def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload.get("_normalize", {}).get("read_edition")
+
+
+def test_head_tail_preview_short_text_is_full():
+    body = "abc" * 100
+    out = head_tail_preview(body)
+    assert out["source_preview_truncated"] is False
+    assert out["source_preview"] == body
+    assert out["source_preview_head"] == body
+    assert out["source_preview_tail"] == ""
+    assert out["source_preview_omitted"] == 0
+
+
+def test_head_tail_preview_long_text_keeps_head_and_tail():
+    body = ("H" * 2000) + ("M" * 1500) + ("T" * 2000)
+    out = head_tail_preview(body)
+    assert out["source_preview_truncated"] is True
+    assert out["source_preview_head"] == "H" * 2000
+    assert out["source_preview_tail"] == "T" * 2000
+    assert out["source_preview_omitted"] == 1500
+    assert "M" not in out["source_preview_head"]
+    assert "M" not in out["source_preview_tail"]
+    assert "[… omitted 1500 chars …]" in out["source_preview"]

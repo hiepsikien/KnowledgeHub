@@ -1,0 +1,754 @@
+{
+  "chapter_id": "ch-023",
+  "title": "THE ETERNITY OF GOD (In Six Articles)",
+  "block_start": 608,
+  "block_end": 658,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "THE ETERNITY OF GOD (In Six Articles)",
+      "level": 2,
+      "spans": [
+        {
+          "start": 20,
+          "end": 37,
+          "style": "paren_cite",
+          "text": "(In Six Articles)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We must now consider the eternity of God, concerning which arise six points of inquiry:"
+    },
+    {
+      "type": "list_item",
+      "text": "(1) What is eternity?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(1)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(2) Whether God is eternal?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(2)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(3) Whether to be eternal belongs to God alone?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(3)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(4) Whether eternity differs from time?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(4)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(5) The difference of aeviternity and of time.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(5)"
+        }
+      ]
+    },
+    {
+      "type": "list_item",
+      "text": "(6) Whether there is only one aeviternity, as there is one time, and one eternity?",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "list_marker",
+          "text": "(6)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "FIRST ARTICLE [I, Q. 10, Art. 1]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 10, Art. 1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether This Is a Good Definition of Eternity, \"The Simultaneously- Whole and Perfect Possession of Interminable Life\"?",
+      "spans": [
+        {
+          "start": 47,
+          "end": 118,
+          "style": "quote",
+          "text": "\"The Simultaneously- Whole and Perfect Possession of Interminable Life\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It seems that the definition of eternity given by Boethius (De Consol. v) is not a good one: \"Eternity is the simultaneously-whole and perfect possession of interminable life.\" For the word \"interminable\" is a negative one. But negation only belongs to what is defective, and this does not belong to eternity. Therefore in the definition of eternity the word \"interminable\" ought not to be found.",
+      "spans": [
+        {
+          "start": 72,
+          "end": 86,
+          "style": "paren_cite",
+          "text": "(De Consol. v)"
+        },
+        {
+          "start": 106,
+          "end": 189,
+          "style": "quote",
+          "text": "\"Eternity is the simultaneously-whole and perfect possession of interminable life.\""
+        },
+        {
+          "start": 203,
+          "end": 217,
+          "style": "quote",
+          "text": "\"interminable\""
+        },
+        {
+          "start": 372,
+          "end": 386,
+          "style": "quote",
+          "text": "\"interminable\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, eternity signifies a certain kind of duration. But duration regards existence rather than life. Therefore the word \"life\" ought not to come into the definition of eternity; but rather the word \"existence.\"",
+      "spans": [
+        {
+          "start": 132,
+          "end": 138,
+          "style": "quote",
+          "text": "\"life\""
+        },
+        {
+          "start": 210,
+          "end": 222,
+          "style": "quote",
+          "text": "\"existence.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, a whole is what has parts. But this is alien to eternity which is simple. Therefore it is improperly said to be \"whole.\"",
+      "spans": [
+        {
+          "start": 129,
+          "end": 137,
+          "style": "quote",
+          "text": "\"whole.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Many days cannot occur together, nor can many times exist all at once. But in eternity, days and times are in the plural, for it is said, \"His going forth is from the beginning, from the days of eternity\" (Micah 5:2); and also it is said, \"According to the revelation of the mystery hidden from eternity\" (Rom. 16:25). Therefore eternity is not omni-simultaneous.",
+      "spans": [
+        {
+          "start": 146,
+          "end": 212,
+          "style": "quote",
+          "text": "\"His going forth is from the beginning, from the days of eternity\""
+        },
+        {
+          "start": 213,
+          "end": 224,
+          "style": "paren_cite",
+          "text": "(Micah 5:2)"
+        },
+        {
+          "start": 247,
+          "end": 312,
+          "style": "quote",
+          "text": "\"According to the revelation of the mystery hidden from eternity\""
+        },
+        {
+          "start": 313,
+          "end": 325,
+          "style": "paren_cite",
+          "text": "(Rom. 16:25)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 5: Further, the whole and the perfect are the same thing. Supposing, therefore, that it is \"whole,\" it is superfluously described as \"perfect.\"",
+      "spans": [
+        {
+          "start": 96,
+          "end": 104,
+          "style": "quote",
+          "text": "\"whole,\""
+        },
+        {
+          "start": 138,
+          "end": 148,
+          "style": "quote",
+          "text": "\"perfect.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 6: Further, duration does not imply \"possession.\" But eternity is a kind of duration. Therefore eternity is not possession.",
+      "spans": [
+        {
+          "start": 41,
+          "end": 54,
+          "style": "quote",
+          "text": "\"possession.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ As we attain to the knowledge of simple things by way of compound things, so must we reach to the knowledge of eternity by means of time, which is nothing but the numbering of movement by _before_ and _after._ For since succession occurs in every movement, and one part comes after another, the fact that we reckon before and after in movement, makes us apprehend time, which is nothing else but the measure of before and after in movement. Now in a thing bereft of movement, which is always the same, there is no before or after. As therefore the idea of time consists in the numbering of before and after in movement; so likewise in the apprehension of the uniformity of what is outside of movement, consists the idea of eternity.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 205,
+          "end": 213,
+          "style": "em",
+          "text": "_before_"
+        },
+        {
+          "start": 218,
+          "end": 226,
+          "style": "em",
+          "text": "_after._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Further, those things are said to be measured by time which have a beginning and an end in time, because in everything which is moved there is a beginning, and there is an end. But as whatever is wholly immutable can have no succession, so it has no beginning, and no end."
+    },
+    {
+      "type": "paragraph",
+      "text": "Thus eternity is known from two sources: first, because what is eternal is interminable--that is, has no beginning nor end (that is, no term either way); secondly, because eternity has no succession, being simultaneously whole.",
+      "spans": [
+        {
+          "start": 123,
+          "end": 152,
+          "style": "paren_aside",
+          "text": "(that is, no term either way)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: Simple things are usually defined by way of negation; as \"a point is that which has no parts.\" Yet this is not to be taken as if the negation belonged to their essence, but because our intellect which first apprehends compound things, cannot attain to the knowledge of simple things except by removing the opposite.",
+      "spans": [
+        {
+          "start": 71,
+          "end": 108,
+          "style": "quote",
+          "text": "\"a point is that which has no parts.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: What is truly eternal, is not only being, but also living; and life extends to operation, which is not true of being. Now the protraction of duration seems to belong to operation rather than to being; hence time is the numbering of movement."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Eternity is called whole, not because it has parts, but because it is wanting in nothing."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: As God, although incorporeal, is named in Scripture metaphorically by corporeal names, so eternity though simultaneously whole, is called by names implying time and succession."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 5: Two things are to be considered in time: time itself, which is successive; and the \"now\" of time, which is imperfect. Hence the expression \"simultaneously-whole\" is used to remove the idea of time, and the word \"perfect\" is used to exclude the \"now\" of time.",
+      "spans": [
+        {
+          "start": 97,
+          "end": 102,
+          "style": "quote",
+          "text": "\"now\""
+        },
+        {
+          "start": 153,
+          "end": 175,
+          "style": "quote",
+          "text": "\"simultaneously-whole\""
+        },
+        {
+          "start": 225,
+          "end": 234,
+          "style": "quote",
+          "text": "\"perfect\""
+        },
+        {
+          "start": 258,
+          "end": 263,
+          "style": "quote",
+          "text": "\"now\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 6: Whatever is possessed, is held firmly and quietly; therefore to designate the immutability and permanence of eternity, we use the word \"possession.\"",
+      "spans": [
+        {
+          "start": 149,
+          "end": 162,
+          "style": "quote",
+          "text": "\"possession.\""
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "SECOND ARTICLE [I, Q. 10, Art. 2]",
+      "spans": [
+        {
+          "start": 15,
+          "end": 33,
+          "style": "bracket_note",
+          "text": "[I, Q. 10, Art. 2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether God is Eternal?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It seems that God is not eternal. For nothing made can be predicated of God; for Boethius says (De Trin. iv) that, \"The now that flows away makes time, the now that stands still makes eternity;\" and Augustine says (Octog. Tri. Quaest. qu. 28) \"that God is the author of eternity.\" Therefore God is not eternal.",
+      "spans": [
+        {
+          "start": 108,
+          "end": 121,
+          "style": "paren_cite",
+          "text": "(De Trin. iv)"
+        },
+        {
+          "start": 128,
+          "end": 207,
+          "style": "quote",
+          "text": "\"The now that flows away makes time, the now that stands still makes eternity;\""
+        },
+        {
+          "start": 227,
+          "end": 255,
+          "style": "paren_cite",
+          "text": "(Octog. Tri. Quaest. qu. 28)"
+        },
+        {
+          "start": 256,
+          "end": 293,
+          "style": "quote",
+          "text": "\"that God is the author of eternity.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, what is before eternity, and after eternity, is not measured by eternity. But, as Aristotle says (De Causis), \"God is before eternity and He is after eternity\": for it is written that \"the Lord shall reign for eternity, and beyond [*Douay: 'for ever and ever']\" (Ex. 15:18). Therefore to be eternal does not belong to God.",
+      "spans": [
+        {
+          "start": 114,
+          "end": 125,
+          "style": "paren_cite",
+          "text": "(De Causis)"
+        },
+        {
+          "start": 127,
+          "end": 176,
+          "style": "quote",
+          "text": "\"God is before eternity and He is after eternity\""
+        },
+        {
+          "start": 201,
+          "end": 278,
+          "style": "quote",
+          "text": "\"the Lord shall reign for eternity, and beyond [*Douay: 'for ever and ever']\""
+        },
+        {
+          "start": 279,
+          "end": 290,
+          "style": "paren_cite",
+          "text": "(Ex. 15:18)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, eternity is a kind of measure. But to be measured belongs not to God. Therefore it does not belong to Him to be eternal."
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 4: Further, in eternity, there is no present, past or future, since it is simultaneously whole; as was said in the preceding article. But words denoting present, past and future time are applied to God in Scripture. Therefore God is not eternal."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Athanasius says in his Creed: \"The Father is eternal, the Son is eternal, the Holy Ghost is eternal.\"",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 49,
+          "end": 120,
+          "style": "quote",
+          "text": "\"The Father is eternal, the Son is eternal, the Holy Ghost is eternal.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ The idea of eternity follows immutability, as the idea of time follows movement, as appears from the preceding article. Hence, as God is supremely immutable, it supremely belongs to Him to be eternal. Nor is He eternal only; but He is His own eternity; whereas, no other being is its own duration, as no other is its own being. Now God is His own uniform being; and hence as He is His own essence, so He is His own eternity.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: The \"now\" that stands still, is said to make eternity according to our apprehension. As the apprehension of time is caused in us by the fact that we apprehend the flow of the \"now,\" so the apprehension of eternity is caused in us by our apprehending the \"now\" standing still. When Augustine says that \"God is the author of eternity,\" this is to be understood of participated eternity. For God communicates His eternity to some in the same way as He communicates His immutability.",
+      "spans": [
+        {
+          "start": 18,
+          "end": 23,
+          "style": "quote",
+          "text": "\"now\""
+        },
+        {
+          "start": 189,
+          "end": 195,
+          "style": "quote",
+          "text": "\"now,\""
+        },
+        {
+          "start": 268,
+          "end": 273,
+          "style": "quote",
+          "text": "\"now\""
+        },
+        {
+          "start": 315,
+          "end": 347,
+          "style": "quote",
+          "text": "\"God is the author of eternity,\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: From this appears the answer to the Second Objection. For God is said to be before eternity, according as it is shared by immaterial substances. Hence, also, in the same book, it is said that \"intelligence is equal to eternity.\" In the words of Exodus, \"The Lord shall reign for eternity, and beyond,\" eternity stands for age, as another rendering has it. Thus it is said that the Lord will reign beyond eternity, inasmuch as He endures beyond every age, i.e. beyond every kind of duration. For age is nothing more than the period of each thing, as is said in the book _De Coelo_ i. Or to reign beyond eternity can be taken to mean that if any other thing were conceived to exist for ever, as the movement of the heavens according to some philosophers, then God would still reign beyond, inasmuch as His reign is simultaneously whole.",
+      "spans": [
+        {
+          "start": 206,
+          "end": 242,
+          "style": "quote",
+          "text": "\"intelligence is equal to eternity.\""
+        },
+        {
+          "start": 267,
+          "end": 315,
+          "style": "quote",
+          "text": "\"The Lord shall reign for eternity, and beyond,\""
+        },
+        {
+          "start": 583,
+          "end": 593,
+          "style": "em",
+          "text": "_De Coelo_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Eternity is nothing else but God Himself. Hence God is not called eternal, as if He were in any way measured; but the idea of measurement is there taken according to the apprehension of our mind alone."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 4: Words denoting different times are applied to God, because His eternity includes all times; not as if He Himself were altered through present, past and future."
+    },
+    {
+      "type": "hr"
+    },
+    {
+      "type": "paragraph",
+      "text": "THIRD ARTICLE [I, Q. 10, Art. 3]",
+      "spans": [
+        {
+          "start": 14,
+          "end": 32,
+          "style": "bracket_note",
+          "text": "[I, Q. 10, Art. 3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Whether to Be Eternal Belongs to God Alone?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Objection 1: It seems that it does not belong to God alone to be eternal. For it is written that \"those who instruct many to justice,\" shall be \"as stars unto perpetual eternities [*Douay: 'for all eternity']\" (Dan. 12:3). Now if God alone were eternal, there could not be many eternities. Therefore God alone is not the only eternal.",
+      "spans": [
+        {
+          "start": 97,
+          "end": 134,
+          "style": "quote",
+          "text": "\"those who instruct many to justice,\""
+        },
+        {
+          "start": 144,
+          "end": 209,
+          "style": "quote",
+          "text": "\"as stars unto perpetual eternities [*Douay: 'for all eternity']\""
+        },
+        {
+          "start": 210,
+          "end": 221,
+          "style": "paren_cite",
+          "text": "(Dan. 12:3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 2: Further, it is written \"Depart, ye cursed into eternal [Douay: 'everlasting'] fire\" (Matt. 25:41). Therefore God is not the only eternal.",
+      "spans": [
+        {
+          "start": 31,
+          "end": 91,
+          "style": "quote",
+          "text": "\"Depart, ye cursed into eternal [Douay: 'everlasting'] fire\""
+        },
+        {
+          "start": 92,
+          "end": 105,
+          "style": "paren_cite",
+          "text": "(Matt. 25:41)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Obj. 3: Further, every necessary thing is eternal. But there are many necessary things; as, for instance, all principles of demonstration and all demonstrative propositions. Therefore God is not the only eternal."
+    },
+    {
+      "type": "paragraph",
+      "text": "_On the contrary,_ Jerome says (Ep. ad Damasum, xv) that \"God is the only one who has no beginning.\" Now whatever has a beginning, is not eternal. Therefore God is the only one eternal.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "em",
+          "text": "_On the contrary,_"
+        },
+        {
+          "start": 31,
+          "end": 51,
+          "style": "paren_cite",
+          "text": "(Ep. ad Damasum, xv)"
+        },
+        {
+          "start": 57,
+          "end": 100,
+          "style": "quote",
+          "text": "\"God is the only one who has no beginning.\""
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_I answer that,_ Eternity truly and properly so called is in God alone, because eternity follows on immutability; as appears from the first article. But God alone is altogether immutable, as was shown above (Q. 9, A. 1). Accordingly, however, as some receive immutability from Him, they share in His eternity. Thus some receive immutability from God in the way of never ceasing to exist; in that sense it is said of the earth, \"it standeth for ever\" (Eccl. 1:4). Again, some things are called eternal in Scripture because of the length of their duration, although they are in nature corruptible; thus (Ps. 75:5) the hills are called \"eternal\" and we read \"of the fruits of the eternal hills.\" (Deut. 33:15). Some again, share more fully than others in the nature of eternity, inasmuch as they possess unchangeableness either in being or further still in operation; like the angels, and the blessed, who enjoy the Word, because \"as regards that vision of the Word, no changing thoughts exist in the Saints,\" as Augustine says (De Trin. xv). Hence those who see God are said to have eternal life; according to that text, \"This is eternal life, that they may know Thee the only true God,\" etc. (John 17:3).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 16,
+          "style": "em",
+          "text": "_I answer that,_"
+        },
+        {
+          "start": 207,
+          "end": 219,
+          "style": "paren_cite",
+          "text": "(Q. 9, A. 1)"
+        },
+        {
+          "start": 427,
+          "end": 449,
+          "style": "quote",
+          "text": "\"it standeth for ever\""
+        },
+        {
+          "start": 450,
+          "end": 461,
+          "style": "paren_cite",
+          "text": "(Eccl. 1:4)"
+        },
+        {
+          "start": 601,
+          "end": 611,
+          "style": "paren_cite",
+          "text": "(Ps. 75:5)"
+        },
+        {
+          "start": 633,
+          "end": 642,
+          "style": "quote",
+          "text": "\"eternal\""
+        },
+        {
+          "start": 655,
+          "end": 692,
+          "style": "quote",
+          "text": "\"of the fruits of the eternal hills.\""
+        },
+        {
+          "start": 693,
+          "end": 706,
+          "style": "paren_cite",
+          "text": "(Deut. 33:15)"
+        },
+        {
+          "start": 927,
+          "end": 1006,
+          "style": "quote",
+          "text": "\"as regards that vision of the Word, no changing thoughts exist in the Saints,\""
+        },
+        {
+          "start": 1025,
+          "end": 1038,
+          "style": "paren_cite",
+          "text": "(De Trin. xv)"
+        },
+        {
+          "start": 1119,
+          "end": 1185,
+          "style": "quote",
+          "text": "\"This is eternal life, that they may know Thee the only true God,\""
+        },
+        {
+          "start": 1191,
+          "end": 1202,
+          "style": "paren_cite",
+          "text": "(John 17:3)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 1: There are said to be many eternities, accordingly as many share in eternity, by the contemplation of God."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 2: The fire of hell is called eternal, only because it never ends. Still, there is change in the pains of the lost, according to the words \"To extreme heat they will pass from snowy waters\" (Job 24:19). Hence in hell true eternity does not exist, but rather time; according to the text of the Psalm \"Their time will be for ever\" (Ps. 80:16).",
+      "spans": [
+        {
+          "start": 150,
+          "end": 200,
+          "style": "quote",
+          "text": "\"To extreme heat they will pass from snowy waters\""
+        },
+        {
+          "start": 201,
+          "end": 212,
+          "style": "paren_cite",
+          "text": "(Job 24:19)"
+        },
+        {
+          "start": 310,
+          "end": 339,
+          "style": "quote",
+          "text": "\"Their time will be for ever\""
+        },
+        {
+          "start": 340,
+          "end": 351,
+          "style": "paren_cite",
+          "text": "(Ps. 80:16)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Reply Obj. 3: Necessary means a certain mode of truth; and truth, according to the Philosopher (Metaph. vi), is in the mind. Therefore in this sense the true and necessary are eternal, because they are in the eternal mind, which is the divine intellect alone; hence it does not follow that anything beside God is eternal.",
+      "spans": [
+        {
+          "start": 95,
+          "end": 107,
+          "style": "paren_cite",
+          "text": "(Metaph. vi)"
+        }
+      ]
+    },
+    {
+      "type": "hr"
+    }
+  ],
+  "reading_markdown": "THE ETERNITY OF GOD (In Six Articles)\n\nWe must now consider the eternity of God, concerning which arise six points of inquiry:\n\n(1) What is eternity?\n\n(2) Whether God is eternal?\n\n(3) Whether to be eternal belongs to God alone?\n\n(4) Whether eternity differs from time?\n\n(5) The difference of aeviternity and of time.\n\n(6) Whether there is only one aeviternity, as there is one time, and one eternity?\n\n---\n\nFIRST ARTICLE [I, Q. 10, Art. 1]\n\nWhether This Is a Good Definition of Eternity, \"The Simultaneously- Whole and Perfect Possession of Interminable Life\"?\n\nObjection 1: It seems that the definition of eternity given by Boethius (De Consol. v) is not a good one: \"Eternity is the simultaneously-whole and perfect possession of interminable life.\" For the word \"interminable\" is a negative one. But negation only belongs to what is defective, and this does not belong to eternity. Therefore in the definition of eternity the word \"interminable\" ought not to be found.\n\nObj. 2: Further, eternity signifies a certain kind of duration. But duration regards existence rather than life. Therefore the word \"life\" ought not to come into the definition of eternity; but rather the word \"existence.\"\n\nObj. 3: Further, a whole is what has parts. But this is alien to eternity which is simple. Therefore it is improperly said to be \"whole.\"\n\nObj. 4: Many days cannot occur together, nor can many times exist all at once. But in eternity, days and times are in the plural, for it is said, \"His going forth is from the beginning, from the days of eternity\" (Micah 5:2); and also it is said, \"According to the revelation of the mystery hidden from eternity\" (Rom. 16:25). Therefore eternity is not omni-simultaneous.\n\nObj. 5: Further, the whole and the perfect are the same thing. Supposing, therefore, that it is \"whole,\" it is superfluously described as \"perfect.\"\n\nObj. 6: Further, duration does not imply \"possession.\" But eternity is a kind of duration. Therefore eternity is not possession.\n\n_I answer that,_ As we attain to the knowledge of simple things by way of compound things, so must we reach to the knowledge of eternity by means of time, which is nothing but the numbering of movement by _before_ and _after._ For since succession occurs in every movement, and one part comes after another, the fact that we reckon before and after in movement, makes us apprehend time, which is nothing else but the measure of before and after in movement. Now in a thing bereft of movement, which is always the same, there is no before or after. As therefore the idea of time consists in the numbering of before and after in movement; so likewise in the apprehension of the uniformity of what is outside of movement, consists the idea of eternity.\n\nFurther, those things are said to be measured by time which have a beginning and an end in time, because in everything which is moved there is a beginning, and there is an end. But as whatever is wholly immutable can have no succession, so it has no beginning, and no end.\n\nThus eternity is known from two sources: first, because what is eternal is interminable--that is, has no beginning nor end (that is, no term either way); secondly, because eternity has no succession, being simultaneously whole.\n\nReply Obj. 1: Simple things are usually defined by way of negation; as \"a point is that which has no parts.\" Yet this is not to be taken as if the negation belonged to their essence, but because our intellect which first apprehends compound things, cannot attain to the knowledge of simple things except by removing the opposite.\n\nReply Obj. 2: What is truly eternal, is not only being, but also living; and life extends to operation, which is not true of being. Now the protraction of duration seems to belong to operation rather than to being; hence time is the numbering of movement.\n\nReply Obj. 3: Eternity is called whole, not because it has parts, but because it is wanting in nothing.\n\nReply Obj. 4: As God, although incorporeal, is named in Scripture metaphorically by corporeal names, so eternity though simultaneously whole, is called by names implying time and succession.\n\nReply Obj. 5: Two things are to be considered in time: time itself, which is successive; and the \"now\" of time, which is imperfect. Hence the expression \"simultaneously-whole\" is used to remove the idea of time, and the word \"perfect\" is used to exclude the \"now\" of time.\n\nReply Obj. 6: Whatever is possessed, is held firmly and quietly; therefore to designate the immutability and permanence of eternity, we use the word \"possession.\"\n\n---\n\nSECOND ARTICLE [I, Q. 10, Art. 2]\n\nWhether God is Eternal?\n\nObjection 1: It seems that God is not eternal. For nothing made can be predicated of God; for Boethius says (De Trin. iv) that, \"The now that flows away makes time, the now that stands still makes eternity;\" and Augustine says (Octog. Tri. Quaest. qu. 28) \"that God is the author of eternity.\" Therefore God is not eternal.\n\nObj. 2: Further, what is before eternity, and after eternity, is not measured by eternity. But, as Aristotle says (De Causis), \"God is before eternity and He is after eternity\": for it is written that \"the Lord shall reign for eternity, and beyond [*Douay: 'for ever and ever']\" (Ex. 15:18). Therefore to be eternal does not belong to God.\n\nObj. 3: Further, eternity is a kind of measure. But to be measured belongs not to God. Therefore it does not belong to Him to be eternal.\n\nObj. 4: Further, in eternity, there is no present, past or future, since it is simultaneously whole; as was said in the preceding article. But words denoting present, past and future time are applied to God in Scripture. Therefore God is not eternal.\n\n_On the contrary,_ Athanasius says in his Creed: \"The Father is eternal, the Son is eternal, the Holy Ghost is eternal.\"\n\n_I answer that,_ The idea of eternity follows immutability, as the idea of time follows movement, as appears from the preceding article. Hence, as God is supremely immutable, it supremely belongs to Him to be eternal. Nor is He eternal only; but He is His own eternity; whereas, no other being is its own duration, as no other is its own being. Now God is His own uniform being; and hence as He is His own essence, so He is His own eternity.\n\nReply Obj. 1: The \"now\" that stands still, is said to make eternity according to our apprehension. As the apprehension of time is caused in us by the fact that we apprehend the flow of the \"now,\" so the apprehension of eternity is caused in us by our apprehending the \"now\" standing still. When Augustine says that \"God is the author of eternity,\" this is to be understood of participated eternity. For God communicates His eternity to some in the same way as He communicates His immutability.\n\nReply Obj. 2: From this appears the answer to the Second Objection. For God is said to be before eternity, according as it is shared by immaterial substances. Hence, also, in the same book, it is said that \"intelligence is equal to eternity.\" In the words of Exodus, \"The Lord shall reign for eternity, and beyond,\" eternity stands for age, as another rendering has it. Thus it is said that the Lord will reign beyond eternity, inasmuch as He endures beyond every age, i.e. beyond every kind of duration. For age is nothing more than the period of each thing, as is said in the book _De Coelo_ i. Or to reign beyond eternity can be taken to mean that if any other thing were conceived to exist for ever, as the movement of the heavens according to some philosophers, then God would still reign beyond, inasmuch as His reign is simultaneously whole.\n\nReply Obj. 3: Eternity is nothing else but God Himself. Hence God is not called eternal, as if He were in any way measured; but the idea of measurement is there taken according to the apprehension of our mind alone.\n\nReply Obj. 4: Words denoting different times are applied to God, because His eternity includes all times; not as if He Himself were altered through present, past and future.\n\n---\n\nTHIRD ARTICLE [I, Q. 10, Art. 3]\n\nWhether to Be Eternal Belongs to God Alone?\n\nObjection 1: It seems that it does not belong to God alone to be eternal. For it is written that \"those who instruct many to justice,\" shall be \"as stars unto perpetual eternities [*Douay: 'for all eternity']\" (Dan. 12:3). Now if God alone were eternal, there could not be many eternities. Therefore God alone is not the only eternal.\n\nObj. 2: Further, it is written \"Depart, ye cursed into eternal [Douay: 'everlasting'] fire\" (Matt. 25:41). Therefore God is not the only eternal.\n\nObj. 3: Further, every necessary thing is eternal. But there are many necessary things; as, for instance, all principles of demonstration and all demonstrative propositions. Therefore God is not the only eternal.\n\n_On the contrary,_ Jerome says (Ep. ad Damasum, xv) that \"God is the only one who has no beginning.\" Now whatever has a beginning, is not eternal. Therefore God is the only one eternal.\n\n_I answer that,_ Eternity truly and properly so called is in God alone, because eternity follows on immutability; as appears from the first article. But God alone is altogether immutable, as was shown above (Q. 9, A. 1). Accordingly, however, as some receive immutability from Him, they share in His eternity. Thus some receive immutability from God in the way of never ceasing to exist; in that sense it is said of the earth, \"it standeth for ever\" (Eccl. 1:4). Again, some things are called eternal in Scripture because of the length of their duration, although they are in nature corruptible; thus (Ps. 75:5) the hills are called \"eternal\" and we read \"of the fruits of the eternal hills.\" (Deut. 33:15). Some again, share more fully than others in the nature of eternity, inasmuch as they possess unchangeableness either in being or further still in operation; like the angels, and the blessed, who enjoy the Word, because \"as regards that vision of the Word, no changing thoughts exist in the Saints,\" as Augustine says (De Trin. xv). Hence those who see God are said to have eternal life; according to that text, \"This is eternal life, that they may know Thee the only true God,\" etc. (John 17:3).\n\nReply Obj. 1: There are said to be many eternities, accordingly as many share in eternity, by the contemplation of God.\n\nReply Obj. 2: The fire of hell is called eternal, only because it never ends. Still, there is change in the pains of the lost, according to the words \"To extreme heat they will pass from snowy waters\" (Job 24:19). Hence in hell true eternity does not exist, but rather time; according to the text of the Psalm \"Their time will be for ever\" (Ps. 80:16).\n\nReply Obj. 3: Necessary means a certain mode of truth; and truth, according to the Philosopher (Metaph. vi), is in the mind. Therefore in this sense the true and necessary are eternal, because they are in the eternal mind, which is the divine intellect alone; hence it does not follow that anything beside God is eternal.\n\n---",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 608,
+    "text": "THE ETERNITY OF GOD (In Six Articles)"
+  },
+  "word_count": 1919,
+  "block_count": 51
+}

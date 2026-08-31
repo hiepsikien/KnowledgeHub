@@ -1,0 +1,102 @@
+{
+  "structure_version": "1",
+  "ref_parser_version": "1.7",
+  "language": "en",
+  "section_count": 7,
+  "sections": [
+    {
+      "section_id": "sec-000-front",
+      "kind": "front_matter",
+      "title": "Front matter",
+      "subtitle": null,
+      "start_line": 0,
+      "heading_line": 0,
+      "start_char": 0,
+      "end_char": 580,
+      "word_count": 75,
+      "confidence": 0.85
+    },
+    {
+      "section_id": "sec-001",
+      "kind": "chapter",
+      "title": "INTRODUCTION",
+      "subtitle": null,
+      "start_line": 21,
+      "heading_line": 21,
+      "start_char": 581,
+      "end_char": 6067,
+      "word_count": 955,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-002",
+      "kind": "chapter",
+      "title": "introduction explanatory which Balzac often gives to his own books, is",
+      "subtitle": null,
+      "start_line": 111,
+      "heading_line": 111,
+      "start_char": 6068,
+      "end_char": 121488,
+      "word_count": 20041,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-003",
+      "kind": "chapter",
+      "title": "introduction, and proceeding in this character to give him (Lucien)",
+      "subtitle": null,
+      "start_line": 2064,
+      "heading_line": 2064,
+      "start_char": 121489,
+      "end_char": 881523,
+      "word_count": 134583,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-004",
+      "kind": "chapter",
+      "title": "introduction to the Wooden Galleries, he had been paid for many an",
+      "subtitle": null,
+      "start_line": 16502,
+      "heading_line": 16502,
+      "start_char": 881524,
+      "end_char": 1145214,
+      "word_count": 45682,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-005",
+      "kind": "chapter",
+      "title": "introduction to Mme. de Senonches,\" the \"tall Cointet\" had said no",
+      "subtitle": null,
+      "start_line": 21756,
+      "heading_line": 21756,
+      "start_char": 1145215,
+      "end_char": 1333069,
+      "word_count": 33488,
+      "confidence": 0.92
+    },
+    {
+      "section_id": "sec-006",
+      "kind": "chapter",
+      "title": "introduction from Goertz, explaining his secretary's adventures and",
+      "subtitle": null,
+      "start_line": 25405,
+      "heading_line": 25405,
+      "start_char": 1333070,
+      "end_char": 1425327,
+      "word_count": 16319,
+      "confidence": 0.92
+    }
+  ],
+  "created_at": "2026-08-31T04:12:48+00:00",
+  "division_level": "chapter",
+  "marker_count": 6,
+  "mode": "markers",
+  "candidate_count": 67,
+  "content_kind": "prose",
+  "summary_vi": "Phân đoạn deterministic từ 6 marker (chapter).",
+  "work_id": "balzac--lost_illusions",
+  "content_hash": "a48a04823a3079290c5dc0768499dccae955d9c7669d97b224a82f060429099d",
+  "source_family": "gutenberg"
+}

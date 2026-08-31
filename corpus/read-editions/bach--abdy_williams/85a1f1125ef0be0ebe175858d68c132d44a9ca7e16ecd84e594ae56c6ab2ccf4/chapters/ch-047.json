@@ -1,0 +1,184 @@
+{
+  "chapter_id": "ch-047",
+  "title": "FOOTNOTES:",
+  "block_start": 492,
+  "block_end": 501,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "FOOTNOTES:",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "text": "[39] The three fairs, called “Messe,” are held at Easter, Michaelmas and New Year. Leipsic is at these times crowded with merchants from all parts of the world.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[39]"
+        },
+        {
+          "start": 29,
+          "end": 37,
+          "style": "quote",
+          "text": "“Messe,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[40] _i.e._ the Church of St Matthew.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[40]"
+        },
+        {
+          "start": 5,
+          "end": 11,
+          "style": "em",
+          "text": "_i.e._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[41] Spitta, vol. ii. p. 186.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[41]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[42] _i.e._ the University Church. In Bach’s time there were six churches at Leipsic--St Thomas, St Nicholas (or Nicolai), St Paul (or University Church), St Matthew (or New Church), St Peter (or Petri), and St John.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[42]"
+        },
+        {
+          "start": 5,
+          "end": 11,
+          "style": "em",
+          "text": "_i.e._"
+        },
+        {
+          "start": 109,
+          "end": 121,
+          "style": "paren_cite",
+          "text": "(or Nicolai)"
+        },
+        {
+          "start": 131,
+          "end": 153,
+          "style": "paren_cite",
+          "text": "(or University Church)"
+        },
+        {
+          "start": 166,
+          "end": 181,
+          "style": "paren_cite",
+          "text": "(or New Church)"
+        },
+        {
+          "start": 192,
+          "end": 202,
+          "style": "paren_cite",
+          "text": "(or Petri)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[43] According to Spitta, vol. ii. p. 223. But Görner’s name appears in the “Chronicle” far more often than that of Bach in connection with the music for these festivals.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[43]"
+        },
+        {
+          "start": 76,
+          "end": 87,
+          "style": "quote",
+          "text": "“Chronicle”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[44] See Glossary.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[44]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[45] Spitta quotes it in full, vol. ii. p. 253.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[45]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[46] Spitta, vol. ii. p. 242.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[46]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[47] Quoted by Bitter, vol. i. p. 303. This appreciation of the skill required to conduct a musical performance is remarkable as coming from one who, not being musical, might be expected to think, with the majority of non-musicians, that the conductor merely has to “beat time.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[47]"
+        },
+        {
+          "start": 266,
+          "end": 278,
+          "style": "quote",
+          "text": "“beat time.”"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "FOOTNOTES:\n\n[39] The three fairs, called “Messe,” are held at Easter, Michaelmas and New Year. Leipsic is at these times crowded with merchants from all parts of the world.\n\n[40] _i.e._ the Church of St Matthew.\n\n[41] Spitta, vol. ii. p. 186.\n\n[42] _i.e._ the University Church. In Bach’s time there were six churches at Leipsic--St Thomas, St Nicholas (or Nicolai), St Paul (or University Church), St Matthew (or New Church), St Peter (or Petri), and St John.\n\n[43] According to Spitta, vol. ii. p. 223. But Görner’s name appears in the “Chronicle” far more often than that of Bach in connection with the music for these festivals.\n\n[44] See Glossary.\n\n[45] Spitta quotes it in full, vol. ii. p. 253.\n\n[46] Spitta, vol. ii. p. 242.\n\n[47] Quoted by Bitter, vol. i. p. 303. This appreciation of the skill required to conduct a musical performance is remarkable as coming from one who, not being musical, might be expected to think, with the majority of non-musicians, that the conductor merely has to “beat time.”",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 492,
+    "text": "FOOTNOTES:"
+  },
+  "word_count": 180,
+  "block_count": 10
+}

@@ -1,0 +1,60 @@
+{
+  "chapter_id": "ch-095",
+  "title": "_Six little Preludes (200)._ _Little two-part Fugue in C minor (200)._ _Fifteen two-part Inventions (201)._ _Fifteen three-part Inventions; also called Symphonies (202)._",
+  "block_start": 1273,
+  "block_end": 1274,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Six little Preludes (200)._ _Little two-part Fugue in C minor (200)._ _Fifteen two-part Inventions (201)._ _Fifteen three-part Inventions; also called Symphonies (202)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 28,
+          "style": "em",
+          "text": "_Six little Preludes (200)._"
+        },
+        {
+          "start": 29,
+          "end": 70,
+          "style": "em",
+          "text": "_Little two-part Fugue in C minor (200)._"
+        },
+        {
+          "start": 71,
+          "end": 107,
+          "style": "em",
+          "text": "_Fifteen two-part Inventions (201)._"
+        },
+        {
+          "start": 108,
+          "end": 170,
+          "style": "em",
+          "text": "_Fifteen three-part Inventions; also called Symphonies (202)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Six little Suites called the French Suites (202)._      From Anna Magdalena’s first book.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 51,
+          "style": "em",
+          "text": "_Six little Suites called the French Suites (202)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Six little Preludes (200)._ _Little two-part Fugue in C minor (200)._ _Fifteen two-part Inventions (201)._ _Fifteen three-part Inventions; also called Symphonies (202)._\n\n_Six little Suites called the French Suites (202)._      From Anna Magdalena’s first book.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1273,
+    "text": "_Six little Preludes (200)._ _Little two-part Fugue in C minor (200)._ _Fifteen two-part Inventions (201)._ _Fifteen three-part Inventions; also called Symphonies (202)._"
+  },
+  "word_count": 41,
+  "block_count": 2
+}

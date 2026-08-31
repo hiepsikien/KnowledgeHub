@@ -1,0 +1,669 @@
+{
+  "chapter_id": "ch-061",
+  "title": "Chapter X",
+  "block_start": 742,
+  "block_end": 788,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Chapter X",
+      "level": 1
+    },
+    {
+      "type": "blockquote",
+      "text": "The _Wohltemperirte Clavier_--“The Art of Fugue”--“Musical Offering”--Bach as a Teacher--Bach’s Works in England.",
+      "spans": [
+        {
+          "start": 4,
+          "end": 28,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 30,
+          "end": 48,
+          "style": "quote",
+          "text": "“The Art of Fugue”"
+        },
+        {
+          "start": 50,
+          "end": 68,
+          "style": "quote",
+          "text": "“Musical Offering”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The _Wohltemperirte Clavier_ was gradually compiled and formed into a complete work in two parts. The first part was completed at Cöthen in 1722, and entitled “The well tempered clavier, or preludes and fugues through all tones and semitones, both with major and minor thirds. For the edification and use of young musicians who are eager to learn, and for the recreation of those who are already facile in this study. Collected and prepared by Johann Sebastian Bach, Grand-ducal Capellmeister and Director of Chamber music to the Court of Cöthen, Anno 1722.”",
+      "spans": [
+        {
+          "start": 4,
+          "end": 28,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 159,
+          "end": 558,
+          "style": "quote",
+          "text": "“The well tempered clavier, or preludes and fugues through all tones and semitones, both with major and minor thirds. For the edification and use of young musicians who are eager to learn, and for the recreation of those who are already facile in this study. Collected and prepared by Johann Sebastian Bach, Grand-ducal Capellmeister and Director of Chamber music to the Court of Cöthen, Anno 1722.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _The Wohlt. Clavier intended for Clavichord_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 56,
+          "style": "bracket_note",
+          "text": "[Sidenote: _The Wohlt. Clavier intended for Clavichord_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The expression “well-tempered” refers to the equal temperament, of which Bach was so strong an advocate, and many of the pieces would be impossible with any other system of tuning. There is sufficient internal evidence to show that these delicate and beautiful compositions were primarily intended for the clavichord, as this instrument had a power of expression which was denied to all the other keyed instruments of that period. It is a mistake therefore to play them on the harpsichord, and Spitta is right in his assertion that they require for their adequate performance the very best pianoforte that the skill of modern makers can produce. The larger number of the pieces in the first collection were written at Cöthen, and probably quickly after one another. According to a tradition they were written on one of his journeys, when he had not access to an instrument. Schumann considered that many of the preludes were not originally connected with the fugues. Bach made three copies which still exist. He never had any intention of publishing a work which would scarcely meet with success among the general public from its difficulty. The second part was completed in 1740 or 1744. The only autograph is in the British Museum, add. MS. 35,021, of a page of which we give a photograph. It is written on large paper, fourteen staves to a page.",
+      "spans": [
+        {
+          "start": 15,
+          "end": 30,
+          "style": "quote",
+          "text": "“well-tempered”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Gerber says that Bach valued the work highly for its educational value, and played it through no less than three times to him."
+    },
+    {
+      "type": "paragraph",
+      "text": "It was first printed by A. F. C. Kollmanns in London in 1799, but this impression was never published. The three first editions were those of Hoffmeister and Kühnel,[66] Simrock in Berlin, and Nägeli in Zurich, all in 1801. The first English edition was that of Wesley and Horn, 1811.",
+      "spans": [
+        {
+          "start": 165,
+          "end": 169,
+          "style": "footnote",
+          "text": "[66]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Music: Preludium]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 18,
+          "style": "bracket_note",
+          "text": "[Music: Preludium]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Various readings_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 30,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Various readings_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "That by Hoffmeister and Kühnel was edited by Forkel, who, selecting from a great number of copies, published many of the fugues in a shortened form, believing that these were Bach’s last arrangements of them. It is well known that Bach constantly polished and improved his works; and the number of different readings of the _Wohltemperirte Clavier_ would fill a large volume. Amongst the more noticeable varieties of reading is that of the E minor prelude in Part I. In Litolff’s edition (Köhler) and Novello’s (Best) there is a florid melody in the right hand, above the chords, which accompany the moving bass. In Chrysander’s edition it is explained that Bach’s more mature taste led him to discard the florid passages, and it is accordingly published from a later MS. with only the chords on the first and third beats of the bar, the melody being entirely omitted.[67]",
+      "spans": [
+        {
+          "start": 324,
+          "end": 348,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 488,
+          "end": 496,
+          "style": "paren_cite",
+          "text": "(Köhler)"
+        },
+        {
+          "start": 511,
+          "end": 517,
+          "style": "paren_cite",
+          "text": "(Best)"
+        },
+        {
+          "start": 868,
+          "end": 872,
+          "style": "footnote",
+          "text": "[67]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The “Art of Fugue” is a series of workings of a single subject in many different ways. Like the _Wohltemperirte Clavier_ it was primarily intended for educational purposes. Forkel gives the following account of it:",
+      "spans": [
+        {
+          "start": 4,
+          "end": 18,
+          "style": "quote",
+          "text": "“Art of Fugue”"
+        },
+        {
+          "start": 96,
+          "end": 120,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Art of Fugue_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 26,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Art of Fugue_]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“This excellent and unique work was not published till 1752, after the composer’s death, but was for the most part engraved during his life by one of his sons. Marpurg, at that time at the helm of musical literature in Germany, wrote a preface to the edition, in which much that is good and true is said concerning the work. “But this ‘Art of Fugue’ was too lofty for the great world; it became only known in the very small world of _connoisseurs_. This small world was soon provided with copies; the plates were useless, and were finally sold by Bach’s heirs as old copper.”... “The last fugue but one has three subjects, the third being the notes b, a, c, h. This fugue was however interrupted by the blindness of the author, and could not be finished. “To make up for the unfinished fugue, the editors added at the end the four voice chorale ‘Wenn wir in höchsten Nöthen sein,’ which he dictated to his son-in-law Altnikol on his death-bed.”",
+      "spans": [
+        {
+          "start": 0,
+          "end": 575,
+          "style": "quote",
+          "text": "“This excellent and unique work was not published till 1752, after the composer’s death, but was for the most part engraved during his life by one of his sons. Marpurg, at that time at the helm of musical literature in Germany, wrote a preface to the edition, in which much that is good and true is said concerning the work. “But this ‘Art of Fugue’ was too lofty for the great world; it became only known in the very small world of _connoisseurs_. This small world was soon provided with copies; the plates were useless, and were finally sold by Bach’s heirs as old copper.”"
+        },
+        {
+          "start": 579,
+          "end": 944,
+          "style": "quote",
+          "text": "“The last fugue but one has three subjects, the third being the notes b, a, c, h. This fugue was however interrupted by the blindness of the author, and could not be finished. “To make up for the unfinished fugue, the editors added at the end the four voice chorale ‘Wenn wir in höchsten Nöthen sein,’ which he dictated to his son-in-law Altnikol on his death-bed.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The work was brought out at the Leipsic Fair of Easter 1752. Mattheson was loud in his praise saying it would astonish all French and Italian fugue-makers. But the work was in reality finished. The MS. was complete, and the engraving was being done under the author’s direction when he died in 1750. No one could fulfil his intentions, and the engravers simply went on engraving everything that came to hand, both sketches and completed movements, and it was full of printer’s errors. Hauptmann clearly shows that the last (unfinished) fugue is certainly Bach’s own work, but that it has no connection with the “Art of Fugue,” which closes in reality with the fugue for two claviers. The series of fugues are all on one subject; the unfinished work leaves the subject, and has nothing to do with the other fugues. We have therefore Bach’s last work complete, and the incomplete portion is due to a mistake of the first publishers.",
+      "spans": [
+        {
+          "start": 523,
+          "end": 535,
+          "style": "paren_cite",
+          "text": "(unfinished)"
+        },
+        {
+          "start": 611,
+          "end": 626,
+          "style": "quote",
+          "text": "“Art of Fugue,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Musical Offering_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 30,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Musical Offering_]"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“The Musical Offering” is a series of fugues and canons on a subject given to Bach at Potsdam by Frederick the Great. The work consists of-- 1. Fuga (ricercata) for three voices. 2. Fuga (ricercata) for six voices. 3. VIII. Canons. 4. Fuga canonica in epidiapente. 5. Sonata (Trio) for flute, violin, and bass. 6. Canon perpetuus for flute, violin, and bass. It is headed: “Regis Iussu Cantio, Et Reliqua Canonica Arte Resoluta.” The dedicatory letter will explain its purpose: “MOST GRACIOUS KING,--To Your Majesty is proffered herewith in humblest obedience a musical offering, whose most excellent portion originates from your noble hand. I recall with respectful pleasure the peculiarly royal favour with which during my visit to Potsdam your Majesty was pleased to play to me a fugue theme, and to require me immediately to work it out in your presence. Obedience to your Majesty’s command was my duty. I however soon remarked, that for want of proper preparation the working out was not as good as so excellent a theme required. I therefore resolved to work out this most royal theme properly and to make it known to the world. This project is now fulfilled to the best of my ability, and it has no other object than in some small way to do honour to the fame of a monarch, whose greatness and power both in the arts of peace and war, and especially in that of music are acknowledged and admired by all. I make bold to add this humble request: that your Majesty will accord a gracious reception to this small work, and by so doing still further extend your royal condescension.--Your Majesty’s most humble and obedient servant, THE AUTHOR. “LEIPSIC, _July 7, 1747_.” This dedication however only referred to a portion of the work, which was gradually completed and engraved later. The epithet _ricercata_ perhaps refers to the mechanical difficulty of the pieces. The six Great or English Suites are so called according to Forkel[68] because they were written for some Englishman of rank. The same authority says that the six little French suites received their name because they are in French taste. It does not appear that the composer gave either of these names. Both sets seem to have been written at Cöthen. [Sidenote: _Bach as a teacher_] All accounts agree as to Bach’s wonderful capacity for teaching, and we have a description of his methods from one of his pupils, H. N. Gerber,[69] which we make no apology for quoting in full: “He went to Leipsic to study partly law and partly music under the great Joh. Seb. Bach.... In the first six months he heard much excellent church music and many concerts under Bach’s direction, but no opportunity arose which gave him courage to approach the great man, until at last he mentioned his wish to one of his friends called Wilde (afterwards organist at St Petersburg) who introduced him to",
+      "spans": [
+        {
+          "start": 0,
+          "end": 22,
+          "style": "quote",
+          "text": "“The Musical Offering”"
+        },
+        {
+          "start": 149,
+          "end": 160,
+          "style": "paren_cite",
+          "text": "(ricercata)"
+        },
+        {
+          "start": 187,
+          "end": 198,
+          "style": "paren_cite",
+          "text": "(ricercata)"
+        },
+        {
+          "start": 275,
+          "end": 281,
+          "style": "paren_cite",
+          "text": "(Trio)"
+        },
+        {
+          "start": 373,
+          "end": 429,
+          "style": "quote",
+          "text": "“Regis Iussu Cantio, Et Reliqua Canonica Arte Resoluta.”"
+        },
+        {
+          "start": 478,
+          "end": 1672,
+          "style": "quote",
+          "text": "“MOST GRACIOUS KING,--To Your Majesty is proffered herewith in humblest obedience a musical offering, whose most excellent portion originates from your noble hand. I recall with respectful pleasure the peculiarly royal favour with which during my visit to Potsdam your Majesty was pleased to play to me a fugue theme, and to require me immediately to work it out in your presence. Obedience to your Majesty’s command was my duty. I however soon remarked, that for want of proper preparation the working out was not as good as so excellent a theme required. I therefore resolved to work out this most royal theme properly and to make it known to the world. This project is now fulfilled to the best of my ability, and it has no other object than in some small way to do honour to the fame of a monarch, whose greatness and power both in the arts of peace and war, and especially in that of music are acknowledged and admired by all. I make bold to add this humble request: that your Majesty will accord a gracious reception to this small work, and by so doing still further extend your royal condescension.--Your Majesty’s most humble and obedient servant, THE AUTHOR. “LEIPSIC, _July 7, 1747_.”"
+        },
+        {
+          "start": 1799,
+          "end": 1810,
+          "style": "em",
+          "text": "_ricercata_"
+        },
+        {
+          "start": 1935,
+          "end": 1939,
+          "style": "footnote",
+          "text": "[68]"
+        },
+        {
+          "start": 2219,
+          "end": 2250,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Bach as a teacher_]"
+        },
+        {
+          "start": 2394,
+          "end": 2398,
+          "style": "footnote",
+          "text": "[69]"
+        },
+        {
+          "start": 2786,
+          "end": 2824,
+          "style": "paren_cite",
+          "text": "(afterwards organist at St Petersburg)"
+        }
+      ]
+    },
+    {
+      "type": "stanza",
+      "text": "Bach. Bach received him in the most friendly manner and at once called him ‘Fellow-countryman.’[70] He promised to give him instruction, and asked whether he had practised fugues diligently. At the first lesson he placed the ‘Inventions’ before him. When Gerber had studied these to Bach’s satisfaction, he was given a number of suites, and then the _Wohltemperirte Clavier_. This work Bach played through three times to him with unapproachable art; and my father counted those amongst his most enjoyable lessons when Bach, under the excuse that he felt indisposed to teach, would seat himself at one of his excellent instruments, and the hours passed like minutes. The end of a lesson was taken up with figured bass-playing, for which Bach would choose the violin solos of Albinoni; and I must confess that the skill with which my father performed these basses in Bach’s manner, and especially in the flow of the parts amongst each other was unsurpassable. This accompaniment was so beautiful in itself that no solo part that I have heard could give me so much pleasure.” Gerber was for two years under Bach.",
+      "lines": [
+        "Bach. Bach received him in the most friendly manner and at once called him ‘Fellow-countryman.’[70] He promised to give him instruction, and asked whether he had practised fugues diligently. At the first lesson he placed the ‘Inventions’ before him. When Gerber had studied these to Bach’s satisfaction, he was given a number of suites, and then the _Wohltemperirte Clavier_. This work Bach played through three times to him with unapproachable art; and my father counted those amongst his most enjoyable lessons when Bach, under the excuse that he felt indisposed to teach, would seat himself at one of his excellent instruments, and the hours passed like minutes. The end of a lesson was taken up with figured bass-playing, for which Bach would choose the violin solos of Albinoni; and I must confess that the skill with which my father performed these basses in Bach’s manner, and especially in the flow of the parts amongst each other was unsurpassable. This accompaniment was so beautiful in itself that no solo part that I have heard could give me so much pleasure.” Gerber was for two years under Bach."
+      ],
+      "spans": [
+        {
+          "start": 95,
+          "end": 99,
+          "style": "footnote",
+          "text": "[70]"
+        },
+        {
+          "start": 350,
+          "end": 374,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Forkel[71] tells us that the first thing he taught was his own peculiar touch, and for this purpose the pupil was kept for several months at finger exercises, in fact they sometimes lasted from six to twelve months; but when the pupil’s patience began to flag he was given little pieces which Bach composed specially for him, such as the six little preludes for beginners, and the two-part inventions. He wrote these during the lesson, and was thus able to make them suit the particular requirements of the pupil. Together with the finger exercises the pupil had to practise all manner of ornaments, and Bach demanded the severest possible application from all his pupils.",
+      "spans": [
+        {
+          "start": 6,
+          "end": 10,
+          "style": "footnote",
+          "text": "[71]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "As soon as possible he was made to learn whichever of Bach’s greater works suited him. In order to lighten the difficulties, Bach played the piece through to the pupil, and said, “that is how it must sound.”",
+      "spans": [
+        {
+          "start": 179,
+          "end": 207,
+          "style": "quote",
+          "text": "“that is how it must sound.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "One can, says Forkel, scarcely enumerate the many advantages of such a method. Even if it were only that the pupil is roused to emulation through the pleasure of hearing such a performance, the advantage would be very great. But in addition to this he obtains at once a grip of the piece in its complete form, instead of having to work it out bit by bit as he gradually overcomes the mechanical difficulties."
+    },
+    {
+      "type": "paragraph",
+      "text": "The instrument on which Bach taught was the clavichord, on account of its expressive quality which trained the ear to fine shades of tone; he would have nothing to say to mere finger training apart from understanding the music, and insisted on the cultivation of both art and technique together."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Method of teaching Composition_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 44,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Method of teaching Composition_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In teaching composition Bach did not begin with dry counterpoints leading to nothing, as in his time was done by all other teachers; still less did he trouble his pupils about tone-relationships, which in his opinion concerned only theorists and instrument makers. He started at once with pure four part figured bass, and insisted on the proper leading of the parts, because this would give the clearest insight into the harmonic progressions. He then went on to the chorale, to which he at first set the basses and made the pupil only write the tenor and alto, afterwards gradually making him write the bass. He insisted at all times not only on the greatest possible purity in the harmony, but on the natural and flowing connection of all the single voices. The models he himself has left are known to every connoisseur, and his inner voices are often so singable that they might serve for the upper part. This style had to be striven for by the pupil, and until he had reached a high degree of proficiency Bach did not consider it wise to allow him to try inventing on his own account. He took for granted that all his composition pupils had the faculty of thinking in music. If any had not this faculty he was advised not to attempt composition."
+    },
+    {
+      "type": "paragraph",
+      "text": "As soon as the above-mentioned preparations in harmony were finished, he began with two voice fugue, and in this, and all composition practice, the pupil was strictly forbidden to use the clavier. Those who were obliged to do so he called “Knights of the keyboard.”",
+      "spans": [
+        {
+          "start": 239,
+          "end": 265,
+          "style": "quote",
+          "text": "“Knights of the keyboard.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In fugue he was especially careful about the part writing--no voice must merely fill in the harmony, or break off before it had finished what it had to say. He looked upon his voices as persons, who conversed together as in private society, in which it would be unseemly for anyone to disturb the conversation either by uninteresting remarks, or by not finishing his sentences. On the other hand, he allowed his pupils as much freedom as possible with regard to intervals. They might try any experiments they liked as long as no damage was done to the purity of the harmony, or the inward meaning of the movement. He tried all possible experiments himself, and was glad to see his pupils do so. The whole of his system is to be found in Kirnberger’s “Kunst des reinen Satzes” (Art of pure writing).[72]",
+      "spans": [
+        {
+          "start": 750,
+          "end": 775,
+          "style": "quote",
+          "text": "“Kunst des reinen Satzes”"
+        },
+        {
+          "start": 776,
+          "end": 797,
+          "style": "paren_cite",
+          "text": "(Art of pure writing)"
+        },
+        {
+          "start": 798,
+          "end": 802,
+          "style": "footnote",
+          "text": "[72]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Pupils_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 20,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Pupils_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Among his pupils were his sons, of whom an account has already been given. The others were the following:--Johann Caspar Vogler, who began studying under him at Arnstadt and Weimar, and, according to Bach’s own showing, was a very fine organist. He became organist and Burgomaster at Weimar."
+    },
+    {
+      "type": "paragraph",
+      "text": "Gottfried August Homilius, subsequently music director of the three chief churches at Dresden, and cantor of the Kreuzschule. He was also of considerable reputation as an organist and church composer. Died 1785."
+    },
+    {
+      "type": "paragraph",
+      "text": "Christoph Transchel, who died in 1800 at Dresden, was an esteemed teacher and clavier player. He was the owner of a considerable musical library."
+    },
+    {
+      "type": "paragraph",
+      "text": "Johann Ludwig Krebs eventually became Court organist and music director at Altenburg, where he died in 1803. He was a very good organist and composer. Bach’s pun, “Ich habe in meinem Bache nur einen Krebs gefangen,” “I have only caught one Crab in my stream,” was intended to show the esteem in which he held him.[73]",
+      "spans": [
+        {
+          "start": 163,
+          "end": 215,
+          "style": "quote",
+          "text": "“Ich habe in meinem Bache nur einen Krebs gefangen,”"
+        },
+        {
+          "start": 216,
+          "end": 259,
+          "style": "quote",
+          "text": "“I have only caught one Crab in my stream,”"
+        },
+        {
+          "start": 313,
+          "end": 317,
+          "style": "footnote",
+          "text": "[73]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "J. G. Goldberg of Königsberg was declared by Bach to be one of his best pupils on the clavier and organ."
+    },
+    {
+      "type": "paragraph",
+      "text": "Altnikol, his son-in-law, a fine organ player, and organist at Naumburg. He helped his father-in-law considerably during his blindness."
+    },
+    {
+      "type": "paragraph",
+      "text": "John Philipp Kirnberger, born 1721, died at Berlin in 1783, was Court musician to Princess Amelia of Prussia, and celebrated as a theorist and composer."
+    },
+    {
+      "type": "paragraph",
+      "text": "Johann Friedrich Agricola (1720-1774) became composer to the Prussian Court. He was more known by his theoretical works than his compositions.",
+      "spans": [
+        {
+          "start": 26,
+          "end": 37,
+          "style": "paren_aside",
+          "text": "(1720-1774)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Johann Christian Kittel, who was organist at Erfurt and died in 1809, was a thorough harmonist, a clever and learned organist, an able composer, and a good teacher."
+    },
+    {
+      "type": "paragraph",
+      "text": "Johann Schneider, Court organist and first violinist at Saalfeld, and afterwards organist of the Nicolai Church at Leipsic. He was also a pupil of Graun."
+    },
+    {
+      "type": "paragraph",
+      "text": "Johann Martin Schubart (1690-1721) was Bach’s first pupil; he became organist at Weimar, but died early.",
+      "spans": [
+        {
+          "start": 23,
+          "end": 34,
+          "style": "paren_aside",
+          "text": "(1690-1721)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A pupil named Voigt is mentioned by Emmanuel Bach as having come to his father after he (Emmanuel) had left the house. Perhaps he is the author of a “Conversation between an organist and his deputy about music,” mentioned by Walther.",
+      "spans": [
+        {
+          "start": 88,
+          "end": 98,
+          "style": "paren_cite",
+          "text": "(Emmanuel)"
+        },
+        {
+          "start": 149,
+          "end": 211,
+          "style": "quote",
+          "text": "“Conversation between an organist and his deputy about music,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Gotthilf Ziegler, organist and music director at St Ulrich, Halle, was a renowned teacher, composer and writer."
+    },
+    {
+      "type": "paragraph",
+      "text": "Ernst Bach, his cousin, was Capellmeister at Eisenach, having first studied law, and become a barrister. He was also a composer and organist."
+    },
+    {
+      "type": "paragraph",
+      "text": "J. H. Müthel, organist in Riga, a good performer and composer. Gerber gives a long account of him, and Burney praises his playing and compositions.[74]",
+      "spans": [
+        {
+          "start": 147,
+          "end": 151,
+          "style": "footnote",
+          "text": "[74]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[Sidenote: _Bach’s music in England_]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "bracket_note",
+          "text": "[Sidenote: _Bach’s music in England_]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We have seen that the first attempt to publish the _Wohltemperirte Clavier_ was made in London. England was early in its recognition of the composer, chiefly through the efforts of Samuel Wesley (1766-1837) who, becoming acquainted with his works, eagerly propagated a knowledge of them. Wesley’s edition of the _Wohltemperirte Clavier_ was published in conjunction with C. F. Horn in 1810; and through his influence, Forkel’s “Life” of Bach was translated and published in 1820. He became famous for his performances of Bach’s organ fugues, or as they were called in those days “pedal fugues,” and perhaps the name of his third son, Samuel Sebastian, may have some connection with his admiration for Sebastian Bach.",
+      "spans": [
+        {
+          "start": 51,
+          "end": 75,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 195,
+          "end": 206,
+          "style": "paren_aside",
+          "text": "(1766-1837)"
+        },
+        {
+          "start": 312,
+          "end": 336,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 427,
+          "end": 433,
+          "style": "quote",
+          "text": "“Life”"
+        },
+        {
+          "start": 579,
+          "end": 594,
+          "style": "quote",
+          "text": "“pedal fugues,”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In 1849 the English Bach Society was founded, having as its objects the collection of the compositions and the performance of the works of J. S. Bach. It gave the first performance of the “Matthew Passion” in England at Hanover Square Rooms in 1854 under Sterndale Bennett. After a few more performances the society was dissolved in 1870, and its library given to the Royal Academy of Music.",
+      "spans": [
+        {
+          "start": 188,
+          "end": 205,
+          "style": "quote",
+          "text": "“Matthew Passion”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In 1875 the “Bach Choir” was formed under the conductorship of Mr Otto Goldschmidt, for the performance of the B minor Mass, which was effected in 1876 at St James’s Hall, and the society was then placed on a permanent footing for the purpose of performing works of Bach and other composers. In 1885 Mr Otto Goldschmidt was succeeded by Professor Villiers Stanford, under whose _bâton_ many of Bach’s important works have been performed.",
+      "spans": [
+        {
+          "start": 12,
+          "end": 24,
+          "style": "quote",
+          "text": "“Bach Choir”"
+        },
+        {
+          "start": 378,
+          "end": 385,
+          "style": "em",
+          "text": "_bâton_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Bach is perhaps best known in England at present by his organ works, which are familiar to all competent organists, and his violin solos, which Herr Joachim has done so much to propagate. The _Wohltemperirte Clavier_ is a household word to every earnest musician, and his _Passions_ of _St Matthew_ and _St John_, besides the _Christmas Oratorio_ and a few cantatas, are frequently performed in London churches.",
+      "spans": [
+        {
+          "start": 192,
+          "end": 216,
+          "style": "em",
+          "text": "_Wohltemperirte Clavier_"
+        },
+        {
+          "start": 272,
+          "end": 282,
+          "style": "em",
+          "text": "_Passions_"
+        },
+        {
+          "start": 286,
+          "end": 298,
+          "style": "em",
+          "text": "_St Matthew_"
+        },
+        {
+          "start": 303,
+          "end": 312,
+          "style": "em",
+          "text": "_St John_"
+        },
+        {
+          "start": 326,
+          "end": 346,
+          "style": "em",
+          "text": "_Christmas Oratorio_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Selections from the organ works have been published in England from time to time: by S. Wesley, by Coventry and Hollier (with the pedal part arranged by Dragonetti for double bass), by Best and by Novello with Best as editor. A complete edition is being brought out by Sir F. Bridge and Mr J. Higgs.",
+      "spans": [
+        {
+          "start": 120,
+          "end": 180,
+          "style": "paren_aside",
+          "text": "(with the pedal part arranged by Dragonetti for double bass)"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "Chapter X\n\n> The _Wohltemperirte Clavier_--“The Art of Fugue”--“Musical Offering”--Bach as a Teacher--Bach’s Works in England.\n\nThe _Wohltemperirte Clavier_ was gradually compiled and formed into a complete work in two parts. The first part was completed at Cöthen in 1722, and entitled “The well tempered clavier, or preludes and fugues through all tones and semitones, both with major and minor thirds. For the edification and use of young musicians who are eager to learn, and for the recreation of those who are already facile in this study. Collected and prepared by Johann Sebastian Bach, Grand-ducal Capellmeister and Director of Chamber music to the Court of Cöthen, Anno 1722.”\n\n[Sidenote: _The Wohlt. Clavier intended for Clavichord_]\n\nThe expression “well-tempered” refers to the equal temperament, of which Bach was so strong an advocate, and many of the pieces would be impossible with any other system of tuning. There is sufficient internal evidence to show that these delicate and beautiful compositions were primarily intended for the clavichord, as this instrument had a power of expression which was denied to all the other keyed instruments of that period. It is a mistake therefore to play them on the harpsichord, and Spitta is right in his assertion that they require for their adequate performance the very best pianoforte that the skill of modern makers can produce. The larger number of the pieces in the first collection were written at Cöthen, and probably quickly after one another. According to a tradition they were written on one of his journeys, when he had not access to an instrument. Schumann considered that many of the preludes were not originally connected with the fugues. Bach made three copies which still exist. He never had any intention of publishing a work which would scarcely meet with success among the general public from its difficulty. The second part was completed in 1740 or 1744. The only autograph is in the British Museum, add. MS. 35,021, of a page of which we give a photograph. It is written on large paper, fourteen staves to a page.\n\nGerber says that Bach valued the work highly for its educational value, and played it through no less than three times to him.\n\nIt was first printed by A. F. C. Kollmanns in London in 1799, but this impression was never published. The three first editions were those of Hoffmeister and Kühnel,[66] Simrock in Berlin, and Nägeli in Zurich, all in 1801. The first English edition was that of Wesley and Horn, 1811.\n\n[Music: Preludium]\n\n[Sidenote: _Various readings_]\n\nThat by Hoffmeister and Kühnel was edited by Forkel, who, selecting from a great number of copies, published many of the fugues in a shortened form, believing that these were Bach’s last arrangements of them. It is well known that Bach constantly polished and improved his works; and the number of different readings of the _Wohltemperirte Clavier_ would fill a large volume. Amongst the more noticeable varieties of reading is that of the E minor prelude in Part I. In Litolff’s edition (Köhler) and Novello’s (Best) there is a florid melody in the right hand, above the chords, which accompany the moving bass. In Chrysander’s edition it is explained that Bach’s more mature taste led him to discard the florid passages, and it is accordingly published from a later MS. with only the chords on the first and third beats of the bar, the melody being entirely omitted.[67]\n\nThe “Art of Fugue” is a series of workings of a single subject in many different ways. Like the _Wohltemperirte Clavier_ it was primarily intended for educational purposes. Forkel gives the following account of it:\n\n[Sidenote: _Art of Fugue_]\n\n> “This excellent and unique work was not published till 1752, after the composer’s death, but was for the most part engraved during his life by one of his sons. Marpurg, at that time at the helm of musical literature in Germany, wrote a preface to the edition, in which much that is good and true is said concerning the work. “But this ‘Art of Fugue’ was too lofty for the great world; it became only known in the very small world of _connoisseurs_. This small world was soon provided with copies; the plates were useless, and were finally sold by Bach’s heirs as old copper.”... “The last fugue but one has three subjects, the third being the notes b, a, c, h. This fugue was however interrupted by the blindness of the author, and could not be finished. “To make up for the unfinished fugue, the editors added at the end the four voice chorale ‘Wenn wir in höchsten Nöthen sein,’ which he dictated to his son-in-law Altnikol on his death-bed.”\n\nThe work was brought out at the Leipsic Fair of Easter 1752. Mattheson was loud in his praise saying it would astonish all French and Italian fugue-makers. But the work was in reality finished. The MS. was complete, and the engraving was being done under the author’s direction when he died in 1750. No one could fulfil his intentions, and the engravers simply went on engraving everything that came to hand, both sketches and completed movements, and it was full of printer’s errors. Hauptmann clearly shows that the last (unfinished) fugue is certainly Bach’s own work, but that it has no connection with the “Art of Fugue,” which closes in reality with the fugue for two claviers. The series of fugues are all on one subject; the unfinished work leaves the subject, and has nothing to do with the other fugues. We have therefore Bach’s last work complete, and the incomplete portion is due to a mistake of the first publishers.\n\n[Sidenote: _Musical Offering_]\n\n> “The Musical Offering” is a series of fugues and canons on a subject given to Bach at Potsdam by Frederick the Great. The work consists of-- 1. Fuga (ricercata) for three voices. 2. Fuga (ricercata) for six voices. 3. VIII. Canons. 4. Fuga canonica in epidiapente. 5. Sonata (Trio) for flute, violin, and bass. 6. Canon perpetuus for flute, violin, and bass. It is headed: “Regis Iussu Cantio, Et Reliqua Canonica Arte Resoluta.” The dedicatory letter will explain its purpose: “MOST GRACIOUS KING,--To Your Majesty is proffered herewith in humblest obedience a musical offering, whose most excellent portion originates from your noble hand. I recall with respectful pleasure the peculiarly royal favour with which during my visit to Potsdam your Majesty was pleased to play to me a fugue theme, and to require me immediately to work it out in your presence. Obedience to your Majesty’s command was my duty. I however soon remarked, that for want of proper preparation the working out was not as good as so excellent a theme required. I therefore resolved to work out this most royal theme properly and to make it known to the world. This project is now fulfilled to the best of my ability, and it has no other object than in some small way to do honour to the fame of a monarch, whose greatness and power both in the arts of peace and war, and especially in that of music are acknowledged and admired by all. I make bold to add this humble request: that your Majesty will accord a gracious reception to this small work, and by so doing still further extend your royal condescension.--Your Majesty’s most humble and obedient servant, THE AUTHOR. “LEIPSIC, _July 7, 1747_.” This dedication however only referred to a portion of the work, which was gradually completed and engraved later. The epithet _ricercata_ perhaps refers to the mechanical difficulty of the pieces. The six Great or English Suites are so called according to Forkel[68] because they were written for some Englishman of rank. The same authority says that the six little French suites received their name because they are in French taste. It does not appear that the composer gave either of these names. Both sets seem to have been written at Cöthen. [Sidenote: _Bach as a teacher_] All accounts agree as to Bach’s wonderful capacity for teaching, and we have a description of his methods from one of his pupils, H. N. Gerber,[69] which we make no apology for quoting in full: “He went to Leipsic to study partly law and partly music under the great Joh. Seb. Bach.... In the first six months he heard much excellent church music and many concerts under Bach’s direction, but no opportunity arose which gave him courage to approach the great man, until at last he mentioned his wish to one of his friends called Wilde (afterwards organist at St Petersburg) who introduced him to\n\nBach. Bach received him in the most friendly manner and at once called him ‘Fellow-countryman.’[70] He promised to give him instruction, and asked whether he had practised fugues diligently. At the first lesson he placed the ‘Inventions’ before him. When Gerber had studied these to Bach’s satisfaction, he was given a number of suites, and then the _Wohltemperirte Clavier_. This work Bach played through three times to him with unapproachable art; and my father counted those amongst his most enjoyable lessons when Bach, under the excuse that he felt indisposed to teach, would seat himself at one of his excellent instruments, and the hours passed like minutes. The end of a lesson was taken up with figured bass-playing, for which Bach would choose the violin solos of Albinoni; and I must confess that the skill with which my father performed these basses in Bach’s manner, and especially in the flow of the parts amongst each other was unsurpassable. This accompaniment was so beautiful in itself that no solo part that I have heard could give me so much pleasure.” Gerber was for two years under Bach.\n\nForkel[71] tells us that the first thing he taught was his own peculiar touch, and for this purpose the pupil was kept for several months at finger exercises, in fact they sometimes lasted from six to twelve months; but when the pupil’s patience began to flag he was given little pieces which Bach composed specially for him, such as the six little preludes for beginners, and the two-part inventions. He wrote these during the lesson, and was thus able to make them suit the particular requirements of the pupil. Together with the finger exercises the pupil had to practise all manner of ornaments, and Bach demanded the severest possible application from all his pupils.\n\nAs soon as possible he was made to learn whichever of Bach’s greater works suited him. In order to lighten the difficulties, Bach played the piece through to the pupil, and said, “that is how it must sound.”\n\nOne can, says Forkel, scarcely enumerate the many advantages of such a method. Even if it were only that the pupil is roused to emulation through the pleasure of hearing such a performance, the advantage would be very great. But in addition to this he obtains at once a grip of the piece in its complete form, instead of having to work it out bit by bit as he gradually overcomes the mechanical difficulties.\n\nThe instrument on which Bach taught was the clavichord, on account of its expressive quality which trained the ear to fine shades of tone; he would have nothing to say to mere finger training apart from understanding the music, and insisted on the cultivation of both art and technique together.\n\n[Sidenote: _Method of teaching Composition_]\n\nIn teaching composition Bach did not begin with dry counterpoints leading to nothing, as in his time was done by all other teachers; still less did he trouble his pupils about tone-relationships, which in his opinion concerned only theorists and instrument makers. He started at once with pure four part figured bass, and insisted on the proper leading of the parts, because this would give the clearest insight into the harmonic progressions. He then went on to the chorale, to which he at first set the basses and made the pupil only write the tenor and alto, afterwards gradually making him write the bass. He insisted at all times not only on the greatest possible purity in the harmony, but on the natural and flowing connection of all the single voices. The models he himself has left are known to every connoisseur, and his inner voices are often so singable that they might serve for the upper part. This style had to be striven for by the pupil, and until he had reached a high degree of proficiency Bach did not consider it wise to allow him to try inventing on his own account. He took for granted that all his composition pupils had the faculty of thinking in music. If any had not this faculty he was advised not to attempt composition.\n\nAs soon as the above-mentioned preparations in harmony were finished, he began with two voice fugue, and in this, and all composition practice, the pupil was strictly forbidden to use the clavier. Those who were obliged to do so he called “Knights of the keyboard.”\n\nIn fugue he was especially careful about the part writing--no voice must merely fill in the harmony, or break off before it had finished what it had to say. He looked upon his voices as persons, who conversed together as in private society, in which it would be unseemly for anyone to disturb the conversation either by uninteresting remarks, or by not finishing his sentences. On the other hand, he allowed his pupils as much freedom as possible with regard to intervals. They might try any experiments they liked as long as no damage was done to the purity of the harmony, or the inward meaning of the movement. He tried all possible experiments himself, and was glad to see his pupils do so. The whole of his system is to be found in Kirnberger’s “Kunst des reinen Satzes” (Art of pure writing).[72]\n\n[Sidenote: _Pupils_]\n\nAmong his pupils were his sons, of whom an account has already been given. The others were the following:--Johann Caspar Vogler, who began studying under him at Arnstadt and Weimar, and, according to Bach’s own showing, was a very fine organist. He became organist and Burgomaster at Weimar.\n\nGottfried August Homilius, subsequently music director of the three chief churches at Dresden, and cantor of the Kreuzschule. He was also of considerable reputation as an organist and church composer. Died 1785.\n\nChristoph Transchel, who died in 1800 at Dresden, was an esteemed teacher and clavier player. He was the owner of a considerable musical library.\n\nJohann Ludwig Krebs eventually became Court organist and music director at Altenburg, where he died in 1803. He was a very good organist and composer. Bach’s pun, “Ich habe in meinem Bache nur einen Krebs gefangen,” “I have only caught one Crab in my stream,” was intended to show the esteem in which he held him.[73]\n\nJ. G. Goldberg of Königsberg was declared by Bach to be one of his best pupils on the clavier and organ.\n\nAltnikol, his son-in-law, a fine organ player, and organist at Naumburg. He helped his father-in-law considerably during his blindness.\n\nJohn Philipp Kirnberger, born 1721, died at Berlin in 1783, was Court musician to Princess Amelia of Prussia, and celebrated as a theorist and composer.\n\nJohann Friedrich Agricola (1720-1774) became composer to the Prussian Court. He was more known by his theoretical works than his compositions.\n\nJohann Christian Kittel, who was organist at Erfurt and died in 1809, was a thorough harmonist, a clever and learned organist, an able composer, and a good teacher.\n\nJohann Schneider, Court organist and first violinist at Saalfeld, and afterwards organist of the Nicolai Church at Leipsic. He was also a pupil of Graun.\n\nJohann Martin Schubart (1690-1721) was Bach’s first pupil; he became organist at Weimar, but died early.\n\nA pupil named Voigt is mentioned by Emmanuel Bach as having come to his father after he (Emmanuel) had left the house. Perhaps he is the author of a “Conversation between an organist and his deputy about music,” mentioned by Walther.\n\nGotthilf Ziegler, organist and music director at St Ulrich, Halle, was a renowned teacher, composer and writer.\n\nErnst Bach, his cousin, was Capellmeister at Eisenach, having first studied law, and become a barrister. He was also a composer and organist.\n\nJ. H. Müthel, organist in Riga, a good performer and composer. Gerber gives a long account of him, and Burney praises his playing and compositions.[74]\n\n[Sidenote: _Bach’s music in England_]\n\nWe have seen that the first attempt to publish the _Wohltemperirte Clavier_ was made in London. England was early in its recognition of the composer, chiefly through the efforts of Samuel Wesley (1766-1837) who, becoming acquainted with his works, eagerly propagated a knowledge of them. Wesley’s edition of the _Wohltemperirte Clavier_ was published in conjunction with C. F. Horn in 1810; and through his influence, Forkel’s “Life” of Bach was translated and published in 1820. He became famous for his performances of Bach’s organ fugues, or as they were called in those days “pedal fugues,” and perhaps the name of his third son, Samuel Sebastian, may have some connection with his admiration for Sebastian Bach.\n\nIn 1849 the English Bach Society was founded, having as its objects the collection of the compositions and the performance of the works of J. S. Bach. It gave the first performance of the “Matthew Passion” in England at Hanover Square Rooms in 1854 under Sterndale Bennett. After a few more performances the society was dissolved in 1870, and its library given to the Royal Academy of Music.\n\nIn 1875 the “Bach Choir” was formed under the conductorship of Mr Otto Goldschmidt, for the performance of the B minor Mass, which was effected in 1876 at St James’s Hall, and the society was then placed on a permanent footing for the purpose of performing works of Bach and other composers. In 1885 Mr Otto Goldschmidt was succeeded by Professor Villiers Stanford, under whose _bâton_ many of Bach’s important works have been performed.\n\nBach is perhaps best known in England at present by his organ works, which are familiar to all competent organists, and his violin solos, which Herr Joachim has done so much to propagate. The _Wohltemperirte Clavier_ is a household word to every earnest musician, and his _Passions_ of _St Matthew_ and _St John_, besides the _Christmas Oratorio_ and a few cantatas, are frequently performed in London churches.\n\nSelections from the organ works have been published in England from time to time: by S. Wesley, by Coventry and Hollier (with the pedal part arranged by Dragonetti for double bass), by Best and by Novello with Best as editor. A complete edition is being brought out by Sir F. Bridge and Mr J. Higgs.",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 742,
+    "text": "Chapter X"
+  },
+  "word_count": 3164,
+  "block_count": 47
+}

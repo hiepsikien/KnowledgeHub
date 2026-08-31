@@ -1,0 +1,22 @@
+{
+  "chapter_id": "ch-022",
+  "title": "QUESTION 10",
+  "block_start": 607,
+  "block_end": 607,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "QUESTION 10",
+      "level": 2
+    }
+  ],
+  "reading_markdown": "QUESTION 10",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 607,
+    "text": "QUESTION 10"
+  },
+  "word_count": 2,
+  "block_count": 1
+}

@@ -1,0 +1,310 @@
+{
+  "chapter_id": "ch-011",
+  "title": "BOOK X",
+  "block_start": 793,
+  "block_end": 810,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "BOOK X",
+      "level": 1
+    },
+    {
+      "type": "paragraph",
+      "text": "[1] See note, p. 43.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[1]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[2] See Book II. chap. ix.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[2]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[3] See Book I. chap. v. ad finem.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[3]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[4] The notion alluded to is that of the [greek: idea]: that there is no real substantial good except the [greek: auto agathon], and therefore whatever is so called is so named in right of its participation in that.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[4]"
+        },
+        {
+          "start": 41,
+          "end": 54,
+          "style": "bracket_note",
+          "text": "[greek: idea]"
+        },
+        {
+          "start": 106,
+          "end": 127,
+          "style": "bracket_note",
+          "text": "[greek: auto agathon]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[5] See note on page 136, 1. 15. P. 238, 1. 24. Movement is, according to Aristotle, of six kinds: From not being to being    .  .  .  .    Generation From being to not being    .  .  .  .    Destruction From being to being more   .  .  .  .    Increase From being to being less   .  .  .  .    Diminution From being here to being there   .  .    Change of Place From being in this way to being in that  Alteration",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[5]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[7] _A_ may go to sleep quicker than _B_, but cannot _do more sleep_ in a given time.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[7]"
+        },
+        {
+          "start": 4,
+          "end": 7,
+          "style": "em",
+          "text": "_A_"
+        },
+        {
+          "start": 37,
+          "end": 40,
+          "style": "em",
+          "text": "_B_"
+        },
+        {
+          "start": 53,
+          "end": 68,
+          "style": "em",
+          "text": "_do more sleep_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[8] Compare Book III. chap. vi. [Greek: osper kai epi ton somaton, k. t. l.]",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[8]"
+        },
+        {
+          "start": 32,
+          "end": 76,
+          "style": "bracket_note",
+          "text": "[Greek: osper kai epi ton somaton, k. t. l.]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[9] Which is of course a [Greek: genesis].",
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "style": "footnote",
+          "text": "[9]"
+        },
+        {
+          "start": 25,
+          "end": 41,
+          "style": "bracket_note",
+          "text": "[Greek: genesis]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[10] That is, subordinate Movements are complete before the whole Movement is.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[10]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[11] Pleasure is so instantaneous a sensation, that it cannot be conceived divisible or incomplete; the longest continued Pleasure is only a succession of single sparks, so rapid as to give the appearance of a stream, of light.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[11]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[12] A man is as effectually hindered from taking a walk by the [Greek: allotria haedouae] of reading a novel, as by the [Greek: oikeia lupae] of gout in the feet.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[12]"
+        },
+        {
+          "start": 64,
+          "end": 90,
+          "style": "bracket_note",
+          "text": "[Greek: allotria haedouae]"
+        },
+        {
+          "start": 121,
+          "end": 142,
+          "style": "bracket_note",
+          "text": "[Greek: oikeia lupae]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[13] I have thus rendered [Greek: spoudae (ouk agnoon to hamartanomenon)]; but, though the English term does not represent the depth of the Greek one, it is some approximation to the truth to connect an earnest serious purpose with Happiness.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[13]"
+        },
+        {
+          "start": 26,
+          "end": 73,
+          "style": "bracket_note",
+          "text": "[Greek: spoudae (ouk agnoon to hamartanomenon)]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[14] Bishop Butler, _contra_ (Sermon XV.).",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[14]"
+        },
+        {
+          "start": 20,
+          "end": 28,
+          "style": "em",
+          "text": "_contra_"
+        },
+        {
+          "start": 29,
+          "end": 41,
+          "style": "paren_cite",
+          "text": "(Sermon XV.)"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "text": "“Knowledge is not our proper Happiness. Whoever will in the least attend to the thing will see that it is the gaining, not the having, of it, which is the entertainment of the mind.” The two statements may however be reconciled. Aristotle may be well understood only to mean, that the pursuit of knowledge will be the pleasanter, the freer it is from the minor hindrances which attend on _learning_.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 182,
+          "style": "quote",
+          "text": "“Knowledge is not our proper Happiness. Whoever will in the least attend to the thing will see that it is the gaining, not the having, of it, which is the entertainment of the mind.”"
+        },
+        {
+          "start": 388,
+          "end": 398,
+          "style": "em",
+          "text": "_learning_"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[15] The clause immediately following indicates that Aristotle felt this statement to be at first sight startling, Happiness having been all the way through connected with [Greek: energeia], but the statement illustrates and confirms what was said in note on page 6, 1. 15.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[15]"
+        },
+        {
+          "start": 172,
+          "end": 189,
+          "style": "bracket_note",
+          "text": "[Greek: energeia]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[16] That is to say, he aims at producing not merely a happy aggregate, but an aggregate of happy individuals. Compare what is said of Legislators in the last chapter of Book I and the first of Book II.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[16]"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "[17] See note, page 146, 1. 17.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 4,
+          "style": "footnote",
+          "text": "[17]"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "BOOK X\n\n[1] See note, p. 43.\n\n[2] See Book II. chap. ix.\n\n[3] See Book I. chap. v. ad finem.\n\n[4] The notion alluded to is that of the [greek: idea]: that there is no real substantial good except the [greek: auto agathon], and therefore whatever is so called is so named in right of its participation in that.\n\n[5] See note on page 136, 1. 15. P. 238, 1. 24. Movement is, according to Aristotle, of six kinds: From not being to being    .  .  .  .    Generation From being to not being    .  .  .  .    Destruction From being to being more   .  .  .  .    Increase From being to being less   .  .  .  .    Diminution From being here to being there   .  .    Change of Place From being in this way to being in that  Alteration\n\n[7] _A_ may go to sleep quicker than _B_, but cannot _do more sleep_ in a given time.\n\n[8] Compare Book III. chap. vi. [Greek: osper kai epi ton somaton, k. t. l.]\n\n[9] Which is of course a [Greek: genesis].\n\n[10] That is, subordinate Movements are complete before the whole Movement is.\n\n[11] Pleasure is so instantaneous a sensation, that it cannot be conceived divisible or incomplete; the longest continued Pleasure is only a succession of single sparks, so rapid as to give the appearance of a stream, of light.\n\n[12] A man is as effectually hindered from taking a walk by the [Greek: allotria haedouae] of reading a novel, as by the [Greek: oikeia lupae] of gout in the feet.\n\n[13] I have thus rendered [Greek: spoudae (ouk agnoon to hamartanomenon)]; but, though the English term does not represent the depth of the Greek one, it is some approximation to the truth to connect an earnest serious purpose with Happiness.\n\n[14] Bishop Butler, _contra_ (Sermon XV.).\n\n> “Knowledge is not our proper Happiness. Whoever will in the least attend to the thing will see that it is the gaining, not the having, of it, which is the entertainment of the mind.” The two statements may however be reconciled. Aristotle may be well understood only to mean, that the pursuit of knowledge will be the pleasanter, the freer it is from the minor hindrances which attend on _learning_.\n\n[15] The clause immediately following indicates that Aristotle felt this statement to be at first sight startling, Happiness having been all the way through connected with [Greek: energeia], but the statement illustrates and confirms what was said in note on page 6, 1. 15.\n\n[16] That is to say, he aims at producing not merely a happy aggregate, but an aggregate of happy individuals. Compare what is said of Legislators in the last chapter of Book I and the first of Book II.\n\n[17] See note, page 146, 1. 17.",
+  "split_hint": {
+    "type": "heading",
+    "level": 1,
+    "block_index": 793,
+    "text": "BOOK X"
+  },
+  "word_count": 451,
+  "block_count": 18
+}

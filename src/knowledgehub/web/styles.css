@@ -625,7 +625,9 @@ mark.ann-context {
 .re-micro { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
 .re-micro-pending { color: var(--muted); }
 .re-micro-complete { color: var(--ok); }
-.re-preview { white-space: pre-wrap; font-size: 13px; max-height: 420px; overflow: auto; background: #faf8f5; padding: 12px; border-radius: 6px; }
+.re-preview { font-size: 13px; max-height: 840px; overflow: auto; background: #faf8f5; padding: 12px; border-radius: 6px; }
+.re-preview pre { margin: 0; white-space: pre-wrap; font: inherit; }
+.re-preview .preview-gap { margin: 10px 0; padding: 10px 0; }
 .re-ch-title { font-weight: 600; font-size: 13px; }
 .re-main {
   background: var(--card);

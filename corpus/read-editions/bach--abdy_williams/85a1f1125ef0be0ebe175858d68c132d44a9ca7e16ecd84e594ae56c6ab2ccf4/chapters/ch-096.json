@@ -1,0 +1,42 @@
+{
+  "chapter_id": "ch-096",
+  "title": "_Six large Suites called the English Suites (203)._",
+  "block_start": 1275,
+  "block_end": 1276,
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "_Six large Suites called the English Suites (203)._",
+      "level": 2,
+      "spans": [
+        {
+          "start": 0,
+          "end": 51,
+          "style": "em",
+          "text": "_Six large Suites called the English Suites (203)._"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "_Toccata and Fugue in G minor (211)._      The toccata is in three movements.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 37,
+          "style": "em",
+          "text": "_Toccata and Fugue in G minor (211)._"
+        }
+      ]
+    }
+  ],
+  "reading_markdown": "_Six large Suites called the English Suites (203)._\n\n_Toccata and Fugue in G minor (211)._      The toccata is in three movements.",
+  "split_hint": {
+    "type": "heading",
+    "level": 2,
+    "block_index": 1275,
+    "text": "_Six large Suites called the English Suites (203)._"
+  },
+  "word_count": 23,
+  "block_count": 2
+}
