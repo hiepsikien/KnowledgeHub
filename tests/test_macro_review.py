@@ -292,3 +292,50 @@ def test_confirm_layout_rejected_until_ready(tmp_path, monkeypatch):
     run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
     with pytest.raises(ReadEditionStepError, match="not ready"):
         confirm_layout_step("grotius--freedom_of_the_seas", corpus=corpus)
+
+
+def _two_books_with_inner_toc() -> str:
+    body = " ".join(["prose"] * 90)
+
+    def one_book(label: str, chapters: tuple[str, ...]) -> str:
+        toc_rows = "\n".join(f"CHAPTER {c} ........ {i}" for i, c in enumerate(chapters, 1))
+        bodies = "".join(f"\nCHAPTER {c}\n\n{body}\n" for c in chapters)
+        return f"BOOK {label}\n\nCONTENTS\n{toc_rows}\n{bodies}"
+
+    return "Title page and imprint.\n\n" + one_book("I", ("I", "II")) + "\n" + one_book("II", ("III", "IV"))
+
+
+def test_expand_macro_splits_super_book_into_chapters_and_toc():
+    text = _two_books_with_inner_toc()
+    lines = text.split("\n")
+    structure = _sections_from_boundaries(
+        text,
+        [
+            {"start_line": 0, "kind": "front_matter", "title": "Front"},
+            {"start_line": lines.index("BOOK I"), "kind": "book", "title": "BOOK I"},
+            {"start_line": lines.index("BOOK II"), "kind": "book", "title": "BOOK II"},
+        ],
+        language="en",
+    )
+    assert structure["section_count"] == 3
+    book1 = next(s for s in structure["sections"] if s["title"] == "BOOK I")
+    expanded, focus = apply_structure_edit(
+        text,
+        structure,
+        action="expand_macro",
+        section_id=book1["section_id"],
+        language="en",
+        use_llm=False,
+    )
+    assert focus == book1["start_line"]
+    assert expanded["section_count"] > structure["section_count"]
+    kinds = [s["kind"] for s in expanded["sections"]]
+    titles = [s["title"] for s in expanded["sections"]]
+    assert "toc" in kinds
+    assert any("CHAPTER I" in t for t in titles)
+    assert any("CHAPTER II" in t for t in titles)
+    assert any(s["kind"] == "book" and s["title"] == "BOOK I" for s in expanded["sections"])
+    assert any(s["kind"] == "book" and s["title"] == "BOOK II" for s in expanded["sections"])
+    assert coverage_report(text, expanded["sections"])["complete"] is True
+    for left, right in zip(expanded["sections"], expanded["sections"][1:]):
+        assert int(right["start_char"]) == int(left["end_char"]) + 1

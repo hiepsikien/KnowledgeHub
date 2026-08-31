@@ -187,6 +187,7 @@ def edit_structure(
     section_id: str,
     start_line: int | None = None,
     kind: str | None = None,
+    use_llm: bool | None = None,
     corpus: Path | None = None,
 ) -> dict[str, Any]:
     try:
@@ -196,6 +197,7 @@ def edit_structure(
             section_id=section_id,
             start_line=start_line,
             kind=kind,
+            use_llm=use_llm,
             corpus=corpus,
         )
     except ReadEditionStepError as exc:

@@ -374,6 +374,7 @@ def edit_structure_step(
     section_id: str,
     start_line: int | None = None,
     kind: str | None = None,
+    use_llm: bool | None = None,
     corpus: Path | None = None,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
@@ -392,6 +393,8 @@ def edit_structure_step(
             start_line=start_line,
             kind=kind,
             language=language,
+            use_llm=False if use_llm is None else use_llm,
+            family=str(structure.get("source_family") or "") or None,
         )
     except ValueError as exc:
         raise ReadEditionStepError(str(exc)) from exc

@@ -29,6 +29,7 @@ SECTION_KINDS = frozenset(
         "appendix",
         "back_matter",
         "notes",
+        "toc",
         "other",
     }
 )

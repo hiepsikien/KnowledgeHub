@@ -388,6 +388,18 @@
     bar.hidden = !hasMacro;
     const kind = $("re-kind");
     if (kind && chapter?.kind) kind.value = chapter.kind;
+    const expand = $("re-expand-macro");
+    if (expand) {
+      const row = reviewRow(chapter?.chapter_id);
+      const flags = row?.flags || chapter?.flags || [];
+      const inner = row?.inner_heads || chapter?.inner_heads || [];
+      const nested =
+        flags.includes("super") ||
+        flags.includes("inner_heads") ||
+        inner.length >= 2 ||
+        ["book", "part"].includes(chapter?.kind);
+      expand.hidden = !nested;
+    }
   }
 
   function renderCompare(chapter) {
@@ -425,7 +437,7 @@
         )
         .join("");
       panes.push(
-        `<div class="re-compare-pane"><h3>Heading lồng (${inner.length}) — bấm để tách super-chapter</h3><div class="re-inner-heads">${rows}</div></div>`,
+        `<div class="re-compare-pane"><h3>Heading lồng (${inner.length}) — bấm để tách một heading, hoặc «Phân đoạn bên trong» để tách hết chapter</h3><div class="re-inner-heads">${rows}</div></div>`,
       );
     }
     box.hidden = !panes.length;
@@ -446,7 +458,13 @@
       });
       applyReview(result);
       const focus = result.focused_section_id || (result.structure?.sections || [])[0]?.section_id;
-      toast(action === "confirm" ? "Đã xác nhận section" : "Đã sửa ranh");
+      const toastMsg =
+        action === "confirm"
+          ? "Đã xác nhận section"
+          : action === "expand_macro"
+            ? "Đã phân đoạn bên trong"
+            : "Đã sửa ranh";
+      toast(toastMsg);
       if (focus) await selectChapter(focus);
     } catch (err) {
       toast(err.message);
@@ -634,6 +652,9 @@
     $("re-merge-prev")?.addEventListener("click", () => void applyStructureEdit("merge_prev"));
     $("re-merge-next")?.addEventListener("click", () => void applyStructureEdit("merge_next"));
     $("re-drop-start")?.addEventListener("click", () => void applyStructureEdit("drop_start"));
+    $("re-expand-macro")?.addEventListener("click", () =>
+      void applyStructureEdit("expand_macro", { use_llm: useLlmMacro() }),
+    );
     $("re-confirm-sec")?.addEventListener("click", () => void applyStructureEdit("confirm"));
     $("re-kind")?.addEventListener("change", (e) => {
       const kind = e.target.value;

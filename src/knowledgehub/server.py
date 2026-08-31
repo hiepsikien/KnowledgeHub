@@ -180,6 +180,7 @@ class ReadEditionStructureEditBody(BaseModel):
     section_id: str
     start_line: int | None = None
     kind: str | None = None
+    use_llm: bool | None = None
 
 
 class SyncRefChaptersBody(BaseModel):
@@ -366,6 +367,7 @@ def create_app() -> FastAPI:
                 section_id=payload.section_id,
                 start_line=payload.start_line,
                 kind=payload.kind,
+                use_llm=payload.use_llm,
             )
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc

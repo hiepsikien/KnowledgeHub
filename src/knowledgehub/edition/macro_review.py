@@ -9,10 +9,12 @@ from .macro import (
     SECTION_KINDS,
     _sections_from_boundaries,
     _toc_excerpt,
+    build_macro_structure,
     line_map,
     scan_heading_candidates,
+    section_source_slice,
 )
-from .macro_qa import extract_toc_from_raw
+from .macro_qa import detect_body_markers, extract_toc_from_raw
 
 SHORT_WORD_THRESHOLD = 80
 SUPER_CHAR_SHARE = 0.35
@@ -20,7 +22,7 @@ INNER_HEADS_FOR_SUPER = 2
 BOUNDARY_CONTEXT_LINES = 20
 TOC_MATCH_MIN = 0.5
 
-EXEMPT_SHORT_KINDS = frozenset({"front_matter", "notes", "back_matter", "preface"})
+EXEMPT_SHORT_KINDS = frozenset({"front_matter", "notes", "back_matter", "preface", "toc"})
 BODY_HEAD_HEURISTICS = frozenset(
     {"heading", "content_match", "profile_pattern", "profile_builtin", "marker"}
 )
@@ -427,6 +429,182 @@ def _heading_title(text: str, start_line: int, *, language: str) -> str:
     return f"Section {start_line}"
 
 
+_TOC_HEAD = re.compile(
+    r"^(?:TABLE OF CONTENTS|CONTENTS(?: OF (?:THIS )?BOOK)?|MỤC LỤC)\s*\.?\s*$",
+    re.I,
+)
+_TOC_DOT_LEADER = re.compile(r"\.{2,}\s*\d{1,4}$")
+
+
+def locate_toc_start_line(text: str) -> int | None:
+    """First line of a contents list in this text (heading or dot-leader run)."""
+    rows = line_map(text)
+    for row in rows:
+        s = str(row.get("text") or "").strip()
+        if _TOC_HEAD.match(s):
+            return int(row["line"])
+    run: list[int] = []
+    for row in rows:
+        s = str(row.get("text") or "").strip()
+        if _TOC_DOT_LEADER.search(s) and len(s) < 90:
+            run.append(int(row["line"]))
+            continue
+        if run and not s:
+            continue
+        if len(run) >= 3:
+            return run[0]
+        run = []
+    if len(run) >= 3:
+        return run[0]
+    return None
+
+
+def _inner_macro_structure(
+    slice_text: str,
+    *,
+    language: str,
+    use_llm: bool,
+    family: str | None,
+) -> dict[str, Any]:
+    """Prefer chapter-level markers inside a super section; else full macro on the slice."""
+    from .macro_markers import build_structure_from_markers, markers_at_level
+
+    markers = detect_body_markers(slice_text)
+    for level in ("chapter", "question", "roman_section", "all_caps_section"):
+        selected = [
+            m
+            for m in markers_at_level(markers, level)
+            if not _TOC_DOT_LEADER.search(str(m.get("text") or ""))
+        ]
+        if len(selected) >= 2:
+            filtered = [
+                m
+                for m in markers
+                if not _TOC_DOT_LEADER.search(str(m.get("text") or ""))
+            ]
+            return build_structure_from_markers(
+                slice_text, filtered, language=language, level=level
+            )
+    return build_macro_structure(
+        slice_text,
+        language=language,
+        family=family,
+        use_llm=use_llm,
+        raw=slice_text,
+    )
+
+
+def expand_section_with_macro(
+    text: str,
+    structure: dict[str, Any],
+    section_id: str,
+    *,
+    language: str | None = None,
+    use_llm: bool = False,
+    family: str | None = None,
+) -> tuple[dict[str, Any], int]:
+    """Re-run macro inside one super section so nested chapters (and inner TOC) become sections."""
+    language = language or str(structure.get("language") or "en")
+    family = family or str(structure.get("source_family") or "") or None
+    sections = list(structure.get("sections") or [])
+    index = next((i for i, s in enumerate(sections) if s.get("section_id") == section_id), None)
+    if index is None:
+        raise ValueError(f"Unknown section: {section_id}")
+    parent = sections[index]
+    slice_text = section_source_slice(text, parent)
+    if len(slice_text.strip()) < 40:
+        raise ValueError("section too small to expand")
+    inner = _inner_macro_structure(slice_text, language=language, use_llm=use_llm, family=family)
+    parent_start = int(parent["start_line"])
+    rows = line_map(text)
+    next_start = (
+        int(sections[index + 1]["start_line"])
+        if index + 1 < len(sections)
+        else _line_at_char(rows, len(text) - 1 if text else 0) + 1
+    )
+    mapped: list[dict[str, Any]] = []
+    for sec in inner.get("sections") or []:
+        gline = parent_start + int(sec.get("start_line") or 0)
+        if gline < parent_start or gline >= next_start:
+            continue
+        mapped.append(
+            {
+                "start_line": gline,
+                "heading_line": gline,
+                "kind": str(sec.get("kind") or "chapter"),
+                "title": str(sec.get("title") or "Section"),
+                "subtitle": sec.get("subtitle"),
+                "confidence": float(sec.get("confidence") or 0.85),
+            }
+        )
+    if not mapped:
+        raise ValueError("inner macro produced no sections")
+    if mapped[0]["start_line"] != parent_start:
+        mapped.insert(
+            0,
+            {
+                "start_line": parent_start,
+                "heading_line": parent_start,
+                "kind": str(parent.get("kind") or "book"),
+                "title": str(parent.get("title") or "Section"),
+                "subtitle": parent.get("subtitle"),
+                "confidence": float(parent.get("confidence") or 0.85),
+            },
+        )
+    else:
+        mapped[0]["kind"] = str(parent.get("kind") or mapped[0]["kind"])
+        mapped[0]["title"] = str(parent.get("title") or mapped[0]["title"])
+
+    toc_local = locate_toc_start_line(slice_text)
+    if toc_local is not None:
+        toc_global = parent_start + toc_local
+        if parent_start < toc_global < next_start:
+            toc_title = _heading_title(text, toc_global, language=language) or "Contents"
+            existing = next((b for b in mapped if int(b["start_line"]) == toc_global), None)
+            if existing:
+                existing["kind"] = "toc"
+                existing["title"] = toc_title
+            else:
+                mapped.append(
+                    {
+                        "start_line": toc_global,
+                        "heading_line": toc_global,
+                        "kind": "toc",
+                        "title": toc_title,
+                        "subtitle": None,
+                        "confidence": 0.9,
+                    }
+                )
+            mapped.sort(key=lambda b: int(b["start_line"]))
+
+    unique_lines = {int(b["start_line"]) for b in mapped}
+    if len(unique_lines) < 2:
+        raise ValueError("inner macro did not find chapters inside this section")
+
+    new_bounds = (
+        sections_to_boundaries(sections[:index]) + mapped + sections_to_boundaries(sections[index + 1 :])
+    )
+    seen: set[int] = set()
+    deduped: list[dict[str, Any]] = []
+    for bound in new_bounds:
+        start = int(bound["start_line"])
+        if start in seen:
+            continue
+        seen.add(start)
+        deduped.append(bound)
+    rebuilt = _sections_from_boundaries(text, deduped, language=language)
+    out = _copy_envelope(structure, rebuilt)
+    hitl = dict(structure.get("hitl") or {})
+    confirmed = {int(x) for x in (hitl.get("confirmed_starts") or [])}
+    still = sorted(
+        s for s in confirmed if any(int(sec["start_line"]) == s for sec in rebuilt.get("sections") or [])
+    )
+    hitl["confirmed_starts"] = still
+    hitl["layout_ok"] = False
+    out["hitl"] = hitl
+    return out, parent_start
+
+
 def apply_structure_edit(
     text: str,
     structure: dict[str, Any],
@@ -436,9 +614,20 @@ def apply_structure_edit(
     start_line: int | None = None,
     kind: str | None = None,
     language: str | None = None,
+    use_llm: bool = False,
+    family: str | None = None,
 ) -> tuple[dict[str, Any], int]:
     """Apply a curator edit. Returns (new_structure, focused_start_line)."""
     language = language or str(structure.get("language") or "en")
+    if action == "expand_macro":
+        return expand_section_with_macro(
+            text,
+            structure,
+            section_id,
+            language=language,
+            use_llm=use_llm,
+            family=family,
+        )
     sections = list(structure.get("sections") or [])
     if not sections:
         raise ValueError("no sections to edit")
