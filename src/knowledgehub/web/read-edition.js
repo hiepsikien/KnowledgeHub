@@ -52,9 +52,10 @@
   }
 
   function readEditionWorkFromPath() {
-    const parts = location.pathname.replace(/^\/+/, "").split("/");
-    if (parts[0] === "read-edition" && parts[1]) return decodeURIComponent(parts.slice(1).join("/"));
-    return null;
+    const parts = location.pathname.replace(/^\/+/, "").split("/").filter(Boolean);
+    if (parts[0] !== "read-edition") return null;
+    if (parts[1]) return decodeURIComponent(parts.slice(1).join("/"));
+    return "";
   }
 
   function spanClass(style) {
@@ -883,6 +884,9 @@
       $("view-read-edition").hidden = false;
       $("re-pick").hidden = false;
       $("re-desk").hidden = true;
+      if (location.pathname !== "/read-edition") {
+        history.replaceState({ view: "read-edition" }, "", "/read-edition");
+      }
       applyReview(null);
       $("re-heading").textContent = "Chế bản";
       $("re-status").textContent = "Cấu trúc chương, định dạng REF, đưa sang Read.";
