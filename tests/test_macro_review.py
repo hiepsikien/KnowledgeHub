@@ -268,6 +268,10 @@ def test_set_kind_keeps_parsed_chapter_json(tmp_path, monkeypatch):
     after = json.loads(ch_path.read_text(encoding="utf-8"))
     assert after["blocks"] == before["blocks"]
     assert after["kind"] == "preface"
+    from knowledgehub.edition.read_edition_steps import load_structure
+
+    saved = load_structure(package_dir)
+    assert (saved.get("hitl") or {}).get("last_section_id") == ch_id
 
 
 def test_parse_requires_hitl_ready(tmp_path, monkeypatch):

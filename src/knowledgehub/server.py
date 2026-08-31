@@ -33,6 +33,7 @@ from .read_edition_service import (
     get_manifest as get_read_edition_manifest,
     get_review as get_read_edition_review,
     get_status as get_read_edition_status,
+    list_sessions as list_read_edition_sessions,
     get_structure as get_read_edition_structure,
     parse_micro as parse_read_edition_micro,
     parse_micro_batch as parse_read_edition_micro_batch,
@@ -304,6 +305,11 @@ def create_app() -> FastAPI:
         except PublishError as exc:
             raise HTTPException(400, str(exc)) from exc
         return result
+
+    @app.get("/api/read-editions", dependencies=guard)
+    def read_edition_sessions() -> dict[str, Any]:
+        sessions = list_read_edition_sessions()
+        return {"sessions": sessions, "total": len(sessions)}
 
     @app.get("/api/works/{work_id}/read-edition", dependencies=guard)
     def read_edition_status(work_id: str) -> dict[str, Any]:

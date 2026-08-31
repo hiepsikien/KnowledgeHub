@@ -17,6 +17,7 @@ from .edition.read_edition import (
     package_status,
     qa_read_edition_chapter,
     save_overrides,
+    list_read_edition_sessions,
 )
 from .edition.read_edition_steps import (
     ReadEditionStepError,
@@ -80,6 +81,10 @@ def _map_error(exc: Exception) -> ValueError:
 
 def get_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
     return package_status(work_id, corpus=corpus)
+
+
+def list_sessions(*, corpus: Path | None = None) -> list[dict[str, Any]]:
+    return list_read_edition_sessions(corpus=corpus)
 
 
 def run_macro(

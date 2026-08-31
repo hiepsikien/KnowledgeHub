@@ -400,6 +400,21 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
     chapters = (manifest or {}).get("chapters") or []
     parsed = sum(1 for row in chapters if row.get("micro_status") == "complete")
     total = len(chapters) or len((structure or {}).get("sections") or [])
+    hitl = dict((structure or {}).get("hitl") or {})
+    toc_status = (hitl.get("toc") or {}).get("status")
+    layout_ok = bool(hitl.get("layout_ok"))
+    if not structure:
+        phase = "empty"
+    elif total and parsed >= total:
+        phase = "parsed"
+    elif parsed > 0:
+        phase = "parsing"
+    elif layout_ok:
+        phase = "layout_ok"
+    elif toc_status:
+        phase = "hitl"
+    else:
+        phase = "macro"
     return {
         "work_id": work_id,
         "title": work.get("title"),
@@ -418,7 +433,53 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
         "chapters_parsed": parsed,
         "gemini_available": gemini_available(),
         "default_use_llm_relabel": default_use_llm_relabel(),
+        "hitl": {
+            "toc_status": toc_status,
+            "layout_ok": layout_ok,
+            "last_section_id": hitl.get("last_section_id"),
+        },
+        "phase": phase,
+        "updated_at": (manifest or {}).get("updated_at") or (structure or {}).get("created_at"),
     }
+
+
+def list_read_edition_sessions(*, corpus: Path | None = None) -> list[dict[str, Any]]:
+    """Works that already have a Read Edition package on disk (in-progress or done)."""
+    from ..catalog import load_works
+
+    root = corpus or corpus_root()
+    works_path = root / "catalog" / "works.json"
+    if not works_path.is_file():
+        return []
+    sessions: list[dict[str, Any]] = []
+    for work in load_works(works_path):
+        work_id = str(work.get("id") or "")
+        if not work_id:
+            continue
+        try:
+            status = package_status(work_id, corpus=root)
+        except (KeyError, FileNotFoundError, ValueError):
+            continue
+        if not status.get("macro_complete") and not status.get("package_built"):
+            continue
+        sessions.append(
+            {
+                "work_id": status.get("work_id"),
+                "title": status.get("title"),
+                "language": status.get("language"),
+                "phase": status.get("phase"),
+                "chapters_total": status.get("chapters_total") or 0,
+                "chapters_parsed": status.get("chapters_parsed") or 0,
+                "toc_status": (status.get("hitl") or {}).get("toc_status"),
+                "layout_ok": bool((status.get("hitl") or {}).get("layout_ok")),
+                "last_section_id": (status.get("hitl") or {}).get("last_section_id"),
+                "updated_at": status.get("updated_at"),
+                "publishable": bool(status.get("publishable")),
+                "macro_mode": status.get("macro_mode"),
+            }
+        )
+    sessions.sort(key=lambda row: str(row.get("updated_at") or ""), reverse=True)
+    return sessions
 
 
 def qa_read_edition_chapter(

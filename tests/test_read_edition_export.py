@@ -100,6 +100,10 @@ def client(tmp_path, monkeypatch):
 
 def test_read_edition_api(client):
     wid = "locke--second_treatise"
+    empty = client.get("/api/read-editions")
+    assert empty.status_code == 200
+    assert empty.json()["sessions"] == []
+
     status = client.get(f"/api/works/{wid}/read-edition")
     assert status.status_code == 200
     body = status.json()
@@ -147,6 +151,20 @@ def test_read_edition_api(client):
     parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
     assert parsed.status_code == 200
     assert parsed.json()["blocks"]
+
+    listed = client.get("/api/read-editions")
+    assert listed.status_code == 200
+    sessions = listed.json()["sessions"]
+    assert any(s["work_id"] == wid for s in sessions)
+    row = next(s for s in sessions if s["work_id"] == wid)
+    assert row["chapters_parsed"] >= 1
+    assert row["phase"] in {"parsing", "parsed"}
+    assert row["last_section_id"] == ch_id
+    assert row["layout_ok"] is True
+
+    status2 = client.get(f"/api/works/{wid}/read-edition")
+    assert status2.json()["hitl"]["last_section_id"] == ch_id
+    assert status2.json()["phase"] in {"parsing", "parsed"}
 
     chapter = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}")
     assert chapter.status_code == 200

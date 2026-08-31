@@ -181,6 +181,17 @@ def _sync_chapter_json_metadata(package_dir: Path, structure: dict[str, Any]) ->
             path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _remember_last_section(package_dir: Path, structure: dict[str, Any] | None, section_id: str | None) -> None:
+    if not structure or not section_id:
+        return
+    hitl = dict(structure.get("hitl") or {})
+    if hitl.get("last_section_id") == section_id:
+        return
+    hitl["last_section_id"] = section_id
+    structure["hitl"] = hitl
+    save_structure(package_dir, structure)
+
+
 def persist_package_structure(
     work_id: str,
     structure: dict[str, Any],
@@ -406,11 +417,14 @@ def edit_structure_step(
         (s for s in (new_structure.get("sections") or []) if int(s.get("start_line") or -1) == focused_start),
         None,
     )
+    focused_id = (focused or {}).get("section_id")
+    if focused_id:
+        _remember_last_section(package_dir, persisted.get("structure") or new_structure, focused_id)
     review = review_structure_step(work_id, corpus=root)
     return {
         **persisted,
         **review,
-        "focused_section_id": (focused or {}).get("section_id"),
+        "focused_section_id": focused_id,
         "focused_start_line": focused_start,
     }
 
@@ -482,6 +496,7 @@ def parse_micro_chapter(
             row["edition_hash"] = edition.get("edition_hash")
     manifest["updated_at"] = chapter_doc.get("parsed_at") or manifest.get("updated_at")
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _remember_last_section(package_dir, structure, chapter_id)
     return chapter_doc
 
 

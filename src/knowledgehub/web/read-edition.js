@@ -241,6 +241,11 @@
     try {
       const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`);
       state.chapter = chapter;
+      try {
+        localStorage.setItem(lastSectionKey(state.workId), chapterId);
+      } catch {
+        /* ignore quota */
+      }
       renderChapterList(state.manifest);
       $("re-detail-title").textContent = chapter.title || chapterId;
       const parsed = chapter.micro_status === "complete";
@@ -486,6 +491,23 @@
     }
   }
 
+  function lastSectionKey(workId) {
+    return `kh-re-section:${workId}`;
+  }
+
+  function phaseLabel(phase) {
+    return (
+      {
+        macro: "đã phân đoạn",
+        hitl: "đang duyệt cấu trúc",
+        layout_ok: "cấu trúc OK",
+        parsing: "đang parse REF",
+        parsed: "parse xong",
+        empty: "chưa bắt đầu",
+      }[phase] || phase || "—"
+    );
+  }
+
   async function loadReadEditionPage(workId) {
     state.workId = workId;
     state.selected.clear();
@@ -511,8 +533,12 @@
         await loadReview();
         $("re-status").textContent = formatStatus(status);
         renderChapterList(state.manifest);
-        const first = (state.manifest.chapters || [])[0];
-        if (first) await selectChapter(first.chapter_id);
+        const chapters = state.manifest.chapters || [];
+        const remembered =
+          status.hitl?.last_section_id ||
+          (workId ? localStorage.getItem(lastSectionKey(workId)) : null);
+        const pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
+        if (pick) await selectChapter(pick.chapter_id);
       } else {
         applyReview(null);
         $("re-chapters").innerHTML = `<p class="muted">Chạy «Bước 1: Phân đoạn» để liệt kê chương.</p>`;
@@ -528,13 +554,39 @@
   function wireReadEdition() {
     $("re-macro")?.addEventListener("click", async () => {
       if (!state.workId) return;
+      if (state.status?.macro_complete) {
+        toast("Đã có phân đoạn đã lưu — bấm Reset phân đoạn nếu muốn làm lại từ đầu");
+        return;
+      }
       $("re-status").textContent = "Đang phân đoạn (macro)…";
+      try {
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
+          method: "POST",
+          body: { force: false, use_llm: useLlmMacro() },
+        });
+        toast("Đã phân đoạn xong");
+        await loadReadEditionPage(state.workId);
+      } catch (err) {
+        toast(err.message);
+        $("re-status").textContent = err.message;
+      }
+    });
+
+    $("re-reset")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      if (!window.confirm("Xóa cấu trúc HITL và parse REF của sách này, làm lại từ Bước 1?")) return;
+      $("re-status").textContent = "Đang reset phân đoạn…";
       try {
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
           method: "POST",
           body: { force: true, use_llm: useLlmMacro() },
         });
-        toast("Đã phân đoạn xong");
+        try {
+          localStorage.removeItem(lastSectionKey(state.workId));
+        } catch {
+          /* ignore */
+        }
+        toast("Đã reset — phân đoạn lại từ đầu");
         await loadReadEditionPage(state.workId);
       } catch (err) {
         toast(err.message);
@@ -770,9 +822,36 @@
       $("re-desk").hidden = true;
       applyReview(null);
       $("re-heading").textContent = "Read Edition";
-      $("re-status").textContent = "Chọn tác phẩm có file raw";
-      const works = await api("/api/works");
-      const rows = (works.works || []).filter((w) => w.has_raw);
+      $("re-status").textContent = "Chọn sách đang làm hoặc bắt đầu sách mới";
+      const [sessionResp, works] = await Promise.all([api("/api/read-editions"), api("/api/works")]);
+      const sessions = sessionResp.sessions || [];
+      const sessionIds = new Set(sessions.map((s) => s.work_id));
+      const box = $("re-sessions");
+      const sessionBody = $("re-session-rows");
+      if (box && sessionBody) {
+        box.hidden = !sessions.length;
+        sessionBody.innerHTML = sessions
+          .map((s) => {
+            const toc = s.toc_status ? s.toc_status : "chưa";
+            const layout = s.layout_ok ? " · layout OK" : "";
+            const when = s.updated_at ? escapeHtml(String(s.updated_at).replace("T", " ").slice(0, 16)) : "—";
+            return `<tr data-id="${escapeHtml(s.work_id)}">
+              <td>${escapeHtml(s.title || s.work_id)}<div class="muted">${escapeHtml(s.work_id)}</div></td>
+              <td><span class="re-phase re-phase-${escapeHtml(s.phase || "macro")}">${escapeHtml(phaseLabel(s.phase))}</span>${layout}</td>
+              <td>${s.chapters_parsed || 0}/${s.chapters_total || 0}</td>
+              <td>${escapeHtml(toc)}</td>
+              <td class="muted">${when}</td>
+            </tr>`;
+          })
+          .join("");
+        sessionBody.onclick = (e) => {
+          const tr = e.target.closest("tr[data-id]");
+          if (tr) location.href = `/read-edition/${encodeURIComponent(tr.dataset.id)}`;
+        };
+      }
+      const rows = (works.works || []).filter((w) => w.has_raw && !sessionIds.has(w.id));
+      const catalogHead = $("re-catalog-heading");
+      if (catalogHead) catalogHead.textContent = sessions.length ? "Bắt đầu sách khác" : "Chọn tác phẩm";
       $("re-pick-rows").innerHTML = rows
         .map(
           (w) =>

@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=read-edition-hitl4" />
+    <link rel="stylesheet" href="/styles.css?v=read-edition-hitl5" />
   </head>
   <body>
     <div class="shell">
@@ -128,6 +128,7 @@
               <label class="inline re-llm-toggle"><input id="re-use-llm" type="checkbox" checked /> LLM relabel</label>
               <label class="inline re-llm-toggle"><input id="re-use-llm-qa" type="checkbox" checked /> LLM QA</label>
               <button type="button" class="btn primary" id="re-macro">Bước 1: Phân đoạn</button>
+              <button type="button" class="btn ghost" id="re-reset">Reset phân đoạn</button>
               <button type="button" class="btn" id="re-layout-ok">Cấu trúc OK</button>
               <button type="button" class="btn ghost" id="re-parse-ch">Parse REF chương</button>
               <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
@@ -136,6 +137,25 @@
             </div>
           </header>
           <section id="re-pick" hidden>
+            <section id="re-sessions" class="re-sessions" hidden>
+              <h2>Đang làm</h2>
+              <p class="muted">Sách đã phân đoạn hoặc parse — chọn để làm tiếp. Reset chỉ khi bấm «Reset phân đoạn» trong bàn làm việc.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Tác phẩm</th>
+                      <th>Trạng thái</th>
+                      <th>Parse</th>
+                      <th>TOC</th>
+                      <th>Cập nhật</th>
+                    </tr>
+                  </thead>
+                  <tbody id="re-session-rows"></tbody>
+                </table>
+              </div>
+            </section>
+            <h2 id="re-catalog-heading">Bắt đầu sách khác</h2>
             <p class="muted">Chọn tác phẩm EN hoặc VI có file raw.</p>
             <div class="table-wrap">
               <table>
@@ -450,7 +470,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=read-edition-hitl4"></script>
-    <script src="/read-edition.js?v=read-edition-hitl4"></script>
+    <script src="/app.js?v=read-edition-hitl5"></script>
+    <script src="/read-edition.js?v=read-edition-hitl5"></script>
   </body>
 </html>

@@ -648,6 +648,21 @@ mark.ann-context {
 }
 .re-toc-banner { margin: 0 0 8px; font-size: 13px; }
 .re-toc-actions { gap: 8px; }
+.re-sessions { margin-bottom: 28px; }
+.re-sessions h2, #re-catalog-heading { font-size: 16px; margin: 0 0 6px; }
+.re-phase {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.re-phase-macro { background: #e4eaf8; color: #243e80; }
+.re-phase-hitl { background: #fde7c7; color: #8a4b08; }
+.re-phase-layout_ok { background: #d8f0d8; color: #1b6b1b; }
+.re-phase-parsing { background: #e4eaf8; color: #243e80; }
+.re-phase-parsed { background: #d8f0d8; color: #1b6b1b; }
 .re-health { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
 .re-health.ok { color: var(--ok, #2a7a4b); }
 .re-flag {
