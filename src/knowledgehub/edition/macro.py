@@ -42,7 +42,10 @@ HEADING_CANDIDATE = re.compile(
     re.I,
 )
 
-VI_CHAPTER = re.compile(r"^CHƯƠNG\s+(?:[IVXLC\d]+|[Một Hai Ba][^\n]{0,40})$", re.I)
+VI_CHAPTER = re.compile(
+    r"^CHƯƠNG\s+(?:[IVXLC\d]+|Một|Hai|Ba|Bốn|Tư|Năm|Sáu|Bảy|Tám|Chín|Mười)(?:[^\n]{0,40})?$",
+    re.I,
+)
 
 
 def _now() -> str:
@@ -126,6 +129,51 @@ def _toc_excerpt(text: str, *, max_chars: int = 3500) -> str:
     return "\n".join(toc_lines[:80])[:max_chars]
 
 
+def _normalize_llm_boundaries(
+    boundaries: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    *,
+    max_snap_distance: int = 5,
+) -> tuple[list[dict[str, Any]] | None, str | None]:
+    """Snap LLM boundary lines to candidate lines; None → caller should rule_fallback."""
+    cand_lines = sorted({int(c["line"]) for c in candidates})
+    if not cand_lines:
+        return None, "no heading candidates"
+    allowed = set(cand_lines) | {0}
+    normalized: list[dict[str, Any]] = []
+    invalid = 0
+    for bound in boundaries:
+        if not isinstance(bound, dict):
+            invalid += 1
+            continue
+        start_line = int(bound.get("start_line", -1))
+        if start_line in allowed:
+            normalized.append(bound)
+            continue
+        nearest = min(cand_lines, key=lambda line: abs(line - start_line))
+        if abs(nearest - start_line) <= max_snap_distance:
+            fixed = dict(bound)
+            fixed["start_line"] = nearest
+            if bound.get("heading_line") is not None:
+                fixed["heading_line"] = nearest
+            normalized.append(fixed)
+            continue
+        invalid += 1
+    if invalid:
+        return None, f"{invalid} boundary start_line values not in candidates"
+    seen: set[int] = set()
+    deduped: list[dict[str, Any]] = []
+    for bound in sorted(normalized, key=lambda b: int(b["start_line"])):
+        start_line = int(bound["start_line"])
+        if start_line in seen:
+            continue
+        seen.add(start_line)
+        deduped.append(bound)
+    if not deduped:
+        return None, "no valid boundaries after normalization"
+    return deduped, None
+
+
 def _sections_from_boundaries(
     text: str,
     boundaries: list[dict[str, Any]],
@@ -140,10 +188,14 @@ def _sections_from_boundaries(
     sections: list[dict[str, Any]] = []
     for index, bound in enumerate(ordered):
         start_line = int(bound["start_line"])
-        start_char = int(line_to_start.get(start_line, 0))
+        if start_line not in line_to_start:
+            raise ValueError(f"unknown start_line {start_line} — not in source line map")
+        start_char = int(line_to_start[start_line])
         if index + 1 < len(ordered):
             next_line = int(ordered[index + 1]["start_line"])
-            end_char = int(line_to_start.get(next_line, text_len)) - 1
+            if next_line not in line_to_start:
+                raise ValueError(f"unknown start_line {next_line} — not in source line map")
+            end_char = int(line_to_start[next_line]) - 1
         else:
             end_char = text_len - 1
         if end_char < start_char:
@@ -331,7 +383,11 @@ def build_macro_structure(
             sections_in = parsed.get("sections") or []
             if not isinstance(sections_in, list) or not sections_in:
                 raise ProviderError("macro LLM returned no sections")
-            doc = _sections_from_boundaries(text, sections_in, language=language)
+            llm_candidates = filter_candidates_for_llm(candidates)
+            normalized, norm_err = _normalize_llm_boundaries(sections_in, llm_candidates)
+            if normalized is None:
+                raise ProviderError(norm_err or "invalid LLM boundaries")
+            doc = _sections_from_boundaries(text, normalized, language=language)
             doc["mode"] = "llm"
             doc["model"] = qa_model
             doc["summary_vi"] = str(parsed.get("summary_vi") or "")

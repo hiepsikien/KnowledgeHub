@@ -399,11 +399,13 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
     manifest = load_manifest(package_dir) if (package_dir / "manifest.json").is_file() else None
     chapters = (manifest or {}).get("chapters") or []
     parsed = sum(1 for row in chapters if row.get("micro_status") == "complete")
+    total = len(chapters) or len((structure or {}).get("sections") or [])
     return {
         "work_id": work_id,
         "title": work.get("title"),
         "language": work.get("language"),
         "ready": True,
+        "publishable": structure is not None and total > 0 and parsed == total,
         "pipeline": "two_step" if structure else "legacy",
         "content_hash": meta.get("content_hash"),
         "macro_complete": structure is not None,

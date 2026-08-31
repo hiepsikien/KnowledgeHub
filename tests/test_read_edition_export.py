@@ -75,6 +75,10 @@ def test_two_step_read_edition_package(tmp_path, monkeypatch):
     chapter = load_chapter(package_dir, ch_id)
     assert chapter["blocks"]
 
+    for row in loaded["chapters"]:
+        if row["chapter_id"] != ch_id:
+            parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False)
+
     edition, _report = edition_for_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert edition["edition_format"] == "ref/1"
     assert edition["blocks"]
@@ -127,6 +131,39 @@ def test_read_edition_api(client):
     assert "passed" in qa.json()
 
 
+def test_publish_rejects_incomplete_edition(tmp_path, monkeypatch):
+    corpus = tmp_path / "corpus"
+    raw_dir = corpus / "sources/grotius/raw"
+    raw_dir.mkdir(parents=True)
+    (raw_dir / "freedom_of_the_seas.txt").write_text(FIXTURE.read_text(encoding="utf-8"), encoding="utf-8")
+    catalog = corpus / "catalog"
+    catalog.mkdir()
+    works = [
+        {
+            "id": "grotius--freedom_of_the_seas",
+            "title": "The Freedom of the Seas",
+            "author_id": "grotius",
+            "language": "en",
+            "license": "public_domain_usa_gutenberg",
+            "content_file": "sources/grotius/raw/freedom_of_the_seas.txt",
+            "content_hash": "deadbeef01",
+            "rights": {"consumers": {"read": "allowed"}},
+        }
+    ]
+    (catalog / "works.json").write_text(json.dumps(works), encoding="utf-8")
+    (catalog / "authors.json").write_text(json.dumps([{"id": "grotius", "name": "Grotius"}]), encoding="utf-8")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+
+    from knowledgehub.read_publish import PublishError, prepare_publish
+
+    run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
+    manifest = load_manifest(corpus / "read-editions/grotius--freedom_of_the_seas/deadbeef01")
+    parse_micro_chapter("grotius--freedom_of_the_seas", manifest["chapters"][0]["chapter_id"], corpus=corpus, use_llm=False)
+    with pytest.raises(PublishError, match="incomplete"):
+        prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
+
+
 def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
     corpus = tmp_path / "corpus"
     raw_dir = corpus / "sources/grotius/raw"
@@ -157,8 +194,8 @@ def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
     manifest = load_manifest(
         corpus / "read-editions/grotius--freedom_of_the_seas/deadbeef01"
     )
-    ch_id = manifest["chapters"][0]["chapter_id"]
-    parse_micro_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False)
+    for row in manifest["chapters"]:
+        parse_micro_chapter("grotius--freedom_of_the_seas", row["chapter_id"], corpus=corpus, use_llm=False)
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload.get("_normalize", {}).get("read_edition")

@@ -82,21 +82,57 @@ def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] |
     for sec in structure.get("sections") or []:
         sid = sec["section_id"]
         prev = by_id.get(sid) or {}
-        rows.append(
-            {
-                "chapter_id": sid,
-                "title": sec.get("title"),
-                "subtitle": sec.get("subtitle"),
-                "kind": sec.get("kind"),
-                "char_range": [sec.get("start_char"), sec.get("end_char")],
-                "word_count": sec.get("word_count"),
-                "micro_status": prev.get("micro_status", "pending"),
-                "block_count": prev.get("block_count"),
-                "qa_status": prev.get("qa_status", "pending"),
-                "confidence": sec.get("confidence"),
-            }
-        )
+        new_range = [sec.get("start_char"), sec.get("end_char")]
+        prev_range = prev.get("char_range")
+        range_changed = prev_range is not None and prev_range != new_range
+        if range_changed:
+            rows.append(
+                {
+                    "chapter_id": sid,
+                    "title": sec.get("title"),
+                    "subtitle": sec.get("subtitle"),
+                    "kind": sec.get("kind"),
+                    "char_range": new_range,
+                    "word_count": sec.get("word_count"),
+                    "micro_status": "pending",
+                    "block_count": None,
+                    "qa_status": "pending",
+                    "confidence": sec.get("confidence"),
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "chapter_id": sid,
+                    "title": sec.get("title"),
+                    "subtitle": sec.get("subtitle"),
+                    "kind": sec.get("kind"),
+                    "char_range": new_range,
+                    "word_count": sec.get("word_count"),
+                    "micro_status": prev.get("micro_status", "pending"),
+                    "block_count": prev.get("block_count"),
+                    "qa_status": prev.get("qa_status", "pending"),
+                    "confidence": sec.get("confidence"),
+                }
+            )
     return rows
+
+
+def _prune_stale_chapter_files(package_dir: Path, manifest: dict[str, Any]) -> None:
+    """Drop chapter JSON when section is pending or no longer in manifest."""
+    chapters_dir = package_dir / "chapters"
+    if not chapters_dir.is_dir():
+        return
+    keep_complete: set[str] = set()
+    for row in manifest.get("chapters") or []:
+        ch_id = str(row.get("chapter_id") or "")
+        if ch_id and row.get("micro_status") == "complete":
+            ch_path = chapters_dir / f"{ch_id}.json"
+            if ch_path.is_file():
+                keep_complete.add(ch_id)
+    for path in chapters_dir.glob("*.json"):
+        if path.stem not in keep_complete:
+            path.unlink(missing_ok=True)
 
 
 def run_macro_step(
@@ -161,6 +197,7 @@ def run_macro_step(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    _prune_stale_chapter_files(package_dir, manifest)
     (package_dir / "chapters").mkdir(exist_ok=True)
     (package_dir / "qa").mkdir(exist_ok=True)
     return {
@@ -238,7 +275,13 @@ def parse_micro_chapter(
     return chapter_doc
 
 
-def assemble_edition_from_package(package_dir: Path, *, language: str, source_family: str) -> dict[str, Any]:
+def assemble_edition_from_package(
+    package_dir: Path,
+    *,
+    language: str,
+    source_family: str,
+    allow_incomplete: bool = False,
+) -> dict[str, Any]:
     manifest_path = package_dir / "manifest.json"
     if not manifest_path.is_file():
         raise ReadEditionStepError("manifest.json missing")
@@ -246,9 +289,35 @@ def assemble_edition_from_package(package_dir: Path, *, language: str, source_fa
     if manifest.get("pipeline") != "two_step":
         raise ReadEditionStepError("Not a two-step package")
 
-    merged_blocks: list[dict[str, Any]] = []
+    chapters = manifest.get("chapters") or []
+    incomplete: list[str] = []
+    missing_json: list[str] = []
     chapters_dir = package_dir / "chapters"
-    for row in manifest.get("chapters") or []:
+    for row in chapters:
+        ch_id = str(row.get("chapter_id") or "")
+        if row.get("micro_status") != "complete":
+            incomplete.append(ch_id)
+            continue
+        ch_path = chapters_dir / f"{ch_id}.json"
+        if not ch_path.is_file():
+            missing_json.append(ch_id)
+
+    if not allow_incomplete and (incomplete or missing_json):
+        parts: list[str] = []
+        if incomplete:
+            sample = ", ".join(incomplete[:5])
+            suffix = "…" if len(incomplete) > 5 else ""
+            parts.append(f"{len(incomplete)} section(s) not parsed ({sample}{suffix})")
+        if missing_json:
+            sample = ", ".join(missing_json[:5])
+            suffix = "…" if len(missing_json) > 5 else ""
+            parts.append(f"{len(missing_json)} parsed section(s) missing chapter JSON ({sample}{suffix})")
+        raise ReadEditionStepError(
+            "Cannot publish incomplete edition — parse all sections first. " + "; ".join(parts)
+        )
+
+    merged_blocks: list[dict[str, Any]] = []
+    for row in chapters:
         if row.get("micro_status") != "complete":
             continue
         ch_path = chapters_dir / f"{row['chapter_id']}.json"
@@ -258,7 +327,7 @@ def assemble_edition_from_package(package_dir: Path, *, language: str, source_fa
         merged_blocks.extend(ch.get("blocks") or [])
 
     if not merged_blocks:
-        raise ReadEditionStepError("No parsed chapters — run micro parse on at least one section")
+        raise ReadEditionStepError("No parsed chapters — run micro parse on all sections")
 
     edition = build_edition_document(
         merged_blocks,
@@ -266,6 +335,9 @@ def assemble_edition_from_package(package_dir: Path, *, language: str, source_fa
         source_family=source_family,
     )
     edition["split_hints"] = split_hints_from_blocks(merged_blocks)
+    if incomplete or missing_json:
+        edition["incomplete"] = True
+        edition["incomplete_sections"] = incomplete + missing_json
     errors = validate_edition(edition)
     if errors:
         raise ReadEditionStepError(f"assembled edition invalid: {'; '.join(errors[:3])}")
