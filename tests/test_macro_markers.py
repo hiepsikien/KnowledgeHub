@@ -296,6 +296,8 @@ def test_chapter_number_key_roman_equals_arabic():
     assert chapter_number_key("Chapter 1") == "1"
     assert chapter_number_key("CHAPTER XIV") == chapter_number_key("Chapter 14") == "14"
     assert chapter_number_key("Chap. IV.") == "4"
+    assert chapter_number_key("CHAPTER IIA. BACH AT LEIPZIG") == "2a"
+    assert chapter_number_key("CHAPTER IIA. BACH AT LEIPZIG") != chapter_number_key("CHAPTER II. THE CAREER OF BACH")
 
 
 def _austen_style_one_line_toc() -> str:
@@ -1249,3 +1251,175 @@ def test_prose_section_of_and_essay_in_are_not_units():
     assert _UNIT_TOC_LINE.match("Sub-Section C. Philosophy.")
     assert _UNIT_TOC_LINE.match("Section I Mind Subjective.")
     assert _UNIT_TOC_LINE.match("sub-section A. Law.")
+
+
+_FORKEL_TOC = """CONTENTS
+
+
+Introduction
+FORKEL’S PREFACE
+CHAPTER I. THE FAMILY OF BACH
+Chapter II. THE CAREER OF BACH
+CHAPTER IIA. BACH AT LEIPZIG, 1723-1750
+CHAPTER III. BACH AS A CLAVIER PLAYER
+CHAPTER IV.  BACH THE ORGANIST
+CHAPTER V. BACH THE COMPOSER
+CHAPTER VI. BACH THE COMPOSER (continued)
+CHAPTER VII. BACH AS A TEACHER
+CHAPTER VIII.  PERSONAL CHARACTERISTICS
+CHAPTER IX. BACH’S COMPOSITIONS
+CHAPTER X.  BACH’S MANUSCRIPTS
+CHAPTER XI. THE GENIUS OF BACH
+APPENDIX I. CHRONOLOGICAL CATALOGUE OF BACH’S COMPOSITIONS
+APPENDIX II. THE CHURCH CANTATAS ARRANGED CHRONOLOGICALLY
+APPENDIX III.  THE BACHGESELLSCHAFT EDITIONS OF BACH’S WORKS
+APPENDIX IV. BIBLIOGRAPHY OF BACH LITERATURE
+APPENDIX V.  A COLLATION OF THE NOVELLO AND PETERS EDITIONS OF THE ORGAN
+WORKS
+APPENDIX VI. GENEALOGY OF THE FAMILY OF BACH
+Footnotes
+"""
+
+
+def _forkel_body() -> str:
+    prose = " ".join(["word"] * 40)
+    return f"""Johann Sebastian Bach
+
+{prose}
+
+INTRODUCTION
+
+{prose}
+
+FORKEL’S PREFACE
+
+{prose}
+
+CHAPTER I. THE FAMILY OF BACH
+
+{prose}
+
+CHAPTER II. THE CAREER OF BACH
+
+{prose}
+
+CHAPTER IIA. BACH AT LEIPZIG, 1723-1750
+
+{prose}
+
+CHAPTER III. BACH AS A CLAVIER PLAYER
+
+{prose}
+
+CHAPTER IV.  BACH THE ORGANIST
+
+{prose}
+
+CHAPTER V. BACH THE COMPOSER
+
+{prose}
+
+CHAPTER VI. BACH THE COMPOSER (continued)
+
+{prose}
+
+CHAPTER VII. BACH AS A TEACHER
+
+{prose}
+
+CHAPTER VIII.  PERSONAL CHARACTERISTICS
+
+{prose}
+
+CHAPTER IX. BACH’S COMPOSITIONS
+
+{prose}
+
+CHAPTER X.  BACH’S MANUSCRIPTS
+
+{prose}
+
+CHAPTER XI. THE GENIUS OF BACH
+
+{prose}
+
+APPENDIX I. CHRONOLOGICAL CATALOGUE OF BACH’S COMPOSITIONS
+
+{prose}
+
+APPENDIX II. THE CHURCH CANTATAS ARRANGED CHRONOLOGICALLY
+
+{prose}
+
+APPENDIX III.  THE BACHGESELLSCHAFT EDITIONS OF BACH’S WORKS
+
+{prose}
+
+APPENDIX IV. BIBLIOGRAPHY OF BACH LITERATURE
+
+{prose}
+
+APPENDIX V.  A COLLATION OF THE NOVELLO AND PETERS EDITIONS OF THE ORGAN WORKS
+
+{prose}
+
+APPENDIX VI. GENEALOGY OF THE FAMILY OF BACH
+
+{prose}
+
+Footnotes
+
+{prose}
+"""
+
+
+def test_forkel_title_list_keeps_chapter_iia_and_footnotes():
+    entries = parse_contents_entries(_FORKEL_TOC)
+    labels = [e["label"] for e in entries]
+    kinds = [e["kind"] for e in entries]
+    assert any(e["kind"] == "introduction" for e in entries)
+    assert any("PREFACE" in lab.upper() and e["kind"] == "preface" for e, lab in zip(entries, labels))
+    assert "CHAPTER I" in labels
+    assert "CHAPTER II" in labels
+    assert "CHAPTER IIA" in labels
+    assert labels.index("CHAPTER IIA") == labels.index("CHAPTER II") + 1
+    assert "CHAPTER XI" in labels
+    assert any("APPENDIX I" in lab for lab in labels)
+    assert any("APPENDIX V" in lab and "WORKS" in (e.get("title") or lab).upper() for e, lab in zip(entries, labels))
+    assert any("APPENDIX VI" in lab for lab in labels)
+    assert any("FOOTNOTE" in lab.upper() for lab in labels)
+    assert kinds.count("chapter") == 12
+    assert kinds.count("appendix") == 6
+    assert kinds.count("back_matter") == 1
+    assert toc_is_heading_list_map(entries)
+    assert not toc_is_page_column_map(entries)
+
+
+def test_forkel_title_list_toc_match_splits_body():
+    text = _forkel_body()
+    entries = parse_contents_entries(_FORKEL_TOC)
+    matched = match_toc_entries_in_body(text, entries)
+    assert toc_match_covers_structure(entries, matched)
+    assert any("FOOTNOTE" in str(m.get("label") or "").upper() for m in matched)
+    doc = build_macro_structure(
+        text, language="en", family="gutenberg", use_llm=False, toc_excerpt=_FORKEL_TOC
+    )
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert "introduction" in kinds
+    assert "preface" in kinds
+    assert any("CHAPTER IIA" in t.upper() or "IIA" in t.upper() for t in titles)
+    assert any("FOOTNOTE" in t.upper() for t in titles)
+    assert kinds.count("chapter") == 12
+    assert kinds.count("appendix") == 6
+    assert "back_matter" in kinds
+
+
+def test_forkel_fixture_contents_includes_footnotes():
+    raw = Path("tests/fixtures/ref_corpus_b/en/bach_forkel_life.txt").read_text(encoding="utf-8")
+    entries = parse_contents_entries(raw)
+    labels = [e["label"] for e in entries]
+    assert "CHAPTER IIA" in labels
+    assert any("FOOTNOTE" in lab.upper() for lab in labels)
+    assert not any(lab == "CHAPTER II" and labels.count("CHAPTER II") > 1 for lab in labels)
