@@ -353,8 +353,12 @@ def toc_source_from_excerpt(excerpt: str) -> str:
 _PAGE_COL = re.compile(r"^PAGE\s*$", re.I)
 _CHAPTER_TOC_LINE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+([IVXLC\d]+)\.?\s*(.*)$", re.I)
 _BOOK_PART_TOC_LINE = re.compile(r"^(BOOK|PART|VOLUME)\s+([IVXLC\d]+)\b(.*)$", re.I)
+# Keyword is case-insensitive; the ordinal is not. re.I would make [A-Z] eat
+# "Section of…" / "Essay in…" as unit O / I. Letter units (Sub-Section A.) need a
+# period; roman/arabic may omit it but must be a whole token (not "Into").
 _UNIT_TOC_LINE = re.compile(
-    r"^(Essay|Section|Sub-Section|Subsection|Sub-section)\s+([IVXLC\d]+|[A-Z])\.?\s*(.*)$",
+    r"^(Essay|Section|Sub-Section|Subsection|Sub-section)\s+"
+    r"((?-i:(?:[IVXLCDM]+|\d+)\.?(?=\s|$)|[A-Z]\.))\s*(.*)$",
     re.I,
 )
 _NAMED_TOC_LINE = re.compile(

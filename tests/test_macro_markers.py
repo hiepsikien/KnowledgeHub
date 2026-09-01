@@ -5,11 +5,12 @@ from pathlib import Path
 import pytest
 
 from knowledgehub.edition.detect import _heading_key, _toc_title_repeats
-from knowledgehub.edition.macro import build_macro_structure, scan_heading_candidates
+from knowledgehub.edition.macro import HEADING_CANDIDATE, build_macro_structure, scan_heading_candidates
 from knowledgehub.edition.macro_markers import resolve_division_level, try_marker_assembly
 from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_page_toc, extract_toc_from_raw, parse_title_page_entries
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
+    _UNIT_TOC_LINE,
     chapter_number_key,
     heading_title_from_toc_match,
     is_body_heading_line,
@@ -1226,3 +1227,25 @@ def test_body_heading_recognizes_essay_and_subsection():
     assert is_body_heading_line("Section I. Mind Subjective.")
     assert is_body_heading_line("Sub-Section A. Anthropology. The Soul.")
     assert not is_toc_list_row("Essay I. On The Scope Of A Philosophy Of Mind.")
+
+
+def test_prose_section_of_and_essay_in_are_not_units():
+    prose = (
+        "Section of the army advanced",
+        "Essay in three parts",
+        "Section Into the valley",
+        "Essay about ethics",
+    )
+    for line in prose:
+        assert _UNIT_TOC_LINE.match(line) is None, line
+        assert not is_body_heading_line(line), line
+        assert HEADING_CANDIDATE.match(line) is None, line
+        assert scan_heading_candidates(line + "\n", language="en") == []
+
+    assert _UNIT_TOC_LINE.match("Section I. Mind Subjective.")
+    assert _UNIT_TOC_LINE.match("Essay II. Aims And Methods Of Psychology.")
+    assert _UNIT_TOC_LINE.match("Sub-Section A. Anthropology. The Soul.")
+    assert _UNIT_TOC_LINE.match("Sub-Section B. The Morality Of Conscience.")
+    assert _UNIT_TOC_LINE.match("Sub-Section C. Philosophy.")
+    assert _UNIT_TOC_LINE.match("Section I Mind Subjective.")
+    assert _UNIT_TOC_LINE.match("sub-section A. Law.")
