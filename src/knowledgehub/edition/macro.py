@@ -425,6 +425,7 @@ def build_macro_structure(
         heading_title_from_toc_match,
         match_toc_entries_in_body,
         parse_contents_entries,
+        toc_is_heading_list_map,
         toc_is_page_column_map,
         toc_match_covers_structure,
         toc_source_from_excerpt,
@@ -439,7 +440,7 @@ def build_macro_structure(
     toc_entries = parse_contents_entries(toc_source) if toc_source else []
     toc_matched = match_toc_entries_in_body(text, toc_entries) if toc_entries else []
     if (
-        toc_is_page_column_map(toc_entries)
+        (toc_is_page_column_map(toc_entries) or toc_is_heading_list_map(toc_entries))
         and toc_match_covers_structure(toc_entries, toc_matched)
     ):
         boundaries: list[dict[str, Any]] = []

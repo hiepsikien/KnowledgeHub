@@ -5,17 +5,19 @@ from pathlib import Path
 import pytest
 
 from knowledgehub.edition.detect import _heading_key, _toc_title_repeats
-from knowledgehub.edition.macro import build_macro_structure, scan_heading_candidates
+from knowledgehub.edition.macro import HEADING_CANDIDATE, build_macro_structure, scan_heading_candidates
 from knowledgehub.edition.macro_markers import resolve_division_level, try_marker_assembly
 from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_page_toc, extract_toc_from_raw, parse_title_page_entries
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
+    _UNIT_TOC_LINE,
     chapter_number_key,
     heading_title_from_toc_match,
     is_body_heading_line,
     is_chapter_number_only_line,
     is_toc_list_row,
     parse_contents_entries,
+    toc_is_heading_list_map,
     toc_is_page_column_map,
     toc_is_wrap_page_column,
     toc_match_covers_structure,
@@ -1043,3 +1045,207 @@ def test_nested_part_inside_book():
     under_book2 = [s for s in doc["sections"] if s.get("parent_id") == books[1]["section_id"]]
     assert len(under_book2) == 1
     assert under_book2[0]["title"].startswith("CHAPTER I")
+
+
+_HEGEL_TOC = """CONTENTS
+
+
+Preface.
+Five Introductory Essays In Psychology And Ethics.
+   Essay I. On The Scope Of A Philosophy Of Mind.
+   Essay II. Aims And Methods Of Psychology.
+   Essay III. On Some Psychological Aspects Of Ethics.
+   Essay IV. Psycho-Genesis.
+   Essay V. Ethics And Politics.
+Introduction.
+Section I. Mind Subjective.
+   Sub-Section A. Anthropology. The Soul.
+   Sub-Section B. Phenomenology Of Mind. Consciousness.
+   Sub-Section C. Psychology. Mind.
+Section II. Mind Objective.
+   Distribution.
+   Sub-Section A. Law.
+   Sub-Section B. The Morality Of Conscience.
+   Sub-Section C. The Moral Life, Or Social Ethics.
+Section III. Absolute Mind.
+   Sub-Section A. Art.
+   Sub-Section B. Revealed Religion.
+   Sub-Section C. Philosophy.
+Index.
+Footnotes
+"""
+
+
+def _hegel_body() -> str:
+    prose = " ".join(["word"] * 40)
+    return f"""THE PHILOSOPHY OF MIND
+
+{prose}
+
+Preface.
+
+{prose}
+
+Five Introductory Essays In Psychology And Ethics.
+
+Essay I. On The Scope Of A Philosophy Of Mind.
+
+{prose}
+
+Essay II. Aims And Methods Of Psychology.
+
+{prose}
+
+Essay III. On Some Psychological Aspects Of Ethics.
+
+{prose}
+
+Essay IV. Psycho-Genesis.
+
+{prose}
+
+Essay V. Ethics And Politics.
+
+{prose}
+
+Introduction.
+
+{prose}
+
+Section I. Mind Subjective.
+
+Sub-Section A. Anthropology. The Soul.
+
+{prose}
+
+Sub-Section B. Phenomenology Of Mind. Consciousness.
+
+{prose}
+
+Sub-Section C. Psychology. Mind.
+
+{prose}
+
+Section II. Mind Objective.
+
+Distribution.
+
+{prose}
+
+Sub-Section A. Law.
+
+{prose}
+
+Sub-Section B. The Morality Of Conscience.
+
+{prose}
+
+Sub-Section C. The Moral Life, Or Social Ethics.
+
+{prose}
+
+Section III. Absolute Mind.
+
+Sub-Section A. Art.
+
+{prose}
+
+Sub-Section B. Revealed Religion.
+
+{prose}
+
+Sub-Section C. Philosophy.
+
+{prose}
+
+Index.
+
+{prose}
+
+Footnotes
+
+{prose}
+"""
+
+
+def test_hegel_title_list_toc_parses_essays_and_sections():
+    entries = parse_contents_entries(_HEGEL_TOC)
+    labels = [e["label"] for e in entries]
+    kinds = [e["kind"] for e in entries]
+    assert "Preface" in labels[0]
+    assert any("Five Introductory Essays" in lab for lab in labels)
+    assert any("Essay I." in lab and "Scope" in lab for lab in labels)
+    assert any("Essay V." in lab for lab in labels)
+    assert any(lab.startswith("Introduction") for lab in labels)
+    assert any("Section I." in lab and "Mind Subjective" in lab for lab in labels)
+    assert any("Sub-Section A." in lab and "Anthropology" in lab for lab in labels)
+    assert any("Law" in lab and "Sub-Section A" in lab for lab in labels)
+    assert any("Distribution" in lab for lab in labels)
+    assert any("Section III." in lab for lab in labels)
+    assert any("Philosophy" in lab for lab in labels)
+    assert any(lab.upper().startswith("INDEX") for lab in labels)
+    assert any("FOOTNOTE" in lab.upper() for lab in labels)
+    assert kinds.count("chapter") == 14  # 5 essays + 9 sub-sections
+    assert kinds.count("part") == 3
+    assert kinds.count("preface") == 1
+    assert kinds.count("introduction") == 1
+    assert not any(e.get("page") for e in entries)
+    assert toc_is_heading_list_map(entries)
+    assert not toc_is_page_column_map(entries)
+    # Must not wrap the whole book into Preface / Introduction.
+    preface = next(e for e in entries if e["kind"] == "preface")
+    assert "Essay" not in (preface.get("title") or "")
+    intro = next(e for e in entries if e["kind"] == "introduction")
+    assert "Section" not in (intro.get("title") or "")
+
+
+def test_hegel_title_list_toc_match_splits_body():
+    text = _hegel_body()
+    entries = parse_contents_entries(_HEGEL_TOC)
+    matched = match_toc_entries_in_body(text, entries)
+    assert toc_match_covers_structure(entries, matched)
+    doc = build_macro_structure(
+        text, language="en", family="gutenberg", use_llm=False, toc_excerpt=_HEGEL_TOC
+    )
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert any("Essay I" in t and "Scope" in t for t in titles)
+    assert any("Essay V" in t for t in titles)
+    assert any("Section I" in t and "Mind Subjective" in t for t in titles)
+    assert any("Anthropology" in t for t in titles)
+    assert any("Sub-Section A. Law" in t or t.endswith("Law") or t.endswith("Law.") for t in titles)
+    assert any("Philosophy" in t and "Sub-Section" in t for t in titles)
+    assert "preface" in kinds
+    assert "introduction" in kinds
+    assert kinds.count("part") == 3
+    assert kinds.count("chapter") >= 14
+
+
+def test_body_heading_recognizes_essay_and_subsection():
+    assert is_body_heading_line("Essay I. On The Scope Of A Philosophy Of Mind.")
+    assert is_body_heading_line("Section I. Mind Subjective.")
+    assert is_body_heading_line("Sub-Section A. Anthropology. The Soul.")
+    assert not is_toc_list_row("Essay I. On The Scope Of A Philosophy Of Mind.")
+
+
+def test_prose_section_of_and_essay_in_are_not_units():
+    prose = (
+        "Section of the army advanced",
+        "Essay in three parts",
+        "Section Into the valley",
+        "Essay about ethics",
+    )
+    for line in prose:
+        assert _UNIT_TOC_LINE.match(line) is None, line
+        assert not is_body_heading_line(line), line
+        assert HEADING_CANDIDATE.match(line) is None, line
+        assert scan_heading_candidates(line + "\n", language="en") == []
+
+    assert _UNIT_TOC_LINE.match("Section I. Mind Subjective.")
+    assert _UNIT_TOC_LINE.match("Essay II. Aims And Methods Of Psychology.")
+    assert _UNIT_TOC_LINE.match("Sub-Section A. Anthropology. The Soul.")
+    assert _UNIT_TOC_LINE.match("Sub-Section B. The Morality Of Conscience.")
+    assert _UNIT_TOC_LINE.match("Sub-Section C. Philosophy.")
+    assert _UNIT_TOC_LINE.match("Section I Mind Subjective.")
+    assert _UNIT_TOC_LINE.match("sub-section A. Law.")
