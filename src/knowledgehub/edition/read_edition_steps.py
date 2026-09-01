@@ -11,7 +11,7 @@ from ..catalog import get_work, is_hub_translation, resolve_content_path
 from ..paths import corpus_root
 from .profile import detect_family
 from .llm_defaults import default_use_llm_relabel
-from .macro import build_macro_structure, section_source_slice
+from .macro import attach_container_parents, build_macro_structure, section_source_slice
 from .macro_review import apply_structure_edit, build_review, propose_toc_candidate
 from .pipeline import build_edition
 from .ref import build_read_edition
@@ -94,13 +94,16 @@ def load_raw_source(work_id: str, *, corpus: Path | None = None) -> str:
 
 def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     by_id = {row["chapter_id"]: row for row in (existing or {}).get("chapters") or [] if row.get("chapter_id")}
+    sections = list(structure.get("sections") or [])
+    attach_container_parents(sections)
     rows: list[dict[str, Any]] = []
-    for sec in structure.get("sections") or []:
+    for sec in sections:
         sid = sec["section_id"]
         prev = by_id.get(sid) or {}
         new_range = [sec.get("start_char"), sec.get("end_char")]
         prev_range = prev.get("char_range")
         range_changed = prev_range is not None and prev_range != new_range
+        parent_id = sec.get("parent_id")
         if range_changed:
             rows.append(
                 {
@@ -108,6 +111,7 @@ def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] |
                     "title": sec.get("title"),
                     "subtitle": sec.get("subtitle"),
                     "kind": sec.get("kind"),
+                    "parent_id": parent_id,
                     "char_range": new_range,
                     "word_count": sec.get("word_count"),
                     "micro_status": "pending",
@@ -123,6 +127,7 @@ def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] |
                     "title": sec.get("title"),
                     "subtitle": sec.get("subtitle"),
                     "kind": sec.get("kind"),
+                    "parent_id": parent_id,
                     "char_range": new_range,
                     "word_count": sec.get("word_count"),
                     "micro_status": prev.get("micro_status", "pending"),
@@ -176,6 +181,13 @@ def _sync_chapter_json_metadata(package_dir: Path, structure: dict[str, Any]) ->
             changed = True
         if doc.get("subtitle") != subtitle:
             doc["subtitle"] = subtitle
+            changed = True
+        parent_id = sec.get("parent_id")
+        if doc.get("parent_id") != parent_id:
+            if parent_id:
+                doc["parent_id"] = parent_id
+            elif "parent_id" in doc:
+                del doc["parent_id"]
             changed = True
         if changed:
             path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

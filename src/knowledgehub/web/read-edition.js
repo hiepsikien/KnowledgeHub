@@ -208,20 +208,30 @@
   function renderChapterList(manifest) {
     const list = $("re-chapters");
     if (!list) return;
-    list.innerHTML = (manifest.chapters || [])
-      .map(
-        (row) =>
-          `<div class="re-ch-row${row.chapter_id === state.chapterId ? " on" : ""}">
+    const rows = manifest.chapters || [];
+    const byId = Object.fromEntries(rows.map((r) => [r.chapter_id, r]));
+    list.innerHTML = rows
+      .map((row) => {
+        const parent = row.parent_id ? byId[row.parent_id] : null;
+        const nested = parent ? (parent.parent_id ? " nested-2" : " nested") : "";
+        const container = row.kind === "book" || row.kind === "part" ? " container-kind" : "";
+        const on = row.chapter_id === state.chapterId ? " on" : "";
+        const kindBadge =
+          row.kind === "book" || row.kind === "part"
+            ? `<span class="re-flag re-flag-kind">${escapeHtml(row.kind)}</span>`
+            : "";
+        return `<div class="re-ch-row${on}${nested}${container}">
             <label class="re-ch-check"><input type="checkbox" data-chk="${escapeHtml(row.chapter_id)}" ${state.selected.has(row.chapter_id) ? "checked" : ""} /></label>
             <button type="button" class="re-ch-item" data-ch="${escapeHtml(row.chapter_id)}">
               <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
+              ${kindBadge}
               ${microBadge(row)}
               ${qaBadge(row)}
               ${layoutConfirmed() ? "" : flagBadges(reviewRow(row.chapter_id)?.flags)}
               <span class="muted">${(row.word_count || 0).toLocaleString()} từ</span>
             </button>
-          </div>`,
-      )
+          </div>`;
+      })
       .join("");
     list.onclick = (e) => {
       const btn = e.target.closest("[data-ch]");
@@ -258,13 +268,15 @@
         /* ignore quota */
       }
       renderChapterList(state.manifest);
+      const parentRow = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapter.parent_id);
       $("re-detail-title").textContent = chapter.title || chapterId;
       const parsed = chapter.micro_status === "complete";
+      const parentBit = parentRow ? `${parentRow.title} · ` : "";
       $("re-detail-meta").textContent = parsed
-        ? `${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`
+        ? `${parentBit}${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`
         : chapter.source_preview_truncated
-          ? `Chưa parse REF — preview đầu + cuối (rút ${(Number(chapter.source_preview_omitted) || 0).toLocaleString()} chữ giữa)`
-          : "Chưa parse REF — xem preview nguồn";
+          ? `${parentBit}Chưa parse REF — preview đầu + cuối (rút ${(Number(chapter.source_preview_omitted) || 0).toLocaleString()} chữ giữa)`
+          : `${parentBit}Chưa parse REF — xem preview nguồn`;
       renderChapterBody(chapter);
       const qa = chapter.qa;
       $("re-qa-panel").hidden = !qa;

@@ -621,6 +621,11 @@ mark.ann-context {
 .re-ch-item.on, .re-ch-item:hover { border-color: var(--accent); background: var(--accent-soft); }
 .re-ch-row { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
 .re-ch-row.on .re-ch-item { border-color: var(--accent); background: var(--accent-soft); }
+.re-ch-row.nested { padding-left: 18px; }
+.re-ch-row.nested-2 { padding-left: 32px; }
+.re-ch-row.container-kind .re-ch-item { background: #f4f1ea; }
+.re-ch-row.container-kind .re-ch-title { font-weight: 700; }
+.re-flag-kind { background: #e8e4f4; color: #4a3a80; }
 .re-ch-check { padding-top: 8px; flex: 0 0 auto; }
 .re-ch-item { flex: 1; }
 .re-micro { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }

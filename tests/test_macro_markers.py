@@ -261,6 +261,7 @@ def test_macro_keeps_markers_for_austen_style_one_line_toc():
     assert doc["mode"] == "markers"
     kinds = [s["kind"] for s in doc["sections"]]
     assert kinds.count("chapter") == 5
+    assert not any(s.get("parent_id") for s in doc["sections"] if s["kind"] == "chapter")
 
 
 def test_all_caps_body_chapter_not_ingested_as_toc():
@@ -459,3 +460,75 @@ def test_build_macro_structure_markers_path_grotius():
     doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False)
     assert doc["mode"] == "markers"
     assert [s["kind"] for s in doc["sections"]].count("chapter") >= 10
+
+
+def _politics_nested_books() -> str:
+    prose = " ".join(["word"] * 90)
+    chunks = [
+        "Title page and translator note.\n\n",
+        "INTRODUCTION\n\n",
+        f"The Politics of Aristotle looks back to the Ethics. {prose}\n\n",
+    ]
+    for book in ("I", "II"):
+        chunks.append(f"BOOK {book}\n\n")
+        for chapter in ("I", "II", "III"):
+            chunks.append(
+                f"CHAPTER {chapter}\n\nAs we see that every city is a society. {prose}\n\n"
+            )
+    return "".join(chunks)
+
+
+def test_nested_books_and_chapters_politics_shape():
+    text = _politics_nested_books()
+    markers = detect_body_markers(text)
+    assert resolve_division_level(markers) == "chapter"
+    assert sum(1 for m in markers if m["kind"] == "book") == 2
+    assert sum(1 for m in markers if m["kind"] == "chapter") == 6
+
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    assert doc["mode"] == "markers"
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert kinds.count("book") == 2
+    assert kinds.count("chapter") >= 6
+
+    books = [s for s in doc["sections"] if s["kind"] == "book"]
+    assert books[0]["title"].startswith("BOOK I")
+    assert books[1]["title"].startswith("BOOK II")
+    book_slice = text[books[0]["start_char"] : books[0]["end_char"] + 1]
+    assert "BOOK I" in book_slice
+    assert "CHAPTER I" not in book_slice
+
+    nested = [s for s in doc["sections"] if s.get("parent_id") == books[0]["section_id"]]
+    assert [s["title"] for s in nested] == ["CHAPTER I", "CHAPTER II", "CHAPTER III"]
+    ch1 = nested[0]
+    ch_slice = text[ch1["start_char"] : ch1["end_char"] + 1].lstrip()
+    assert ch_slice.startswith("CHAPTER I")
+    assert "BOOK I" not in ch_slice
+
+    book2_children = [s for s in doc["sections"] if s.get("parent_id") == books[1]["section_id"]]
+    assert len(book2_children) == 3
+    assert all(c["kind"] == "chapter" for c in book2_children)
+
+    for left, right in zip(doc["sections"], doc["sections"][1:]):
+        assert int(right["start_char"]) == int(left["end_char"]) + 1
+
+
+def test_nested_part_inside_book():
+    prose = " ".join(["word"] * 90)
+    text = (
+        "Front matter note.\n\n"
+        f"BOOK I\n\nPART I\n\nCHAPTER I\n\n{prose}\n\nCHAPTER II\n\n{prose}\n\n"
+        f"BOOK II\n\nCHAPTER I\n\n{prose}\n"
+    )
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    assert doc["mode"] == "markers"
+    books = [s for s in doc["sections"] if s["kind"] == "book"]
+    parts = [s for s in doc["sections"] if s["kind"] == "part"]
+    assert len(books) == 2
+    assert len(parts) == 1
+    assert parts[0]["parent_id"] == books[0]["section_id"]
+    under_part = [s for s in doc["sections"] if s.get("parent_id") == parts[0]["section_id"]]
+    assert [s["title"] for s in under_part] == ["CHAPTER I", "CHAPTER II"]
+    under_book2 = [s for s in doc["sections"] if s.get("parent_id") == books[1]["section_id"]]
+    assert len(under_book2) == 1
+    assert under_book2[0]["title"].startswith("CHAPTER I")

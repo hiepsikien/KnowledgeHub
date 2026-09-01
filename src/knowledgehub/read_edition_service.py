@@ -237,6 +237,7 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
             "title": section.get("title"),
             "subtitle": section.get("subtitle"),
             "kind": section.get("kind"),
+            "parent_id": section.get("parent_id"),
             "char_range": [section.get("start_char"), section.get("end_char")],
             "micro_status": "pending",
             **head_tail_preview(slice_text),
@@ -263,6 +264,10 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
         section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
         if section:
             chapter["kind"] = section.get("kind", chapter.get("kind"))
+            if section.get("parent_id"):
+                chapter["parent_id"] = section.get("parent_id")
+            elif "parent_id" in chapter:
+                del chapter["parent_id"]
     qa = (load_qa_report(package_dir).get("chapters") or {}).get(chapter_id)
     overrides = load_overrides(package_dir).get(chapter_id)
     chapter["qa"] = qa

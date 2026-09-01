@@ -231,6 +231,7 @@ def _sections_from_boundaries(
                 "confidence": float(bound.get("confidence") or 0.85),
             }
         )
+    attach_container_parents(sections)
     return {
         "structure_version": STRUCTURE_VERSION,
         "ref_parser_version": REF_PARSER_VERSION,
@@ -239,6 +240,37 @@ def _sections_from_boundaries(
         "sections": sections,
         "created_at": _now(),
     }
+
+
+def attach_container_parents(sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Nest chapters (and parts) under the nearest preceding book/part.
+
+    Coverage stays a flat contiguous char range; parent_id is display/HITL metadata.
+    """
+    last_book: str | None = None
+    last_part: str | None = None
+    for sec in sections:
+        kind = str(sec.get("kind") or "")
+        sid = str(sec.get("section_id") or "")
+        sec.pop("parent_id", None)
+        if kind == "book":
+            last_book = sid
+            last_part = None
+            continue
+        if kind == "part":
+            last_part = sid
+            if last_book:
+                sec["parent_id"] = last_book
+            continue
+        if kind == "chapter":
+            parent = last_part or last_book
+            if parent:
+                sec["parent_id"] = parent
+            continue
+        if kind in {"front_matter", "back_matter", "notes"}:
+            last_book = None
+            last_part = None
+    return sections
 
 
 def _rule_macro_structure(text: str, candidates: list[dict[str, Any]], *, language: str) -> dict[str, Any]:
@@ -297,6 +329,7 @@ Rules:
 - TOC/list lines (dot leaders, page numbers, short title lists) are NOT body starts — skip them.
 - The first body chapter usually appears AFTER the TOC block with its own heading followed by prose.
 - Include front_matter from line 0 if imprint/preface/TOC exists before first body chapter.
+- Nested classical layout: if the body has BOOK I / BOOK II (or PART) AND CHAPTER I, II, … emit BOTH — kind "book" (or "part") at each book line, then kind "chapter" at each chapter. Do not fold a BOOK heading into the previous or next chapter.
 - Do not rewrite text; only return line numbers already provided in CANDIDATES.
 
 Return ONLY JSON:

@@ -340,6 +340,33 @@ def test_expand_macro_splits_super_book_into_chapters_and_toc():
     assert any("CHAPTER II" in t for t in titles)
     assert any(s["kind"] == "book" and s["title"] == "BOOK I" for s in expanded["sections"])
     assert any(s["kind"] == "book" and s["title"] == "BOOK II" for s in expanded["sections"])
+    book1_exp = next(s for s in expanded["sections"] if s["kind"] == "book" and s["title"] == "BOOK I")
+    nested = [s for s in expanded["sections"] if s.get("parent_id") == book1_exp["section_id"]]
+    assert any("CHAPTER I" in s["title"] for s in nested)
     assert coverage_report(text, expanded["sections"])["complete"] is True
     for left, right in zip(expanded["sections"], expanded["sections"][1:]):
         assert int(right["start_char"]) == int(left["end_char"]) + 1
+
+
+def test_heading_only_books_do_not_block_as_short():
+    prose = " ".join(["word"] * 90)
+    text = (
+        "Title page.\n\n"
+        f"BOOK I\n\nCHAPTER I\n\n{prose}\n\nCHAPTER II\n\n{prose}\n\n"
+        f"BOOK II\n\nCHAPTER I\n\n{prose}\n"
+    )
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    assert doc["mode"] == "markers"
+    books = [s for s in doc["sections"] if s["kind"] == "book"]
+    assert len(books) == 2
+    review = build_review(
+        text,
+        {**doc, "hitl": {"toc": {"excerpt": "", "status": "none"}}},
+        language="en",
+    )
+    by_id = {s["section_id"]: s for s in review["sections"]}
+    for book in books:
+        assert "short" not in (by_id[book["section_id"]].get("flags") or [])
+    untreated = set(review["health"]["untreated_flags"])
+    assert not {b["section_id"] for b in books} & untreated
+    assert review["health"]["ready_to_parse"] is True

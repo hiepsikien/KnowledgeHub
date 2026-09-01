@@ -9,6 +9,7 @@ from .macro import (
     SECTION_KINDS,
     _sections_from_boundaries,
     _toc_excerpt,
+    attach_container_parents,
     build_macro_structure,
     line_map,
     scan_heading_candidates,
@@ -22,7 +23,9 @@ INNER_HEADS_FOR_SUPER = 2
 BOUNDARY_CONTEXT_LINES = 20
 TOC_MATCH_MIN = 0.5
 
-EXEMPT_SHORT_KINDS = frozenset({"front_matter", "notes", "back_matter", "preface", "toc"})
+EXEMPT_SHORT_KINDS = frozenset(
+    {"front_matter", "notes", "back_matter", "preface", "toc", "book", "part"}
+)
 BODY_HEAD_HEURISTICS = frozenset(
     {"heading", "content_match", "profile_pattern", "profile_builtin", "marker"}
 )
@@ -274,6 +277,7 @@ def diagnose_sections(
 ) -> list[dict[str, Any]]:
     language = language or str(structure.get("language") or "en")
     sections = list(structure.get("sections") or [])
+    attach_container_parents(sections)
     rows = line_map(text)
     candidates = scan_heading_candidates(text, language=language)
     toc = (structure.get("hitl") or {}).get("toc") or {}
@@ -652,6 +656,7 @@ def apply_structure_edit(
         if kind_norm not in SECTION_KINDS:
             raise ValueError(f"unknown kind: {kind}")
         sections[index] = {**sections[index], "kind": kind_norm}
+        attach_container_parents(sections)
         out = dict(structure)
         out["sections"] = sections
         out["hitl"] = hitl
