@@ -1249,3 +1249,168 @@ def test_prose_section_of_and_essay_in_are_not_units():
     assert _UNIT_TOC_LINE.match("Sub-Section C. Philosophy.")
     assert _UNIT_TOC_LINE.match("Section I Mind Subjective.")
     assert _UNIT_TOC_LINE.match("sub-section A. Law.")
+
+
+def test_prose_part_book_introduction_are_not_headings():
+    prose = (
+        "part of it only is known in the form of idea.",
+        "book which the histologist E.B. Wilson has devoted to the development",
+        "introduction of motion into the genesis of figures is nevertheless the",
+        "what is colored, or, in other words, psychic states. As a matter of",
+        "The law of correlation will be invoked, of course; Darwin himself",
+    )
+    for line in prose:
+        assert not is_body_heading_line(line), line
+        assert HEADING_CANDIDATE.match(line) is None, line
+        assert scan_heading_candidates(line + "\n", language="en") == []
+
+    assert is_body_heading_line("INTRODUCTION")
+    assert is_body_heading_line("INDEX")
+    assert HEADING_CANDIDATE.match("CHAPTER I")
+    assert HEADING_CANDIDATE.match("PART II")
+    assert HEADING_CANDIDATE.match("BOOK I")
+
+
+def _bergson_style_wrap_toc_book() -> str:
+    body_i = "Duration is real. " * 40
+    body_ii = "Life diverges. " * 40
+    body_iii = "Knowledge and life. " * 40
+    body_iv = (
+        "Form and Becoming\n\n"
+        "The cinematograph is an illusion.\n\n"
+        "The Criticism of Kant\n\n"
+        "Spencer follows.\n" + ("Cinematograph. " * 40)
+    )
+    return f"""Title page.
+
+CONTENTS
+
+                                                                       PAGE
+
+INTRODUCTION                                                             ix
+
+CHAPTER I
+
+THE EVOLUTION OF LIFE--MECHANISM AND TELEOLOGY
+
+Of duration in general--Unorganized bodies and abstract
+time--Organized bodies and real duration--Individuality and
+the process of growing old                                                1
+
+Of transformism and the different ways of interpreting it--Radical
+mechanism and real duration: the relation of biology to
+physics and chemistry--Radical finalism and real duration:
+the relation of biology to philosophy                                    23
+
+The nature of the intellect                                             151
+
+CHAPTER II
+
+THE DIVERGENT DIRECTIONS OF THE EVOLUTION OF
+LIFE--TORPOR, INTELLIGENCE, INSTINCT
+
+General idea of the evolutionary process                                98
+
+CHAPTER III
+
+ON THE MEANING OF LIFE                                                  186
+
+CHAPTER IV
+
+THE CINEMATOGRAPHICAL MECHANISM                                         272
+
+Form and Becoming                                                       298
+
+The Criticism of Kant                                                   356
+
+INDEX                                                                   371
+
+INTRODUCTION
+
+{body_i}
+
+CHAPTER I
+
+THE EVOLUTION OF LIFE--MECHANISM AND TELEOLOGY
+
+{body_i}
+what is colored, or, in other words, psychic states. As a matter of
+fact duration is given.
+part of it only is known in the form of idea.
+
+CHAPTER II
+
+{body_ii}
+
+CHAPTER III
+
+{body_iii}
+
+CHAPTER IV
+
+{body_iv}
+
+INDEX
+
+Aeneas, 12
+Achilles, 18
+Apollo, 22
+Athens, 40
+Baldus, 44
+Cicero, 50
+Dutch, 61
+East Indies, 70
+"""
+
+
+def test_bergson_wrap_synopses_do_not_poison_chapter_match():
+    text = _bergson_style_wrap_toc_book()
+    entries = parse_contents_entries(text)
+    labels = [e["label"] for e in entries]
+    assert "CHAPTER I" in labels
+    assert "CHAPTER III" in labels
+    assert "CHAPTER IV" in labels
+    assert "INDEX" in labels
+    assert not any(e["label"].startswith("the relation of biology") for e in entries)
+    matched = match_toc_entries_in_body(text, entries)
+    kinds = {m["kind"] for m in matched}
+    assert "chapter" in kinds
+    assert toc_match_covers_structure(entries, matched)
+    assert any(m["label"] == "CHAPTER III" for m in matched)
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert any("CHAPTER I" in t for t in titles)
+    assert any("CHAPTER III" in t for t in titles)
+    assert any("CHAPTER IV" in t for t in titles)
+    assert "back_matter" in kinds or any(t.strip().upper().startswith("INDEX") for t in titles)
+
+
+def test_bergson_inner_heads_skip_prose_and_use_real_subheads():
+    from knowledgehub.edition.macro_review import build_review, inner_heading_candidates
+
+    text = _bergson_style_wrap_toc_book()
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=text)
+    ch1 = next(s for s in doc["sections"] if "CHAPTER I" in (s.get("title") or ""))
+    inner = inner_heading_candidates(text, ch1, language="en")
+    joined = " ".join(h["text"].lower() for h in inner)
+    assert "what is colored" not in joined
+    assert "part of it only" not in joined
+    review = build_review(
+        text,
+        {
+            **doc,
+            "hitl": {
+                "toc": {
+                    "excerpt": text[text.index("CONTENTS") : text.index("\nINTRODUCTION\n")],
+                    "status": "yes",
+                }
+            },
+        },
+        language="en",
+    )
+    ch4 = next(s for s in review["sections"] if "CHAPTER IV" in (s.get("title") or ""))
+    inner4 = " | ".join(h["text"] for h in (ch4.get("inner_heads") or []))
+    assert "Form and Becoming" in inner4
+    assert "The Criticism of Kant" in inner4

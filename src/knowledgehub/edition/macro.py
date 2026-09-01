@@ -36,11 +36,12 @@ SECTION_KINDS = frozenset(
 
 HEADING_CANDIDATE = re.compile(
     r"^(?:"
-    r"CHAPTER|CHAP\.?|Chapter|BOOK|PART|VOLUME|"
-    r"PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX|"
-    r"CHƯƠNG|PHẦN|MỤC|"
-    r"Letter|LETTER"
-    r")\s+",
+    r"(?:CHAPTER|CHAP\.?|Chapter)\s+[IVXLC\d]+|"
+    r"(?:BOOK|PART|VOLUME)\s+(?:[IVXLC\d]+|ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\b|"
+    r"(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX|INDEX|BIBLIOGRAPHY)(?:\s*$|[.:]|\s+(?-i:[A-Z]))|"
+    r"(?:CHƯƠNG|PHẦN|MỤC)\s+(?:[IVXLC\d]+|Một|Hai|Ba|Bốn|Tư|Năm|Sáu|Bảy|Tám|Chín|Mười)\b|"
+    r"(?:Letter|LETTER)\s+\d+"
+    r")",
     re.I,
 )
 
@@ -77,6 +78,24 @@ ESSAY_SECTION = re.compile(
     r"^(?:What (?:Is|Are|Ought)|The (?:Law|Complete|Solution|Conclusion)|Property and)\b",
     re.I,
 )
+_ESSAY_PROSE = re.compile(
+    r"[,;:] .+\b(?:will|is|are|was|were|has|have|would|himself|herself|itself)\b",
+    re.I,
+)
+
+
+def _essay_section_heading(line: str) -> bool:
+    """Paine-style short section title, not a wrapped prose sentence."""
+    s = (line or "").strip()
+    if not s or len(s) >= 80 or not ESSAY_SECTION.match(s):
+        return False
+    if s[0].islower():
+        return False
+    if s.endswith((" of", " the", " a", " an", " and", " or", " to", " in")):
+        return False
+    if _ESSAY_PROSE.search(s):
+        return False
+    return True
 
 
 def scan_heading_candidates(text: str, *, language: str = "en") -> list[dict[str, Any]]:
@@ -93,7 +112,7 @@ def scan_heading_candidates(text: str, *, language: str = "en") -> list[dict[str
         if is_all_caps_section_line(stripped):
             out.append({**row, "text": stripped, "heuristic": "heading", "kind": "all_caps_section"})
             continue
-        if ESSAY_SECTION.match(stripped) and len(stripped) < 80:
+        if _essay_section_heading(stripped):
             out.append({**row, "text": stripped, "heuristic": "heading", "kind": "section"})
             continue
         if is_toc_entry_line(stripped):

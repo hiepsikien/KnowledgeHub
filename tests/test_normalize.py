@@ -3,6 +3,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from knowledgehub.edition.pipeline import build_edition
+from knowledgehub.edition.toc import is_body_heading_line
 from knowledgehub.normalize import normalize_manuscript
 
 
@@ -115,6 +117,23 @@ def test_keeps_author_notes_drops_index_only():
     assert "NOTES TO THE DEMO" in text
     assert "Achilles, 18" not in text
     assert "Project Gutenberg License leftover" not in text
+
+
+def test_strip_only_keeps_index_heading_for_macro():
+    raw = (
+        "*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***\n\n"
+        "CHAPTER I\n\n"
+        + ("The argument proceeds with care and cites the ancients. " * 40)
+        + "\n\nINDEX\n\n"
+        "Aeneas, 12\nAchilles, 18\nApollo, 22\nAthens, 40\n"
+        "Baldus, 44\nCicero, 50\nDutch, 61\nEast Indies, 70\n"
+        "*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***\n"
+    )
+    text, report = build_edition(raw, language="en", strip_only=True)
+    assert report["dropped_tail_index"] is True
+    assert re.search(r"(?m)^INDEX\s*$", text)
+    assert "Achilles, 18" not in text
+    assert is_body_heading_line("INDEX")
 
 
 def test_mid_chapter_footnotes_not_treated_as_tail():
