@@ -420,13 +420,16 @@
     const loc = toc.location && toc.location !== "none" ? toc.location : "không thấy";
     const src = toc.source || "none";
     $("re-toc-meta").textContent = `${toc.line_count || 0} dòng · ${src} · ${loc}`;
-    $("re-toc-excerpt").textContent = toc.excerpt || "(không tìm thấy mục lục — chọn «Không có TOC» nếu đúng)";
+    const el = $("re-toc-excerpt");
+    if (el && document.activeElement !== el) {
+      el.value = toc.excerpt || "";
+    }
     const status = toc.status;
     const banner = $("re-toc-banner");
-    if (status === "yes") banner.textContent = "Đã xác nhận: đây là mục lục.";
+    if (status === "yes") banner.textContent = "Đã xác nhận: đây là mục lục. Sửa rồi bấm lại nếu còn thừa.";
     else if (status === "no") banner.textContent = "Đã ghi: đoạn này không phải mục lục.";
     else if (status === "none") banner.textContent = "Đã ghi: sách không có mục lục.";
-    else banner.textContent = "Đây có phải mục lục của sách không?";
+    else banner.textContent = "Sửa nếu thừa, rồi xác nhận đây là mục lục.";
   }
 
   function renderHealth(review) {
@@ -559,9 +562,10 @@
   async function confirmToc(status) {
     if (!state.workId) return;
     try {
+      const excerpt = $("re-toc-excerpt")?.value ?? "";
       const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/toc`, {
         method: "POST",
-        body: { status },
+        body: { status, excerpt },
       });
       applyReview(result);
       toast(status === "yes" ? "Đã xác nhận TOC" : status === "none" ? "Không có TOC" : "Không phải TOC");
@@ -569,6 +573,14 @@
     } catch (err) {
       toast(err.message);
     }
+  }
+
+  function resetTocProposal() {
+    const proposed = state.review?.toc_candidate?.proposed_excerpt;
+    const el = $("re-toc-excerpt");
+    if (!el) return;
+    el.value = proposed || "";
+    el.focus();
   }
 
   function lastSectionKey(workId) {
@@ -784,6 +796,7 @@
     $("re-toc-yes")?.addEventListener("click", () => void confirmToc("yes"));
     $("re-toc-no")?.addEventListener("click", () => void confirmToc("no"));
     $("re-toc-none")?.addEventListener("click", () => void confirmToc("none"));
+    $("re-toc-reset")?.addEventListener("click", resetTocProposal);
     $("re-merge-prev")?.addEventListener("click", () => void applyStructureEdit("merge_prev"));
     $("re-merge-next")?.addEventListener("click", () => void applyStructureEdit("merge_next"));
     $("re-drop-start")?.addEventListener("click", () => void applyStructureEdit("drop_start"));

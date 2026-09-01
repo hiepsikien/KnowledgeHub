@@ -132,6 +132,32 @@ def test_parse_abdy_style_wrapped_toc():
     assert "CHAPTER I" in excerpt
     assert "GLOSSARY" in excerpt
     assert "quodlibet" in excerpt.lower() or "Bachs of Thuringia" in excerpt
+    assert "CHAPTER XIV" in excerpt
+
+
+def test_extract_toc_preserves_compact_list_newlines():
+    raw = """Title
+
+CONTENTS
+
+Preface: iii-lx
+I: 1-50 (Sweetness and Light)
+II: 51-92 (Doing as One Likes)
+VI: 197-272 (Our Liberal Practitioners)
+
+*Note: in the first edition, chapters are numbered only, not named.
+
+CULTURE AND ANARCHY (1869, FIRST EDITION)
+
+PREFACE
+
+[iii] My foremost design in writing this Preface is to address a word
+of exhortation to the Society.
+"""
+    excerpt = extract_toc_from_raw(raw)
+    assert "Preface: iii-lx\nI: 1-50 (Sweetness and Light)\nII: 51-92" in excerpt
+    assert "foremost design" not in excerpt
+    assert excerpt.count("\n") >= 4
 
 
 def test_macro_uses_toc_for_abdy_style_sections():

@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=cheban6" />
+    <link rel="stylesheet" href="/styles.css?v=cheban7" />
   </head>
   <body>
     <div class="shell">
@@ -173,12 +173,13 @@
               <strong>Mục lục đề xuất</strong>
               <span class="muted" id="re-toc-meta"></span>
             </header>
-            <pre class="re-toc-excerpt" id="re-toc-excerpt"></pre>
-            <p class="re-toc-banner" id="re-toc-banner">Đây có phải mục lục của sách không?</p>
+            <textarea class="re-toc-excerpt" id="re-toc-excerpt" rows="8" spellcheck="false" placeholder="Không tìm thấy mục lục — chọn «Không có TOC» nếu đúng"></textarea>
+            <p class="re-toc-banner" id="re-toc-banner">Sửa nếu thừa, rồi xác nhận đây là mục lục.</p>
             <div class="row re-toc-actions">
               <button type="button" class="btn" id="re-toc-yes">Đúng TOC</button>
               <button type="button" class="btn ghost" id="re-toc-no">Không phải</button>
               <button type="button" class="btn ghost" id="re-toc-none">Không có TOC</button>
+              <button type="button" class="btn ghost" id="re-toc-reset">Đề xuất lại</button>
             </div>
           </section>
           <p class="re-health" id="re-health" hidden></p>
@@ -481,7 +482,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=cheban6"></script>
-    <script src="/read-edition.js?v=cheban6"></script>
+    <script src="/app.js?v=cheban7"></script>
+    <script src="/read-edition.js?v=cheban7"></script>
   </body>
 </html>

@@ -172,9 +172,15 @@ def get_review(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
         raise _map_error(exc) from exc
 
 
-def confirm_toc(work_id: str, status: str, *, corpus: Path | None = None) -> dict[str, Any]:
+def confirm_toc(
+    work_id: str,
+    status: str,
+    *,
+    excerpt: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
     try:
-        return confirm_toc_step(work_id, status, corpus=corpus)
+        return confirm_toc_step(work_id, status, excerpt=excerpt, corpus=corpus)
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
 

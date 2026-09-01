@@ -181,6 +181,7 @@ class ReadEditionQaBody(BaseModel):
 
 class ReadEditionTocBody(BaseModel):
     status: str
+    excerpt: str | None = None
 
 
 class ReadEditionStructureEditBody(BaseModel):
@@ -356,7 +357,7 @@ def create_app() -> FastAPI:
     @app.post("/api/works/{work_id}/read-edition/toc", dependencies=guard)
     def read_edition_toc(work_id: str, payload: ReadEditionTocBody) -> dict[str, Any]:
         try:
-            return confirm_read_edition_toc(work_id, payload.status)
+            return confirm_read_edition_toc(work_id, payload.status, excerpt=payload.excerpt)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:

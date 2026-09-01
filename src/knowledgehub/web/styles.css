@@ -689,12 +689,20 @@ mark.ann-context {
 }
 .re-toc-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 8px; }
 .re-toc-excerpt {
-  max-height: 180px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 140px;
+  max-height: 280px;
   overflow: auto;
-  white-space: pre-wrap;
-  font-size: 12px;
+  resize: vertical;
+  white-space: pre;
+  overflow-wrap: normal;
+  font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
   background: #faf8f5;
+  color: var(--ink);
   padding: 10px;
+  border: 1px solid var(--line);
   border-radius: 6px;
   margin: 0 0 8px;
 }

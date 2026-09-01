@@ -334,10 +334,15 @@ def build_review(
 ) -> dict[str, Any]:
     language = language or str(structure.get("language") or "en")
     hitl = dict(structure.get("hitl") or {})
-    toc = dict(hitl.get("toc") or {})
-    if not toc.get("excerpt"):
-        proposed = propose_toc_candidate(text, raw)
-        toc = {**proposed, "status": toc.get("status")}
+    proposed = propose_toc_candidate(text, raw)
+    saved = dict(hitl.get("toc") or {})
+    answered = saved.get("status") in {"yes", "no", "none"}
+    if answered:
+        toc = {**proposed, **saved, "proposed_excerpt": proposed.get("excerpt") or ""}
+        if not toc.get("excerpt"):
+            toc["excerpt"] = proposed.get("excerpt") or ""
+    else:
+        toc = {**proposed, "status": saved.get("status"), "proposed_excerpt": proposed.get("excerpt") or ""}
     sections = diagnose_sections(text, {**structure, "hitl": {**hitl, "toc": toc}}, language=language)
     coverage = coverage_report(text, structure.get("sections") or [])
     untreated = [

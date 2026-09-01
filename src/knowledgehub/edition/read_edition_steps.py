@@ -336,6 +336,7 @@ def confirm_toc_step(
     work_id: str,
     status: str,
     *,
+    excerpt: str | None = None,
     corpus: Path | None = None,
 ) -> dict[str, Any]:
     if status not in {"yes", "no", "none"}:
@@ -348,6 +349,12 @@ def confirm_toc_step(
         raise ReadEditionStepError("Run macro step first (structure.json missing)")
     hitl = dict(structure.get("hitl") or {})
     toc = dict(hitl.get("toc") or propose_toc_candidate(text, load_raw_source(work_id, corpus=root)))
+    if excerpt is not None:
+        cleaned = str(excerpt).replace("\r\n", "\n").replace("\r", "\n")[:12000].strip("\n")
+        toc["excerpt"] = cleaned
+        toc["line_count"] = len([ln for ln in cleaned.split("\n") if ln.strip()])
+        if not toc.get("source") or toc.get("source") == "none":
+            toc["source"] = "raw"
     toc["status"] = status
     hitl["toc"] = toc
     structure["hitl"] = hitl

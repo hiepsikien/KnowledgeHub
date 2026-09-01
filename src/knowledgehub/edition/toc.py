@@ -133,6 +133,17 @@ def is_toc_entry_line(line: str) -> bool:
         return True
     if re.search(r"\.{2,}\s*\d{1,4}$", s) and len(s) < 90:
         return True
+    # Compact PG lists: "Preface: iii-lx" / "I: 1-50 (Sweetness and Light)"
+    if (
+        len(s) < 140
+        and re.match(
+            r"^(?:Preface|Introduction|Prologue|Appendix|[IVXLCDM]+|\d{1,3})\s*:\s*"
+            r"(?:[ivxlcdm]+|\d{1,4})(?:\s*[-–—]\s*(?:[ivxlcdm]+|\d{1,4}))?\b",
+            s,
+            re.I,
+        )
+    ):
+        return True
     return False
 
 

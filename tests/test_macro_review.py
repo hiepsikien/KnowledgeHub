@@ -79,6 +79,35 @@ def test_propose_toc_from_raw_contents():
     assert cand["source"] == "raw"
     assert "CHAPTER I" in cand["excerpt"]
     assert cand["line_count"] >= 2
+    assert "CHAPTER I .... 1\nCHAPTER II .... 5" in cand["excerpt"]
+
+
+def test_propose_toc_keeps_compact_list_newlines():
+    raw = """Title
+
+CONTENTS
+
+Preface: iii-lx
+I: 1-50 (Sweetness and Light)
+II: 51-92 (Doing as One Likes)
+
+*Note: editorial titles
+
+CULTURE AND ANARCHY (1869, FIRST EDITION)
+
+PREFACE
+
+[iii] My foremost design in writing this Preface is to address a word
+of exhortation to the Society for Promoting Christian Knowledge.
+"""
+    cand = propose_toc_candidate("PREFACE\nBody\n", raw)
+    excerpt = cand["excerpt"]
+    assert "Preface: iii-lx" in excerpt
+    assert "I: 1-50 (Sweetness and Light)" in excerpt
+    assert excerpt.index("Preface: iii-lx") < excerpt.index("\nI: 1-50")
+    assert "foremost design" not in excerpt
+    assert "*Note" not in excerpt
+    assert cand["line_count"] >= 4
 
 
 def test_merge_split_drop_rebuild_contiguous():
@@ -240,6 +269,26 @@ def _make_ready(work_id: str, corpus: Path) -> None:
     review = review_structure_step(work_id, corpus=corpus)
     for sid in review["health"]["untreated_flags"]:
         edit_structure_step(work_id, action="confirm", section_id=sid, corpus=corpus)
+
+
+def test_confirm_toc_saves_edited_excerpt(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
+    edited = "CONTENTS\nCHAPTER I. Of War\nCHAPTER II. Of Peace"
+    from knowledgehub.edition.read_edition_steps import confirm_toc_step
+
+    result = confirm_toc_step(
+        "grotius--freedom_of_the_seas",
+        "yes",
+        excerpt=edited,
+        corpus=corpus,
+    )
+    toc = result["toc_candidate"]
+    assert toc["status"] == "yes"
+    assert toc["excerpt"] == edited
+    assert toc["line_count"] == 3
+    assert "CHAPTER I. Of War" in toc["excerpt"]
+    assert "\n" in toc["excerpt"]
 
 
 def test_set_kind_keeps_parsed_chapter_json(tmp_path, monkeypatch):
