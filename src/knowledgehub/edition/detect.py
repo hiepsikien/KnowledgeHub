@@ -96,10 +96,21 @@ def _heading_key(line: str) -> str:
     return _HEADING_PAGE_TAIL.sub("", s).strip(" .")
 
 
+def _compact_heading(text: str) -> str:
+    return re.sub(r"[^A-Z0-9]+", " ", text).strip()
+
+
+def _strip_leading_ordinal(compact: str) -> str:
+    """Drop a bare roman/arabic ordinal so split body titles can match TOC rows."""
+    return re.sub(r"^(?:[IVXLCDM]+|\d+)\s+", "", compact).strip()
+
+
 def _toc_title_repeats(key: str, seen: set[str]) -> bool:
     """True when a body heading repeats a Contents row (possibly split across lines).
 
     Prefix match covers Arnold ``NUMBERS;`` ⊆ ``NUMBERS OR THE MAJORITY…``.
+    A split body title ``THE FUNCTION OF CRITICISM AT THE PRESENT`` matches TOC
+    ``I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME`` after dropping the ordinal.
     Do not match on the first word alone — ``CHAPTER`` is 7 letters, so that
     branch treated ``CHAPTER IV`` as a repeat of ``CHAPTER I``.
     """
@@ -107,20 +118,24 @@ def _toc_title_repeats(key: str, seen: set[str]) -> bool:
         return False
     if key in seen:
         return True
-    compact = re.sub(r"[^A-Z0-9]+", " ", key).strip()
+    compact = _compact_heading(key)
     if len(compact) < 4:
         return False
     from .toc import chapter_number_key
 
     chap = chapter_number_key(key)
     for prev in seen:
-        prev_c = re.sub(r"[^A-Z0-9]+", " ", prev).strip()
+        prev_c = _compact_heading(prev)
         if not prev_c:
             continue
         if compact == prev_c:
             return True
         if len(compact) >= 5 and prev_c.startswith(compact + " "):
             return True
+        prev_title = _strip_leading_ordinal(prev_c)
+        if prev_title != prev_c and len(compact) >= 5:
+            if prev_title == compact or prev_title.startswith(compact + " "):
+                return True
         if chap and chapter_number_key(prev) == chap:
             return True
     return False
@@ -228,8 +243,27 @@ def detect_front_apparatus(text: str, *, family: str) -> list[EditionSpan]:
     return spans
 
 
+def _is_heading_cluster_line(line: str) -> bool:
+    """CHAPTER/INTRODUCTION, lone ``I.``, or a short ALL-CAPS title — not a TOC row."""
+    s = line.strip()
+    if not s:
+        return False
+    from .toc import is_chapter_number_only_line, is_toc_list_row
+
+    if is_toc_list_row(s):
+        return False
+    if BODY_HEADING.match(s) or CHAP_HEADING.match(s):
+        return True
+    if is_chapter_number_only_line(s):
+        return True
+    letters = [c for c in s if c.isalpha()]
+    if len(letters) >= 2 and len(s) < 80 and sum(c.isupper() for c in letters) / len(letters) >= 0.75:
+        return True
+    return False
+
+
 def _body_open_start(rows: list[tuple[int, int, str]], index: int) -> int:
-    """Keep a short CHAPTER/INTRODUCTION cluster immediately before body prose."""
+    """Keep a short heading cluster (CHAPTER / ``I.`` / ALL-CAPS title) before body prose."""
     start = rows[index][0]
     headings = 0
     for j in range(index - 1, -1, -1):
@@ -237,7 +271,7 @@ def _body_open_start(rows: list[tuple[int, int, str]], index: int) -> int:
         s = raw.strip()
         if not s or RULE_LINE.match(s):
             continue
-        if BODY_HEADING.match(s) and start - a < 400 and headings < 3:
+        if _is_heading_cluster_line(s) and start - a < 400 and headings < 3:
             start = a
             headings += 1
             continue
@@ -267,7 +301,7 @@ def detect_toc(text: str, *, family: str) -> list[EditionSpan]:
             break
         key = _heading_key(s)
         if toc_lines >= 3 and _toc_title_repeats(key, seen):
-            cut_at = a
+            cut_at = _body_open_start(rows, i)
             break
         if _looks_like_toc_line(s):
             toc_lines += 1
