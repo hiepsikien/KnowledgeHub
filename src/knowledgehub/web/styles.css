@@ -835,6 +835,17 @@ mark.ann-context {
   .re-layout { grid-template-columns: 1fr; }
 }
 
+.re-steps[hidden],
+.re-hitl[hidden],
+.re-struct-tools[hidden],
+.re-compare[hidden],
+.re-toc[hidden],
+.re-render[hidden],
+.re-hitl-filter[hidden],
+.re-qa-panel[hidden],
+.re-edit[hidden] {
+  display: none !important;
+}
 .re-steps {
   display: flex;
   flex-wrap: wrap;
