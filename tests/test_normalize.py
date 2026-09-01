@@ -266,6 +266,26 @@ def test_named_page_column_toc_does_not_swallow_first_essay():
     assert "characteristic saying of Dr. Johnson" in text
 
 
+def test_chapter_i_to_v_contents_not_cut_at_chapter_iv():
+    raw = (
+        "*** START OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***\n\n"
+        "CONTENTS\n\n"
+        "CHAPTER I.     Mr. Bennet sees Bingley          1\n"
+        "CHAPTER II.    Visit to Netherfield             8\n"
+        "CHAPTER III.   The assembly                    15\n"
+        "CHAPTER IV.    Jane's letter                   22\n"
+        "CHAPTER V.     The ball                        30\n\n"
+        "Chapter 1\n\n"
+        "It is a truth universally acknowledged that a single man in possession\n"
+        "of a good fortune must be in want of a wife.\n\n"
+        "*** END OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***\n"
+    )
+    text, report = normalize_manuscript(raw)
+    assert report["dropped_contents"] is True
+    assert "Jane's letter" not in text
+    assert "It is a truth universally acknowledged" in text
+
+
 def test_short_lines_not_merged():
     raw = "Translated by\nFathers of the English Dominican Province\nNew York\n"
     text, report = normalize_manuscript(raw)

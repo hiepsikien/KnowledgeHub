@@ -97,7 +97,12 @@ def _heading_key(line: str) -> str:
 
 
 def _toc_title_repeats(key: str, seen: set[str]) -> bool:
-    """True when a body heading repeats a Contents row (possibly split across lines)."""
+    """True when a body heading repeats a Contents row (possibly split across lines).
+
+    Prefix match covers Arnold ``NUMBERS;`` ⊆ ``NUMBERS OR THE MAJORITY…``.
+    Do not match on the first word alone — ``CHAPTER`` is 7 letters, so that
+    branch treated ``CHAPTER IV`` as a repeat of ``CHAPTER I``.
+    """
     if not key:
         return False
     if key in seen:
@@ -105,7 +110,9 @@ def _toc_title_repeats(key: str, seen: set[str]) -> bool:
     compact = re.sub(r"[^A-Z0-9]+", " ", key).strip()
     if len(compact) < 4:
         return False
-    first = compact.split()[0]
+    from .toc import chapter_number_key
+
+    chap = chapter_number_key(key)
     for prev in seen:
         prev_c = re.sub(r"[^A-Z0-9]+", " ", prev).strip()
         if not prev_c:
@@ -114,7 +121,7 @@ def _toc_title_repeats(key: str, seen: set[str]) -> bool:
             return True
         if len(compact) >= 5 and prev_c.startswith(compact + " "):
             return True
-        if len(first) >= 5 and prev_c.split()[0] == first:
+        if chap and chapter_number_key(prev) == chap:
             return True
     return False
 

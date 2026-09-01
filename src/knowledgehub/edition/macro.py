@@ -429,11 +429,14 @@ def build_macro_structure(
                 subtitle_out = None
             else:
                 subtitle_out = subtitle[:180] or None
+            kind = str(row.get("kind") or "chapter")
+            if kind == "other":
+                kind = "chapter"
             boundaries.append(
                 {
                     "start_line": int(row["line"]),
                     "heading_line": int(row["line"]),
-                    "kind": str(row.get("kind") or "chapter"),
+                    "kind": kind,
                     "title": title,
                     "subtitle": subtitle_out,
                     "confidence": 0.93,

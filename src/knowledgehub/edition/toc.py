@@ -362,7 +362,10 @@ def kind_for_toc_label(label: str) -> str:
         return "appendix"
     if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA")):
         return "back_matter"
-    return "chapter"
+    # Named essays stay "other" (not structural). toc_match still requires them
+    # when the TOC has no chapter/book/part rows; Dedication / To the Reader
+    # are filtered out of that fallback so they stay optional.
+    return "other"
 
 
 def chapter_number_key(label: str) -> str | None:
@@ -437,6 +440,7 @@ def toc_is_page_column_map(entries: list[dict[str, Any]]) -> bool:
 # Catalogue / glossary / bibliography are optional. A miss still allows toc_match;
 # that tail stays in the previous section. Require every chapter/part/book/preface.
 _STRUCTURAL_TOC_KINDS = frozenset({"chapter", "part", "book", "preface", "introduction", "prologue"})
+_OPTIONAL_TOC_FRONT = re.compile(r"^(DEDICATION|TO THE READER|ADVERTISEMENT)\b", re.I)
 
 
 def toc_match_covers_structure(
@@ -448,7 +452,13 @@ def toc_match_covers_structure(
         return False
     needed = [e for e in entries if e.get("kind") in _STRUCTURAL_TOC_KINDS]
     if not needed:
-        needed = list(entries)
+        needed = [
+            e
+            for e in entries
+            if not _OPTIONAL_TOC_FRONT.match(str(e.get("label") or "").strip())
+        ]
+        if not needed:
+            needed = list(entries)
     got = {(m.get("index"), m.get("label")) for m in matched}
     return all((e.get("index"), e.get("label")) in got for e in needed)
 
@@ -783,7 +793,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
                     break
             if hit:
                 found_line = line_no
-                found_text = raw_line
+                found_text = probe
                 break
         if found_line is None:
             continue

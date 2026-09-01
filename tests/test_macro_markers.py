@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from knowledgehub.edition.detect import _heading_key, _toc_title_repeats
 from knowledgehub.edition.macro import build_macro_structure, scan_heading_candidates
 from knowledgehub.edition.macro_markers import resolve_division_level, try_marker_assembly
 from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_page_toc, extract_toc_from_raw, parse_title_page_entries
@@ -517,7 +518,7 @@ def test_named_page_column_toc_is_a_map():
         "Literature and Science",
         "Emerson",
     ]
-    assert all(e["kind"] == "chapter" for e in entries)
+    assert all(e["kind"] == "other" for e in entries)
     assert not toc_is_wrap_page_column(entries)
     assert toc_is_page_column_map(entries)
 
@@ -527,7 +528,8 @@ def test_macro_uses_toc_for_arnold_named_essays():
     entries = parse_contents_entries(raw)
     matched = match_toc_entries_in_body(raw, entries)
     assert [m["label"] for m in matched] == [e["label"] for e in entries]
-    assert matched[0]["text"] == "NUMBERS;"
+    assert "NUMBERS;" in matched[0]["text"]
+    assert "MAJORITY" in matched[0]["text"].upper()
     assert toc_match_covers_structure(entries, matched)
     doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
     assert doc["mode"] == "toc_match"
@@ -535,9 +537,9 @@ def test_macro_uses_toc_for_arnold_named_essays():
     titles = [s["title"] for s in doc["sections"]]
     assert kinds[0] == "front_matter"
     assert kinds.count("chapter") == 3
-    assert "NUMBERS;" in titles
-    assert "LITERATURE AND SCIENCE." in titles
-    assert "EMERSON." in titles
+    assert any("NUMBERS;" in t and "MAJORITY" in t.upper() for t in titles)
+    assert any("LITERATURE AND SCIENCE" in t for t in titles)
+    assert any("EMERSON" in t for t in titles)
 
 
 def test_strip_keeps_arnold_first_essay_heading():
@@ -550,6 +552,136 @@ def test_strip_keeps_arnold_first_essay_heading():
     assert "LITERATURE AND SCIENCE." in text
     assert "EMERSON." in text
     doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    assert [s["kind"] for s in doc["sections"]].count("chapter") == 3
+
+
+def test_toc_title_repeats_prefix_not_first_word():
+    seen = {
+        _heading_key("CHAPTER I.     Mr. Bennet sees Bingley          1"),
+        _heading_key("CHAPTER II.    Visit to Netherfield             8"),
+        _heading_key("CHAPTER III.   The assembly                    15"),
+    }
+    assert not _toc_title_repeats(_heading_key("CHAPTER IV.    Jane's letter                   22"), seen)
+    assert _toc_title_repeats(_heading_key("Chapter 1"), seen)
+    arnold_toc = _heading_key("Numbers; or, The Majority and the Remnant              1")
+    assert _toc_title_repeats(_heading_key("NUMBERS;"), {arnold_toc})
+    volume_seen = {
+        _heading_key("VOLUME I. First                     1"),
+        _heading_key("VOLUME II. Second                    2"),
+        _heading_key("VOLUME III. Third                    3"),
+    }
+    assert not _toc_title_repeats(_heading_key("VOLUME IV. Fourth                    4"), volume_seen)
+    assert _toc_title_repeats(_heading_key("VOLUME I"), volume_seen)
+
+
+def _chapter_i_to_v_contents() -> str:
+    return """*** START OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***
+
+Title page
+
+CONTENTS
+
+CHAPTER I.     Mr. Bennet sees Bingley          1
+CHAPTER II.    Visit to Netherfield             8
+CHAPTER III.   The assembly                    15
+CHAPTER IV.    Jane's letter                   22
+CHAPTER V.     The ball                        30
+
+Chapter 1
+
+It is a truth universally acknowledged that a single man in possession
+of a good fortune must be in want of a wife.
+
+Chapter 2
+
+Mr. Bennet was among the earliest of those who waited on Mr. Bingley.
+
+Chapter 3
+
+Not all that Mrs. Bennet, however, with the assistance of her five daughters.
+
+Chapter 4
+
+When Jane and Elizabeth were alone, Jane told her sister the letter.
+
+Chapter 5
+
+The village of Longbourn was only one mile from Meryton.
+
+*** END OF THE PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***
+"""
+
+
+def test_chapter_i_to_v_contents_is_stripped_not_cut_at_iv():
+    raw = _chapter_i_to_v_contents()
+    text, report = build_edition(raw, language="en", strip_only=True)
+    assert report["dropped_contents"] is True
+    assert "Jane's letter" not in text
+    assert "Mr. Bennet sees Bingley" not in text
+    assert "It is a truth universally acknowledged" in text
+    assert "When Jane and Elizabeth were alone" in text
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "markers"
+    assert [s["kind"] for s in doc["sections"]].count("chapter") == 5
+
+
+def test_dedication_in_named_toc_is_not_required():
+    raw = """*** START OF THE PROJECT GUTENBERG EBOOK DISCOURSES IN AMERICA ***
+
+CONTENTS.
+
+
+                                                      PAGE
+
+  Dedication                                           vii
+
+  To the Reader                                        xii
+
+  Numbers; or, The Majority and the Remnant              1
+
+  Literature and Science                                72
+
+  Emerson                                              138
+
+
+
+  NUMBERS;
+  OR,
+  THE MAJORITY AND THE REMNANT.
+
+
+There is a characteristic saying of Dr. Johnson: Patriotism is the last
+refuge of a scoundrel. The saying is cynical yet it has in it something
+of plain robust sense and truth.
+
+  LITERATURE AND SCIENCE.
+
+
+The question of public education is a question of high importance in
+modern life, and it is a question on which the public is not agreed.
+
+  EMERSON.
+
+
+Towards Emerson the feelings of his countrymen have not always been
+steady, but they have been strong.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DISCOURSES IN AMERICA ***
+"""
+    entries = parse_contents_entries(raw)
+    labels = [e["label"] for e in entries]
+    assert any(lab.lower().startswith("dedication") for lab in labels)
+    assert any("reader" in lab.lower() for lab in labels)
+    assert all(e["kind"] == "other" for e in entries)
+    matched = match_toc_entries_in_body(raw, entries)
+    assert toc_match_covers_structure(entries, matched)
+    assert [m["label"] for m in matched] == [
+        "Numbers; or, The Majority and the Remnant",
+        "Literature and Science",
+        "Emerson",
+    ]
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
     assert doc["mode"] == "toc_match"
     assert [s["kind"] for s in doc["sections"]].count("chapter") == 3
 
