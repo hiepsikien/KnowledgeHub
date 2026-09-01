@@ -129,6 +129,30 @@
     }
   }
 
+  async function openSectionFullText() {
+    if (!state.workId || !state.chapterId) return;
+    const box = $("preview");
+    const fullBtn = $("preview-full");
+    if (!box) return;
+    $("preview-title").textContent = "Đang tải…";
+    $("preview-meta").textContent = "";
+    $("preview-body").textContent = "";
+    if (fullBtn) fullBtn.hidden = true;
+    box.hidden = false;
+    $("preview-body").scrollTop = 0;
+    try {
+      const data = await api(
+        `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}/source`,
+      );
+      $("preview-title").textContent = data.title || state.chapterId;
+      const kind = data.kind ? ` · ${data.kind}` : "";
+      $("preview-meta").textContent = `${(data.chars || 0).toLocaleString()} chữ · nguồn section${kind}`;
+      $("preview-body").textContent = data.text || "";
+    } catch (err) {
+      $("preview-meta").textContent = err.message;
+    }
+  }
+
   function renderChapterBody(chapter) {
     const box = $("re-body");
     if (!box) return;
@@ -138,7 +162,7 @@
       const compare = chapter.compare || reviewRow(chapter.chapter_id)?.compare || {};
       const omitted = Number(chapter.source_preview_omitted) || 0;
       const gap = chapter.source_preview_truncated
-        ? `<p class="preview-gap">… đã rút ${omitted.toLocaleString()} chữ giữa đầu và cuối …</p>`
+        ? `<p class="preview-gap">… đã rút ${omitted.toLocaleString()} chữ giữa đầu và cuối. <button type="button" class="btn ghost" data-section-full>Toàn văn</button></p>`
         : "";
       const head = escapeHtml(chapter.source_preview_head || chapter.source_preview || "");
       const tail = chapter.source_preview_truncated
@@ -151,6 +175,9 @@
         ? `<aside class="re-rail"><h3>Rìa sau</h3><pre>${escapeHtml(compare.next_head)}</pre></aside>`
         : "";
       box.innerHTML = `${prev}<div class="re-preview"><pre>${head}</pre>${gap}${tail}</div>${next}<p class="muted">Chưa parse REF — bấm «Parse chương này» khi cấu trúc đã OK.</p>`;
+      box.onclick = (e) => {
+        if (e.target.closest("[data-section-full]")) void openSectionFullText();
+      };
       return;
     }
     box.innerHTML = blocks
@@ -269,6 +296,7 @@
         /* ignore quota */
       }
       renderChapterList(state.manifest);
+      if ($("re-section-full")) $("re-section-full").hidden = false;
       const parentRow = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapter.parent_id);
       $("re-detail-title").textContent = chapter.title || chapterId;
       const parsed = chapter.micro_status === "complete";
@@ -293,6 +321,7 @@
       renderCompare(chapter);
       syncToolbar();
     } catch (err) {
+      if ($("re-section-full")) $("re-section-full").hidden = true;
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
     }
@@ -635,6 +664,7 @@
         applyReview(null);
         $("re-chapters").innerHTML = `<p class="muted">Bấm «Phân đoạn» để liệt kê chương.</p>`;
         $("re-body").innerHTML = "";
+        if ($("re-section-full")) $("re-section-full").hidden = true;
         if ($("re-compare")) $("re-compare").hidden = true;
         if ($("re-struct-tools")) $("re-struct-tools").hidden = true;
       }
@@ -808,6 +838,8 @@
       const kind = e.target.value;
       if (kind) void applyStructureEdit("set_kind", { kind });
     });
+
+    $("re-section-full")?.addEventListener("click", () => void openSectionFullText());
 
     $("re-qa-ch")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;

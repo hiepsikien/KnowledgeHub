@@ -30,6 +30,7 @@ from .read_edition_service import (
     confirm_toc as confirm_read_edition_toc,
     edit_structure as edit_read_edition_structure,
     get_chapter as get_read_edition_chapter,
+    get_section_source as get_read_edition_section_source,
     get_manifest as get_read_edition_manifest,
     get_review as get_read_edition_review,
     get_status as get_read_edition_status,
@@ -419,6 +420,15 @@ def create_app() -> FastAPI:
     def read_edition_manifest(work_id: str) -> dict[str, Any]:
         try:
             return {"manifest": get_read_edition_manifest(work_id)}
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/chapters/{chapter_id}/source", dependencies=guard)
+    def read_edition_chapter_source(work_id: str, chapter_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_section_source(work_id, chapter_id)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:

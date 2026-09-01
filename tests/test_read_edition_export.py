@@ -109,6 +109,7 @@ def test_cheban_ui_labels(client):
     assert "Parse REF chương" not in html
     assert "Parse chương này" in html
     assert "Chế bản (REF)" in html
+    assert 'id="re-section-full"' in html
 
 
 def test_read_edition_api(client):
@@ -137,6 +138,17 @@ def test_read_edition_api(client):
     assert pending.get("micro_status") == "pending"
     assert "source_preview" in pending
     assert "source_preview_truncated" in pending
+    source = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}/source")
+    assert source.status_code == 200
+    src = source.json()
+    assert src["chapter_id"] == ch_id
+    assert src["text"]
+    assert src["chars"] == len(src["text"])
+    head = pending.get("source_preview_head") or ""
+    if head:
+        assert src["text"].startswith(head)
+    missing = client.get(f"/api/works/{wid}/read-edition/chapters/no-such-section/source")
+    assert missing.status_code == 400
     viewed = client.get(f"/api/works/{wid}/read-edition")
     assert viewed.json()["hitl"]["last_section_id"] == ch_id
 
@@ -184,6 +196,10 @@ def test_read_edition_api(client):
     chapter = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}")
     assert chapter.status_code == 200
     assert chapter.json()["blocks"]
+    source_after = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}/source")
+    assert source_after.status_code == 200
+    assert source_after.json()["chars"] == src["chars"]
+    assert source_after.json()["text"] == src["text"]
 
     qa = client.post(f"/api/works/{wid}/read-edition/qa", json={"chapter_id": ch_id, "use_llm": False})
     assert qa.status_code == 200

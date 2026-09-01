@@ -299,6 +299,35 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
     return chapter
 
 
+def get_section_source(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Full stripped source for one macro section — not the truncated CMS preview."""
+    try:
+        return _get_section_source(work_id, chapter_id, corpus=corpus)
+    except (ReadEditionError, ReadEditionStepError) as exc:
+        raise _map_error(exc) from exc
+
+
+def _get_section_source(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    root = corpus or corpus_root()
+    package_dir, _, _ = package_dir_for_work(work_id, corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ValueError("Chapter not parsed — run macro then micro parse")
+    section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
+    if not section:
+        raise ValueError(f"Unknown chapter: {chapter_id}")
+    text, _, _ = resolve_stripped_source(work_id, corpus=root)
+    slice_text = section_source_slice(text, section)
+    return {
+        "chapter_id": chapter_id,
+        "title": section.get("title"),
+        "kind": section.get("kind"),
+        "char_range": [section.get("start_char"), section.get("end_char")],
+        "chars": len(slice_text),
+        "text": slice_text,
+    }
+
+
 def patch_chapter(
     work_id: str,
     chapter_id: str,

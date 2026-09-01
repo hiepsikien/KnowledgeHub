@@ -778,6 +778,7 @@ mark.ann-context {
   align-items: flex-start;
   margin-bottom: 12px;
 }
+.re-detail-actions { flex-shrink: 0; }
 .re-render {
   font-family: var(--serif);
   font-size: 17px;
