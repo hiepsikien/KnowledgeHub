@@ -6,19 +6,15 @@ import re
 from typing import Any
 
 from .footnotes import parse_numbered_notes, split_footnotes_section
-from .inline_spans import annotate_blocks
 from .label_rules import (
     CONTINUATION_START,
     HANGING_WORD,
     HYPHEN_BREAK,
     _sentence_ended,
     _should_join,
-    label_lines_rules,
 )
 from .lines import TextLine, iter_lines
-from .merge_blocks import labels_to_blocks
-from .serialize import grotius_latin_to_blockquote
-from .structure import merge_adjacent_blockquotes, merge_adjacent_headings, merge_adjacent_metadata
+from .ref import apply_wrap_overrides, blocks_from_labels, label_edition_lines, normalize_edition_source
 
 HITL_KINDS = ("wrap", "footnotes", "quotes")
 
@@ -44,7 +40,9 @@ REASON_VI = {
     "short_body": "nội dung chú thích quá ngắn",
     "split_body": "nội dung chú thích bị ngắt nhiều dòng",
     "sequence_gap": "thiếu số trong dãy chú thích",
+    "footnotes_dump_global": "nội dung lấy từ FOOTNOTES cuối sách — cần xác nhận đúng chương",
     "unclosed_quote": "thiếu dấu đóng ngoặc kép",
+    "not_actionable": "chỉ ghi nhận; parse không đổi chỗ này",
     "short_blockquote": "blockquote rất ngắn — có thể là thoại thường",
     "unmatched_em": "gạch dưới lẻ, chưa thành cặp nhấn mạnh",
     "mixed_verse": "trộn thơ / văn xuôi trong cùng khối trích",
@@ -116,7 +114,7 @@ def summarize_items(items: list[dict[str, Any]], *, extra: dict[str, int] | None
             summary["accepted"] += 1
         elif decision == "reject":
             summary["rejected"] += 1
-        else:
+        elif item.get("suspect"):
             summary["pending"] += 1
         status = item.get("status")
         if status == "linked":
@@ -227,8 +225,8 @@ def scan_wrap(
     family: str = "gutenberg",
     language: str = "en",
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    lines = iter_lines(text)
-    labels = label_lines_rules(lines, family=family, source_text=text)
+    body, _apparatus, _unwrapped = normalize_edition_source(text, family=family, language=language)
+    lines, labels, _events = label_edition_lines(body, family=family, language=language, use_llm=False)
     items: list[dict[str, Any]] = []
     auto_join = 0
     auto_keep = 0
@@ -266,6 +264,7 @@ def scan_wrap(
                     "next": _clip(lines[i + 1].text),
                     "preview": _clip(preview, 240) if preview else "",
                     "blank_before": bool(lines[i + 1].blank_before),
+                    "actionable": True,
                 }
             )
         )
@@ -332,6 +331,10 @@ def _dump_bodies(book_text: str | None) -> dict[int, str]:
     return parse_numbered_notes(blob) if blob else {}
 
 
+def extract_dump_notes(book_text: str | None) -> dict[int, str]:
+    return _dump_bodies(book_text)
+
+
 def scan_footnotes(
     text: str,
     *,
@@ -339,11 +342,13 @@ def scan_footnotes(
     family: str = "gutenberg",
     language: str = "en",
     book_text: str | None = None,
+    dump_notes: dict[int, str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     del family, language
-    lines = iter_lines(text)
+    body_text, _local_dump = split_footnotes_section(text)
+    lines = iter_lines(body_text)
     local_bodies = _collect_indented_bodies(lines)
-    dump = _dump_bodies(book_text)
+    dump = dump_notes if dump_notes is not None else _dump_bodies(book_text if book_text is not None else text)
     body_lines = {row["line_index"] for row in local_bodies.values()}
 
     markers: dict[int, list[dict[str, Any]]] = {}
@@ -364,25 +369,26 @@ def scan_footnotes(
                 }
             )
 
-    numbers = sorted(set(markers) | set(local_bodies) | set(dump))
+    numbers = sorted(set(markers) | set(local_bodies))
     items: list[dict[str, Any]] = []
-    used_dump: set[int] = set()
     for number in numbers:
         hits = markers.get(number) or []
         local = local_bodies.get(number)
         dumped = dump.get(number)
         marker = f"[{number}]"
+        from_dump = bool(dumped) and not local
         body = (local or {}).get("body") or dumped or ""
         body_source = None
         if local:
             body_source = local.get("source")
         elif dumped:
             body_source = "footnotes_dump"
-            used_dump.add(number)
         reasons: list[str] = []
         status = "linked"
         if hits and body:
             status = "linked"
+            if from_dump:
+                reasons.append("footnotes_dump_global")
         elif hits and not body:
             status = "unmatched_marker"
             reasons.append("unmatched_marker")
@@ -416,6 +422,7 @@ def scan_footnotes(
                     "suspect": suspect,
                     "reasons": reasons,
                     "line_index": first.get("line_index") if hits else (local or {}).get("line_index"),
+                    "actionable": True,
                 }
             )
         )
@@ -456,19 +463,18 @@ def scan_quotes(
     family: str = "gutenberg",
     language: str = "en",
     work_id: str | None = None,
+    wrap_overrides: dict[int, bool] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    del language
-    lines = iter_lines(text)
-    labels = label_lines_rules(lines, family=family, source_text=text)
-    blocks = labels_to_blocks(lines, labels)
-    if work_id and work_id.startswith("grotius--"):
-        blocks = grotius_latin_to_blockquote(blocks)
-    blocks = merge_adjacent_headings(blocks)
-    blocks = merge_adjacent_metadata(blocks)
-    blocks = merge_adjacent_blockquotes(blocks)
-    blocks, _profile = annotate_blocks(blocks)
+    body, _apparatus, _unwrapped = normalize_edition_source(text, family=family, language=language)
+    lines, labels, _events = label_edition_lines(
+        body,
+        family=family,
+        language=language,
+        use_llm=False,
+        wrap_overrides=wrap_overrides,
+    )
+    blocks, _profile = blocks_from_labels(lines, labels, work_id=work_id, language=language)
     items: list[dict[str, Any]] = []
-    idx = 0
 
     for bi, block in enumerate(blocks):
         kind = block.get("type")
@@ -494,10 +500,10 @@ def scan_quotes(
                         "context": "",
                         "suspect": bool(reasons),
                         "reasons": reasons,
+                        "actionable": True,
                     }
                 )
             )
-            idx += 1
         for span in block.get("spans") or []:
             style = span.get("style")
             if style not in {"quote", "em"}:
@@ -508,6 +514,8 @@ def scan_quotes(
                 reasons.append("unmatched_em")
             if style == "quote" and len(span_text) > 280:
                 reasons.append("long_inline")
+            start = span.get("start")
+            end = span.get("end")
             items.append(
                 _label_item(
                     {
@@ -516,18 +524,18 @@ def scan_quotes(
                         "kind": "quote",
                         "mark": style,
                         "block_index": bi,
-                        "start": span.get("start"),
-                        "end": span.get("end"),
+                        "start": start,
+                        "end": end,
                         "text": _clip(span_text, 220),
                         "context": _clip(block_text, 180),
                         "suspect": bool(reasons),
                         "reasons": reasons,
+                        "actionable": isinstance(start, int) and isinstance(end, int),
                     }
                 )
             )
-            idx += 1
 
-    odd_underscores = text.count("_") % 2 == 1
+    odd_underscores = body.count("_") % 2 == 1
     if odd_underscores and not any("unmatched_em" in (it.get("reasons") or []) for it in items):
         items.append(
             _label_item(
@@ -536,14 +544,15 @@ def scan_quotes(
                     "chapter_id": chapter_id,
                     "kind": "quote",
                     "mark": "em",
-                    "text": _clip(text, 160),
+                    "text": _clip(body, 160),
                     "context": "",
                     "suspect": True,
-                    "reasons": ["unmatched_em"],
+                    "reasons": ["unmatched_em", "not_actionable"],
+                    "actionable": False,
                 }
             )
         )
-    for i, issue in enumerate(_unclosed_quote_issues(text)):
+    for i, issue in enumerate(_unclosed_quote_issues(body)):
         items.append(
             _label_item(
                 {
@@ -554,7 +563,8 @@ def scan_quotes(
                     "text": issue["text"],
                     "context": "",
                     "suspect": True,
-                    "reasons": issue["reasons"],
+                    "reasons": issue["reasons"] + ["not_actionable"],
+                    "actionable": False,
                 }
             )
         )
@@ -569,7 +579,9 @@ def scan_kind(
     family: str = "gutenberg",
     language: str = "en",
     book_text: str | None = None,
+    dump_notes: dict[int, str] | None = None,
     work_id: str | None = None,
+    wrap_overrides: dict[int, bool] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     if kind == "wrap":
         return scan_wrap(text, chapter_id=chapter_id, family=family, language=language)
@@ -580,6 +592,7 @@ def scan_kind(
             family=family,
             language=language,
             book_text=book_text,
+            dump_notes=dump_notes,
         )
     if kind == "quotes":
         return scan_quotes(
@@ -588,6 +601,7 @@ def scan_kind(
             family=family,
             language=language,
             work_id=work_id,
+            wrap_overrides=wrap_overrides,
         )
     raise ValueError(f"unknown HITL kind: {kind}")
 
@@ -609,12 +623,6 @@ def wrap_overrides_from_items(items: list[dict[str, Any]], *, chapter_id: str | 
         if isinstance(idx, int):
             out[idx] = join
     return out
-
-
-def apply_wrap_overrides(labels: list[Any], overrides: dict[int, bool]) -> None:
-    for index, join in overrides.items():
-        if 0 <= index < len(labels):
-            labels[index].join_next = join
 
 
 def footnote_records_from_items(

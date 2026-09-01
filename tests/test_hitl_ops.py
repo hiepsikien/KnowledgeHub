@@ -2,7 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from knowledgehub.edition.hitl_ops import scan_footnotes, scan_quotes, scan_wrap
+from knowledgehub.edition.hitl_ops import (
+    apply_quote_decisions,
+    apply_wrap_overrides,
+    footnote_records_from_items,
+    scan_footnotes,
+    scan_quotes,
+    scan_wrap,
+    summarize_items,
+    wrap_overrides_from_items,
+)
 
 CORPUS = Path(__file__).resolve().parent / "fixtures" / "ref_corpus"
 GROTIUS = (CORPUS / "en" / "grotius_treatise_ch1.txt").read_text(encoding="utf-8")
@@ -46,14 +55,23 @@ def test_footnotes_link_indented_hume_note():
 
 
 def test_footnotes_link_dump_from_book_tail():
-    body = GROTIUS + "\n\nFOOTNOTES:\n\n[1] Pliny, Natural History.\n\n[4] Seneca, Natural Questions.\n"
+    body = GROTIUS + "\n\nFOOTNOTES:\n\n[1] Pliny, Natural History.\n\n[4] Seneca, Natural Questions.\n\n[99] Only in the dump.\n"
     items, extra = scan_footnotes(GROTIUS, chapter_id="ch1", book_text=body)
     one = next(row for row in items if row["marker"] == "[1]")
     four = next(row for row in items if row["marker"] == "[4]")
     assert one["status"] == "linked"
+    assert one["suspect"] is True
+    assert "footnotes_dump_global" in one["reasons"]
     assert "Pliny" in one["body"]
     assert four["status"] == "linked"
+    assert four["suspect"] is True
     assert extra["linked"] >= 2
+    assert all(row["number"] != 99 for row in items)
+    auto = footnote_records_from_items(items, chapter_id="ch1")
+    assert all(row.get("number") not in {1, 4} for row in auto)
+    one["decision"] = "accept"
+    accepted = footnote_records_from_items(items, chapter_id="ch1")
+    assert any(row.get("number") == 1 for row in accepted)
 
 
 def test_quotes_find_vergil_blockquote_and_emphasis():
@@ -155,6 +173,17 @@ def test_hitl_trial_then_book_api(tmp_path, monkeypatch):
     )
     assert book.status_code == 200
     assert book.json()["scope"] == "book"
+    accepted_id = next((row["id"] for row in book.json()["items"] if row.get("decision") == "accept"), None)
+
+    rescan = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": ch_id},
+    )
+    assert rescan.status_code == 200
+    assert rescan.json()["scope"] == "book"
+    if accepted_id:
+        kept = next(row for row in rescan.json()["items"] if row["id"] == accepted_id)
+        assert kept.get("decision") == "accept"
 
     notes = client.post(
         f"/api/works/{wid}/read-edition/hitl/footnotes/scan",
@@ -166,6 +195,8 @@ def test_hitl_trial_then_book_api(tmp_path, monkeypatch):
     assert "[1]" in markers
     linked = next(row for row in payload["items"] if row["marker"] == "[1]")
     assert linked["status"] == "linked"
+    assert linked["suspect"] is True
+    assert "footnotes_dump_global" in linked["reasons"]
     assert "Pliny" in linked["body"]
 
     quotes = client.post(
@@ -181,3 +212,162 @@ def test_hitl_trial_then_book_api(tmp_path, monkeypatch):
     kinds = overview.json()["kinds"]
     assert kinds["wrap"]["trial_confirmed"] is True
     assert kinds["footnotes"]["status"] == "trial"
+
+
+def test_pending_counts_undecided_suspects_only():
+    summary = summarize_items(
+        [
+            {"suspect": False},
+            {"suspect": True},
+            {"suspect": True, "decision": "accept"},
+            {"suspect": False, "decision": "accept"},
+        ]
+    )
+    assert summary["pending"] == 1
+    assert summary["suspect"] == 2
+    assert summary["accepted"] == 2
+    assert summary["total"] == 4
+
+
+def test_wrap_scan_indexes_match_unwrapped_archive_scan():
+    from knowledgehub.edition.lines import iter_lines
+    from knowledgehub.edition.ref import normalize_edition_source
+
+    raw = (CORPUS / "en" / "archive_scan_ocr.txt").read_text(encoding="utf-8")
+    body, _apparatus, unwrapped = normalize_edition_source(raw, family="archive_scan", language="en")
+    assert unwrapped is True
+    raw_n = len(iter_lines(raw))
+    body_n = len(iter_lines(body))
+    assert body_n < raw_n
+    items, _extra = scan_wrap(raw, chapter_id="c1", family="archive_scan", language="en")
+    for row in items:
+        assert 0 <= row["line_index"] < body_n
+        assert 0 <= row["next_index"] < body_n
+
+
+def test_apply_wrap_overrides_joins_megarians():
+    from knowledgehub.edition.ref import build_read_edition
+
+    items, _extra = scan_wrap(GROTIUS, chapter_id="ch1", family="gutenberg")
+    hit = next(row for row in items if "Megarians" in row["prev"] and "Athenians" in row["next"])
+    hit["decision"] = "accept"
+    overrides = wrap_overrides_from_items(items, chapter_id="ch1")
+    assert hit["line_index"] in overrides
+    edition, _report = build_read_edition(
+        GROTIUS,
+        family="gutenberg",
+        language="en",
+        use_llm=False,
+        wrap_overrides=overrides,
+    )
+    glued = " ".join(edition["reading_markdown"].split())
+    assert "Megarians against the Athenians" in glued
+
+
+def test_quote_scan_block_index_matches_parse_and_reject():
+    from knowledgehub.edition.ref import build_read_edition
+
+    work_id = "grotius--freedom_of_the_seas"
+    items, _extra = scan_quotes(GROTIUS, chapter_id="ch1", family="gutenberg", work_id=work_id)
+    edition, _report = build_read_edition(
+        GROTIUS,
+        family="gutenberg",
+        language="en",
+        use_llm=False,
+        work_id=work_id,
+    )
+    blocks = edition["blocks"]
+    bq = next(row for row in items if row["mark"] == "blockquote")
+    assert bq["actionable"] is True
+    assert blocks[bq["block_index"]]["type"] == "blockquote"
+    snippet = bq["text"].rstrip("…")[:24]
+    assert snippet in (blocks[bq["block_index"]].get("text") or "")
+    bq["decision"] = "reject"
+    apply_quote_decisions(blocks, items, chapter_id="ch1")
+    assert blocks[bq["block_index"]]["type"] == "paragraph"
+
+
+def test_unclosed_quote_is_not_actionable():
+    items, _extra = scan_quotes('He said "hello and never finished.\n', chapter_id="c1", family="gutenberg")
+    unclosed = [row for row in items if row["mark"] == "unclosed"]
+    assert unclosed
+    assert all(row["actionable"] is False for row in unclosed)
+
+
+def _confirm_layout(client, work_id: str) -> None:
+    toc = client.post(f"/api/works/{work_id}/read-edition/toc", json={"status": "none"})
+    assert toc.status_code == 200, toc.text
+    review = client.get(f"/api/works/{work_id}/read-edition/review")
+    assert review.status_code == 200
+    for sid in review.json()["health"]["untreated_flags"]:
+        confirmed = client.post(
+            f"/api/works/{work_id}/read-edition/structure/edit",
+            json={"action": "confirm", "section_id": sid},
+        )
+        assert confirmed.status_code == 200
+    layout = client.post(f"/api/works/{work_id}/read-edition/layout")
+    assert layout.status_code == 200, layout.text
+    assert layout.json()["health"]["layout_ok"] is True
+
+
+def test_decide_reparses_and_refreshes_hash(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from knowledgehub.catalog import build_catalog
+    from knowledgehub.hash import refresh_hashes
+    from knowledgehub.server import create_app
+
+    corpus = _grotius_corpus(tmp_path)
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    refresh_hashes(corpus=corpus)
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    client = TestClient(create_app())
+    wid = "grotius--freedom_of_the_seas"
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200, macro.text
+    ch_id = client.get(f"/api/works/{wid}/read-edition/manifest").json()["manifest"]["chapters"][0]["chapter_id"]
+    _confirm_layout(client, wid)
+
+    parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
+    assert parsed.status_code == 200, parsed.text
+    before_hash = parsed.json()["edition_hash"]
+    before_md = parsed.json()["reading_markdown"]
+
+    quotes = client.post(
+        f"/api/works/{wid}/read-edition/hitl/quotes/scan",
+        json={"scope": "chapter", "chapter_id": ch_id},
+    )
+    assert quotes.status_code == 200, quotes.text
+    bq = next(row for row in quotes.json()["items"] if row["mark"] == "blockquote")
+    decided = client.post(
+        f"/api/works/{wid}/read-edition/hitl/quotes/decide",
+        json={"decision": "reject", "item_ids": [bq["id"]]},
+    )
+    assert decided.status_code == 200, decided.text
+    assert ch_id in (decided.json().get("reparsed") or [])
+
+    from knowledgehub.edition.serialize import edition_hash as hash_blocks
+
+    chapter = client.get(f"/api/works/{wid}/read-edition/chapters/{ch_id}")
+    assert chapter.status_code == 200
+    body = chapter.json()
+    assert body["edition_hash"] != before_hash
+    assert body["edition_hash"] == hash_blocks(body["blocks"])
+    assert body["reading_markdown"] != before_md
+    assert body["blocks"][bq["block_index"]]["type"] == "paragraph"
+
+
+def test_apply_wrap_overrides_function_mutates_join_next():
+    from knowledgehub.edition.label_rules import label_lines_rules
+    from knowledgehub.edition.lines import iter_lines
+
+    lines = iter_lines("Alpha the\nbeta line.\n")
+    labels = label_lines_rules(lines, family="gutenberg", source_text="Alpha the\nbeta line.\n")
+    apply_wrap_overrides(labels, {0: True})
+    assert labels[0].join_next is True
+    apply_wrap_overrides(labels, {0: False})
+    assert labels[0].join_next is False

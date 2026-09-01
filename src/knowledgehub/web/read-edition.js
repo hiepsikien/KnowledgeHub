@@ -21,15 +21,15 @@
   const HITL_STEPS = {
     wrap: {
       title: "Nối dòng",
-      lead: "Ghép các dòng bị cắt cứng (soft wrap). Parser tự nối chỗ chắc; chỗ nghi ngờ gom lại để bạn xác nhận. Chạy thử một chương, xong mới chạy toàn sách.",
+      lead: "Ghép các dòng bị cắt cứng (soft wrap). Parser tự nối chỗ chắc; chỗ nghi ngờ gom lại để bạn xác nhận. Quyết định ghi ngay vào chương đã parse — nếu chưa parse, bấm «Parse chương này» sau khi xong bước này (trước khi đưa sang Read).",
     },
     footnotes: {
       title: "Chú thích",
-      lead: "Nối marker ([1], [2]…) với nội dung chú thích. Hiện tất cả chú thích của chương thử; chỗ nghi ngờ (thiếu nội dung, trùng số…) được đánh dấu. Ổn thì chạy toàn văn bản.",
+      lead: "Nối marker ([1], [2]…) với nội dung chú thích của chương. Ghi chú lấy từ FOOTNOTES cuối sách được đánh nghi ngờ — phải bấm OK mới gắn. Quyết định ghi ngay vào chương đã parse.",
     },
     quotes: {
       title: "Trích dẫn & nhấn mạnh",
-      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Chạy thử một chương để rà; chỗ nghi ngờ (thiếu dấu đóng, blockquote quá ngắn…) được đánh dấu rồi mới chạy toàn sách.",
+      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Bỏ blockquote/nhấn mạnh ghi vào chương đã parse. Chỗ thiếu dấu đóng chỉ ghi nhận (Đã xem) — parse không tự sửa dấu lẻ.",
     },
   };
 
@@ -427,10 +427,10 @@
         ? "Xác nhận cấu trúc, rồi parse REF"
         : health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý";
     }
-    showBtn("re-parse-ch", onStructure && layoutOk && currentPending);
+    showBtn("re-parse-ch", layoutOk && !!current && (onStructure ? currentPending : true));
     showBtn("re-parse-selected", onStructure && layoutOk && selectedPending > 1);
-    showBtn("re-parse-ready", onStructure && layoutOk && pending.length > 0 && !(currentPending && pending.length === 1));
-    showBtn("re-publish", onStructure && layoutOk && parsed > 0);
+    showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(onStructure && currentPending && pending.length === 1));
+    showBtn("re-publish", layoutOk && parsed > 0);
     showBtn("re-more", onStructure);
 
     let primary = "re-macro";
@@ -592,14 +592,22 @@
         body += `<p class="muted">${escapeHtml(item.context)}</p>`;
       }
     }
-    const acceptLabel = state.step === "wrap" ? (item.proposed === "join" ? "Ghép" : "Giữ tách") : "OK";
+    const actionable = item.actionable !== false;
+    const acceptLabel = !actionable
+      ? "Đã xem"
+      : state.step === "wrap"
+        ? (item.proposed === "join" ? "Ghép" : "Giữ tách")
+        : "OK";
     const rejectLabel = state.step === "wrap" ? (item.proposed === "join" ? "Giữ tách" : "Ghép") : "Bỏ";
+    const rejectBtn = actionable
+      ? `<button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}">${rejectLabel}</button>`
+      : "";
     return `<article class="${cls.join(" ")}" data-hitl-id="${escapeHtml(item.id)}">
       <div class="re-hitl-card-top">${tags.join("")}${reasons ? `<span class="muted">${reasons}</span>` : ""}</div>
       ${body}
       <div class="re-hitl-actions">
         <button type="button" class="btn ${decision === "accept" ? "primary" : "ghost"}" data-hitl-accept="${escapeHtml(item.id)}">${acceptLabel}</button>
-        <button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}">${rejectLabel}</button>
+        ${rejectBtn}
       </div>
     </article>`;
   }
@@ -698,6 +706,12 @@
       });
       await loadHitlOverview();
       renderHitlList();
+      if ((state.hitlJob.reparsed || []).includes(state.chapterId)) {
+        toast("Đã ghi vào chương đã parse");
+        await selectChapter(state.chapterId);
+      } else if ((state.hitlJob.apply_errors || []).length) {
+        toast(state.hitlJob.apply_errors[0]);
+      }
     } catch (err) {
       toast(err.message);
     }
