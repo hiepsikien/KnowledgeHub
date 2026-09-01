@@ -115,6 +115,15 @@ def test_cheban_ui_labels(client):
     assert ">Reset<" in html
     assert "Chế bản (REF)" in html
     assert 'id="re-section-full"' in html
+    assert "Nối dòng" in html
+    assert "Chạy thử chương này" in html
+    assert "Chạy toàn văn bản" in html
+    assert 'data-step="footnotes"' in html
+    js = client.get("/read-edition.js")
+    assert js.status_code == 200
+    assert "chương đã parse" in js.text
+    assert "Đã xem" in js.text
+    assert 'styles.css?v=cheban12' in html
 
 
 def test_toc_reclass_keeps_excerpt_and_reset_wipes(client):
