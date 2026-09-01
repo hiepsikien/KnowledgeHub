@@ -837,8 +837,10 @@ def heading_title_from_toc_match(row: dict[str, Any]) -> str:
     toc_num = bare_leading_numeral(toc_label)
     body_num = bare_leading_numeral(body)
     if toc_num and toc_num != body_num:
-        return toc_label
-    return body or toc_label
+        chosen = toc_label
+    else:
+        chosen = body or toc_label
+    return _FOOTNOTE_MARK.sub("", chosen).strip()
 
 
 def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -860,6 +862,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
         )
         found_line: int | None = None
         found_text = ""
+        hit_line: int | None = None
         for line_no, raw in enumerate(lines):
             if line_no <= cursor:
                 continue
@@ -873,7 +876,10 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
                 if got == chap:
                     found_line = line_no
                     found_text = raw_line
+                    hit_line = line_no
                     break
+                continue
+            if is_chapter_number_only_line(raw_line):
                 continue
             probes = [raw_line]
             joined = _joined_title_window(lines, line_no)
@@ -904,6 +910,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
                     numeral = lines[found_line].strip()
                     if numeral and numeral not in found_text:
                         found_text = f"{numeral} {found_text}".strip()
+                hit_line = line_no
                 break
         if found_line is None:
             continue
@@ -911,5 +918,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
         item["line"] = found_line
         item["text"] = found_text
         matched.append(item)
-        cursor = found_line
+        # Advance past the matched title, not the attached numeral. Otherwise the
+        # next entry can still see this title (token-subset false match).
+        cursor = hit_line if hit_line is not None else found_line
     return matched

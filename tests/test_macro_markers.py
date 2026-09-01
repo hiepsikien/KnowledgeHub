@@ -698,12 +698,67 @@ def test_roman_numeral_not_glued_to_following_prose():
     lines = ["I.", "", "Many objections have been made to a proposition which, in some remarks"]
     assert is_chapter_number_only_line(lines[0])
     assert _attach_leading_chapter_number(lines, 2) == 2
+
+
+def test_heading_title_prefers_toc_ordinal_and_strips_footnote():
     assert heading_title_from_toc_match(
         {"label": "XI. THE STUDY OF POETRY", "text": "I. THE STUDY OF POETRY"}
     ) == "XI. THE STUDY OF POETRY"
+    assert heading_title_from_toc_match(
+        {"label": "XII. MILTON", "text": "XII. MILTON[34]"}
+    ) == "XII. MILTON"
+
+
+def test_title_key_folds_accents():
     from knowledgehub.edition.toc import _title_key
 
     assert _title_key("III. MAURICE DE GUERIN") == _title_key("MAURICE DE GUÉRIN.")
+
+
+def test_toc_match_cursor_does_not_rescan_current_title():
+    """Longer title must not be reused as a token-subset hit for the next TOC row."""
+    raw = """*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
+
+CONTENTS.
+
+       I. THE STUDY OF POETRY AND LIFE              1
+
+      II. THE STUDY OF POETRY                      10
+
+
+
+                                   I.
+
+                        THE STUDY OF POETRY AND LIFE.
+
+The first essay discusses poetry as it bears on life at some length here.
+
+                                  II.
+
+                        THE STUDY OF POETRY.
+
+The second essay is only about poetry as such, without the life theme.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***
+"""
+    entries = parse_contents_entries(raw)
+    assert [e["label"] for e in entries] == [
+        "I. THE STUDY OF POETRY AND LIFE",
+        "II. THE STUDY OF POETRY",
+    ]
+    text, _ = build_edition(raw, language="en", strip_only=True)
+    matched = match_toc_entries_in_body(text, entries)
+    assert [m["label"] for m in matched] == [e["label"] for e in entries]
+    lines = text.splitlines()
+    assert "AND LIFE" in lines[matched[0]["line"] + 1].upper() or "AND LIFE" in (
+        matched[0].get("text") or ""
+    ).upper()
+    assert "AND LIFE" not in (matched[1].get("text") or "").upper()
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    titles = [s["title"] for s in doc["sections"] if s["kind"] == "chapter"]
+    assert titles[0].startswith("I. THE STUDY OF POETRY AND LIFE")
+    assert titles[1].startswith("II. THE STUDY OF POETRY")
+    assert "AND LIFE" not in titles[1].upper()
 
 
 def test_toc_title_repeats_prefix_not_first_word():
