@@ -629,7 +629,10 @@ def load_hitl_job(package_dir: Path, kind: str) -> dict[str, Any]:
 def save_hitl_job(package_dir: Path, kind: str, job: dict[str, Any]) -> dict[str, Any]:
     job["kind"] = kind
     job["updated_at"] = datetime.now(UTC).replace(microsecond=0).isoformat()
-    job["summary"] = summarize_items(job.get("items") or [], extra={k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep", "linked", "unmatched"}})
+    job["summary"] = summarize_items(
+        job.get("items") or [],
+        extra={k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}},
+    )
     folder = package_dir / "hitl"
     folder.mkdir(parents=True, exist_ok=True)
     hitl_path(package_dir, kind).write_text(
@@ -791,7 +794,7 @@ def decide_hitl_step(
         changed += 1
     if wanted and changed == 0 and not suspects_only:
         raise ReadEditionStepError("Không khớp item nào")
-    extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep", "linked", "unmatched"}}
+    extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}}
     job["summary"] = extra
     return save_hitl_job(package_dir, kind, job)
 
