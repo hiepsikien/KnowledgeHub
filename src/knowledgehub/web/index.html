@@ -123,7 +123,7 @@
             <div>
               <p class="crumb" id="re-crumb" hidden><a href="/read-edition">← Đang làm</a></p>
               <h1 id="re-heading">Chế bản</h1>
-              <p class="lead" id="re-status">Cấu trúc chương, định dạng REF, đưa sang Read.</p>
+              <p class="lead" id="re-status">Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — rồi đưa sang Read.</p>
             </div>
             <div class="page-actions" id="re-actions" hidden>
               <button type="button" class="btn primary" id="re-macro">Phân đoạn</button>
@@ -185,6 +185,20 @@
             </div>
           </section>
           <p class="re-health" id="re-health" hidden></p>
+          <nav class="re-steps" id="re-steps" hidden>
+            <button type="button" class="re-step on" data-step="structure">
+              <span class="re-step-n">1</span> Phân đoạn
+            </button>
+            <button type="button" class="re-step" data-step="wrap" disabled>
+              <span class="re-step-n">2</span> Nối dòng
+            </button>
+            <button type="button" class="re-step" data-step="footnotes" disabled>
+              <span class="re-step-n">3</span> Chú thích
+            </button>
+            <button type="button" class="re-step" data-step="quotes" disabled>
+              <span class="re-step-n">4</span> Trích dẫn
+            </button>
+          </nav>
           <div id="re-desk" class="re-layout">
             <aside class="re-sidebar-wrap">
               <div class="re-sidebar-head">
@@ -229,6 +243,23 @@
                 <button type="button" class="btn" id="re-confirm-sec">Xác nhận section</button>
               </div>
               <div id="re-compare" class="re-compare" hidden></div>
+              <section id="re-hitl" class="re-hitl" hidden>
+                <header class="re-hitl-head">
+                  <h2 id="re-hitl-title">Nối dòng</h2>
+                  <p class="muted" id="re-hitl-lead"></p>
+                </header>
+                <div class="re-hitl-bar">
+                  <button type="button" class="btn primary" id="re-hitl-trial">Chạy thử chương này</button>
+                  <button type="button" class="btn" id="re-hitl-confirm" hidden>Chương thử ổn</button>
+                  <button type="button" class="btn" id="re-hitl-book" disabled>Chạy toàn văn bản</button>
+                  <button type="button" class="btn ghost" id="re-hitl-accept-suspects" hidden>Chấp nhận chỗ nghi ngờ</button>
+                </div>
+                <p class="muted" id="re-hitl-meta"></p>
+                <label class="re-hitl-filter" id="re-hitl-filter-row">
+                  <input type="checkbox" id="re-hitl-suspects-only" checked /> Chỉ chỗ nghi ngờ
+                </label>
+                <div id="re-hitl-list" class="re-hitl-list"></div>
+              </section>
               <article class="re-render" id="re-body"></article>
               <div class="re-qa-panel" id="re-qa-panel" hidden></div>
               <details class="re-edit">

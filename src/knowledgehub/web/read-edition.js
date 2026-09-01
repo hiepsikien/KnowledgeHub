@@ -12,6 +12,25 @@
     editIndex: null,
     review: null,
     editionSettings: { use_llm_macro: true, use_llm_relabel: true, use_llm_qa: true },
+    step: "structure",
+    hitlJob: null,
+    hitlOverview: null,
+    suspectsOnly: true,
+  };
+
+  const HITL_STEPS = {
+    wrap: {
+      title: "Nối dòng",
+      lead: "Ghép các dòng bị cắt cứng (soft wrap). Parser tự nối chỗ chắc; chỗ nghi ngờ gom lại để bạn xác nhận. Chạy thử một chương, xong mới chạy toàn sách.",
+    },
+    footnotes: {
+      title: "Chú thích",
+      lead: "Nối marker ([1], [2]…) với nội dung chú thích. Hiện tất cả chú thích của chương thử; chỗ nghi ngờ (thiếu nội dung, trùng số…) được đánh dấu. Ổn thì chạy toàn văn bản.",
+    },
+    quotes: {
+      title: "Trích dẫn & nhấn mạnh",
+      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Chạy thử một chương để rà; chỗ nghi ngờ (thiếu dấu đóng, blockquote quá ngắn…) được đánh dấu rồi mới chạy toàn sách.",
+    },
   };
 
   async function api(path, opts = {}) {
@@ -316,9 +335,11 @@
           (llm.scores ? `<p class="muted">overall ${llm.scores.overall}/10 · structure ${llm.scores.block_structure}/10</p>` : "");
       }
       fillEditorForSelection();
-      $("re-edit-json")?.closest("details")?.toggleAttribute("open", parsed);
+      $("re-edit-json")?.closest("details")?.toggleAttribute("open", parsed && state.step === "structure");
       renderStructTools(chapter);
       renderCompare(chapter);
+      applyStepVisibility();
+      if (state.step !== "structure") renderHitlList();
       syncToolbar();
     } catch (err) {
       if ($("re-section-full")) $("re-section-full").hidden = true;
@@ -391,12 +412,13 @@
     const selectedPending = [...state.selected].filter((id) =>
       chapters.some((row) => row.chapter_id === id && row.micro_status !== "complete"),
     ).length;
+    const onStructure = state.step === "structure";
 
     const tocStatus = state.review?.toc_candidate?.status || status.hitl?.toc_status;
     const tocOk = tocStatus === "yes" || tocStatus === "no" || tocStatus === "none";
-    showBtn("re-macro", !macro);
-    showBtn("re-reclass", macro && tocOk);
-    showBtn("re-layout-ok", macro && !layoutOk);
+    showBtn("re-macro", !macro && onStructure);
+    showBtn("re-reclass", macro && tocOk && onStructure);
+    showBtn("re-layout-ok", macro && !layoutOk && onStructure);
     const layoutBtn = $("re-layout-ok");
     if (layoutBtn) {
       const canConfirm = !!(health.ready_to_parse && !layoutOk);
@@ -405,11 +427,11 @@
         ? "Xác nhận cấu trúc, rồi parse REF"
         : health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý";
     }
-    showBtn("re-parse-ch", layoutOk && currentPending);
-    showBtn("re-parse-selected", layoutOk && selectedPending > 1);
-    showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(currentPending && pending.length === 1));
-    showBtn("re-publish", layoutOk && parsed > 0);
-    showBtn("re-more", true);
+    showBtn("re-parse-ch", onStructure && layoutOk && currentPending);
+    showBtn("re-parse-selected", onStructure && layoutOk && selectedPending > 1);
+    showBtn("re-parse-ready", onStructure && layoutOk && pending.length > 0 && !(currentPending && pending.length === 1));
+    showBtn("re-publish", onStructure && layoutOk && parsed > 0);
+    showBtn("re-more", onStructure);
 
     let primary = "re-macro";
     if (!macro) primary = "re-macro";
@@ -438,6 +460,247 @@
     }
     if (parsed < total) return `${parsed}/${total} đã parse REF` + llmNote;
     return `${total} phần đã parse — đưa sang Read` + llmNote;
+  }
+
+  function hitlKind() {
+    return state.step === "wrap" || state.step === "footnotes" || state.step === "quotes" ? state.step : null;
+  }
+
+  function applyStepVisibility() {
+    const onStruct = state.step === "structure";
+    const hasMacro = !!(state.status?.macro_complete || state.review);
+    const steps = $("re-steps");
+    const onDesk = !!state.workId && $("re-pick")?.hidden;
+    if (steps) steps.hidden = !(onDesk && hasMacro);
+    document.querySelectorAll("#re-steps .re-step").forEach((btn) => {
+      const step = btn.dataset.step;
+      btn.classList.toggle("on", step === state.step);
+      btn.disabled = step !== "structure" && !hasMacro;
+      const ov = state.hitlOverview?.kinds?.[step];
+      let badge = btn.querySelector(".re-step-badge");
+      const pending = ov?.summary?.pending || 0;
+      if (step !== "structure" && pending) {
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "re-step-badge";
+          btn.appendChild(badge);
+        }
+        badge.textContent = String(pending);
+        badge.hidden = false;
+      } else if (badge) {
+        badge.hidden = true;
+      }
+    });
+    const hitl = $("re-hitl");
+    if (hitl) hitl.hidden = onStruct;
+    if ($("re-body")) $("re-body").hidden = !onStruct;
+    const edit = document.querySelector("details.re-edit");
+    if (edit) edit.hidden = !onStruct;
+    if ($("re-qa-ch")) $("re-qa-ch").hidden = !onStruct;
+    if ($("re-qa-panel")) $("re-qa-panel").hidden = !onStruct || !state.chapter?.qa;
+    if ($("re-toc")) $("re-toc").hidden = !onStruct || !state.review;
+    if (!onStruct && $("re-struct-tools")) $("re-struct-tools").hidden = true;
+    if (!onStruct && $("re-compare")) $("re-compare").hidden = true;
+    if ($("re-section-full")) $("re-section-full").hidden = !state.chapterId;
+    if (!onStruct) {
+      const meta = HITL_STEPS[state.step];
+      if (meta) {
+        if ($("re-hitl-title")) $("re-hitl-title").textContent = meta.title;
+        if ($("re-hitl-lead")) $("re-hitl-lead").textContent = meta.lead;
+      }
+      const suspectsFilter = $("re-hitl-filter-row");
+      if (suspectsFilter) suspectsFilter.hidden = state.step === "wrap";
+    }
+  }
+
+  function renderHitlList() {
+    const box = $("re-hitl-list");
+    const metaEl = $("re-hitl-meta");
+    const job = state.hitlJob;
+    if (!box) return;
+    if (!job || job.status === "idle") {
+      box.innerHTML = `<p class="muted">Chọn một chương bên trái, rồi bấm «Chạy thử chương này».</p>`;
+      if (metaEl) metaEl.textContent = "";
+      $("re-hitl-confirm").hidden = true;
+      $("re-hitl-book").disabled = true;
+      $("re-hitl-accept-suspects").hidden = true;
+      return;
+    }
+    const summary = job.summary || {};
+    const items = job.items || [];
+    const suspectsOnly = !!$("re-hitl-suspects-only")?.checked;
+    const shown = items.filter((it) => {
+      if (job.scope === "chapter" && job.trial_chapter_id && it.chapter_id !== job.trial_chapter_id) return false;
+      if (suspectsOnly && !it.suspect && !it.decision) return false;
+      return true;
+    });
+    const pending = items.filter((it) => it.suspect && !it.decision).length;
+    const auto = summary.auto_join || 0;
+    const autoKeep = summary.auto_keep || 0;
+    if (metaEl) {
+      const bits = [];
+      if (job.scope === "book") bits.push("toàn sách");
+      else bits.push("chương thử");
+      if (state.step === "wrap") bits.push(`tự ghép ${auto}`, `tự giữ ${autoKeep}`, `nghi ngờ ${summary.suspect || 0}`);
+      else bits.push(`${items.length} mục`, `nghi ngờ ${summary.suspect || 0}`);
+      if (summary.linked) bits.push(`đã nối ${summary.linked}`);
+      if (summary.unmatched) bits.push(`chưa khớp ${summary.unmatched}`);
+      bits.push(`chưa quyết ${pending}`);
+      if (job.trial_confirmed) bits.push("đã xác nhận thử");
+      metaEl.textContent = bits.join(" · ");
+    }
+    $("re-hitl-confirm").hidden = job.status === "idle" || !!job.trial_confirmed;
+    $("re-hitl-book").disabled = !job.trial_confirmed;
+    $("re-hitl-accept-suspects").hidden = pending === 0;
+    if (!shown.length) {
+      box.innerHTML = `<p class="muted">${items.length ? "Không còn mục nào khớp bộ lọc." : "Không có chỗ nghi ngờ — có thể xác nhận chương thử rồi chạy toàn văn bản."}</p>`;
+      return;
+    }
+    box.innerHTML = shown.map(renderHitlCard).join("");
+  }
+
+  function renderHitlCard(item) {
+    const decision = item.decision || "";
+    const cls = ["re-hitl-card"];
+    if (item.suspect) cls.push("suspect");
+    if (decision === "accept") cls.push("accepted");
+    if (decision === "reject") cls.push("rejected");
+    const tags = [];
+    if (item.suspect) tags.push(`<span class="re-hitl-tag suspect">nghi ngờ</span>`);
+    else tags.push(`<span class="re-hitl-tag ok">ổn</span>`);
+    if (item.proposed) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.proposed === "join" ? "đề xuất: ghép" : "đề xuất: giữ tách")}</span>`);
+    if (item.mark) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.mark)}</span>`);
+    if (item.status) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.status)}</span>`);
+    if (item.marker) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.marker)}</span>`);
+    if (item.chapter_id && state.hitlJob?.scope === "book") tags.push(`<span class="re-hitl-tag">${escapeHtml(item.chapter_id)}</span>`);
+    const reasons = (item.reason_labels || []).map((r) => escapeHtml(r)).join("; ");
+    let body = "";
+    if (state.step === "wrap") {
+      body = `<pre>${escapeHtml(item.prev || "")}\n${escapeHtml(item.next || "")}</pre>`;
+      if (item.proposed === "join" && item.preview) {
+        body += `<pre class="re-hitl-preview">→ ${escapeHtml(item.preview)}</pre>`;
+      }
+    } else if (state.step === "footnotes") {
+      const anchor = item.anchor ? `<strong>${escapeHtml(item.anchor)}</strong> ` : "";
+      body = `<p class="re-hitl-body">${anchor}<span class="muted">${escapeHtml(item.context || "")}</span></p>`;
+      body += item.body
+        ? `<p class="re-hitl-body">${escapeHtml(item.body)}</p>`
+        : `<p class="muted">Chưa có nội dung chú thích.</p>`;
+    } else {
+      body = `<p class="re-hitl-body">${escapeHtml(item.text || "")}</p>`;
+      if (item.context && item.context !== item.text) {
+        body += `<p class="muted">${escapeHtml(item.context)}</p>`;
+      }
+    }
+    const acceptLabel = state.step === "wrap" ? (item.proposed === "join" ? "Ghép" : "Giữ tách") : "OK";
+    const rejectLabel = state.step === "wrap" ? (item.proposed === "join" ? "Giữ tách" : "Ghép") : "Bỏ";
+    return `<article class="${cls.join(" ")}" data-hitl-id="${escapeHtml(item.id)}">
+      <div class="re-hitl-card-top">${tags.join("")}${reasons ? `<span class="muted">${reasons}</span>` : ""}</div>
+      ${body}
+      <div class="re-hitl-actions">
+        <button type="button" class="btn ${decision === "accept" ? "primary" : "ghost"}" data-hitl-accept="${escapeHtml(item.id)}">${acceptLabel}</button>
+        <button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}">${rejectLabel}</button>
+      </div>
+    </article>`;
+  }
+
+  async function loadHitlOverview() {
+    if (!state.workId) return;
+    try {
+      state.hitlOverview = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl`);
+    } catch {
+      state.hitlOverview = null;
+    }
+    applyStepVisibility();
+  }
+
+  async function loadHitlJob() {
+    const kind = hitlKind();
+    if (!kind || !state.workId) {
+      state.hitlJob = null;
+      return;
+    }
+    try {
+      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}`);
+    } catch {
+      state.hitlJob = null;
+    }
+    renderHitlList();
+  }
+
+  async function setStep(step) {
+    state.step = step;
+    const suspectsBox = $("re-hitl-suspects-only");
+    if (suspectsBox) suspectsBox.checked = step === "wrap";
+    applyStepVisibility();
+    syncToolbar();
+    if (step === "structure") {
+      if (state.chapter) {
+        renderStructTools(state.chapter);
+        renderCompare(state.chapter);
+        renderChapterBody(state.chapter);
+      }
+      return;
+    }
+    await loadHitlJob();
+  }
+
+  async function runHitlScan(scope) {
+    const kind = hitlKind();
+    if (!kind || !state.workId) return;
+    if (scope === "chapter" && !state.chapterId) {
+      toast("Chọn một chương để chạy thử");
+      return;
+    }
+    const label = scope === "book" ? "Đang quét toàn văn bản…" : "Đang chạy thử chương…";
+    toast(label);
+    try {
+      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/scan`, {
+        method: "POST",
+        body: { scope, chapter_id: state.chapterId },
+      });
+      toast(scope === "book" ? "Đã quét toàn sách" : "Đã chạy thử chương");
+      await loadHitlOverview();
+      renderHitlList();
+    } catch (err) {
+      toast(err.message);
+    }
+  }
+
+  async function confirmHitlTrial() {
+    const kind = hitlKind();
+    if (!kind || !state.workId) return;
+    try {
+      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/confirm`, {
+        method: "POST",
+        body: { chapter_id: state.chapterId },
+      });
+      toast("Đã xác nhận chương thử — có thể chạy toàn văn bản");
+      await loadHitlOverview();
+      renderHitlList();
+    } catch (err) {
+      toast(err.message);
+    }
+  }
+
+  async function decideHitl(itemId, decision, suspectsOnly) {
+    const kind = hitlKind();
+    if (!kind || !state.workId) return;
+    try {
+      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/decide`, {
+        method: "POST",
+        body: {
+          decision,
+          item_ids: itemId ? [itemId] : [],
+          suspects_only: !!suspectsOnly,
+          chapter_id: state.hitlJob?.scope === "chapter" ? state.chapterId : null,
+        },
+      });
+      await loadHitlOverview();
+      renderHitlList();
+    } catch (err) {
+      toast(err.message);
+    }
   }
 
   function renderTocPanel(review) {
@@ -715,6 +978,7 @@
           status.hitl?.last_section_id;
         const pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
         if (pick) await selectChapter(pick.chapter_id);
+        await loadHitlOverview();
       } else {
         state.manifest = null;
         state.chapter = null;
@@ -730,6 +994,7 @@
         if ($("re-qa-panel")) $("re-qa-panel").hidden = true;
         $("re-more")?.removeAttribute("open");
       }
+      applyStepVisibility();
       syncToolbar();
     } catch (err) {
       $("re-status").textContent = err.message;
@@ -738,6 +1003,26 @@
   }
 
   function wireReadEdition() {
+    $("re-steps")?.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-step]");
+      if (!btn || btn.disabled) return;
+      void setStep(btn.dataset.step);
+    });
+    $("re-hitl-trial")?.addEventListener("click", () => void runHitlScan("chapter"));
+    $("re-hitl-book")?.addEventListener("click", () => void runHitlScan("book"));
+    $("re-hitl-confirm")?.addEventListener("click", () => void confirmHitlTrial());
+    $("re-hitl-accept-suspects")?.addEventListener("click", () => void decideHitl(null, "accept", true));
+    $("re-hitl-suspects-only")?.addEventListener("change", () => renderHitlList());
+    $("re-hitl-list")?.addEventListener("click", (e) => {
+      const accept = e.target.closest("[data-hitl-accept]");
+      if (accept) {
+        void decideHitl(accept.dataset.hitlAccept, "accept");
+        return;
+      }
+      const reject = e.target.closest("[data-hitl-reject]");
+      if (reject) void decideHitl(reject.dataset.hitlReject, "reject");
+    });
+
     $("re-macro")?.addEventListener("click", async () => {
       if (!state.workId) return;
       if (state.status?.macro_complete) {
@@ -1019,8 +1304,12 @@
       }
       applyReview(null);
       $("re-heading").textContent = "Chế bản";
-      $("re-status").textContent = "Cấu trúc chương, định dạng REF, đưa sang Read.";
+      $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — rồi đưa sang Read.";
       state.workId = null;
+      state.step = "structure";
+      state.hitlJob = null;
+      state.hitlOverview = null;
+      applyStepVisibility();
       syncToolbar();
       await loadEditionSettings();
       const [sessionResp, works] = await Promise.all([api("/api/read-editions"), api("/api/works")]);

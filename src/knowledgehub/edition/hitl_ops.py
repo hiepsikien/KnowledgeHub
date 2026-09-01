@@ -1,0 +1,696 @@
+"""HITL scanners for wrap, footnotes, and quotes/emphasis — review, then apply."""
+
+from __future__ import annotations
+
+import re
+from typing import Any
+
+from .footnotes import parse_numbered_notes, split_footnotes_section
+from .inline_spans import annotate_blocks
+from .label_rules import (
+    CONTINUATION_START,
+    HANGING_WORD,
+    HYPHEN_BREAK,
+    _sentence_ended,
+    _should_join,
+    label_lines_rules,
+)
+from .lines import TextLine, iter_lines
+from .merge_blocks import labels_to_blocks
+from .serialize import grotius_latin_to_blockquote
+from .structure import merge_adjacent_blockquotes, merge_adjacent_headings, merge_adjacent_metadata
+
+HITL_KINDS = ("wrap", "footnotes", "quotes")
+
+BODY_LINE = re.compile(r"^\[(\d{1,4})\]\s+(\S.*)$")
+INLINE_MARKER = re.compile(r"\[(\d{1,4})\]")
+ROMAN = re.compile(r"^[IVXLCDM]+$", re.I)
+LATINISH = re.compile(r"\b(?:qui|quod|et|non|sed|ad|in|est|sunt|hoc|haec|illam)\b", re.I)
+
+REASON_VI = {
+    "blank_line": "có dòng trống giữa hai dòng",
+    "capital_continue": "dòng sau viết hoa nhưng câu trước chưa hết",
+    "hanging_word": "dòng trước kết bằng từ treo (the, of, và…)",
+    "short_line": "dòng trước khá ngắn",
+    "hyphen": "cắt giữa từ (gạch nối)",
+    "possible_wrap": "câu chưa kết mà parser không ghép",
+    "open_clause": "dở dấu phẩy / chấm phẩy",
+    "continuation": "dòng sau giống phần tiếp của câu",
+    "parser_disagree": "khác quyết định parser hiện tại",
+    "unmatched_marker": "có marker nhưng chưa thấy nội dung chú thích",
+    "unmatched_body": "có nội dung chú thích nhưng không thấy marker",
+    "duplicate_marker": "cùng số xuất hiện nhiều lần trong chương",
+    "duplicate_body": "trùng số nội dung chú thích",
+    "short_body": "nội dung chú thích quá ngắn",
+    "split_body": "nội dung chú thích bị ngắt nhiều dòng",
+    "sequence_gap": "thiếu số trong dãy chú thích",
+    "unclosed_quote": "thiếu dấu đóng ngoặc kép",
+    "short_blockquote": "blockquote rất ngắn — có thể là thoại thường",
+    "unmatched_em": "gạch dưới lẻ, chưa thành cặp nhấn mạnh",
+    "mixed_verse": "trộn thơ / văn xuôi trong cùng khối trích",
+    "long_inline": "trích dẫn nội dòng rất dài",
+}
+
+_CLIP = 180
+
+
+def empty_job(kind: str) -> dict[str, Any]:
+    return {
+        "kind": kind,
+        "status": "idle",
+        "trial_chapter_id": None,
+        "trial_confirmed": False,
+        "scope": None,
+        "items": [],
+        "summary": _empty_summary(),
+        "updated_at": None,
+    }
+
+
+def _empty_summary() -> dict[str, int]:
+    return {
+        "total": 0,
+        "suspect": 0,
+        "pending": 0,
+        "accepted": 0,
+        "rejected": 0,
+        "auto_join": 0,
+        "auto_keep": 0,
+        "linked": 0,
+        "unmatched": 0,
+    }
+
+
+def _clip(text: str, n: int = _CLIP) -> str:
+    s = re.sub(r"\s+", " ", str(text or "")).strip()
+    if len(s) <= n:
+        return s
+    return s[: n - 1] + "…"
+
+
+def _glue(prev: str, nxt: str) -> str:
+    if prev.rstrip().endswith("-") and nxt[:1].islower():
+        return prev.rstrip()[:-1] + nxt.lstrip()
+    return prev.rstrip() + " " + nxt.lstrip()
+
+
+def _reasons_vi(reasons: list[str]) -> list[str]:
+    return [REASON_VI.get(code, code) for code in reasons]
+
+
+def _label_item(item: dict[str, Any]) -> dict[str, Any]:
+    item["reason_labels"] = _reasons_vi(list(item.get("reasons") or []))
+    return item
+
+
+def summarize_items(items: list[dict[str, Any]], *, extra: dict[str, int] | None = None) -> dict[str, int]:
+    summary = _empty_summary()
+    if extra:
+        summary.update(extra)
+    summary["total"] = len(items)
+    for item in items:
+        if item.get("suspect"):
+            summary["suspect"] += 1
+        decision = item.get("decision")
+        if decision == "accept":
+            summary["accepted"] += 1
+        elif decision == "reject":
+            summary["rejected"] += 1
+        else:
+            summary["pending"] += 1
+        status = item.get("status")
+        if status == "linked":
+            summary["linked"] += 1
+        elif status in {"unmatched_marker", "unmatched_body"}:
+            summary["unmatched"] += 1
+    return summary
+
+
+def merge_item_decisions(old_items: list[dict[str, Any]], new_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    prev = {row["id"]: row.get("decision") for row in old_items if row.get("id") and row.get("decision")}
+    out: list[dict[str, Any]] = []
+    for item in new_items:
+        decision = prev.get(item["id"])
+        if decision:
+            item = {**item, "decision": decision}
+        out.append(item)
+    return out
+
+
+def classify_wrap_pair(
+    prev: str,
+    nxt: str,
+    *,
+    family: str,
+    blank_before: bool,
+    parser_join: bool,
+    prev_role: str = "prose",
+    nxt_role: str = "prose",
+) -> dict[str, Any]:
+    """Decide join vs keep and whether a curator should look at the pair."""
+    prev_r = prev.rstrip()
+    nxt_s = nxt.strip()
+    rule_join = _should_join(prev, nxt, family=family, blank_before=blank_before)
+    high_hyphen = bool(HYPHEN_BREAK.search(prev_r) and nxt_s[:1].islower())
+    hanging = bool(HANGING_WORD.search(prev_r) and not _sentence_ended(prev))
+    ended = _sentence_ended(prev)
+    reasons: list[str] = []
+
+    if prev_role in {"heading", "hr", "metadata"} or nxt_role in {"heading", "hr", "metadata"}:
+        proposed = "keep"
+        suspect = False
+        confidence = 0.96
+    elif rule_join:
+        proposed = "join"
+        confidence = 0.88
+        if blank_before:
+            reasons.append("blank_line")
+            confidence = 0.68
+        if hanging and (blank_before or (nxt_s[:1].isupper() and not ended)):
+            reasons.append("hanging_word")
+        if nxt_s[:1].isupper() and not ended:
+            reasons.append("capital_continue")
+            confidence = min(confidence, 0.66)
+        if len(prev_r) < 45 and not hanging and not high_hyphen:
+            reasons.append("short_line")
+            confidence = min(confidence, 0.7)
+        if high_hyphen:
+            reasons.append("hyphen")
+            confidence = 0.95
+            reasons[:] = [r for r in reasons if r == "hyphen"]
+        suspect = bool(reasons) and not high_hyphen
+        if hanging and not blank_before and nxt_s[:1].islower() and not high_hyphen:
+            suspect = False
+            confidence = 0.9
+            reasons = [r for r in reasons if r not in {"hanging_word", "short_line"}]
+            suspect = bool(reasons)
+        if hanging and blank_before:
+            suspect = True
+            confidence = 0.7
+    else:
+        proposed = "keep"
+        confidence = 0.9
+        suspect = False
+        if not ended and not blank_before and len(prev_r) >= 50:
+            reasons.append("possible_wrap")
+            suspect = True
+            confidence = 0.55
+            if CONTINUATION_START.match(nxt_s) or nxt_s[:1].islower():
+                proposed = "join"
+                reasons.append("continuation")
+                confidence = 0.62
+        elif prev_r.endswith((",", ";", "--", "—")) and not blank_before:
+            reasons.append("open_clause")
+            proposed = "join"
+            suspect = True
+            confidence = 0.6
+
+    parser = "join" if parser_join else "keep"
+    if parser != proposed:
+        reasons.append("parser_disagree")
+        suspect = True
+        confidence = min(confidence, 0.6)
+
+    return {
+        "proposed": proposed,
+        "parser": parser,
+        "suspect": suspect,
+        "reasons": reasons,
+        "confidence": round(confidence, 2),
+    }
+
+
+def scan_wrap(
+    text: str,
+    *,
+    chapter_id: str,
+    family: str = "gutenberg",
+    language: str = "en",
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    lines = iter_lines(text)
+    labels = label_lines_rules(lines, family=family, source_text=text)
+    items: list[dict[str, Any]] = []
+    auto_join = 0
+    auto_keep = 0
+    for i in range(len(lines) - 1):
+        classified = classify_wrap_pair(
+            lines[i].text,
+            lines[i + 1].text,
+            family=family,
+            blank_before=lines[i + 1].blank_before,
+            parser_join=bool(labels[i].join_next),
+            prev_role=labels[i].role,
+            nxt_role=labels[i + 1].role,
+        )
+        if not classified["suspect"]:
+            if classified["proposed"] == "join":
+                auto_join += 1
+            else:
+                auto_keep += 1
+            continue
+        preview = _glue(lines[i].text, lines[i + 1].text) if classified["proposed"] == "join" else ""
+        items.append(
+            _label_item(
+                {
+                    "id": f"wrap:{chapter_id}:{i}",
+                    "chapter_id": chapter_id,
+                    "kind": "wrap",
+                    "line_index": i,
+                    "next_index": i + 1,
+                    "proposed": classified["proposed"],
+                    "parser": classified["parser"],
+                    "suspect": True,
+                    "reasons": classified["reasons"],
+                    "confidence": classified["confidence"],
+                    "prev": _clip(lines[i].text),
+                    "next": _clip(lines[i + 1].text),
+                    "preview": _clip(preview, 240) if preview else "",
+                    "blank_before": bool(lines[i + 1].blank_before),
+                }
+            )
+        )
+    extra = {"auto_join": auto_join, "auto_keep": auto_keep}
+    return items, extra
+
+
+def _anchor_near_marker(text: str, marker: str) -> str:
+    pattern = re.compile(rf"([A-ZÀ-Ỵ][\wÀ-ỹ.'’\-]{{1,40}})\.?,?\s*{re.escape(marker)}")
+    matches = list(pattern.finditer(text))
+    for match in reversed(matches):
+        name = match.group(1).strip(" .,'’")
+        if len(name) >= 3 and not ROMAN.fullmatch(name):
+            return name
+    return ""
+
+
+def _context_near_marker(text: str, marker: str) -> str:
+    at = text.find(marker)
+    if at < 0:
+        return _clip(text, 160)
+    lo = max(0, at - 70)
+    hi = min(len(text), at + len(marker) + 70)
+    return _clip(text[lo:hi], 180)
+
+
+def _collect_indented_bodies(lines: list[TextLine]) -> dict[int, dict[str, Any]]:
+    bodies: dict[int, dict[str, Any]] = {}
+    i = 0
+    n = len(lines)
+    while i < n:
+        match = BODY_LINE.match(lines[i].text)
+        if match and (lines[i].indent >= 2 or (i > 0 and lines[i].blank_before)):
+            number = int(match.group(1))
+            parts = [match.group(2)]
+            start = i
+            i += 1
+            while i < n and not BODY_LINE.match(lines[i].text):
+                cont = lines[i]
+                if cont.indent >= 2 or (not cont.blank_before and i == start + 1):
+                    if _should_join(parts[-1], cont.text, family="gutenberg", blank_before=cont.blank_before) or cont.indent >= 2:
+                        parts.append(cont.text)
+                        i += 1
+                        continue
+                break
+            body = re.sub(r"\s+", " ", " ".join(parts)).strip()
+            if len(body) >= 4:
+                bodies[number] = {
+                    "number": number,
+                    "body": body,
+                    "source": "indented" if lines[start].indent >= 2 else "block",
+                    "split": len(parts) > 2,
+                    "line_index": start,
+                }
+            continue
+        i += 1
+    return bodies
+
+
+def _dump_bodies(book_text: str | None) -> dict[int, str]:
+    if not book_text:
+        return {}
+    _body, blob = split_footnotes_section(book_text)
+    return parse_numbered_notes(blob) if blob else {}
+
+
+def scan_footnotes(
+    text: str,
+    *,
+    chapter_id: str,
+    family: str = "gutenberg",
+    language: str = "en",
+    book_text: str | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    del family, language
+    lines = iter_lines(text)
+    local_bodies = _collect_indented_bodies(lines)
+    dump = _dump_bodies(book_text)
+    body_lines = {row["line_index"] for row in local_bodies.values()}
+
+    markers: dict[int, list[dict[str, Any]]] = {}
+    for row in lines:
+        if row.index in body_lines:
+            continue
+        if BODY_LINE.match(row.text) and row.indent >= 2:
+            continue
+        for match in INLINE_MARKER.finditer(row.text):
+            number = int(match.group(1))
+            marker = match.group(0)
+            markers.setdefault(number, []).append(
+                {
+                    "marker": marker,
+                    "line_index": row.index,
+                    "anchor": _anchor_near_marker(row.text, marker),
+                    "context": _context_near_marker(row.text, marker),
+                }
+            )
+
+    numbers = sorted(set(markers) | set(local_bodies) | set(dump))
+    items: list[dict[str, Any]] = []
+    used_dump: set[int] = set()
+    for number in numbers:
+        hits = markers.get(number) or []
+        local = local_bodies.get(number)
+        dumped = dump.get(number)
+        marker = f"[{number}]"
+        body = (local or {}).get("body") or dumped or ""
+        body_source = None
+        if local:
+            body_source = local.get("source")
+        elif dumped:
+            body_source = "footnotes_dump"
+            used_dump.add(number)
+        reasons: list[str] = []
+        status = "linked"
+        if hits and body:
+            status = "linked"
+        elif hits and not body:
+            status = "unmatched_marker"
+            reasons.append("unmatched_marker")
+        elif body and not hits:
+            status = "unmatched_body"
+            reasons.append("unmatched_body")
+        if len(hits) > 1:
+            reasons.append("duplicate_marker")
+        if local and dumped and local.get("body") and dumped and local["body"][:40] != dumped[:40]:
+            reasons.append("duplicate_body")
+        if body and len(body) < 12:
+            reasons.append("short_body")
+        if local and local.get("split"):
+            reasons.append("split_body")
+        suspect = bool(reasons) or status != "linked"
+        first = hits[0] if hits else {}
+        items.append(
+            _label_item(
+                {
+                    "id": f"fn:{chapter_id}:{number}",
+                    "chapter_id": chapter_id,
+                    "kind": "footnote",
+                    "number": number,
+                    "marker": marker,
+                    "anchor": first.get("anchor") or "",
+                    "context": first.get("context") or _clip(body, 160),
+                    "body": body,
+                    "body_source": body_source,
+                    "marker_count": len(hits),
+                    "status": status,
+                    "suspect": suspect,
+                    "reasons": reasons,
+                    "line_index": first.get("line_index") if hits else (local or {}).get("line_index"),
+                }
+            )
+        )
+    if numbers:
+        expected = set(range(min(numbers), max(numbers) + 1))
+        missing = expected - set(numbers)
+        if missing and len(missing) <= 8:
+            for item in items:
+                if item["number"] in {min(missing) - 1, min(missing) + 1, max(missing) - 1, max(missing) + 1}:
+                    if "sequence_gap" not in item["reasons"]:
+                        item["reasons"].append("sequence_gap")
+                        item["suspect"] = True
+                        item["reason_labels"] = _reasons_vi(item["reasons"])
+    extra = {"linked": sum(1 for i in items if i["status"] == "linked"), "unmatched": sum(1 for i in items if i["status"] != "linked")}
+    return items, extra
+
+
+def _unclosed_quote_issues(text: str) -> list[dict[str, Any]]:
+    issues: list[dict[str, Any]] = []
+    straight = text.count('"')
+    if straight % 2:
+        at = text.rfind('"')
+        snippet = _clip(text[max(0, at - 80) : at + 80], 160) if at >= 0 else _clip(text, 160)
+        issues.append({"kind": "straight", "text": snippet, "reasons": ["unclosed_quote"]})
+    if text.count("“") != text.count("”"):
+        at = max(text.rfind("“"), text.rfind("”"))
+        snippet = _clip(text[max(0, at - 80) : at + 80], 160) if at >= 0 else _clip(text, 160)
+        issues.append({"kind": "curly", "text": snippet, "reasons": ["unclosed_quote"]})
+    if text.count("«") != text.count("»"):
+        issues.append({"kind": "guillemet", "text": _clip(text, 160), "reasons": ["unclosed_quote"]})
+    return issues
+
+
+def scan_quotes(
+    text: str,
+    *,
+    chapter_id: str,
+    family: str = "gutenberg",
+    language: str = "en",
+    work_id: str | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    del language
+    lines = iter_lines(text)
+    labels = label_lines_rules(lines, family=family, source_text=text)
+    blocks = labels_to_blocks(lines, labels)
+    if work_id and work_id.startswith("grotius--"):
+        blocks = grotius_latin_to_blockquote(blocks)
+    blocks = merge_adjacent_headings(blocks)
+    blocks = merge_adjacent_metadata(blocks)
+    blocks = merge_adjacent_blockquotes(blocks)
+    blocks, _profile = annotate_blocks(blocks)
+    items: list[dict[str, Any]] = []
+    idx = 0
+
+    for bi, block in enumerate(blocks):
+        kind = block.get("type")
+        block_text = str(block.get("text") or "")
+        if kind == "blockquote":
+            reasons: list[str] = []
+            if len(block_text) < 40:
+                reasons.append("short_blockquote")
+            if LATINISH.search(block_text) and not block_text.strip()[:1] in {'"', "“", "«", "_"}:
+                pass
+            stripped = block_text.strip()
+            if "\n" in stripped and ('"' in stripped or "“" in stripped) and not stripped.endswith(('"', "”", "»", "_", ".", ",", "]")):
+                reasons.append("mixed_verse")
+            items.append(
+                _label_item(
+                    {
+                        "id": f"q:{chapter_id}:blockquote:{bi}",
+                        "chapter_id": chapter_id,
+                        "kind": "quote",
+                        "mark": "blockquote",
+                        "block_index": bi,
+                        "text": _clip(block_text, 280),
+                        "context": "",
+                        "suspect": bool(reasons),
+                        "reasons": reasons,
+                    }
+                )
+            )
+            idx += 1
+        for span in block.get("spans") or []:
+            style = span.get("style")
+            if style not in {"quote", "em"}:
+                continue
+            span_text = str(span.get("text") or "")
+            reasons = []
+            if style == "em" and span_text.count("_") % 2:
+                reasons.append("unmatched_em")
+            if style == "quote" and len(span_text) > 280:
+                reasons.append("long_inline")
+            items.append(
+                _label_item(
+                    {
+                        "id": f"q:{chapter_id}:{style}:{bi}:{span.get('start')}",
+                        "chapter_id": chapter_id,
+                        "kind": "quote",
+                        "mark": style,
+                        "block_index": bi,
+                        "start": span.get("start"),
+                        "end": span.get("end"),
+                        "text": _clip(span_text, 220),
+                        "context": _clip(block_text, 180),
+                        "suspect": bool(reasons),
+                        "reasons": reasons,
+                    }
+                )
+            )
+            idx += 1
+
+    odd_underscores = text.count("_") % 2 == 1
+    if odd_underscores and not any("unmatched_em" in (it.get("reasons") or []) for it in items):
+        items.append(
+            _label_item(
+                {
+                    "id": f"q:{chapter_id}:em:unmatched",
+                    "chapter_id": chapter_id,
+                    "kind": "quote",
+                    "mark": "em",
+                    "text": _clip(text, 160),
+                    "context": "",
+                    "suspect": True,
+                    "reasons": ["unmatched_em"],
+                }
+            )
+        )
+    for i, issue in enumerate(_unclosed_quote_issues(text)):
+        items.append(
+            _label_item(
+                {
+                    "id": f"q:{chapter_id}:unclosed:{i}",
+                    "chapter_id": chapter_id,
+                    "kind": "quote",
+                    "mark": "unclosed",
+                    "text": issue["text"],
+                    "context": "",
+                    "suspect": True,
+                    "reasons": issue["reasons"],
+                }
+            )
+        )
+    return items, {}
+
+
+def scan_kind(
+    kind: str,
+    text: str,
+    *,
+    chapter_id: str,
+    family: str = "gutenberg",
+    language: str = "en",
+    book_text: str | None = None,
+    work_id: str | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    if kind == "wrap":
+        return scan_wrap(text, chapter_id=chapter_id, family=family, language=language)
+    if kind == "footnotes":
+        return scan_footnotes(
+            text,
+            chapter_id=chapter_id,
+            family=family,
+            language=language,
+            book_text=book_text,
+        )
+    if kind == "quotes":
+        return scan_quotes(
+            text,
+            chapter_id=chapter_id,
+            family=family,
+            language=language,
+            work_id=work_id,
+        )
+    raise ValueError(f"unknown HITL kind: {kind}")
+
+
+def wrap_overrides_from_items(items: list[dict[str, Any]], *, chapter_id: str | None = None) -> dict[int, bool]:
+    """Map line_index → join_next for decided wrap items in one chapter."""
+    out: dict[int, bool] = {}
+    for item in items:
+        if item.get("kind") not in {None, "wrap"}:
+            continue
+        if chapter_id and item.get("chapter_id") != chapter_id:
+            continue
+        decision = item.get("decision")
+        if decision not in {"accept", "reject"}:
+            continue
+        proposed_join = item.get("proposed") == "join"
+        join = proposed_join if decision == "accept" else (not proposed_join)
+        idx = item.get("line_index")
+        if isinstance(idx, int):
+            out[idx] = join
+    return out
+
+
+def apply_wrap_overrides(labels: list[Any], overrides: dict[int, bool]) -> None:
+    for index, join in overrides.items():
+        if 0 <= index < len(labels):
+            labels[index].join_next = join
+
+
+def footnote_records_from_items(
+    items: list[dict[str, Any]],
+    *,
+    chapter_id: str | None = None,
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in items:
+        if chapter_id and item.get("chapter_id") != chapter_id:
+            continue
+        if item.get("decision") == "reject":
+            continue
+        auto = item.get("status") == "linked" and not item.get("suspect")
+        if item.get("decision") != "accept" and not auto:
+            continue
+        records.append(
+            {
+                "marker": item.get("marker"),
+                "number": item.get("number"),
+                "anchor": item.get("anchor") or "",
+                "body": item.get("body") or "",
+                "status": item.get("status"),
+                "chapter_id": item.get("chapter_id"),
+            }
+        )
+    return records
+
+
+def apply_footnote_links(blocks: list[dict[str, Any]], records: list[dict[str, Any]]) -> None:
+    by_marker = {str(row.get("marker") or ""): row for row in records if row.get("marker")}
+    if not by_marker:
+        return
+    for block in blocks:
+        for span in block.get("spans") or []:
+            if span.get("style") != "footnote":
+                continue
+            note = by_marker.get(str(span.get("text") or ""))
+            if not note:
+                continue
+            if note.get("body"):
+                span["note"] = note["body"]
+            if note.get("anchor"):
+                span["anchor"] = note["anchor"]
+
+
+def apply_quote_decisions(blocks: list[dict[str, Any]], items: list[dict[str, Any]], *, chapter_id: str | None = None) -> None:
+    rejected_blocks: set[int] = set()
+    rejected_spans: set[tuple[int, int, int]] = set()
+    for item in items:
+        if chapter_id and item.get("chapter_id") != chapter_id:
+            continue
+        if item.get("decision") != "reject":
+            continue
+        mark = item.get("mark")
+        bi = item.get("block_index")
+        if mark == "blockquote" and isinstance(bi, int):
+            rejected_blocks.add(bi)
+        elif mark in {"quote", "em"} and isinstance(bi, int):
+            start = item.get("start")
+            end = item.get("end")
+            if isinstance(start, int) and isinstance(end, int):
+                rejected_spans.add((bi, start, end))
+    for bi, block in enumerate(blocks):
+        if bi in rejected_blocks and block.get("type") == "blockquote":
+            block["type"] = "paragraph"
+        if not rejected_spans:
+            continue
+        spans = list(block.get("spans") or [])
+        kept = [
+            span
+            for span in spans
+            if (bi, span.get("start"), span.get("end")) not in rejected_spans
+        ]
+        if len(kept) != len(spans):
+            if kept:
+                block["spans"] = kept
+            else:
+                block.pop("spans", None)

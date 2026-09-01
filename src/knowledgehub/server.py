@@ -26,10 +26,14 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_edition_service import (
+    confirm_hitl_trial as confirm_read_edition_hitl_trial,
     confirm_layout as confirm_read_edition_layout,
     confirm_toc as confirm_read_edition_toc,
+    decide_hitl as decide_read_edition_hitl,
     edit_structure as edit_read_edition_structure,
     get_chapter as get_read_edition_chapter,
+    get_hitl_job as get_read_edition_hitl_job,
+    get_hitl_overview as get_read_edition_hitl_overview,
     get_section_source as get_read_edition_section_source,
     get_manifest as get_read_edition_manifest,
     get_review as get_read_edition_review,
@@ -42,6 +46,7 @@ from .read_edition_service import (
     run_macro as run_read_edition_macro,
     reset_read_edition as reset_read_edition_package,
     run_qa as run_read_edition_qa,
+    scan_hitl as scan_read_edition_hitl,
 )
 from .read_publish import PublishError, preview_normalized, publish_to_read
 from .settings import save_settings, settings_payload
@@ -193,6 +198,22 @@ class ReadEditionStructureEditBody(BaseModel):
     start_line: int | None = None
     kind: str | None = None
     use_llm: bool | None = None
+
+
+class ReadEditionHitlScanBody(BaseModel):
+    chapter_id: str | None = None
+    scope: str = "chapter"
+
+
+class ReadEditionHitlDecideBody(BaseModel):
+    item_ids: list[str] = Field(default_factory=list)
+    decision: str
+    suspects_only: bool = False
+    chapter_id: str | None = None
+
+
+class ReadEditionHitlConfirmBody(BaseModel):
+    chapter_id: str | None = None
 
 
 class SyncRefChaptersBody(BaseModel):
@@ -381,6 +402,68 @@ def create_app() -> FastAPI:
     def read_edition_layout(work_id: str) -> dict[str, Any]:
         try:
             return confirm_read_edition_layout(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/hitl", dependencies=guard)
+    def read_edition_hitl_overview(work_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_hitl_overview(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/hitl/{kind}", dependencies=guard)
+    def read_edition_hitl_job(work_id: str, kind: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_hitl_job(work_id, kind)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/hitl/{kind}/scan", dependencies=guard)
+    def read_edition_hitl_scan(
+        work_id: str, kind: str, payload: ReadEditionHitlScanBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or ReadEditionHitlScanBody()
+        try:
+            return scan_read_edition_hitl(
+                work_id, kind, chapter_id=body.chapter_id, scope=body.scope
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/hitl/{kind}/confirm", dependencies=guard)
+    def read_edition_hitl_confirm(
+        work_id: str, kind: str, payload: ReadEditionHitlConfirmBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or ReadEditionHitlConfirmBody()
+        try:
+            return confirm_read_edition_hitl_trial(work_id, kind, chapter_id=body.chapter_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/hitl/{kind}/decide", dependencies=guard)
+    def read_edition_hitl_decide(
+        work_id: str, kind: str, payload: ReadEditionHitlDecideBody
+    ) -> dict[str, Any]:
+        try:
+            return decide_read_edition_hitl(
+                work_id,
+                kind,
+                decision=payload.decision,
+                item_ids=payload.item_ids,
+                suspects_only=payload.suspects_only,
+                chapter_id=payload.chapter_id,
+            )
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:
