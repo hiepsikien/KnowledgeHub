@@ -16,6 +16,7 @@
     hitlJob: null,
     hitlOverview: null,
     suspectsOnly: true,
+    chapterLoad: 0,
   };
 
   const HITL_STEPS = {
@@ -379,12 +380,18 @@
 
   async function selectChapter(chapterId) {
     if (!state.workId) return;
+    const loadId = ++state.chapterLoad;
     state.chapterId = chapterId;
     state.editIndex = null;
+    if (state.manifest) renderChapterList(state.manifest);
+    const row = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapterId);
+    if (row && $("re-detail-title")) $("re-detail-title").textContent = row.title || chapterId;
+    if (state.step !== "structure") renderHitlList();
     const meta = $("re-detail-meta");
     if (meta) meta.textContent = "Đang tải…";
     try {
       const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`);
+      if (loadId !== state.chapterLoad) return;
       state.chapter = chapter;
       try {
         localStorage.setItem(lastSectionKey(state.workId), chapterId);
@@ -421,6 +428,7 @@
       if (state.step !== "structure") renderHitlList();
       syncToolbar();
     } catch (err) {
+      if (loadId !== state.chapterLoad) return;
       if ($("re-section-full")) $("re-section-full").hidden = true;
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
@@ -592,6 +600,19 @@
     }
   }
 
+  function hitlItemMatchesChapter(item, chapterId, job) {
+    if (!chapterId) return true;
+    const cid = item?.chapter_id || "";
+    if (cid) return cid === chapterId;
+    return (job?.trial_chapter_id || "") === chapterId;
+  }
+
+  function hitlChapterScanned(job, chapterId) {
+    if (!job || !chapterId) return false;
+    if (job.chapter_stats && Object.prototype.hasOwnProperty.call(job.chapter_stats, chapterId)) return true;
+    return (job.items || []).some((it) => it.chapter_id === chapterId);
+  }
+
   function renderHitlList() {
     const box = $("re-hitl-list");
     const metaEl = $("re-hitl-meta");
@@ -606,36 +627,62 @@
       return;
     }
     const summary = job.summary || {};
-    const items = job.items || [];
     const suspectsOnly = !!$("re-hitl-suspects-only")?.checked;
-    const visible = items.filter((it) => {
-      if (job.scope === "chapter" && job.trial_chapter_id && it.chapter_id !== job.trial_chapter_id) return false;
-      return true;
-    });
+    const focusId = state.chapterId;
+    const visible = (job.items || []).filter((it) => hitlItemMatchesChapter(it, focusId, job));
     const shown = visible.filter((it) => {
       if (suspectsOnly && !it.suspect && !it.decision) return false;
       return true;
     });
     const pending = visible.filter((it) => it.suspect && !it.decision).length;
-    const auto = summary.auto_join || 0;
-    const autoKeep = summary.auto_keep || 0;
+    const suspect = visible.filter((it) => it.suspect).length;
+    const scanned = hitlChapterScanned(job, focusId);
+    const stats = (job.chapter_stats && focusId && job.chapter_stats[focusId]) || {};
+    const hasStats = !!(job.chapter_stats && focusId && Object.prototype.hasOwnProperty.call(job.chapter_stats, focusId));
+    const useJobSummary = !hasStats && job.scope === "chapter";
+    const auto = hasStats ? Number(stats.auto_join) || 0 : useJobSummary ? Number(summary.auto_join) || 0 : 0;
+    const autoKeep = hasStats ? Number(stats.auto_keep) || 0 : useJobSummary ? Number(summary.auto_keep) || 0 : 0;
+    const linked = hasStats ? Number(stats.linked) || 0 : useJobSummary ? Number(summary.linked) || 0 : 0;
+    const unmatched = hasStats ? Number(stats.unmatched) || 0 : useJobSummary ? Number(summary.unmatched) || 0 : 0;
     if (metaEl) {
       const bits = [];
       if (job.scope === "book") bits.push("toàn sách");
       else bits.push("chương thử");
-      if (state.step === "wrap") bits.push(`tự ghép ${auto}`, `tự giữ ${autoKeep}`, `nghi ngờ ${summary.suspect || 0}`);
-      else bits.push(`${items.length} mục`, `nghi ngờ ${summary.suspect || 0}`);
-      if (summary.linked) bits.push(`đã nối ${summary.linked}`);
-      if (summary.unmatched) bits.push(`chưa khớp ${summary.unmatched}`);
-      bits.push(`chưa quyết ${pending}`);
+      if (!scanned) {
+        bits.push("chưa quét chương này");
+      } else if (state.step === "wrap") {
+        bits.push(`tự ghép ${auto}`, `tự giữ ${autoKeep}`, `nghi ngờ ${suspect}`);
+      } else {
+        bits.push(`${visible.length} mục`, `nghi ngờ ${suspect}`);
+      }
+      if (scanned && linked) bits.push(`đã nối ${linked}`);
+      if (scanned && unmatched) bits.push(`chưa khớp ${unmatched}`);
+      if (scanned) bits.push(`chưa quyết ${pending}`);
       if (job.trial_confirmed) bits.push("đã xác nhận thử");
       metaEl.textContent = bits.join(" · ");
     }
-    $("re-hitl-confirm").hidden = job.status === "idle" || !!job.trial_confirmed;
+    const viewingTrial = !focusId || !job.trial_chapter_id || job.trial_chapter_id === focusId;
+    $("re-hitl-confirm").hidden = job.status === "idle" || !!job.trial_confirmed || !viewingTrial;
     $("re-hitl-book").disabled = !job.trial_confirmed;
     $("re-hitl-accept-suspects").hidden = pending === 0;
     if (!shown.length) {
-      box.innerHTML = `<p class="muted">${items.length ? "Không còn mục nào khớp bộ lọc." : "Không có chỗ nghi ngờ — có thể xác nhận chương thử rồi chạy toàn văn bản."}</p>`;
+      let empty;
+      if (!scanned) {
+        if (job.scope === "book") {
+          empty = "Chương này không có chỗ cần duyệt.";
+        } else if (job.trial_confirmed) {
+          empty = "Chương này chưa được quét — bấm «Chạy toàn văn bản». «Chạy thử chương này» sẽ đổi chương thử và xóa kết quả cũ.";
+        } else {
+          empty = "Chương này chưa được quét — bấm «Chạy thử chương này».";
+        }
+      } else if (visible.length) {
+        empty = "Không còn mục nào khớp bộ lọc.";
+      } else if (job.scope === "book" || job.trial_confirmed) {
+        empty = "Chương này không có chỗ cần duyệt.";
+      } else {
+        empty = "Không có chỗ nghi ngờ — có thể xác nhận chương thử rồi chạy toàn văn bản.";
+      }
+      box.innerHTML = `<p class="muted">${empty}</p>`;
       return;
     }
     box.innerHTML = shown.map(renderHitlCard).join("");
@@ -789,7 +836,7 @@
           decision,
           item_ids: itemId ? [itemId] : [],
           suspects_only: !!suspectsOnly,
-          chapter_id: itemId ? null : hitlTrialChapterId(),
+          chapter_id: itemId ? null : state.chapterId || hitlTrialChapterId(),
         },
       });
       await loadHitlOverview();
