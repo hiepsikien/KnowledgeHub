@@ -714,12 +714,19 @@
         const pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
         if (pick) await selectChapter(pick.chapter_id);
       } else {
+        state.manifest = null;
+        state.chapter = null;
+        state.chapterId = null;
         applyReview(null);
         $("re-chapters").innerHTML = `<p class="muted">Bấm «Phân đoạn» để liệt kê chương.</p>`;
         $("re-body").innerHTML = "";
+        if ($("re-detail-title")) $("re-detail-title").textContent = "Chương";
+        if ($("re-detail-meta")) $("re-detail-meta").textContent = "";
         if ($("re-section-full")) $("re-section-full").hidden = true;
         if ($("re-compare")) $("re-compare").hidden = true;
         if ($("re-struct-tools")) $("re-struct-tools").hidden = true;
+        if ($("re-qa-panel")) $("re-qa-panel").hidden = true;
+        $("re-more")?.removeAttribute("open");
       }
       syncToolbar();
     } catch (err) {
