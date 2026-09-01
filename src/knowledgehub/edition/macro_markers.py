@@ -10,6 +10,7 @@ MIN_MARKER_COUNT = 5
 _KIND_TO_SECTION = {
     "chapter": "chapter",
     "book": "book",
+    "part": "part",
     "roman_section": "chapter",
     "question": "chapter",
     "section": "chapter",
@@ -76,7 +77,9 @@ def markers_at_level(markers: list[dict[str, Any]], level: str) -> list[dict[str
         return sorted(body, key=lambda x: int(x["line"]))
     if level in {"chapter", "question", "roman_section", "section", "all_caps_section"}:
         kind_map = {
-            "chapter": {"chapter", "heading"},
+            # Keep book/part wrappers when splitting at chapter grain
+            # (Politics: BOOK I then CHAPTER I, II, …).
+            "chapter": {"chapter", "heading", "book", "part"},
             "question": {"question"},
             "roman_section": {"roman_section"},
             "section": {"section"},
@@ -116,8 +119,9 @@ def build_structure_from_markers(
         boundaries.append(
             {"start_line": 0, "kind": "front_matter", "title": "Front matter", "confidence": 0.85}
         )
-    sec_kind = _KIND_TO_SECTION.get(level, "chapter")
     for m in body:
+        marker_kind = str(m.get("kind") or "")
+        sec_kind = _KIND_TO_SECTION.get(marker_kind) or _KIND_TO_SECTION.get(level, "chapter")
         boundaries.append(
             {
                 "start_line": int(m["line"]),

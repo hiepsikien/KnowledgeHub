@@ -11,7 +11,8 @@ from ..catalog import get_work, is_hub_translation, resolve_content_path
 from ..paths import corpus_root
 from .profile import detect_family
 from .llm_defaults import default_use_llm_relabel
-from .macro import build_macro_structure, section_source_slice
+from .macro import attach_container_parents, build_macro_structure, section_source_slice
+from .macro_review import apply_structure_edit, build_review, propose_toc_candidate
 from .pipeline import build_edition
 from .ref import build_read_edition
 from .serialize import build_edition_document, blocks_to_markdown, split_hints_from_blocks
@@ -76,15 +77,33 @@ def resolve_stripped_source(
     return text, {"content_hash": work["content_hash"], "family": family, "origin": "source"}, work
 
 
+def load_raw_source(work_id: str, *, corpus: Path | None = None) -> str:
+    from ..translation.assemble import assemble_finals
+
+    root = corpus or corpus_root()
+    work = get_work(work_id, corpus=root)
+    if is_hub_translation(work):
+        source_id = str(work.get("derived_from") or "")
+        text, _meta = assemble_finals(source_id, require_complete=True)
+        return text
+    path = resolve_content_path(work, root=root)
+    if not path.is_file():
+        return ""
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
 def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     by_id = {row["chapter_id"]: row for row in (existing or {}).get("chapters") or [] if row.get("chapter_id")}
+    sections = list(structure.get("sections") or [])
+    attach_container_parents(sections)
     rows: list[dict[str, Any]] = []
-    for sec in structure.get("sections") or []:
+    for sec in sections:
         sid = sec["section_id"]
         prev = by_id.get(sid) or {}
         new_range = [sec.get("start_char"), sec.get("end_char")]
         prev_range = prev.get("char_range")
         range_changed = prev_range is not None and prev_range != new_range
+        parent_id = sec.get("parent_id")
         if range_changed:
             rows.append(
                 {
@@ -92,6 +111,7 @@ def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] |
                     "title": sec.get("title"),
                     "subtitle": sec.get("subtitle"),
                     "kind": sec.get("kind"),
+                    "parent_id": parent_id,
                     "char_range": new_range,
                     "word_count": sec.get("word_count"),
                     "micro_status": "pending",
@@ -107,6 +127,7 @@ def _manifest_chapter_rows(structure: dict[str, Any], existing: dict[str, Any] |
                     "title": sec.get("title"),
                     "subtitle": sec.get("subtitle"),
                     "kind": sec.get("kind"),
+                    "parent_id": parent_id,
                     "char_range": new_range,
                     "word_count": sec.get("word_count"),
                     "micro_status": prev.get("micro_status", "pending"),
@@ -135,6 +156,112 @@ def _prune_stale_chapter_files(package_dir: Path, manifest: dict[str, Any]) -> N
             path.unlink(missing_ok=True)
 
 
+def _sync_chapter_json_metadata(package_dir: Path, structure: dict[str, Any]) -> None:
+    """Keep parsed chapter JSON kind/title in sync with structure (set_kind does not reparse)."""
+    chapters_dir = package_dir / "chapters"
+    if not chapters_dir.is_dir():
+        return
+    for sec in structure.get("sections") or []:
+        sid = str(sec.get("section_id") or "")
+        if not sid:
+            continue
+        path = chapters_dir / f"{sid}.json"
+        if not path.is_file():
+            continue
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        kind = sec.get("kind")
+        title = sec.get("title")
+        subtitle = sec.get("subtitle")
+        changed = False
+        if kind is not None and doc.get("kind") != kind:
+            doc["kind"] = kind
+            changed = True
+        if title is not None and doc.get("title") != title:
+            doc["title"] = title
+            changed = True
+        if doc.get("subtitle") != subtitle:
+            doc["subtitle"] = subtitle
+            changed = True
+        parent_id = sec.get("parent_id")
+        if doc.get("parent_id") != parent_id:
+            if parent_id:
+                doc["parent_id"] = parent_id
+            elif "parent_id" in doc:
+                del doc["parent_id"]
+            changed = True
+        if changed:
+            path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def remember_last_section(package_dir: Path, structure: dict[str, Any] | None, section_id: str | None) -> None:
+    if not structure or not section_id:
+        return
+    hitl = dict(structure.get("hitl") or {})
+    if hitl.get("last_section_id") == section_id:
+        return
+    hitl["last_section_id"] = section_id
+    structure["hitl"] = hitl
+    save_structure(package_dir, structure)
+
+
+def persist_package_structure(
+    work_id: str,
+    structure: dict[str, Any],
+    *,
+    corpus: Path | None = None,
+    reset_micro: bool = False,
+) -> dict[str, Any]:
+    """Write structure.json + manifest; optionally drop inherited micro status."""
+    root = corpus or corpus_root()
+    _text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    content_hash = str(meta["content_hash"])
+    package_dir = package_root(work_id, content_hash, corpus=root)
+    language = str(work.get("language") or structure.get("language") or "en")
+    family = str(structure.get("source_family") or meta.get("family") or "plain")
+    structure["work_id"] = work_id
+    structure["content_hash"] = content_hash
+    structure["source_family"] = family
+    structure["language"] = language
+    save_structure(package_dir, structure)
+
+    manifest_path = package_dir / "manifest.json"
+    old_manifest: dict[str, Any] = {}
+    if not reset_micro and manifest_path.is_file():
+        old_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = {
+        "package_version": "2",
+        "pipeline": "two_step",
+        "work_id": work_id,
+        "title": work.get("title"),
+        "language": language,
+        "content_hash": content_hash,
+        "macro_status": "complete",
+        "macro_mode": structure.get("mode"),
+        "macro_model": structure.get("model"),
+        "macro_summary_vi": structure.get("summary_vi"),
+        "content_kind": structure.get("content_kind"),
+        "source_family": family,
+        "ref_parser_version": REF_PARSER_VERSION,
+        "chapter_count": structure.get("section_count"),
+        "chapters": _manifest_chapter_rows(structure, None if reset_micro else old_manifest),
+        "updated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
+    }
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    _prune_stale_chapter_files(package_dir, manifest)
+    if not reset_micro:
+        _sync_chapter_json_metadata(package_dir, structure)
+    (package_dir / "chapters").mkdir(exist_ok=True)
+    (package_dir / "qa").mkdir(exist_ok=True)
+    return {
+        "package_dir": str(package_dir.relative_to(root)),
+        "structure": structure,
+        "manifest": manifest,
+    }
+
+
 def run_macro_step(
     work_id: str,
     *,
@@ -161,50 +288,163 @@ def run_macro_step(
 
     language = str(work.get("language") or "en")
     family = str(meta.get("family") or detect_family(text, work=work, language=language))
+    raw = load_raw_source(work_id, corpus=root)
     structure = build_macro_structure(
         text,
         language=language,
         family=family,
         work=work,
         use_llm=use_llm,
+        raw=raw,
     )
     structure["work_id"] = work_id
     structure["content_hash"] = content_hash
     structure["source_family"] = family
-    save_structure(package_dir, structure)
+    toc = propose_toc_candidate(text, raw)
+    structure["hitl"] = {"toc": toc, "confirmed_starts": []}
+    persisted = persist_package_structure(work_id, structure, corpus=root, reset_micro=True)
+    return {"built": True, **persisted}
 
+
+def review_structure_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    root = corpus or corpus_root()
+    text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    language = str(work.get("language") or structure.get("language") or "en")
+    raw = load_raw_source(work_id, corpus=root)
+    review = build_review(text, structure, raw=raw, language=language)
+    hitl = dict(structure.get("hitl") or {})
+    toc = dict(review.get("toc_candidate") or hitl.get("toc") or {})
+    if (not (hitl.get("toc") or {}).get("excerpt")) and toc.get("excerpt"):
+        hitl["toc"] = toc
+        structure["hitl"] = hitl
+        save_structure(package_dir, structure)
     manifest_path = package_dir / "manifest.json"
-    old_manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
-    manifest = {
-        "package_version": "2",
-        "pipeline": "two_step",
-        "work_id": work_id,
-        "title": work.get("title"),
-        "language": language,
-        "content_hash": content_hash,
-        "macro_status": "complete",
-        "macro_mode": structure.get("mode"),
-        "macro_model": structure.get("model"),
-        "macro_summary_vi": structure.get("summary_vi"),
-        "content_kind": structure.get("content_kind"),
-        "source_family": family,
-        "ref_parser_version": REF_PARSER_VERSION,
-        "chapter_count": structure.get("section_count"),
-        "chapters": _manifest_chapter_rows(structure, old_manifest),
-        "updated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
-    }
-    (package_dir / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    _prune_stale_chapter_files(package_dir, manifest)
-    (package_dir / "chapters").mkdir(exist_ok=True)
-    (package_dir / "qa").mkdir(exist_ok=True)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else None
     return {
-        "built": True,
-        "package_dir": str(package_dir.relative_to(root)),
         "structure": structure,
         "manifest": manifest,
+        **review,
+        "hitl": hitl,
+    }
+
+
+def confirm_toc_step(
+    work_id: str,
+    status: str,
+    *,
+    excerpt: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    if status not in {"yes", "no", "none"}:
+        raise ReadEditionStepError("toc status must be yes, no, or none")
+    root = corpus or corpus_root()
+    text, meta, _work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    hitl = dict(structure.get("hitl") or {})
+    toc = dict(hitl.get("toc") or propose_toc_candidate(text, load_raw_source(work_id, corpus=root)))
+    if excerpt is not None:
+        cleaned = str(excerpt).replace("\r\n", "\n").replace("\r", "\n")[:12000].strip("\n")
+        toc["excerpt"] = cleaned
+        toc["line_count"] = len([ln for ln in cleaned.split("\n") if ln.strip()])
+        if not toc.get("source") or toc.get("source") == "none":
+            toc["source"] = "raw"
+    toc["status"] = status
+    hitl["toc"] = toc
+    structure["hitl"] = hitl
+    persisted = persist_package_structure(work_id, structure, corpus=root, reset_micro=False)
+    review = review_structure_step(work_id, corpus=root)
+    return {**persisted, **review}
+
+
+def confirm_layout_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Curator asserts macro structure is final. Requires ready_to_parse; does not parse."""
+    root = corpus or corpus_root()
+    text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    language = str(work.get("language") or structure.get("language") or "en")
+    raw = load_raw_source(work_id, corpus=root)
+    review = build_review(text, structure, raw=raw, language=language)
+    if not review["health"].get("ready_to_parse"):
+        raise ReadEditionStepError(review["health"].get("not_ready_reason") or "Structure not ready")
+    hitl = dict(structure.get("hitl") or {})
+    hitl["layout_ok"] = True
+    structure["hitl"] = hitl
+    persisted = persist_package_structure(work_id, structure, corpus=root, reset_micro=False)
+    review = review_structure_step(work_id, corpus=root)
+    return {**persisted, **review}
+
+
+def ensure_ready_to_parse(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Raise unless diagnostics are clean and curator stamped Cấu trúc OK."""
+    review = review_structure_step(work_id, corpus=corpus)
+    health = review.get("health") or {}
+    if not health.get("can_parse"):
+        raise ReadEditionStepError(
+            health.get("parse_block_reason")
+            or health.get("not_ready_reason")
+            or "Confirm layout (Cấu trúc OK) before parse"
+        )
+    return review
+
+
+def edit_structure_step(
+    work_id: str,
+    *,
+    action: str,
+    section_id: str,
+    start_line: int | None = None,
+    kind: str | None = None,
+    use_llm: bool | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    root = corpus or corpus_root()
+    text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    language = str(work.get("language") or structure.get("language") or "en")
+    try:
+        new_structure, focused_start = apply_structure_edit(
+            text,
+            structure,
+            action=action,
+            section_id=section_id,
+            start_line=start_line,
+            kind=kind,
+            language=language,
+            use_llm=False if use_llm is None else use_llm,
+            family=str(structure.get("source_family") or "") or None,
+        )
+    except ValueError as exc:
+        raise ReadEditionStepError(str(exc)) from exc
+    reset_micro = action not in {"confirm", "set_kind"}
+    persisted = persist_package_structure(
+        work_id, new_structure, corpus=root, reset_micro=reset_micro
+    )
+    focused = next(
+        (s for s in (new_structure.get("sections") or []) if int(s.get("start_line") or -1) == focused_start),
+        None,
+    )
+    focused_id = (focused or {}).get("section_id")
+    if focused_id:
+        remember_last_section(package_dir, persisted.get("structure") or new_structure, focused_id)
+    review = review_structure_step(work_id, corpus=root)
+    return {
+        **persisted,
+        **review,
+        "focused_section_id": focused_id,
+        "focused_start_line": focused_start,
     }
 
 
@@ -214,6 +454,7 @@ def parse_micro_chapter(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     text, meta, work = resolve_stripped_source(work_id, corpus=root)
@@ -225,6 +466,8 @@ def parse_micro_chapter(
     section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
     if not section:
         raise ReadEditionStepError(f"Unknown section: {chapter_id}")
+    if require_ready:
+        ensure_ready_to_parse(work_id, corpus=root)
 
     use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
     slice_text = section_source_slice(text, section)
@@ -272,6 +515,7 @@ def parse_micro_chapter(
             row["edition_hash"] = edition.get("edition_hash")
     manifest["updated_at"] = chapter_doc.get("parsed_at") or manifest.get("updated_at")
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    remember_last_section(package_dir, structure, chapter_id)
     return chapter_doc
 
 

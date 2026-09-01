@@ -17,18 +17,61 @@ from .edition.read_edition import (
     package_status,
     qa_read_edition_chapter,
     save_overrides,
+    list_read_edition_sessions,
 )
 from .edition.read_edition_steps import (
     ReadEditionStepError,
+    remember_last_section,
     assemble_edition_from_package,
+    confirm_layout_step,
+    confirm_toc_step,
+    edit_structure_step,
+    ensure_ready_to_parse,
     load_structure,
     parse_micro_chapter,
     resolve_stripped_source,
+    review_structure_step,
     run_macro_step,
     section_source_slice,
 )
 from .edition.serialize import blocks_to_markdown
 from .paths import corpus_root
+
+# Pending-section CMS preview: double the old 2000-char head-only cap.
+SOURCE_PREVIEW_MAX = 4000
+SOURCE_PREVIEW_HEAD = 2000
+SOURCE_PREVIEW_TAIL = 2000
+
+
+def head_tail_preview(
+    text: str,
+    *,
+    max_chars: int = SOURCE_PREVIEW_MAX,
+    head_chars: int = SOURCE_PREVIEW_HEAD,
+    tail_chars: int = SOURCE_PREVIEW_TAIL,
+) -> dict[str, Any]:
+    """Head + tail excerpt; omit the middle when longer than max_chars."""
+    body = text or ""
+    n = len(body)
+    if n <= max_chars:
+        return {
+            "source_preview": body,
+            "source_preview_head": body,
+            "source_preview_tail": "",
+            "source_preview_truncated": False,
+            "source_preview_omitted": 0,
+        }
+    head = body[:head_chars]
+    tail = body[-tail_chars:]
+    omitted = max(0, n - head_chars - tail_chars)
+    marker = f"\n\n[… omitted {omitted} chars …]\n\n"
+    return {
+        "source_preview": f"{head}{marker}{tail}",
+        "source_preview_head": head,
+        "source_preview_tail": tail,
+        "source_preview_truncated": True,
+        "source_preview_omitted": omitted,
+    }
 
 
 def _map_error(exc: Exception) -> ValueError:
@@ -39,6 +82,10 @@ def _map_error(exc: Exception) -> ValueError:
 
 def get_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
     return package_status(work_id, corpus=corpus)
+
+
+def list_sessions(*, corpus: Path | None = None) -> list[dict[str, Any]]:
+    return list_read_edition_sessions(corpus=corpus)
 
 
 def run_macro(
@@ -60,9 +107,12 @@ def parse_micro(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
     try:
-        return parse_micro_chapter(work_id, chapter_id, corpus=corpus, use_llm=use_llm)
+        return parse_micro_chapter(
+            work_id, chapter_id, corpus=corpus, use_llm=use_llm, require_ready=require_ready
+        )
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
 
@@ -73,12 +123,20 @@ def parse_micro_batch(
     *,
     corpus: Path | None = None,
     use_llm: bool | None = None,
+    require_ready: bool = True,
 ) -> dict[str, Any]:
+    if require_ready:
+        try:
+            ensure_ready_to_parse(work_id, corpus=corpus)
+        except ReadEditionStepError as exc:
+            raise _map_error(exc) from exc
     parsed: dict[str, Any] = {}
     errors: dict[str, str] = {}
     for ch_id in chapter_ids:
         try:
-            parsed[ch_id] = parse_micro_chapter(work_id, ch_id, corpus=corpus, use_llm=use_llm)
+            parsed[ch_id] = parse_micro_chapter(
+                work_id, ch_id, corpus=corpus, use_llm=use_llm, require_ready=False
+            )
         except ReadEditionStepError as exc:
             errors[ch_id] = str(exc)
     return {"parsed": parsed, "errors": errors, "count": len(parsed)}
@@ -107,6 +165,57 @@ def get_structure(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]
         raise _map_error(exc) from exc
 
 
+def get_review(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return review_structure_step(work_id, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def confirm_toc(
+    work_id: str,
+    status: str,
+    *,
+    excerpt: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return confirm_toc_step(work_id, status, excerpt=excerpt, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def confirm_layout(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return confirm_layout_step(work_id, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def edit_structure(
+    work_id: str,
+    *,
+    action: str,
+    section_id: str,
+    start_line: int | None = None,
+    kind: str | None = None,
+    use_llm: bool | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return edit_structure_step(
+            work_id,
+            action=action,
+            section_id=section_id,
+            start_line=start_line,
+            kind=kind,
+            use_llm=use_llm,
+            corpus=corpus,
+        )
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
 def get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
     try:
         return _get_chapter(work_id, chapter_id, corpus=corpus)
@@ -128,21 +237,65 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
         if not section:
             raise ValueError(f"Unknown chapter: {chapter_id}")
         text, _, _ = resolve_stripped_source(work_id, corpus=root)
+        slice_text = section_source_slice(text, section)
         chapter = {
             "chapter_id": chapter_id,
             "title": section.get("title"),
             "subtitle": section.get("subtitle"),
             "kind": section.get("kind"),
+            "parent_id": section.get("parent_id"),
             "char_range": [section.get("start_char"), section.get("end_char")],
             "micro_status": "pending",
-            "source_preview": section_source_slice(text, section)[:2000],
+            **head_tail_preview(slice_text),
             "blocks": [],
             "reading_markdown": "",
         }
+        try:
+            review = review_structure_step(work_id, corpus=root)
+            diag = next(
+                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
+                None,
+            )
+            if diag:
+                chapter["flags"] = diag.get("flags") or []
+                chapter["inner_heads"] = diag.get("inner_heads") or []
+                chapter["toc_match"] = diag.get("toc_match")
+                chapter["compare"] = diag.get("compare") or {}
+                chapter["confirmed"] = bool(diag.get("confirmed"))
+                chapter["char_share"] = diag.get("char_share")
+        except ReadEditionStepError:
+            pass
+    structure = load_structure(package_dir)
+    if structure:
+        section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
+        if section:
+            chapter["kind"] = section.get("kind", chapter.get("kind"))
+            if section.get("parent_id"):
+                chapter["parent_id"] = section.get("parent_id")
+            elif "parent_id" in chapter:
+                del chapter["parent_id"]
     qa = (load_qa_report(package_dir).get("chapters") or {}).get(chapter_id)
     overrides = load_overrides(package_dir).get(chapter_id)
     chapter["qa"] = qa
     chapter["overrides"] = overrides
+    if "flags" not in chapter:
+        try:
+            review = review_structure_step(work_id, corpus=root)
+            diag = next(
+                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
+                None,
+            )
+            if diag:
+                chapter["flags"] = diag.get("flags") or []
+                chapter["inner_heads"] = diag.get("inner_heads") or []
+                chapter["toc_match"] = diag.get("toc_match")
+                chapter["compare"] = diag.get("compare") or {}
+                chapter["confirmed"] = bool(diag.get("confirmed"))
+                chapter["char_share"] = diag.get("char_share")
+        except ReadEditionStepError:
+            pass
+    if structure:
+        remember_last_section(package_dir, structure, chapter_id)
     return chapter
 
 

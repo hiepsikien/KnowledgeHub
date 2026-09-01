@@ -28,4 +28,4 @@ def bootstrap_read_edition(
     if not structure:
         raise RuntimeError(f"macro step failed for {work_id}")
     for section in structure.get("sections") or []:
-        parse_micro_chapter(work_id, section["section_id"], corpus=corpus, use_llm=use_llm)
+        parse_micro_chapter(work_id, section["section_id"], corpus=corpus, use_llm=use_llm, require_ready=False)

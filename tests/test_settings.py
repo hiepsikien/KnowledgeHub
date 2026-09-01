@@ -89,6 +89,9 @@ def test_settings_page(client: TestClient):
     assert 'value="1200"' in page.text
     assert 'id="set-hard-max-part-words"' in page.text
     assert 'value="1500"' in page.text
+    assert "Chế bản (REF)" in page.text
+    assert 'id="set-llm-macro"' in page.text
+    assert ">Chế bản<" in page.text
 
 
 def test_settings_get_defaults(client: TestClient):
@@ -110,6 +113,29 @@ def test_settings_get_defaults(client: TestClient):
     assert data["model_catalog_counts"]["deepseek"] == 3
     assert data["secrets"]["gemini"] is True
     assert data["secrets"]["deepseek"] is False
+    ed = data["settings"]["edition"]
+    assert ed["use_llm_macro"] is True
+    assert ed["use_llm_relabel"] is True
+    assert ed["use_llm_qa"] is True
+
+
+def test_settings_save_edition_llm_flags(client: TestClient, tmp_path: Path):
+    res = client.post(
+        "/api/settings",
+        json={"edition": {"use_llm_macro": False, "use_llm_relabel": True, "use_llm_qa": False}},
+    )
+    assert res.status_code == 200, res.text
+    ed = res.json()["settings"]["edition"]
+    assert ed["use_llm_macro"] is False
+    assert ed["use_llm_relabel"] is True
+    assert ed["use_llm_qa"] is False
+    stored = json.loads((tmp_path / "hub-settings.json").read_text(encoding="utf-8"))
+    assert stored["edition"]["use_llm_macro"] is False
+    again = client.post("/api/settings", json={"translation": {"auto_qa": False}})
+    assert again.status_code == 200
+    kept = again.json()["settings"]["edition"]
+    assert kept["use_llm_macro"] is False
+    assert kept["use_llm_qa"] is False
 
 
 def test_settings_save_models_and_pipeline(client: TestClient, tmp_path: Path):

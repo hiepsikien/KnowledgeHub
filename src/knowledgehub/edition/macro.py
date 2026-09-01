@@ -28,6 +28,8 @@ SECTION_KINDS = frozenset(
         "epilogue",
         "appendix",
         "back_matter",
+        "notes",
+        "toc",
         "other",
     }
 )
@@ -50,6 +52,14 @@ VI_CHAPTER = re.compile(
 
 def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def _same_heading(left: str, right: str) -> bool:
+    def norm(value: str) -> str:
+        return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+
+    a, b = norm(left), norm(right)
+    return bool(a) and a == b
 
 
 def line_map(text: str) -> list[dict[str, Any]]:
@@ -221,6 +231,7 @@ def _sections_from_boundaries(
                 "confidence": float(bound.get("confidence") or 0.85),
             }
         )
+    attach_container_parents(sections)
     return {
         "structure_version": STRUCTURE_VERSION,
         "ref_parser_version": REF_PARSER_VERSION,
@@ -229,6 +240,37 @@ def _sections_from_boundaries(
         "sections": sections,
         "created_at": _now(),
     }
+
+
+def attach_container_parents(sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Nest chapters (and parts) under the nearest preceding book/part.
+
+    Coverage stays a flat contiguous char range; parent_id is display/HITL metadata.
+    """
+    last_book: str | None = None
+    last_part: str | None = None
+    for sec in sections:
+        kind = str(sec.get("kind") or "")
+        sid = str(sec.get("section_id") or "")
+        sec.pop("parent_id", None)
+        if kind == "book":
+            last_book = sid
+            last_part = None
+            continue
+        if kind == "part":
+            last_part = sid
+            if last_book:
+                sec["parent_id"] = last_book
+            continue
+        if kind == "chapter":
+            parent = last_part or last_book
+            if parent:
+                sec["parent_id"] = parent
+            continue
+        if kind in {"front_matter", "back_matter", "notes"}:
+            last_book = None
+            last_part = None
+    return sections
 
 
 def _rule_macro_structure(text: str, candidates: list[dict[str, Any]], *, language: str) -> dict[str, Any]:
@@ -287,6 +329,7 @@ Rules:
 - TOC/list lines (dot leaders, page numbers, short title lists) are NOT body starts — skip them.
 - The first body chapter usually appears AFTER the TOC block with its own heading followed by prose.
 - Include front_matter from line 0 if imprint/preface/TOC exists before first body chapter.
+- Nested classical layout: if the body has BOOK I / BOOK II (or PART) AND CHAPTER I, II, … emit BOTH — kind "book" (or "part") at each book line, then kind "chapter" at each chapter. Do not fold a BOOK heading into the previous or next chapter.
 - Do not rewrite text; only return line numbers already provided in CANDIDATES.
 
 Return ONLY JSON:
@@ -359,6 +402,56 @@ def build_macro_structure(
 
     from .macro_markers import try_marker_assembly
     from .macro_qa import detect_body_markers
+    from .toc import (
+        match_toc_entries_in_body,
+        parse_contents_entries,
+        toc_is_page_column_map,
+        toc_match_covers_structure,
+    )
+
+    toc_source = raw or text
+    toc_entries = parse_contents_entries(toc_source)
+    toc_matched = match_toc_entries_in_body(text, toc_entries) if toc_entries else []
+    if (
+        toc_is_page_column_map(toc_entries)
+        and toc_match_covers_structure(toc_entries, toc_matched)
+    ):
+        boundaries: list[dict[str, Any]] = []
+        if int(toc_matched[0]["line"]) > 0:
+            # CONTENTS stays in front_matter. kind: toc is HITL only (set_kind / expand).
+            boundaries.append(
+                {"start_line": 0, "kind": "front_matter", "title": "Front matter", "confidence": 0.85}
+            )
+        for row in toc_matched:
+            title = str(row.get("text") or row.get("label") or "Section")
+            subtitle = str(row.get("title") or "")
+            if _same_heading(subtitle, title) or _same_heading(subtitle, str(row.get("label") or "")):
+                subtitle_out = None
+            else:
+                subtitle_out = subtitle[:180] or None
+            kind = str(row.get("kind") or "chapter")
+            if kind == "other":
+                kind = "chapter"
+            boundaries.append(
+                {
+                    "start_line": int(row["line"]),
+                    "heading_line": int(row["line"]),
+                    "kind": kind,
+                    "title": title,
+                    "subtitle": subtitle_out,
+                    "confidence": 0.93,
+                }
+            )
+        doc = _sections_from_boundaries(text, boundaries, language=language)
+        doc["mode"] = "toc_match"
+        doc["candidate_count"] = len(candidates)
+        doc["content_kind"] = "prose"
+        doc["toc_entry_count"] = len(toc_entries)
+        doc["toc_matched_count"] = len(toc_matched)
+        doc["summary_vi"] = (
+            f"Phân đoạn từ mục lục ({len(toc_matched)}/{len(toc_entries)} mục khớp trong body)."
+        )
+        return doc
 
     markers = detect_body_markers(text)
     marker_doc = try_marker_assembly(text, markers, language=language)

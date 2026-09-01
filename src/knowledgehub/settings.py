@@ -65,7 +65,12 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "llm_retries": 3,
         "gemini_rpm": 12,
         "deepseek_rpm": 30,
-    }
+    },
+    "edition": {
+        "use_llm_macro": True,
+        "use_llm_relabel": True,
+        "use_llm_qa": True,
+    },
 }
 
 INT_LIMITS: dict[str, tuple[int, int, int]] = {
@@ -150,10 +155,20 @@ def _merge_translation(raw: dict[str, Any] | None) -> dict[str, Any]:
     return base
 
 
+def _merge_edition(raw: dict[str, Any] | None) -> dict[str, Any]:
+    base = deepcopy(DEFAULT_SETTINGS["edition"])
+    incoming = raw if isinstance(raw, dict) else {}
+    for key in ("use_llm_macro", "use_llm_relabel", "use_llm_qa"):
+        if key in incoming:
+            base[key] = bool(incoming[key])
+    return base
+
+
 def _normalize(payload: dict[str, Any] | None) -> dict[str, Any]:
     data = payload if isinstance(payload, dict) else {}
     return {
         "translation": _merge_translation(data.get("translation") if isinstance(data.get("translation"), dict) else data),
+        "edition": _merge_edition(data.get("edition") if isinstance(data.get("edition"), dict) else {}),
         "updated_at": data.get("updated_at"),
     }
 
@@ -245,7 +260,13 @@ def save_settings(payload: dict[str, Any], *, sync_projects: bool = True) -> dic
                 **incoming_tr,
                 "models": {**current_models, **incoming_models},
             }
-        )
+        ),
+        "edition": _merge_edition(
+            {
+                **(current.get("edition") if isinstance(current.get("edition"), dict) else {}),
+                **(incoming.get("edition") if isinstance(incoming.get("edition"), dict) else {}),
+            }
+        ),
     }
     merged["translation"] = _validate_translation(merged["translation"])
     merged["updated_at"] = _now()
@@ -352,6 +373,7 @@ def settings_payload(*, refresh: bool = False) -> dict[str, Any]:
     return {
         "settings": {
             "translation": stored.get("translation") or deepcopy(DEFAULT_SETTINGS["translation"]),
+            "edition": stored.get("edition") or deepcopy(DEFAULT_SETTINGS["edition"]),
         },
         "updated_at": stored.get("updated_at"),
         "model_catalog": live.get("models") or [],

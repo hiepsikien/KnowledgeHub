@@ -11,12 +11,31 @@ from ..translation.llm_json import parse_json_object
 from ..translation.providers import ProviderError, complete_chat
 from .llm_defaults import gemini_available, ref_llm_model
 from .macro import _toc_excerpt, scan_heading_candidates, section_source_slice
-from .toc import is_all_caps_body_section_line, is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
+from .toc import (
+    is_all_caps_body_section_line,
+    is_all_caps_section_line,
+    is_body_heading_line,
+    is_chapter_heading_line,
+    is_chapter_title_line,
+    is_toc_chapter_block,
+    is_toc_entry_line,
+    is_toc_list_row,
+)
 
 CONTENTS_HEAD = re.compile(r"(?m)^[ \t]*(TABLE OF CONTENTS|CONTENTS)\s*\.?\s*$", re.I)
 TITLE_PAGE_SUBJECTS = re.compile(r"^SUBJECTS?\s*$", re.I)
+TOC_EDITORIAL_NOTE = re.compile(r"^\*?Note\b", re.I)
+TOC_PAGE_MARKER = re.compile(r"^\[\s*(?:[ivxlcdm]+|\d{1,4})\s*\]")
+TOC_TITLE_WITH_YEAR = re.compile(r"^[A-Z][A-Z0-9 ,:'\-]{8,}\(\d{4}")
 QUESTION_LINE = re.compile(r"^QUESTION\s+\d+\.?\s*$", re.I)
-BOOK_LINE = re.compile(r"^(?:BOOK|Book)\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|[IVXLC]+|\d+)\b", re.I)
+BOOK_LINE = re.compile(
+    r"^(?:BOOK|Book|VOLUME|Volume)\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|[IVXLC]+|\d+)\b",
+    re.I,
+)
+PART_LINE = re.compile(
+    r"^(?:PART|Part|PHẦN)\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|[IVXLC]+|\d+)\b",
+    re.I,
+)
 ROMAN_SECTION = re.compile(r"^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XVII|XVIII|XIX|XX)\.\s*$")
 CHAPTER_LINE = re.compile(r"^CHAPTER\s+[IVXLC\d]+", re.I)
 
@@ -81,13 +100,41 @@ def parse_title_page_entries(raw: str) -> list[dict[str, Any]]:
     return entries
 
 
+def _is_contents_header(line: str) -> bool:
+    s = line.strip()
+    return bool(CONTENTS_HEAD.match(s) or s.upper() in {"CONTENTS", "MỤC LỤC", "TABLE OF CONTENTS"})
+
+
+def _is_raw_toc_row(line: str) -> bool:
+    """A contents-list row, not the CONTENTS header and not body prose."""
+    s = line.strip()
+    if not s or _is_contents_header(s):
+        return False
+    if is_toc_entry_line(s) or is_toc_list_row(s) or is_chapter_heading_line(s):
+        return True
+    if is_chapter_title_line(s) or BOOK_LINE.match(s):
+        return True
+    if re.match(r"^[IVXLC]+\.\s*$", s) or re.match(r"^PAGE\s*$", s, re.I):
+        return True
+    return False
+
+
+def _raw_toc_should_stop(line: str, toc_rows: int) -> bool:
+    if toc_rows < 2:
+        return False
+    s = line.strip()
+    if TOC_EDITORIAL_NOTE.match(s) or TOC_PAGE_MARKER.match(s) or TOC_TITLE_WITH_YEAR.match(s):
+        return True
+    return False
+
+
 def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
-    """Full TOC block from PG raw text (before strip drops it)."""
+    """TOC slice from PG raw — original line breaks, not reconstructed entries."""
     title_page = extract_title_page_toc(raw, max_chars=max_chars)
     lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
     start: int | None = None
     for i, line in enumerate(lines):
-        if CONTENTS_HEAD.match(line.strip()) or line.strip().upper() == "CONTENTS":
+        if _is_contents_header(line):
             start = i
             break
     if start is None:
@@ -98,7 +145,7 @@ def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
             if not s:
                 continue
             if is_toc_entry_line(s) or BOOK_LINE.match(s) or re.match(r"^[IVXLC]+\.", s):
-                block.append(s)
+                block.append(line.rstrip())
             elif block and len(s) > 100:
                 break
         inline = "\n".join(block)[:max_chars] if block else ""
@@ -107,29 +154,52 @@ def extract_toc_from_raw(raw: str, *, max_chars: int = 12000) -> str:
         return title_page or inline
 
     out: list[str] = []
-    for line in lines[start : start + 200]:
-        s = line.strip()
-        if not s and len(out) > 3:
+    blank_run = 0
+    toc_rows = 0
+    for line in lines[start : start + 400]:
+        raw_line = line.rstrip()
+        s = raw_line.strip()
+        if not s:
+            blank_run += 1
+            if blank_run >= 3 and toc_rows >= 2:
+                break
+            if out and out[-1] != "":
+                out.append("")
+            continue
+        blank_run = 0
+        if s.startswith("***") or re.match(r"^List of ", s, re.I):
             break
-        if start != 0 and len(out) > 8 and len(s) > 110 and not is_toc_entry_line(s):
+        if _raw_toc_should_stop(s, toc_rows):
             break
-        if is_toc_entry_line(s) or CONTENTS_HEAD.match(s) or BOOK_LINE.match(s) or not out:
-            out.append(s)
-        elif out and (is_chapter_heading_line(s) or re.match(r"^[IVXLC]+\.", s)):
-            out.append(s)
-        elif out and len(s) > 90:
+        looks = _is_raw_toc_row(s) or _is_contents_header(s)
+        if not out:
+            out.append(raw_line)
+            if _is_raw_toc_row(s):
+                toc_rows += 1
+        elif looks:
+            out.append(raw_line)
+            if _is_raw_toc_row(s):
+                toc_rows += 1
+        elif toc_rows >= 2:
             break
+        elif len(s) > 90:
+            break
+        else:
+            out.append(raw_line)
         if sum(len(x) + 1 for x in out) > max_chars:
             break
-    return "\n".join(out)[:max_chars]
+    return "\n".join(out).strip("\n")[:max_chars]
 
 
 def detect_body_markers(text: str) -> list[dict[str, Any]]:
     """Deterministic body division markers in stripped text (ground-truth hint)."""
     markers: list[dict[str, Any]] = []
-    for line_no, line in enumerate(text.replace("\r\n", "\n").split("\n")):
+    split_lines = text.replace("\r\n", "\n").split("\n")
+    for line_no, line in enumerate(split_lines):
         s = line.strip()
         if not s:
+            continue
+        if is_toc_list_row(s) or is_toc_chapter_block(split_lines, line_no):
             continue
         kind: str | None = None
         if CHAPTER_LINE.match(s) or (is_body_heading_line(s) and "CHAPTER" in s.upper()):
@@ -140,6 +210,8 @@ def detect_body_markers(text: str) -> list[dict[str, Any]]:
             kind = "roman_section"
         elif BOOK_LINE.match(s) and len(s) < 60:
             kind = "book"
+        elif PART_LINE.match(s) and len(s) < 60:
+            kind = "part"
         elif is_all_caps_body_section_line(s):
             if line_no == 0:
                 continue
