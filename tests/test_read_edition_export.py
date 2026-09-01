@@ -108,6 +108,11 @@ def test_cheban_ui_labels(client):
     assert "Bước 1: Phân đoạn" not in html
     assert "Parse REF chương" not in html
     assert "Parse chương này" in html
+    assert "Phân loại lại" in html
+    assert "Khôi phục đề xuất" in html
+    assert "Đề xuất lại" not in html
+    assert "Reset phân đoạn" not in html
+    assert ">Reset<" in html
     assert "Chế bản (REF)" in html
     assert 'id="re-section-full"' in html
     assert "Nối dòng" in html
@@ -119,6 +124,34 @@ def test_cheban_ui_labels(client):
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
     assert 'styles.css?v=cheban10' in html
+
+
+def test_toc_reclass_keeps_excerpt_and_reset_wipes(client):
+    wid = "locke--second_treatise"
+    blocked = client.post(f"/api/works/{wid}/read-edition/macro", json={"keep_toc": True, "use_llm": False})
+    assert blocked.status_code == 400
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200
+    edited = "CONTENTS\nCHAPTER I. THE FAMILY OF BACH\nCHAPTER II. THE CAREER OF BACH"
+    toc = client.post(f"/api/works/{wid}/read-edition/toc", json={"status": "yes", "excerpt": edited})
+    assert toc.status_code == 200
+    assert toc.json()["toc_candidate"]["excerpt"] == edited
+    assert toc.json()["toc_candidate"]["source"] == "curated"
+
+    reclass = client.post(f"/api/works/{wid}/read-edition/macro", json={"keep_toc": True, "use_llm": False})
+    assert reclass.status_code == 200
+    hitl_toc = reclass.json()["structure"]["hitl"]["toc"]
+    assert hitl_toc["excerpt"] == edited
+    assert hitl_toc["status"] == "yes"
+
+    reset = client.post(f"/api/works/{wid}/read-edition/reset")
+    assert reset.status_code == 200
+    assert reset.json()["reset"] is True
+    status = client.get(f"/api/works/{wid}/read-edition")
+    assert status.json()["macro_complete"] is False
+    review = client.get(f"/api/works/{wid}/read-edition/review")
+    assert review.status_code == 400
 
 
 def test_read_edition_api(client):

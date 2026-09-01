@@ -33,6 +33,7 @@ from .edition.read_edition_steps import (
     hitl_overview_step,
     load_structure,
     parse_micro_chapter,
+    reset_read_edition_step,
     resolve_stripped_source,
     review_structure_step,
     run_macro_step,
@@ -99,9 +100,19 @@ def run_macro(
     corpus: Path | None = None,
     force: bool = False,
     use_llm: bool = True,
+    keep_toc: bool = False,
 ) -> dict[str, Any]:
     try:
-        return run_macro_step(work_id, corpus=corpus, force=force, use_llm=use_llm)
+        return run_macro_step(
+            work_id, corpus=corpus, force=force, use_llm=use_llm, keep_toc=keep_toc
+        )
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def reset_read_edition(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return reset_read_edition_step(work_id, corpus=corpus)
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
 

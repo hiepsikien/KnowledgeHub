@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -280,14 +281,28 @@ def run_macro_step(
     corpus: Path | None = None,
     use_llm: bool = True,
     force: bool = False,
+    keep_toc: bool = False,
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     text, meta, work = resolve_stripped_source(work_id, corpus=root)
     content_hash = str(meta["content_hash"])
     package_dir = package_root(work_id, content_hash, corpus=root)
+    existing = load_structure(package_dir)
 
-    if not force:
-        existing = load_structure(package_dir)
+    saved_toc: dict[str, Any] | None = None
+    toc_excerpt: str | None = None
+    if keep_toc:
+        if not existing:
+            raise ReadEditionStepError("Run phân đoạn first, then confirm TOC")
+        saved_toc = dict((existing.get("hitl") or {}).get("toc") or {})
+        if saved_toc.get("status") not in {"yes", "no", "none"}:
+            raise ReadEditionStepError("Confirm TOC before phân loại lại")
+        if saved_toc.get("status") == "yes":
+            toc_excerpt = str(saved_toc.get("excerpt") or "").strip()
+        else:
+            # Rejected / no TOC: remacro without falling back to auto-extract.
+            toc_excerpt = ""
+    elif not force:
         if existing and existing.get("ref_parser_version") == REF_PARSER_VERSION:
             manifest_path = package_dir / "manifest.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else None
@@ -308,14 +323,37 @@ def run_macro_step(
         work=work,
         use_llm=use_llm,
         raw=raw,
+        toc_excerpt=toc_excerpt,
     )
     structure["work_id"] = work_id
     structure["content_hash"] = content_hash
     structure["source_family"] = family
-    toc = propose_toc_candidate(text, raw)
-    structure["hitl"] = {"toc": toc, "confirmed_starts": []}
+    if saved_toc is not None:
+        structure["hitl"] = {"toc": saved_toc, "confirmed_starts": []}
+    else:
+        toc = propose_toc_candidate(text, raw)
+        structure["hitl"] = {"toc": toc, "confirmed_starts": []}
     persisted = persist_package_structure(work_id, structure, corpus=root, reset_micro=True)
     return {"built": True, **persisted}
+
+
+def reset_read_edition_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Wipe the package back to empty — no remacro, no TOC proposal."""
+    root = corpus or corpus_root()
+    _text, meta, _work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    existed = package_dir.is_dir()
+    if existed:
+        shutil.rmtree(package_dir)
+    parent = package_dir.parent
+    if parent.is_dir() and not any(parent.iterdir()):
+        parent.rmdir()
+    return {
+        "reset": True,
+        "work_id": work_id,
+        "cleared": existed,
+        "package_dir": None,
+    }
 
 
 def review_structure_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
@@ -360,12 +398,16 @@ def confirm_toc_step(
     if not structure:
         raise ReadEditionStepError("Run macro step first (structure.json missing)")
     hitl = dict(structure.get("hitl") or {})
-    toc = dict(hitl.get("toc") or propose_toc_candidate(text, load_raw_source(work_id, corpus=root)))
+    raw = load_raw_source(work_id, corpus=root)
+    toc = dict(hitl.get("toc") or propose_toc_candidate(text, raw))
     if excerpt is not None:
         cleaned = str(excerpt).replace("\r\n", "\n").replace("\r", "\n")[:12000].strip("\n")
         toc["excerpt"] = cleaned
         toc["line_count"] = len([ln for ln in cleaned.split("\n") if ln.strip()])
-        if not toc.get("source") or toc.get("source") == "none":
+        proposed = propose_toc_candidate(text, raw)
+        if cleaned.strip() != str(proposed.get("excerpt") or "").strip():
+            toc["source"] = "curated"
+        elif not toc.get("source") or toc.get("source") == "none":
             toc["source"] = "raw"
     toc["status"] = status
     hitl["toc"] = toc
