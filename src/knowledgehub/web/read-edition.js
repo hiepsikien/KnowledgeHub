@@ -529,12 +529,15 @@
     const summary = job.summary || {};
     const items = job.items || [];
     const suspectsOnly = !!$("re-hitl-suspects-only")?.checked;
-    const shown = items.filter((it) => {
+    const visible = items.filter((it) => {
       if (job.scope === "chapter" && job.trial_chapter_id && it.chapter_id !== job.trial_chapter_id) return false;
+      return true;
+    });
+    const shown = visible.filter((it) => {
       if (suspectsOnly && !it.suspect && !it.decision) return false;
       return true;
     });
-    const pending = items.filter((it) => it.suspect && !it.decision).length;
+    const pending = visible.filter((it) => it.suspect && !it.decision).length;
     const auto = summary.auto_join || 0;
     const autoKeep = summary.auto_keep || 0;
     if (metaEl) {
@@ -675,13 +678,19 @@
     }
   }
 
+  function hitlTrialChapterId() {
+    const job = state.hitlJob;
+    if (!job || job.scope === "book") return null;
+    return job.trial_chapter_id || null;
+  }
+
   async function confirmHitlTrial() {
     const kind = hitlKind();
     if (!kind || !state.workId) return;
     try {
       state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/confirm`, {
         method: "POST",
-        body: { chapter_id: state.chapterId },
+        body: { chapter_id: hitlTrialChapterId() || state.chapterId },
       });
       toast("Đã xác nhận chương thử — có thể chạy toàn văn bản");
       await loadHitlOverview();
@@ -701,7 +710,7 @@
           decision,
           item_ids: itemId ? [itemId] : [],
           suspects_only: !!suspectsOnly,
-          chapter_id: state.hitlJob?.scope === "chapter" ? state.chapterId : null,
+          chapter_id: itemId ? null : hitlTrialChapterId(),
         },
       });
       await loadHitlOverview();
