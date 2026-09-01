@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 REF_FORMAT = "ref/1"
-REF_PARSER_VERSION = "1.7"
+REF_PARSER_VERSION = "1.8"
 DEFAULT_REF_QA_MODEL = "gemini-3.1-flash-lite"
 
 BLOCK_TYPES = frozenset(

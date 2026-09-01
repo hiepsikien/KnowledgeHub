@@ -40,7 +40,7 @@ Paragraph blocks may include `spans[]` with offsets into `text`:
 
 | `style` | Example | Notes |
 |---------|---------|-------|
-| `footnote` | `[178]`, `[168]` | Numeric bracket markers only |
+| `footnote` | `[178]`, `[168]` | Numeric bracket markers only; `note` holds the chapter-end dump body when present |
 | `bracket_note` | `[The Cambridge Modern History, I, 23-24, …]` | Long editorial note in brackets |
 | `paren_cite` | `(Politics)`, `(foedus aequum)`, `(as X also says)` | Short citation / aside |
 | `paren_quote` | long `(…quoted phrase…)` | Parenthetical quote |

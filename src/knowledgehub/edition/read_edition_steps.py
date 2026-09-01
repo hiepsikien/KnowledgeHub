@@ -535,6 +535,7 @@ def parse_micro_chapter(
         "content_kind": edition.get("content_kind"),
         "ref_mode": ref_report.get("ref_mode"),
         "llm_segments": ref_report.get("llm_segments") or [],
+        "notes": edition.get("notes") or [],
         "block_count": len(blocks),
         "word_count": section.get("word_count"),
         "micro_status": "complete",

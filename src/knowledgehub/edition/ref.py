@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from .footnotes import attach_footnote_bodies
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
 from .lines import iter_lines, normalize_wiki_source
@@ -39,6 +40,7 @@ def build_read_edition(
         labels = label_lines_rules(lines, family=family, source_text=unwrapped_body)
         blocks = labels_to_blocks(lines, labels)
         blocks, quotation_profile = annotate_blocks(blocks)
+        blocks, notes = attach_footnote_bodies(blocks, unwrapped_body)
         edition = build_edition_document(
             blocks,
             language=language,
@@ -46,6 +48,8 @@ def build_read_edition(
             quotation_profile=quotation_profile,
             apparatus_dropped=apparatus or None,
         )
+        if notes:
+            edition["notes"] = notes
         return edition, {
             "ref_mode": "rule_fallback",
             "line_count": len(lines),
@@ -54,6 +58,7 @@ def build_read_edition(
             "llm_segments": [],
             "quotation_profile": quotation_profile,
             "apparatus_dropped": apparatus,
+            "notes_linked": len(notes),
         }
 
     lines = iter_lines(body)
@@ -70,6 +75,7 @@ def build_read_edition(
     blocks = group_dramatis_blocks(blocks)
     blocks = group_stanzas(blocks)
     blocks, quotation_profile = annotate_blocks(blocks)
+    blocks, notes = attach_footnote_bodies(blocks, body)
     joined = any(label.join_next for label in labels) or unwrapped
     edition = build_edition_document(
         blocks,
@@ -78,6 +84,8 @@ def build_read_edition(
         quotation_profile=quotation_profile,
         apparatus_dropped=apparatus or None,
     )
+    if notes:
+        edition["notes"] = notes
     return edition, {
         "ref_mode": "llm_hybrid" if llm_enabled else "rule",
         "line_count": len(lines),
@@ -86,4 +94,5 @@ def build_read_edition(
         "unwrapped": joined,
         "quotation_profile": quotation_profile,
         "apparatus_dropped": apparatus,
+        "notes_linked": len(notes),
     }

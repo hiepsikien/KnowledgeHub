@@ -808,6 +808,24 @@ mark.ann-context {
 .re-verse { margin-left: 1.2em; }
 .re-span { background: transparent; padding: 0 1px; }
 .re-span-footnote { color: var(--accent); font-size: 0.85em; vertical-align: super; }
+.re-span-footnote.has-note { cursor: help; text-decoration: underline dotted; text-underline-offset: 2px; }
+.re-notes {
+  margin-top: 1.6em;
+  padding-top: 1em;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.re-notes h3 { font-size: 15px; margin: 0 0 0.6em; }
+.re-notes ol { margin: 0; padding-left: 1.4em; }
+.re-notes li { margin: 0.45em 0; }
+.re-notes li.on {
+  background: rgba(180, 140, 60, 0.12);
+  outline: 1px solid rgba(180, 140, 60, 0.35);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.re-note-anchor { color: var(--muted); }
 .re-span-em { font-style: italic; }
 .re-span-paren_cite, .re-span-bracket_cite { color: #4a5a7a; }
 .re-qa { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }

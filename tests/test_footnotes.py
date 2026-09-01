@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 from knowledgehub.edition.footnotes import (
+    attach_footnote_bodies,
     glossary_from_annotations,
     glossary_from_footnotes,
     notes_from_annotations,
+    notes_from_text,
 )
+from knowledgehub.edition.inline_spans import annotate_blocks
+from knowledgehub.edition.ref import build_read_edition
 
 
 def test_footnotes_become_glossary_and_leave_the_body():
@@ -173,3 +177,131 @@ def test_notes_drop_context_that_restates_a_footnote():
     assert "Bối cảnh pháp lý" not in labels
     assert any("Vasquez" in row["label"] or row["anchor"] == "Vasquez" for row in notes)
     assert "Luật các dân tộc" in labels
+
+
+BERGSON_CHAPTER = """\
+CHAPTER I
+
+THE EVOLUTION OF LIFE
+
+True, biologists are not agreed on what is gained and what is lost
+between the day of birth and the day of death.[5] More probable is the
+theory of residual substances which finally "crust it over."[6] Must we
+declare any explanation insufficient that does not take account of
+phagocytosis?[7]
+
+FOOTNOTES:
+
+[Footnote 5: There are those who hold to the continual growth in the
+volume of protoplasm from the birth of the cell right on to its death.]
+
+[Footnote 6: Le Dantec, _L'Individualité et l'erreur individualiste_,
+Paris, 1905, pp. 84 ff.]
+
+[Footnote 7: Metchnikoff, _La Dégénérescence sénile_.]
+"""
+
+BACH_CHAPTER = """\
+CHAPTER I
+
+HIS CHILDREN
+
+Johann Sebastian had a second son.[1] The violas were divided.[2]
+Spitta records the visit.[5]
+
+FOOTNOTES:
+
+[1] See Glossary, "College of Instrumental Musicians."
+
+[2] The violas were divided into alto, tenor and bass, as the trombones
+are now.
+
+[5] Spitta.
+"""
+
+
+def test_per_chapter_numbered_notes_are_extracted():
+    body, entries = glossary_from_footnotes(BACH_CHAPTER)
+    assert "FOOTNOTES" not in body
+    assert "Johann Sebastian had a second son.[1]" in body
+    by_alias = {e["aliases"][0]: e for e in entries}
+    assert by_alias["[1]"]["summary"].startswith("See Glossary")
+    assert by_alias["[5]"]["summary"] == "Spitta."
+
+
+def test_per_chapter_gutenberg_bracket_notes_are_extracted():
+    parsed = notes_from_text(BERGSON_CHAPTER)
+    assert 5 in parsed
+    assert "volume of protoplasm" in parsed[5]
+    assert "Le Dantec" in parsed[6]
+    assert parsed[7].startswith("Metchnikoff")
+    body, entries = glossary_from_footnotes(BERGSON_CHAPTER)
+    assert "FOOTNOTES" not in body
+    assert "phagocytosis?[7]" in body
+    assert any("Matière" in e["summary"] or "Le Dantec" in e["summary"] for e in entries)
+
+
+def test_multiple_chapter_footnote_dumps():
+    raw = BACH_CHAPTER + "\n\nCHAPTER II\n\nLater years.[7]\n\nFOOTNOTES:\n\n[7] No. 27 in the Genealogical List.\n"
+    body, entries = glossary_from_footnotes(raw)
+    assert "CHAPTER II" in body
+    assert "Later years.[7]" in body
+    assert "FOOTNOTES" not in body
+    markers = {e["aliases"][0] for e in entries}
+    assert markers == {"[1]", "[2]", "[5]", "[7]"}
+
+
+def test_mixed_case_chapter_stops_the_dump():
+    raw = (
+        "Chapter I\n\nHis children.[1]\n\nFOOTNOTES:\n\n[1] See Glossary.\n\n"
+        "Chapter II\n\nLater years continue here.\n"
+    )
+    body, entries = glossary_from_footnotes(raw)
+    assert "Chapter II" in body
+    assert "Later years continue here" in body
+    assert "FOOTNOTES" not in body
+    assert entries[0]["summary"].startswith("See Glossary")
+
+
+def test_ref_attaches_bergson_note_bodies_to_markers():
+    edition, report = build_read_edition(BERGSON_CHAPTER, family="gutenberg", language="en", use_llm=False)
+    assert report["notes_linked"] >= 3
+    notes = {row["marker"]: row["body"] for row in edition.get("notes") or []}
+    assert "volume of protoplasm" in notes["[5]"]
+    linked = [
+        span
+        for block in edition["blocks"]
+        for span in block.get("spans") or []
+        if span.get("style") == "footnote" and span.get("text") == "[5]" and span.get("note")
+    ]
+    assert linked
+    assert "volume of protoplasm" in linked[0]["note"]
+
+
+def test_ref_attaches_abdy_williams_note_bodies_to_markers():
+    edition, report = build_read_edition(BACH_CHAPTER, family="gutenberg", language="en", use_llm=False)
+    assert report["notes_linked"] >= 3
+    notes = {row["marker"]: row["body"] for row in edition.get("notes") or []}
+    assert notes["[1]"].startswith("See Glossary")
+    assert notes["[5]"] == "Spitta."
+    five = [
+        span
+        for block in edition["blocks"]
+        for span in block.get("spans") or []
+        if span.get("style") == "footnote" and span.get("text") == "[5]"
+    ]
+    assert five and five[0].get("note") == "Spitta."
+
+
+def test_attach_footnote_bodies_on_annotated_blocks():
+    blocks = [
+        {"type": "paragraph", "text": "The violas were divided.[2]"},
+        {"type": "heading", "level": 2, "text": "FOOTNOTES:"},
+        {"type": "paragraph", "text": "[2] The violas were divided into alto, tenor and bass."},
+    ]
+    annotated, _ = annotate_blocks(blocks)
+    out, notes = attach_footnote_bodies(annotated, BACH_CHAPTER)
+    span = next(s for s in out[0]["spans"] if s["style"] == "footnote")
+    assert span["note"].startswith("The violas were divided into alto")
+    assert any(row["marker"] == "[2]" for row in notes)
+
