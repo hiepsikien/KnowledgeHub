@@ -13,6 +13,7 @@ from knowledgehub.edition.toc import (
     is_body_heading_line,
     is_toc_list_row,
     parse_contents_entries,
+    toc_is_page_column_map,
     toc_is_wrap_page_column,
     toc_match_covers_structure,
     match_toc_entries_in_body,
@@ -253,6 +254,7 @@ def test_one_line_contents_is_not_wrap_page_column():
     assert len(entries) >= 5
     assert all(not e.get("wrapped") for e in entries)
     assert not toc_is_wrap_page_column(entries)
+    assert not toc_is_page_column_map(entries)
 
 
 def test_macro_keeps_markers_for_austen_style_one_line_toc():
@@ -450,6 +452,123 @@ At Weimar he wrote for the organ.
     assert "Chapter 1" in titles
     assert "Chapter 2" in titles
     assert "Chapter 3" in titles
+
+
+def _arnold_named_page_column_toc() -> str:
+    """Matthew Arnold, Discourses in America — named essays + page column, split first heading."""
+    return """*** START OF THE PROJECT GUTENBERG EBOOK DISCOURSES IN AMERICA ***
+
+DISCOURSES IN AMERICA
+
+BY
+MATTHEW ARNOLD
+
+PREFACE.
+
+Of the three discourses in this volume, the second was originally given
+as the Rede Lecture at Cambridge.
+
+CONTENTS.
+
+
+                                                      PAGE
+
+  Numbers; or, The Majority and the Remnant              1
+
+  Literature and Science                                72
+
+  Emerson                                              138
+
+
+
+  NUMBERS;
+  OR,
+  THE MAJORITY AND THE REMNANT.
+
+
+There is a characteristic saying of Dr. Johnson: Patriotism is the last
+refuge of a scoundrel. The saying is cynical yet it has in it something
+of plain robust sense and truth, and we do often see men passing
+themselves off as patriots who are in truth scoundrels of the common
+sort. Short of such, there is undoubtedly a good deal of self-flattery.
+
+  LITERATURE AND SCIENCE.
+
+
+The question of public education is a question of high importance in
+modern life, and it is a question on which the public is not agreed at
+present. Literature and science both claim a place.
+
+  EMERSON.
+
+
+Towards Emerson the feelings of his countrymen have not always been
+steady, but they have been strong, and they remain a living force.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DISCOURSES IN AMERICA ***
+"""
+
+
+def test_named_page_column_toc_is_a_map():
+    entries = parse_contents_entries(_arnold_named_page_column_toc())
+    labels = [e["label"] for e in entries]
+    assert labels == [
+        "Numbers; or, The Majority and the Remnant",
+        "Literature and Science",
+        "Emerson",
+    ]
+    assert all(e["kind"] == "chapter" for e in entries)
+    assert not toc_is_wrap_page_column(entries)
+    assert toc_is_page_column_map(entries)
+
+
+def test_macro_uses_toc_for_arnold_named_essays():
+    raw = _arnold_named_page_column_toc()
+    entries = parse_contents_entries(raw)
+    matched = match_toc_entries_in_body(raw, entries)
+    assert [m["label"] for m in matched] == [e["label"] for e in entries]
+    assert matched[0]["text"] == "NUMBERS;"
+    assert toc_match_covers_structure(entries, matched)
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    kinds = [s["kind"] for s in doc["sections"]]
+    titles = [s["title"] for s in doc["sections"]]
+    assert kinds[0] == "front_matter"
+    assert kinds.count("chapter") == 3
+    assert "NUMBERS;" in titles
+    assert "LITERATURE AND SCIENCE." in titles
+    assert "EMERSON." in titles
+
+
+def test_strip_keeps_arnold_first_essay_heading():
+    raw = _arnold_named_page_column_toc()
+    text, report = build_edition(raw, language="en", strip_only=True)
+    assert report["dropped_contents"] is True
+    assert "Numbers; or, The Majority and the Remnant" not in text
+    assert "NUMBERS;" in text
+    assert "THE MAJORITY AND THE REMNANT." in text
+    assert "LITERATURE AND SCIENCE." in text
+    assert "EMERSON." in text
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    assert [s["kind"] for s in doc["sections"]].count("chapter") == 3
+
+
+def test_pg_arnold_discourses_if_cached():
+    raw_path = Path("/tmp/pg44919.txt")
+    if not raw_path.is_file():
+        pytest.skip("PG 44919 cache missing — compact Arnold fixture covers named TOC")
+    raw = raw_path.read_text(encoding="utf-8", errors="replace")
+    text, report = build_edition(raw, language="en", strip_only=True)
+    assert report["dropped_contents"] is True
+    assert "NUMBERS;" in text
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    assert any("NUMBERS" in t for t in titles)
+    assert any("LITERATURE AND SCIENCE" in t for t in titles)
+    assert any("EMERSON" in t for t in titles)
+    assert [s["kind"] for s in doc["sections"]].count("chapter") == 3
 
 
 def test_build_macro_structure_markers_path_grotius():

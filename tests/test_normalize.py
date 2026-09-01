@@ -243,6 +243,29 @@ def test_toc_stops_before_chapter_prose():
     assert "By the examination of the elements of human thought" in text
 
 
+def test_named_page_column_toc_does_not_swallow_first_essay():
+    raw = (
+        "*** START OF THE PROJECT GUTENBERG EBOOK DISCOURSES ***\n\n"
+        "CONTENTS.\n\n"
+        "                                                      PAGE\n\n"
+        "  Numbers; or, The Majority and the Remnant              1\n\n"
+        "  Literature and Science                                72\n\n"
+        "  Emerson                                              138\n\n\n"
+        "  NUMBERS;\n"
+        "  OR,\n"
+        "  THE MAJORITY AND THE REMNANT.\n\n"
+        "There is a characteristic saying of Dr. Johnson: Patriotism is the last\n"
+        "refuge of a scoundrel, and it has in it something of plain robust sense.\n\n"
+        "*** END OF THE PROJECT GUTENBERG EBOOK DISCOURSES ***\n"
+    )
+    text, report = normalize_manuscript(raw)
+    assert report["dropped_contents"] is True
+    assert "Literature and Science                                72" not in text
+    assert "NUMBERS;" in text
+    assert "THE MAJORITY AND THE REMNANT." in text
+    assert "characteristic saying of Dr. Johnson" in text
+
+
 def test_short_lines_not_merged():
     raw = "Translated by\nFathers of the English Dominican Province\nNew York\n"
     text, report = normalize_manuscript(raw)
