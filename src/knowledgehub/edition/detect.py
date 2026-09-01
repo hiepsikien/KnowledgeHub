@@ -88,8 +88,42 @@ def _looks_like_index_line(line: str) -> bool:
     return "," in s and len(s) < 80
 
 
+_HEADING_PAGE_TAIL = re.compile(r"(?:\.{2,}|\s{2,})(?:\d{1,4}|[IVXLCDM]{1,8})$", re.I)
+
+
 def _heading_key(line: str) -> str:
-    return re.sub(r"\s+", " ", line.strip()).upper().rstrip(".")
+    s = re.sub(r"\s+", " ", line.strip()).upper()
+    return _HEADING_PAGE_TAIL.sub("", s).strip(" .")
+
+
+def _toc_title_repeats(key: str, seen: set[str]) -> bool:
+    """True when a body heading repeats a Contents row (possibly split across lines).
+
+    Prefix match covers Arnold ``NUMBERS;`` ⊆ ``NUMBERS OR THE MAJORITY…``.
+    Do not match on the first word alone — ``CHAPTER`` is 7 letters, so that
+    branch treated ``CHAPTER IV`` as a repeat of ``CHAPTER I``.
+    """
+    if not key:
+        return False
+    if key in seen:
+        return True
+    compact = re.sub(r"[^A-Z0-9]+", " ", key).strip()
+    if len(compact) < 4:
+        return False
+    from .toc import chapter_number_key
+
+    chap = chapter_number_key(key)
+    for prev in seen:
+        prev_c = re.sub(r"[^A-Z0-9]+", " ", prev).strip()
+        if not prev_c:
+            continue
+        if compact == prev_c:
+            return True
+        if len(compact) >= 5 and prev_c.startswith(compact + " "):
+            return True
+        if chap and chapter_number_key(prev) == chap:
+            return True
+    return False
 
 
 def _is_toc_heading(line: str) -> bool:
@@ -232,7 +266,7 @@ def detect_toc(text: str, *, family: str) -> list[EditionSpan]:
         if PG_END_LINE.search(s) or a - marker.start() > window:
             break
         key = _heading_key(s)
-        if key in seen and toc_lines >= 4:
+        if toc_lines >= 3 and _toc_title_repeats(key, seen):
             cut_at = a
             break
         if _looks_like_toc_line(s):
@@ -246,21 +280,6 @@ def detect_toc(text: str, *, family: str) -> list[EditionSpan]:
             continue
         seen.add(key)
     if cut_at is None or toc_lines < 4 or cut_at <= marker.start():
-        return [
-            EditionSpan(
-                marker.start(),
-                marker.end(),
-                "toc",
-                "keep",
-                0.4,
-                "Possible contents heading; not enough TOC evidence to drop",
-            )
-        ]
-    confidence = 0.92 if toc_lines >= 12 else 0.86
-    return [
-        EditionSpan(marker.start(), cut_at, "toc", "drop", confidence, f"Front contents list ({toc_lines} entries)")
-    ]
-    if cut_at is None or toc_lines < 4:
         return [
             EditionSpan(
                 marker.start(),

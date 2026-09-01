@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=pick-work" />
+    <link rel="stylesheet" href="/styles.css?v=cheban7" />
   </head>
   <body>
     <div class="shell">
@@ -19,7 +19,7 @@
         <p class="tagline">Catalog corpus · dịch thuật · publish Read</p>
         <button class="nav-link active" data-view="works" type="button">Tác phẩm</button>
         <button class="nav-link" data-view="translation" type="button">Dịch thuật</button>
-        <button class="nav-link" data-view="read-edition" type="button">Read Edition</button>
+        <button class="nav-link" data-view="read-edition" type="button">Chế bản</button>
         <button class="nav-link" data-view="settings" type="button">Cài đặt</button>
         <button class="nav-link" data-view="licenses" type="button">License</button>
         <div class="nav-foot" id="health"></div>
@@ -62,6 +62,7 @@
                     <th>Lang</th>
                     <th>Read</th>
                     <th>Raw</th>
+                    <th>Chế bản</th>
                   </tr>
                 </thead>
                 <tbody id="rows"></tbody>
@@ -120,18 +121,45 @@
         <section id="view-read-edition" hidden>
           <header class="page-head">
             <div>
-              <h1 id="re-heading">Read Edition</h1>
-              <p class="lead" id="re-status">REF/1 structured edition — preview, QA, chỉnh sửa theo chương.</p>
+              <p class="crumb" id="re-crumb" hidden><a href="/read-edition">← Đang làm</a></p>
+              <h1 id="re-heading">Chế bản</h1>
+              <p class="lead" id="re-status">Cấu trúc chương, định dạng REF, đưa sang Read.</p>
             </div>
-            <div class="page-actions">
-              <label class="inline re-llm-toggle"><input id="re-use-llm" type="checkbox" checked /> LLM relabel</label>
-              <label class="inline re-llm-toggle"><input id="re-use-llm-qa" type="checkbox" checked /> LLM QA</label>
-              <button type="button" class="btn ghost" id="re-build">Build lại</button>
-              <button type="button" class="btn ghost" id="re-qa-all">QA (rule)</button>
-              <button type="button" class="btn" id="re-publish">Publish Read</button>
+            <div class="page-actions" id="re-actions" hidden>
+              <button type="button" class="btn primary" id="re-macro">Phân đoạn</button>
+              <button type="button" class="btn" id="re-layout-ok">Cấu trúc OK</button>
+              <button type="button" class="btn primary" id="re-parse-ch">Parse chương này</button>
+              <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
+              <button type="button" class="btn ghost" id="re-parse-ready">Parse phần còn lại</button>
+              <button type="button" class="btn" id="re-publish">Đưa sang Read</button>
+              <details class="re-more" id="re-more">
+                <summary>⋯</summary>
+                <div class="re-more-menu">
+                  <button type="button" class="btn ghost" id="re-reset">Reset phân đoạn</button>
+                </div>
+              </details>
             </div>
           </header>
           <section id="re-pick" hidden>
+            <section id="re-sessions" class="re-sessions" hidden>
+              <h2>Đang làm</h2>
+              <p class="muted">Sách đã phân đoạn hoặc parse — chọn để làm tiếp. Reset chỉ khi bấm «Reset phân đoạn» trong bàn làm việc.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Tác phẩm</th>
+                      <th>Trạng thái</th>
+                      <th>Parse</th>
+                      <th>TOC</th>
+                      <th>Cập nhật</th>
+                    </tr>
+                  </thead>
+                  <tbody id="re-session-rows"></tbody>
+                </table>
+              </div>
+            </section>
+            <h2 id="re-catalog-heading">Bắt đầu sách khác</h2>
             <p class="muted">Chọn tác phẩm EN hoặc VI có file raw.</p>
             <div class="table-wrap">
               <table>
@@ -140,8 +168,29 @@
               </table>
             </div>
           </section>
+          <section id="re-toc" class="re-toc" hidden>
+            <header class="re-toc-head">
+              <strong>Mục lục đề xuất</strong>
+              <span class="muted" id="re-toc-meta"></span>
+            </header>
+            <textarea class="re-toc-excerpt" id="re-toc-excerpt" rows="8" spellcheck="false" placeholder="Không tìm thấy mục lục — chọn «Không có TOC» nếu đúng"></textarea>
+            <p class="re-toc-banner" id="re-toc-banner">Sửa nếu thừa, rồi xác nhận đây là mục lục.</p>
+            <div class="row re-toc-actions">
+              <button type="button" class="btn" id="re-toc-yes">Đúng TOC</button>
+              <button type="button" class="btn ghost" id="re-toc-no">Không phải</button>
+              <button type="button" class="btn ghost" id="re-toc-none">Không có TOC</button>
+              <button type="button" class="btn ghost" id="re-toc-reset">Đề xuất lại</button>
+            </div>
+          </section>
+          <p class="re-health" id="re-health" hidden></p>
           <div id="re-desk" class="re-layout">
-            <aside class="re-sidebar" id="re-chapters"></aside>
+            <aside class="re-sidebar-wrap">
+              <div class="re-sidebar-head">
+                <span>Chương / phần</span>
+                <label class="re-select-all"><input type="checkbox" id="re-select-all" /> Chọn tất</label>
+              </div>
+              <aside class="re-sidebar" id="re-chapters"></aside>
+            </aside>
             <div class="re-main">
               <header class="re-detail-head">
                 <div>
@@ -150,6 +199,31 @@
                 </div>
                 <button type="button" class="btn ghost" id="re-qa-ch">QA chương</button>
               </header>
+              <div id="re-struct-tools" class="re-struct-tools" hidden>
+                <button type="button" class="btn ghost" id="re-merge-prev">Gộp với trước</button>
+                <button type="button" class="btn ghost" id="re-merge-next">Gộp với sau</button>
+                <button type="button" class="btn ghost" id="re-drop-start">Bỏ start giả</button>
+                <button type="button" class="btn" id="re-expand-macro">Phân đoạn bên trong</button>
+                <label class="re-kind-label">Kind
+                  <select id="re-kind">
+                    <option value="front_matter">front_matter</option>
+                    <option value="preface">preface</option>
+                    <option value="introduction">introduction</option>
+                    <option value="prologue">prologue</option>
+                    <option value="chapter">chapter</option>
+                    <option value="part">part</option>
+                    <option value="book">book</option>
+                    <option value="toc">toc</option>
+                    <option value="epilogue">epilogue</option>
+                    <option value="appendix">appendix</option>
+                    <option value="notes">notes</option>
+                    <option value="back_matter">back_matter</option>
+                    <option value="other">other</option>
+                  </select>
+                </label>
+                <button type="button" class="btn" id="re-confirm-sec">Xác nhận section</button>
+              </div>
+              <div id="re-compare" class="re-compare" hidden></div>
               <article class="re-render" id="re-body"></article>
               <div class="re-qa-panel" id="re-qa-panel" hidden></div>
               <details class="re-edit">
@@ -181,6 +255,13 @@
                 <button type="button" class="btn ghost" id="settings-refresh-models">Tải lại danh sách</button>
               </div>
               <div class="settings-grid" id="settings-models"></div>
+            </fieldset>
+            <fieldset>
+              <legend>Chế bản (REF)</legend>
+              <p class="muted">Bật Gemini cho phân đoạn chương, relabel dòng khi parse, và QA. Tắt thì chỉ rule. Cần <code>GEMINI_API_KEY</code>.</p>
+              <label class="inline"><input id="set-llm-macro" type="checkbox" checked /> LLM phân đoạn</label>
+              <label class="inline"><input id="set-llm-relabel" type="checkbox" checked /> LLM relabel</label>
+              <label class="inline"><input id="set-llm-qa" type="checkbox" checked /> LLM QA chương</label>
             </fieldset>
             <fieldset>
               <legend>Sau khi dịch chương</legend>
@@ -401,7 +482,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=read-edition-2"></script>
-    <script src="/read-edition.js?v=read-edition-2"></script>
+    <script src="/app.js?v=cheban7"></script>
+    <script src="/read-edition.js?v=cheban7"></script>
   </body>
 </html>

@@ -54,6 +54,9 @@ def test_build_validate_and_publish_gate(tmp_path):
     from knowledgehub.catalog import set_read_consumer
 
     set_read_consumer(wid, True, corpus=corpus)
+    from read_edition_helpers import bootstrap_read_edition
+
+    bootstrap_read_edition(wid, corpus=corpus)
     payload = prepare_publish(wid, corpus=corpus)
     assert payload["hub_work_id"] == wid
     assert payload["raw_text"].startswith("Of civil government")

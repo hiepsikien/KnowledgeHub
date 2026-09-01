@@ -26,11 +26,19 @@ from .licenses import load_license_catalog
 from .paths import corpus_root
 from .read_options import read_publisher_options
 from .read_edition_service import (
-    build_package as build_read_edition,
+    confirm_layout as confirm_read_edition_layout,
+    confirm_toc as confirm_read_edition_toc,
+    edit_structure as edit_read_edition_structure,
     get_chapter as get_read_edition_chapter,
     get_manifest as get_read_edition_manifest,
+    get_review as get_read_edition_review,
     get_status as get_read_edition_status,
+    list_sessions as list_read_edition_sessions,
+    get_structure as get_read_edition_structure,
+    parse_micro as parse_read_edition_micro,
+    parse_micro_batch as parse_read_edition_micro_batch,
     patch_chapter as patch_read_edition_chapter,
+    run_macro as run_read_edition_macro,
     run_qa as run_read_edition_qa,
 )
 from .read_publish import PublishError, preview_normalized, publish_to_read
@@ -136,12 +144,28 @@ class TranslationSettingsBody(BaseModel):
     deepseek_rpm: int | None = None
 
 
+class EditionSettingsBody(BaseModel):
+    use_llm_macro: bool | None = None
+    use_llm_relabel: bool | None = None
+    use_llm_qa: bool | None = None
+
+
 class SettingsBody(BaseModel):
     translation: TranslationSettingsBody | None = None
+    edition: EditionSettingsBody | None = None
 
 
-class ReadEditionBuildBody(BaseModel):
+class ReadEditionMacroBody(BaseModel):
     force: bool = False
+    use_llm: bool = True
+
+
+class ReadEditionParseBody(BaseModel):
+    use_llm: bool | None = None
+
+
+class ReadEditionParseBatchBody(BaseModel):
+    chapter_ids: list[str] = Field(default_factory=list)
     use_llm: bool | None = None
 
 
@@ -153,6 +177,19 @@ class ReadEditionPatchBody(BaseModel):
 class ReadEditionQaBody(BaseModel):
     chapter_id: str | None = None
     use_llm: bool = True
+
+
+class ReadEditionTocBody(BaseModel):
+    status: str
+    excerpt: str | None = None
+
+
+class ReadEditionStructureEditBody(BaseModel):
+    action: str
+    section_id: str
+    start_line: int | None = None
+    kind: str | None = None
+    use_llm: bool | None = None
 
 
 class SyncRefChaptersBody(BaseModel):
@@ -277,6 +314,11 @@ def create_app() -> FastAPI:
             raise HTTPException(400, str(exc)) from exc
         return result
 
+    @app.get("/api/read-editions", dependencies=guard)
+    def read_edition_sessions() -> dict[str, Any]:
+        sessions = list_read_edition_sessions()
+        return {"sessions": sessions, "total": len(sessions)}
+
     @app.get("/api/works/{work_id}/read-edition", dependencies=guard)
     def read_edition_status(work_id: str) -> dict[str, Any]:
         try:
@@ -284,11 +326,90 @@ def create_app() -> FastAPI:
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
 
-    @app.post("/api/works/{work_id}/read-edition/build", dependencies=guard)
-    def read_edition_build(work_id: str, payload: ReadEditionBuildBody | None = None) -> dict[str, Any]:
-        body = payload or ReadEditionBuildBody()
+    @app.post("/api/works/{work_id}/read-edition/macro", dependencies=guard)
+    def read_edition_macro(work_id: str, payload: ReadEditionMacroBody | None = None) -> dict[str, Any]:
+        body = payload or ReadEditionMacroBody()
         try:
-            return build_read_edition(work_id, force=body.force, use_llm=body.use_llm)
+            return run_read_edition_macro(work_id, force=body.force, use_llm=body.use_llm)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/structure", dependencies=guard)
+    def read_edition_structure(work_id: str) -> dict[str, Any]:
+        try:
+            return {"structure": get_read_edition_structure(work_id)}
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/review", dependencies=guard)
+    def read_edition_review(work_id: str) -> dict[str, Any]:
+        try:
+            return get_read_edition_review(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/toc", dependencies=guard)
+    def read_edition_toc(work_id: str, payload: ReadEditionTocBody) -> dict[str, Any]:
+        try:
+            return confirm_read_edition_toc(work_id, payload.status, excerpt=payload.excerpt)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/layout", dependencies=guard)
+    def read_edition_layout(work_id: str) -> dict[str, Any]:
+        try:
+            return confirm_read_edition_layout(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/structure/edit", dependencies=guard)
+    def read_edition_structure_edit(work_id: str, payload: ReadEditionStructureEditBody) -> dict[str, Any]:
+        try:
+            return edit_read_edition_structure(
+                work_id,
+                action=payload.action,
+                section_id=payload.section_id,
+                start_line=payload.start_line,
+                kind=payload.kind,
+                use_llm=payload.use_llm,
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/chapters/{chapter_id}/parse", dependencies=guard)
+    def read_edition_parse_chapter(
+        work_id: str, chapter_id: str, payload: ReadEditionParseBody | None = None
+    ) -> dict[str, Any]:
+        body = payload or ReadEditionParseBody()
+        try:
+            return parse_read_edition_micro(work_id, chapter_id, use_llm=body.use_llm)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/chapters/parse", dependencies=guard)
+    def read_edition_parse_chapters(
+        work_id: str, payload: ReadEditionParseBatchBody
+    ) -> dict[str, Any]:
+        if not payload.chapter_ids:
+            raise HTTPException(400, "chapter_ids required")
+        try:
+            return parse_read_edition_micro_batch(
+                work_id, payload.chapter_ids, use_llm=payload.use_llm
+            )
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:
@@ -387,6 +508,8 @@ def create_app() -> FastAPI:
         if payload.translation is not None:
             tr = payload.translation.model_dump(exclude_none=True)
             body["translation"] = tr
+        if payload.edition is not None:
+            body["edition"] = payload.edition.model_dump(exclude_none=True)
         try:
             saved = save_settings(body)
         except (ProviderError, ValueError) as exc:

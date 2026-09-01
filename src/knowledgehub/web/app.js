@@ -103,6 +103,17 @@ function renderStats(stats) {
   lang.value = current;
 }
 
+function editionBadge(workId) {
+  const s = (state.editionByWork || {})[workId];
+  if (!s) return `<span class="muted">—</span>`;
+  const parsed = s.chapters_parsed || 0;
+  const total = s.chapters_total || 0;
+  const phase = s.phase || "macro";
+  const tone = phase === "parsed" ? "ok" : phase === "parsing" || phase === "layout_ok" ? "warn" : "";
+  const klass = tone ? `badge ${tone}` : "badge";
+  return `<span class="${klass}" title="${escapeHtml(phase)}">${parsed}/${total}</span>`;
+}
+
 function renderRows() {
   const rows = filtered();
   $("count").textContent = `${rows.length} / ${state.works.length} tác phẩm`;
@@ -115,6 +126,7 @@ function renderRows() {
         <td>${escapeHtml(w.language)}</td>
         <td>${badge(w.read_allowed, "allowed", "blocked")}</td>
         <td>${badge(w.has_raw, "raw", "missing")}</td>
+        <td>${editionBadge(w.id)}</td>
       </tr>`;
     })
     .join("");
@@ -186,7 +198,7 @@ async function selectWork(id) {
         <button class="btn" id="toggle-read" type="button">${
           summary.read_allowed ? "Block Read" : "Allow Read"
         }</button>
-        <a class="btn" href="/read-edition/${encodeURIComponent(id)}">Read Edition</a>
+        <a class="btn" href="/read-edition/${encodeURIComponent(id)}">Chế bản</a>
         <a class="btn primary" id="apply" href="/publish/${encodeURIComponent(id)}">Publish to Read</a>
       </div>
       ${workTranslateHtml(work, summary)}
@@ -1606,6 +1618,17 @@ function renderSettingsForm(data) {
     .join("");
   $("set-auto-annotate").checked = Boolean(tr.auto_annotate);
   $("set-auto-qa").checked = Boolean(tr.auto_qa);
+  const ed = data.settings?.edition || {};
+  const gemini = Boolean(data.secrets?.gemini);
+  const fillEdition = (id, value) => {
+    const el = $(id);
+    if (!el) return;
+    el.checked = value !== false;
+    el.disabled = !gemini;
+  };
+  fillEdition("set-llm-macro", ed.use_llm_macro);
+  fillEdition("set-llm-relabel", ed.use_llm_relabel);
+  fillEdition("set-llm-qa", ed.use_llm_qa);
   fillNumberInput("set-min-workers", tr.min_workers, 1);
   fillNumberInput("set-max-workers", tr.max_workers, 2);
   fillNumberInput("set-max-attempts", tr.max_attempts, 2);
@@ -1698,6 +1721,11 @@ async function saveSettings(e) {
           gemini_rpm: readNumberInput("set-gemini-rpm", 12),
           deepseek_rpm: readNumberInput("set-deepseek-rpm", 30),
           default_mode: $("set-default-mode").value,
+        },
+        edition: {
+          use_llm_macro: $("set-llm-macro").checked,
+          use_llm_relabel: $("set-llm-relabel").checked,
+          use_llm_qa: $("set-llm-qa").checked,
         },
       },
     });
@@ -1862,17 +1890,21 @@ function wireNav() {
         void loadTranslationView(null, null);
       }
       if (view === "read-edition") {
-        const reId = readEditionFromPath();
-        if (reId) void window.KHReadEdition?.load(reId);
-        else void window.KHReadEdition?.pickWork();
+        // Nav always opens Đang làm, even when already on /read-edition/<work>.
+        void window.KHReadEdition?.pickWork();
       }
     };
   });
 }
 
 async function refresh() {
-  const [stats, works] = await Promise.all([api("/api/stats"), api("/api/works")]);
+  const [stats, works, sessions] = await Promise.all([
+    api("/api/stats"),
+    api("/api/works"),
+    api("/api/read-editions").catch(() => ({ sessions: [] })),
+  ]);
   state.works = works.works;
+  state.editionByWork = Object.fromEntries((sessions.sessions || []).map((s) => [s.work_id, s]));
   renderStats(stats);
   renderRows();
 }

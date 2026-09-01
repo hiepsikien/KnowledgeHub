@@ -115,10 +115,17 @@ def main(argv: list[str] | None = None) -> int:
     serve.add_argument("--reload", action="store_true", default=True)
     serve.add_argument("--no-reload", action="store_false", dest="reload")
 
-    re_exp = sub.add_parser("export-read-edition", help="Build REF/1 package split by chapter")
+    re_exp = sub.add_parser("export-read-edition", help="Two-step Read Edition: macro split + optional micro parse")
     re_exp.add_argument("--work", required=True, help="Work id")
-    re_exp.add_argument("--force", action="store_true", help="Rebuild even if package exists")
-    re_exp.add_argument("--llm", action="store_true", help="Use LLM during REF build")
+    re_exp.add_argument("--force", action="store_true", help="Rebuild macro even if structure exists")
+    re_exp.add_argument("--llm", action="store_true", help="Use LLM for macro segmentation")
+    re_exp.add_argument("--parse-all", action="store_true", help="After macro, REF-parse every section")
+    re_exp.add_argument(
+        "--skip-hitl",
+        action="store_true",
+        help="Allow --parse-all before TOC/section HITL is ready",
+    )
+    re_exp.add_argument("--parse-llm", action="store_true", help="Use LLM relabel during micro parse")
 
     args = parser.parse_args(argv)
 
@@ -384,10 +391,20 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         return 2
     if args.cmd == "export-read-edition":
-        from .read_edition_service import build_package
+        from .read_edition_service import get_manifest, parse_micro_batch, run_macro
 
         try:
-            result = build_package(args.work, force=args.force, use_llm=args.llm)
+            result = run_macro(args.work, force=args.force, use_llm=args.llm)
+            if args.parse_all:
+                manifest = result.get("manifest") or get_manifest(args.work)
+                chapter_ids = [row["chapter_id"] for row in manifest.get("chapters") or []]
+                micro = parse_micro_batch(
+                    args.work,
+                    chapter_ids,
+                    use_llm=True if args.parse_llm else None,
+                    require_ready=not args.skip_hitl,
+                )
+                result["micro"] = micro
         except (ValueError, KeyError) as exc:
             print(str(exc), file=sys.stderr)
             return 1

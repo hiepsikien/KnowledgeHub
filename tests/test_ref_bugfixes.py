@@ -8,7 +8,8 @@ from knowledgehub.edition.cache import load_cached_edition, save_cached_edition
 from knowledgehub.edition.label_rules import LineLabel
 from knowledgehub.edition.lines import TextLine
 from knowledgehub.edition.merge_blocks import labels_to_blocks
-from knowledgehub.edition.read_edition import ReadEditionError
+from knowledgehub.edition.read_edition import ReadEditionError, qa_read_edition_chapter
+from knowledgehub.edition.read_edition_steps import load_structure, parse_micro_chapter, run_macro_step
 from knowledgehub.edition.ref_schema import REF_PARSER_VERSION
 from knowledgehub.read_edition_service import get_chapter, patch_chapter, run_qa
 
@@ -127,11 +128,14 @@ def test_cms_helpers_map_read_edition_error_to_value_error(tmp_path, monkeypatch
     for call in (
         lambda: get_chapter("demo--nohash", "ch-001", corpus=corpus),
         lambda: patch_chapter("demo--nohash", "ch-001", block_patches=[], corpus=corpus),
-        lambda: run_qa("demo--nohash", use_llm=False, corpus=corpus),
     ):
         with pytest.raises(ValueError, match="missing manuscript|content_hash") as caught:
             call()
         assert not isinstance(caught.value, ReadEditionError)
+
+    with pytest.raises(ValueError, match="Specify chapter_id") as caught:
+        run_qa("demo--nohash", use_llm=False, corpus=corpus)
+    assert not isinstance(caught.value, ReadEditionError)
 
 
 def test_merge_block_patches_accumulates_across_saves():
@@ -149,12 +153,6 @@ def test_merge_block_patches_accumulates_across_saves():
 
 
 def test_chapter_qa_uses_chapter_text_not_manuscript_head(tmp_path, monkeypatch):
-    from knowledgehub.edition.read_edition import (
-        build_read_edition_package,
-        qa_read_edition_chapter,
-        read_edition_dir,
-    )
-
     corpus = tmp_path / "corpus"
     raw_dir = corpus / "sources/demo/raw"
     raw_dir.mkdir(parents=True)
@@ -183,18 +181,14 @@ def test_chapter_qa_uses_chapter_text_not_manuscript_head(tmp_path, monkeypatch)
     (catalog / "authors.json").write_text(json.dumps([{"id": "demo", "name": "Demo"}]), encoding="utf-8")
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
 
-    built = build_read_edition_package("demo--book", corpus=corpus)
-    chapters = built["manifest"]["chapters"]
-    assert len(chapters) >= 2
-    ch2 = chapters[1]["chapter_id"]
+    macro = run_macro_step("demo--book", corpus=corpus, use_llm=False)
+    structure = load_structure(corpus / macro["package_dir"])
+    assert len(structure.get("sections") or []) >= 2
+    ch2 = structure["sections"][1]["section_id"]
+    parse_micro_chapter("demo--book", ch2, corpus=corpus, use_llm=False, require_ready=False)
     qa = qa_read_edition_chapter("demo--book", ch2, corpus=corpus, use_llm=False)
     assert qa["fidelity"]["passed"] is True
-    md = json.loads(
-        (
-            read_edition_dir("demo--book", built["manifest"]["edition_hash"], corpus=corpus)
-            / "chapters"
-            / f"{ch2}.json"
-        ).read_text(encoding="utf-8")
-    )["reading_markdown"]
+    chapter_path = corpus / macro["package_dir"] / "chapters" / f"{ch2}.json"
+    md = json.loads(chapter_path.read_text(encoding="utf-8"))["reading_markdown"]
     assert "Beta paragraph" in md
     assert "Alpha paragraph" not in md

@@ -1,0 +1,271 @@
+{
+  "books": 5,
+  "summary": {
+    "llm_qa_complete_count": 2,
+    "llm_det_complete_count": 2,
+    "rule_qa_complete_count": 0
+  },
+  "results": [
+    {
+      "id": "mill_on_liberty",
+      "gutenberg_id": "34901",
+      "text_chars": 305986,
+      "toc_chars": 81,
+      "expected_body_divisions": 5,
+      "expected_basis": "chapter_lines",
+      "expected_by_kind": {
+        "roman_section": 3,
+        "chapter": 5
+      },
+      "rule": {
+        "sections": 6,
+        "body_sections": 5,
+        "deterministic_complete": true,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại không khớp với các chương thực tế của tác phẩm 'On Liberty'. Các điểm chia tách đang bị đặt sai vị trí vào các đoạn văn bản thay vì các tiêu đề chương (CHAPTER I-V), dẫn đến việc bỏ lỡ các phân đoạn chính của sách.",
+        "missing": [
+          {
+            "title_or_marker": "CHAPTER I",
+            "note_vi": "Không có điểm bắt đầu cho Chương I tại vị trí L404."
+          },
+          {
+            "title_or_marker": "CHAPTER II",
+            "note_vi": "Không có điểm bắt đầu cho Chương II tại vị trí L910."
+          },
+          {
+            "title_or_marker": "CHAPTER III",
+            "note_vi": "Không có điểm bắt đầu cho Chương III tại vị trí L2372."
+          },
+          {
+            "title_or_marker": "CHAPTER IV",
+            "note_vi": "Không có điểm bắt đầu cho Chương IV tại vị trí L3092."
+          },
+          {
+            "title_or_marker": "CHAPTER V",
+            "note_vi": "Không có điểm bắt đầu cho Chương V tại vị trí L3798."
+          }
+        ]
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 7,
+        "content_kind": "prose",
+        "body_sections": 6,
+        "deterministic_complete": true,
+        "qa_complete": true,
+        "qa_verdict": "pass",
+        "qa_summary_vi": "Cấu trúc phân đoạn của tác phẩm 'On Liberty' đã được xác định chính xác, bao gồm phần giới thiệu và 5 chương nội dung chính. Các điểm bắt đầu của từng chương khớp hoàn toàn với các mốc đánh dấu trong văn bản.",
+        "missing": [],
+        "toc_body_estimate": 5,
+        "macro_body_count": 5
+      }
+    },
+    {
+      "id": "wilde_dorian",
+      "gutenberg_id": "174",
+      "text_chars": 428924,
+      "toc_chars": 260,
+      "expected_body_divisions": 20,
+      "expected_basis": "chapter_lines",
+      "expected_by_kind": {
+        "chapter": 20
+      },
+      "rule": {
+        "sections": 4,
+        "body_sections": 3,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro được cung cấp hoàn toàn không khớp với các chương của tác phẩm. Thay vì chia theo 20 chương như trong mục lục, hệ thống chỉ chia thành 4 phần ngẫu nhiên, bỏ lỡ hầu hết các điểm bắt đầu chương thực tế.",
+        "missing": [
+          {
+            "title_or_marker": "CHAPTER I - XX",
+            "note_vi": "Hệ thống không nhận diện được 20 chương theo mục lục và các điểm đánh dấu CHAPTER."
+          }
+        ]
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 21,
+        "content_kind": "prose",
+        "body_sections": 21,
+        "deterministic_complete": true,
+        "qa_complete": true,
+        "qa_verdict": "pass",
+        "qa_summary_vi": "Cấu trúc phân đoạn của tác phẩm 'The Picture of Dorian Gray' đã được thực hiện chính xác. Tất cả 20 chương và phần Lời tựa (Preface) đều được phân tách đúng theo các điểm đánh dấu trong văn bản gốc.",
+        "missing": [],
+        "toc_body_estimate": 20,
+        "macro_body_count": 21
+      }
+    },
+    {
+      "id": "marx_communist",
+      "gutenberg_id": "61",
+      "text_chars": 71987,
+      "toc_chars": 196,
+      "expected_body_divisions": 4,
+      "expected_basis": "roman_sections",
+      "expected_by_kind": {
+        "roman_section": 4
+      },
+      "rule": {
+        "sections": 3,
+        "body_sections": 2,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại chỉ có 3 phần, trong đó phần nội dung chính bị cắt xén và gộp sai lệch so với 4 chương được liệt kê trong mục lục và các điểm đánh dấu (markers).",
+        "missing": [
+          {
+            "title_or_marker": "I. BOURGEOIS AND PROLETARIANS",
+            "note_vi": "Thiếu điểm bắt đầu cho chương I."
+          },
+          {
+            "title_or_marker": "II. PROLETARIANS AND COMMUNISTS",
+            "note_vi": "Thiếu điểm bắt đầu cho chương II."
+          },
+          {
+            "title_or_marker": "III. SOCIALIST AND COMMUNIST LITERATURE",
+            "note_vi": "Thiếu điểm bắt đầu cho chương III."
+          },
+          {
+            "title_or_marker": "IV. POSITION OF THE COMMUNISTS...",
+            "note_vi": "Thiếu điểm bắt đầu cho chương IV."
+          }
+        ]
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 2,
+        "content_kind": "prose",
+        "body_sections": 1,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại chỉ bao gồm phần mở đầu và chương I, bỏ sót các chương II, III và IV được liệt kê trong mục lục và các điểm đánh dấu (markers) trong văn bản.",
+        "missing": [
+          {
+            "title_or_marker": "II. PROLETARIANS AND COMMUNISTS",
+            "note_vi": "Thiếu phân đoạn cho chương II."
+          },
+          {
+            "title_or_marker": "III. SOCIALIST AND COMMUNIST LITERATURE",
+            "note_vi": "Thiếu phân đoạn cho chương III."
+          },
+          {
+            "title_or_marker": "IV. POSITION OF THE COMMUNISTS...",
+            "note_vi": "Thiếu phân đoạn cho chương IV."
+          }
+        ],
+        "toc_body_estimate": 4,
+        "macro_body_count": 1
+      }
+    },
+    {
+      "id": "cicero_offices",
+      "gutenberg_id": "541",
+      "text_chars": 578232,
+      "toc_chars": 9,
+      "expected_body_divisions": 20,
+      "expected_basis": "roman_sections",
+      "expected_by_kind": {
+        "book": 2,
+        "roman_section": 20
+      },
+      "rule": {
+        "sections": 3,
+        "body_sections": 2,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại hoàn toàn sai lệch so với nội dung thực tế của cuốn sách (Cicero's De Officiis). Các tiêu đề phần được trích xuất nhầm lẫn từ một tác phẩm khác (The Age of Innocence của Edith Wharton) và số lượng phân đoạn không khớp với 20 phần La Mã đã xác định.",
+        "missing": [
+          {
+            "title_or_marker": "I. đến XX.",
+            "note_vi": "Thiếu toàn bộ 20 phân đoạn La Mã được yêu cầu theo cấu trúc của sách."
+          }
+        ]
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 3,
+        "content_kind": "prose",
+        "body_sections": 2,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại chỉ chia sách thành 2 phần chính (Book I và Book II), bỏ qua 20 phân đoạn La Mã (I-XX) được xác định trong văn bản. Việc phân đoạn quá thô khiến các chương nhỏ bị gộp chung, làm giảm độ chi tiết cần thiết cho việc xử lý văn bản.",
+        "missing": [
+          {
+            "title_or_marker": "I. đến XX.",
+            "note_vi": "Thiếu 18 phân đoạn La Mã (II-XVIII và XIX-XX) trong cấu trúc macro."
+          }
+        ],
+        "toc_body_estimate": 20,
+        "macro_body_count": 2
+      }
+    },
+    {
+      "id": "paine_common_sense",
+      "gutenberg_id": "147",
+      "text_chars": 125559,
+      "toc_chars": 0,
+      "expected_body_divisions": 0,
+      "expected_basis": "none",
+      "expected_by_kind": {},
+      "rule": {
+        "sections": 5,
+        "body_sections": 4,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại chia văn bản dựa trên các đoạn văn ngẫu nhiên chứa từ 'part' thay vì các chương hoặc phần thực tế của tác phẩm 'Common Sense'. Việc phân đoạn này không phản ánh cấu trúc nội dung của cuốn sách.",
+        "missing": [
+          {
+            "title_or_marker": "Of the Origin and Design of Government",
+            "note_vi": "Thiếu phân đoạn cho chương đầu tiên."
+          },
+          {
+            "title_or_marker": "Of Monarchy and Hereditary Succession",
+            "note_vi": "Thiếu phân đoạn cho chương về quân chủ."
+          },
+          {
+            "title_or_marker": "Thoughts on the Present State of American Affairs",
+            "note_vi": "Thiếu phân đoạn cho chương về tình hình nước Mỹ."
+          },
+          {
+            "title_or_marker": "On the Present Ability of America",
+            "note_vi": "Thiếu phân đoạn cho chương về khả năng của nước Mỹ."
+          }
+        ]
+      },
+      "llm": {
+        "mode": "llm",
+        "sections": 3,
+        "content_kind": "prose",
+        "body_sections": 2,
+        "deterministic_complete": false,
+        "qa_complete": false,
+        "qa_verdict": "fail",
+        "qa_summary_vi": "Cấu trúc macro hiện tại chỉ bao gồm phần mở đầu và chương đầu tiên của tác phẩm 'Common Sense'. Do thiếu các chương còn lại (II, III, IV) được liệt kê trong tiêu đề của văn bản, quá trình phân đoạn chưa hoàn tất.",
+        "missing": [
+          {
+            "title_or_marker": "OF MONARCHY AND HEREDITARY SUCCESSION",
+            "note_vi": "Thiếu chương II"
+          },
+          {
+            "title_or_marker": "THOUGHTS ON THE PRESENT STATE OF AMERICAN AFFAIRS",
+            "note_vi": "Thiếu chương III"
+          },
+          {
+            "title_or_marker": "ON THE PRESENT ABILITY OF AMERICA, WITH SOME MISCELLANEOUS REFLECTIONS",
+            "note_vi": "Thiếu chương IV"
+          }
+        ],
+        "toc_body_estimate": 5,
+        "macro_body_count": 1
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import Any
 
 from .lines import TextLine
 from .structure import CONTENTS_HEADER
@@ -25,6 +26,7 @@ LETTER_CHAPTER_ENTRY = re.compile(
     re.I,
 )
 ROMAN_ONLY = re.compile(r"^(?:[IVXLCDM]+|\d{1,3})$")
+ALL_CAPS_SECTION = re.compile(r"^[A-Z][A-Z\s,\-\';]{15,95}[,.]?\s*$")
 VI_TOC_HEADER = re.compile(r"^Mục\s+lục\b", re.I)
 ELECTRONIC_NOTE = re.compile(r"^NOTE TO THIS ELECTRONIC EDITION\s*$", re.I)
 
@@ -34,6 +36,62 @@ def is_chapter_heading_line(line: str) -> bool:
     if not s:
         return False
     return bool(CHAPTER_HEADING.match(s) or BOOK_PART_HEADING.match(s))
+
+
+def is_toc_list_row(line: str) -> bool:
+    """TOC contents-list row (dot leaders / page number), not a body heading."""
+    s = line.strip()
+    if not s:
+        return False
+    if re.search(r"\.{2,}\s*\d{1,4}$", s):
+        return True
+    if re.search(r"\s{2,}(?:\d{1,4}|[ivxlcdm]{1,8})\s*$", s, re.I) and len(s) < 90:
+        return True
+    return False
+
+
+def is_all_caps_section_line(line: str) -> bool:
+    s = line.strip()
+    if not s or not ALL_CAPS_SECTION.match(s):
+        return False
+    if re.match(r"^(?:PHILADELPHIA|PRINTED|COMMON SENSE|INHABITANTS|AMERICA|MDCCL|ISBN)\b", s):
+        return False
+    return True
+
+
+def is_all_caps_body_section_line(line: str) -> bool:
+    """Strict ALL-CAPS body section (Paine pamphlet), not biography pull quotes."""
+    s = line.strip()
+    if not is_all_caps_section_line(s):
+        return False
+    upper = s.upper()
+    if upper.startswith(("INTRODUCTION", "APPENDIX", "PREFACE", "EPILOGUE")):
+        return True
+    if re.match(r"^OF (?:THE|MONARCHY|THOUGHTS|A )", upper):
+        return True
+    if upper.startswith("THOUGHTS ON "):
+        return True
+    if s.endswith(",") and 28 <= len(s) <= 95:
+        if re.search(r"\b(I|MY|WE|OUR|ME|TO)\b", upper):
+            return False
+        return True
+    if re.search(r"\b(I|MY|WE|OUR|ME)\b", upper):
+        return False
+    if s.endswith(".") and len(s.split()) > 7 and "," not in s:
+        return False
+    return False
+
+
+def is_body_heading_line(line: str) -> bool:
+    """Standalone body section start — not a TOC list duplicate."""
+    s = line.strip()
+    if not s or len(s) > 160:
+        return False
+    if is_chapter_heading_line(s) and not is_toc_list_row(s):
+        return True
+    if re.match(r"^(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b", s, re.I):
+        return not is_toc_list_row(s)
+    return False
 
 
 def is_chapter_title_line(line: str) -> bool:
@@ -71,9 +129,20 @@ def is_toc_entry_line(line: str) -> bool:
         return True
     if re.match(r"^\d+\.\s+\S", s):
         return True
-    if re.search(r"\s{2,}\d{1,4}$", s) and len(s) < 90:
+    if re.search(r"\s{2,}(?:\d{1,4}|[ivxlcdm]{1,8})$", s, re.I) and len(s) < 90:
         return True
     if re.search(r"\.{2,}\s*\d{1,4}$", s) and len(s) < 90:
+        return True
+    # Compact PG lists: "Preface: iii-lx" / "I: 1-50 (Sweetness and Light)"
+    if (
+        len(s) < 140
+        and re.match(
+            r"^(?:Preface|Introduction|Prologue|Appendix|[IVXLCDM]+|\d{1,3})\s*:\s*"
+            r"(?:[ivxlcdm]+|\d{1,4})(?:\s*[-–—]\s*(?:[ivxlcdm]+|\d{1,4}))?\b",
+            s,
+            re.I,
+        )
+    ):
         return True
     return False
 
@@ -255,3 +324,493 @@ def merge_split_chapter_titles(lines: list[TextLine], labels: list, *, family: s
             labels[i + 1].role = "heading"
             labels[i + 1].level = labels[i].level or 1
             labels[i + 1].confidence = 0.88
+
+
+CONTENTS_HEAD = re.compile(
+    r"^(?:TABLE OF CONTENTS|CONTENTS(?: OF (?:THIS )?BOOK)?|MỤC LỤC)\s*\.?\s*$",
+    re.I,
+)
+_PAGE_COL = re.compile(r"^PAGE\s*$", re.I)
+_CHAPTER_TOC_LINE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+([IVXLC\d]+)\.?\s*(.*)$", re.I)
+_BOOK_PART_TOC_LINE = re.compile(r"^(BOOK|PART|VOLUME)\s+([IVXLC\d]+)\b(.*)$", re.I)
+_NAMED_TOC_LINE = re.compile(
+    r"^(PREFACE|INTRODUCTION|PROLOGUE|FOREWORD|APPENDIX|NOTES|INDEX|"
+    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|CATALOGUE\b.*|CATALOG\b.*)\s*(.*)$",
+    re.I,
+)
+_TOC_PAGE_TAIL = re.compile(r"(?:\.{2,}|\s{2,})(\d{1,4}|[ivxlcdm]{1,8})\s*$", re.I)
+_TOC_STOP = re.compile(
+    r"^(?:\*\*\*|List of |Illustrations\b|END OF THE PROJECT GUTENBERG)",
+    re.I,
+)
+_STOP_WORDS = frozenset({"of", "the", "a", "an", "and", "or", "to", "in", "on", "for"})
+
+
+def toc_page_tail(line: str) -> str | None:
+    match = _TOC_PAGE_TAIL.search(line.strip())
+    return match.group(1) if match else None
+
+
+def strip_toc_page_tail(line: str) -> str:
+    return _TOC_PAGE_TAIL.sub("", line.strip()).strip(" \t-–—.")
+
+
+def kind_for_toc_label(label: str) -> str:
+    u = (label or "").strip().upper()
+    if u.startswith(("CHAPTER", "CHAP")):
+        return "chapter"
+    if u.startswith("BOOK"):
+        return "book"
+    if u.startswith(("PART", "VOLUME")):
+        return "part"
+    if u.startswith("PREFACE") or "FOREWORD" in u:
+        return "preface"
+    if u.startswith("INTRODUCTION"):
+        return "introduction"
+    if u.startswith("PROLOGUE"):
+        return "prologue"
+    if u.startswith("APPENDIX"):
+        return "appendix"
+    if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA")):
+        return "back_matter"
+    # Named essays stay "other" (not structural). toc_match still requires them
+    # when the TOC has no chapter/book/part rows; Dedication / To the Reader
+    # are filtered out of that fallback so they stay optional.
+    return "other"
+
+
+def chapter_number_key(label: str) -> str | None:
+    match = re.match(r"^(?:chapter|chap\.?)\s+([ivxlcdm]+|\d+)\b", (label or "").strip(), re.I)
+    if not match:
+        return None
+    num = match.group(1)
+    if num.isdigit():
+        value = int(num)
+        return str(value) if value > 0 else None
+    value = _roman_to_int(num.upper())
+    return str(value) if value else None
+
+
+def _roman_to_int(token: str) -> int | None:
+    values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    if not token or any(ch not in values for ch in token):
+        return None
+    total = 0
+    prev = 0
+    for ch in reversed(token):
+        val = values[ch]
+        if val < prev:
+            total -= val
+        else:
+            total += val
+            prev = val
+    return total if total > 0 else None
+
+
+def _following_has_toc_wrap_page(lines: list[str], index: int) -> bool:
+    """True when a bare CHAPTER line is followed by a synopsis that ends in a page number."""
+    for j in range(index + 1, min(index + 14, len(lines))):
+        nxt = lines[j].strip()
+        if not nxt:
+            continue
+        if _CHAPTER_TOC_LINE.match(nxt) or _NAMED_TOC_LINE.match(nxt) or _BOOK_PART_TOC_LINE.match(nxt):
+            return False
+        if _TOC_STOP.match(nxt):
+            return False
+        if toc_page_tail(nxt) or is_toc_list_row(nxt):
+            return True
+    return False
+
+
+def toc_is_wrap_page_column(entries: list[dict[str, Any]]) -> bool:
+    """Abdy-style TOC: chapter heading on its own line, wrap + page column — not Austen one-liners."""
+    if len(entries) < 3:
+        return False
+    wrapped = sum(1 for e in entries if e.get("wrapped"))
+    paged = sum(1 for e in entries if e.get("page"))
+    return wrapped >= 2 and paged >= 2
+
+
+def toc_is_page_column_map(entries: list[dict[str, Any]]) -> bool:
+    """Use TOC→body for page-column Contents maps, except numbered CHAPTER one-liners.
+
+    Arnold-style named essays (`Numbers … 1`) need the map; Austen `CHAPTER I. Title  1`
+    stays on markers.
+    """
+    if toc_is_wrap_page_column(entries):
+        return True
+    if len(entries) < 2:
+        return False
+    paged = sum(1 for e in entries if e.get("page"))
+    if paged < 2:
+        return False
+    numbered = sum(1 for e in entries if chapter_number_key(str(e.get("label") or "")))
+    return numbered < max(2, (len(entries) + 1) // 2)
+
+
+# Catalogue / glossary / bibliography are optional. A miss still allows toc_match;
+# that tail stays in the previous section. Require every chapter/part/book/preface.
+_STRUCTURAL_TOC_KINDS = frozenset({"chapter", "part", "book", "preface", "introduction", "prologue"})
+_OPTIONAL_TOC_FRONT = re.compile(r"^(DEDICATION|TO THE READER|ADVERTISEMENT)\b", re.I)
+
+
+def toc_match_covers_structure(
+    entries: list[dict[str, Any]],
+    matched: list[dict[str, Any]],
+) -> bool:
+    """Require every structural TOC entry; unmatched back_matter is allowed."""
+    if not entries or not matched:
+        return False
+    needed = [e for e in entries if e.get("kind") in _STRUCTURAL_TOC_KINDS]
+    if not needed:
+        needed = [
+            e
+            for e in entries
+            if not _OPTIONAL_TOC_FRONT.match(str(e.get("label") or "").strip())
+        ]
+        if not needed:
+            needed = list(entries)
+    got = {(m.get("index"), m.get("label")) for m in matched}
+    return all((e.get("index"), e.get("label")) in got for e in needed)
+
+
+def is_toc_chapter_block(lines: list[str], index: int) -> bool:
+    """True when this CHAPTER line is a contents stub (synopsis + page), not body."""
+    if index < 0 or index >= len(lines):
+        return False
+    stripped = lines[index].strip()
+    if not re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+\.?\s*$", stripped, re.I):
+        return False
+    seen = 0
+    for j in range(index + 1, min(index + 14, len(lines))):
+        nxt = lines[j].strip()
+        if not nxt:
+            continue
+        if re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", nxt, re.I):
+            return False
+        seen += 1
+        if is_toc_list_row(nxt) or toc_page_tail(nxt):
+            return True
+        if seen >= 8:
+            return False
+    return False
+
+
+def _norm_toc_heading(text: str) -> str:
+    s = (text or "").lower().replace("\u00a0", " ")
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _sig_tokens(text: str) -> set[str]:
+    return {p for p in _norm_toc_heading(text).split() if p not in _STOP_WORDS and len(p) > 1}
+
+
+def _int_to_roman(value: int) -> str:
+    table = (
+        (1000, "M"),
+        (900, "CM"),
+        (500, "D"),
+        (400, "CD"),
+        (100, "C"),
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
+        (10, "X"),
+        (9, "IX"),
+        (5, "V"),
+        (4, "IV"),
+        (1, "I"),
+    )
+    parts: list[str] = []
+    n = value
+    for amount, glyph in table:
+        while n >= amount:
+            parts.append(glyph)
+            n -= amount
+    return "".join(parts)
+
+
+def _match_strings_for(label: str, title: str) -> list[str]:
+    out: list[str] = []
+    for val in (label, title):
+        val = (val or "").strip()
+        if val:
+            out.append(val)
+    num = chapter_number_key(label)
+    if num:
+        tokens = [num]
+        roman = _int_to_roman(int(num))
+        if roman and roman != num:
+            tokens.append(roman)
+        for token in tokens:
+            out.extend(
+                [f"CHAPTER {token}", f"Chapter {token}", f"CHAPTER {token}.", f"Chapter {token}."]
+            )
+    seen: set[str] = set()
+    uniq: list[str] = []
+    for item in out:
+        key = _norm_toc_heading(item)
+        if key and key not in seen:
+            seen.add(key)
+            uniq.append(item)
+    return uniq
+
+
+def _flush_toc_pending(pending: dict[str, Any] | None, entries: list[dict[str, Any]]) -> None:
+    if not pending:
+        return
+    title = re.sub(r"\s+", " ", " ".join(pending.get("title_parts") or [])).strip()
+    title = strip_toc_page_tail(title)
+    label = str(pending.get("label") or title or "Section")
+    entries.append(
+        {
+            "index": len(entries) + 1,
+            "label": label,
+            "title": title or label,
+            "kind": str(pending.get("kind") or kind_for_toc_label(label)),
+            "page": pending.get("page"),
+            "wrapped": bool(pending.get("wrapped")),
+            "match_strings": _match_strings_for(label, title),
+        }
+    )
+
+
+def parse_contents_entries(text: str) -> list[dict[str, Any]]:
+    """Structured body entries from a Contents / Table of Contents block."""
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    start: int | None = None
+    for i, line in enumerate(lines):
+        if CONTENTS_HEAD.match(line.strip()):
+            start = i
+            break
+    if start is None:
+        return []
+
+    entries: list[dict[str, Any]] = []
+    pending: dict[str, Any] | None = None
+
+    def flush() -> None:
+        nonlocal pending
+        _flush_toc_pending(pending, entries)
+        pending = None
+
+    for index in range(start + 1, min(start + 450, len(lines))):
+        stripped = lines[index].strip()
+        if not stripped or _PAGE_COL.match(stripped):
+            continue
+        if _TOC_STOP.match(stripped):
+            flush()
+            break
+
+        chapter = _CHAPTER_TOC_LINE.match(stripped)
+        if chapter:
+            rest = chapter.group(2).strip()
+            page = toc_page_tail(stripped)
+            word0 = stripped.split()[0]
+            num = chapter.group(1)
+            label = f"CHAPTER {num.upper() if not num.isdigit() else num}"
+            already = chapter_number_key(label)
+            if (
+                entries
+                and pending is None
+                and (
+                    (word0[:1].isupper() and word0[1:].islower())
+                    or already in {chapter_number_key(str(e.get("label") or "")) for e in entries}
+                    or (
+                        not rest
+                        and not page
+                        and not _following_has_toc_wrap_page(lines, index)
+                    )
+                )
+            ):
+                break
+            flush()
+            pending = {
+                "label": label,
+                "kind": "chapter",
+                "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
+                "page": page,
+                "wrapped": False,
+            }
+            if page:
+                flush()
+            continue
+
+        named = _NAMED_TOC_LINE.match(stripped)
+        if named:
+            full = strip_toc_page_tail(stripped)
+            kind = kind_for_toc_label(full or named.group(1))
+            page = toc_page_tail(stripped)
+            if (
+                entries
+                and pending is None
+                and any(e.get("kind") == kind for e in entries)
+                and not page
+                and not _following_has_toc_wrap_page(lines, index)
+            ):
+                flush()
+                break
+            flush()
+            pending = {
+                "label": full or named.group(1),
+                "kind": kind,
+                "title_parts": [],
+                "page": page,
+            }
+            if pending["page"]:
+                flush()
+            continue
+
+        book_part = _BOOK_PART_TOC_LINE.match(stripped)
+        if book_part:
+            flush()
+            unit = book_part.group(1).upper()
+            num = book_part.group(2)
+            rest = book_part.group(3).strip()
+            label = f"{unit} {num.upper() if not num.isdigit() else num}"
+            pending = {
+                "label": label,
+                "kind": "book" if unit == "BOOK" else "part",
+                "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
+                "page": toc_page_tail(stripped),
+            }
+            if pending["page"] and not rest:
+                flush()
+            continue
+
+        if pending is not None:
+            pending.setdefault("title_parts", []).append(strip_toc_page_tail(stripped))
+            pending["wrapped"] = True
+            page = toc_page_tail(stripped)
+            if page:
+                pending["page"] = page
+                flush()
+            continue
+
+        page = toc_page_tail(stripped)
+        if page and len(stripped) < 90:
+            label = strip_toc_page_tail(stripped)
+            if label:
+                entries.append(
+                    {
+                        "index": len(entries) + 1,
+                        "label": label,
+                        "title": label,
+                        "kind": kind_for_toc_label(label),
+                        "page": page,
+                        "match_strings": _match_strings_for(label, label),
+                    }
+                )
+            continue
+
+        if entries and len(stripped) > 90 and not page:
+            break
+
+    flush()
+    return entries
+
+
+def format_contents_excerpt(entries: list[dict[str, Any]], *, max_chars: int = 12000) -> str:
+    rows: list[str] = ["CONTENTS"]
+    for entry in entries:
+        label = str(entry.get("label") or "")
+        title = str(entry.get("title") or "")
+        if title and title.upper() != label.upper() and not title.upper().startswith(label.upper()):
+            line = f"{label}  {title}"
+        else:
+            line = label
+        rows.append(line)
+        if sum(len(x) + 1 for x in rows) > max_chars:
+            break
+    return "\n".join(rows)[:max_chars]
+
+
+def _is_titleish_line(line: str) -> bool:
+    s = line.strip()
+    if not s or len(s) > 80 or is_toc_list_row(s):
+        return False
+    letters = [c for c in s if c.isalpha()]
+    if not letters:
+        return False
+    if sum(c.isupper() for c in letters) / len(letters) >= 0.75:
+        return True
+    words = [w for w in s.strip(".;:").split() if w]
+    if 1 <= len(words) <= 10 and all(w[:1].isupper() for w in words if w[:1].isalpha()):
+        return not re.search(r"[.!?]\s+\S", s) and len(s) < 70
+    return False
+
+
+def _joined_title_window(lines: list[str], start: int, *, limit: int = 4) -> str:
+    """Join a split all-caps heading such as NUMBERS; / OR, / THE MAJORITY…"""
+    parts: list[str] = []
+    for j in range(start, min(start + limit, len(lines))):
+        s = lines[j].strip()
+        if not s:
+            if parts:
+                break
+            continue
+        if is_toc_list_row(s) or is_toc_chapter_block(lines, j):
+            break
+        if not _is_titleish_line(s):
+            break
+        parts.append(s)
+        joined = " ".join(parts)
+        if s.endswith(".") and len(_norm_toc_heading(joined).split()) >= 3:
+            break
+    return " ".join(parts)
+
+
+def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Locate TOC entries on body heading lines, skipping leftover contents-list rows."""
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    matched: list[dict[str, Any]] = []
+    cursor = -1
+    for entry in entries:
+        chap = chapter_number_key(str(entry.get("label") or ""))
+        needles = [_norm_toc_heading(s) for s in (entry.get("match_strings") or []) if s]
+        need_toks = _sig_tokens(str(entry.get("label") or "")) | _sig_tokens(str(entry.get("title") or ""))
+        found_line: int | None = None
+        found_text = ""
+        for line_no, raw in enumerate(lines):
+            if line_no <= cursor:
+                continue
+            raw_line = raw.strip()
+            if not raw_line or len(raw_line) > 120:
+                continue
+            if is_toc_list_row(raw_line) or is_toc_chapter_block(lines, line_no):
+                continue
+            if chap:
+                got = chapter_number_key(raw_line)
+                if got == chap:
+                    found_line = line_no
+                    found_text = raw_line
+                    break
+                continue
+            probes = [raw_line]
+            joined = _joined_title_window(lines, line_no)
+            if joined and joined != raw_line:
+                probes.append(joined)
+            hit = False
+            for probe in probes:
+                norm = _norm_toc_heading(probe)
+                if not norm:
+                    continue
+                if any(n == norm for n in needles if n):
+                    hit = True
+                    break
+                if len(need_toks) >= 2 and need_toks <= _sig_tokens(probe) and len(probe) < 120:
+                    hit = True
+                    break
+            if hit:
+                found_line = line_no
+                found_text = probe
+                break
+        if found_line is None:
+            continue
+        item = dict(entry)
+        item["line"] = found_line
+        item["text"] = found_text
+        matched.append(item)
+        cursor = found_line
+    return matched
