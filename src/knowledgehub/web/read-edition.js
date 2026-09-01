@@ -220,10 +220,11 @@
           row.kind === "book" || row.kind === "part"
             ? `<span class="re-flag re-flag-kind">${escapeHtml(row.kind)}</span>`
             : "";
+        const nestMark = parent ? `<span class="re-nest-mark" aria-hidden="true">↳</span>` : "";
         return `<div class="re-ch-row${on}${nested}${container}">
             <label class="re-ch-check"><input type="checkbox" data-chk="${escapeHtml(row.chapter_id)}" ${state.selected.has(row.chapter_id) ? "checked" : ""} /></label>
             <button type="button" class="re-ch-item" data-ch="${escapeHtml(row.chapter_id)}">
-              <span class="re-ch-title">${escapeHtml(row.title || row.chapter_id)}</span>
+              <span class="re-ch-title">${nestMark}${escapeHtml(row.title || row.chapter_id)}</span>
               ${kindBadge}
               ${microBadge(row)}
               ${qaBadge(row)}
