@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from .hitl_ops import apply_wrap_overrides
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
 from .lines import iter_lines, normalize_wiki_source
@@ -20,6 +21,7 @@ def build_read_edition(
     language: str = "en",
     use_llm: bool | None = None,
     work_id: str | None = None,
+    wrap_overrides: dict[int, bool] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Structured REF/1 edition from stripped manuscript text."""
     llm_enabled = default_use_llm_relabel() if use_llm is None else use_llm
@@ -37,6 +39,8 @@ def build_read_edition(
         unwrapped_body, unwrapped = unwrap_hard_wrap(body, family=family, language=lang)
         lines = iter_lines(unwrapped_body)
         labels = label_lines_rules(lines, family=family, source_text=unwrapped_body)
+        if wrap_overrides:
+            apply_wrap_overrides(labels, wrap_overrides)
         blocks = labels_to_blocks(lines, labels)
         blocks, quotation_profile = annotate_blocks(blocks)
         edition = build_edition_document(
@@ -61,6 +65,8 @@ def build_read_edition(
     labels, llm_events = relabel_uncertain_segments(
         lines, labels, enabled=llm_enabled, model=ref_llm_model()
     )
+    if wrap_overrides:
+        apply_wrap_overrides(labels, wrap_overrides)
     blocks = labels_to_blocks(lines, labels)
     if work_id and work_id.startswith("grotius--"):
         blocks = grotius_latin_to_blockquote(blocks)

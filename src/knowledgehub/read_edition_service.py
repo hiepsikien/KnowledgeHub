@@ -23,15 +23,20 @@ from .edition.read_edition_steps import (
     ReadEditionStepError,
     remember_last_section,
     assemble_edition_from_package,
+    confirm_hitl_trial_step,
     confirm_layout_step,
     confirm_toc_step,
+    decide_hitl_step,
     edit_structure_step,
     ensure_ready_to_parse,
+    get_hitl_job_step,
+    hitl_overview_step,
     load_structure,
     parse_micro_chapter,
     resolve_stripped_source,
     review_structure_step,
     run_macro_step,
+    scan_hitl_step,
     section_source_slice,
 )
 from .edition.serialize import blocks_to_markdown
@@ -411,5 +416,72 @@ def edition_for_publish(work_id: str, *, corpus: Path | None = None) -> tuple[di
             "package_dir": str(package_dir.relative_to(root)),
             "pipeline": "two_step",
         }
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def get_hitl_overview(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return hitl_overview_step(work_id, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def get_hitl_job(work_id: str, kind: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    try:
+        return get_hitl_job_step(work_id, kind, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def scan_hitl(
+    work_id: str,
+    kind: str,
+    *,
+    chapter_id: str | None = None,
+    scope: str = "chapter",
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return scan_hitl_step(
+            work_id, kind, chapter_id=chapter_id, scope=scope, corpus=corpus
+        )
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def confirm_hitl_trial(
+    work_id: str,
+    kind: str,
+    *,
+    chapter_id: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return confirm_hitl_trial_step(work_id, kind, chapter_id=chapter_id, corpus=corpus)
+    except ReadEditionStepError as exc:
+        raise _map_error(exc) from exc
+
+
+def decide_hitl(
+    work_id: str,
+    kind: str,
+    *,
+    decision: str,
+    item_ids: list[str] | None = None,
+    suspects_only: bool = False,
+    chapter_id: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    try:
+        return decide_hitl_step(
+            work_id,
+            kind,
+            decision=decision,
+            item_ids=item_ids,
+            suspects_only=suspects_only,
+            chapter_id=chapter_id,
+            corpus=corpus,
+        )
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc

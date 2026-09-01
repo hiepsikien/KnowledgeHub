@@ -110,6 +110,11 @@ def test_cheban_ui_labels(client):
     assert "Parse chương này" in html
     assert "Chế bản (REF)" in html
     assert 'id="re-section-full"' in html
+    assert "Nối dòng" in html
+    assert "Chạy thử chương này" in html
+    assert "Chạy toàn văn bản" in html
+    assert 'data-step="footnotes"' in html
+    assert 'data-step="quotes"' in html
 
 
 def test_read_edition_api(client):

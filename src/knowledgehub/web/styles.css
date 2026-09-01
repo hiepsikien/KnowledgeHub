@@ -834,3 +834,87 @@ mark.ann-context {
 @media (max-width: 960px) {
   .re-layout { grid-template-columns: 1fr; }
 }
+
+.re-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+.re-step {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 6px 12px 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.re-step .re-step-n {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #efe8dc;
+  color: var(--muted);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.re-step.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.re-step.on .re-step-n { background: var(--accent); color: #fff; }
+.re-step:disabled { opacity: 0.45; cursor: not-allowed; }
+.re-step .re-step-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--warn);
+}
+.re-hitl-head { margin-bottom: 10px; }
+.re-hitl-head h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 4px; }
+.re-hitl-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.re-hitl-filter { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+.re-hitl-list { display: grid; gap: 10px; }
+.re-hitl-card {
+  border: 1px solid var(--line);
+  background: #faf8f5;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.re-hitl-card.suspect { border-color: #e2c48a; background: #fff8ee; }
+.re-hitl-card.accepted { border-color: #b7d4bc; background: #f3faf4; }
+.re-hitl-card.rejected { opacity: 0.72; }
+.re-hitl-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+.re-hitl-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background: #eee;
+  color: #555;
+}
+.re-hitl-tag.suspect { background: #fde7c7; color: #8a4b08; }
+.re-hitl-tag.ok { background: #d8f0d8; color: #1b6b1b; }
+.re-hitl-card pre {
+  margin: 0 0 6px;
+  white-space: pre-wrap;
+  font: 13px/1.45 var(--serif);
+}
+.re-hitl-card .re-hitl-preview { color: var(--ok); }
+.re-hitl-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.re-hitl-actions .btn { padding: 4px 10px; font-size: 12px; }
+.re-hitl-body { font-size: 14px; line-height: 1.5; margin: 0 0 8px; }
