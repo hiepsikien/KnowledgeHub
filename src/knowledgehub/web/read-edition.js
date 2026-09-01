@@ -16,6 +16,7 @@
     hitlJob: null,
     hitlOverview: null,
     suspectsOnly: true,
+    chapterLoad: 0,
   };
 
   const HITL_STEPS = {
@@ -379,12 +380,18 @@
 
   async function selectChapter(chapterId) {
     if (!state.workId) return;
+    const loadId = ++state.chapterLoad;
     state.chapterId = chapterId;
     state.editIndex = null;
+    if (state.manifest) renderChapterList(state.manifest);
+    const row = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapterId);
+    if (row && $("re-detail-title")) $("re-detail-title").textContent = row.title || chapterId;
+    if (state.step !== "structure") renderHitlList();
     const meta = $("re-detail-meta");
     if (meta) meta.textContent = "Đang tải…";
     try {
       const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`);
+      if (loadId !== state.chapterLoad) return;
       state.chapter = chapter;
       try {
         localStorage.setItem(lastSectionKey(state.workId), chapterId);
@@ -421,6 +428,7 @@
       if (state.step !== "structure") renderHitlList();
       syncToolbar();
     } catch (err) {
+      if (loadId !== state.chapterLoad) return;
       if ($("re-section-full")) $("re-section-full").hidden = true;
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
