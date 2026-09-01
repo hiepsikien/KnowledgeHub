@@ -149,8 +149,9 @@ def test_index_stops_before_colon_footnotes():
     assert report["dropped_tail_index"] is True
     assert report["kept_notes"] is True
     assert report["dropped_transcriber"] is True
-    assert "eighth Section is omitted" in text
-    assert "FOOTNOTES" in text
+    notes = {row["marker"]: row["body"] for row in (report.get("edition") or {}).get("notes") or []}
+    assert "eighth Section is omitted" in notes.get("[1]", "")
+    assert "FOOTNOTES:" not in text
     assert "Achilles, 18" not in text
     assert "Transcribers" not in text
     assert "End of Project Gutenberg" not in text

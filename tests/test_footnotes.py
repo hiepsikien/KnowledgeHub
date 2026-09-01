@@ -4,6 +4,7 @@ from knowledgehub.edition.footnotes import (
     attach_footnote_bodies,
     glossary_from_annotations,
     glossary_from_footnotes,
+    iter_footnote_dumps,
     notes_from_annotations,
     notes_from_text,
 )
@@ -276,6 +277,8 @@ def test_ref_attaches_bergson_note_bodies_to_markers():
     ]
     assert linked
     assert "volume of protoplasm" in linked[0]["note"]
+    assert "FOOTNOTES" not in edition["reading_markdown"]
+    assert not any("Metchnikoff" in (block.get("text") or "") for block in edition["blocks"])
 
 
 def test_ref_attaches_abdy_williams_note_bodies_to_markers():
@@ -291,6 +294,29 @@ def test_ref_attaches_abdy_williams_note_bodies_to_markers():
         if span.get("style") == "footnote" and span.get("text") == "[5]"
     ]
     assert five and five[0].get("note") == "Spitta."
+    assert "FOOTNOTES" not in edition["reading_markdown"]
+    assert not any((block.get("text") or "").startswith("[5]") for block in edition["blocks"])
+
+
+def test_attach_drops_joined_footnotes_heading_and_item():
+    blocks = [
+        {"type": "paragraph", "text": "Played here.[75]"},
+        {"type": "paragraph", "text": "FOOTNOTES: [75] P. 144."},
+        {"type": "paragraph", "text": "[76] Extracted from the Gesellschaft."},
+        {"type": "heading", "level": 1, "text": "Chapter XII"},
+    ]
+    source = (
+        "Played here.[75]\n\nFOOTNOTES:\n\n[75] P. 144.\n\n"
+        "[76] Extracted from the Gesellschaft.\n\nChapter XII\n"
+    )
+    annotated, _ = annotate_blocks(blocks)
+    out, notes = attach_footnote_bodies(annotated, source)
+    span = next(s for s in out[0]["spans"] if s["style"] == "footnote")
+    assert span["note"] == "P. 144."
+    assert all("FOOTNOTES" not in (block.get("text") or "") for block in out)
+    assert all(not (block.get("text") or "").startswith("[76]") for block in out)
+    assert any("Chapter XII" in (block.get("text") or "") for block in out)
+    assert {row["marker"] for row in notes} == {"[75]", "[76]"}
 
 
 def test_attach_footnote_bodies_on_annotated_blocks():
@@ -304,4 +330,104 @@ def test_attach_footnote_bodies_on_annotated_blocks():
     span = next(s for s in out[0]["spans"] if s["style"] == "footnote")
     assert span["note"].startswith("The violas were divided into alto")
     assert any(row["marker"] == "[2]" for row in notes)
+    assert all("FOOTNOTES" not in (block.get("text") or "") for block in out)
+    assert len(out) == 1
+
+
+RESTARTING_CHAPTERS = """\
+CHAPTER I
+
+Hello.[1]
+
+FOOTNOTES:
+
+[1] First chapter note.
+
+CHAPTER II
+
+Later.[1]
+
+FOOTNOTES:
+
+[1] Second chapter note.
+"""
+
+
+def test_restarting_footnote_numbers_keep_both_bodies():
+    dumps = iter_footnote_dumps(RESTARTING_CHAPTERS)
+    assert len(dumps) == 2
+    assert dumps[0].notes[1] == "First chapter note."
+    assert dumps[1].notes[1] == "Second chapter note."
+    assert notes_from_text(RESTARTING_CHAPTERS) == {}
+
+    body, entries = glossary_from_footnotes(RESTARTING_CHAPTERS)
+    assert "Hello.[1]" in body
+    assert "Later.[1]" in body
+    assert "FOOTNOTES" not in body
+    summaries = [row["summary"] for row in entries]
+    assert "First chapter note." in summaries
+    assert "Second chapter note." in summaries
+    assert {row["chapter"] for row in entries} == {"I", "II"}
+
+    edition, _ = build_read_edition(RESTARTING_CHAPTERS, family="gutenberg", language="en", use_llm=False)
+    hello = next(block for block in edition["blocks"] if "Hello." in (block.get("text") or ""))
+    later = next(block for block in edition["blocks"] if "Later." in (block.get("text") or ""))
+    hello_note = next(span for span in hello["spans"] if span.get("text") == "[1]")
+    later_note = next(span for span in later["spans"] if span.get("text") == "[1]")
+    assert hello_note["note"].startswith("First")
+    assert later_note["note"].startswith("Second")
+    assert "FOOTNOTES" not in edition["reading_markdown"]
+    assert "First chapter note." not in edition["reading_markdown"]
+    assert "Second chapter note." not in edition["reading_markdown"]
+
+
+def test_wrapped_chapter_line_stays_in_note():
+    raw = (
+        "CHAPTER I\n\nSee above.[1] And also.[2]\n\nFOOTNOTES:\n\n"
+        "[1] See the argument that begins in\nCHAPTER III of the later volume.\n\n"
+        "[2] Short enough.\n"
+    )
+    dumps = iter_footnote_dumps(raw)
+    assert len(dumps) == 1
+    assert "CHAPTER III of the later volume" in dumps[0].notes[1]
+    assert dumps[0].notes[2] == "Short enough."
+    body, entries = glossary_from_footnotes(raw)
+    assert "See above.[1]" in body
+    assert "And also.[2]" in body
+    by_marker = {row["marker"]: row["summary"] for row in entries}
+    assert "later volume" in by_marker["[1]"]
+    assert by_marker["[2]"] == "Short enough."
+    edition, _ = build_read_edition(raw, family="gutenberg", language="en", use_llm=False)
+    one = next(
+        span
+        for block in edition["blocks"]
+        for span in block.get("spans") or []
+        if span.get("text") == "[1]"
+    )
+    two = next(
+        span
+        for block in edition["blocks"]
+        for span in block.get("spans") or []
+        if span.get("text") == "[2]"
+    )
+    assert "later volume" in one["note"]
+    assert two["note"] == "Short enough."
+    assert "FOOTNOTES" not in edition["reading_markdown"]
+    assert "Short enough" not in edition["reading_markdown"]
+    assert not any("CHAPTER III" in (block.get("text") or "") for block in edition["blocks"])
+
+
+def test_mid_chapter_dump_does_not_swallow_following_prose():
+    raw = (
+        "CHAPTER I\n\nHello.[1]\n\nFOOTNOTES:\n\n[1] A short note.\n\n"
+        "And the argument continues in this chapter.\n"
+    )
+    body, entries = glossary_from_footnotes(raw)
+    assert "And the argument continues in this chapter." in body
+    assert "FOOTNOTES" not in body
+    assert entries[0]["summary"] == "A short note."
+    edition, _ = build_read_edition(raw, family="gutenberg", language="en", use_llm=False)
+    assert "argument continues" in edition["reading_markdown"]
+    assert "FOOTNOTES" not in edition["reading_markdown"]
+    assert "A short note." not in edition["reading_markdown"]
 

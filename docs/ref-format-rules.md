@@ -234,7 +234,7 @@ Five rule groups (not per-sample hacks):
 | **TOC** | `CONTENTS` blocks → `metadata`; double-space mid-line no longer triggers false TOC (Poe fix) |
 | **Inline** | `(1)` list markers; full `paren_aside` spans; QA digest shows complete span text |
 
-## REF/1 v1.8 — per-chapter FOOTNOTES
+## REF/1 v1.9 — per-chapter FOOTNOTES
 
 Gutenberg chapters often end with a `FOOTNOTES:` dump. Inline `[n]` spans now copy that dump onto `span.note`, and the chapter document lists `notes[]`.
 
@@ -243,5 +243,5 @@ Gutenberg chapters often end with a `FOOTNOTES:` dump. Inline `[n]` spans now co
 | Numbered dump (Abdy Williams) | `[1] See Glossary, "College of Instrumental Musicians."` |
 | Gutenberg bracket (Bergson) | `[Footnote 3: _Matière et mémoire_, Paris, 1896.]` |
 
-Every `FOOTNOTES:` heading followed by those items is a dump (not only a book-tail section after 40% of the file). `NOTES TO …` essays are still kept as body text. CMS Chế bản shows the note body on hover and in a list at the end of the chapter.
+Every `FOOTNOTES:` heading followed by those items is a dump (item run only — not until the next `CHAPTER` line, so wrap like `CHAPTER III of the later volume.` stays inside the note, and mid-chapter prose after the dump is kept). Numbering is **per dump**: a later chapter’s `[1]` does not replace an earlier chapter’s `[1]`. Dump blocks are dropped from REF reading flow after the bodies are copied onto inline markers. `NOTES TO …` essays are still kept as body text. CMS Chế bản shows the note body on hover (tooltip truncated) and in a list at the end of the chapter.
 

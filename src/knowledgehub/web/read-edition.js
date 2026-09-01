@@ -62,6 +62,17 @@
     return `re-span re-span-${String(style || "other").replace(/[^a-z0-9_-]/gi, "")}`;
   }
 
+  function tooltipText(note, style) {
+    const raw = note || style || "";
+    if (raw.length <= 280) return raw;
+    return `${raw.slice(0, 277)}…`;
+  }
+
+  function noteElementId(marker) {
+    const nums = String(marker || "").match(/\d+/g) || [];
+    return nums.length ? `re-note-${nums[0]}` : "";
+  }
+
   function collectNotes(chapter) {
     const rows = [];
     const seen = new Set();
@@ -95,7 +106,7 @@
       .map((note) => {
         const marker = escapeHtml(note.marker || "");
         const anchor = note.anchor ? `<span class="re-note-anchor">${escapeHtml(note.anchor)}</span> ` : "";
-        const id = `re-note-${String(note.marker || "").replace(/[^\d,]/g, "")}`;
+        const id = noteElementId(note.marker);
         return `<li id="${id}"><strong>${anchor}${marker}</strong> ${escapeHtml(note.body)}</li>`;
       })
       .join("");
@@ -116,7 +127,7 @@
         const end = span.end || start;
         if (start > cursor) parts.push(escapeHtml(text.slice(cursor, start)));
         const note = span.note ? String(span.note) : "";
-        const title = note || span.style || "";
+        const title = tooltipText(note, span.style);
         const marker = String(span.text || text.slice(start, end));
         const hasNote = span.style === "footnote" && note ? " has-note" : "";
         const data = note
@@ -241,8 +252,8 @@
     box.onclick = (e) => {
       const mark = e.target.closest("mark[data-fn]");
       if (mark) {
-        const id = `re-note-${String(mark.getAttribute("data-fn") || "").replace(/[^\d,]/g, "")}`;
-        const target = document.getElementById(id);
+        const id = noteElementId(mark.getAttribute("data-fn"));
+        const target = id ? document.getElementById(id) : null;
         if (target) {
           box.querySelectorAll(".re-notes li.on").forEach((el) => el.classList.remove("on"));
           target.classList.add("on");
