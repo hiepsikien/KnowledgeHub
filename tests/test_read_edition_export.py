@@ -123,7 +123,7 @@ def test_cheban_ui_labels(client):
     assert js.status_code == 200
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban10' in html
+    assert 'styles.css?v=cheban12' in html
 
 
 def test_toc_reclass_keeps_excerpt_and_reset_wipes(client):
