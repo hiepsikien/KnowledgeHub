@@ -331,6 +331,23 @@ CONTENTS_HEAD = re.compile(
     r"^(?:TABLE OF CONTENTS|CONTENTS(?: OF (?:THIS )?BOOK)?|MỤC LỤC)\s*\.?\s*$",
     re.I,
 )
+
+
+def toc_source_from_excerpt(excerpt: str) -> str:
+    """Turn a curator-pasted TOC into a parseable Contents block.
+
+    Only CONTENTS_HEAD is a parseable opener. Vietnamese ``Mục lục:`` matches
+    VI_TOC_HEADER (body-run detector) but not CONTENTS_HEAD — prepend CONTENTS.
+    """
+    text = str(excerpt or "").replace("\r\n", "\n").replace("\r", "\n").strip()
+    if not text:
+        return ""
+    first = next((ln.strip() for ln in text.split("\n") if ln.strip()), "")
+    if CONTENTS_HEAD.match(first):
+        return text
+    return f"CONTENTS\n\n{text}"
+
+
 _PAGE_COL = re.compile(r"^PAGE\s*$", re.I)
 _CHAPTER_TOC_LINE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+([IVXLC\d]+)\.?\s*(.*)$", re.I)
 _BOOK_PART_TOC_LINE = re.compile(r"^(BOOK|PART|VOLUME)\s+([IVXLC\d]+)\b(.*)$", re.I)

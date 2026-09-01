@@ -40,6 +40,7 @@ from .read_edition_service import (
     parse_micro_batch as parse_read_edition_micro_batch,
     patch_chapter as patch_read_edition_chapter,
     run_macro as run_read_edition_macro,
+    reset_read_edition as reset_read_edition_package,
     run_qa as run_read_edition_qa,
 )
 from .read_publish import PublishError, preview_normalized, publish_to_read
@@ -159,6 +160,7 @@ class SettingsBody(BaseModel):
 class ReadEditionMacroBody(BaseModel):
     force: bool = False
     use_llm: bool = True
+    keep_toc: bool = False
 
 
 class ReadEditionParseBody(BaseModel):
@@ -331,7 +333,18 @@ def create_app() -> FastAPI:
     def read_edition_macro(work_id: str, payload: ReadEditionMacroBody | None = None) -> dict[str, Any]:
         body = payload or ReadEditionMacroBody()
         try:
-            return run_read_edition_macro(work_id, force=body.force, use_llm=body.use_llm)
+            return run_read_edition_macro(
+                work_id, force=body.force, use_llm=body.use_llm, keep_toc=body.keep_toc
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/reset", dependencies=guard)
+    def read_edition_reset(work_id: str) -> dict[str, Any]:
+        try:
+            return reset_read_edition_package(work_id)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:
