@@ -362,7 +362,7 @@ def kind_for_toc_label(label: str) -> str:
         return "appendix"
     if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA")):
         return "back_matter"
-    return "other"
+    return "chapter"
 
 
 def chapter_number_key(label: str) -> str | None:
@@ -415,6 +415,23 @@ def toc_is_wrap_page_column(entries: list[dict[str, Any]]) -> bool:
     wrapped = sum(1 for e in entries if e.get("wrapped"))
     paged = sum(1 for e in entries if e.get("page"))
     return wrapped >= 2 and paged >= 2
+
+
+def toc_is_page_column_map(entries: list[dict[str, Any]]) -> bool:
+    """Use TOC→body for page-column Contents maps, except numbered CHAPTER one-liners.
+
+    Arnold-style named essays (`Numbers … 1`) need the map; Austen `CHAPTER I. Title  1`
+    stays on markers.
+    """
+    if toc_is_wrap_page_column(entries):
+        return True
+    if len(entries) < 2:
+        return False
+    paged = sum(1 for e in entries if e.get("page"))
+    if paged < 2:
+        return False
+    numbered = sum(1 for e in entries if chapter_number_key(str(e.get("label") or "")))
+    return numbered < max(2, (len(entries) + 1) // 2)
 
 
 # Catalogue / glossary / bibliography are optional. A miss still allows toc_match;
@@ -688,6 +705,41 @@ def format_contents_excerpt(entries: list[dict[str, Any]], *, max_chars: int = 1
     return "\n".join(rows)[:max_chars]
 
 
+def _is_titleish_line(line: str) -> bool:
+    s = line.strip()
+    if not s or len(s) > 80 or is_toc_list_row(s):
+        return False
+    letters = [c for c in s if c.isalpha()]
+    if not letters:
+        return False
+    if sum(c.isupper() for c in letters) / len(letters) >= 0.75:
+        return True
+    words = [w for w in s.strip(".;:").split() if w]
+    if 1 <= len(words) <= 10 and all(w[:1].isupper() for w in words if w[:1].isalpha()):
+        return not re.search(r"[.!?]\s+\S", s) and len(s) < 70
+    return False
+
+
+def _joined_title_window(lines: list[str], start: int, *, limit: int = 4) -> str:
+    """Join a split all-caps heading such as NUMBERS; / OR, / THE MAJORITY…"""
+    parts: list[str] = []
+    for j in range(start, min(start + limit, len(lines))):
+        s = lines[j].strip()
+        if not s:
+            if parts:
+                break
+            continue
+        if is_toc_list_row(s) or is_toc_chapter_block(lines, j):
+            break
+        if not _is_titleish_line(s):
+            break
+        parts.append(s)
+        joined = " ".join(parts)
+        if s.endswith(".") and len(_norm_toc_heading(joined).split()) >= 3:
+            break
+    return " ".join(parts)
+
+
 def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Locate TOC entries on body heading lines, skipping leftover contents-list rows."""
     lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
@@ -696,7 +748,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
     for entry in entries:
         chap = chapter_number_key(str(entry.get("label") or ""))
         needles = [_norm_toc_heading(s) for s in (entry.get("match_strings") or []) if s]
-        need_toks = _sig_tokens(str(entry.get("label") or ""))
+        need_toks = _sig_tokens(str(entry.get("label") or "")) | _sig_tokens(str(entry.get("title") or ""))
         found_line: int | None = None
         found_text = ""
         for line_no, raw in enumerate(lines):
@@ -714,14 +766,22 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
                     found_text = raw_line
                     break
                 continue
-            norm = _norm_toc_heading(raw_line)
-            if not norm:
-                continue
-            if any(n == norm for n in needles if n):
-                found_line = line_no
-                found_text = raw_line
-                break
-            if len(need_toks) >= 2 and need_toks <= _sig_tokens(raw_line) and len(raw_line) < 80:
+            probes = [raw_line]
+            joined = _joined_title_window(lines, line_no)
+            if joined and joined != raw_line:
+                probes.append(joined)
+            hit = False
+            for probe in probes:
+                norm = _norm_toc_heading(probe)
+                if not norm:
+                    continue
+                if any(n == norm for n in needles if n):
+                    hit = True
+                    break
+                if len(need_toks) >= 2 and need_toks <= _sig_tokens(probe) and len(probe) < 120:
+                    hit = True
+                    break
+            if hit:
                 found_line = line_no
                 found_text = raw_line
                 break
