@@ -75,7 +75,9 @@ def test_footnotes_link_dump_from_book_tail():
 
 
 def test_quotes_find_vergil_blockquote_and_emphasis():
-    items, _extra = scan_quotes(GROTIUS, chapter_id="ch1", family="gutenberg", work_id="grotius--freedom_of_the_seas")
+    items, _extra = scan_quotes(
+        GROTIUS, chapter_id="ch1", family="gutenberg", work_id="grotius--freedom_of_the_seas", use_llm=False
+    )
     marks = {row["mark"] for row in items}
     assert "blockquote" in marks
     assert "em" in marks
@@ -268,7 +270,7 @@ def test_quote_scan_block_index_matches_parse_and_reject():
     from knowledgehub.edition.ref import build_read_edition
 
     work_id = "grotius--freedom_of_the_seas"
-    items, _extra = scan_quotes(GROTIUS, chapter_id="ch1", family="gutenberg", work_id=work_id)
+    items, _extra = scan_quotes(GROTIUS, chapter_id="ch1", family="gutenberg", work_id=work_id, use_llm=False)
     edition, _report = build_read_edition(
         GROTIUS,
         family="gutenberg",
@@ -288,7 +290,7 @@ def test_quote_scan_block_index_matches_parse_and_reject():
 
 
 def test_unclosed_quote_is_not_actionable():
-    items, _extra = scan_quotes('He said "hello and never finished.\n', chapter_id="c1", family="gutenberg")
+    items, _extra = scan_quotes('He said "hello and never finished.\n', chapter_id="c1", family="gutenberg", use_llm=False)
     unclosed = [row for row in items if row["mark"] == "unclosed"]
     assert unclosed
     assert all(row["actionable"] is False for row in unclosed)
@@ -358,7 +360,9 @@ def test_decide_reparses_and_refreshes_hash(tmp_path, monkeypatch):
     assert body["edition_hash"] != before_hash
     assert body["edition_hash"] == hash_blocks(body["blocks"])
     assert body["reading_markdown"] != before_md
-    assert body["blocks"][bq["block_index"]]["type"] == "paragraph"
+    snippet = (bq["text"] or "").rstrip("…")[:24]
+    quoted = next(b for b in body["blocks"] if snippet in (b.get("text") or ""))
+    assert quoted["type"] == "paragraph"
 
 
 def test_apply_wrap_overrides_function_mutates_join_next():
@@ -371,3 +375,112 @@ def test_apply_wrap_overrides_function_mutates_join_next():
     assert labels[0].join_next is True
     apply_wrap_overrides(labels, {0: False})
     assert labels[0].join_next is False
+
+
+def test_quote_reject_matches_snippet_after_wrap_reindex():
+    from knowledgehub.edition.ref import build_read_edition
+
+    work_id = "grotius--freedom_of_the_seas"
+    items, _extra = scan_quotes(GROTIUS, chapter_id="ch1", family="gutenberg", work_id=work_id, use_llm=False)
+    bq = next(row for row in items if row["mark"] == "blockquote")
+    wrap_items, _extra = scan_wrap(GROTIUS, chapter_id="ch1", family="gutenberg")
+    for row in wrap_items:
+        row["decision"] = "accept"
+    overrides = wrap_overrides_from_items(wrap_items, chapter_id="ch1")
+    assert overrides
+    edition, _report = build_read_edition(
+        GROTIUS,
+        family="gutenberg",
+        language="en",
+        use_llm=False,
+        work_id=work_id,
+        wrap_overrides=overrides,
+    )
+    blocks = edition["blocks"]
+    stale = dict(bq)
+    stale["decision"] = "reject"
+    stale["block_index"] = 10_000
+    apply_quote_decisions(blocks, [stale], chapter_id="ch1")
+    snippet = (bq["text"] or "").rstrip("…")[:24]
+    matching = [block for block in blocks if snippet in (block.get("text") or "")]
+    assert matching
+    assert all(block["type"] == "paragraph" for block in matching)
+
+
+def test_quote_ids_do_not_embed_block_index():
+    items, _extra = scan_quotes(
+        GROTIUS, chapter_id="ch1", family="gutenberg", work_id="grotius--freedom_of_the_seas", use_llm=False
+    )
+    bq = next(row for row in items if row["mark"] == "blockquote")
+    assert ":blockquote:" in bq["id"]
+    assert not bq["id"].endswith(f":{bq['block_index']}")
+    wrap_items, _ = scan_wrap(GROTIUS, chapter_id="ch1", family="gutenberg")
+    for row in wrap_items:
+        row["decision"] = "accept"
+    overrides = wrap_overrides_from_items(wrap_items, chapter_id="ch1")
+    rescanned, _ = scan_quotes(
+        GROTIUS,
+        chapter_id="ch1",
+        family="gutenberg",
+        work_id="grotius--freedom_of_the_seas",
+        wrap_overrides=overrides or None,
+        use_llm=False,
+    )
+    ids = {row["id"] for row in rescanned if row["mark"] == "blockquote"}
+    assert bq["id"] in ids
+
+
+def test_decide_item_ids_ignore_wrong_chapter_filter(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from knowledgehub.catalog import build_catalog
+    from knowledgehub.hash import refresh_hashes
+    from knowledgehub.server import create_app
+
+    corpus = _grotius_corpus(tmp_path)
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    refresh_hashes(corpus=corpus)
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    client = TestClient(create_app())
+    wid = "grotius--freedom_of_the_seas"
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200, macro.text
+    chapters = client.get(f"/api/works/{wid}/read-edition/manifest").json()["manifest"]["chapters"]
+    ch_id = chapters[0]["chapter_id"]
+    other = next((row["chapter_id"] for row in chapters if row["chapter_id"] != ch_id), "sidebar-other")
+
+    trial = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": ch_id},
+    )
+    assert trial.status_code == 200, trial.text
+    suspect = next(row for row in trial.json()["items"] if row["suspect"])
+    decided = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/decide",
+        json={"decision": "accept", "item_ids": [suspect["id"]], "chapter_id": other},
+    )
+    assert decided.status_code == 200, decided.text
+    hit = next(row for row in decided.json()["items"] if row["id"] == suspect["id"])
+    assert hit.get("decision") == "accept"
+
+    confirm = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/confirm",
+        json={"chapter_id": other},
+    )
+    assert confirm.status_code == 200, confirm.text
+    assert confirm.json()["trial_chapter_id"] == ch_id
+
+    if len(chapters) >= 2:
+        second = chapters[1]["chapter_id"]
+        retry = client.post(
+            f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+            json={"scope": "chapter", "chapter_id": second},
+        )
+        assert retry.status_code == 200, retry.text
+        leftover = [row for row in retry.json()["items"] if row.get("chapter_id") == ch_id]
+        assert leftover == []
+        assert retry.json()["trial_chapter_id"] == second

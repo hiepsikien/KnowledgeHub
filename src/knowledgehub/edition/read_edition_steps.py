@@ -712,7 +712,15 @@ def scan_hitl_step(
     wrap_job = load_hitl_job(package_dir, "wrap") if kind == "quotes" else None
     new_items: list[dict[str, Any]] = []
     extra_keys = ("auto_join", "auto_keep", "linked", "unmatched")
-    chapter_stats: dict[str, Any] = dict(existing.get("chapter_stats") or {}) if scope == "chapter" else {}
+    switching_trial = (
+        scope == "chapter"
+        and existing.get("scope") != "book"
+        and existing.get("trial_chapter_id")
+        and existing.get("trial_chapter_id") != chapter_id
+    )
+    chapter_stats: dict[str, Any] = {}
+    if scope == "chapter" and not switching_trial:
+        chapter_stats = dict(existing.get("chapter_stats") or {})
     for section in targets:
         sid = str(section["section_id"])
         slice_text = section_source_slice(text, section)
@@ -735,8 +743,12 @@ def scan_hitl_step(
     extra_acc = {key: sum(int((chapter_stats.get(cid) or {}).get(key) or 0) for cid in chapter_stats) for key in extra_keys}
     if scope == "chapter":
         sid = str(chapter_id)
-        kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
-        chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
+        if switching_trial:
+            kept: list[dict[str, Any]] = []
+            chapter_old: list[dict[str, Any]] = []
+        else:
+            kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
+            chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
         merged = kept + merge_item_decisions(chapter_old, new_items)
         if existing.get("scope") == "book":
             job_scope = "book"
@@ -780,7 +792,7 @@ def confirm_hitl_trial_step(
         raise ReadEditionStepError(f"unknown HITL kind: {kind}")
     package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
     job = load_hitl_job(package_dir, kind)
-    trial_id = chapter_id or job.get("trial_chapter_id")
+    trial_id = job.get("trial_chapter_id") or chapter_id
     if job.get("status") in {None, "idle"} or not trial_id:
         raise ReadEditionStepError("Chạy thử một chương trước khi xác nhận")
     job["trial_chapter_id"] = trial_id
@@ -808,17 +820,21 @@ def decide_hitl_step(
     root = corpus or corpus_root()
     job = load_hitl_job(package_dir, kind)
     wanted = set(item_ids or [])
+    if not wanted and suspects_only and not chapter_id and job.get("scope") == "chapter":
+        chapter_id = job.get("trial_chapter_id")
     changed = 0
     affected: set[str] = set()
     for item in job.get("items") or []:
-        if chapter_id and item.get("chapter_id") != chapter_id:
-            continue
-        if wanted and item.get("id") not in wanted:
-            continue
-        if suspects_only and not item.get("suspect"):
-            continue
-        if not wanted and not suspects_only:
-            continue
+        if wanted:
+            if item.get("id") not in wanted:
+                continue
+        else:
+            if chapter_id and item.get("chapter_id") != chapter_id:
+                continue
+            if suspects_only and not item.get("suspect"):
+                continue
+            if not suspects_only:
+                continue
         if decision == "clear":
             item.pop("decision", None)
         else:
@@ -827,7 +843,7 @@ def decide_hitl_step(
         cid = str(item.get("chapter_id") or "")
         if cid:
             affected.add(cid)
-    if wanted and changed == 0 and not suspects_only:
+    if changed == 0 and (wanted or suspects_only):
         raise ReadEditionStepError("Không khớp item nào")
     extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}}
     job["summary"] = extra

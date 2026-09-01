@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 from typing import Any
 
@@ -14,6 +15,7 @@ from .label_rules import (
     _should_join,
 )
 from .lines import TextLine, iter_lines
+from .llm_defaults import default_use_llm_relabel
 from .ref import apply_wrap_overrides, blocks_from_labels, label_edition_lines, normalize_edition_source
 
 HITL_KINDS = ("wrap", "footnotes", "quotes")
@@ -21,7 +23,6 @@ HITL_KINDS = ("wrap", "footnotes", "quotes")
 BODY_LINE = re.compile(r"^\[(\d{1,4})\]\s+(\S.*)$")
 INLINE_MARKER = re.compile(r"\[(\d{1,4})\]")
 ROMAN = re.compile(r"^[IVXLCDM]+$", re.I)
-LATINISH = re.compile(r"\b(?:qui|quod|et|non|sed|ad|in|est|sunt|hoc|haec|illam)\b", re.I)
 
 REASON_VI = {
     "blank_line": "có dòng trống giữa hai dòng",
@@ -77,6 +78,24 @@ def _empty_summary() -> dict[str, int]:
         "linked": 0,
         "unmatched": 0,
     }
+
+
+def _norm_hitl_text(text: str) -> str:
+    return re.sub(r"\s+", " ", str(text or "")).strip().lower().rstrip("…. ")
+
+
+def _snippet_hits(snippet: str, haystack: str) -> bool:
+    needle = _norm_hitl_text(snippet)
+    body = _norm_hitl_text(haystack)
+    if not needle or not body:
+        return False
+    core = needle[:80] if len(needle) > 12 else needle
+    return core in body or body in needle
+
+
+def _quote_id_token(text: str) -> str:
+    core = _norm_hitl_text(text)[:96]
+    return hashlib.sha1(core.encode("utf-8")).hexdigest()[:12]
 
 
 def _clip(text: str, n: int = _CLIP) -> str:
@@ -464,13 +483,15 @@ def scan_quotes(
     language: str = "en",
     work_id: str | None = None,
     wrap_overrides: dict[int, bool] | None = None,
+    use_llm: bool | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     body, _apparatus, _unwrapped = normalize_edition_source(text, family=family, language=language)
+    llm = default_use_llm_relabel() if use_llm is None else use_llm
     lines, labels, _events = label_edition_lines(
         body,
         family=family,
         language=language,
-        use_llm=False,
+        use_llm=llm,
         wrap_overrides=wrap_overrides,
     )
     blocks, _profile = blocks_from_labels(lines, labels, work_id=work_id, language=language)
@@ -483,15 +504,13 @@ def scan_quotes(
             reasons: list[str] = []
             if len(block_text) < 40:
                 reasons.append("short_blockquote")
-            if LATINISH.search(block_text) and not block_text.strip()[:1] in {'"', "“", "«", "_"}:
-                pass
             stripped = block_text.strip()
             if "\n" in stripped and ('"' in stripped or "“" in stripped) and not stripped.endswith(('"', "”", "»", "_", ".", ",", "]")):
                 reasons.append("mixed_verse")
             items.append(
                 _label_item(
                     {
-                        "id": f"q:{chapter_id}:blockquote:{bi}",
+                        "id": f"q:{chapter_id}:blockquote:{_quote_id_token(block_text)}",
                         "chapter_id": chapter_id,
                         "kind": "quote",
                         "mark": "blockquote",
@@ -519,7 +538,7 @@ def scan_quotes(
             items.append(
                 _label_item(
                     {
-                        "id": f"q:{chapter_id}:{style}:{bi}:{span.get('start')}",
+                        "id": f"q:{chapter_id}:{style}:{_quote_id_token(span_text)}",
                         "chapter_id": chapter_id,
                         "kind": "quote",
                         "mark": style,
@@ -582,6 +601,7 @@ def scan_kind(
     dump_notes: dict[int, str] | None = None,
     work_id: str | None = None,
     wrap_overrides: dict[int, bool] | None = None,
+    use_llm: bool | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     if kind == "wrap":
         return scan_wrap(text, chapter_id=chapter_id, family=family, language=language)
@@ -602,6 +622,7 @@ def scan_kind(
             language=language,
             work_id=work_id,
             wrap_overrides=wrap_overrides,
+            use_llm=use_llm,
         )
     raise ValueError(f"unknown HITL kind: {kind}")
 
@@ -669,36 +690,84 @@ def apply_footnote_links(blocks: list[dict[str, Any]], records: list[dict[str, A
                 span["anchor"] = note["anchor"]
 
 
+def _drop_matching_span(block: dict[str, Any], spec: dict[str, Any]) -> bool:
+    style = spec.get("style")
+    snippet = str(spec.get("text") or "")
+    start = spec.get("start")
+    end = spec.get("end")
+    spans = list(block.get("spans") or [])
+    kept: list[dict[str, Any]] = []
+    dropped = False
+    for span in spans:
+        if span.get("style") != style:
+            kept.append(span)
+            continue
+        same_text = _snippet_hits(snippet, str(span.get("text") or ""))
+        same_range = (
+            isinstance(start, int)
+            and isinstance(end, int)
+            and span.get("start") == start
+            and span.get("end") == end
+        )
+        if same_text or (same_range and not snippet):
+            dropped = True
+            continue
+        kept.append(span)
+    if dropped:
+        if kept:
+            block["spans"] = kept
+        else:
+            block.pop("spans", None)
+    return dropped
+
+
 def apply_quote_decisions(blocks: list[dict[str, Any]], items: list[dict[str, Any]], *, chapter_id: str | None = None) -> None:
-    rejected_blocks: set[int] = set()
-    rejected_spans: set[tuple[int, int, int]] = set()
+    """Apply reject decisions by snippet/span text so wrap/LLM reindex cannot hit the wrong block."""
+    rejected_quotes: list[dict[str, Any]] = []
     for item in items:
         if chapter_id and item.get("chapter_id") != chapter_id:
             continue
         if item.get("decision") != "reject":
             continue
-        mark = item.get("mark")
-        bi = item.get("block_index")
-        if mark == "blockquote" and isinstance(bi, int):
-            rejected_blocks.add(bi)
-        elif mark in {"quote", "em"} and isinstance(bi, int):
-            start = item.get("start")
-            end = item.get("end")
-            if isinstance(start, int) and isinstance(end, int):
-                rejected_spans.add((bi, start, end))
-    for bi, block in enumerate(blocks):
-        if bi in rejected_blocks and block.get("type") == "blockquote":
-            block["type"] = "paragraph"
-        if not rejected_spans:
+        rejected_quotes.append(item)
+
+    claimed: set[int] = set()
+    for item in rejected_quotes:
+        if item.get("mark") != "blockquote":
             continue
-        spans = list(block.get("spans") or [])
-        kept = [
-            span
-            for span in spans
-            if (bi, span.get("start"), span.get("end")) not in rejected_spans
-        ]
-        if len(kept) != len(spans):
-            if kept:
-                block["spans"] = kept
-            else:
-                block.pop("spans", None)
+        snippet = str(item.get("text") or "")
+        matched: int | None = None
+        for bi, block in enumerate(blocks):
+            if bi in claimed or block.get("type") != "blockquote":
+                continue
+            if _snippet_hits(snippet, str(block.get("text") or "")):
+                matched = bi
+                break
+        if matched is None:
+            bi = item.get("block_index")
+            if (
+                isinstance(bi, int)
+                and 0 <= bi < len(blocks)
+                and bi not in claimed
+                and blocks[bi].get("type") == "blockquote"
+            ):
+                matched = bi
+        if matched is not None:
+            blocks[matched]["type"] = "paragraph"
+            claimed.add(matched)
+
+    for item in rejected_quotes:
+        if item.get("mark") not in {"quote", "em"}:
+            continue
+        spec = {
+            "style": item.get("mark"),
+            "text": item.get("text") or "",
+            "start": item.get("start"),
+            "end": item.get("end"),
+        }
+        bi = item.get("block_index")
+        if isinstance(bi, int) and 0 <= bi < len(blocks) and _drop_matching_span(blocks[bi], spec):
+            continue
+        for block in blocks:
+            if _drop_matching_span(block, spec):
+                break
