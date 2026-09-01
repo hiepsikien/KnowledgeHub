@@ -666,9 +666,22 @@
     $("re-hitl-book").disabled = !job.trial_confirmed;
     $("re-hitl-accept-suspects").hidden = pending === 0;
     if (!shown.length) {
-      let empty = "Không có chỗ nghi ngờ — có thể xác nhận chương thử rồi chạy toàn văn bản.";
-      if (!scanned) empty = "Chương này chưa được quét — bấm «Chạy thử chương này».";
-      else if (visible.length) empty = "Không còn mục nào khớp bộ lọc.";
+      let empty;
+      if (!scanned) {
+        if (job.scope === "book") {
+          empty = "Chương này không có chỗ cần duyệt.";
+        } else if (job.trial_confirmed) {
+          empty = "Chương này chưa được quét — bấm «Chạy toàn văn bản». «Chạy thử chương này» sẽ đổi chương thử và xóa kết quả cũ.";
+        } else {
+          empty = "Chương này chưa được quét — bấm «Chạy thử chương này».";
+        }
+      } else if (visible.length) {
+        empty = "Không còn mục nào khớp bộ lọc.";
+      } else if (job.scope === "book" || job.trial_confirmed) {
+        empty = "Chương này không có chỗ cần duyệt.";
+      } else {
+        empty = "Không có chỗ nghi ngờ — có thể xác nhận chương thử rồi chạy toàn văn bản.";
+      }
       box.innerHTML = `<p class="muted">${empty}</p>`;
       return;
     }
