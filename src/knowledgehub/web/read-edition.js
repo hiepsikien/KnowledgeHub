@@ -787,7 +787,7 @@
     const bar = $("re-struct-tools");
     if (!bar) return;
     const hasMacro = !!(state.review || state.status?.macro_complete);
-    bar.hidden = !hasMacro;
+    bar.hidden = !hasMacro || state.step !== "structure";
     const kind = $("re-kind");
     if (kind && chapter?.kind) kind.value = chapter.kind;
     const expand = $("re-expand-macro");
@@ -834,7 +834,7 @@
         `<div class="re-compare-pane"><h3>Heading lồng (${inner.length}) — bấm để tách một heading, hoặc «Phân đoạn bên trong» để tách hết chapter</h3><div class="re-inner-heads">${rows}</div></div>`,
       );
     }
-    box.hidden = !panes.length;
+    box.hidden = !panes.length || state.step !== "structure";
     box.innerHTML = panes.join("");
     box.onclick = (e) => {
       const btn = e.target.closest("[data-split-line]");

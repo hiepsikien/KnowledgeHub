@@ -118,6 +118,7 @@ def test_cheban_ui_labels(client):
     assert js.status_code == 200
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
+    assert 'styles.css?v=cheban10' in html
 
 
 def test_read_edition_api(client):
