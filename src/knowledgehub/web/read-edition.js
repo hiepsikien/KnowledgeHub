@@ -392,7 +392,10 @@
       chapters.some((row) => row.chapter_id === id && row.micro_status !== "complete"),
     ).length;
 
+    const tocStatus = state.review?.toc_candidate?.status || status.hitl?.toc_status;
+    const tocOk = tocStatus === "yes" || tocStatus === "no" || tocStatus === "none";
     showBtn("re-macro", !macro);
+    showBtn("re-reclass", macro && tocOk);
     showBtn("re-layout-ok", macro && !layoutOk);
     const layoutBtn = $("re-layout-ok");
     if (layoutBtn) {
@@ -454,11 +457,23 @@
       el.value = toc.excerpt || "";
     }
     const status = toc.status;
+    const answered = status === "yes" || status === "no" || status === "none";
+    const title = box.querySelector(".re-toc-head strong");
+    if (title) title.textContent = answered ? "Mục lục" : "Mục lục đề xuất";
+    const restore = $("re-toc-reset");
+    if (restore) restore.hidden = answered;
+    const reclass = $("re-toc-reclass");
+    if (reclass) reclass.hidden = !answered;
     const banner = $("re-toc-banner");
-    if (status === "yes") banner.textContent = "Đã xác nhận: đây là mục lục. Sửa rồi bấm lại nếu còn thừa.";
-    else if (status === "no") banner.textContent = "Đã ghi: đoạn này không phải mục lục.";
-    else if (status === "none") banner.textContent = "Đã ghi: sách không có mục lục.";
-    else banner.textContent = "Sửa nếu thừa, rồi xác nhận đây là mục lục.";
+    if (status === "yes") {
+      banner.textContent = "Đã xác nhận: đây là mục lục. Bấm «Phân loại lại» để tách chương theo mục lục này.";
+    } else if (status === "no") {
+      banner.textContent = "Đã ghi: đoạn này không phải mục lục. Bấm «Phân loại lại» nếu muốn tách chương lại.";
+    } else if (status === "none") {
+      banner.textContent = "Đã ghi: sách không có mục lục. Bấm «Phân loại lại» nếu muốn tách chương lại.";
+    } else {
+      banner.textContent = "Dán TOC chuẩn nếu đề xuất sai, rồi xác nhận. «Khôi phục đề xuất» chỉ lấy lại TOC máy.";
+    }
   }
 
   function renderHealth(review) {
@@ -612,6 +627,44 @@
     el.focus();
   }
 
+  function tocIsAnswered() {
+    const status = state.review?.toc_candidate?.status || state.status?.hitl?.toc_status;
+    return status === "yes" || status === "no" || status === "none";
+  }
+
+  async function reclassifyWithToc() {
+    if (!state.workId) return;
+    if (!tocIsAnswered()) {
+      toast("Xác nhận TOC trước khi phân loại lại");
+      return;
+    }
+    const status = state.review?.toc_candidate?.status;
+    if (status === "yes") {
+      try {
+        const excerpt = $("re-toc-excerpt")?.value ?? "";
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/toc`, {
+          method: "POST",
+          body: { status: "yes", excerpt },
+        });
+      } catch (err) {
+        toast(err.message);
+        return;
+      }
+    }
+    $("re-status").textContent = "Đang phân loại lại theo TOC…";
+    try {
+      await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
+        method: "POST",
+        body: { keep_toc: true, use_llm: useLlmMacro() },
+      });
+      toast("Đã phân loại lại — TOC đã dán được giữ");
+      await loadReadEditionPage(state.workId);
+    } catch (err) {
+      toast(err.message);
+      $("re-status").textContent = err.message;
+    }
+  }
+
   function lastSectionKey(workId) {
     return `kh-re-section:${workId}`;
   }
@@ -679,7 +732,7 @@
     $("re-macro")?.addEventListener("click", async () => {
       if (!state.workId) return;
       if (state.status?.macro_complete) {
-        toast("Đã có phân đoạn đã lưu — bấm Reset phân đoạn nếu muốn làm lại từ đầu");
+        toast("Đã có phân đoạn — xác nhận TOC rồi bấm «Phân loại lại», hoặc Reset để xóa hết");
         return;
       }
       $("re-status").textContent = "Đang phân đoạn (macro)…";
@@ -688,7 +741,7 @@
           method: "POST",
           body: { force: false, use_llm: useLlmMacro() },
         });
-        toast("Đã phân đoạn xong");
+        toast("Đã phân đoạn xong — duyệt TOC rồi bấm «Phân loại lại» nếu cần");
         await loadReadEditionPage(state.workId);
       } catch (err) {
         toast(err.message);
@@ -696,21 +749,28 @@
       }
     });
 
+    $("re-reclass")?.addEventListener("click", () => void reclassifyWithToc());
+
     $("re-reset")?.addEventListener("click", async () => {
       if (!state.workId) return;
-      if (!window.confirm("Xóa cấu trúc HITL và parse REF của sách này, làm lại từ Phân đoạn?")) return;
-      $("re-status").textContent = "Đang reset phân đoạn…";
+      if (
+        !window.confirm(
+          "Xóa hết phân đoạn, parse REF, và mục lục đã dán? Sách trở về trạng thái chưa bắt đầu — không tự phân đoạn lại.",
+        )
+      ) {
+        return;
+      }
+      $("re-status").textContent = "Đang reset…";
       try {
-        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/reset`, {
           method: "POST",
-          body: { force: true, use_llm: useLlmMacro() },
         });
         try {
           localStorage.removeItem(lastSectionKey(state.workId));
         } catch {
           /* ignore */
         }
-        toast("Đã reset — phân đoạn lại từ đầu");
+        toast("Đã reset — sách trở về trạng thái ban đầu");
         await loadReadEditionPage(state.workId);
       } catch (err) {
         toast(err.message);
@@ -827,6 +887,7 @@
     $("re-toc-no")?.addEventListener("click", () => void confirmToc("no"));
     $("re-toc-none")?.addEventListener("click", () => void confirmToc("none"));
     $("re-toc-reset")?.addEventListener("click", resetTocProposal);
+    $("re-toc-reclass")?.addEventListener("click", () => void reclassifyWithToc());
     $("re-merge-prev")?.addEventListener("click", () => void applyStructureEdit("merge_prev"));
     $("re-merge-next")?.addEventListener("click", () => void applyStructureEdit("merge_next"));
     $("re-drop-start")?.addEventListener("click", () => void applyStructureEdit("drop_start"));

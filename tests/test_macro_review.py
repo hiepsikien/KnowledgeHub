@@ -287,8 +287,90 @@ def test_confirm_toc_saves_edited_excerpt(tmp_path, monkeypatch):
     assert toc["status"] == "yes"
     assert toc["excerpt"] == edited
     assert toc["line_count"] == 3
+    assert toc["source"] == "curated"
     assert "CHAPTER I. Of War" in toc["excerpt"]
     assert "\n" in toc["excerpt"]
+
+
+def test_keep_toc_remacro_preserves_confirmed_excerpt(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    work_id = "grotius--freedom_of_the_seas"
+    run_macro_step(work_id, corpus=corpus, use_llm=False)
+    edited = "CONTENTS\nCHAPTER I. THE FAMILY OF BACH\nCHAPTER II. THE CAREER OF BACH"
+    from knowledgehub.edition.read_edition_steps import confirm_toc_step, load_structure
+
+    confirm_toc_step(work_id, "yes", excerpt=edited, corpus=corpus)
+
+    seen: dict[str, str | None] = {}
+    original = build_macro_structure
+
+    def spy(text, **kwargs):
+        seen["toc_excerpt"] = kwargs.get("toc_excerpt")
+        return original(text, **kwargs)
+
+    monkeypatch.setattr("knowledgehub.edition.read_edition_steps.build_macro_structure", spy)
+    result = run_macro_step(work_id, corpus=corpus, use_llm=False, keep_toc=True)
+    assert result["built"] is True
+    assert seen["toc_excerpt"] == edited
+    toc = (result["structure"].get("hitl") or {}).get("toc") or {}
+    assert toc["excerpt"] == edited
+    assert toc["status"] == "yes"
+    package_dir = corpus / result["package_dir"]
+    saved = load_structure(package_dir)
+    assert (saved.get("hitl") or {}).get("toc", {}).get("excerpt") == edited
+    assert (saved.get("hitl") or {}).get("layout_ok") is not True
+    assert not (saved.get("hitl") or {}).get("confirmed_starts")
+
+
+def test_keep_toc_requires_confirmed_toc(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
+    with pytest.raises(ReadEditionStepError, match="Confirm TOC"):
+        run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False, keep_toc=True)
+
+
+def test_force_remacro_replaces_pasted_toc(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    work_id = "grotius--freedom_of_the_seas"
+    run_macro_step(work_id, corpus=corpus, use_llm=False)
+    edited = "CONTENTS\nCHAPTER I. THE FAMILY OF BACH"
+    from knowledgehub.edition.read_edition_steps import confirm_toc_step
+
+    confirm_toc_step(work_id, "yes", excerpt=edited, corpus=corpus)
+    remacro = run_macro_step(work_id, corpus=corpus, use_llm=False, force=True)
+    toc = (remacro["structure"].get("hitl") or {}).get("toc") or {}
+    assert toc.get("status") not in {"yes", "no", "none"}
+    assert toc.get("excerpt") != edited
+
+
+def test_reset_wipes_package_including_toc(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    work_id = "grotius--freedom_of_the_seas"
+    result = run_macro_step(work_id, corpus=corpus, use_llm=False)
+    from knowledgehub.edition.read_edition import package_status
+    from knowledgehub.edition.read_edition_steps import confirm_toc_step, reset_read_edition_step
+
+    confirm_toc_step(work_id, "yes", excerpt="CONTENTS\nCHAPTER I. Alpha", corpus=corpus)
+    package_dir = corpus / result["package_dir"]
+    assert (package_dir / "structure.json").is_file()
+    cleared = reset_read_edition_step(work_id, corpus=corpus)
+    assert cleared["reset"] is True
+    assert cleared["cleared"] is True
+    assert not package_dir.is_dir()
+    status = package_status(work_id, corpus=corpus)
+    assert status["macro_complete"] is False
+    assert status["phase"] == "empty"
+
+
+def test_toc_source_from_excerpt_prepends_contents():
+    from knowledgehub.edition.toc import toc_source_from_excerpt
+
+    wrapped = toc_source_from_excerpt("CHAPTER I. Foo\nCHAPTER II. Bar")
+    assert wrapped.startswith("CONTENTS\n")
+    assert "CHAPTER I. Foo" in wrapped
+    already = toc_source_from_excerpt("CONTENTS\n\nCHAPTER I. Foo")
+    assert already.startswith("CONTENTS")
+    assert already.count("CONTENTS") == 1
 
 
 def test_set_kind_keeps_parsed_chapter_json(tmp_path, monkeypatch):
