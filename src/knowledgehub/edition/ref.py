@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from .footnotes import attach_footnote_bodies
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
 from .lines import iter_lines, normalize_wiki_source
@@ -107,6 +108,7 @@ def build_read_edition(
         wrap_overrides=wrap_overrides,
     )
     blocks, quotation_profile = blocks_from_labels(lines, labels, work_id=work_id, language=language)
+    blocks, notes = attach_footnote_bodies(blocks, body)
     joined = any(label.join_next for label in labels) or unwrapped
     edition = build_edition_document(
         blocks,
@@ -115,6 +117,8 @@ def build_read_edition(
         quotation_profile=quotation_profile,
         apparatus_dropped=apparatus or None,
     )
+    if notes:
+        edition["notes"] = notes
     return edition, {
         "ref_mode": "rule_fallback" if cjk else ("llm_hybrid" if llm_enabled else "rule"),
         "line_count": len(lines),
@@ -123,4 +127,5 @@ def build_read_edition(
         "unwrapped": joined if not cjk else unwrapped,
         "quotation_profile": quotation_profile,
         "apparatus_dropped": apparatus,
+        "notes_linked": len(notes),
     }

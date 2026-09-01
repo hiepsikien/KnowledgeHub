@@ -11,6 +11,7 @@ from typing import Any
 from ..catalog import get_work, is_hub_translation, resolve_content_path
 from ..paths import corpus_root
 from .cache import load_cached_edition, save_cached_edition
+from .footnotes import notes_for_chapter_blocks
 from .llm_defaults import default_use_llm_relabel, gemini_available
 from .overrides import apply_chapter_overrides, overrides_digest
 from .ref import build_read_edition
@@ -115,6 +116,7 @@ def chapter_document(edition: dict[str, Any], spec: dict[str, Any]) -> dict[str,
         "block_start": spec["block_start"],
         "block_end": spec["block_end"],
         "blocks": blocks,
+        "notes": notes_for_chapter_blocks(blocks, edition.get("notes") or []),
         "reading_markdown": md,
         "split_hint": spec.get("split_hint"),
         "word_count": _word_count(md),

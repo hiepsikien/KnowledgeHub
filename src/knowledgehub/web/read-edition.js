@@ -81,6 +81,57 @@
     return `re-span re-span-${String(style || "other").replace(/[^a-z0-9_-]/gi, "")}`;
   }
 
+  function tooltipText(note, style) {
+    const raw = note || style || "";
+    if (raw.length <= 280) return raw;
+    return `${raw.slice(0, 277)}…`;
+  }
+
+  function noteElementId(marker) {
+    const nums = String(marker || "").match(/\d+/g) || [];
+    return nums.length ? `re-note-${nums[0]}` : "";
+  }
+
+  function collectNotes(chapter) {
+    const rows = [];
+    const seen = new Set();
+    for (const note of chapter.notes || []) {
+      const marker = String(note.marker || "");
+      if (!marker || !note.body || seen.has(marker)) continue;
+      seen.add(marker);
+      rows.push(note);
+    }
+    if (rows.length) return rows;
+    for (const block of chapter.blocks || []) {
+      for (const span of block.spans || []) {
+        if (span.style !== "footnote" || !span.note || seen.has(span.text)) continue;
+        seen.add(span.text);
+        rows.push({ marker: span.text, body: span.note, anchor: span.anchor || "" });
+      }
+    }
+    return rows;
+  }
+
+  function renderNotes(chapter) {
+    const notes = collectNotes(chapter);
+    if (!notes.length) {
+      const orphan = (chapter.blocks || []).some((b) =>
+        (b.spans || []).some((s) => s.style === "footnote" && !s.note),
+      );
+      if (!orphan) return "";
+      return `<section class="re-notes"><h3>Chú thích</h3><p class="muted">Có mốc chú thích nhưng chưa gắn được nội dung từ cuối chương.</p></section>`;
+    }
+    const items = notes
+      .map((note) => {
+        const marker = escapeHtml(note.marker || "");
+        const anchor = note.anchor ? `<span class="re-note-anchor">${escapeHtml(note.anchor)}</span> ` : "";
+        const id = noteElementId(note.marker);
+        return `<li id="${id}"><strong>${anchor}${marker}</strong> ${escapeHtml(note.body)}</li>`;
+      })
+      .join("");
+    return `<section class="re-notes"><h3>Chú thích (${notes.length})</h3><ol>${items}</ol></section>`;
+  }
+
   function renderBlock(block) {
     const kind = block.type || "paragraph";
     const text = String(block.text || "");
@@ -94,7 +145,18 @@
         const start = span.start || 0;
         const end = span.end || start;
         if (start > cursor) parts.push(escapeHtml(text.slice(cursor, start)));
-        parts.push(`<mark class="${spanClass(span.style)}" title="${escapeHtml(span.style)}">${escapeHtml(text.slice(start, end))}</mark>`);
+        const note = span.note ? String(span.note) : "";
+        const title = tooltipText(note, span.style);
+        const marker = String(span.text || text.slice(start, end));
+        const hasNote = span.style === "footnote" && note ? " has-note" : "";
+        const data = note
+          ? ` data-fn="${escapeHtml(marker)}" data-note="1"`
+          : span.style === "footnote"
+            ? ` data-fn="${escapeHtml(marker)}"`
+            : "";
+        parts.push(
+          `<mark class="${spanClass(span.style)}${hasNote}" title="${escapeHtml(title)}"${data}>${escapeHtml(text.slice(start, end))}</mark>`,
+        );
         cursor = end;
       }
       if (cursor < text.length) parts.push(escapeHtml(text.slice(cursor)));
@@ -199,13 +261,28 @@
       };
       return;
     }
-    box.innerHTML = blocks
-      .map(
-        (b, i) =>
-          `<div class="re-block${state.editIndex === i ? " on" : ""}" data-index="${i}" tabindex="0" role="button">${renderBlock(b)}</div>`,
-      )
-      .join("");
+    box.innerHTML =
+      blocks
+        .map(
+          (b, i) =>
+            `<div class="re-block${state.editIndex === i ? " on" : ""}" data-index="${i}" tabindex="0" role="button">${renderBlock(b)}</div>`,
+        )
+        .join("") + renderNotes(chapter);
     box.onclick = (e) => {
+      const mark = e.target.closest("mark[data-fn]");
+      if (mark) {
+        const id = noteElementId(mark.getAttribute("data-fn"));
+        const target = id ? document.getElementById(id) : null;
+        if (target) {
+          box.querySelectorAll(".re-notes li.on").forEach((el) => el.classList.remove("on"));
+          target.classList.add("on");
+          target.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+        if (mark.getAttribute("data-note")) {
+          e.stopPropagation();
+          return;
+        }
+      }
       const hit = e.target.closest(".re-block[data-index]");
       if (!hit) return;
       state.editIndex = Number(hit.dataset.index);
@@ -320,8 +397,10 @@
       $("re-detail-title").textContent = chapter.title || chapterId;
       const parsed = chapter.micro_status === "complete";
       const parentBit = parentRow ? `${parentRow.title} · ` : "";
+      const noteCount = collectNotes(chapter).length;
+      const noteBit = parsed && noteCount ? ` · ${noteCount} chú thích` : "";
       $("re-detail-meta").textContent = parsed
-        ? `${parentBit}${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ`
+        ? `${parentBit}${chapter.block_count || 0} blocks · ${(chapter.word_count || 0).toLocaleString()} từ${noteBit}`
         : chapter.source_preview_truncated
           ? `${parentBit}Chưa parse REF — preview đầu + cuối (rút ${(Number(chapter.source_preview_omitted) || 0).toLocaleString()} chữ giữa)`
           : `${parentBit}Chưa parse REF — xem preview nguồn`;

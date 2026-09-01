@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Any
 
 from .profile import PG_END
@@ -17,8 +18,31 @@ KIND_ALIASES = {"term": "glossary"}
 FOOTNOTE_MARKER = re.compile(r"^\[\d+\]$")
 
 FOOTNOTES_ONLY = re.compile(r"(?im)^[ \t]*FOOTNOTES\s*[:.]?\s*$")
+FOOTNOTES_START = re.compile(r"(?im)^[ \t]*FOOTNOTES\s*[:.]?\s+")
 NOTE_ITEM = re.compile(r"(?m)^\[(\d+)\]\s*")
+NOTE_LINE = re.compile(r"^\[(\d+)\]\s*")
+PG_FOOTNOTE_OPEN = re.compile(r"\[Footnote\s+(\d+)\s*:\s*", re.I)
+STRUCT_HEAD = re.compile(
+    r"^(?:CHAPTER|BOOK|VOLUME|PART)\s+[IVXLC\d]+[A-Z]?\s*\.?\s*(.*)$",
+    re.I,
+)
+INDEX_HEAD = re.compile(r"^(?:INDEX|BIBLIOGRAPHY|CONTENTS)\s*[:.]?\s*$", re.I)
+CHAPTER_KEY = re.compile(
+    r"(?im)^(?:CHAPTER|BOOK|VOLUME|PART|Chapter)\s+([IVXLC\d]+[A-Z]?)\b"
+)
+TRANSCRIBER_TAIL = re.compile(
+    r"(?im)^[ \t]*Transcriber(?:'?s|s'?)\s+Notes?\s*:?\s*$"
+)
+SPAN_NUMBERS = re.compile(r"\[(\d+(?:,\s*\d+)*)\]")
 ROMAN = re.compile(r"^[IVXLCDM]+$", re.I)
+
+
+@dataclass(frozen=True)
+class FootnoteDump:
+    start: int
+    end: int
+    body_start: int
+    notes: dict[int, str]
 
 
 def annotation_kind(item: dict[str, Any]) -> str:
@@ -58,22 +82,179 @@ def _anchor_name(body: str, number: int) -> str:
     return fallback
 
 
-def split_footnotes_section(text: str) -> tuple[str, str]:
-    """Cut only a tail FOOTNOTES dump, not NOTES TO … essays."""
-    match = None
+def _compact_note(body: str) -> str:
+    return re.sub(r"\s+", " ", body).strip()
+
+
+def _looks_like_note_dump(window: str) -> bool:
+    """True when a FOOTNOTES heading is followed by real note items, not a TOC row."""
+    sample = window[:1200]
+    if PG_FOOTNOTE_OPEN.search(sample):
+        return True
+    return bool(NOTE_ITEM.search(sample))
+
+
+def _is_structural_heading_line(line: str) -> bool:
+    """True for a real CHAPTER/INDEX line, not wrap like 'CHAPTER III of the later volume.'"""
+    s = line.strip()
+    if not s:
+        return False
+    if INDEX_HEAD.match(s) or TRANSCRIBER_TAIL.match(s) or PG_END.search(s):
+        return True
+    match = STRUCT_HEAD.match(s)
+    if not match:
+        return False
+    rest = match.group(1).strip()
+    if not rest:
+        return True
+    if rest[0].islower():
+        return False
+    if len(s) > 90:
+        return False
+    letters = [ch for ch in rest if ch.isalpha()]
+    if letters and rest.endswith(".") and sum(ch.islower() for ch in letters) / len(letters) > 0.3:
+        return False
+    return True
+
+
+def _closing_bracket(text: str, open_at: int) -> int | None:
+    depth = 1
+    index = open_at + 1
+    while index < len(text) and depth:
+        char = text[index]
+        if char == "[":
+            depth += 1
+        elif char == "]":
+            depth -= 1
+        index += 1
+    return index if depth == 0 else None
+
+
+def _footnote_dump_end(text: str, after: int) -> int:
+    """End offset of note items after a FOOTNOTES heading — not the next chapter heading."""
+    pos = after
+    saw_item = False
+    blank_run = False
+    end = after
+    while pos < len(text):
+        line_end = text.find("\n", pos)
+        if line_end < 0:
+            raw = text[pos:]
+            next_pos = len(text)
+        else:
+            raw = text[pos:line_end]
+            next_pos = line_end + 1
+        stripped = raw.strip()
+        if not stripped:
+            blank_run = True
+            pos = next_pos
+            continue
+        pg = PG_FOOTNOTE_OPEN.match(stripped)
+        numbered = NOTE_LINE.match(stripped)
+        if pg or numbered:
+            if pg:
+                open_at = pos + raw.find("[")
+                closed = _closing_bracket(text, open_at)
+                if closed is None:
+                    return len(text)
+                pos = closed
+                if pos < len(text) and text[pos] == "\n":
+                    pos += 1
+                saw_item = True
+                blank_run = False
+                end = pos
+                continue
+            saw_item = True
+            blank_run = False
+            end = next_pos
+            pos = next_pos
+            continue
+        if not saw_item:
+            if _is_structural_heading_line(stripped) or FOOTNOTES_ONLY.match(stripped):
+                return after
+            pos = next_pos
+            continue
+        if (
+            FOOTNOTES_ONLY.match(stripped)
+            or _is_structural_heading_line(stripped)
+            or PG_END.search(stripped)
+            or TRANSCRIBER_TAIL.match(stripped)
+        ):
+            return pos
+        if blank_run:
+            return pos
+        end = next_pos
+        pos = next_pos
+        blank_run = False
+    return max(end, after)
+
+
+def iter_footnote_dumps(text: str) -> list[FootnoteDump]:
+    """Each FOOTNOTES dump with notes local to the preceding chapter body."""
+    if not text.strip():
+        return []
+    dumps: list[FootnoteDump] = []
+    body_start = 0
     for found in FOOTNOTES_ONLY.finditer(text):
-        if found.start() >= int(len(text) * 0.4):
-            match = found
-    if match is None:
+        after = found.end()
+        if not _looks_like_note_dump(text[after:]):
+            continue
+        end = _footnote_dump_end(text, after)
+        if end <= found.start():
+            continue
+        notes = parse_footnote_blob(text[found.start() : end])
+        if not notes:
+            continue
+        dumps.append(FootnoteDump(found.start(), end, body_start, notes))
+        body_start = end
+    return dumps
+
+
+def footnote_dump_ranges(text: str) -> list[tuple[int, int]]:
+    """Character ranges of per-chapter FOOTNOTES dumps (items only)."""
+    return [(dump.start, dump.end) for dump in iter_footnote_dumps(text)]
+
+
+def _cut_ranges(text: str, ranges: list[tuple[int, int]]) -> str:
+    if not ranges:
+        return text
+    parts: list[str] = []
+    cursor = 0
+    for start, end in ranges:
+        parts.append(text[cursor:start])
+        cursor = end
+    parts.append(text[cursor:])
+    return "".join(parts).rstrip()
+
+
+def split_footnotes_section(text: str) -> tuple[str, str]:
+    """Cut FOOTNOTES dumps (every chapter, not only the book tail)."""
+    ranges = footnote_dump_ranges(text)
+    if not ranges:
         return text, ""
-    end = len(text)
-    pg = PG_END.search(text, match.start())
-    if pg:
-        end = pg.start()
-    trans = re.search(r"(?im)^[ \t]*Transcriber(?:'?s|s'?)\s+Notes?\s*:?\s*$", text[match.start() :])
-    if trans:
-        end = min(end, match.start() + trans.start())
-    return text[: match.start()].rstrip(), text[match.start() : end]
+    blob = "\n\n".join(text[start:end] for start, end in ranges)
+    return _cut_ranges(text, ranges), blob
+
+
+def parse_gutenberg_bracket_notes(blob: str) -> dict[int, str]:
+    """Parse Gutenberg ``[Footnote 12: body]`` items, including wrapped lines."""
+    items: dict[int, str] = {}
+    for match in PG_FOOTNOTE_OPEN.finditer(blob):
+        depth = 1
+        index = match.start() + 1
+        while index < len(blob) and depth:
+            char = blob[index]
+            if char == "[":
+                depth += 1
+            elif char == "]":
+                depth -= 1
+            index += 1
+        if depth != 0:
+            continue
+        body = _compact_note(blob[match.end() : index - 1])
+        if len(body) >= 2:
+            items[int(match.group(1))] = body
+    return items
 
 
 def parse_numbered_notes(blob: str) -> dict[int, str]:
@@ -84,36 +265,318 @@ def parse_numbered_notes(blob: str) -> dict[int, str]:
     numbered = parts[1:]
     for i in range(0, len(numbered) - 1, 2):
         number = int(numbered[i])
-        body = re.sub(r"\s+", " ", numbered[i + 1]).strip()
-        if len(body) >= 8:
+        body = _compact_note(numbered[i + 1])
+        body = PG_FOOTNOTE_OPEN.split(body, maxsplit=1)[0].strip()
+        if len(body) >= 2:
             items[number] = body
     return items
 
 
-def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
-    """Return (body without FOOTNOTES dump, glossary entries for Read)."""
-    body, notes_blob = split_footnotes_section(text)
-    parsed = parse_numbered_notes(notes_blob)
-    if not parsed:
-        return text, []
+def parse_footnote_blob(blob: str) -> dict[int, str]:
+    """Numbered ``[1]`` notes plus Gutenberg ``[Footnote 1: …]`` notes."""
+    items = parse_numbered_notes(blob)
+    items.update(parse_gutenberg_bracket_notes(blob))
+    return items
+
+
+def notes_from_text(text: str) -> dict[int, str]:
+    """Notes from a single FOOTNOTES dump (a chapter slice).
+
+    Multiple dumps are not merged by number — that overwrites restarted [1], [2].
+    Use ``iter_footnote_dumps`` for a whole book.
+    """
+    dumps = iter_footnote_dumps(text)
+    if len(dumps) == 1:
+        return dumps[0].notes
+    return {}
+
+
+def _span_numbers(marker: str) -> list[int]:
+    match = SPAN_NUMBERS.fullmatch(str(marker or "").strip())
+    if not match:
+        return []
+    return [int(part) for part in match.group(1).split(",")]
+
+
+def _chapter_key(body: str) -> str:
+    matches = list(CHAPTER_KEY.finditer(body))
+    return matches[-1].group(1).upper() if matches else ""
+
+
+def _block_text(block: dict[str, Any]) -> str:
+    return str(block.get("text") or "").strip()
+
+
+def _block_has_note_item(text: str) -> bool:
+    if NOTE_LINE.match(text) or PG_FOOTNOTE_OPEN.search(text):
+        return True
+    return bool(FOOTNOTES_START.match(text) and re.search(r"\[\d+\]", text))
+
+
+def _block_is_footnotes_heading(block: dict[str, Any]) -> bool:
+    text = _block_text(block)
+    if FOOTNOTES_ONLY.match(text):
+        return True
+    # Joined heading+first item: "FOOTNOTES: [75] P. 144."
+    return bool(FOOTNOTES_START.match(text) and _block_has_note_item(text))
+
+
+def _unclosed_pg_footnote(text: str) -> bool:
+    index = 0
+    while True:
+        match = PG_FOOTNOTE_OPEN.search(text, index)
+        if not match:
+            return False
+        closed = _closing_bracket(text, match.start())
+        if closed is None:
+            return True
+        index = closed
+
+
+def _dump_block_end(
+    blocks: list[dict[str, Any]],
+    heading_index: int,
+    dump: FootnoteDump | None = None,
+    source_text: str = "",
+) -> int:
+    """Exclusive end of dump blocks after a FOOTNOTES heading. heading_index if none.
+
+    Prefer the source dump blob so wrap lines like ``CHAPTER III of the later
+    volume.`` (often labeled heading) stay inside the dump, while the next
+    real paragraph after a blank is kept.
+    """
+    if dump is not None and source_text:
+        blob = _compact_note(source_text[dump.start : dump.end])
+        if blob:
+            cursor = heading_index
+            search_from = 0
+            saw_item = False
+            while cursor < len(blocks):
+                raw = _block_text(blocks[cursor])
+                text = _compact_note(raw)
+                if not text:
+                    cursor += 1
+                    continue
+                found = blob.find(text, search_from)
+                if found < 0 and search_from:
+                    found = blob.find(text)
+                if found < 0:
+                    break
+                if _block_has_note_item(raw):
+                    saw_item = True
+                search_from = found + max(len(text), 1)
+                cursor += 1
+                if search_from >= len(blob):
+                    break
+            if saw_item and cursor > heading_index:
+                return cursor
+    cursor = heading_index + 1
+    saw_item = False
+    blank_run = False
+    acc = ""
+    end = heading_index
+    while cursor < len(blocks):
+        text = _block_text(blocks[cursor])
+        if not text:
+            blank_run = True
+            cursor += 1
+            continue
+        pg_open = _unclosed_pg_footnote(acc)
+        if _block_has_note_item(text) or pg_open:
+            saw_item = True
+            blank_run = False
+            acc += "\n" + text
+            end = cursor + 1
+            cursor += 1
+            continue
+        if not saw_item:
+            if _is_structural_heading_line(text) or FOOTNOTES_ONLY.match(text):
+                return heading_index
+            cursor += 1
+            continue
+        if (
+            FOOTNOTES_ONLY.match(text)
+            or _is_structural_heading_line(text)
+            or TRANSCRIBER_TAIL.match(text)
+        ):
+            break
+        if blank_run:
+            break
+        acc += "\n" + text
+        end = cursor + 1
+        cursor += 1
+        blank_run = False
+    return end if saw_item else heading_index
+
+
+def _apply_notes_to_blocks(
+    blocks: list[dict[str, Any]],
+    notes: dict[int, str],
+) -> list[dict[str, Any]]:
+    if not notes:
+        return blocks
+    out: list[dict[str, Any]] = []
+    for block in blocks:
+        spans = block.get("spans")
+        if not spans:
+            out.append(block)
+            continue
+        new_spans: list[dict[str, Any]] = []
+        for span in spans:
+            row = dict(span)
+            if row.get("style") == "footnote":
+                bodies = [notes[number] for number in _span_numbers(row.get("text") or "") if number in notes]
+                if bodies:
+                    row["note"] = " ".join(bodies)[:8000]
+            new_spans.append(row)
+        out.append({**block, "spans": new_spans})
+    return out
+
+
+def note_entries_from_parsed(
+    parsed: dict[int, str],
+    *,
+    body: str = "",
+    chapter: str = "",
+) -> list[dict[str, Any]]:
     entries: list[dict[str, Any]] = []
     for number, summary in sorted(parsed.items()):
         marker = f"[{number}]"
-        name = _anchor_name(body, number)
-        label = f"{name} {marker}" if name != marker else marker
+        name = _anchor_name(body, number) if body else marker
         entries.append(
             {
-                "name": label[:300],
-                "aliases": [marker],
-                "summary": summary[:8000],
-                "group_label": "Chú thích",
-                "kind": "footnote",
                 "marker": marker,
-                "anchor": name[:300],
-                "chapter": "",
+                "body": summary[:8000],
+                "anchor": "" if name == marker else name[:300],
+                "chapter": chapter,
             }
         )
-    return body, entries
+    return entries
+
+
+def notes_for_chapter_blocks(
+    blocks: list[dict[str, Any]],
+    catalog: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Notes already attached to these blocks; catalog is a fallback only."""
+    from_spans: dict[str, dict[str, Any]] = {}
+    markers: set[str] = set()
+    for block in blocks:
+        for span in block.get("spans") or []:
+            if span.get("style") != "footnote":
+                continue
+            marker = str(span.get("text") or "")
+            if not marker:
+                continue
+            markers.add(marker)
+            if span.get("note"):
+                from_spans[marker] = {
+                    "marker": marker,
+                    "body": str(span.get("note") or "")[:8000],
+                    "anchor": "",
+                    "chapter": str(span.get("chapter") or ""),
+                }
+    if from_spans:
+        return [from_spans[key] for key in sorted(from_spans, key=lambda marker: _span_numbers(marker) or [0])]
+    if catalog:
+        grouped: dict[str, list[dict[str, Any]]] = {}
+        for row in catalog:
+            marker = str(row.get("marker") or "")
+            if marker in markers and row.get("body"):
+                grouped.setdefault(marker, []).append(row)
+        # Book-wide catalog cannot choose among restarted [1] per chapter.
+        return [
+            rows[0]
+            for marker, rows in sorted(grouped.items(), key=lambda item: _span_numbers(item[0]) or [0])
+            if len(rows) == 1
+        ]
+    return []
+
+
+def attach_footnote_bodies(
+    blocks: list[dict[str, Any]],
+    source_text: str = "",
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Attach each dump to the preceding body and drop FOOTNOTES blocks from reading flow."""
+    dumps = iter_footnote_dumps(source_text) if source_text else []
+    dump_index = 0
+    pending: list[dict[str, Any]] = []
+    out: list[dict[str, Any]] = []
+    catalog: list[dict[str, Any]] = []
+
+    def flush(notes: dict[int, str]) -> None:
+        nonlocal pending
+        body = "\n\n".join(_block_text(block) for block in pending)
+        applied = _apply_notes_to_blocks(pending, notes)
+        out.extend(applied)
+        catalog.extend(note_entries_from_parsed(notes, body=body, chapter=_chapter_key(body)))
+        pending = []
+
+    index = 0
+    while index < len(blocks):
+        if _block_is_footnotes_heading(blocks[index]):
+            dump = dumps[dump_index] if dump_index < len(dumps) else None
+            dump_end = _dump_block_end(blocks, index, dump, source_text)
+            if dump_end > index:
+                if dump_index < len(dumps):
+                    notes = dumps[dump_index].notes
+                    dump_index += 1
+                else:
+                    blob = "\n\n".join(_block_text(block) for block in blocks[index:dump_end])
+                    notes = parse_footnote_blob(blob)
+                flush(notes)
+                index = dump_end
+                continue
+        pending.append(blocks[index])
+        index += 1
+    if dumps and dump_index < len(dumps) and pending:
+        flush(dumps[dump_index].notes)
+        dump_index += 1
+    else:
+        out.extend(pending)
+    while dump_index < len(dumps):
+        catalog.extend(
+            note_entries_from_parsed(
+                dumps[dump_index].notes,
+                body=source_text[dumps[dump_index].body_start : dumps[dump_index].start],
+                chapter=_chapter_key(source_text[dumps[dump_index].body_start : dumps[dump_index].start]),
+            )
+        )
+        dump_index += 1
+    return out, catalog
+
+
+def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
+    """Return (body without FOOTNOTES dumps, glossary entries for Read)."""
+    dumps = iter_footnote_dumps(text)
+    if not dumps:
+        return text, []
+    stripped = _cut_ranges(text, [(dump.start, dump.end) for dump in dumps])
+    entries: list[dict[str, Any]] = []
+    used_names: set[str] = set()
+    for dump in dumps:
+        chapter_body = text[dump.body_start : dump.start]
+        chapter = _chapter_key(chapter_body)
+        for number, summary in sorted(dump.notes.items()):
+            marker = f"[{number}]"
+            name = _anchor_name(chapter_body, number)
+            label = f"{name} {marker}" if name != marker else marker
+            if label in used_names and chapter:
+                label = f"{label} (ch. {chapter})"
+            used_names.add(label)
+            entries.append(
+                {
+                    "name": label[:300],
+                    "aliases": [marker],
+                    "summary": summary[:8000],
+                    "group_label": "Chú thích",
+                    "kind": "footnote",
+                    "marker": marker,
+                    "anchor": name[:300],
+                    "chapter": chapter,
+                }
+            )
+    return stripped, entries
 
 
 def notes_from_annotations(
