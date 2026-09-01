@@ -362,8 +362,34 @@ def test_reset_wipes_package_including_toc(tmp_path, monkeypatch):
     assert status["phase"] == "empty"
 
 
+def test_keep_toc_rejected_does_not_reuse_raw_toc(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    work_id = "grotius--freedom_of_the_seas"
+    run_macro_step(work_id, corpus=corpus, use_llm=False)
+    from knowledgehub.edition.read_edition_steps import confirm_toc_step
+
+    confirm_toc_step(work_id, "no", corpus=corpus)
+    seen: dict[str, str | None] = {}
+    original = build_macro_structure
+
+    def spy(text, **kwargs):
+        seen["toc_excerpt"] = kwargs.get("toc_excerpt")
+        return original(text, **kwargs)
+
+    monkeypatch.setattr("knowledgehub.edition.read_edition_steps.build_macro_structure", spy)
+    result = run_macro_step(work_id, corpus=corpus, use_llm=False, keep_toc=True)
+    assert result["built"] is True
+    assert seen["toc_excerpt"] == ""
+    assert (result["structure"].get("hitl") or {}).get("toc", {}).get("status") == "no"
+
+
 def test_toc_source_from_excerpt_prepends_contents():
-    from knowledgehub.edition.toc import toc_source_from_excerpt
+    from knowledgehub.edition.toc import (
+        CONTENTS_HEAD,
+        VI_TOC_HEADER,
+        parse_contents_entries,
+        toc_source_from_excerpt,
+    )
 
     wrapped = toc_source_from_excerpt("CHAPTER I. Foo\nCHAPTER II. Bar")
     assert wrapped.startswith("CONTENTS\n")
@@ -371,6 +397,19 @@ def test_toc_source_from_excerpt_prepends_contents():
     already = toc_source_from_excerpt("CONTENTS\n\nCHAPTER I. Foo")
     assert already.startswith("CONTENTS")
     assert already.count("CONTENTS") == 1
+
+    plain_vi = "Mục lục"
+    assert CONTENTS_HEAD.match(plain_vi)
+    assert toc_source_from_excerpt(f"{plain_vi}\nCHAPTER I. Alpha  1").startswith("Mục lục")
+
+    colon = "Mục lục:"
+    assert VI_TOC_HEADER.match(colon)
+    assert not CONTENTS_HEAD.match(colon)
+    src = toc_source_from_excerpt(f"{colon}\nCHAPTER I. Alpha  1\nCHAPTER II. Beta  12")
+    assert src.startswith("CONTENTS\n")
+    labels = [e["label"] for e in parse_contents_entries(src)]
+    assert "CHAPTER I" in labels
+    assert "CHAPTER II" in labels
 
 
 def test_set_kind_keeps_parsed_chapter_json(tmp_path, monkeypatch):

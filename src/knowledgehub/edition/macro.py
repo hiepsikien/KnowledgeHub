@@ -317,7 +317,7 @@ def _llm_macro_prompt(
     toc_excerpt: str | None = None,
 ) -> list[dict[str, str]]:
     head = text[:5000]
-    toc = (toc_excerpt or "").strip() or _toc_excerpt(text)
+    toc = (toc_excerpt or "").strip()
     cand_block = "\n".join(
         f"{c['line']}: [{c.get('heuristic', '?')}] {c['text'][:120]}"
         for c in filter_candidates_for_llm(candidates)
@@ -382,19 +382,32 @@ def build_macro_structure(
 
     strategy: baseline (legacy) | pa1 (LLM heading patterns) | pa2 (patterns + TOC content match)
     raw: optional unstripped source for TOC extraction (required for best pa1/pa2 results).
-    toc_excerpt: curator-confirmed Contents text; preferred over auto-extract from raw.
+    toc_excerpt: curator-confirmed Contents text. None = auto-extract from raw;
+        empty string = do not use a TOC (rejected / none).
     """
     if not text.strip():
         raise ValueError("empty text for macro structure")
     family = family or detect_family(text, work=work, language=language)
-    curated = str(toc_excerpt or "").strip()
+    if toc_excerpt is None:
+        prompt_toc = _toc_excerpt(text)
+        curated = ""
+        auto_toc = True
+    else:
+        prompt_toc = str(toc_excerpt).strip()
+        curated = prompt_toc
+        auto_toc = False
     if strategy not in {"baseline", "pa1", "pa2"}:
         raise ValueError(f"unknown macro strategy: {strategy}")
     if strategy in {"pa1", "pa2"}:
         from .macro_profile import build_macro_with_strategy
         from .toc import toc_source_from_excerpt
 
-        strategy_raw = toc_source_from_excerpt(curated) if curated else raw
+        if curated:
+            strategy_raw = toc_source_from_excerpt(curated)
+        elif auto_toc:
+            strategy_raw = raw
+        else:
+            strategy_raw = None
         return build_macro_with_strategy(
             text,
             strategy_raw,
@@ -417,8 +430,13 @@ def build_macro_structure(
         toc_source_from_excerpt,
     )
 
-    toc_source = toc_source_from_excerpt(curated) if curated else (raw or text)
-    toc_entries = parse_contents_entries(toc_source)
+    if curated:
+        toc_source = toc_source_from_excerpt(curated)
+    elif auto_toc:
+        toc_source = raw or text
+    else:
+        toc_source = ""
+    toc_entries = parse_contents_entries(toc_source) if toc_source else []
     toc_matched = match_toc_entries_in_body(text, toc_entries) if toc_entries else []
     if (
         toc_is_page_column_map(toc_entries)
@@ -480,7 +498,7 @@ def build_macro_structure(
                     candidates=candidates,
                     language=language,
                     family=family,
-                    toc_excerpt=curated or None,
+                    toc_excerpt=prompt_toc,
                 ),
                 model=qa_model,
                 temperature=0.1,

@@ -180,6 +180,57 @@ def test_macro_uses_toc_for_abdy_style_sections():
     assert "toc" not in kinds
 
 
+def test_empty_toc_excerpt_skips_auto_toc_match():
+    raw, text = _abdy_toc_and_body()
+    auto = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert auto["mode"] == "toc_match"
+    skipped = build_macro_structure(
+        text, language="en", family="gutenberg", use_llm=False, raw=raw, toc_excerpt=""
+    )
+    assert skipped["mode"] != "toc_match"
+
+
+def test_curated_wrap_excerpt_drives_toc_match_over_junk_raw():
+    raw, text = _abdy_toc_and_body()
+    junk = """Title page
+
+CONTENTS
+
+Wrong leftover essay  1
+Another leftover title  2
+
+""" + text
+    auto = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=junk)
+    assert auto["mode"] != "toc_match" or "Chapter I" not in [s["title"] for s in auto["sections"]]
+    curated = """CONTENTS
+
+                                                                     PAGE
+
+ PREFACE                                                                v
+
+
+ CHAPTER I
+
+ The Bachs of Thuringia                                                 1
+
+
+ CHAPTER II
+
+ Bach’s attitude towards art                                           20
+"""
+    doc = build_macro_structure(
+        text, language="en", family="gutenberg", use_llm=False, raw=junk, toc_excerpt=curated
+    )
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert "preface" in kinds
+    assert kinds.count("chapter") == 2
+    assert any("Chapter I" in t for t in titles)
+    assert any("Chapter II" in t for t in titles)
+    assert not any("leftover" in t.lower() for t in titles)
+
+
 def test_macro_abdy_williams_full_pg():
     raw_path = Path("/tmp/pg_full/pg43650.txt")
     if not raw_path.is_file():

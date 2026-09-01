@@ -286,9 +286,10 @@ def run_macro_step(
         if saved_toc.get("status") not in {"yes", "no", "none"}:
             raise ReadEditionStepError("Confirm TOC before phân loại lại")
         if saved_toc.get("status") == "yes":
-            excerpt = str(saved_toc.get("excerpt") or "").strip()
-            if excerpt:
-                toc_excerpt = excerpt
+            toc_excerpt = str(saved_toc.get("excerpt") or "").strip()
+        else:
+            # Rejected / no TOC: remacro without falling back to auto-extract.
+            toc_excerpt = ""
     elif not force:
         if existing and existing.get("ref_parser_version") == REF_PARSER_VERSION:
             manifest_path = package_dir / "manifest.json"

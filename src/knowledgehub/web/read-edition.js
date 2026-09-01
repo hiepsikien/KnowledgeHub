@@ -657,7 +657,9 @@
         method: "POST",
         body: { keep_toc: true, use_llm: useLlmMacro() },
       });
-      toast("Đã phân loại lại — TOC đã dán được giữ");
+      toast(
+        status === "yes" ? "Đã phân loại lại — TOC đã dán được giữ" : "Đã phân loại lại — không dùng TOC máy",
+      );
       await loadReadEditionPage(state.workId);
     } catch (err) {
       toast(err.message);
