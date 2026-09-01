@@ -92,6 +92,8 @@ def is_body_heading_line(line: str) -> bool:
         return True
     if re.match(r"^(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b", s, re.I):
         return not is_toc_list_row(s)
+    if _UNIT_TOC_LINE.match(s):
+        return not is_toc_list_row(s)
     return False
 
 
@@ -351,11 +353,17 @@ def toc_source_from_excerpt(excerpt: str) -> str:
 _PAGE_COL = re.compile(r"^PAGE\s*$", re.I)
 _CHAPTER_TOC_LINE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+([IVXLC\d]+)\.?\s*(.*)$", re.I)
 _BOOK_PART_TOC_LINE = re.compile(r"^(BOOK|PART|VOLUME)\s+([IVXLC\d]+)\b(.*)$", re.I)
-_NAMED_TOC_LINE = re.compile(
-    r"^(PREFACE|INTRODUCTION|PROLOGUE|FOREWORD|APPENDIX|NOTES|INDEX|"
-    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|CATALOGUE\b.*|CATALOG\b.*)\s*(.*)$",
+_UNIT_TOC_LINE = re.compile(
+    r"^(Essay|Section|Sub-Section|Subsection|Sub-section)\s+([IVXLC\d]+|[A-Z])\.?\s*(.*)$",
     re.I,
 )
+_NAMED_TOC_LINE = re.compile(
+    r"^(PREFACE|INTRODUCTION|PROLOGUE|FOREWORD|APPENDIX|NOTES|INDEX|"
+    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|FOOTNOTES|"
+    r"CATALOGUE\b.*|CATALOG\b.*)\s*(.*)$",
+    re.I,
+)
+_TITLE_CASE_SMALL = frozenset({"of", "and", "the", "or", "in", "a", "an", "to", "on", "for"})
 _TOC_PAGE_TAIL = re.compile(r"(?:\.{2,}|\s{2,})(\d{1,4}|[ivxlcdm]{1,8})\s*$", re.I)
 _TOC_STOP = re.compile(
     r"^(?:\*\*\*|List of |Illustrations\b|END OF THE PROJECT GUTENBERG)",
@@ -381,6 +389,12 @@ def kind_for_toc_label(label: str) -> str:
         return "book"
     if u.startswith(("PART", "VOLUME")):
         return "part"
+    if u.startswith("ESSAY"):
+        return "chapter"
+    if u.startswith(("SUB-SECTION", "SUBSECTION", "SUB SECTION")):
+        return "chapter"
+    if u.startswith("SECTION"):
+        return "part"
     if u.startswith("PREFACE") or "FOREWORD" in u:
         return "preface"
     if u.startswith("INTRODUCTION"):
@@ -389,7 +403,7 @@ def kind_for_toc_label(label: str) -> str:
         return "prologue"
     if u.startswith("APPENDIX"):
         return "appendix"
-    if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA")):
+    if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA", "FOOTNOTES")):
         return "back_matter"
     # Named essays stay "other" (not structural). toc_match still requires them
     # when the TOC has no chapter/book/part rows; Dedication / To the Reader
@@ -425,13 +439,50 @@ def _roman_to_int(token: str) -> int | None:
     return total if total > 0 else None
 
 
+def _is_title_case_heading(line: str) -> bool:
+    """Standalone title-case TOC row without CHAPTER/Essay and without a page column."""
+    s = line.strip()
+    if not s or len(s) > 90:
+        return False
+    if toc_page_tail(s) or is_toc_list_row(s):
+        return False
+    if (
+        _CHAPTER_TOC_LINE.match(s)
+        or _NAMED_TOC_LINE.match(s)
+        or _UNIT_TOC_LINE.match(s)
+        or _BOOK_PART_TOC_LINE.match(s)
+    ):
+        return False
+    core = s.rstrip(".")
+    if not core or not core[0].isalpha() or not core[0].isupper():
+        return False
+    words = re.findall(r"[A-Za-z']+", core)
+    if not words:
+        return False
+    letters = [c for c in core if c.isalpha()]
+    # ALL-CAPS column headers / body reprints (NUMBERS;, CHAPTER PAGE, I.)
+    if letters and sum(c.isupper() for c in letters) / len(letters) >= 0.85:
+        return False
+    for word in words:
+        if word.lower() in _TITLE_CASE_SMALL:
+            continue
+        if not word[0].isupper():
+            return False
+    return True
+
+
 def _following_has_toc_wrap_page(lines: list[str], index: int) -> bool:
     """True when a bare CHAPTER line is followed by a synopsis that ends in a page number."""
     for j in range(index + 1, min(index + 14, len(lines))):
         nxt = lines[j].strip()
         if not nxt:
             continue
-        if _CHAPTER_TOC_LINE.match(nxt) or _NAMED_TOC_LINE.match(nxt) or _BOOK_PART_TOC_LINE.match(nxt):
+        if (
+            _CHAPTER_TOC_LINE.match(nxt)
+            or _NAMED_TOC_LINE.match(nxt)
+            or _BOOK_PART_TOC_LINE.match(nxt)
+            or _UNIT_TOC_LINE.match(nxt)
+        ):
             return False
         if _TOC_STOP.match(nxt):
             return False
@@ -461,6 +512,24 @@ def toc_is_page_column_map(entries: list[dict[str, Any]]) -> bool:
         return False
     paged = sum(1 for e in entries if e.get("page"))
     if paged < 2:
+        return False
+    numbered = sum(1 for e in entries if chapter_number_key(str(e.get("label") or "")))
+    return numbered < max(2, (len(entries) + 1) // 2)
+
+
+def toc_is_heading_list_map(entries: list[dict[str, Any]]) -> bool:
+    """Named heading list without a page column (Hegel essays / sections).
+
+    Austen ``CHAPTER I.`` one-liners stay on markers: they are mostly numbered
+    CHAPTER rows. Arnold/Abdy page-column maps use ``toc_is_page_column_map``.
+    """
+    if len(entries) < 4:
+        return False
+    paged = sum(1 for e in entries if e.get("page"))
+    if paged >= 2:
+        return False
+    structural = sum(1 for e in entries if e.get("kind") in _STRUCTURAL_TOC_KINDS)
+    if structural < 3:
         return False
     numbered = sum(1 for e in entries if chapter_number_key(str(e.get("label") or "")))
     return numbered < max(2, (len(entries) + 1) // 2)
@@ -701,10 +770,15 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
             full = strip_toc_page_tail(stripped)
             kind = kind_for_toc_label(full or named.group(1))
             page = toc_page_tail(stripped)
+            head = str(named.group(1) or "").upper()
             if (
                 entries
                 and pending is None
-                and any(e.get("kind") == kind for e in entries)
+                and kind not in {"back_matter", "appendix"}
+                and any(
+                    str(e.get("label") or "").upper().startswith(head) and e.get("kind") == kind
+                    for e in entries
+                )
                 and not page
                 and not _following_has_toc_wrap_page(lines, index)
             ):
@@ -717,20 +791,38 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
                 "title_parts": [],
                 "page": page,
             }
-            if pending["page"]:
+            # Flush immediately unless a wrap title + page column follows (Abdy PREFACE).
+            if pending["page"] or not _following_has_toc_wrap_page(lines, index):
+                flush()
+            continue
+
+        unit = _UNIT_TOC_LINE.match(stripped)
+        if unit:
+            flush()
+            full = strip_toc_page_tail(stripped)
+            rest = unit.group(3).strip()
+            page = toc_page_tail(stripped)
+            pending = {
+                "label": full,
+                "kind": kind_for_toc_label(full),
+                "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
+                "page": page,
+                "wrapped": False,
+            }
+            if pending["page"] or rest or not _following_has_toc_wrap_page(lines, index):
                 flush()
             continue
 
         book_part = _BOOK_PART_TOC_LINE.match(stripped)
         if book_part:
             flush()
-            unit = book_part.group(1).upper()
+            unit_name = book_part.group(1).upper()
             num = book_part.group(2)
             rest = book_part.group(3).strip()
-            label = f"{unit} {num.upper() if not num.isdigit() else num}"
+            label = f"{unit_name} {num.upper() if not num.isdigit() else num}"
             pending = {
                 "label": label,
-                "kind": "book" if unit == "BOOK" else "part",
+                "kind": "book" if unit_name == "BOOK" else "part",
                 "title_parts": [strip_toc_page_tail(rest)] if rest and strip_toc_page_tail(rest) else [],
                 "page": toc_page_tail(stripped),
             }
@@ -758,6 +850,26 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
                         "title": label,
                         "kind": kind_for_toc_label(label),
                         "page": page,
+                        "match_strings": _match_strings_for(label, label),
+                    }
+                )
+            continue
+
+        if _is_title_case_heading(stripped):
+            # Only inside a title-list TOC (Preface / Essay / Section, no page column).
+            # Page-column maps must not ingest ALL-CAPS body reprints as extra rows.
+            if not entries or any(e.get("page") for e in entries):
+                continue
+            label = strip_toc_page_tail(stripped)
+            already = {_norm_toc_heading(str(e.get("label") or "")) for e in entries}
+            if label and _norm_toc_heading(label) not in already:
+                entries.append(
+                    {
+                        "index": len(entries) + 1,
+                        "label": label,
+                        "title": label,
+                        "kind": kind_for_toc_label(label),
+                        "page": None,
                         "match_strings": _match_strings_for(label, label),
                     }
                 )
