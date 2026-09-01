@@ -403,6 +403,7 @@ def build_macro_structure(
     from .macro_markers import try_marker_assembly
     from .macro_qa import detect_body_markers
     from .toc import (
+        heading_title_from_toc_match,
         match_toc_entries_in_body,
         parse_contents_entries,
         toc_is_page_column_map,
@@ -423,7 +424,7 @@ def build_macro_structure(
                 {"start_line": 0, "kind": "front_matter", "title": "Front matter", "confidence": 0.85}
             )
         for row in toc_matched:
-            title = str(row.get("text") or row.get("label") or "Section")
+            title = heading_title_from_toc_match(row)
             subtitle = str(row.get("title") or "")
             if _same_heading(subtitle, title) or _same_heading(subtitle, str(row.get("label") or "")):
                 subtitle_out = None

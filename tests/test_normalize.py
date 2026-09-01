@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from knowledgehub.normalize import normalize_manuscript
@@ -264,6 +265,31 @@ def test_named_page_column_toc_does_not_swallow_first_essay():
     assert "NUMBERS;" in text
     assert "THE MAJORITY AND THE REMNANT." in text
     assert "characteristic saying of Dr. Johnson" in text
+
+
+def test_named_ordinal_toc_does_not_swallow_first_essay():
+    raw = (
+        "*** START OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***\n\n"
+        "CONTENTS.\n\n"
+        "       I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME                1\n\n"
+        "      II. THE LITERARY INFLUENCE OF ACADEMIES                         31\n\n"
+        "     III. MAURICE DE GUERIN                                           59\n\n"
+        "      XI. THE STUDY OF POETRY                                        279\n\n\n"
+        "                          ESSAYS IN CRITICISM.\n\n"
+        "                             --------------\n\n"
+        "                                   I.\n"
+        "                THE FUNCTION OF CRITICISM AT THE PRESENT\n"
+        "                                 TIME.\n\n"
+        "Many objections have been made to a proposition which, in some remarks\n"
+        "of mine on translating Homer, I ventured to put forth.\n\n"
+        "*** END OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***\n"
+    )
+    text, report = normalize_manuscript(raw)
+    assert report["dropped_contents"] is True
+    assert "II. THE LITERARY INFLUENCE OF ACADEMIES" not in text
+    assert "THE FUNCTION OF CRITICISM AT THE PRESENT" in text
+    assert re.search(r"(?m)^\s*I\.\s*$", text)
+    assert "Many objections have been made" in text
 
 
 def test_chapter_i_to_v_contents_not_cut_at_chapter_iv():

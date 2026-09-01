@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from typing import Any
 
 from .lines import TextLine
@@ -496,10 +497,48 @@ def is_toc_chapter_block(lines: list[str], index: int) -> bool:
     return False
 
 
+_FOOTNOTE_MARK = re.compile(r"\[\d+\]")
+_BARE_NUM_TITLE = re.compile(r"^([IVXLC]{1,8}|\d+)\.\s+(.+)$")
+_BARE_NUM_ONLY = re.compile(r"^[IVXLC]{1,8}\.$")
+
+
+def is_chapter_number_only_line(line: str) -> bool:
+    """Lone roman numeral heading (``I.``, ``XII.``), not ``CHAPTER I`` or a year."""
+    return bool(_BARE_NUM_ONLY.fullmatch(line.strip()))
+
+
+def strip_heading_number(text: str) -> str:
+    """Drop a leading bare roman/arabic ordinal so titles can match across series."""
+    s = _FOOTNOTE_MARK.sub("", text or "").strip()
+    match = _BARE_NUM_TITLE.match(s)
+    if match:
+        return match.group(2).strip()
+    return s
+
+
+def bare_leading_numeral(text: str) -> str | None:
+    """Roman/arabic ordinal at the start of a named-essay heading, not CHAPTER/BOOK."""
+    s = (text or "").strip()
+    if re.match(r"^(?:CHAPTER|CHAP\.?|BOOK|PART|VOLUME)\b", s, re.I):
+        return None
+    match = re.match(r"^([IVXLC]{1,8}|\d+)\.(?:\s|$)", s)
+    if not match:
+        return None
+    token = match.group(1)
+    return token if token.isdigit() else token.upper()
+
+
 def _norm_toc_heading(text: str) -> str:
-    s = (text or "").lower().replace("\u00a0", " ")
+    s = _FOOTNOTE_MARK.sub(" ", text or "")
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = s.lower().replace("\u00a0", " ")
     s = re.sub(r"[^a-z0-9]+", " ", s)
     return re.sub(r"\s+", " ", s).strip()
+
+
+def _title_key(text: str) -> str:
+    return _norm_toc_heading(strip_heading_number(text))
 
 
 def _sig_tokens(text: str) -> set[str]:
@@ -537,6 +576,9 @@ def _match_strings_for(label: str, title: str) -> list[str]:
         val = (val or "").strip()
         if val:
             out.append(val)
+            stripped = strip_heading_number(val)
+            if stripped and stripped != val:
+                out.append(stripped)
     num = chapter_number_key(label)
     if num:
         tokens = [num]
@@ -744,9 +786,15 @@ def _is_titleish_line(line: str) -> bool:
 def _joined_title_window(lines: list[str], start: int, *, limit: int = 4) -> str:
     """Join a split all-caps heading such as NUMBERS; / OR, / THE MAJORITY…"""
     parts: list[str] = []
-    for j in range(start, min(start + limit, len(lines))):
+    span = limit
+    if start < len(lines) and is_chapter_number_only_line(lines[start]):
+        span = limit + 2
+    for j in range(start, min(start + span, len(lines))):
         s = lines[j].strip()
         if not s:
+            # Arnold second series: ``I.`` then a blank then ``THE STUDY OF POETRY.``
+            if len(parts) == 1 and is_chapter_number_only_line(parts[0]):
+                continue
             if parts:
                 break
             continue
@@ -761,6 +809,40 @@ def _joined_title_window(lines: list[str], start: int, *, limit: int = 4) -> str
     return " ".join(parts)
 
 
+def _attach_leading_chapter_number(lines: list[str], found_line: int) -> int:
+    """If the matched title follows a lone roman numeral, start the section there.
+
+    Only attach when the previous non-empty line is itself a chapter number — never
+    glue a numeral onto following prose.
+    """
+    if found_line <= 0 or found_line >= len(lines):
+        return found_line
+    if is_chapter_number_only_line(lines[found_line]):
+        return found_line
+    j = found_line - 1
+    while j >= 0 and not lines[j].strip():
+        j -= 1
+    if j < 0 or not is_chapter_number_only_line(lines[j].strip()):
+        return found_line
+    following = lines[found_line].strip()
+    if not _is_titleish_line(following):
+        return found_line
+    return j
+
+
+def heading_title_from_toc_match(row: dict[str, Any]) -> str:
+    """Prefer the TOC label when the body reprint uses a different ordinal."""
+    toc_label = str(row.get("label") or "").strip()
+    body = str(row.get("text") or "").strip()
+    toc_num = bare_leading_numeral(toc_label)
+    body_num = bare_leading_numeral(body)
+    if toc_num and toc_num != body_num:
+        chosen = toc_label
+    else:
+        chosen = body or toc_label
+    return _FOOTNOTE_MARK.sub("", chosen).strip()
+
+
 def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Locate TOC entries on body heading lines, skipping leftover contents-list rows."""
     lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
@@ -768,10 +850,19 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
     cursor = -1
     for entry in entries:
         chap = chapter_number_key(str(entry.get("label") or ""))
-        needles = [_norm_toc_heading(s) for s in (entry.get("match_strings") or []) if s]
-        need_toks = _sig_tokens(str(entry.get("label") or "")) | _sig_tokens(str(entry.get("title") or ""))
+        needles = [
+            key
+            for s in (entry.get("match_strings") or [])
+            if s
+            for key in (_title_key(s), _norm_toc_heading(s))
+            if key
+        ]
+        need_toks = _sig_tokens(strip_heading_number(str(entry.get("label") or ""))) | _sig_tokens(
+            strip_heading_number(str(entry.get("title") or ""))
+        )
         found_line: int | None = None
         found_text = ""
+        hit_line: int | None = None
         for line_no, raw in enumerate(lines):
             if line_no <= cursor:
                 continue
@@ -785,26 +876,41 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
                 if got == chap:
                     found_line = line_no
                     found_text = raw_line
+                    hit_line = line_no
                     break
+                continue
+            if is_chapter_number_only_line(raw_line):
                 continue
             probes = [raw_line]
             joined = _joined_title_window(lines, line_no)
             if joined and joined != raw_line:
                 probes.append(joined)
             hit = False
+            hit_text = raw_line
             for probe in probes:
-                norm = _norm_toc_heading(probe)
-                if not norm:
+                if is_chapter_number_only_line(probe):
                     continue
-                if any(n == norm for n in needles if n):
+                title_key = _title_key(probe)
+                norm = _norm_toc_heading(probe)
+                if not title_key and not norm:
+                    continue
+                if any(n in {title_key, norm} for n in needles):
                     hit = True
+                    hit_text = probe
                     break
-                if len(need_toks) >= 2 and need_toks <= _sig_tokens(probe) and len(probe) < 120:
+                probe_toks = _sig_tokens(strip_heading_number(probe))
+                if len(need_toks) >= 2 and need_toks <= probe_toks and len(probe) < 120:
                     hit = True
+                    hit_text = probe
                     break
             if hit:
-                found_line = line_no
-                found_text = probe
+                found_line = _attach_leading_chapter_number(lines, line_no)
+                found_text = hit_text
+                if found_line < line_no:
+                    numeral = lines[found_line].strip()
+                    if numeral and numeral not in found_text:
+                        found_text = f"{numeral} {found_text}".strip()
+                hit_line = line_no
                 break
         if found_line is None:
             continue
@@ -812,5 +918,7 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
         item["line"] = found_line
         item["text"] = found_text
         matched.append(item)
-        cursor = found_line
+        # Advance past the matched title, not the attached numeral. Otherwise the
+        # next entry can still see this title (token-subset false match).
+        cursor = hit_line if hit_line is not None else found_line
     return matched

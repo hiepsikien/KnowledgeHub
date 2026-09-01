@@ -11,7 +11,9 @@ from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_pag
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
     chapter_number_key,
+    heading_title_from_toc_match,
     is_body_heading_line,
+    is_chapter_number_only_line,
     is_toc_list_row,
     parse_contents_entries,
     toc_is_page_column_map,
@@ -582,6 +584,183 @@ def test_strip_keeps_arnold_first_essay_heading():
     assert [s["kind"] for s in doc["sections"]].count("chapter") == 3
 
 
+def _arnold_essays_page_column_toc() -> str:
+    """Essays in Criticism (PG 77244): TOC I–XIX vs body reprint I. / IX. for series 2."""
+    return """*** START OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***
+
+ESSAYS IN CRITICISM
+
+CONTENTS.
+
+  CHAPTER                                                           PAGE
+
+       I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME                1
+
+      XI. THE STUDY OF POETRY                                        279
+
+     XII. MILTON                                                     308
+
+    XIII. THOMAS GRAY                                                315
+
+     XIX. AMIEL                                                      432
+
+
+
+                          ESSAYS IN CRITICISM.
+
+                             --------------
+
+                                   I.
+                THE FUNCTION OF CRITICISM AT THE PRESENT
+                                 TIME.
+
+Many objections have been made to a proposition which, in some remarks
+of mine on translating Homer, I ventured to put forth; a proposition
+about criticism, and its importance at the present day.
+
+                                   I.
+
+                        THE STUDY OF POETRY.
+
+The future of poetry is immense, because in poetry, where it is worthy
+of its high destinies, our race will find an ever surer stay.
+
+                                  XII.
+
+                               MILTON
+
+The most eloquent voice of our century uttered, shortly before leaving
+the world, a warning cry against the Anglo-Saxon contagion.
+
+                                  III.
+
+                              THOMAS GRAY.
+
+James Brown, Master of Pembroke Hall at Cambridge, Gray’s friend and
+executor, wrote a letter a fortnight after Gray’s death.
+
+                                  IX.
+
+                               AMIEL.
+
+It is somewhat late to speak of Amiel, but I was late in reading him.
+Goethe says that in seasons of cholera one should read no books but
+such as are tonic.
+
+*** END OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***
+"""
+
+
+def test_parse_arnold_essays_consecutive_toc():
+    entries = parse_contents_entries(_arnold_essays_page_column_toc())
+    labels = [e["label"] for e in entries]
+    assert labels[0] == "I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME"
+    assert "XI. THE STUDY OF POETRY" in labels
+    assert "XIX. AMIEL" in labels
+    assert toc_is_page_column_map(entries)
+
+
+def test_strip_keeps_arnold_essays_first_heading():
+    raw = _arnold_essays_page_column_toc()
+    text, report = build_edition(raw, language="en", strip_only=True)
+    assert report["dropped_contents"] is True
+    assert "XI. THE STUDY OF POETRY                                        279" not in text
+    assert "THE FUNCTION OF CRITICISM AT THE PRESENT" in text
+    assert "Many objections have been made" in text
+
+
+def test_macro_uses_toc_numbers_not_body_reprint():
+    raw = _arnold_essays_page_column_toc()
+    text, _ = build_edition(raw, language="en", strip_only=True)
+    entries = parse_contents_entries(raw)
+    matched = match_toc_entries_in_body(text, entries)
+    assert toc_match_covers_structure(entries, matched)
+    assert [m["label"] for m in matched] == [e["label"] for e in entries]
+    lines = text.splitlines()
+    first = matched[0]
+    assert is_chapter_number_only_line(lines[first["line"]].strip())
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"] if s["kind"] == "chapter"]
+    assert titles[0].startswith("I. THE FUNCTION OF CRITICISM")
+    assert any(t.startswith("XI. THE STUDY OF POETRY") for t in titles)
+    assert any(t.startswith("XII. MILTON") for t in titles)
+    assert any(t.startswith("XIII. THOMAS GRAY") for t in titles)
+    assert any(t.startswith("XIX. AMIEL") for t in titles)
+    assert not any(t.startswith("IX. AMIEL") for t in titles)
+    assert sum(1 for t in titles if t.startswith("I.") and "STUDY OF POETRY" in t.upper()) == 0
+
+
+def test_roman_numeral_not_glued_to_following_prose():
+    """Lone ``I.`` plus a prose paragraph is not a chapter title."""
+    from knowledgehub.edition.toc import _attach_leading_chapter_number
+
+    lines = ["I.", "", "Many objections have been made to a proposition which, in some remarks"]
+    assert is_chapter_number_only_line(lines[0])
+    assert _attach_leading_chapter_number(lines, 2) == 2
+
+
+def test_heading_title_prefers_toc_ordinal_and_strips_footnote():
+    assert heading_title_from_toc_match(
+        {"label": "XI. THE STUDY OF POETRY", "text": "I. THE STUDY OF POETRY"}
+    ) == "XI. THE STUDY OF POETRY"
+    assert heading_title_from_toc_match(
+        {"label": "XII. MILTON", "text": "XII. MILTON[34]"}
+    ) == "XII. MILTON"
+
+
+def test_title_key_folds_accents():
+    from knowledgehub.edition.toc import _title_key
+
+    assert _title_key("III. MAURICE DE GUERIN") == _title_key("MAURICE DE GUÉRIN.")
+
+
+def test_toc_match_cursor_does_not_rescan_current_title():
+    """Longer title must not be reused as a token-subset hit for the next TOC row."""
+    raw = """*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
+
+CONTENTS.
+
+       I. THE STUDY OF POETRY AND LIFE              1
+
+      II. THE STUDY OF POETRY                      10
+
+
+
+                                   I.
+
+                        THE STUDY OF POETRY AND LIFE.
+
+The first essay discusses poetry as it bears on life at some length here.
+
+                                  II.
+
+                        THE STUDY OF POETRY.
+
+The second essay is only about poetry as such, without the life theme.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***
+"""
+    entries = parse_contents_entries(raw)
+    assert [e["label"] for e in entries] == [
+        "I. THE STUDY OF POETRY AND LIFE",
+        "II. THE STUDY OF POETRY",
+    ]
+    text, _ = build_edition(raw, language="en", strip_only=True)
+    matched = match_toc_entries_in_body(text, entries)
+    assert [m["label"] for m in matched] == [e["label"] for e in entries]
+    lines = text.splitlines()
+    assert "AND LIFE" in lines[matched[0]["line"] + 1].upper() or "AND LIFE" in (
+        matched[0].get("text") or ""
+    ).upper()
+    assert "AND LIFE" not in (matched[1].get("text") or "").upper()
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    titles = [s["title"] for s in doc["sections"] if s["kind"] == "chapter"]
+    assert titles[0].startswith("I. THE STUDY OF POETRY AND LIFE")
+    assert titles[1].startswith("II. THE STUDY OF POETRY")
+    assert "AND LIFE" not in titles[1].upper()
+
+
 def test_toc_title_repeats_prefix_not_first_word():
     seen = {
         _heading_key("CHAPTER I.     Mr. Bennet sees Bingley          1"),
@@ -592,6 +771,10 @@ def test_toc_title_repeats_prefix_not_first_word():
     assert _toc_title_repeats(_heading_key("Chapter 1"), seen)
     arnold_toc = _heading_key("Numbers; or, The Majority and the Remnant              1")
     assert _toc_title_repeats(_heading_key("NUMBERS;"), {arnold_toc})
+    function_toc = _heading_key("I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME                1")
+    assert _toc_title_repeats(
+        _heading_key("THE FUNCTION OF CRITICISM AT THE PRESENT"), {function_toc}
+    )
     volume_seen = {
         _heading_key("VOLUME I. First                     1"),
         _heading_key("VOLUME II. Second                    2"),
