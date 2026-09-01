@@ -10,13 +10,25 @@ from typing import Any
 
 from ..catalog import get_work, is_hub_translation, resolve_content_path
 from ..paths import corpus_root
+from .hitl_ops import (
+    HITL_KINDS,
+    apply_footnote_links,
+    apply_quote_decisions,
+    empty_job,
+    extract_dump_notes,
+    footnote_records_from_items,
+    merge_item_decisions,
+    scan_kind,
+    summarize_items,
+    wrap_overrides_from_items,
+)
 from .profile import detect_family
 from .llm_defaults import default_use_llm_relabel
 from .macro import attach_container_parents, build_macro_structure, section_source_slice
 from .macro_review import apply_structure_edit, build_review, propose_toc_candidate
 from .pipeline import build_edition
 from .ref import build_read_edition
-from .serialize import build_edition_document, blocks_to_markdown, split_hints_from_blocks
+from .serialize import build_edition_document, blocks_to_markdown, detect_content_kind, edition_hash, split_hints_from_blocks
 from .ref_schema import REF_PARSER_VERSION, validate_edition
 
 
@@ -515,14 +527,25 @@ def parse_micro_chapter(
     slice_text = section_source_slice(text, section)
     language = str(work.get("language") or "en")
     family = str(structure.get("source_family") or meta.get("family") or "plain")
+    wrap_job = load_hitl_job(package_dir, "wrap")
+    footnote_job = load_hitl_job(package_dir, "footnotes")
+    quote_job = load_hitl_job(package_dir, "quotes")
+    wrap_overrides = wrap_overrides_from_items(wrap_job.get("items") or [], chapter_id=chapter_id)
     edition, ref_report = build_read_edition(
         slice_text,
         family=family,
         language=language,
         use_llm=use_llm_resolved,
         work_id=work_id,
+        wrap_overrides=wrap_overrides or None,
     )
     blocks = edition.get("blocks") or []
+    footnote_records = footnote_records_from_items(footnote_job.get("items") or [], chapter_id=chapter_id)
+    if footnote_records:
+        apply_footnote_links(blocks, footnote_records)
+    apply_quote_decisions(blocks, quote_job.get("items") or [], chapter_id=chapter_id)
+    reading_markdown = blocks_to_markdown(blocks)
+    hashed = edition_hash(blocks)
     chapter_doc = {
         "chapter_id": chapter_id,
         "title": section.get("title"),
@@ -530,9 +553,10 @@ def parse_micro_chapter(
         "kind": section.get("kind"),
         "char_range": [section.get("start_char"), section.get("end_char")],
         "blocks": blocks,
-        "reading_markdown": edition.get("reading_markdown") or blocks_to_markdown(blocks),
-        "edition_hash": edition.get("edition_hash"),
-        "content_kind": edition.get("content_kind"),
+        "footnotes": footnote_records,
+        "reading_markdown": reading_markdown,
+        "edition_hash": hashed,
+        "content_kind": detect_content_kind(blocks, family=family),
         "ref_mode": ref_report.get("ref_mode"),
         "llm_segments": ref_report.get("llm_segments") or [],
         "block_count": len(blocks),
@@ -554,7 +578,7 @@ def parse_micro_chapter(
             row["micro_status"] = "complete"
             row["block_count"] = len(blocks)
             row["ref_mode"] = ref_report.get("ref_mode")
-            row["edition_hash"] = edition.get("edition_hash")
+            row["edition_hash"] = hashed
     manifest["updated_at"] = chapter_doc.get("parsed_at") or manifest.get("updated_at")
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     remember_last_section(package_dir, structure, chapter_id)
@@ -628,3 +652,258 @@ def assemble_edition_from_package(
     if errors:
         raise ReadEditionStepError(f"assembled edition invalid: {'; '.join(errors[:3])}")
     return edition
+
+
+def hitl_path(package_dir: Path, kind: str) -> Path:
+    return package_dir / "hitl" / f"{kind}.json"
+
+
+def load_hitl_job(package_dir: Path, kind: str) -> dict[str, Any]:
+    if kind not in HITL_KINDS:
+        raise ReadEditionStepError(f"unknown HITL kind: {kind}")
+    path = hitl_path(package_dir, kind)
+    if not path.is_file():
+        return empty_job(kind)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data.setdefault("kind", kind)
+    data.setdefault("items", [])
+    data.setdefault("summary", summarize_items(data.get("items") or []))
+    return data
+
+
+def save_hitl_job(package_dir: Path, kind: str, job: dict[str, Any]) -> dict[str, Any]:
+    job["kind"] = kind
+    job["updated_at"] = datetime.now(UTC).replace(microsecond=0).isoformat()
+    job["summary"] = summarize_items(
+        job.get("items") or [],
+        extra={k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}},
+    )
+    folder = package_dir / "hitl"
+    folder.mkdir(parents=True, exist_ok=True)
+    hitl_path(package_dir, kind).write_text(
+        json.dumps(job, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return job
+
+
+def _hitl_package(work_id: str, *, corpus: Path | None = None) -> tuple[Path, str, dict[str, Any], dict[str, Any], dict[str, Any]]:
+    root = corpus or corpus_root()
+    text, meta, work = resolve_stripped_source(work_id, corpus=root)
+    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
+    return package_dir, text, meta, work, structure
+
+
+def hitl_overview_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    kinds = {}
+    for kind in HITL_KINDS:
+        job = load_hitl_job(package_dir, kind)
+        kinds[kind] = {
+            "kind": kind,
+            "status": job.get("status") or "idle",
+            "trial_chapter_id": job.get("trial_chapter_id"),
+            "trial_confirmed": bool(job.get("trial_confirmed")),
+            "scope": job.get("scope"),
+            "summary": job.get("summary") or summarize_items(job.get("items") or []),
+            "updated_at": job.get("updated_at"),
+        }
+    return {"kinds": kinds}
+
+
+def get_hitl_job_step(work_id: str, kind: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    if kind not in HITL_KINDS:
+        raise ReadEditionStepError(f"unknown HITL kind: {kind}")
+    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    return load_hitl_job(package_dir, kind)
+
+
+def scan_hitl_step(
+    work_id: str,
+    kind: str,
+    *,
+    chapter_id: str | None = None,
+    scope: str = "chapter",
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    if kind not in HITL_KINDS:
+        raise ReadEditionStepError(f"unknown HITL kind: {kind}")
+    if scope not in {"chapter", "book"}:
+        raise ReadEditionStepError("scope must be chapter or book")
+    package_dir, text, meta, work, structure = _hitl_package(work_id, corpus=corpus)
+    existing = load_hitl_job(package_dir, kind)
+    if scope == "book" and not existing.get("trial_confirmed"):
+        raise ReadEditionStepError("Xác nhận chương thử trước khi chạy toàn văn bản")
+    family = str(structure.get("source_family") or meta.get("family") or "plain")
+    language = str(work.get("language") or structure.get("language") or "en")
+    sections = list(structure.get("sections") or [])
+    if scope == "chapter":
+        if not chapter_id:
+            raise ReadEditionStepError("chapter_id required for trial scan")
+        targets = [s for s in sections if s.get("section_id") == chapter_id]
+        if not targets:
+            raise ReadEditionStepError(f"Unknown section: {chapter_id}")
+    else:
+        targets = sections
+        chapter_id = existing.get("trial_chapter_id") or chapter_id
+
+    dump_notes = extract_dump_notes(text) if kind == "footnotes" else None
+    wrap_job = load_hitl_job(package_dir, "wrap") if kind == "quotes" else None
+    new_items: list[dict[str, Any]] = []
+    extra_keys = ("auto_join", "auto_keep", "linked", "unmatched")
+    switching_trial = (
+        scope == "chapter"
+        and existing.get("scope") != "book"
+        and existing.get("trial_chapter_id")
+        and existing.get("trial_chapter_id") != chapter_id
+    )
+    chapter_stats: dict[str, Any] = {}
+    if scope == "chapter" and not switching_trial:
+        chapter_stats = dict(existing.get("chapter_stats") or {})
+    for section in targets:
+        sid = str(section["section_id"])
+        slice_text = section_source_slice(text, section)
+        wrap_overrides = None
+        if wrap_job is not None:
+            wrap_overrides = wrap_overrides_from_items(wrap_job.get("items") or [], chapter_id=sid) or None
+        items, extra = scan_kind(
+            kind,
+            slice_text,
+            chapter_id=sid,
+            family=family,
+            language=language,
+            dump_notes=dump_notes,
+            work_id=work_id,
+            wrap_overrides=wrap_overrides,
+        )
+        new_items.extend(items)
+        chapter_stats[sid] = {key: int(extra.get(key) or 0) for key in extra_keys}
+
+    extra_acc = {key: sum(int((chapter_stats.get(cid) or {}).get(key) or 0) for cid in chapter_stats) for key in extra_keys}
+    if scope == "chapter":
+        sid = str(chapter_id)
+        if switching_trial:
+            kept: list[dict[str, Any]] = []
+            chapter_old: list[dict[str, Any]] = []
+        else:
+            kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
+            chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
+        merged = kept + merge_item_decisions(chapter_old, new_items)
+        if existing.get("scope") == "book":
+            job_scope = "book"
+            job_status = existing.get("status") or "book"
+            job_confirmed = bool(existing.get("trial_confirmed"))
+        elif existing.get("trial_chapter_id") == chapter_id and existing.get("trial_confirmed"):
+            job_scope = "chapter"
+            job_status = "trial_confirmed"
+            job_confirmed = True
+        else:
+            job_scope = "chapter"
+            job_status = "trial"
+            job_confirmed = False
+    else:
+        merged = merge_item_decisions(existing.get("items") or [], new_items)
+        job_scope = "book"
+        job_status = "book"
+        job_confirmed = bool(existing.get("trial_confirmed"))
+
+    job = {
+        "kind": kind,
+        "status": job_status,
+        "trial_chapter_id": chapter_id if scope == "chapter" else existing.get("trial_chapter_id") or chapter_id,
+        "trial_confirmed": job_confirmed,
+        "scope": job_scope,
+        "items": merged,
+        "chapter_stats": chapter_stats,
+        "summary": extra_acc,
+    }
+    return save_hitl_job(package_dir, kind, job)
+
+
+def confirm_hitl_trial_step(
+    work_id: str,
+    kind: str,
+    *,
+    chapter_id: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    if kind not in HITL_KINDS:
+        raise ReadEditionStepError(f"unknown HITL kind: {kind}")
+    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    job = load_hitl_job(package_dir, kind)
+    trial_id = job.get("trial_chapter_id") or chapter_id
+    if job.get("status") in {None, "idle"} or not trial_id:
+        raise ReadEditionStepError("Chạy thử một chương trước khi xác nhận")
+    job["trial_chapter_id"] = trial_id
+    job["trial_confirmed"] = True
+    if job.get("status") != "book":
+        job["status"] = "trial_confirmed"
+    return save_hitl_job(package_dir, kind, job)
+
+
+def decide_hitl_step(
+    work_id: str,
+    kind: str,
+    *,
+    decision: str,
+    item_ids: list[str] | None = None,
+    suspects_only: bool = False,
+    chapter_id: str | None = None,
+    corpus: Path | None = None,
+) -> dict[str, Any]:
+    if kind not in HITL_KINDS:
+        raise ReadEditionStepError(f"unknown HITL kind: {kind}")
+    if decision not in {"accept", "reject", "clear"}:
+        raise ReadEditionStepError("decision must be accept, reject, or clear")
+    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    root = corpus or corpus_root()
+    job = load_hitl_job(package_dir, kind)
+    wanted = set(item_ids or [])
+    if not wanted and suspects_only and not chapter_id and job.get("scope") == "chapter":
+        chapter_id = job.get("trial_chapter_id")
+    changed = 0
+    affected: set[str] = set()
+    for item in job.get("items") or []:
+        if wanted:
+            if item.get("id") not in wanted:
+                continue
+        else:
+            if chapter_id and item.get("chapter_id") != chapter_id:
+                continue
+            if suspects_only and not item.get("suspect"):
+                continue
+            if not suspects_only:
+                continue
+        if decision == "clear":
+            item.pop("decision", None)
+        else:
+            item["decision"] = decision
+        changed += 1
+        cid = str(item.get("chapter_id") or "")
+        if cid:
+            affected.add(cid)
+    if changed == 0 and (wanted or suspects_only):
+        raise ReadEditionStepError("Không khớp item nào")
+    extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}}
+    job["summary"] = extra
+    saved = save_hitl_job(package_dir, kind, job)
+    reparsed: list[str] = []
+    apply_errors: list[str] = []
+    for cid in sorted(affected):
+        chapter_path = package_dir / "chapters" / f"{cid}.json"
+        if not chapter_path.is_file():
+            continue
+        try:
+            parse_micro_chapter(work_id, cid, corpus=root, require_ready=False)
+            reparsed.append(cid)
+        except ReadEditionStepError as exc:
+            apply_errors.append(f"{cid}: {exc}")
+    if reparsed:
+        saved["reparsed"] = reparsed
+    if apply_errors:
+        saved["apply_errors"] = apply_errors
+    return saved
+

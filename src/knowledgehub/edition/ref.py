@@ -12,6 +12,78 @@ from .reflow import unwrap_hard_wrap
 from .serialize import build_edition_document, grotius_latin_to_blockquote
 from .structure import group_dramatis_blocks, group_stanzas, merge_adjacent_blockquotes, merge_adjacent_headings, merge_adjacent_metadata
 
+CJK_LANG = {"ja", "zh", "ko"}
+
+
+def apply_wrap_overrides(labels: list[Any], overrides: dict[int, bool]) -> None:
+    for index, join in overrides.items():
+        if 0 <= index < len(labels):
+            labels[index].join_next = join
+
+
+def normalize_edition_source(
+    text: str,
+    *,
+    family: str = "plain",
+    language: str = "en",
+) -> tuple[str, list[str], bool]:
+    """Same source transform parse uses before labeling (wiki / unwrap)."""
+    lang = (language or "en").lower()[:2]
+    apparatus: list[str] = []
+    body = text
+    unwrapped = False
+    if family == "plain":
+        body, wiki_apparatus = normalize_wiki_source(text)
+        apparatus.extend(wiki_apparatus)
+    elif family in {"scholastic", "archive_scan"} and lang not in CJK_LANG:
+        body, unwrapped = unwrap_hard_wrap(text, family=family, language=lang)
+    if lang in CJK_LANG:
+        body, unwrapped = unwrap_hard_wrap(body, family=family, language=lang)
+    return body, apparatus, unwrapped
+
+
+def label_edition_lines(
+    body: str,
+    *,
+    family: str,
+    language: str = "en",
+    use_llm: bool = False,
+    wrap_overrides: dict[int, bool] | None = None,
+) -> tuple[list[Any], list[Any], list[Any]]:
+    lang = (language or "en").lower()[:2]
+    lines = iter_lines(body)
+    labels = label_lines_rules(lines, family=family, source_text=body)
+    llm_events: list[Any] = []
+    if use_llm and lang not in CJK_LANG:
+        labels, llm_events = relabel_uncertain_segments(
+            lines, labels, enabled=True, model=ref_llm_model()
+        )
+    if wrap_overrides:
+        apply_wrap_overrides(labels, wrap_overrides)
+    return lines, labels, llm_events
+
+
+def blocks_from_labels(
+    lines: list[Any],
+    labels: list[Any],
+    *,
+    work_id: str | None = None,
+    language: str = "en",
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """labels_to_blocks plus the grouping parse applies before annotate."""
+    lang = (language or "en").lower()[:2]
+    blocks = labels_to_blocks(lines, labels)
+    if lang in CJK_LANG:
+        return annotate_blocks(blocks)
+    if work_id and work_id.startswith("grotius--"):
+        blocks = grotius_latin_to_blockquote(blocks)
+    blocks = merge_adjacent_headings(blocks)
+    blocks = merge_adjacent_metadata(blocks)
+    blocks = merge_adjacent_blockquotes(blocks)
+    blocks = group_dramatis_blocks(blocks)
+    blocks = group_stanzas(blocks)
+    return annotate_blocks(blocks)
+
 
 def build_read_edition(
     text: str,
@@ -20,56 +92,21 @@ def build_read_edition(
     language: str = "en",
     use_llm: bool | None = None,
     work_id: str | None = None,
+    wrap_overrides: dict[int, bool] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Structured REF/1 edition from stripped manuscript text."""
     llm_enabled = default_use_llm_relabel() if use_llm is None else use_llm
     lang = (language or "en").lower()[:2]
-    apparatus: list[str] = []
-    body = text
-    unwrapped = False
-    if family == "plain":
-        body, wiki_apparatus = normalize_wiki_source(text)
-        apparatus.extend(wiki_apparatus)
-    elif family in {"scholastic", "archive_scan"} and lang not in {"ja", "zh", "ko"}:
-        body, unwrapped = unwrap_hard_wrap(text, family=family, language=lang)
-
-    if lang in {"ja", "zh", "ko"}:
-        unwrapped_body, unwrapped = unwrap_hard_wrap(body, family=family, language=lang)
-        lines = iter_lines(unwrapped_body)
-        labels = label_lines_rules(lines, family=family, source_text=unwrapped_body)
-        blocks = labels_to_blocks(lines, labels)
-        blocks, quotation_profile = annotate_blocks(blocks)
-        edition = build_edition_document(
-            blocks,
-            language=language,
-            source_family=family,
-            quotation_profile=quotation_profile,
-            apparatus_dropped=apparatus or None,
-        )
-        return edition, {
-            "ref_mode": "rule_fallback",
-            "line_count": len(lines),
-            "block_count": len(blocks),
-            "unwrapped": unwrapped,
-            "llm_segments": [],
-            "quotation_profile": quotation_profile,
-            "apparatus_dropped": apparatus,
-        }
-
-    lines = iter_lines(body)
-    labels = label_lines_rules(lines, family=family, source_text=body)
-    labels, llm_events = relabel_uncertain_segments(
-        lines, labels, enabled=llm_enabled, model=ref_llm_model()
+    body, apparatus, unwrapped = normalize_edition_source(text, family=family, language=language)
+    cjk = lang in CJK_LANG
+    lines, labels, llm_events = label_edition_lines(
+        body,
+        family=family,
+        language=language,
+        use_llm=llm_enabled and not cjk,
+        wrap_overrides=wrap_overrides,
     )
-    blocks = labels_to_blocks(lines, labels)
-    if work_id and work_id.startswith("grotius--"):
-        blocks = grotius_latin_to_blockquote(blocks)
-    blocks = merge_adjacent_headings(blocks)
-    blocks = merge_adjacent_metadata(blocks)
-    blocks = merge_adjacent_blockquotes(blocks)
-    blocks = group_dramatis_blocks(blocks)
-    blocks = group_stanzas(blocks)
-    blocks, quotation_profile = annotate_blocks(blocks)
+    blocks, quotation_profile = blocks_from_labels(lines, labels, work_id=work_id, language=language)
     joined = any(label.join_next for label in labels) or unwrapped
     edition = build_edition_document(
         blocks,
@@ -79,11 +116,11 @@ def build_read_edition(
         apparatus_dropped=apparatus or None,
     )
     return edition, {
-        "ref_mode": "llm_hybrid" if llm_enabled else "rule",
+        "ref_mode": "rule_fallback" if cjk else ("llm_hybrid" if llm_enabled else "rule"),
         "line_count": len(lines),
         "block_count": len(blocks),
         "llm_segments": llm_events,
-        "unwrapped": joined,
+        "unwrapped": joined if not cjk else unwrapped,
         "quotation_profile": quotation_profile,
         "apparatus_dropped": apparatus,
     }
