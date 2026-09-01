@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" fill="none" role="img" aria-label="Knowledge Hub">
+  <title>Knowledge Hub</title>
+  <g transform="translate(0, 0)">
+    <path d="M24 5C14.5 5 7 11.5 7 19.5V37.5C7 39.8 9.2 41.2 11.3 40.4L24 35.5L36.7 40.4C38.8 41.2 41 39.8 41 37.5V19.5C41 11.5 33.5 5 24 5Z" fill="#1c1915"/>
+    <path d="M24 5V35.5" stroke="#ffffff" stroke-width="0.75" stroke-linecap="round" opacity="0.35"/>
+    <circle cx="24" cy="26" r="4" fill="#ffffff"/>
+    <path d="M24 30V41" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round"/>
+    <path d="M20.5 28.5L12 37" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" opacity="0.65"/>
+    <path d="M27.5 28.5L36 37" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" opacity="0.65"/>
+  </g>
+  <text x="58" y="31" font-family="'Source Serif 4', Georgia, 'Times New Roman', serif" font-size="24" font-weight="600" fill="#1c1915">Knowledge Hub</text>
+</svg>
