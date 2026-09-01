@@ -5,6 +5,7 @@ from pathlib import Path
 from knowledgehub.edition.hitl_ops import (
     apply_quote_decisions,
     apply_wrap_overrides,
+    extract_dump_notes,
     footnote_records_from_items,
     scan_footnotes,
     scan_quotes,
@@ -72,6 +73,50 @@ def test_footnotes_link_dump_from_book_tail():
     one["decision"] = "accept"
     accepted = footnote_records_from_items(items, chapter_id="ch1")
     assert any(row.get("number") == 1 for row in accepted)
+
+
+BERGSON_PG_NOTES = """\
+CHAPTER I
+
+THE EVOLUTION OF LIFE
+
+True, biologists are not agreed on what is gained and what is lost
+between the day of birth and the day of death.[5] More probable is the
+theory of residual substances which finally "crust it over."[6] Must we
+declare any explanation insufficient that does not take account of
+phagocytosis?[7]
+
+FOOTNOTES:
+
+[Footnote 5: There are those who hold to the continual growth in the
+volume of protoplasm from the birth of the cell right on to its death.]
+
+[Footnote 6: Le Dantec, _L'Individualité et l'erreur individualiste_,
+Paris, 1905, pp. 84 ff.]
+
+[Footnote 7: Metchnikoff, _La Dégénérescence sénile_.]
+"""
+
+
+def test_footnotes_link_gutenberg_bracket_dump_in_chapter():
+    items, extra = scan_footnotes(BERGSON_PG_NOTES, chapter_id="ch1", dump_notes={})
+    by_marker = {row["marker"]: row for row in items}
+    assert extra["linked"] == 3
+    assert extra["unmatched"] == 0
+    five = by_marker["[5]"]
+    assert five["status"] == "linked"
+    assert five["suspect"] is False
+    assert "footnotes_dump_global" not in five["reasons"]
+    assert "volume of protoplasm" in five["body"]
+    assert "Le Dantec" in by_marker["[6]"]["body"]
+    auto = footnote_records_from_items(items, chapter_id="ch1")
+    assert {row["number"] for row in auto} == {5, 6, 7}
+
+
+def test_extract_dump_notes_parses_gutenberg_brackets():
+    notes = extract_dump_notes(BERGSON_PG_NOTES)
+    assert 5 in notes
+    assert "volume of protoplasm" in notes[5]
 
 
 def test_quotes_find_vergil_blockquote_and_emphasis():
@@ -197,9 +242,10 @@ def test_hitl_trial_then_book_api(tmp_path, monkeypatch):
     assert "[1]" in markers
     linked = next(row for row in payload["items"] if row["marker"] == "[1]")
     assert linked["status"] == "linked"
-    assert linked["suspect"] is True
-    assert "footnotes_dump_global" in linked["reasons"]
     assert "Pliny" in linked["body"]
+    # FOOTNOTES is in this chapter slice, not a book-tail dump from another section.
+    assert "footnotes_dump_global" not in linked["reasons"]
+    assert linked["suspect"] is False
 
     quotes = client.post(
         f"/api/works/{wid}/read-edition/hitl/quotes/scan",

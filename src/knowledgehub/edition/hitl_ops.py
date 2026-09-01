@@ -6,7 +6,7 @@ import hashlib
 import re
 from typing import Any
 
-from .footnotes import parse_numbered_notes, split_footnotes_section
+from .footnotes import parse_footnote_blob, split_footnotes_section
 from .label_rules import (
     CONTINUATION_START,
     HANGING_WORD,
@@ -347,7 +347,7 @@ def _dump_bodies(book_text: str | None) -> dict[int, str]:
     if not book_text:
         return {}
     _body, blob = split_footnotes_section(book_text)
-    return parse_numbered_notes(blob) if blob else {}
+    return parse_footnote_blob(blob) if blob else {}
 
 
 def extract_dump_notes(book_text: str | None) -> dict[int, str]:
@@ -364,10 +364,13 @@ def scan_footnotes(
     dump_notes: dict[int, str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     del family, language
-    body_text, _local_dump = split_footnotes_section(text)
+    body_text, local_dump_blob = split_footnotes_section(text)
     lines = iter_lines(body_text)
     local_bodies = _collect_indented_bodies(lines)
-    dump = dump_notes if dump_notes is not None else _dump_bodies(book_text if book_text is not None else text)
+    chapter_dump = parse_footnote_blob(local_dump_blob) if local_dump_blob else {}
+    book_dump = dump_notes if dump_notes is not None else _dump_bodies(
+        book_text if book_text is not None else text
+    )
     body_lines = {row["line_index"] for row in local_bodies.values()}
 
     markers: dict[int, list[dict[str, Any]]] = {}
@@ -393,9 +396,11 @@ def scan_footnotes(
     for number in numbers:
         hits = markers.get(number) or []
         local = local_bodies.get(number)
-        dumped = dump.get(number)
+        dumped_chapter = chapter_dump.get(number)
+        dumped_book = book_dump.get(number)
+        dumped = dumped_chapter or dumped_book
         marker = f"[{number}]"
-        from_dump = bool(dumped) and not local
+        from_book_dump = bool(dumped_book) and not local and not dumped_chapter
         body = (local or {}).get("body") or dumped or ""
         body_source = None
         if local:
@@ -406,7 +411,7 @@ def scan_footnotes(
         status = "linked"
         if hits and body:
             status = "linked"
-            if from_dump:
+            if from_book_dump:
                 reasons.append("footnotes_dump_global")
         elif hits and not body:
             status = "unmatched_marker"
