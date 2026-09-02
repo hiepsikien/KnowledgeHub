@@ -12,9 +12,34 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+import threading
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+_PATH_LOCKS_GUARD = threading.Lock()
+_PATH_LOCKS: dict[str, threading.RLock] = {}
+
+
+def path_lock(path: Path) -> threading.RLock:
+    """Reentrant lock for one resolved filesystem path."""
+    key = str(Path(path).resolve())
+    with _PATH_LOCKS_GUARD:
+        lock = _PATH_LOCKS.get(key)
+        if lock is None:
+            lock = threading.RLock()
+            _PATH_LOCKS[key] = lock
+        return lock
+
+
+def package_lock(package_dir: Path) -> threading.RLock:
+    """One lock for every shared JSON file under a read-edition package.
+
+    Workers are in-process threads, so a threading.RLock is enough. Long LLM
+    work must stay outside this lock; only short read-modify-write of
+    manifest.json, structure.json, qa/report.json, and HITL jobs belongs inside.
+    """
+    return path_lock(Path(package_dir) / ".package.lock")
 
 
 def write_json_atomic(path: Path, data: Any) -> None:

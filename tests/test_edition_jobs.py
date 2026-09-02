@@ -249,3 +249,191 @@ def test_two_edition_workers_run_parses_in_parallel(client: TestClient, monkeypa
     assert len(parses) >= 2
     assert all(job["status"] == "done" for job in parses)
     assert peak == 2
+
+
+def _package_dir():
+    from knowledgehub.edition.read_edition import package_dir_for_work
+
+    package_dir, _meta, _work = package_dir_for_work(WORK_ID)
+    return package_dir
+
+
+def _manifest_status(package_dir, chapter_id, field="micro_status"):
+    manifest = json.loads((package_dir / "manifest.json").read_text(encoding="utf-8"))
+    row = next(r for r in manifest["chapters"] if r["chapter_id"] == chapter_id)
+    return row.get(field)
+
+
+def test_parallel_parse_micro_chapter_keeps_both_manifest_rows(client):
+    from concurrent.futures import ThreadPoolExecutor
+
+    from knowledgehub.edition.read_edition_steps import parse_micro_chapter
+
+    ids = _ready_to_parse(client)
+    assert len(ids) >= 2
+    package_dir = _package_dir()
+
+    def slow_build(*args, **kwargs):
+        time.sleep(0.15)
+        from knowledgehub.edition.ref import build_read_edition as real_build
+
+        return real_build(*args, **kwargs)
+
+    with patch("knowledgehub.edition.read_edition_steps.build_read_edition", slow_build):
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futs = [
+                pool.submit(parse_micro_chapter, WORK_ID, chapter_id, use_llm=False)
+                for chapter_id in ids[:2]
+            ]
+            results = [fut.result(timeout=30) for fut in futs]
+    assert {row["chapter_id"] for row in results} == set(ids[:2])
+    assert all(row["micro_status"] == "complete" for row in results)
+    assert _manifest_status(package_dir, ids[0]) == "complete"
+    assert _manifest_status(package_dir, ids[1]) == "complete"
+    assert (package_dir / "chapters" / f"{ids[0]}.json").is_file()
+    assert (package_dir / "chapters" / f"{ids[1]}.json").is_file()
+
+
+def test_parallel_save_qa_chapter_keeps_both_reports(client):
+    from knowledgehub.edition.read_edition import save_qa_chapter
+
+    ids = _ready_to_parse(client)
+    assert len(ids) >= 2
+    package_dir = _package_dir()
+    barrier = threading.Barrier(2)
+    errors: list[BaseException] = []
+
+    def write_qa(chapter_id: str, passed: bool) -> None:
+        try:
+            barrier.wait(timeout=5)
+            save_qa_chapter(
+                package_dir,
+                chapter_id,
+                {"passed": passed, "llm": {"verdict": "pass" if passed else "fail"}},
+            )
+        except BaseException as exc:
+            errors.append(exc)
+
+    first = threading.Thread(target=write_qa, args=(ids[0], True))
+    second = threading.Thread(target=write_qa, args=(ids[1], False))
+    first.start()
+    second.start()
+    first.join(timeout=10)
+    second.join(timeout=10)
+    assert not errors
+    report = json.loads((package_dir / "qa" / "report.json").read_text(encoding="utf-8"))
+    assert report["chapters"][ids[0]]["passed"] is True
+    assert report["chapters"][ids[1]]["passed"] is False
+    assert _manifest_status(package_dir, ids[0], "qa_status") == "pass"
+    assert _manifest_status(package_dir, ids[1], "qa_status") == "fail"
+
+
+def test_two_edition_workers_write_both_parse_statuses(client, monkeypatch: pytest.MonkeyPatch):
+    from knowledgehub.edition.jobs import enqueue_job, list_jobs, start_worker, stop_worker
+
+    ids = _ready_to_parse(client)
+    assert len(ids) >= 2
+    save_settings({"edition": {"min_workers": 2, "max_workers": 2}})
+    package_dir = _package_dir()
+
+    def slow_build(*args, **kwargs):
+        time.sleep(0.12)
+        from knowledgehub.edition.ref import build_read_edition as real_build
+
+        return real_build(*args, **kwargs)
+
+    monkeypatch.setattr("knowledgehub.edition.read_edition_steps.build_read_edition", slow_build)
+    for chapter in ids[:2]:
+        enqueue_job(WORK_ID, "parse", chapter=chapter, params={"use_llm": False})
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
+    start_worker()
+    deadline = time.monotonic() + 20
+    last = []
+    while time.monotonic() < deadline:
+        last = list_jobs(WORK_ID)
+        if last and not any(job.get("status") in {"queued", "running"} for job in last):
+            break
+        time.sleep(0.05)
+    stop_worker()
+    parses = [job for job in last if job.get("kind") == "parse"]
+    assert len(parses) >= 2
+    assert all(job["status"] == "done" for job in parses), last
+    assert _manifest_status(package_dir, ids[0]) == "complete"
+    assert _manifest_status(package_dir, ids[1]) == "complete"
+
+
+def test_hitl_scan_keeps_decision_made_during_scan(client):
+    from knowledgehub.edition.read_edition_steps import decide_hitl_step, save_hitl_job, scan_hitl_step
+
+    ids = _ready_to_parse(client)
+    assert len(ids) >= 2
+    package_dir = _package_dir()
+    item_id = f"wrap:{ids[0]}:0"
+    save_hitl_job(
+        package_dir,
+        "wrap",
+        {
+            "status": "trial_confirmed",
+            "trial_chapter_id": ids[0],
+            "trial_confirmed": True,
+            "scope": "chapter",
+            "items": [
+                {
+                    "id": item_id,
+                    "chapter_id": ids[0],
+                    "kind": "wrap",
+                    "suspect": True,
+                    "proposed": "join",
+                }
+            ],
+            "chapter_stats": {
+                ids[0]: {"auto_join": 0, "auto_keep": 0, "linked": 0, "unmatched": 0},
+            },
+        },
+    )
+
+    pause = threading.Event()
+    resume = threading.Event()
+    calls = {"n": 0}
+
+    def gated_scan(_kind, _text, *, chapter_id, **_kwargs):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            pause.set()
+            assert resume.wait(timeout=8)
+        extra = {"auto_join": 0, "auto_keep": 1, "linked": 0, "unmatched": 0}
+        return (
+            [
+                {
+                    "id": f"wrap:{chapter_id}:0",
+                    "chapter_id": chapter_id,
+                    "kind": "wrap",
+                    "suspect": True,
+                    "proposed": "join",
+                }
+            ],
+            extra,
+        )
+
+    holder: dict[str, object] = {}
+    errors: list[BaseException] = []
+
+    def run_book_scan() -> None:
+        try:
+            holder["job"] = scan_hitl_step(WORK_ID, "wrap", scope="book")
+        except BaseException as exc:
+            errors.append(exc)
+
+    with patch("knowledgehub.edition.read_edition_steps.scan_kind", gated_scan):
+        worker = threading.Thread(target=run_book_scan)
+        worker.start()
+        assert pause.wait(timeout=8)
+        decided = decide_hitl_step(WORK_ID, "wrap", decision="accept", item_ids=[item_id])
+        assert any(row.get("id") == item_id and row.get("decision") == "accept" for row in decided["items"])
+        resume.set()
+        worker.join(timeout=20)
+    assert not worker.is_alive()
+    assert not errors, errors
+    saved = holder["job"]
+    kept = next(row for row in saved["items"] if row["id"] == item_id)
+    assert kept.get("decision") == "accept"

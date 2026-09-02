@@ -134,6 +134,12 @@
     );
   }
 
+  function hitlScanBusy() {
+    return activeJobs(state.jobs).some(
+      (job) => job.kind === "hitl_scan" && (job.hitl_kind || job.params?.hitl_kind) === hitlKind(),
+    );
+  }
+
   function renderJobQueue() {
     const el = $("re-jobs");
     if (!el) return;
@@ -781,11 +787,11 @@
     setDisabled("re-parse-selected", busyWork);
     setDisabled("re-parse-ready", busyWork);
     setDisabled("re-qa-ch", parseLocked);
-    const hitlBusy = activeJobs(state.jobs).some(
-      (job) => job.kind === "hitl_scan" && (job.hitl_kind || job.params?.hitl_kind) === hitlKind(),
-    );
+    const hitlBusy = hitlScanBusy();
     setDisabled("re-hitl-trial", busyWork || hitlBusy);
     setDisabled("re-hitl-book", busyWork || hitlBusy || !state.hitlJob?.trial_confirmed);
+    setDisabled("re-hitl-confirm", hitlBusy);
+    setDisabled("re-hitl-accept-suspects", hitlBusy);
 
     let primary = "re-macro";
     if (!macro) primary = "re-macro";
@@ -942,14 +948,21 @@
       metaEl.textContent = bits.join(" · ");
     }
     const viewingTrial = !job.trial_chapter_id || job.trial_chapter_id === focusId;
+    const decideLocked = hitlScanBusy();
     const confirmBtn = $("re-hitl-confirm");
     if (confirmBtn) {
       confirmBtn.hidden = job.status === "idle" || !!job.trial_confirmed || !viewingTrial;
       const trialLabel = chapterTitle(job.trial_chapter_id);
       confirmBtn.textContent = trialLabel ? `Chương thử ổn · ${trialLabel}` : "Chương thử ổn";
+      confirmBtn.disabled = decideLocked;
+      confirmBtn.title = decideLocked ? "Đang quét — quyết định sẽ mất nếu ghi đè" : "";
     }
-    $("re-hitl-book").disabled = !job.trial_confirmed;
+    $("re-hitl-book").disabled = !job.trial_confirmed || decideLocked || workScopedActive();
     $("re-hitl-accept-suspects").hidden = pending === 0;
+    $("re-hitl-accept-suspects").disabled = decideLocked;
+    if ($("re-hitl-accept-suspects")) {
+      $("re-hitl-accept-suspects").title = decideLocked ? "Đang quét — quyết định sẽ mất nếu ghi đè" : "";
+    }
     if (!shown.length) {
       let empty;
       if (!scanned) {
@@ -1007,6 +1020,8 @@
       }
     }
     const actionable = item.actionable !== false;
+    const decideLocked = hitlScanBusy();
+    const lockedAttr = decideLocked ? " disabled title=\"Đang quét — không quyết định giữa chừng\"" : "";
     const acceptLabel = !actionable
       ? "Đã xem"
       : state.step === "wrap"
@@ -1014,13 +1029,13 @@
         : "OK";
     const rejectLabel = state.step === "wrap" ? (item.proposed === "join" ? "Giữ tách" : "Ghép") : "Bỏ";
     const rejectBtn = actionable
-      ? `<button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}">${rejectLabel}</button>`
+      ? `<button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}"${lockedAttr}>${rejectLabel}</button>`
       : "";
     return `<article class="${cls.join(" ")}" data-hitl-id="${escapeHtml(item.id)}">
       <div class="re-hitl-card-top">${tags.join("")}${reasons ? `<span class="muted">${reasons}</span>` : ""}</div>
       ${body}
       <div class="re-hitl-actions">
-        <button type="button" class="btn ${decision === "accept" ? "primary" : "ghost"}" data-hitl-accept="${escapeHtml(item.id)}">${acceptLabel}</button>
+        <button type="button" class="btn ${decision === "accept" ? "primary" : "ghost"}" data-hitl-accept="${escapeHtml(item.id)}"${lockedAttr}>${acceptLabel}</button>
         ${rejectBtn}
       </div>
     </article>`;
@@ -1139,6 +1154,10 @@
   async function confirmHitlTrial() {
     const kind = hitlKind();
     if (!kind || !state.workId) return;
+    if (hitlScanBusy()) {
+      toast("Đang quét — đợi xong rồi mới xác nhận");
+      return;
+    }
     try {
       applyHitlJob(
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/confirm`, {
@@ -1156,6 +1175,10 @@
   async function decideHitl(itemId, decision, suspectsOnly) {
     const kind = hitlKind();
     if (!kind || !state.workId) return;
+    if (hitlScanBusy()) {
+      toast("Đang quét — đợi xong rồi mới chấp nhận/bỏ");
+      return;
+    }
     try {
       applyHitlJob(
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/decide`, {
