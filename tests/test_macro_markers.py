@@ -16,11 +16,13 @@ from knowledgehub.edition.toc import (
     is_body_heading_line,
     is_chapter_number_only_line,
     is_toc_list_row,
+    kind_for_toc_label,
     parse_contents_entries,
     toc_is_heading_list_map,
     toc_is_page_column_map,
     toc_is_wrap_page_column,
     toc_match_covers_structure,
+    toc_source_from_excerpt,
     match_toc_entries_in_body,
 )
 
@@ -1249,3 +1251,156 @@ def test_prose_section_of_and_essay_in_are_not_units():
     assert _UNIT_TOC_LINE.match("Sub-Section C. Philosophy.")
     assert _UNIT_TOC_LINE.match("Section I Mind Subjective.")
     assert _UNIT_TOC_LINE.match("sub-section A. Law.")
+
+
+_BASTIAT_SOPHISMS_TOC = """
+TRANSLATOR'S PREFACE.
+ECONOMIC SOPHISMS. FIRST SERIES.
+INTRODUCTION.
+I. ABUNDANCE, SCARCITY.
+II. OBSTACLE, CAUSE.
+III. EFFORT, RESULT.
+IV. TO EQUALIZE THE CONDITIONS OF PRODUCTION.
+V. OUR PRODUCTS ARE BURDENED WITH TAXES.
+VI. BALANCE OF TRADE.
+VII. OF THE MANUFACTURERS
+VIII. DIFFERENTIAL DUTIES.
+IX. IMMENSE DISCOVERY.
+X. RECIPROCITY.
+XI. NOMINAL PRICES.
+XII. DOES PROTECTION RAISE THE RATE OF WAGES?
+XIII. THEORY, PRACTICE.
+XIV. CONFLICT OF PRINCIPLES.
+XV. RECIPROCITY AGAIN.
+XVI. OBSTRUCTED NAVIGATION PLEADING FOR THE PROHIBITIONISTS.
+XVII. A NEGATIVE RAILWAY.
+XVIII. THERE ARE NO ABSOLUTE PRINCIPLES.
+XIX. NATIONAL INDEPENDENCE.
+XX. HUMAN LABOUR, NATIONAL LABOUR.
+XXI. RAW MATERIALS.
+XXII. METAPHORS.
+CONCLUSION.
+
+
+SECOND SERIES.
+I. PHYSIOLOGY OF SPOLIATION.
+II. TWO PRINCIPLES OF MORALITY.
+III. THE TWO HATCHETS.
+IV. LOWER COUNCIL OF LABOUR.
+V. DEARNESS-CHEAPNESS.
+VI. TO ARTISANS AND WORKMEN.
+VII. A CHINESE STORY.\t
+VIII. POST HOC, ERGO PROPTER HOC.
+IX. THE PREMIUM THEFT.
+X. THE TAXGATHERER.
+XI. THE UTOPIAN FREE-TRADER.
+XII. THE SALT-TAX, RATES OF POSTAGE, AND CUSTOMHOUSE DUTIES.
+XIII. PROTECTION; OR, THE THREE CITY MAGISTRATES. Demonstration in Four Tableaux.
+XIV. SOMETHING ELSE.
+XV. THE LITTLE ARSENAL OF THE FREE-TRADER.
+XVI. THE RIGHT HAND AND THE LEFT.
+XVII. DOMINATION BY LABOUR.
+""".strip()
+
+
+def _bastiat_sophisms_body(toc: str) -> str:
+    prose = " ".join(["word"] * 40)
+    parts = [
+        "*** START OF THE PROJECT GUTENBERG EBOOK ECONOMIC SOPHISMS ***",
+        "",
+        "ECONOMIC SOPHISMS",
+        "",
+        prose,
+    ]
+    for line in toc.splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        if s.startswith("IV. TO EQUALIZE"):
+            parts += ["", s, "", prose, "I. To level and equalize the conditions of labour is not simply to cramp"]
+            continue
+        if s.startswith("XIII. PROTECTION"):
+            parts += [
+                "",
+                "XIII. PROTECTION; OR, THE THREE CITY MAGISTRATES. Demonstration in Four",
+                "Tableaux.",
+                "",
+                prose,
+            ]
+            continue
+        parts += ["", s, "", prose]
+    parts += ["", "*** END OF THE PROJECT GUTENBERG EBOOK ECONOMIC SOPHISMS ***"]
+    return "\n".join(parts)
+
+
+def test_bastiat_pasted_toc_parses_numbered_essays_and_series():
+    src = toc_source_from_excerpt(_BASTIAT_SOPHISMS_TOC)
+    entries = parse_contents_entries(src)
+    labels = [e["label"] for e in entries]
+    kinds = [e["kind"] for e in entries]
+    assert any("TRANSLATOR" in lab.upper() and "PREFACE" in lab.upper() for lab in labels)
+    assert any("FIRST SERIES" in lab.upper() for lab in labels)
+    assert any("SECOND SERIES" in lab.upper() for lab in labels)
+    assert any(lab.upper().startswith("INTRODUCTION") for lab in labels)
+    assert any(lab.upper().startswith("CONCLUSION") for lab in labels)
+    assert any("ABUNDANCE" in lab.upper() for lab in labels)
+    assert any("PHYSIOLOGY OF SPOLIATION" in lab.upper() for lab in labels)
+    assert any("THREE CITY MAGISTRATES" in lab.upper() and "TABLEAUX" in lab.upper() for lab in labels)
+    assert kinds.count("preface") == 1
+    assert kinds.count("introduction") == 1
+    assert kinds.count("part") == 2
+    assert kinds.count("chapter") == 39  # 22 first series + 17 second series
+    assert not any(e.get("page") for e in entries)
+    assert toc_is_heading_list_map(entries)
+    assert not toc_is_page_column_map(entries)
+    # Numbered prose inside a chapter must not become a TOC row.
+    assert not any("To level" in str(e.get("label") or "") for e in entries)
+
+
+def test_bastiat_pasted_toc_matches_body_and_splits_series():
+    text = _bastiat_sophisms_body(_BASTIAT_SOPHISMS_TOC)
+    src = toc_source_from_excerpt(_BASTIAT_SOPHISMS_TOC)
+    entries = parse_contents_entries(src)
+    matched = match_toc_entries_in_body(text, entries)
+    assert toc_match_covers_structure(entries, matched)
+    assert [m["label"] for m in matched] == [e["label"] for e in entries]
+    magistracy = next(m for m in matched if "MAGISTRATES" in m["label"].upper())
+    assert "TABLEAUX" in magistracy["text"].upper()
+
+    doc = build_macro_structure(
+        text, language="en", family="gutenberg", use_llm=False, toc_excerpt=_BASTIAT_SOPHISMS_TOC
+    )
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    kinds = [s["kind"] for s in doc["sections"]]
+    assert kinds[0] == "front_matter"
+    assert "preface" in kinds
+    assert "introduction" in kinds
+    assert kinds.count("part") == 2
+    assert kinds.count("chapter") >= 39
+    assert any("ABUNDANCE" in t.upper() for t in titles)
+    assert any("PHYSIOLOGY OF SPOLIATION" in t.upper() for t in titles)
+    assert any("FIRST SERIES" in t.upper() for t in titles)
+    assert any("SECOND SERIES" in t.upper() for t in titles)
+    first_i = next(s for s in doc["sections"] if "ABUNDANCE" in s["title"].upper())
+    second_i = next(s for s in doc["sections"] if "PHYSIOLOGY" in s["title"].upper())
+    first_part = next(s for s in doc["sections"] if "FIRST SERIES" in s["title"].upper())
+    second_part = next(s for s in doc["sections"] if s["kind"] == "part" and "SECOND SERIES" in s["title"].upper())
+    assert first_i.get("parent_id") == first_part["section_id"]
+    assert second_i.get("parent_id") == second_part["section_id"]
+
+
+def test_bastiat_body_headings_are_not_toc_list_rows():
+    assert is_body_heading_line("TRANSLATOR'S PREFACE.")
+    assert is_body_heading_line("ECONOMIC SOPHISMS. FIRST SERIES.")
+    assert is_body_heading_line("I. ABUNDANCE, SCARCITY.")
+    assert is_body_heading_line("SECOND SERIES.")
+    assert is_body_heading_line("CONCLUSION.")
+    assert not is_body_heading_line(
+        "I. To level and equalize the conditions of labour is not simply to cramp"
+    )
+    assert not is_body_heading_line(
+        "I. YES, but then a long lowercase sentence about labour is not a heading"
+    )
+    assert kind_for_toc_label("TRANSLATOR'S PREFACE.") == "preface"
+    assert kind_for_toc_label("A Preface to Politics") == "other"
