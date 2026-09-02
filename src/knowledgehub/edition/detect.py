@@ -510,6 +510,7 @@ _STRUCTURAL_UNIT_HEADING = re.compile(
     re.I,
 )
 _NUMBERED_ESSAY_HEADING = re.compile(r"^(?:[IVXLC]{1,8}|\d+)\.\s+\S")
+_FULL_LINE_ITALIC = re.compile(r"^_[^_\n].*[^_\n]_$")
 _RUNNING_HEADER_MAX_LEN = 90
 _RUNNING_HEADER_MIN_COUNT = 3
 
@@ -526,19 +527,30 @@ def is_structural_unit_heading(line: str) -> bool:
     return bool(_STRUCTURAL_UNIT_HEADING.match(s) or _NUMBERED_ESSAY_HEADING.match(s))
 
 
+def _is_running_header_shape(line: str) -> bool:
+    """ALL-CAPS banners or a full-line ``_italic_`` wrapper — not sentence-case refrains."""
+    s = line.strip()
+    if not s:
+        return False
+    if _FULL_LINE_ITALIC.match(s):
+        return True
+    letters = [c for c in s.replace("_", "") if c.isalpha()]
+    return len(letters) >= 8 and all(c.isupper() for c in letters)
+
+
 def repeating_running_header_keys(
     text: str,
     *,
     min_count: int = _RUNNING_HEADER_MIN_COUNT,
     max_len: int = _RUNNING_HEADER_MAX_LEN,
 ) -> set[str]:
-    """Keys of short lines that repeat often enough to be running headers, not unique headings."""
+    """Keys of short ALL-CAPS / italic lines that repeat often enough to be page headers."""
     counts: dict[str, int] = {}
     for raw in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
         s = raw.strip()
         if not s or len(s) >= max_len:
             continue
-        if is_structural_unit_heading(s):
+        if is_structural_unit_heading(s) or not _is_running_header_shape(s):
             continue
         key = _heading_key(s)
         if not key:
@@ -556,12 +568,14 @@ def is_repeating_running_header(
     s = line.strip()
     if not s or len(s) >= max_len or is_structural_unit_heading(s):
         return False
+    if not _is_running_header_shape(s):
+        return False
     key = _heading_key(s)
     return bool(key and key in keys)
 
 
 def detect_running_headers(text: str) -> list[EditionSpan]:
-    """Drop short lines that repeat ≥3 times (page headers), not unique chapter/essay titles."""
+    """Drop ALL-CAPS / full-line italic lines that repeat ≥3 times (page headers)."""
     keys = repeating_running_header_keys(text)
     if not keys:
         return []

@@ -16,6 +16,7 @@ from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_pag
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
     _UNIT_TOC_LINE,
+    _looks_like_chapter_body_prose,
     chapter_number_key,
     heading_title_from_toc_match,
     is_body_heading_line,
@@ -353,6 +354,30 @@ def test_bare_chapter_stack_is_toc_list():
     lines = ["CHAPTER III", "", "CHAPTER IV", "", "CHAPTER V"]
     assert is_toc_chapter_block(lines, 0)
     assert is_toc_chapter_block(lines, 2)
+
+
+def test_short_chapter_emdash_sentence_is_body_not_toc_stub():
+    opening = "The competition took place at Easter—terms were arranged a month later."
+    assert _looks_like_chapter_body_prose(opening)
+    austen = (
+        "It is a truth universally acknowledged that a single man in possession "
+        "of a good fortune must be in want of a wife."
+    )
+    assert _looks_like_chapter_body_prose(austen)
+    synopsis = "The Bachs of Thuringia--Veit Bach, the ancestor of the family"
+    assert not _looks_like_chapter_body_prose(synopsis)
+    multi = "Bach's salary—He borrows a cart—The agreement is made verbally"
+    assert not _looks_like_chapter_body_prose(multi)
+    lines = [
+        "CHAPTER I",
+        "",
+        opening,
+        "",
+        "CHAPTER II",
+        "",
+        _body_prose("chapter II"),
+    ]
+    assert not is_toc_chapter_block(lines, 0)
 
 
 def test_marker_assembly_austen():
@@ -936,6 +961,13 @@ def test_heading_key_strips_italic_wrappers():
     plain = _heading_key("FIRST AND SECOND SERIES COMPLETE")
     assert italic == plain
     assert "FIRST AND SECOND SERIES COMPLETE" in italic
+
+
+def test_sentence_case_refrain_is_not_a_running_header():
+    refrain = "And I will always love you, my dear"
+    text = "\n\n".join([refrain] * 4)
+    assert repeating_running_header_keys(text) == set()
+    assert detect_running_headers(text) == []
 
 
 def test_running_headers_need_three_repeats():

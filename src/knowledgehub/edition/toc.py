@@ -646,13 +646,25 @@ _TOC_CHAPTER_ANY = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", re.I)
 
 
 def _looks_like_chapter_body_prose(line: str) -> bool:
-    """Substantial body paragraph after CHAPTER — not a contents title/synopsis."""
+    """Substantial body paragraph after CHAPTER — not a contents title/synopsis.
+
+    A finished sentence (``.!?``) or a long line without a title/synopsis shape
+    counts as body. Leftover CONTENTS synopses are dash-lists of topics (two or
+    more dashes, or one dash with no terminal period). ``the`` is a useful
+    signal in fixtures but is not required — Austen-style openings omit it.
+    """
     s = line.strip()
     if not s or len(s) < 55:
         return False
-    if _TOC_CHAPTER_ANY.match(s) or is_chapter_heading_line(s) or is_chapter_title_line(s):
+    if _TOC_CHAPTER_ANY.match(s) or is_chapter_heading_line(s):
         return False
-    if "—" in s or "–" in s or "--" in s:
+    dash_hits = s.count("—") + s.count("–") + s.count("--")
+    ends_sentence = bool(re.search(r"[.!?]$", s))
+    if dash_hits >= 2:
+        return False
+    if dash_hits == 1:
+        return ends_sentence
+    if is_chapter_title_line(s) and not ends_sentence:
         return False
     return True
 
