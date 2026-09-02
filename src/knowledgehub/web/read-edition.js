@@ -18,7 +18,8 @@
     suspectsOnly: true,
     chapterLoad: 0,
     pageLoad: 0,
-    hitlLoad: 0,
+    hitlJobLoad: 0,
+    hitlOverviewLoad: 0,
   };
 
   const HITL_STEPS = {
@@ -623,6 +624,12 @@
     return `<span class="re-micro re-micro-complete">quét</span>`;
   }
 
+  function chapterTitle(chapterId) {
+    if (!chapterId) return "";
+    const row = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapterId);
+    return (row && row.title) || chapterId;
+  }
+
   function renderHitlList() {
     const box = $("re-hitl-list");
     const metaEl = $("re-hitl-meta");
@@ -671,7 +678,13 @@
       if (job.trial_confirmed) bits.push("đã xác nhận thử");
       metaEl.textContent = bits.join(" · ");
     }
-    $("re-hitl-confirm").hidden = job.status === "idle" || !!job.trial_confirmed;
+    const viewingTrial = !job.trial_chapter_id || job.trial_chapter_id === focusId;
+    const confirmBtn = $("re-hitl-confirm");
+    if (confirmBtn) {
+      confirmBtn.hidden = job.status === "idle" || !!job.trial_confirmed || !viewingTrial;
+      const trialLabel = chapterTitle(job.trial_chapter_id);
+      confirmBtn.textContent = trialLabel ? `Chương thử ổn · ${trialLabel}` : "Chương thử ổn";
+    }
     $("re-hitl-book").disabled = !job.trial_confirmed;
     $("re-hitl-accept-suspects").hidden = pending === 0;
     if (!shown.length) {
@@ -752,23 +765,30 @@
 
   async function loadHitlOverview() {
     if (!state.workId) return;
-    const loadId = ++state.hitlLoad;
+    const loadId = ++state.hitlOverviewLoad;
     const workId = state.workId;
     try {
       const overview = await api(`/api/works/${encodeURIComponent(workId)}/read-edition/hitl`);
-      if (loadId !== state.hitlLoad || state.workId !== workId) return;
+      if (loadId !== state.hitlOverviewLoad || state.workId !== workId) return;
       state.hitlOverview = overview;
     } catch {
-      if (loadId !== state.hitlLoad || state.workId !== workId) return;
+      if (loadId !== state.hitlOverviewLoad || state.workId !== workId) return;
       state.hitlOverview = null;
     }
     applyStepVisibility();
   }
 
+  function applyHitlJob(job) {
+    state.hitlJobLoad += 1;
+    state.hitlJob = job;
+    renderHitlList();
+    if (state.manifest) renderChapterList(state.manifest);
+  }
+
   async function loadHitlJob() {
     const kind = hitlKind();
     const workId = state.workId;
-    const loadId = ++state.hitlLoad;
+    const loadId = ++state.hitlJobLoad;
     if (!kind || !workId) {
       state.hitlJob = null;
       renderHitlList();
@@ -777,10 +797,10 @@
     }
     try {
       const job = await api(`/api/works/${encodeURIComponent(workId)}/read-edition/hitl/${kind}`);
-      if (loadId !== state.hitlLoad || state.workId !== workId || hitlKind() !== kind) return;
+      if (loadId !== state.hitlJobLoad || state.workId !== workId || hitlKind() !== kind) return;
       state.hitlJob = job;
     } catch {
-      if (loadId !== state.hitlLoad || state.workId !== workId) return;
+      if (loadId !== state.hitlJobLoad || state.workId !== workId) return;
       state.hitlJob = null;
     }
     renderHitlList();
@@ -804,20 +824,6 @@
       /* ignore */
     }
     return null;
-  }
-
-  function latestHitlStep(overview) {
-    let best = null;
-    let bestAt = "";
-    for (const kind of ["wrap", "footnotes", "quotes"]) {
-      const row = overview?.kinds?.[kind];
-      if (!row || row.status === "idle" || !row.updated_at) continue;
-      if (String(row.updated_at) > bestAt) {
-        bestAt = String(row.updated_at);
-        best = kind;
-      }
-    }
-    return best;
   }
 
   async function setStep(step) {
@@ -849,14 +855,14 @@
     const label = scope === "book" ? "Đang quét toàn văn bản…" : "Đang chạy thử chương…";
     toast(label);
     try {
-      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/scan`, {
-        method: "POST",
-        body: { scope, chapter_id: state.chapterId },
-      });
+      applyHitlJob(
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/scan`, {
+          method: "POST",
+          body: { scope, chapter_id: state.chapterId },
+        }),
+      );
       toast(scope === "book" ? "Đã quét toàn sách" : "Đã chạy thử chương");
       await loadHitlOverview();
-      renderHitlList();
-      if (state.manifest) renderChapterList(state.manifest);
     } catch (err) {
       toast(err.message);
     }
@@ -872,13 +878,14 @@
     const kind = hitlKind();
     if (!kind || !state.workId) return;
     try {
-      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/confirm`, {
-        method: "POST",
-        body: { chapter_id: hitlTrialChapterId() || state.chapterId },
-      });
+      applyHitlJob(
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/confirm`, {
+          method: "POST",
+          body: { chapter_id: hitlTrialChapterId() || state.chapterId },
+        }),
+      );
       toast("Đã xác nhận chương thử — có thể chạy toàn văn bản");
       await loadHitlOverview();
-      renderHitlList();
     } catch (err) {
       toast(err.message);
     }
@@ -888,17 +895,18 @@
     const kind = hitlKind();
     if (!kind || !state.workId) return;
     try {
-      state.hitlJob = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/decide`, {
-        method: "POST",
-        body: {
-          decision,
-          item_ids: itemId ? [itemId] : [],
-          suspects_only: !!suspectsOnly,
-          chapter_id: itemId ? null : state.chapterId || hitlTrialChapterId(),
-        },
-      });
+      applyHitlJob(
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/decide`, {
+          method: "POST",
+          body: {
+            decision,
+            item_ids: itemId ? [itemId] : [],
+            suspects_only: !!suspectsOnly,
+            chapter_id: itemId ? null : state.chapterId || hitlTrialChapterId(),
+          },
+        }),
+      );
       await loadHitlOverview();
-      renderHitlList();
       if ((state.hitlJob.reparsed || []).includes(state.chapterId)) {
         toast("Đã ghi vào chương đã parse");
         await selectChapter(state.chapterId);
@@ -1196,7 +1204,7 @@
         renderChapterList(state.manifest);
         await loadHitlOverview();
         if (loadId !== state.pageLoad) return;
-        const savedStep = rememberedStep(workId) || latestHitlStep(state.hitlOverview) || "structure";
+        const savedStep = rememberedStep(workId) || "structure";
         state.step = savedStep;
         persistStep(workId, savedStep);
         if (hitlKind()) {
@@ -1209,14 +1217,7 @@
         const remembered =
           (workId ? localStorage.getItem(lastSectionKey(workId)) : null) ||
           status.hitl?.last_section_id;
-        let pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
-        if (hitlKind() && state.hitlJob && pick && !hitlChapterScanned(state.hitlJob, pick.chapter_id)) {
-          const trial = state.hitlJob.trial_chapter_id;
-          pick =
-            chapters.find((row) => row.chapter_id === trial && hitlChapterScanned(state.hitlJob, row.chapter_id)) ||
-            chapters.find((row) => hitlChapterScanned(state.hitlJob, row.chapter_id)) ||
-            pick;
-        }
+        const pick = chapters.find((row) => row.chapter_id === remembered) || chapters[0];
         if (pick) await selectChapter(pick.chapter_id);
         if (loadId !== state.pageLoad) return;
       } else {
@@ -1550,7 +1551,8 @@
       $("re-heading").textContent = "Chế bản";
       $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — rồi đưa sang Read.";
       state.pageLoad += 1;
-      state.hitlLoad += 1;
+      state.hitlJobLoad += 1;
+      state.hitlOverviewLoad += 1;
       state.workId = null;
       state.step = "structure";
       state.hitlJob = null;

@@ -797,19 +797,21 @@ def scan_hitl_step(
         kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
         chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
         merged = kept + merge_item_decisions(chapter_old, new_items)
-        trial_id = existing.get("trial_chapter_id") or chapter_id
         if existing.get("scope") == "book":
             job_scope = "book"
             job_status = existing.get("status") or "book"
             job_confirmed = bool(existing.get("trial_confirmed"))
+            trial_id = existing.get("trial_chapter_id") or chapter_id
         elif existing.get("trial_confirmed"):
             job_scope = "chapter"
             job_status = "trial_confirmed"
             job_confirmed = True
+            trial_id = existing.get("trial_chapter_id") or chapter_id
         else:
             job_scope = "chapter"
             job_status = "trial"
             job_confirmed = False
+            trial_id = chapter_id
     else:
         merged = merge_item_decisions(existing.get("items") or [], new_items)
         job_scope = "book"
