@@ -2,6 +2,8 @@
 
 Hub produces REF/1 at publish time; Read consumes it for split, render, and TTS.
 
+**Pilot contract (frozen):** see [ref-read-contract.md](./ref-read-contract.md) for the Hub→Read payload Read must honor on the first three English pilots (`arnold--essays_in_criticism`, `bastiat--economic_sophisms`, `bach--abdy_williams`).
+
 **Rule reference:** see [ref-format-rules.md](./ref-format-rules.md) for parser pipeline, join rules, inline span classifiers, and corpus fixtures.
 
 ## Goals
