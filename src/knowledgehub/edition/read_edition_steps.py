@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from ..catalog import get_work, is_hub_translation, resolve_content_path
+from ..jsonfile import package_lock, write_json_atomic
 from ..paths import corpus_root
 from .hitl_ops import (
     HITL_KINDS,
@@ -55,10 +56,8 @@ def load_structure(package_dir: Path) -> dict[str, Any] | None:
 
 def save_structure(package_dir: Path, structure: dict[str, Any]) -> None:
     package_dir.mkdir(parents=True, exist_ok=True)
-    structure_path(package_dir).write_text(
-        json.dumps(structure, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    with package_lock(package_dir):
+        write_json_atomic(structure_path(package_dir), structure)
 
 
 def resolve_stripped_source(
@@ -218,18 +217,26 @@ def _sync_chapter_json_metadata(package_dir: Path, structure: dict[str, Any]) ->
                 del doc["parent_id"]
             changed = True
         if changed:
-            path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_json_atomic(path, doc)
 
 
 def remember_last_section(package_dir: Path, structure: dict[str, Any] | None, section_id: str | None) -> None:
-    if not structure or not section_id:
+    if not section_id:
         return
-    hitl = dict(structure.get("hitl") or {})
-    if hitl.get("last_section_id") == section_id:
-        return
-    hitl["last_section_id"] = section_id
-    structure["hitl"] = hitl
-    save_structure(package_dir, structure)
+    with package_lock(package_dir):
+        disk = load_structure(package_dir)
+        target = disk if disk is not None else structure
+        if not target:
+            return
+        hitl = dict(target.get("hitl") or {})
+        if hitl.get("last_section_id") != section_id:
+            hitl["last_section_id"] = section_id
+            target["hitl"] = hitl
+            save_structure(package_dir, target)
+        if structure is not None:
+            mirrored = dict(structure.get("hitl") or {})
+            mirrored["last_section_id"] = section_id
+            structure["hitl"] = mirrored
 
 
 def persist_package_structure(
@@ -250,39 +257,36 @@ def persist_package_structure(
     structure["content_hash"] = content_hash
     structure["source_family"] = family
     structure["language"] = language
-    save_structure(package_dir, structure)
-
-    manifest_path = package_dir / "manifest.json"
-    old_manifest: dict[str, Any] = {}
-    if not reset_micro and manifest_path.is_file():
-        old_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    manifest = {
-        "package_version": "2",
-        "pipeline": "two_step",
-        "work_id": work_id,
-        "title": work.get("title"),
-        "language": language,
-        "content_hash": content_hash,
-        "macro_status": "complete",
-        "macro_mode": structure.get("mode"),
-        "macro_model": structure.get("model"),
-        "macro_summary_vi": structure.get("summary_vi"),
-        "content_kind": structure.get("content_kind"),
-        "source_family": family,
-        "ref_parser_version": REF_PARSER_VERSION,
-        "chapter_count": structure.get("section_count"),
-        "chapters": _manifest_chapter_rows(structure, None if reset_micro else old_manifest),
-        "updated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
-    }
-    manifest_path.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    _prune_stale_chapter_files(package_dir, manifest)
-    if not reset_micro:
-        _sync_chapter_json_metadata(package_dir, structure)
-    (package_dir / "chapters").mkdir(exist_ok=True)
-    (package_dir / "qa").mkdir(exist_ok=True)
+    with package_lock(package_dir):
+        save_structure(package_dir, structure)
+        manifest_path = package_dir / "manifest.json"
+        old_manifest: dict[str, Any] = {}
+        if not reset_micro and manifest_path.is_file():
+            old_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest = {
+            "package_version": "2",
+            "pipeline": "two_step",
+            "work_id": work_id,
+            "title": work.get("title"),
+            "language": language,
+            "content_hash": content_hash,
+            "macro_status": "complete",
+            "macro_mode": structure.get("mode"),
+            "macro_model": structure.get("model"),
+            "macro_summary_vi": structure.get("summary_vi"),
+            "content_kind": structure.get("content_kind"),
+            "source_family": family,
+            "ref_parser_version": REF_PARSER_VERSION,
+            "chapter_count": structure.get("section_count"),
+            "chapters": _manifest_chapter_rows(structure, None if reset_micro else old_manifest),
+            "updated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
+        }
+        write_json_atomic(manifest_path, manifest)
+        _prune_stale_chapter_files(package_dir, manifest)
+        if not reset_micro:
+            _sync_chapter_json_metadata(package_dir, structure)
+        (package_dir / "chapters").mkdir(exist_ok=True)
+        (package_dir / "qa").mkdir(exist_ok=True)
     return {
         "package_dir": str(package_dir.relative_to(root)),
         "structure": structure,
@@ -582,22 +586,19 @@ def parse_micro_chapter(
     }
     chapters_dir = package_dir / "chapters"
     chapters_dir.mkdir(parents=True, exist_ok=True)
-    (chapters_dir / f"{chapter_id}.json").write_text(
-        json.dumps(chapter_doc, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-
-    manifest_path = package_dir / "manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
-    for row in manifest.get("chapters") or []:
-        if row.get("chapter_id") == chapter_id:
-            row["micro_status"] = "complete"
-            row["block_count"] = len(blocks)
-            row["ref_mode"] = ref_report.get("ref_mode")
-            row["edition_hash"] = hashed
-    manifest["updated_at"] = chapter_doc.get("parsed_at") or manifest.get("updated_at")
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    remember_last_section(package_dir, structure, chapter_id)
+    with package_lock(package_dir):
+        write_json_atomic(chapters_dir / f"{chapter_id}.json", chapter_doc)
+        manifest_path = package_dir / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
+        for row in manifest.get("chapters") or []:
+            if row.get("chapter_id") == chapter_id:
+                row["micro_status"] = "complete"
+                row["block_count"] = len(blocks)
+                row["ref_mode"] = ref_report.get("ref_mode")
+                row["edition_hash"] = hashed
+        manifest["updated_at"] = chapter_doc.get("parsed_at") or manifest.get("updated_at")
+        write_json_atomic(manifest_path, manifest)
+        remember_last_section(package_dir, structure, chapter_id)
     return chapter_doc
 
 
@@ -711,10 +712,8 @@ def save_hitl_job(package_dir: Path, kind: str, job: dict[str, Any]) -> dict[str
     job["scanned_chapter_ids"] = scanned_chapter_ids(job)
     folder = package_dir / "hitl"
     folder.mkdir(parents=True, exist_ok=True)
-    hitl_path(package_dir, kind).write_text(
-        json.dumps(job, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    with package_lock(package_dir):
+        write_json_atomic(hitl_path(package_dir, kind), job)
     return job
 
 
@@ -790,9 +789,13 @@ def scan_hitl_step(
     wrap_job = load_hitl_job(package_dir, "wrap") if kind == "quotes" else None
     new_items: list[dict[str, Any]] = []
     extra_keys = ("auto_join", "auto_keep", "linked", "unmatched")
-    chapter_stats: dict[str, Any] = {} if scope == "book" else dict(existing.get("chapter_stats") or {})
-    for section in targets:
+    chapter_stats: dict[str, Any] = {}
+    from .jobs import raise_if_stopped, report_progress
+
+    for index, section in enumerate(targets, 1):
         sid = str(section["section_id"])
+        raise_if_stopped()
+        report_progress("scan", f"Đang quét {kind} {index}/{len(targets)}…")
         slice_text = section_source_slice(text, section)
         wrap_overrides = None
         if wrap_job is not None:
@@ -811,45 +814,51 @@ def scan_hitl_step(
         new_items.extend(items)
         chapter_stats[sid] = {key: int(extra.get(key) or 0) for key in extra_keys}
 
-    extra_acc = {key: sum(int((chapter_stats.get(cid) or {}).get(key) or 0) for cid in chapter_stats) for key in extra_keys}
-    if scope == "chapter":
-        sid = str(chapter_id)
-        kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
-        chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
-        merged = kept + merge_item_decisions(chapter_old, new_items)
-        if existing.get("scope") == "book":
-            job_scope = "book"
-            job_status = existing.get("status") or "book"
-            job_confirmed = bool(existing.get("trial_confirmed"))
-            trial_id = existing.get("trial_chapter_id") or chapter_id
-        elif existing.get("trial_confirmed"):
-            job_scope = "chapter"
-            job_status = "trial_confirmed"
-            job_confirmed = True
-            trial_id = existing.get("trial_chapter_id") or chapter_id
+    with package_lock(package_dir):
+        current = load_hitl_job(package_dir, kind)
+        stats = dict(current.get("chapter_stats") or {})
+        stats.update(chapter_stats)
+        extra_acc = {
+            key: sum(int((stats.get(cid) or {}).get(key) or 0) for cid in stats) for key in extra_keys
+        }
+        if scope == "chapter":
+            sid = str(chapter_id)
+            kept = [it for it in (current.get("items") or []) if str(it.get("chapter_id")) != sid]
+            chapter_old = [it for it in (current.get("items") or []) if str(it.get("chapter_id")) == sid]
+            merged = kept + merge_item_decisions(chapter_old, new_items)
+            if current.get("scope") == "book":
+                job_scope = "book"
+                job_status = current.get("status") or "book"
+                job_confirmed = bool(current.get("trial_confirmed"))
+                trial_id = current.get("trial_chapter_id") or chapter_id
+            elif current.get("trial_confirmed"):
+                job_scope = "chapter"
+                job_status = "trial_confirmed"
+                job_confirmed = True
+                trial_id = current.get("trial_chapter_id") or chapter_id
+            else:
+                job_scope = "chapter"
+                job_status = "trial"
+                job_confirmed = False
+                trial_id = chapter_id
         else:
-            job_scope = "chapter"
-            job_status = "trial"
-            job_confirmed = False
-            trial_id = chapter_id
-    else:
-        merged = merge_item_decisions(existing.get("items") or [], new_items)
-        job_scope = "book"
-        job_status = "book"
-        job_confirmed = bool(existing.get("trial_confirmed"))
-        trial_id = existing.get("trial_chapter_id") or chapter_id
+            merged = merge_item_decisions(current.get("items") or [], new_items)
+            job_scope = "book"
+            job_status = "book"
+            job_confirmed = bool(current.get("trial_confirmed"))
+            trial_id = current.get("trial_chapter_id") or chapter_id
 
-    job = {
-        "kind": kind,
-        "status": job_status,
-        "trial_chapter_id": trial_id,
-        "trial_confirmed": job_confirmed,
-        "scope": job_scope,
-        "items": merged,
-        "chapter_stats": chapter_stats,
-        "summary": extra_acc,
-    }
-    return save_hitl_job(package_dir, kind, job)
+        job = {
+            "kind": kind,
+            "status": job_status,
+            "trial_chapter_id": trial_id,
+            "trial_confirmed": job_confirmed,
+            "scope": job_scope,
+            "items": merged,
+            "chapter_stats": stats,
+            "summary": extra_acc,
+        }
+        return save_hitl_job(package_dir, kind, job)
 
 
 def confirm_hitl_trial_step(
@@ -862,15 +871,16 @@ def confirm_hitl_trial_step(
     if kind not in HITL_KINDS:
         raise ReadEditionStepError(f"unknown HITL kind: {kind}")
     package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
-    job = load_hitl_job(package_dir, kind)
-    trial_id = job.get("trial_chapter_id") or chapter_id
-    if job.get("status") in {None, "idle"} or not trial_id:
-        raise ReadEditionStepError("Chạy thử một chương trước khi xác nhận")
-    job["trial_chapter_id"] = trial_id
-    job["trial_confirmed"] = True
-    if job.get("status") != "book":
-        job["status"] = "trial_confirmed"
-    return save_hitl_job(package_dir, kind, job)
+    with package_lock(package_dir):
+        job = load_hitl_job(package_dir, kind)
+        trial_id = job.get("trial_chapter_id") or chapter_id
+        if job.get("status") in {None, "idle"} or not trial_id:
+            raise ReadEditionStepError("Chạy thử một chương trước khi xác nhận")
+        job["trial_chapter_id"] = trial_id
+        job["trial_confirmed"] = True
+        if job.get("status") != "book":
+            job["status"] = "trial_confirmed"
+        return save_hitl_job(package_dir, kind, job)
 
 
 def decide_hitl_step(
@@ -891,39 +901,41 @@ def decide_hitl_step(
     if not load_structure(package_dir):
         raise ReadEditionStepError("Run macro step first (structure.json missing)")
     root = corpus or corpus_root()
-    job = load_hitl_job(package_dir, kind)
-    wanted = set(item_ids or [])
-    if not wanted and suspects_only and not chapter_id and job.get("scope") == "chapter":
-        chapter_id = job.get("trial_chapter_id")
-    changed = 0
-    affected: set[str] = set()
-    for item in job.get("items") or []:
-        if wanted:
-            if item.get("id") not in wanted:
-                continue
-        else:
-            if chapter_id and item.get("chapter_id") != chapter_id:
-                continue
-            if suspects_only and not item.get("suspect"):
-                continue
-            if not suspects_only:
-                continue
-        if decision == "clear":
-            item.pop("decision", None)
-        else:
-            item["decision"] = decision
-        changed += 1
-        cid = str(item.get("chapter_id") or "")
-        if cid:
-            affected.add(cid)
-    if changed == 0 and (wanted or suspects_only):
-        raise ReadEditionStepError("Không khớp item nào")
-    extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}}
-    job["summary"] = extra
-    saved = save_hitl_job(package_dir, kind, job)
+    with package_lock(package_dir):
+        job = load_hitl_job(package_dir, kind)
+        wanted = set(item_ids or [])
+        if not wanted and suspects_only and not chapter_id and job.get("scope") == "chapter":
+            chapter_id = job.get("trial_chapter_id")
+        changed = 0
+        affected: set[str] = set()
+        for item in job.get("items") or []:
+            if wanted:
+                if item.get("id") not in wanted:
+                    continue
+            else:
+                if chapter_id and item.get("chapter_id") != chapter_id:
+                    continue
+                if suspects_only and not item.get("suspect"):
+                    continue
+                if not suspects_only:
+                    continue
+            if decision == "clear":
+                item.pop("decision", None)
+            else:
+                item["decision"] = decision
+            changed += 1
+            cid = str(item.get("chapter_id") or "")
+            if cid:
+                affected.add(cid)
+        if changed == 0 and (wanted or suspects_only):
+            raise ReadEditionStepError("Không khớp item nào")
+        extra = {k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}}
+        job["summary"] = extra
+        saved = save_hitl_job(package_dir, kind, job)
+        affected_ids = sorted(affected)
     reparsed: list[str] = []
     apply_errors: list[str] = []
-    for cid in sorted(affected):
+    for cid in affected_ids:
         chapter_path = package_dir / "chapters" / f"{cid}.json"
         if not chapter_path.is_file():
             continue

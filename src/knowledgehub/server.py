@@ -78,6 +78,13 @@ from .translation.jobs import (
     worker_alive,
     worker_status,
 )
+from .edition.jobs import (
+    cancel_jobs as cancel_edition_jobs,
+    enqueue_edition_job,
+    jobs_payload as edition_jobs_payload,
+    start_worker as start_edition_worker,
+    stop_worker as stop_edition_worker,
+)
 from .translation.providers import ProviderError
 from .validate import validate_catalog
 
@@ -155,6 +162,10 @@ class EditionSettingsBody(BaseModel):
     use_llm_macro: bool | None = None
     use_llm_relabel: bool | None = None
     use_llm_qa: bool | None = None
+    min_workers: int | None = None
+    max_workers: int | None = None
+    max_attempts: int | None = None
+    job_timeout_sec: int | None = None
 
 
 class SettingsBody(BaseModel):
@@ -185,6 +196,22 @@ class ReadEditionPatchBody(BaseModel):
 class ReadEditionQaBody(BaseModel):
     chapter_id: str | None = None
     use_llm: bool = True
+
+
+class ReadEditionJobBody(BaseModel):
+    kind: str
+    chapter_id: str | None = None
+    chapter_ids: list[str] = Field(default_factory=list)
+    hitl_kind: str | None = None
+    scope: str | None = None
+    use_llm: bool | None = None
+    force: bool = False
+    keep_toc: bool = False
+
+
+class ReadEditionCancelBody(BaseModel):
+    job_id: str | None = None
+    chapter: str | None = None
 
 
 class ReadEditionTocBody(BaseModel):
@@ -244,7 +271,9 @@ def require_ops(request: Request) -> None:
 async def _lifespan(_app: FastAPI):
     configure_job_logging()
     start_worker()
+    start_edition_worker()
     yield
+    stop_edition_worker()
     stop_worker()
 
 
@@ -346,9 +375,11 @@ def create_app() -> FastAPI:
     @app.get("/api/works/{work_id}/read-edition", dependencies=guard)
     def read_edition_status(work_id: str) -> dict[str, Any]:
         try:
-            return get_read_edition_status(work_id)
+            status = get_read_edition_status(work_id)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
+        status.update(edition_jobs_payload(work_id))
+        return status
 
     @app.post("/api/works/{work_id}/read-edition/macro", dependencies=guard)
     def read_edition_macro(work_id: str, payload: ReadEditionMacroBody | None = None) -> dict[str, Any]:
@@ -568,6 +599,42 @@ def create_app() -> FastAPI:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/works/{work_id}/read-edition/jobs", dependencies=guard)
+    def read_edition_jobs(work_id: str) -> dict[str, Any]:
+        try:
+            get_read_edition_status(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        return edition_jobs_payload(work_id)
+
+    @app.post("/api/works/{work_id}/read-edition/jobs", dependencies=guard)
+    def read_edition_enqueue(work_id: str, payload: ReadEditionJobBody) -> dict[str, Any]:
+        try:
+            return enqueue_edition_job(
+                work_id,
+                kind=payload.kind,
+                chapter_id=payload.chapter_id,
+                chapter_ids=payload.chapter_ids,
+                hitl_kind=payload.hitl_kind,
+                scope=payload.scope,
+                use_llm=payload.use_llm,
+                force=payload.force,
+                keep_toc=payload.keep_toc,
+            )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/jobs/cancel", dependencies=guard)
+    def read_edition_cancel(work_id: str, payload: ReadEditionCancelBody | None = None) -> dict[str, Any]:
+        body = payload or ReadEditionCancelBody()
+        try:
+            get_read_edition_status(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        return cancel_edition_jobs(work_id=work_id, chapter=body.chapter, job_id=body.job_id)
 
     @app.post("/api/translations/{source_work_id}/sync-ref-chapters", dependencies=guard)
     def translation_sync_ref_chapters(

@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=cheban18" />
+    <link rel="stylesheet" href="/styles.css?v=cheban19" />
   </head>
   <body>
     <div class="shell">
@@ -132,6 +132,7 @@
               <button type="button" class="btn ghost" id="re-parse-selected">Parse đã chọn</button>
               <button type="button" class="btn ghost" id="re-parse-ready">Parse phần còn lại</button>
               <button type="button" class="btn" id="re-publish">Đưa sang Read</button>
+              <button type="button" class="btn ghost" id="re-cancel-jobs" hidden>Hủy job đang chạy</button>
               <details class="re-more" id="re-more">
                 <summary>⋯</summary>
                 <div class="re-more-menu">
@@ -185,6 +186,8 @@
             </div>
           </section>
           <p class="re-health" id="re-health" hidden></p>
+          <p class="muted re-jobs" id="re-jobs"></p>
+          <pre class="re-job-log" id="re-job-log" hidden></pre>
           <nav class="re-steps" id="re-steps" hidden>
             <button type="button" class="re-step on" data-step="structure">
               <span class="re-step-n">1</span> Phân đoạn
@@ -298,6 +301,25 @@
               <label class="inline"><input id="set-llm-macro" type="checkbox" checked /> LLM phân đoạn</label>
               <label class="inline"><input id="set-llm-relabel" type="checkbox" checked /> LLM relabel</label>
               <label class="inline"><input id="set-llm-qa" type="checkbox" checked /> LLM QA chương</label>
+              <p class="muted">Worker nền cho phân đoạn, parse REF, QA, và quét HITL. Cùng một sách không chạy macro song song với parse.</p>
+              <div class="settings-grid">
+                <label>min_workers
+                  <input id="set-ed-min-workers" type="number" min="0" max="8" step="1" required />
+                  <span>Luồng giữ khi rảnh. 0 = không giữ luồng idle.</span>
+                </label>
+                <label>max_workers
+                  <input id="set-ed-max-workers" type="number" min="1" max="8" step="1" required />
+                  <span>Trần 1–8 khi hàng đợi dài. Nên 2.</span>
+                </label>
+                <label>max_attempts
+                  <input id="set-ed-max-attempts" type="number" min="1" max="10" step="1" required />
+                  <span>Một job không được claim lại quá số lần này.</span>
+                </label>
+                <label>job_timeout_sec
+                  <input id="set-ed-job-timeout" type="number" min="60" max="3600" step="1" required />
+                  <span>Hủy job nếu không có tiến triển nào trong ngần này giây.</span>
+                </label>
+              </div>
             </fieldset>
             <fieldset>
               <legend>Sau khi dịch chương</legend>
@@ -518,7 +540,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=cheban18"></script>
-    <script src="/read-edition.js?v=cheban18"></script>
+    <script src="/app.js?v=cheban19"></script>
+    <script src="/read-edition.js?v=cheban19"></script>
   </body>
 </html>

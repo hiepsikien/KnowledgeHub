@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from ..catalog import get_work, is_hub_translation, resolve_content_path
+from ..jsonfile import package_lock, write_json_atomic
 from ..paths import corpus_root
 from .cache import load_cached_edition, save_cached_edition
 from .footnotes import notes_for_chapter_blocks
@@ -230,16 +231,14 @@ def save_overrides(package_dir: Path, chapters: dict[str, Any]) -> dict[str, Any
     qa_dir = package_dir / "qa"
     qa_dir.mkdir(parents=True, exist_ok=True)
     payload = {"updated_at": _now(), "chapters": chapters}
-    (qa_dir / "overrides.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    manifest_path = package_dir / "manifest.json"
-    if manifest_path.is_file():
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        manifest["overrides_hash"] = overrides_digest(chapters)
-        manifest["updated_at"] = payload["updated_at"]
-        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with package_lock(package_dir):
+        write_json_atomic(qa_dir / "overrides.json", payload)
+        manifest_path = package_dir / "manifest.json"
+        if manifest_path.is_file():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["overrides_hash"] = overrides_digest(chapters)
+            manifest["updated_at"] = payload["updated_at"]
+            write_json_atomic(manifest_path, manifest)
     return payload
 
 
@@ -257,24 +256,25 @@ def save_qa_chapter(package_dir: Path, chapter_id: str, qa: dict[str, Any]) -> d
     qa_dir = package_dir / "qa"
     qa_dir.mkdir(parents=True, exist_ok=True)
     report_path = qa_dir / "report.json"
-    report = load_qa_report(package_dir)
-    chapters = dict(report.get("chapters") or {})
-    chapters[chapter_id] = qa
-    report["chapters"] = chapters
-    report["updated_at"] = _now()
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with package_lock(package_dir):
+        report = load_qa_report(package_dir)
+        chapters = dict(report.get("chapters") or {})
+        chapters[chapter_id] = qa
+        report["chapters"] = chapters
+        report["updated_at"] = _now()
+        write_json_atomic(report_path, report)
 
-    manifest_path = package_dir / "manifest.json"
-    if manifest_path.is_file():
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        for row in manifest.get("chapters") or []:
-            if row.get("chapter_id") == chapter_id:
-                row["qa_status"] = "pass" if qa.get("passed") else "fail"
-                llm = qa.get("llm") or {}
-                if llm.get("verdict"):
-                    row["qa_verdict"] = llm["verdict"]
-        manifest["qa_updated_at"] = report["updated_at"]
-        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        manifest_path = package_dir / "manifest.json"
+        if manifest_path.is_file():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            for row in manifest.get("chapters") or []:
+                if row.get("chapter_id") == chapter_id:
+                    row["qa_status"] = "pass" if qa.get("passed") else "fail"
+                    llm = qa.get("llm") or {}
+                    if llm.get("verdict"):
+                        row["qa_verdict"] = llm["verdict"]
+            manifest["qa_updated_at"] = report["updated_at"]
+            write_json_atomic(manifest_path, manifest)
     return report
 
 
