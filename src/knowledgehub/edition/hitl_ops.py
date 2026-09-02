@@ -259,13 +259,26 @@ def summarize_items(items: list[dict[str, Any]], *, extra: dict[str, int] | None
 
 
 def merge_item_decisions(old_items: list[dict[str, Any]], new_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    prev = {row["id"]: row.get("decision") for row in old_items if row.get("id") and row.get("decision")}
+    prev = {row["id"]: row for row in old_items if row.get("id")}
     out: list[dict[str, Any]] = []
     for item in new_items:
-        decision = prev.get(item["id"])
-        if decision:
-            item = {**item, "decision": decision}
+        old = prev.get(item["id"])
+        if old and old.get("decision"):
+            item = {**item, "decision": old["decision"]}
+            if old.get("auto_ok") and old["decision"] == "accept":
+                item["auto_ok"] = True
         out.append(item)
+    return out
+
+
+def apply_auto_ok(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Stamp accept on non-suspect items that the curator has not decided yet."""
+    out: list[dict[str, Any]] = []
+    for item in items:
+        if item.get("decision") or item.get("suspect"):
+            out.append(item)
+            continue
+        out.append({**item, "decision": "accept", "auto_ok": True})
     return out
 
 
@@ -379,7 +392,7 @@ def scan_wrap(
                 auto_join += 1
             else:
                 auto_keep += 1
-            continue
+                continue
         preview = _glue(lines[i].text, lines[i + 1].text) if classified["proposed"] == "join" else ""
         items.append(
             _label_item(
@@ -391,7 +404,7 @@ def scan_wrap(
                     "next_index": i + 1,
                     "proposed": classified["proposed"],
                     "parser": classified["parser"],
-                    "suspect": True,
+                    "suspect": classified["suspect"],
                     "reasons": classified["reasons"],
                     "confidence": classified["confidence"],
                     "prev": _clip(lines[i].text),

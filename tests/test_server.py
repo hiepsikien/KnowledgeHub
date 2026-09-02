@@ -56,7 +56,10 @@ def test_preview_normalized_without_allow(client):
     assert preview.status_code == 200
     data = preview.json()
     assert data["truncated"] is False
-    assert data["text"].startswith("Of civil government")
+    assert data["normalize"]["origin"] == "read_edition"
+    assert not data["normalize"].get("incomplete")
+    text = data.get("text") or ""
+    assert "civil government" in text.lower()
     assert data["normalize"]["source_chars"] > 0
 
 

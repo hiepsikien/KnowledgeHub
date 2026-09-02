@@ -9,7 +9,13 @@ from typing import Any
 
 from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication, work_credits
 from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, notes_from_annotations
-from .edition.read_edition import ReadEditionError
+from .edition.pipeline import build_edition
+from .edition.read_edition import ReadEditionError, package_dir_for_work
+from .edition.read_edition_steps import (
+    ReadEditionStepError,
+    assemble_edition_from_package,
+    load_structure,
+)
 from .edition.ref_schema import validate_edition
 from .normalize import normalize_manuscript
 from .read_edition_service import edition_for_publish
@@ -271,6 +277,44 @@ def _apply_publish_overrides(
             raise PublishError(str(exc)) from exc
 
 
+def _preview_from_read_edition(
+    work_id: str,
+    *,
+    corpus: Path,
+) -> tuple[str, dict[str, Any]] | None:
+    """Use the already-parsed REF package so Preview does not rebuild the book."""
+    try:
+        package_dir, meta, work = package_dir_for_work(work_id, corpus=corpus)
+        structure = load_structure(package_dir)
+        if not structure:
+            return None
+        language = str(work.get("language") or "en")
+        family = str(structure.get("source_family") or meta.get("family") or "plain")
+        edition = assemble_edition_from_package(
+            package_dir,
+            language=language,
+            source_family=family,
+            allow_incomplete=True,
+        )
+        text = str(edition.get("reading_markdown") or "").strip()
+        if not text:
+            return None
+        incomplete_sections = list(edition.get("incomplete_sections") or [])
+        report = {
+            "origin": "read_edition",
+            "source_chars": len(text),
+            "published_chars": len(text),
+            "family": family,
+            "unwrapped": True,
+            "incomplete": bool(edition.get("incomplete")),
+            "incomplete_sections": incomplete_sections,
+            "incomplete_count": len(incomplete_sections),
+        }
+        return text, report
+    except (ReadEditionError, ReadEditionStepError, ValueError, FileNotFoundError, OSError):
+        return None
+
+
 def preview_normalized(
     work_id: str,
     *,
@@ -281,6 +325,22 @@ def preview_normalized(
 ) -> dict[str, Any]:
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
+    packed = _preview_from_read_edition(work_id, corpus=root)
+    if packed:
+        text, report = packed
+        truncated = (not full) and len(text) > head_chars + tail_chars
+        out: dict[str, Any] = {
+            "id": work["id"],
+            "title": work.get("title"),
+            "normalize": report,
+            "truncated": truncated,
+        }
+        if truncated:
+            out["head"] = text[:head_chars]
+            out["tail"] = text[-tail_chars:]
+        else:
+            out["text"] = text
+        return out
     if is_hub_translation(work):
         source_id = str(work.get("derived_from") or "")
         try:
@@ -290,7 +350,7 @@ def preview_normalized(
         except (FileNotFoundError, ValueError) as exc:
             raise PublishError(str(exc)) from exc
         truncated = (not full) and len(text) > head_chars + tail_chars
-        out: dict[str, Any] = {
+        out = {
             "id": work["id"],
             "title": work.get("title"),
             "normalize": {
@@ -312,13 +372,16 @@ def preview_normalized(
         raise PublishError(f"missing manuscript: {path}")
     raw = path.read_text(encoding="utf-8", errors="replace")
     try:
-        text, report = normalize_manuscript(
+        text, report = build_edition(
             raw,
             language=str(work.get("language") or "en"),
             work=_work_for_normalize(work, root),
+            strip_only=True,
         )
     except ValueError as exc:
         raise PublishError(str(exc)) from exc
+    report = dict(report)
+    report.setdefault("origin", "strip")
     truncated = (not full) and len(text) > head_chars + tail_chars
     out = {
         "id": work["id"],

@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from knowledgehub.edition.hitl_ops import (
+    apply_auto_ok,
     apply_quote_decisions,
     apply_wrap_overrides,
     extract_dump_notes,
@@ -809,3 +810,90 @@ def test_hitl_unconfirmed_trial_follows_latest_chapter_scan(tmp_path, monkeypatc
     assert after.json()["trial_chapter_id"] == second
     assert after.json()["trial_confirmed"] is True
     assert {row["id"] for row in after.json()["items"] if row.get("chapter_id") == first} == first_ids
+
+
+def test_apply_auto_ok_stamps_only_undecided_non_suspects():
+    items = apply_auto_ok(
+        [
+            {"id": "a", "suspect": False},
+            {"id": "b", "suspect": True},
+            {"id": "c", "suspect": False, "decision": "reject"},
+        ]
+    )
+    by_id = {row["id"]: row for row in items}
+    assert by_id["a"]["decision"] == "accept"
+    assert by_id["a"]["auto_ok"] is True
+    assert "decision" not in by_id["b"]
+    assert by_id["c"]["decision"] == "reject"
+    assert by_id["c"].get("auto_ok") is None
+
+
+def test_wrap_scan_includes_auto_join_pairs():
+    items, extra = scan_wrap(GROTIUS, chapter_id="ch1", family="gutenberg")
+    auto_joins = [row for row in items if not row["suspect"] and row["proposed"] == "join"]
+    assert extra["auto_join"] >= 1
+    assert len(auto_joins) == extra["auto_join"]
+    suspects = [row for row in items if row["suspect"]]
+    assert suspects
+    assert all(row["suspect"] for row in suspects)
+
+
+def test_parse_scans_hitl_and_auto_oks(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from knowledgehub.catalog import build_catalog
+    from knowledgehub.hash import refresh_hashes
+    from knowledgehub.server import create_app
+
+    corpus = _grotius_corpus(tmp_path)
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    refresh_hashes(corpus=corpus)
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    client = TestClient(create_app())
+    wid = "grotius--freedom_of_the_seas"
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200, macro.text
+    ch_id = client.get(f"/api/works/{wid}/read-edition/manifest").json()["manifest"]["chapters"][0]["chapter_id"]
+    _confirm_layout(client, wid)
+
+    parsed = client.post(f"/api/works/{wid}/read-edition/chapters/{ch_id}/parse", json={"use_llm": False})
+    assert parsed.status_code == 200, parsed.text
+
+    wrap = client.get(f"/api/works/{wid}/read-edition/hitl/wrap")
+    assert wrap.status_code == 200, wrap.text
+    wrap_job = wrap.json()
+    assert ch_id in (wrap_job.get("scanned_chapter_ids") or [])
+    auto_wrap = [row for row in wrap_job["items"] if row.get("chapter_id") == ch_id and not row.get("suspect")]
+    assert auto_wrap
+    assert all(row.get("decision") == "accept" and row.get("auto_ok") for row in auto_wrap)
+    suspects = [row for row in wrap_job["items"] if row.get("chapter_id") == ch_id and row.get("suspect")]
+    assert all(not row.get("decision") for row in suspects)
+
+    notes = client.get(f"/api/works/{wid}/read-edition/hitl/footnotes")
+    assert notes.status_code == 200, notes.text
+    notes_job = notes.json()
+    assert ch_id in (notes_job.get("scanned_chapter_ids") or [])
+    ok_notes = [row for row in notes_job["items"] if row.get("chapter_id") == ch_id and not row.get("suspect")]
+    assert all(row.get("decision") == "accept" for row in ok_notes)
+
+    quotes = client.get(f"/api/works/{wid}/read-edition/hitl/quotes")
+    assert quotes.status_code == 200, quotes.text
+    quotes_job = quotes.json()
+    assert ch_id in (quotes_job.get("scanned_chapter_ids") or [])
+    ok_quotes = [row for row in quotes_job["items"] if row.get("chapter_id") == ch_id and not row.get("suspect")]
+    assert ok_quotes
+    assert all(row.get("decision") == "accept" and row.get("auto_ok") for row in ok_quotes)
+
+    bulk = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/decide",
+        json={"decision": "reject", "suspects_only": True, "chapter_id": ch_id},
+    )
+    assert bulk.status_code == 200, bulk.text
+    after = [row for row in bulk.json()["items"] if row.get("chapter_id") == ch_id]
+    assert all(row.get("decision") == "reject" for row in after if row.get("suspect"))
+    assert all(row.get("decision") == "accept" for row in after if not row.get("suspect"))
+

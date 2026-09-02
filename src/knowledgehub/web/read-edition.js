@@ -30,15 +30,15 @@
   const HITL_STEPS = {
     wrap: {
       title: "Nối dòng",
-      lead: "Ghép các dòng bị cắt cứng (soft wrap). Parser tự nối chỗ chắc; chỗ nghi ngờ gom lại để bạn xác nhận. Quyết định ghi ngay vào chương đã parse — nếu chưa parse, bấm «Parse chương này» sau khi xong bước này (trước khi đưa sang Read).",
+      lead: "Ghép dòng bị cắt cứng. Chỗ chắc được auto OK (hoàn tác từng chỗ được). Chỉ hiện chỗ nghi ngờ — duyệt hoặc bỏ tất cả. «Parse chương này» (cạnh tiêu đề) cũng quét bước này rồi mới dựng REF.",
     },
     footnotes: {
       title: "Chú thích",
-      lead: "Nối marker ([1], [2]…) với nội dung chú thích của chương. Ghi chú lấy từ FOOTNOTES cuối sách được đánh nghi ngờ — phải bấm OK mới gắn. Quyết định ghi ngay vào chương đã parse.",
+      lead: "Nối marker ([1], [2]…) với nội dung chú thích. Chỗ khớp chắc được auto OK. Ghi chú lấy từ FOOTNOTES cuối sách vẫn nghi ngờ — phải bấm OK. Có nút duyệt / bỏ tất cả nghi ngờ.",
     },
     quotes: {
       title: "Trích dẫn & nhấn mạnh",
-      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Ngữ cảnh lấy quanh đúng cụm (đoạn ngắn thì hiện cả paragraph). Bỏ blockquote/nhấn mạnh ghi vào chương đã parse. Chỗ thiếu dấu đóng chỉ ghi nhận (Đã xem) — parse không tự sửa dấu lẻ.",
+      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Chỗ chắc auto OK (hoàn tác được). Ngữ cảnh lấy quanh đúng cụm. Thiếu dấu đóng chỉ ghi nhận (Đã xem). Có nút duyệt / bỏ tất cả nghi ngờ.",
     },
   };
 
@@ -264,6 +264,8 @@
       }
       if (justDone.some((job) => job.kind === "parse" || job.kind === "qa")) {
         await loadReview();
+        await loadHitlOverview();
+        if (hitlKind()) await loadHitlJob();
         if (state.chapterId) await selectChapter(state.chapterId);
       }
       if (justDone.some((job) => job.kind === "hitl_scan")) {
@@ -600,7 +602,9 @@
             ? `<span class="re-flag re-flag-kind">${escapeHtml(row.kind)}</span>`
             : "";
         const nestMark = parent ? `<span class="re-nest-mark" aria-hidden="true">↳</span>` : "";
-        return `<div class="re-ch-row${on}${nested}${container}">
+        const parsedCls = row.micro_status === "complete" ? " parsed" : "";
+        const scannedCls = hitlKind() && hitlChapterScanned(state.hitlJob, row.chapter_id) ? " scanned" : "";
+        return `<div class="re-ch-row${on}${nested}${container}${parsedCls}${scannedCls}">
             <label class="re-ch-check"><input type="checkbox" data-chk="${escapeHtml(row.chapter_id)}" ${state.selected.has(row.chapter_id) ? "checked" : ""} /></label>
             <button type="button" class="re-ch-item" data-ch="${escapeHtml(row.chapter_id)}">
               <span class="re-ch-title">${nestMark}${escapeHtml(row.title || row.chapter_id)}</span>
@@ -775,7 +779,14 @@
         ? "Xác nhận cấu trúc, rồi parse REF"
         : health.not_ready_reason || "Còn TOC chưa confirm hoặc section short/super chưa xử lý";
     }
-    showBtn("re-parse-ch", layoutOk && !!current && (onStructure ? currentPending : true));
+    showBtn("re-parse-ch", layoutOk && !!current);
+    const parseBtn = $("re-parse-ch");
+    if (parseBtn && !parseBtn.hidden) {
+      parseBtn.textContent = currentPending ? "Parse chương này" : "Parse lại";
+      parseBtn.title = currentPending
+        ? "Parse REF và quét nối dòng, chú thích, trích dẫn cho chương này"
+        : "Parse lại REF và quét lại nối dòng, chú thích, trích dẫn";
+    }
     showBtn("re-parse-selected", onStructure && layoutOk && selectedPending > 1);
     showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(onStructure && currentPending && pending.length === 1));
     showBtn("re-publish", layoutOk && parsed > 0);
@@ -801,14 +812,19 @@
     setDisabled("re-hitl-book", busyWork || hitlBusy || !state.hitlJob?.trial_confirmed);
     setDisabled("re-hitl-confirm", hitlBusy);
     setDisabled("re-hitl-accept-suspects", hitlBusy);
+    setDisabled("re-hitl-reject-suspects", hitlBusy);
 
     let primary = "re-macro";
     if (!macro) primary = "re-macro";
     else if (!layoutOk) primary = "re-layout-ok";
-    else if (currentPending) primary = "re-parse-ch";
+    else if (currentPending && onStructure) primary = "re-parse-ch";
     else if (pending.length) primary = "re-parse-ready";
     else primary = "re-publish";
     markPrimary(primary);
+    if (parseBtn && !parseBtn.hidden) {
+      parseBtn.classList.toggle("primary", onStructure && currentPending);
+      parseBtn.classList.toggle("ghost", !(onStructure && currentPending));
+    }
   }
 
   function formatStatus(status) {
@@ -846,9 +862,18 @@
       btn.classList.toggle("on", step === state.step);
       btn.disabled = step !== "structure" && !hasMacro;
       const ov = state.hitlOverview?.kinds?.[step];
+      const scannedIds = ov?.scanned_chapter_ids || [];
+      const chapterScanned = !!(state.chapterId && scannedIds.includes(state.chapterId));
+      const structureDone = step === "structure" && layoutConfirmed();
+      btn.classList.toggle("done", structureDone || (step !== "structure" && chapterScanned));
       let badge = btn.querySelector(".re-step-badge");
-      const pending = ov?.summary?.pending || 0;
-      if (step !== "structure" && pending) {
+      let pending = ov?.summary?.pending || 0;
+      if (state.chapterId && chapterScanned && state.hitlJob?.kind === step) {
+        pending = (state.hitlJob.items || []).filter(
+          (it) => it.chapter_id === state.chapterId && it.suspect && !it.decision,
+        ).length;
+      }
+      if (step !== "structure" && pending && (chapterScanned || !state.chapterId)) {
         if (!badge) {
           badge = document.createElement("span");
           badge.className = "re-step-badge";
@@ -878,7 +903,7 @@
         if ($("re-hitl-lead")) $("re-hitl-lead").textContent = meta.lead;
       }
       const suspectsFilter = $("re-hitl-filter-row");
-      if (suspectsFilter) suspectsFilter.hidden = state.step === "wrap";
+      if (suspectsFilter) suspectsFilter.hidden = false;
     }
   }
 
@@ -919,6 +944,7 @@
       $("re-hitl-confirm").hidden = true;
       $("re-hitl-book").disabled = true;
       $("re-hitl-accept-suspects").hidden = true;
+      if ($("re-hitl-reject-suspects")) $("re-hitl-reject-suspects").hidden = true;
       return;
     }
     const summary = job.summary || {};
@@ -926,7 +952,7 @@
     const focusId = state.chapterId;
     const visible = (job.items || []).filter((it) => hitlItemMatchesChapter(it, focusId, job));
     const shown = visible.filter((it) => {
-      if (suspectsOnly && !it.suspect && !it.decision) return false;
+      if (suspectsOnly && !it.suspect) return false;
       return true;
     });
     const pending = visible.filter((it) => it.suspect && !it.decision).length;
@@ -969,6 +995,11 @@
     $("re-hitl-book").disabled = !job.trial_confirmed || decideLocked || workScopedActive();
     $("re-hitl-accept-suspects").hidden = pending === 0;
     $("re-hitl-accept-suspects").disabled = decideLocked;
+    if ($("re-hitl-reject-suspects")) {
+      $("re-hitl-reject-suspects").hidden = pending === 0;
+      $("re-hitl-reject-suspects").disabled = decideLocked;
+      $("re-hitl-reject-suspects").title = decideLocked ? "Đang quét — quyết định sẽ mất nếu ghi đè" : "";
+    }
     if ($("re-hitl-accept-suspects")) {
       $("re-hitl-accept-suspects").title = decideLocked ? "Đang quét — quyết định sẽ mất nếu ghi đè" : "";
     }
@@ -1008,7 +1039,8 @@
     if (decision === "accept") cls.push("accepted");
     if (decision === "reject") cls.push("rejected");
     const tags = [];
-    if (item.suspect) tags.push(`<span class="re-hitl-tag suspect">nghi ngờ</span>`);
+    if (item.auto_ok && decision === "accept") tags.push(`<span class="re-hitl-tag auto-ok">auto OK</span>`);
+    else if (item.suspect) tags.push(`<span class="re-hitl-tag suspect">nghi ngờ</span>`);
     else tags.push(`<span class="re-hitl-tag ok">ổn</span>`);
     if (item.proposed) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.proposed === "join" ? "đề xuất: ghép" : "đề xuất: giữ tách")}</span>`);
     if (item.mark) tags.push(`<span class="re-hitl-tag">${escapeHtml(item.mark)}</span>`);
@@ -1047,7 +1079,14 @@
       : state.step === "wrap"
         ? (item.proposed === "join" ? "Ghép" : "Giữ tách")
         : "OK";
-    const rejectLabel = state.step === "wrap" ? (item.proposed === "join" ? "Giữ tách" : "Ghép") : "Bỏ";
+    const rejectLabel =
+      item.auto_ok && decision === "accept"
+        ? "Hoàn tác"
+        : state.step === "wrap"
+          ? item.proposed === "join"
+            ? "Giữ tách"
+            : "Ghép"
+          : "Bỏ";
     const rejectBtn = actionable
       ? `<button type="button" class="btn ${decision === "reject" ? "primary" : "ghost"}" data-hitl-reject="${escapeHtml(item.id)}"${lockedAttr}>${rejectLabel}</button>`
       : "";
@@ -1128,7 +1167,7 @@
     state.step = step;
     persistStep(state.workId, step);
     const suspectsBox = $("re-hitl-suspects-only");
-    if (suspectsBox) suspectsBox.checked = step === "wrap";
+    if (suspectsBox) suspectsBox.checked = true;
     applyStepVisibility();
     syncToolbar();
     if (state.manifest) renderChapterList(state.manifest);
@@ -1562,6 +1601,7 @@
     $("re-hitl-book")?.addEventListener("click", () => void runHitlScan("book"));
     $("re-hitl-confirm")?.addEventListener("click", () => void confirmHitlTrial());
     $("re-hitl-accept-suspects")?.addEventListener("click", () => void decideHitl(null, "accept", true));
+    $("re-hitl-reject-suspects")?.addEventListener("click", () => void decideHitl(null, "reject", true));
     $("re-hitl-suspects-only")?.addEventListener("change", () => renderHitlList());
     $("re-edit-json")?.closest("details")?.addEventListener("toggle", (e) => {
       if (e.target.open) fillEditorForSelection();
@@ -1831,7 +1871,7 @@
       }
       applyReview(null);
       $("re-heading").textContent = "Chế bản";
-      $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — rồi đưa sang Read.";
+      $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — Parse nằm cạnh chương, rồi đưa sang Read.";
       stopJobPoll();
       state.pageLoad += 1;
       state.hitlJobLoad += 1;

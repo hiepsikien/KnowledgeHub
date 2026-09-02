@@ -13,6 +13,7 @@ from ..jsonfile import package_lock, write_json_atomic
 from ..paths import corpus_root
 from .hitl_ops import (
     HITL_KINDS,
+    apply_auto_ok,
     apply_footnote_links,
     apply_quote_decisions,
     empty_job,
@@ -528,7 +529,9 @@ def parse_micro_chapter(
     corpus: Path | None = None,
     use_llm: bool | None = None,
     require_ready: bool = True,
+    hitl_scan: bool = False,
 ) -> dict[str, Any]:
+    """Parse one chapter's REF. ``hitl_scan`` defaults off so reparse/tests skip a rescan; API and jobs pass True."""
     root = corpus or corpus_root()
     text, meta, work = resolve_stripped_source(work_id, corpus=root)
     content_hash = str(meta["content_hash"])
@@ -541,6 +544,24 @@ def parse_micro_chapter(
         raise ReadEditionStepError(f"Unknown section: {chapter_id}")
     if require_ready:
         ensure_ready_to_parse(work_id, corpus=root)
+
+    if hitl_scan:
+        try:
+            from .jobs import raise_if_stopped, report_progress
+        except ImportError:
+
+            def raise_if_stopped() -> None:
+                return None
+
+            def report_progress(_phase: str, _detail: str | None = None) -> None:
+                return None
+
+        labels = {"wrap": "nối dòng", "footnotes": "chú thích", "quotes": "trích dẫn"}
+        for kind in HITL_KINDS:
+            raise_if_stopped()
+            report_progress("scan", f"Đang quét {labels.get(kind, kind)}…")
+            scan_hitl_step(work_id, kind, chapter_id=chapter_id, scope="chapter", corpus=root)
+        report_progress("parse", f"Đang parse REF {chapter_id}…")
 
     use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
     slice_text = section_source_slice(text, section)
@@ -825,7 +846,7 @@ def scan_hitl_step(
             sid = str(chapter_id)
             kept = [it for it in (current.get("items") or []) if str(it.get("chapter_id")) != sid]
             chapter_old = [it for it in (current.get("items") or []) if str(it.get("chapter_id")) == sid]
-            merged = kept + merge_item_decisions(chapter_old, new_items)
+            merged = kept + apply_auto_ok(merge_item_decisions(chapter_old, new_items))
             if current.get("scope") == "book":
                 job_scope = "book"
                 job_status = current.get("status") or "book"
@@ -842,7 +863,7 @@ def scan_hitl_step(
                 job_confirmed = False
                 trial_id = chapter_id
         else:
-            merged = merge_item_decisions(current.get("items") or [], new_items)
+            merged = apply_auto_ok(merge_item_decisions(current.get("items") or [], new_items))
             job_scope = "book"
             job_status = "book"
             job_confirmed = bool(current.get("trial_confirmed"))
@@ -921,8 +942,11 @@ def decide_hitl_step(
                     continue
             if decision == "clear":
                 item.pop("decision", None)
+                item.pop("auto_ok", None)
             else:
                 item["decision"] = decision
+                if decision != "accept":
+                    item.pop("auto_ok", None)
             changed += 1
             cid = str(item.get("chapter_id") or "")
             if cid:
@@ -940,7 +964,9 @@ def decide_hitl_step(
         if not chapter_path.is_file():
             continue
         try:
-            parse_micro_chapter(work_id, cid, corpus=root, require_ready=False, use_llm=False)
+            parse_micro_chapter(
+                work_id, cid, corpus=root, require_ready=False, use_llm=False, hitl_scan=False
+            )
             reparsed.append(cid)
         except ReadEditionStepError as exc:
             apply_errors.append(f"{cid}: {exc}")
