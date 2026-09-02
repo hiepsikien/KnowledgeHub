@@ -4,17 +4,25 @@ from pathlib import Path
 
 import pytest
 
-from knowledgehub.edition.detect import _heading_key, _toc_title_repeats
+from knowledgehub.edition.detect import (
+    _heading_key,
+    _toc_title_repeats,
+    detect_running_headers,
+    repeating_running_header_keys,
+)
 from knowledgehub.edition.macro import HEADING_CANDIDATE, build_macro_structure, scan_heading_candidates
 from knowledgehub.edition.macro_markers import resolve_division_level, try_marker_assembly
 from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_page_toc, extract_toc_from_raw, parse_title_page_entries
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
     _UNIT_TOC_LINE,
+    _looks_like_chapter_body_prose,
     chapter_number_key,
     heading_title_from_toc_match,
     is_body_heading_line,
+    is_chapter_heading_line,
     is_chapter_number_only_line,
+    is_toc_chapter_block,
     is_toc_list_row,
     kind_for_toc_label,
     parse_contents_entries,
@@ -25,6 +33,14 @@ from knowledgehub.edition.toc import (
     toc_source_from_excerpt,
     match_toc_entries_in_body,
 )
+
+
+def _body_prose(topic: str) -> str:
+    """Paragraph that body-detection treats as prose (len, ``the``, not a TOC title)."""
+    return (
+        f"The account of {topic} continues in connected prose so that the parser "
+        "keeps this chapter start rather than a leftover contents stub."
+    )
 
 
 def test_body_heading_not_toc_list_row():
@@ -89,19 +105,22 @@ Chapter I
 
     The Bachs of Thuringia--Veit Bach.
 
-John Sebastian Bach came of a large family.
+The account of the Thuringian Bachs continues in connected prose so that the
+parser keeps this chapter start rather than a leftover contents stub.
 
 Chapter II
 
     Bach’s attitude towards art.
 
-He was born at Eisenach.
+The young Bach was born at Eisenach and the household already lived for music
+in the years before he left for Ohrdruf.
 
 Chapter XIV
 
     Bach as Familien-Vater.
 
-He was never a poor man.
+The later years show that the family of Bach was never among the poor of the
+town, and monuments followed in public places.
 
 Catalogue of Bach’s Vocal Works
 
@@ -253,6 +272,114 @@ def test_macro_abdy_williams_full_pg():
     assert not any(t.startswith("CHAPTER III") for t in titles)  # leftover TOC row
 
 
+_LEFTOVER_CHAPTER_ROMANS = (
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "VIII",
+    "IX",
+    "X",
+    "XI",
+    "XII",
+    "XIII",
+    "XIV",
+)
+
+
+def _leftover_toc_without_page_column() -> str:
+    """CONTENTS leftover CHAPTER stubs (em-dash synopsis, no page column) + title-case body."""
+    synopses = {
+        "I": "The Bachs of Thuringia--Veit Bach, the ancestor of the family",
+        "II": "Bach's attitude towards art--His birth--The death of his father",
+        "III": "Early years at Ohrdruf--The church and the organ of the time",
+        "IV": "The choir at Luneburg--Journeys and the first independent posts",
+        "V": "Arnstadt and Muhlhausen--The young composer and the council",
+        "VI": "Weimar--The court organist and the body of organ works",
+        "VII": "Cothen--The chamber music and the teaching of the sons",
+        "VIII": "Leipzig--The cantorate and the first cycles of church music",
+        "IX": "The Passions--The oratorios and the later church works",
+        "X": "The Mass and the great keyboard collections of the last decade",
+        "XI": "The Musical Offering--The Art of Fugue and the last pupils",
+        "XII": "The composer as teacher--Pupils, copies, and the circle of friends",
+        "XIII": "The last illness--The death of the cantor and the estate",
+        "XIV": "Bach as Familien-Vater--Portraits--Public monuments of the time",
+    }
+    toc_rows = []
+    for num in _LEFTOVER_CHAPTER_ROMANS:
+        toc_rows.append(f"CHAPTER {num}\n\n{synopses[num]}\n")
+    body_rows = []
+    for num in _LEFTOVER_CHAPTER_ROMANS:
+        body_rows.append(f"Chapter {num}\n\n{_body_prose('chapter ' + num)}\n")
+    return (
+        "Title page\n\nCONTENTS\n\n"
+        + "\n".join(toc_rows)
+        + "\n"
+        + "\n".join(body_rows)
+    )
+
+
+def test_leftover_toc_without_page_column_is_not_body():
+    raw = _leftover_toc_without_page_column()
+    lines = raw.split("\n")
+    leftover_iii = next(i for i, line in enumerate(lines) if line.strip() == "CHAPTER III")
+    body_iii = next(i for i, line in enumerate(lines) if line.strip() == "Chapter III")
+    assert leftover_iii < body_iii
+    assert is_toc_chapter_block(lines, leftover_iii)
+    assert not is_toc_chapter_block(lines, body_iii)
+    assert not is_chapter_heading_line("CHAPTER III")
+    assert not is_chapter_heading_line("Chapter III")
+
+    entries = parse_contents_entries(raw)
+    assert [e["kind"] for e in entries].count("chapter") == 14
+    assert toc_is_wrap_page_column(entries)
+    matched = match_toc_entries_in_body(raw, entries)
+    assert toc_match_covers_structure(entries, matched)
+
+    doc = build_macro_structure(raw, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    kinds = [s["kind"] for s in doc["sections"]]
+    titles = [s["title"] for s in doc["sections"]]
+    assert kinds.count("chapter") == 14
+    assert any(t == "Chapter I" or t.endswith(" I") for t in titles)
+    assert any(t == "Chapter III" or t.endswith(" III") for t in titles)
+    assert any(t == "Chapter XIV" or t.endswith(" XIV") for t in titles)
+    assert not any(t.startswith("CHAPTER III") for t in titles)
+
+
+def test_bare_chapter_stack_is_toc_list():
+    lines = ["CHAPTER III", "", "CHAPTER IV", "", "CHAPTER V"]
+    assert is_toc_chapter_block(lines, 0)
+    assert is_toc_chapter_block(lines, 2)
+
+
+def test_short_chapter_emdash_sentence_is_body_not_toc_stub():
+    opening = "The competition took place at Easter—terms were arranged a month later."
+    assert _looks_like_chapter_body_prose(opening)
+    austen = (
+        "It is a truth universally acknowledged that a single man in possession "
+        "of a good fortune must be in want of a wife."
+    )
+    assert _looks_like_chapter_body_prose(austen)
+    synopsis = "The Bachs of Thuringia--Veit Bach, the ancestor of the family"
+    assert not _looks_like_chapter_body_prose(synopsis)
+    multi = "Bach's salary—He borrows a cart—The agreement is made verbally"
+    assert not _looks_like_chapter_body_prose(multi)
+    lines = [
+        "CHAPTER I",
+        "",
+        opening,
+        "",
+        "CHAPTER II",
+        "",
+        _body_prose("chapter II"),
+    ]
+    assert not is_toc_chapter_block(lines, 0)
+
+
 def test_marker_assembly_austen():
     raw = Path("/tmp/pg_full/pg1342.txt")
     if not raw.is_file():
@@ -375,16 +502,18 @@ Contents
 
 CHAPTER I
 
-John Sebastian Bach came of a large family of musicians in Thuringia who
-were known throughout the district.
+The account of the Thuringian Bachs continues in connected prose so that the
+parser keeps this chapter start rather than a leftover contents stub.
 
 CHAPTER II
 
-He was born at Eisenach in 1685 and orphaned while still a boy.
+The young Bach was born at Eisenach and the household already lived for music
+in the years before he left for Ohrdruf.
 
 CHAPTER III
 
-At Weimar he wrote the greater number of his organ works.
+The years at Weimar gave him the organ works that the later catalogues still
+list among the chief monuments of the art.
 """
     entries = parse_contents_entries(raw)
     labels = [e["label"] for e in entries]
@@ -425,11 +554,12 @@ Contents
 
 Chapter I
 
-John Sebastian Bach came of a large family.
+The account of the Thuringian Bachs continues in connected prose so that the
+parser keeps this chapter start rather than a leftover contents stub.
 
 Chapter II
 
-He was born at Eisenach. Matthew Passion is listed only here; Ahle, Joh. Rudolph.
+The young Bach was born at Eisenach. Matthew Passion is listed only here; Ahle, Joh. Rudolph.
 """
     entries = parse_contents_entries(raw)
     kinds = [e["kind"] for e in entries]
@@ -476,11 +606,13 @@ Contents
 
 Chapter I
 
-Body of chapter one continues without a chapter two heading.
+The body of chapter one continues without a chapter two heading in the later
+pages of the same volume.
 
 Chapter III
 
-Body of chapter three. Chapter II is missing so a 70% rule would still win.
+The body of chapter three is present, but chapter two is missing so a 70%
+rule would still win if coverage were optional.
 """
     entries = parse_contents_entries(raw)
     matched = match_toc_entries_in_body(raw, entries)
@@ -516,15 +648,16 @@ Contents
 
 Chapter 1
 
-John Sebastian Bach came of a large family.
+The account of the Thuringian Bachs continues in connected prose so that the
+parser keeps this chapter start rather than a leftover contents stub.
 
 Chapter 2
 
-He was born at Eisenach.
+The young Bach was born at Eisenach and the household already lived for music.
 
 Chapter 3
 
-At Weimar he wrote for the organ.
+The years at Weimar gave him the organ works that the catalogues still list.
 """
     entries = parse_contents_entries(raw)
     matched = match_toc_entries_in_body(raw, entries)
@@ -744,6 +877,137 @@ def test_macro_uses_toc_numbers_not_body_reprint():
     assert any(t.startswith("XIX. AMIEL") for t in titles)
     assert not any(t.startswith("IX. AMIEL") for t in titles)
     assert sum(1 for t in titles if t.startswith("I.") and "STUDY OF POETRY" in t.upper()) == 0
+
+
+def _repeating_series_header_book() -> str:
+    """Named-essay TOC plus a short series line that repeats as a running header."""
+    header_italic = "_FIRST AND SECOND SERIES COMPLETE_"
+    header_plain = "FIRST AND SECOND SERIES COMPLETE"
+    return f"""*** START OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***
+
+ESSAYS IN CRITICISM
+
+{header_italic}
+
+CONTENTS.
+
+  CHAPTER                                                           PAGE
+
+       I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME                1
+
+      XI. THE STUDY OF POETRY                                        279
+
+     XII. MILTON                                                     308
+
+    XIII. THOMAS GRAY                                                315
+
+     XIX. AMIEL                                                      432
+
+
+
+                          ESSAYS IN CRITICISM.
+
+                             --------------
+
+{header_italic}
+
+                                   I.
+                THE FUNCTION OF CRITICISM AT THE PRESENT
+                                 TIME.
+
+Many objections have been made to a proposition which, in some remarks
+of mine on translating Homer, I ventured to put forth; a proposition
+about criticism, and its importance at the present day.
+
+{header_plain}
+
+                                   I.
+
+                        THE STUDY OF POETRY.
+
+The future of poetry is immense, because in poetry, where it is worthy
+of its high destinies, our race will find an ever surer stay.
+
+{header_italic}
+
+                                  XII.
+
+                               MILTON
+
+The most eloquent voice of our century uttered, shortly before leaving
+the world, a warning cry against the Anglo-Saxon contagion.
+
+                                  III.
+
+                              THOMAS GRAY.
+
+James Brown, Master of Pembroke Hall at Cambridge, Gray’s friend and
+executor, wrote a letter a fortnight after Gray’s death.
+
+                                  IX.
+
+                               AMIEL.
+
+It is somewhat late to speak of Amiel, but I was late in reading him.
+Goethe says that in seasons of cholera one should read no books but
+such as are tonic.
+
+*** END OF THE PROJECT GUTENBERG EBOOK ESSAYS IN CRITICISM ***
+"""
+
+
+def test_heading_key_strips_italic_wrappers():
+    italic = _heading_key("_FIRST AND SECOND SERIES COMPLETE_")
+    plain = _heading_key("FIRST AND SECOND SERIES COMPLETE")
+    assert italic == plain
+    assert "FIRST AND SECOND SERIES COMPLETE" in italic
+
+
+def test_sentence_case_refrain_is_not_a_running_header():
+    refrain = "And I will always love you, my dear"
+    text = "\n\n".join([refrain] * 4)
+    assert repeating_running_header_keys(text) == set()
+    assert detect_running_headers(text) == []
+
+
+def test_running_headers_need_three_repeats():
+    twice = "Title\n\n_FIRST AND SECOND SERIES COMPLETE_\n\nBody of the essay.\n\nFIRST AND SECOND SERIES COMPLETE\n"
+    assert repeating_running_header_keys(twice) == set()
+    assert detect_running_headers(twice) == []
+    thrice = twice + "\n_FIRST AND SECOND SERIES COMPLETE_\n"
+    keys = repeating_running_header_keys(thrice)
+    assert any("FIRST AND SECOND SERIES COMPLETE" in k for k in keys)
+    assert detect_running_headers(thrice)
+    chapter_repeat = "CHAPTER I\n\nThe first body paragraph of the chapter is long enough.\n\n" * 4
+    assert _heading_key("CHAPTER I") not in repeating_running_header_keys(chapter_repeat)
+    numbered = "I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME\n\nThe essay body follows here in connected prose.\n\n" * 4
+    assert _heading_key("I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME") not in repeating_running_header_keys(
+        numbered
+    )
+
+
+def test_repeating_series_header_is_not_a_chapter():
+    raw = _repeating_series_header_book()
+    keys = repeating_running_header_keys(raw)
+    assert any("FIRST AND SECOND SERIES COMPLETE" in k for k in keys)
+    cands = scan_heading_candidates(raw, language="en")
+    assert not any("FIRST AND SECOND SERIES COMPLETE" in str(c.get("text") or "").upper() for c in cands)
+
+    text, _ = build_edition(raw, language="en", strip_only=True)
+    assert text.upper().count("FIRST AND SECOND SERIES COMPLETE") == 0
+    assert "THE FUNCTION OF CRITICISM AT THE PRESENT" in text
+    assert "Many objections have been made" in text
+
+    doc = build_macro_structure(text, language="en", family="gutenberg", use_llm=False, raw=raw)
+    assert doc["mode"] == "toc_match"
+    titles = [s["title"] for s in doc["sections"]]
+    series_titles = [t for t in titles if "FIRST AND SECOND SERIES" in t.upper()]
+    assert series_titles == []
+    chapter_titles = [s["title"] for s in doc["sections"] if s["kind"] == "chapter"]
+    assert chapter_titles[0].startswith("I. THE FUNCTION OF CRITICISM")
+    assert any(t.startswith("XI. THE STUDY OF POETRY") for t in chapter_titles)
+    assert any(t.startswith("XIX. AMIEL") for t in chapter_titles)
+    assert not any(t.startswith("IX. AMIEL") for t in chapter_titles)
 
 
 def test_roman_numeral_not_glued_to_following_prose():
