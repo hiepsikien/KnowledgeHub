@@ -23,6 +23,7 @@ from .read_edition_steps import (
     assemble_edition_from_package,
     load_structure,
     package_root,
+    resolve_package_dir,
     resolve_stripped_source,
     section_source_slice,
 )
@@ -39,9 +40,7 @@ def package_dir_for_work(
     *,
     corpus: Path | None = None,
 ) -> tuple[Path, dict[str, Any], dict[str, Any]]:
-    root = corpus or corpus_root()
-    _text, meta, work = resolve_stripped_source(work_id, corpus=root)
-    return package_root(work_id, str(meta["content_hash"]), corpus=root), meta, work
+    return resolve_package_dir(work_id, corpus=corpus)
 
 
 def _now() -> str:
@@ -416,10 +415,9 @@ def package_status(work_id: str, *, corpus: Path | None = None) -> dict[str, Any
     root = corpus or corpus_root()
     work = get_work(work_id, corpus=root)
     try:
-        _text, meta, _work = resolve_stripped_source(work_id, corpus=root)
+        package_dir, meta, _work = resolve_package_dir(work_id, corpus=root)
     except ReadEditionStepError as exc:
         return {"work_id": work_id, "ready": False, "error": str(exc)}
-    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
     structure = load_structure(package_dir)
     manifest = load_manifest(package_dir) if (package_dir / "manifest.json").is_file() else None
     chapters = (manifest or {}).get("chapters") or []

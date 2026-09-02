@@ -19,6 +19,19 @@ GROTIUS = (CORPUS / "en" / "grotius_treatise_ch1.txt").read_text(encoding="utf-8
 HUME = (CORPUS / "en" / "hume_treatise.txt").read_text(encoding="utf-8")
 
 
+def test_hitl_scan_and_apply_are_rule_only():
+    import inspect
+
+    from knowledgehub.edition.read_edition_steps import decide_hitl_step, scan_hitl_step
+
+    scan_src = inspect.getsource(scan_hitl_step)
+    decide_src = inspect.getsource(decide_hitl_step)
+    assert "use_llm=False" in scan_src
+    assert "use_llm=False" in decide_src
+    assert "resolve_package_dir" in decide_src
+    assert "_hitl_package" not in decide_src
+
+
 def test_wrap_flags_spurious_blank_before_athenians():
     items, extra = scan_wrap(GROTIUS, chapter_id="ch1", family="gutenberg")
     assert extra["auto_join"] >= 1

@@ -90,6 +90,21 @@ def resolve_stripped_source(
     return text, {"content_hash": work["content_hash"], "family": family, "origin": "source"}, work
 
 
+def resolve_package_dir(
+    work_id: str,
+    *,
+    corpus: Path | None = None,
+) -> tuple[Path, dict[str, Any], dict[str, Any]]:
+    """Locate the read-edition package without stripping the manuscript when possible."""
+    root = corpus or corpus_root()
+    work = get_work(work_id, corpus=root)
+    if is_hub_translation(work) or not work.get("content_hash"):
+        _text, meta, work = resolve_stripped_source(work_id, corpus=root)
+        return package_root(work_id, str(meta["content_hash"]), corpus=root), meta, work
+    meta = {"content_hash": work["content_hash"], "origin": "catalog"}
+    return package_root(work_id, str(work["content_hash"]), corpus=root), meta, work
+
+
 def load_raw_source(work_id: str, *, corpus: Path | None = None) -> str:
     from ..translation.assemble import assemble_finals
 
@@ -714,7 +729,9 @@ def _hitl_package(work_id: str, *, corpus: Path | None = None) -> tuple[Path, st
 
 
 def hitl_overview_step(work_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
-    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    package_dir, _meta, _work = resolve_package_dir(work_id, corpus=corpus)
+    if not load_structure(package_dir):
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
     kinds = {}
     for kind in HITL_KINDS:
         job = load_hitl_job(package_dir, kind)
@@ -734,7 +751,9 @@ def hitl_overview_step(work_id: str, *, corpus: Path | None = None) -> dict[str,
 def get_hitl_job_step(work_id: str, kind: str, *, corpus: Path | None = None) -> dict[str, Any]:
     if kind not in HITL_KINDS:
         raise ReadEditionStepError(f"unknown HITL kind: {kind}")
-    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    package_dir, _meta, _work = resolve_package_dir(work_id, corpus=corpus)
+    if not load_structure(package_dir):
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
     return load_hitl_job(package_dir, kind)
 
 
@@ -787,6 +806,7 @@ def scan_hitl_step(
             dump_notes=dump_notes,
             work_id=work_id,
             wrap_overrides=wrap_overrides,
+            use_llm=False,
         )
         new_items.extend(items)
         chapter_stats[sid] = {key: int(extra.get(key) or 0) for key in extra_keys}
@@ -867,7 +887,9 @@ def decide_hitl_step(
         raise ReadEditionStepError(f"unknown HITL kind: {kind}")
     if decision not in {"accept", "reject", "clear"}:
         raise ReadEditionStepError("decision must be accept, reject, or clear")
-    package_dir, _text, _meta, _work, _structure = _hitl_package(work_id, corpus=corpus)
+    package_dir, _meta, _work = resolve_package_dir(work_id, corpus=corpus)
+    if not load_structure(package_dir):
+        raise ReadEditionStepError("Run macro step first (structure.json missing)")
     root = corpus or corpus_root()
     job = load_hitl_job(package_dir, kind)
     wanted = set(item_ids or [])
@@ -906,7 +928,7 @@ def decide_hitl_step(
         if not chapter_path.is_file():
             continue
         try:
-            parse_micro_chapter(work_id, cid, corpus=root, require_ready=False)
+            parse_micro_chapter(work_id, cid, corpus=root, require_ready=False, use_llm=False)
             reparsed.append(cid)
         except ReadEditionStepError as exc:
             apply_errors.append(f"{cid}: {exc}")

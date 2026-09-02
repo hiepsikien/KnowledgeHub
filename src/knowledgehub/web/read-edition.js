@@ -20,6 +20,7 @@
     pageLoad: 0,
     hitlJobLoad: 0,
     hitlOverviewLoad: 0,
+    chapterAbort: null,
   };
 
   const HITL_STEPS = {
@@ -43,6 +44,7 @@
       headers: { "Content-Type": "application/json", ...(opts.headers || {}) },
       body: opts.body ? JSON.stringify(opts.body) : undefined,
       credentials: "same-origin",
+      signal: opts.signal,
     });
     const text = await res.text();
     let data;
@@ -188,6 +190,8 @@
   }
 
   function fillEditorForSelection() {
+    const details = $("re-edit-json")?.closest("details");
+    if (state.step !== "structure" && !details?.open && state.editIndex == null) return;
     const blocks = state.chapter?.blocks || [];
     if (state.editIndex == null || state.editIndex < 0 || state.editIndex >= blocks.length) {
       setEditJson(JSON.stringify(blocks, null, 2));
@@ -385,6 +389,9 @@
   async function selectChapter(chapterId) {
     if (!state.workId) return;
     const loadId = ++state.chapterLoad;
+    state.chapterAbort?.abort();
+    const ac = new AbortController();
+    state.chapterAbort = ac;
     state.chapterId = chapterId;
     state.editIndex = null;
     if (state.manifest) renderChapterList(state.manifest);
@@ -394,7 +401,9 @@
     const meta = $("re-detail-meta");
     if (meta) meta.textContent = "Đang tải…";
     try {
-      const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`);
+      const chapter = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(chapterId)}`, {
+        signal: ac.signal,
+      });
       if (loadId !== state.chapterLoad) return;
       state.chapter = chapter;
       try {
@@ -432,7 +441,7 @@
       if (state.step !== "structure") renderHitlList();
       syncToolbar();
     } catch (err) {
-      if (loadId !== state.chapterLoad) return;
+      if (loadId !== state.chapterLoad || err.name === "AbortError") return;
       if ($("re-section-full")) $("re-section-full").hidden = true;
       if (meta) meta.innerHTML = `<span class="err">${escapeHtml(err.message)}</span>`;
       toast(err.message);
@@ -605,7 +614,7 @@
   }
 
   function hitlItemMatchesChapter(item, chapterId, job) {
-    if (!chapterId) return true;
+    if (!chapterId) return false;
     const cid = item?.chapter_id || "";
     if (cid) return cid === chapterId;
     return (job?.trial_chapter_id || "") === chapterId;
@@ -1257,6 +1266,9 @@
     $("re-hitl-confirm")?.addEventListener("click", () => void confirmHitlTrial());
     $("re-hitl-accept-suspects")?.addEventListener("click", () => void decideHitl(null, "accept", true));
     $("re-hitl-suspects-only")?.addEventListener("change", () => renderHitlList());
+    $("re-edit-json")?.closest("details")?.addEventListener("toggle", (e) => {
+      if (e.target.open) fillEditorForSelection();
+    });
     $("re-hitl-list")?.addEventListener("click", (e) => {
       const accept = e.target.closest("[data-hitl-accept]");
       if (accept) {

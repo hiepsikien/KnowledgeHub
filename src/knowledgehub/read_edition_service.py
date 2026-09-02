@@ -243,10 +243,10 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
     root = corpus or corpus_root()
     package_dir, _, _ = package_dir_for_work(work_id, corpus=root)
     ch_path = package_dir / "chapters" / f"{chapter_id}.json"
+    structure = load_structure(package_dir)
     if ch_path.is_file():
         chapter = load_chapter(package_dir, chapter_id)
     else:
-        structure = load_structure(package_dir)
         if not structure:
             raise ValueError("Chapter not parsed — run macro then micro parse")
         section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
@@ -266,22 +266,6 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
             "blocks": [],
             "reading_markdown": "",
         }
-        try:
-            review = review_structure_step(work_id, corpus=root)
-            diag = next(
-                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
-                None,
-            )
-            if diag:
-                chapter["flags"] = diag.get("flags") or []
-                chapter["inner_heads"] = diag.get("inner_heads") or []
-                chapter["toc_match"] = diag.get("toc_match")
-                chapter["compare"] = diag.get("compare") or {}
-                chapter["confirmed"] = bool(diag.get("confirmed"))
-                chapter["char_share"] = diag.get("char_share")
-        except ReadEditionStepError:
-            pass
-    structure = load_structure(package_dir)
     if structure:
         section = next((s for s in structure.get("sections") or [] if s["section_id"] == chapter_id), None)
         if section:
@@ -294,22 +278,6 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
     overrides = load_overrides(package_dir).get(chapter_id)
     chapter["qa"] = qa
     chapter["overrides"] = overrides
-    if "flags" not in chapter:
-        try:
-            review = review_structure_step(work_id, corpus=root)
-            diag = next(
-                (row for row in review.get("sections") or [] if row.get("section_id") == chapter_id),
-                None,
-            )
-            if diag:
-                chapter["flags"] = diag.get("flags") or []
-                chapter["inner_heads"] = diag.get("inner_heads") or []
-                chapter["toc_match"] = diag.get("toc_match")
-                chapter["compare"] = diag.get("compare") or {}
-                chapter["confirmed"] = bool(diag.get("confirmed"))
-                chapter["char_share"] = diag.get("char_share")
-        except ReadEditionStepError:
-            pass
     if structure:
         remember_last_section(package_dir, structure, chapter_id)
     return chapter

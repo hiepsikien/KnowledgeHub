@@ -123,9 +123,11 @@ def test_cheban_ui_labels(client):
     assert js.status_code == 200
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban17' in html
+    assert 'styles.css?v=cheban18' in html
     assert "chưa quét chương này" in js.text
     assert "hitlItemMatchesChapter" in js.text
+    assert "if (!chapterId) return false;" in js.text
+    assert "chapterAbort" in js.text
     assert "bấm «Chạy thử chương này» hoặc «Chạy toàn văn bản»" in js.text
     assert "Chương này không có chỗ cần duyệt." in js.text
     assert "Kết quả các chương đã quét vẫn giữ." in js.text
@@ -485,3 +487,22 @@ def test_head_tail_preview_long_text_keeps_head_and_tail():
     assert "M" not in out["source_preview_head"]
     assert "M" not in out["source_preview_tail"]
     assert "[… omitted 1500 chars …]" in out["source_preview"]
+
+
+def test_parsed_chapter_get_skips_structure_review(tmp_path, monkeypatch):
+    corpus = _grotius_corpus(tmp_path, monkeypatch)
+    result = run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
+    ch_id = result["manifest"]["chapters"][0]["chapter_id"]
+    parse_micro_chapter(
+        "grotius--freedom_of_the_seas", ch_id, corpus=corpus, use_llm=False, require_ready=False
+    )
+
+    def boom(*_a, **_k):
+        raise AssertionError("parsed chapter GET must not re-run review_structure_step")
+
+    monkeypatch.setattr("knowledgehub.read_edition_service.review_structure_step", boom)
+    from knowledgehub.read_edition_service import get_chapter
+
+    chapter = get_chapter("grotius--freedom_of_the_seas", ch_id, corpus=corpus)
+    assert chapter["blocks"]
+    assert chapter["micro_status"] == "complete"

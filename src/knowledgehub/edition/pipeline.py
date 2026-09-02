@@ -50,7 +50,7 @@ def build_edition(
     family = detect_family(text, work=work, language=language)
     spans = collect_spans(text, family=family, work=work, preserve_toc=preserve_toc)
     use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
-    if use_llm_resolved:
+    if use_llm_resolved and not strip_only:
         spans = classify_unsure_spans(text, spans, enabled=True)
     body = apply_drops(text, spans)
     aozora_inline = False
