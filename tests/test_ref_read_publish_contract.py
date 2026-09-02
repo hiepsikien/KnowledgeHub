@@ -34,6 +34,45 @@ def test_notes_for_read_publish_prefers_chapter_span_notes():
     assert notes[0]["label"] == "[1]"
 
 
+def test_notes_for_read_publish_span_wins_over_stale_chapter_notes():
+    """HITL writes body on span.note; chapter notes may still hold the parse-time body."""
+    chapters = [
+        {
+            "chapter_id": "ch-002",
+            "title": "Chapter II",
+            "notes": [
+                {
+                    "marker": "[1]",
+                    "body": "stale parse-time body",
+                    "chapter": "II",
+                    "label": "[1]",
+                }
+            ],
+            "blocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Arnold[1] wrote.",
+                    "spans": [
+                        {
+                            "style": "footnote",
+                            "start": 6,
+                            "end": 9,
+                            "text": "[1]",
+                            "note": "HITL-corrected body.",
+                        }
+                    ],
+                }
+            ],
+            "reading_markdown": "Arnold[1] wrote.",
+        }
+    ]
+    notes = notes_for_read_publish({}, chapters=chapters)
+    assert len(notes) == 1
+    assert notes[0]["body"] == "HITL-corrected body."
+    assert notes[0]["chapter"] == "ch-002"
+    assert notes[0]["marker"] == "[1]"
+
+
 def test_attach_edition_sends_chapters_and_notes():
     edition = {
         "edition_format": "ref/1",
@@ -62,7 +101,13 @@ def test_attach_edition_sends_chapters_and_notes():
                         ],
                     }
                 ],
-                "notes": [],
+                "notes": [
+                    {
+                        "marker": "[1]",
+                        "body": "stale chapter note",
+                        "chapter": "I",
+                    }
+                ],
                 "word_count": 1,
             }
         ],
@@ -74,4 +119,5 @@ def test_attach_edition_sends_chapters_and_notes():
     assert payload["chapters"][0]["content"] == "Hello[1]."
     assert payload["chapters"][0]["blocks"]
     assert payload["notes"][0]["body"] == "A note."
+    assert payload["notes"][0]["chapter"] == "ch-001"
     assert _chapters_for_read_publish(edition)[0]["title"] == "Chapter I"

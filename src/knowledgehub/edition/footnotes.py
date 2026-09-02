@@ -553,13 +553,15 @@ def notes_for_read_publish(
 ) -> list[dict[str, Any]]:
     """Flatten REF notes / span.note into the Hub→Read ``notes[]`` shape.
 
-    Prefers per-chapter ``notes`` (and footnote spans) so numbering that restarts
-    each chapter stays scoped. Falls back to edition-level ``notes``.
+    Per-chapter path prefers ``span.note`` (HITL writes bodies there) over stale
+    ``chapter["notes"]``, and always stamps ``chapter`` with the Hub chapter id
+    (``ch-001``, …) so Read can join footnotes by id. Falls back to edition-level
+    notes / spans when no chapter package is present.
     """
     out: list[dict[str, Any]] = []
-    seen: set[tuple[str, str, str]] = set()
+    seen: set[tuple[str, str]] = set()
 
-    def add(row: dict[str, Any], *, chapter: str = "") -> None:
+    def add(row: dict[str, Any], *, chapter: str = "", force_chapter: bool = False) -> None:
         body = str(row.get("body") or "").strip()
         marker = str(row.get("marker") or "").strip()
         if not body:
@@ -567,13 +569,16 @@ def notes_for_read_publish(
         if marker and not FOOTNOTE_MARKER.fullmatch(marker):
             marker = ""
         anchor = str(row.get("anchor") or "").strip()
-        chapter_id = str(row.get("chapter") or chapter or "").strip()
+        if force_chapter and chapter:
+            chapter_id = chapter.strip()
+        else:
+            chapter_id = str(chapter or row.get("chapter") or "").strip()
         label = str(row.get("label") or row.get("name") or "").strip()
         if not label:
             label = f"{anchor} {marker}".strip() if anchor and marker else (marker or anchor)
         if not label:
             return
-        key = (marker or label, chapter_id, body[:80])
+        key = (marker or label, chapter_id)
         if key in seen:
             return
         seen.add(key)
@@ -591,22 +596,27 @@ def notes_for_read_publish(
         )
 
     for chapter in chapters or []:
-        chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "")
-        for row in chapter.get("notes") or []:
-            add(row, chapter=chapter_id)
+        chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "").strip()
+        from_spans: dict[str, dict[str, Any]] = {}
         for block in chapter.get("blocks") or []:
             for span in block.get("spans") or []:
                 if span.get("style") != "footnote" or not span.get("note"):
                     continue
-                add(
-                    {
-                        "marker": span.get("text") or "",
-                        "body": span.get("note") or "",
-                        "chapter": chapter_id,
-                        "kind": "footnote",
-                    },
-                    chapter=chapter_id,
-                )
+                marker = str(span.get("text") or "").strip()
+                if not marker:
+                    continue
+                from_spans[marker] = {
+                    "marker": marker,
+                    "body": span.get("note") or "",
+                    "kind": "footnote",
+                }
+        for marker in sorted(from_spans, key=lambda item: _span_numbers(item) or [0]):
+            add(from_spans[marker], chapter=chapter_id, force_chapter=True)
+        for row in chapter.get("notes") or []:
+            marker = str(row.get("marker") or "").strip()
+            if marker and marker in from_spans:
+                continue
+            add(row, chapter=chapter_id, force_chapter=True)
 
     if out:
         return out
