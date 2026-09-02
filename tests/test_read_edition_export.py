@@ -123,11 +123,14 @@ def test_cheban_ui_labels(client):
     assert js.status_code == 200
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban15' in html
+    assert 'styles.css?v=cheban16' in html
     assert "chưa quét chương này" in js.text
     assert "hitlItemMatchesChapter" in js.text
-    assert "bấm «Chạy toàn văn bản»" in js.text
+    assert "bấm «Chạy thử chương này» hoặc «Chạy toàn văn bản»" in js.text
     assert "Chương này không có chỗ cần duyệt." in js.text
+    assert "Kết quả các chương đã quét vẫn giữ." in js.text
+    assert "lastStepKey" in js.text
+    assert "xóa kết quả cũ" not in js.text
 
 
 def test_toc_reclass_keeps_excerpt_and_reset_wipes(client):

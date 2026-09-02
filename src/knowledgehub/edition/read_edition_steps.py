@@ -659,6 +659,18 @@ def hitl_path(package_dir: Path, kind: str) -> Path:
     return package_dir / "hitl" / f"{kind}.json"
 
 
+def scanned_chapter_ids(job: dict[str, Any]) -> list[str]:
+    ids: set[str] = set()
+    for cid in job.get("chapter_stats") or {}:
+        if cid:
+            ids.add(str(cid))
+    for item in job.get("items") or []:
+        cid = item.get("chapter_id")
+        if cid:
+            ids.add(str(cid))
+    return sorted(ids)
+
+
 def load_hitl_job(package_dir: Path, kind: str) -> dict[str, Any]:
     if kind not in HITL_KINDS:
         raise ReadEditionStepError(f"unknown HITL kind: {kind}")
@@ -668,7 +680,9 @@ def load_hitl_job(package_dir: Path, kind: str) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
     data.setdefault("kind", kind)
     data.setdefault("items", [])
+    data.setdefault("chapter_stats", {})
     data.setdefault("summary", summarize_items(data.get("items") or []))
+    data["scanned_chapter_ids"] = scanned_chapter_ids(data)
     return data
 
 
@@ -679,6 +693,7 @@ def save_hitl_job(package_dir: Path, kind: str, job: dict[str, Any]) -> dict[str
         job.get("items") or [],
         extra={k: v for k, v in (job.get("summary") or {}).items() if k in {"auto_join", "auto_keep"}},
     )
+    job["scanned_chapter_ids"] = scanned_chapter_ids(job)
     folder = package_dir / "hitl"
     folder.mkdir(parents=True, exist_ok=True)
     hitl_path(package_dir, kind).write_text(
@@ -710,6 +725,7 @@ def hitl_overview_step(work_id: str, *, corpus: Path | None = None) -> dict[str,
             "trial_confirmed": bool(job.get("trial_confirmed")),
             "scope": job.get("scope"),
             "summary": job.get("summary") or summarize_items(job.get("items") or []),
+            "scanned_chapter_ids": scanned_chapter_ids(job),
             "updated_at": job.get("updated_at"),
         }
     return {"kinds": kinds}
@@ -755,15 +771,7 @@ def scan_hitl_step(
     wrap_job = load_hitl_job(package_dir, "wrap") if kind == "quotes" else None
     new_items: list[dict[str, Any]] = []
     extra_keys = ("auto_join", "auto_keep", "linked", "unmatched")
-    switching_trial = (
-        scope == "chapter"
-        and existing.get("scope") != "book"
-        and existing.get("trial_chapter_id")
-        and existing.get("trial_chapter_id") != chapter_id
-    )
-    chapter_stats: dict[str, Any] = {}
-    if scope == "chapter" and not switching_trial:
-        chapter_stats = dict(existing.get("chapter_stats") or {})
+    chapter_stats: dict[str, Any] = {} if scope == "book" else dict(existing.get("chapter_stats") or {})
     for section in targets:
         sid = str(section["section_id"])
         slice_text = section_source_slice(text, section)
@@ -786,18 +794,15 @@ def scan_hitl_step(
     extra_acc = {key: sum(int((chapter_stats.get(cid) or {}).get(key) or 0) for cid in chapter_stats) for key in extra_keys}
     if scope == "chapter":
         sid = str(chapter_id)
-        if switching_trial:
-            kept: list[dict[str, Any]] = []
-            chapter_old: list[dict[str, Any]] = []
-        else:
-            kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
-            chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
+        kept = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) != sid]
+        chapter_old = [it for it in (existing.get("items") or []) if str(it.get("chapter_id")) == sid]
         merged = kept + merge_item_decisions(chapter_old, new_items)
+        trial_id = existing.get("trial_chapter_id") or chapter_id
         if existing.get("scope") == "book":
             job_scope = "book"
             job_status = existing.get("status") or "book"
             job_confirmed = bool(existing.get("trial_confirmed"))
-        elif existing.get("trial_chapter_id") == chapter_id and existing.get("trial_confirmed"):
+        elif existing.get("trial_confirmed"):
             job_scope = "chapter"
             job_status = "trial_confirmed"
             job_confirmed = True
@@ -810,11 +815,12 @@ def scan_hitl_step(
         job_scope = "book"
         job_status = "book"
         job_confirmed = bool(existing.get("trial_confirmed"))
+        trial_id = existing.get("trial_chapter_id") or chapter_id
 
     job = {
         "kind": kind,
         "status": job_status,
-        "trial_chapter_id": chapter_id if scope == "chapter" else existing.get("trial_chapter_id") or chapter_id,
+        "trial_chapter_id": trial_id,
         "trial_confirmed": job_confirmed,
         "scope": job_scope,
         "items": merged,
