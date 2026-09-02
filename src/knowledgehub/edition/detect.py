@@ -92,7 +92,9 @@ _HEADING_PAGE_TAIL = re.compile(r"(?:\.{2,}|\s{2,})(?:\d{1,4}|[IVXLCDM]{1,8})$",
 
 
 def _heading_key(line: str) -> str:
-    s = re.sub(r"\s+", " ", line.strip()).upper()
+    """Compact uppercase key; strip PG ``_italic_`` wrappers so running headers match."""
+    s = line.strip().replace("_", " ")
+    s = re.sub(r"\s+", " ", s).upper()
     return _HEADING_PAGE_TAIL.sub("", s).strip(" .")
 
 
@@ -503,6 +505,82 @@ def detect_library_stamp(text: str, *, family: str) -> list[EditionSpan]:
     ]
 
 
+_STRUCTURAL_UNIT_HEADING = re.compile(
+    r"^(?:CHAPTER|CHAP\.?|BOOK|PART|VOLUME)\s+[IVXLC\d]+\b",
+    re.I,
+)
+_NUMBERED_ESSAY_HEADING = re.compile(r"^(?:[IVXLC]{1,8}|\d+)\.\s+\S")
+_RUNNING_HEADER_MAX_LEN = 90
+_RUNNING_HEADER_MIN_COUNT = 3
+
+
+def _plain_heading_line(line: str) -> str:
+    return re.sub(r"\s+", " ", line.strip().replace("_", " ")).strip()
+
+
+def is_structural_unit_heading(line: str) -> bool:
+    """CHAPTER/BOOK/PART/VOLUME + number, or numbered essay ``I. Title``."""
+    s = _plain_heading_line(line)
+    if not s:
+        return False
+    return bool(_STRUCTURAL_UNIT_HEADING.match(s) or _NUMBERED_ESSAY_HEADING.match(s))
+
+
+def repeating_running_header_keys(
+    text: str,
+    *,
+    min_count: int = _RUNNING_HEADER_MIN_COUNT,
+    max_len: int = _RUNNING_HEADER_MAX_LEN,
+) -> set[str]:
+    """Keys of short lines that repeat often enough to be running headers, not unique headings."""
+    counts: dict[str, int] = {}
+    for raw in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+        s = raw.strip()
+        if not s or len(s) >= max_len:
+            continue
+        if is_structural_unit_heading(s):
+            continue
+        key = _heading_key(s)
+        if not key:
+            continue
+        counts[key] = counts.get(key, 0) + 1
+    return {key for key, n in counts.items() if n >= min_count}
+
+
+def is_repeating_running_header(
+    line: str,
+    keys: set[str],
+    *,
+    max_len: int = _RUNNING_HEADER_MAX_LEN,
+) -> bool:
+    s = line.strip()
+    if not s or len(s) >= max_len or is_structural_unit_heading(s):
+        return False
+    key = _heading_key(s)
+    return bool(key and key in keys)
+
+
+def detect_running_headers(text: str) -> list[EditionSpan]:
+    """Drop short lines that repeat ≥3 times (page headers), not unique chapter/essay titles."""
+    keys = repeating_running_header_keys(text)
+    if not keys:
+        return []
+    spans: list[EditionSpan] = []
+    for start, end, raw in _line_table(text):
+        if is_repeating_running_header(raw, keys):
+            spans.append(
+                EditionSpan(
+                    start,
+                    end,
+                    "running_header",
+                    "drop",
+                    0.9,
+                    "Repeating running header",
+                )
+            )
+    return spans
+
+
 def collect_spans(
     text: str,
     *,
@@ -517,6 +595,7 @@ def collect_spans(
         spans.extend(detect_front_apparatus(text, family=family))
         if not preserve_toc:
             spans.extend(detect_toc(text, family=family))
+        spans.extend(detect_running_headers(text))
     if family == "aozora":
         spans.extend(detect_aozora(text))
     spans.extend(detect_notes(text))

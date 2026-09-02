@@ -564,12 +564,20 @@ def _following_is_toc_title_wrap(lines: list[str], index: int) -> bool:
 
 
 def toc_is_wrap_page_column(entries: list[dict[str, Any]]) -> bool:
-    """Abdy-style TOC: chapter heading on its own line, wrap + page column — not Austen one-liners."""
+    """CHAPTER-on-its-own-line wrap TOC (Abdy leftover stubs), with or without a page column.
+
+    Austen ``CHAPTER I. Title  1`` one-liners are not wrapped and stay on markers.
+    """
     if len(entries) < 3:
         return False
     wrapped = sum(1 for e in entries if e.get("wrapped"))
     paged = sum(1 for e in entries if e.get("page"))
-    return wrapped >= 2 and paged >= 2
+    if wrapped >= 2 and paged >= 2:
+        return True
+    if wrapped < 2:
+        return False
+    numbered = sum(1 for e in entries if chapter_number_key(str(e.get("label") or "")))
+    return numbered >= 3
 
 
 def toc_is_page_column_map(entries: list[dict[str, Any]]) -> bool:
@@ -633,25 +641,86 @@ def toc_match_covers_structure(
     return all((e.get("index"), e.get("label")) in got for e in needed)
 
 
+_TOC_CHAPTER_BARE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+\.?\s*$", re.I)
+_TOC_CHAPTER_ANY = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", re.I)
+_BODY_FUNCTION_WORD = re.compile(r"\bthe\b", re.I)
+
+
+def _looks_like_chapter_body_prose(line: str) -> bool:
+    """Substantial body paragraph after CHAPTER — not a contents title/synopsis."""
+    s = line.strip()
+    if not s or len(s) < 55:
+        return False
+    if _TOC_CHAPTER_ANY.match(s) or is_chapter_heading_line(s) or is_chapter_title_line(s):
+        return False
+    if "—" in s or "–" in s or "--" in s:
+        return False
+    return bool(_BODY_FUNCTION_WORD.search(s))
+
+
+def _join_chapter_follow_lines(lines: list[str], start: int, *, limit: int) -> str:
+    """Join wrap continuations after a CHAPTER line (lowercase / TOC wrap)."""
+    parts: list[str] = []
+    end = min(start + limit, len(lines))
+    for j in range(start, end):
+        nxt = lines[j].strip()
+        if not nxt:
+            if parts:
+                break
+            continue
+        if _TOC_CHAPTER_ANY.match(nxt):
+            break
+        if parts and not (nxt[0:1].islower() or is_toc_continuation(parts[-1], nxt)):
+            break
+        parts.append(nxt)
+        if toc_page_tail(nxt) or is_toc_list_row(nxt):
+            break
+    return " ".join(parts)
+
+
 def is_toc_chapter_block(lines: list[str], index: int) -> bool:
-    """True when this CHAPTER line is a contents stub (synopsis + page), not body."""
+    """True when this CHAPTER line is a contents stub, not body.
+
+    Leftover CONTENTS rows are bare ``CHAPTER N`` (optional period) with a
+    title/synopsis and maybe a page, then the next CHAPTER. Real body is the
+    same marker followed by a substantial prose paragraph (function word
+    ``the``, not another CHAPTER / title line). Consecutive bare CHAPTER
+    lines with only blanks between them are a TOC list.
+    """
     if index < 0 or index >= len(lines):
         return False
     stripped = lines[index].strip()
-    if not re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+\.?\s*$", stripped, re.I):
+    if not _TOC_CHAPTER_BARE.match(stripped):
         return False
     seen = 0
-    for j in range(index + 1, min(index + 14, len(lines))):
+    j = index + 1
+    end = min(index + 14, len(lines))
+    while j < end:
         nxt = lines[j].strip()
         if not nxt:
+            j += 1
             continue
-        if re.match(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", nxt, re.I):
-            return False
-        seen += 1
-        if is_toc_list_row(nxt) or toc_page_tail(nxt):
+        if _TOC_CHAPTER_ANY.match(nxt):
             return True
+        seen += 1
+        blob = _join_chapter_follow_lines(lines, j, limit=end - j)
+        if (
+            is_toc_list_row(nxt)
+            or toc_page_tail(nxt)
+            or is_toc_list_row(blob)
+            or toc_page_tail(blob)
+        ):
+            return True
+        if _looks_like_chapter_body_prose(blob) or _looks_like_chapter_body_prose(nxt):
+            return False
+        if is_chapter_title_line(nxt) or _is_toc_wrap_line(nxt):
+            j += 1
+            if seen >= 8:
+                return False
+            continue
         if seen >= 8:
             return False
+        j += 1
     return False
 
 
@@ -811,6 +880,10 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
             num = chapter.group(1)
             label = f"CHAPTER {num.upper() if not num.isdigit() else num}"
             already = chapter_number_key(label)
+            if entries and _TOC_CHAPTER_BARE.match(stripped) and not is_toc_chapter_block(lines, index):
+                # Body ``Chapter N`` / ``CHAPTER N`` + prose — leftover stubs stay open.
+                flush()
+                break
             if (
                 entries
                 and pending is None

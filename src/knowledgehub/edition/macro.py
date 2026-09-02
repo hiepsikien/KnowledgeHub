@@ -12,6 +12,7 @@ from ..translation.providers import ProviderError, complete_chat
 from .profile import detect_family
 from .llm_defaults import gemini_available, ref_llm_model
 from .ref_schema import REF_PARSER_VERSION
+from .detect import is_repeating_running_header, repeating_running_header_keys
 from .toc import is_all_caps_section_line, is_body_heading_line, is_chapter_heading_line, is_toc_entry_line
 
 STRUCTURE_VERSION = "1"
@@ -82,10 +83,13 @@ ESSAY_SECTION = re.compile(
 def scan_heading_candidates(text: str, *, language: str = "en") -> list[dict[str, Any]]:
     lang = (language or "en").lower()[:2]
     rows = line_map(text)
+    running_keys = repeating_running_header_keys(text)
     out: list[dict[str, Any]] = []
     for row in rows:
         stripped = row["text"].strip()
         if not stripped or len(stripped) > 160:
+            continue
+        if running_keys and is_repeating_running_header(stripped, running_keys):
             continue
         if is_body_heading_line(stripped):
             out.append({**row, "text": stripped, "heuristic": "heading"})
