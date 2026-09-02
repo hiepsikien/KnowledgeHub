@@ -947,9 +947,11 @@ def test_running_headers_need_three_repeats():
     assert any("FIRST AND SECOND SERIES COMPLETE" in k for k in keys)
     assert detect_running_headers(thrice)
     chapter_repeat = "CHAPTER I\n\nThe first body paragraph of the chapter is long enough.\n\n" * 4
-    assert not any("CHAPTER I" in k for k in repeating_running_header_keys(chapter_repeat))
+    assert _heading_key("CHAPTER I") not in repeating_running_header_keys(chapter_repeat)
     numbered = "I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME\n\nThe essay body follows here in connected prose.\n\n" * 4
-    assert not repeating_running_header_keys(numbered)
+    assert _heading_key("I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME") not in repeating_running_header_keys(
+        numbered
+    )
 
 
 def test_repeating_series_header_is_not_a_chapter():

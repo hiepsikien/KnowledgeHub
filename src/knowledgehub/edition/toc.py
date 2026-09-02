@@ -643,7 +643,6 @@ def toc_match_covers_structure(
 
 _TOC_CHAPTER_BARE = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+\.?\s*$", re.I)
 _TOC_CHAPTER_ANY = re.compile(r"^(?:CHAPTER|CHAP\.?)\s+[IVXLC\d]+", re.I)
-_BODY_FUNCTION_WORD = re.compile(r"\bthe\b", re.I)
 
 
 def _looks_like_chapter_body_prose(line: str) -> bool:
@@ -655,7 +654,21 @@ def _looks_like_chapter_body_prose(line: str) -> bool:
         return False
     if "—" in s or "–" in s or "--" in s:
         return False
-    return bool(_BODY_FUNCTION_WORD.search(s))
+    return True
+
+
+def _is_toc_stub_follow_line(line: str) -> bool:
+    """Title/synopsis after a leftover CHAPTER row (dashes, page, or no sentence end)."""
+    s = line.strip()
+    if not s:
+        return False
+    if is_toc_list_row(s) or toc_page_tail(s):
+        return True
+    if "—" in s or "–" in s or "--" in s:
+        return True
+    if (is_chapter_title_line(s) or _is_toc_wrap_line(s)) and not re.search(r"[.!?]$", s):
+        return True
+    return False
 
 
 def _join_chapter_follow_lines(lines: list[str], start: int, *, limit: int) -> str:
@@ -693,6 +706,7 @@ def is_toc_chapter_block(lines: list[str], index: int) -> bool:
     if not _TOC_CHAPTER_BARE.match(stripped):
         return False
     seen = 0
+    saw_toc_material = False
     j = index + 1
     end = min(index + 14, len(lines))
     while j < end:
@@ -701,7 +715,9 @@ def is_toc_chapter_block(lines: list[str], index: int) -> bool:
             j += 1
             continue
         if _TOC_CHAPTER_ANY.match(nxt):
-            return True
+            # Only blanks → TOC list. Synopsis/title then CHAPTER → leftover stub.
+            # A short sentence then CHAPTER is body (Austen / nested BOOK+CHAPTER).
+            return seen == 0 or saw_toc_material
         seen += 1
         blob = _join_chapter_follow_lines(lines, j, limit=end - j)
         if (
@@ -713,7 +729,8 @@ def is_toc_chapter_block(lines: list[str], index: int) -> bool:
             return True
         if _looks_like_chapter_body_prose(blob) or _looks_like_chapter_body_prose(nxt):
             return False
-        if is_chapter_title_line(nxt) or _is_toc_wrap_line(nxt):
+        if _is_toc_stub_follow_line(nxt) or _is_toc_stub_follow_line(blob):
+            saw_toc_material = True
             j += 1
             if seen >= 8:
                 return False
