@@ -562,7 +562,7 @@
       return `<span class="re-micro re-micro-running">${escapeHtml(job.status === "queued" ? "chờ" : label)}</span>`;
     }
     const st = row.micro_status || "pending";
-    return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "parsed" : st)}</span>`;
+    return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "Ready" : st)}</span>`;
   }
 
   function layoutConfirmed() {
@@ -789,7 +789,14 @@
     }
     showBtn("re-parse-selected", onStructure && layoutOk && selectedPending > 1);
     showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(onStructure && currentPending && pending.length === 1));
-    showBtn("re-publish", layoutOk && parsed > 0);
+    // Publish only when every chapter is Ready (micro_status=complete).
+    const allReady = layoutOk && parsed > 0 && pending.length === 0;
+    showBtn("re-publish", allReady);
+    const publishBtn = $("re-publish");
+    if (publishBtn && !publishBtn.hidden) {
+      publishBtn.disabled = false;
+      publishBtn.title = "Mọi chương đã Ready — mở trang gửi Read";
+    }
     showBtn("re-more", onStructure);
 
     const busyWork = workScopedActive();
@@ -843,8 +850,8 @@
       const why = health.not_ready_reason || (toc ? "duyệt short/super" : "chưa confirm TOC");
       return `${total} phần · ${why}` + llmNote;
     }
-    if (parsed < total) return `${parsed}/${total} đã parse REF` + llmNote;
-    return `${total} phần đã parse — đưa sang Read` + llmNote;
+    if (parsed < total) return `${parsed}/${total} Ready — parse hết trước khi gửi Read` + llmNote;
+    return `${total} phần Ready — đưa sang Read` + llmNote;
   }
 
   function hitlKind() {
@@ -1848,7 +1855,22 @@
     });
 
     $("re-publish")?.addEventListener("click", () => {
-      if (state.workId) location.href = `/publish/${encodeURIComponent(state.workId)}`;
+      if (!state.workId) return;
+      const chapters = state.manifest?.chapters || [];
+      const pending = chapters.filter((row) => row.micro_status !== "complete");
+      if (!chapters.length || pending.length) {
+        toast(
+          pending.length
+            ? `Còn ${pending.length} chương chưa Ready — parse hết trước khi gửi Read`
+            : "Chưa có chương Ready để gửi Read",
+        );
+        return;
+      }
+      if (!layoutConfirmed()) {
+        toast("Cần Cấu trúc OK trước khi gửi Read");
+        return;
+      }
+      location.href = `/publish/${encodeURIComponent(state.workId)}`;
     });
   }
 

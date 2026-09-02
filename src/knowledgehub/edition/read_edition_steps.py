@@ -661,7 +661,8 @@ def assemble_edition_from_package(
             suffix = "…" if len(missing_json) > 5 else ""
             parts.append(f"{len(missing_json)} parsed section(s) missing chapter JSON ({sample}{suffix})")
         raise ReadEditionStepError(
-            "Cannot publish incomplete edition — parse all sections first. " + "; ".join(parts)
+            "Cannot publish incomplete edition — not every chapter is Ready. "
+            "Parse all sections first. " + "; ".join(parts)
         )
 
     merged_blocks: list[dict[str, Any]] = []

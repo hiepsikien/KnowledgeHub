@@ -10,6 +10,7 @@ from knowledgehub.edition.read_edition import (
     chapter_document,
     load_chapter,
     load_manifest,
+    package_status,
     split_edition_chapters,
 )
 from knowledgehub.edition.read_edition_steps import parse_micro_chapter, run_macro_step
@@ -326,8 +327,14 @@ def test_publish_rejects_incomplete_edition(tmp_path, monkeypatch):
     assert preview["normalize"]["origin"] == "read_edition"
     assert preview["normalize"]["incomplete"] is True
     assert preview["normalize"]["incomplete_count"] >= 1
-    with pytest.raises(PublishError, match="incomplete"):
+    with pytest.raises(PublishError, match="incomplete|Ready"):
         prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
+
+    status = package_status("grotius--freedom_of_the_seas", corpus=corpus)
+    assert status["publishable"] is False
+    assert status["chapters_parsed"] < status["chapters_total"]
+    with pytest.raises(ValueError, match="Ready"):
+        edition_for_publish("grotius--freedom_of_the_seas", corpus=corpus)
 
 
 def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
