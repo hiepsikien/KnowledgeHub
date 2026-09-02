@@ -365,6 +365,7 @@ def test_publish_uses_read_edition_package(tmp_path, monkeypatch):
     payload = prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
     assert payload["edition_format"] == "ref/1"
     assert payload.get("_normalize", {}).get("read_edition")
+    assert payload.get("_normalize", {}).get("origin") == "read_edition"
 
 
 def _grotius_corpus(tmp_path, monkeypatch):

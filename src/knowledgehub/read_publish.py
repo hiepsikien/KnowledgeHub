@@ -17,7 +17,6 @@ from .edition.read_edition_steps import (
     load_structure,
 )
 from .edition.ref_schema import validate_edition
-from .normalize import normalize_manuscript
 from .read_edition_service import edition_for_publish
 from .paths import corpus_root
 from .read_options import validate_category_slug, validate_split_length
@@ -132,28 +131,20 @@ def prepare_publish(
             price_cents=price_cents,
             split_length=split_length,
         )
-    path = resolve_content_path(work, root=root)
-    if not path.is_file():
-        raise PublishError(f"missing manuscript: {path}")
-    if not work.get("content_hash"):
-        raise PublishError(f"{work_id} has no content_hash — run: knowledgehub hash")
-    raw = path.read_text(encoding="utf-8", errors="replace")
-    try:
-        text, report = normalize_manuscript(
-            raw,
-            language=str(work.get("language") or "en"),
-            work=_work_for_normalize(work, root),
-        )
-    except ValueError as exc:
-        raise PublishError(str(exc)) from exc
-    reading_text, footnote_glossary = glossary_from_footnotes(text)
-    if not footnote_glossary:
-        _, footnote_glossary = glossary_from_footnotes(raw)
     edition, package_meta = _edition_for_publish_or_raise(work_id, corpus=root)
-    reading_text = str(edition.get("reading_markdown") or reading_text)
-    report = dict(report)
-    report["edition"] = edition
-    report["read_edition"] = package_meta
+    assembled = str(edition.get("reading_markdown") or "").strip()
+    if not assembled:
+        raise PublishError("assembled edition has no reading text — parse all sections first")
+    reading_text, footnote_glossary = glossary_from_footnotes(assembled)
+    report = {
+        "origin": "read_edition",
+        "source_chars": len(assembled),
+        "published_chars": len(reading_text),
+        "edition": edition,
+        "read_edition": package_meta,
+        "glossary_count": len(footnote_glossary),
+        "stripped_footnotes": reading_text != assembled,
+    }
     validate_errors = validate_edition(edition)
     if validate_errors:
         raise PublishError(f"REF validation: {'; '.join(validate_errors[:3])}")
@@ -161,9 +152,6 @@ def prepare_publish(
     _attach_edition(payload, report)
     if footnote_glossary:
         payload["glossary"] = footnote_glossary
-    report = dict(report)
-    report["glossary_count"] = len(footnote_glossary)
-    report["stripped_footnotes"] = reading_text != text
     _apply_publish_overrides(
         payload,
         title=title,
@@ -465,3 +453,7 @@ def publish_to_read(
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")
         raise PublishError(f"Read {exc.code}: {detail}") from exc
+    except TimeoutError as exc:
+        raise PublishError(f"Read timed out after 120s ({base})") from exc
+    except urllib.error.URLError as exc:
+        raise PublishError(f"Read unreachable ({base}): {exc.reason}") from exc

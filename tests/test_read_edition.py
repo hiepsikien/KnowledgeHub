@@ -79,8 +79,7 @@ def test_normalize_attaches_ref_edition(tmp_path, monkeypatch):
     assert payload["edition_hash"]
     assert payload["blocks"]
     assert "Dutch have the right" in payload["raw_text"]
-    cache = corpus / "editions/grotius--freedom_of_the_seas/deadbeef/blocks.json"
-    assert cache.is_file()
+    assert payload.get("_normalize", {}).get("origin") == "read_edition"
 
 
 def test_extract_english_treatise_sample():
