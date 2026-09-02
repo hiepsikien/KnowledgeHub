@@ -299,6 +299,7 @@ def _preview_from_read_edition(
         text = str(edition.get("reading_markdown") or "").strip()
         if not text:
             return None
+        incomplete_sections = list(edition.get("incomplete_sections") or [])
         report = {
             "origin": "read_edition",
             "source_chars": len(text),
@@ -306,6 +307,8 @@ def _preview_from_read_edition(
             "family": family,
             "unwrapped": True,
             "incomplete": bool(edition.get("incomplete")),
+            "incomplete_sections": incomplete_sections,
+            "incomplete_count": len(incomplete_sections),
         }
         return text, report
     except (ReadEditionError, ReadEditionStepError, ValueError, FileNotFoundError, OSError):

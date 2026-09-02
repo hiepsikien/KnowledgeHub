@@ -131,9 +131,12 @@ def test_cheban_ui_labels(client):
     assert "parsedCls" in js.text
     assert "re-hitl-reject-suspects" in js.text
     assert "Parse nằm cạnh chương" in js.text
+    assert "if (suspectsOnly && !it.suspect) return false;" in js.text
+    assert "if (suspectsOnly && !it.suspect && !it.decision) return false;" not in js.text
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban20' in html
+    assert 'styles.css?v=cheban21' in html
+    assert "chưa parse hết" in client.get("/app.js").text
     assert 'id="re-jobs"' in html
     assert 'id="re-cancel-jobs"' in html
     assert "/read-edition/jobs" in js.text
@@ -314,11 +317,15 @@ def test_publish_rejects_incomplete_edition(tmp_path, monkeypatch):
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
     monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
 
-    from knowledgehub.read_publish import PublishError, prepare_publish
+    from knowledgehub.read_publish import PublishError, prepare_publish, preview_normalized
 
     run_macro_step("grotius--freedom_of_the_seas", corpus=corpus, use_llm=False)
     manifest = load_manifest(corpus / "read-editions/grotius--freedom_of_the_seas/deadbeef01")
     parse_micro_chapter("grotius--freedom_of_the_seas", manifest["chapters"][0]["chapter_id"], corpus=corpus, use_llm=False, require_ready=False)
+    preview = preview_normalized("grotius--freedom_of_the_seas", corpus=corpus)
+    assert preview["normalize"]["origin"] == "read_edition"
+    assert preview["normalize"]["incomplete"] is True
+    assert preview["normalize"]["incomplete_count"] >= 1
     with pytest.raises(PublishError, match="incomplete"):
         prepare_publish("grotius--freedom_of_the_seas", corpus=corpus)
 

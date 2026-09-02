@@ -531,6 +531,7 @@ def parse_micro_chapter(
     require_ready: bool = True,
     hitl_scan: bool = False,
 ) -> dict[str, Any]:
+    """Parse one chapter's REF. ``hitl_scan`` defaults off so reparse/tests skip a rescan; API and jobs pass True."""
     root = corpus or corpus_root()
     text, meta, work = resolve_stripped_source(work_id, corpus=root)
     content_hash = str(meta["content_hash"])

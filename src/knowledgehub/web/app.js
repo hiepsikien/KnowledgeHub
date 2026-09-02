@@ -242,8 +242,12 @@ function renderPreview(data) {
     n.unwrapped && "unwrap dòng",
     n.aozora && "Aozora",
   ].filter(Boolean);
+  const incompleteNote = n.incomplete
+    ? ` · chưa parse hết${n.incomplete_count ? ` (${n.incomplete_count} chương còn thiếu)` : ""}`
+    : "";
   $("preview-meta").textContent = `${(n.published_chars || n.assembled_chars || 0).toLocaleString()} chữ đã normalize` +
     (n.origin === "read_edition" ? " · chế bản REF" : "") +
+    incompleteNote +
     (n.source_chars ? ` · nguồn ${(n.source_chars).toLocaleString()}` : "") +
     (dropped.length ? ` · đã cắt: ${dropped.join(", ")}` : n.origin === "read_edition" ? "" : " · không cắt thêm");
   $("preview-full").hidden = !data.truncated;

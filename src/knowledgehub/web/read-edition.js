@@ -952,7 +952,7 @@
     const focusId = state.chapterId;
     const visible = (job.items || []).filter((it) => hitlItemMatchesChapter(it, focusId, job));
     const shown = visible.filter((it) => {
-      if (suspectsOnly && !it.suspect && !it.decision) return false;
+      if (suspectsOnly && !it.suspect) return false;
       return true;
     });
     const pending = visible.filter((it) => it.suspect && !it.decision).length;
