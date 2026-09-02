@@ -51,6 +51,10 @@ REASON_VI = {
 }
 
 _CLIP = 180
+_SPAN_RADIUS = 110
+_SPAN_FULL_MAX = 400
+_SPAN_MARK_L = "\ufdd0"
+_SPAN_MARK_R = "\ufdd1"
 
 
 def empty_job(kind: str) -> dict[str, Any]:
@@ -105,6 +109,115 @@ def _clip(text: str, n: int = _CLIP) -> str:
     if len(s) <= n:
         return s
     return s[: n - 1] + "…"
+
+
+def _collapse_ws(text: str) -> str:
+    return re.sub(r"\s+", " ", str(text or ""))
+
+
+def _find_snippet(text: str, snippet: str, *, hint: int | None = None) -> tuple[int, int] | None:
+    needle = str(snippet or "")
+    if not needle:
+        return None
+    n = len(text)
+    if hint is not None and 0 <= hint <= n and text.startswith(needle, hint):
+        return hint, hint + len(needle)
+    at = text.find(needle)
+    if at < 0:
+        stripped = needle.rstrip("…").strip()
+        if stripped and stripped != needle:
+            at = text.find(stripped)
+            needle = stripped
+        if at < 0:
+            return None
+    if hint is None:
+        return at, at + len(needle)
+    best = at
+    while at >= 0:
+        if abs(at - hint) < abs(best - hint):
+            best = at
+        at = text.find(needle, at + 1)
+    return best, best + len(needle)
+
+
+def _resolve_span_offsets(
+    text: str,
+    start: int | None,
+    end: int | None,
+    snippet: str,
+) -> tuple[int, int] | None:
+    n = len(text)
+    needle = str(snippet or "")
+    if isinstance(start, int) and isinstance(end, int) and 0 <= start < end <= n:
+        sliced = text[start:end]
+        if not needle or sliced == needle or _collapse_ws(sliced) == _collapse_ws(needle.rstrip("…")):
+            return start, end
+        found = _find_snippet(text, needle, hint=start)
+        if found:
+            return found
+        return None
+    return _find_snippet(text, needle.rstrip("…") or needle, hint=start if isinstance(start, int) else None)
+
+
+def _snap_window_edges(text: str, lo: int, hi: int) -> tuple[int, int]:
+    n = len(text)
+    if lo > 0:
+        bound = max(0, lo - 24)
+        while lo > bound and not text[lo - 1].isspace():
+            lo -= 1
+    if hi < n:
+        bound = min(n, hi + 24)
+        while hi < bound and not text[hi].isspace():
+            hi += 1
+    return lo, hi
+
+
+def span_window(
+    text: str,
+    start: int | None = None,
+    end: int | None = None,
+    *,
+    snippet: str = "",
+    radius: int = _SPAN_RADIUS,
+    full_max: int = _SPAN_FULL_MAX,
+) -> dict[str, str]:
+    """Context around a span: full paragraph if short, else a window centered on it."""
+    raw = str(text or "")
+    n = len(raw)
+    empty = {"before": "", "after": "", "span": "", "context": ""}
+    if not n:
+        return empty
+    offsets = _resolve_span_offsets(raw, start, end, snippet)
+    if offsets is None:
+        return {"before": "", "after": "", "span": "", "context": _clip(raw, full_max)}
+    span_start, span_end = offsets
+    span_len = span_end - span_start
+    if n <= max(full_max, radius * 2 + span_len):
+        lo, hi = 0, n
+    else:
+        lo = max(0, span_start - radius)
+        hi = min(n, span_end + radius)
+        lo, hi = _snap_window_edges(raw, lo, hi)
+        lo = min(lo, span_start)
+        hi = max(hi, span_end)
+    marked = raw[lo:span_start] + _SPAN_MARK_L + raw[span_start:span_end] + _SPAN_MARK_R + raw[span_end:hi]
+    collapsed = _collapse_ws(marked)
+    left, rest = collapsed.split(_SPAN_MARK_L, 1)
+    span, right = rest.split(_SPAN_MARK_R, 1)
+    if lo > 0:
+        left = "…" + left.lstrip()
+    else:
+        left = left.lstrip()
+    if hi < n:
+        right = right.rstrip() + "…"
+    else:
+        right = right.rstrip()
+    return {
+        "before": left,
+        "after": right,
+        "span": span,
+        "context": f"{left}{span}{right}".strip(),
+    }
 
 
 def _glue(prev: str, nxt: str) -> str:
@@ -542,6 +655,7 @@ def scan_quotes(
                 reasons.append("long_inline")
             start = span.get("start")
             end = span.get("end")
+            window = span_window(block_text, start, end, snippet=span_text)
             items.append(
                 _label_item(
                     {
@@ -552,8 +666,11 @@ def scan_quotes(
                         "block_index": bi,
                         "start": start,
                         "end": end,
-                        "text": _clip(span_text, 220),
-                        "context": _clip(block_text, 180),
+                        "text": span_text if len(span_text) <= 280 else _clip(span_text, 220),
+                        "context": window["context"],
+                        "context_before": window["before"],
+                        "context_after": window["after"],
+                        "context_span": window["span"],
                         "suspect": bool(reasons),
                         "reasons": reasons,
                         "actionable": isinstance(start, int) and isinstance(end, int),

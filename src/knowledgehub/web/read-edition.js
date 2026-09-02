@@ -38,7 +38,7 @@
     },
     quotes: {
       title: "Trích dẫn & nhấn mạnh",
-      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Bỏ blockquote/nhấn mạnh ghi vào chương đã parse. Chỗ thiếu dấu đóng chỉ ghi nhận (Đã xem) — parse không tự sửa dấu lẻ.",
+      lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Ngữ cảnh lấy quanh đúng cụm (đoạn ngắn thì hiện cả paragraph). Bỏ blockquote/nhấn mạnh ghi vào chương đã parse. Chỗ thiếu dấu đóng chỉ ghi nhận (Đã xem) — parse không tự sửa dấu lẻ.",
     },
   };
 
@@ -995,6 +995,12 @@
     box.innerHTML = shown.map(renderHitlCard).join("");
   }
 
+  function quoteContextParts(item) {
+    const span = item.context_span;
+    if (!span) return "";
+    return `${escapeHtml(item.context_before || "")}<mark class="re-hitl-span">${escapeHtml(span)}</mark>${escapeHtml(item.context_after || "")}`;
+  }
+
   function renderHitlCard(item) {
     const decision = item.decision || "";
     const cls = ["re-hitl-card"];
@@ -1023,9 +1029,14 @@
         ? `<p class="re-hitl-body">${escapeHtml(item.body)}</p>`
         : `<p class="muted">Chưa có nội dung chú thích.</p>`;
     } else {
-      body = `<p class="re-hitl-body">${escapeHtml(item.text || "")}</p>`;
-      if (item.context && item.context !== item.text) {
-        body += `<p class="muted">${escapeHtml(item.context)}</p>`;
+      const windowed = quoteContextParts(item);
+      if (windowed) {
+        body = `<p class="re-hitl-context">${windowed}</p>`;
+      } else {
+        body = `<p class="re-hitl-body">${escapeHtml(item.text || "")}</p>`;
+        if (item.context && item.context !== item.text) {
+          body += `<p class="muted">${escapeHtml(item.context)}</p>`;
+        }
       }
     }
     const actionable = item.actionable !== false;

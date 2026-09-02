@@ -962,3 +962,11 @@ mark.ann-context {
 .re-hitl-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 .re-hitl-actions .btn { padding: 4px 10px; font-size: 12px; }
 .re-hitl-body { font-size: 14px; line-height: 1.5; margin: 0 0 8px; }
+.re-hitl-context { font-size: 14px; line-height: 1.55; margin: 0 0 8px; color: var(--muted); }
+.re-hitl-span {
+  background: #f3e6c4;
+  color: var(--ink);
+  font-weight: 600;
+  padding: 0 2px;
+  border-radius: 2px;
+}

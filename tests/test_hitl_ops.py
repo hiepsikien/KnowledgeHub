@@ -10,6 +10,7 @@ from knowledgehub.edition.hitl_ops import (
     scan_footnotes,
     scan_quotes,
     scan_wrap,
+    span_window,
     summarize_items,
     wrap_overrides_from_items,
 )
@@ -141,6 +142,77 @@ def test_quotes_find_vergil_blockquote_and_emphasis():
     assert "em" in marks
     texts = " ".join(row["text"] for row in items)
     assert "Not every plant" in texts or "cruel seas" in texts
+
+
+def test_span_window_centers_on_late_span():
+    lead = "The subject of this biography considered that the founder of his family was Veit Bach. " * 4
+    quote = '"He must,"'
+    tail = " said the narrator, have learned time in this way from the mill-wheel."
+    text = lead + quote + tail
+    window = span_window(text, len(lead), len(lead) + len(quote), snippet=quote)
+    assert "He must" in window["context"]
+    assert window["context"].startswith("…")
+    assert window["span"] == quote
+    assert not window["context"].startswith("The subject of this biography")
+    assert window["before"].endswith(" ") or "Bach." in window["before"]
+    assert "mill-wheel" in window["after"]
+
+
+def test_span_window_shows_full_short_paragraph():
+    text = 'He played a sixteenth century _quodlibet_ at the fair.'
+    start = text.index("_quodlibet_")
+    end = start + len("_quodlibet_")
+    window = span_window(text, start, end, snippet="_quodlibet_")
+    assert window["context"] == text
+    assert not window["context"].startswith("…")
+    assert window["before"].startswith("He played")
+    assert window["after"].endswith("fair.")
+
+
+def test_span_window_ignores_stale_offsets_when_snippet_exists():
+    lead = "Word " * 40
+    quote = '"worked as hard."'
+    text = lead + quote + " And this capacity for hard work is perhaps not the least."
+    start = text.index(quote)
+    window = span_window(text, start + 3, start + 12, snippet=quote)
+    assert window["span"] == quote
+    assert not window["span"].startswith("ked")
+    assert window["context"].count("worked") >= 1
+
+
+def test_span_window_drops_stale_offsets_when_snippet_missing():
+    text = "Alpha beta gamma delta epsilon zeta eta theta iota kappa. " * 8
+    window = span_window(text, 10, 20, snippet='"this quote is not in the text"')
+    assert window["span"] == ""
+    assert window["before"] == ""
+    assert window["after"] == ""
+    assert "Alpha beta" in window["context"]
+    assert text[10:20] not in window["span"]
+
+
+def test_span_window_highlight_survives_hardwrap_whitespace():
+    lead = "Alpha\n    beta\n    gamma said he " * 6
+    quote = '"should be the glory of God"'
+    tail = "\n    and pleasant recreation followed.\n    more words here."
+    text = lead + quote + tail
+    start = text.index(quote)
+    window = span_window(text, start, start + len(quote), snippet=quote)
+    assert window["span"] == quote
+    assert window["before"] + window["span"] + window["after"] == window["context"]
+    assert "glory of God" in window["span"]
+    assert not window["span"].startswith("hould")
+
+
+def test_quote_scan_context_includes_span_not_paragraph_head():
+    lead = "The subject of this biography considered that the founder of his family was Veit Bach, who settled at Presburg. " * 5
+    body = lead + 'He said "He must," at any rate have learned time in this way.\n'
+    items, _extra = scan_quotes(body, chapter_id="c1", family="gutenberg", use_llm=False)
+    row = next(it for it in items if it.get("mark") == "quote" and "He must" in (it.get("text") or ""))
+    assert "He must" in row["context"]
+    assert row["context_before"].startswith("…")
+    assert "He must" not in row["context_before"]
+    assert row["context_span"] == row["text"] or "He must" in (row.get("context_span") or "")
+    assert not row["context"].startswith("The subject of this biography")
 
 
 def _grotius_corpus(tmp: Path) -> Path:

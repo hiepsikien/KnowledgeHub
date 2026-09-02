@@ -17,6 +17,8 @@ corpus/editions/
 corpus/read-editions/
 corpus/.translation-jobs.json
 .translation-jobs.json
+corpus/.edition-jobs.json
+.edition-jobs.json
 
 # Scratch files from atomic writes, and job queues quarantined after corruption
 .*.tmp
