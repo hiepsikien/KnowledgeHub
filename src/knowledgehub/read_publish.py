@@ -8,7 +8,12 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import get_work, is_hub_translation, resolve_content_path, update_read_publication, work_credits
-from .edition.footnotes import glossary_from_annotations, glossary_from_footnotes, notes_from_annotations
+from .edition.footnotes import (
+    glossary_from_annotations,
+    glossary_from_footnotes,
+    notes_for_read_publish,
+    notes_from_annotations,
+)
 from .edition.pipeline import build_edition
 from .edition.read_edition import ReadEditionError, package_dir_for_work
 from .edition.read_edition_steps import (
@@ -48,6 +53,35 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
         payload["quotation_profile"] = edition["quotation_profile"]
     if edition.get("reading_markdown"):
         payload["raw_text"] = edition["reading_markdown"]
+    chapters = _chapters_for_read_publish(edition)
+    if chapters:
+        payload["chapters"] = chapters
+    notes = notes_for_read_publish(edition, chapters=edition.get("_chapters") or None)
+    if notes:
+        payload["notes"] = notes
+
+
+def _chapters_for_read_publish(edition: dict[str, Any]) -> list[dict[str, Any]]:
+    """Hub chapter packages → Read ``chapters[]`` (prefer over re-splitting raw_text)."""
+    out: list[dict[str, Any]] = []
+    for chapter in edition.get("_chapters") or []:
+        chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "").strip()
+        content = str(chapter.get("reading_markdown") or "").strip()
+        if not chapter_id or not content:
+            continue
+        row: dict[str, Any] = {
+            "id": chapter_id,
+            "title": str(chapter.get("title") or chapter_id),
+            "content": content,
+        }
+        blocks = chapter.get("blocks") or []
+        if blocks:
+            row["blocks"] = blocks
+        word_count = chapter.get("word_count")
+        if word_count is not None:
+            row["word_count"] = word_count
+        out.append(row)
+    return out
 
 
 def _payload(work: dict[str, Any], text: str, *, corpus: Path | None = None) -> dict[str, Any]:
@@ -150,8 +184,14 @@ def prepare_publish(
         raise PublishError(f"REF validation: {'; '.join(validate_errors[:3])}")
     payload = _payload(work, reading_text, corpus=root)
     _attach_edition(payload, report)
-    if footnote_glossary:
+    # Prefer REF notes (span.note / chapter notes). Fall back to dump-scrape glossary.
+    if not payload.get("notes") and footnote_glossary:
         payload["glossary"] = footnote_glossary
+    elif footnote_glossary and not payload.get("glossary"):
+        # Keep glossary cast entries only when notes already carry footnote bodies.
+        payload["glossary"] = [
+            row for row in footnote_glossary if str(row.get("kind") or "") != "footnote"
+        ]
     _apply_publish_overrides(
         payload,
         title=title,

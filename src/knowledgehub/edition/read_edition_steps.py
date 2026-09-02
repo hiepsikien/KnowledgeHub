@@ -666,6 +666,8 @@ def assemble_edition_from_package(
         )
 
     merged_blocks: list[dict[str, Any]] = []
+    merged_notes: list[dict[str, Any]] = []
+    chapter_docs: list[dict[str, Any]] = []
     for row in chapters:
         if row.get("micro_status") != "complete":
             continue
@@ -674,6 +676,8 @@ def assemble_edition_from_package(
             continue
         ch = json.loads(ch_path.read_text(encoding="utf-8"))
         merged_blocks.extend(ch.get("blocks") or [])
+        merged_notes.extend(ch.get("notes") or [])
+        chapter_docs.append(ch)
 
     if not merged_blocks:
         raise ReadEditionStepError("No parsed chapters — run micro parse on all sections")
@@ -684,6 +688,9 @@ def assemble_edition_from_package(
         source_family=source_family,
     )
     edition["split_hints"] = split_hints_from_blocks(merged_blocks)
+    if merged_notes:
+        edition["notes"] = merged_notes
+    edition["_chapters"] = chapter_docs
     if incomplete or missing_json:
         edition["incomplete"] = True
         edition["incomplete_sections"] = incomplete + missing_json

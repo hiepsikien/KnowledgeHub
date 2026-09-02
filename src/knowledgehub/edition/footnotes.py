@@ -546,6 +546,88 @@ def attach_footnote_bodies(
     return out, catalog
 
 
+def notes_for_read_publish(
+    edition: dict[str, Any],
+    *,
+    chapters: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Flatten REF notes / span.note into the Hub→Read ``notes[]`` shape.
+
+    Prefers per-chapter ``notes`` (and footnote spans) so numbering that restarts
+    each chapter stays scoped. Falls back to edition-level ``notes``.
+    """
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str]] = set()
+
+    def add(row: dict[str, Any], *, chapter: str = "") -> None:
+        body = str(row.get("body") or "").strip()
+        marker = str(row.get("marker") or "").strip()
+        if not body:
+            return
+        if marker and not FOOTNOTE_MARKER.fullmatch(marker):
+            marker = ""
+        anchor = str(row.get("anchor") or "").strip()
+        chapter_id = str(row.get("chapter") or chapter or "").strip()
+        label = str(row.get("label") or row.get("name") or "").strip()
+        if not label:
+            label = f"{anchor} {marker}".strip() if anchor and marker else (marker or anchor)
+        if not label:
+            return
+        key = (marker or label, chapter_id, body[:80])
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(
+            {
+                "id": str(row.get("id") or ""),
+                "kind": str(row.get("kind") or "footnote"),
+                "label": label[:300],
+                "marker": marker,
+                "anchor": anchor[:300],
+                "chapter": chapter_id,
+                "body": body[:8000],
+                "group_label": str(row.get("group_label") or "Chú thích"),
+            }
+        )
+
+    for chapter in chapters or []:
+        chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "")
+        for row in chapter.get("notes") or []:
+            add(row, chapter=chapter_id)
+        for block in chapter.get("blocks") or []:
+            for span in block.get("spans") or []:
+                if span.get("style") != "footnote" or not span.get("note"):
+                    continue
+                add(
+                    {
+                        "marker": span.get("text") or "",
+                        "body": span.get("note") or "",
+                        "chapter": chapter_id,
+                        "kind": "footnote",
+                    },
+                    chapter=chapter_id,
+                )
+
+    if out:
+        return out
+
+    for row in edition.get("notes") or []:
+        add(row)
+    for block in edition.get("blocks") or []:
+        for span in block.get("spans") or []:
+            if span.get("style") != "footnote" or not span.get("note"):
+                continue
+            add(
+                {
+                    "marker": span.get("text") or "",
+                    "body": span.get("note") or "",
+                    "chapter": span.get("chapter") or "",
+                    "kind": "footnote",
+                }
+            )
+    return out
+
+
 def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
     """Return (body without FOOTNOTES dumps, glossary entries for Read)."""
     dumps = iter_footnote_dumps(text)
