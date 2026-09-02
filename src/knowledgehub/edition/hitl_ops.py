@@ -61,6 +61,8 @@ def empty_job(kind: str) -> dict[str, Any]:
         "trial_confirmed": False,
         "scope": None,
         "items": [],
+        "chapter_stats": {},
+        "scanned_chapter_ids": [],
         "summary": _empty_summary(),
         "updated_at": None,
     }

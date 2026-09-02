@@ -528,5 +528,199 @@ def test_decide_item_ids_ignore_wrong_chapter_filter(tmp_path, monkeypatch):
         )
         assert retry.status_code == 200, retry.text
         leftover = [row for row in retry.json()["items"] if row.get("chapter_id") == ch_id]
-        assert leftover == []
-        assert retry.json()["trial_chapter_id"] == second
+        assert leftover
+        assert retry.json()["trial_chapter_id"] == ch_id
+        assert retry.json()["trial_confirmed"] is True
+        scanned = retry.json().get("scanned_chapter_ids") or []
+        assert ch_id in scanned
+        assert second in scanned
+
+
+def _two_chapter_corpus(tmp: Path) -> Path:
+    import json
+
+    corpus = tmp / "corpus"
+    src = corpus / "sources" / "grotius"
+    src.mkdir(parents=True)
+    (src / "raw").mkdir()
+    (src / "raw" / "freedom_of_the_seas.txt").write_text(
+        "CHAPTER I\n\n"
+        "The Megarians against the\n"
+        "Athenians were at war over the sea.\n\n"
+        "CHAPTER II\n\n"
+        "Nature itself has given the\n"
+        "ocean to all people in common.\n",
+        encoding="utf-8",
+    )
+    (src / "works.json").write_text(
+        json.dumps(
+            [
+                {
+                    "file": "freedom_of_the_seas.txt",
+                    "work": "The Freedom of the Seas",
+                    "year": 1609,
+                    "license": "public_domain_usa_gutenberg",
+                    "source_url": "https://www.gutenberg.org/ebooks/1022",
+                    "concepts": ["law"],
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (corpus / "licenses.json").write_text(
+        (Path(__file__).resolve().parents[1] / "corpus" / "licenses.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    return corpus
+
+
+def test_hitl_keeps_chapter_scans_when_switching_sections(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from knowledgehub.catalog import build_catalog
+    from knowledgehub.hash import refresh_hashes
+    from knowledgehub.server import create_app
+
+    corpus = _two_chapter_corpus(tmp_path)
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    refresh_hashes(corpus=corpus)
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    client = TestClient(create_app())
+    wid = "grotius--freedom_of_the_seas"
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200, macro.text
+    chapters = client.get(f"/api/works/{wid}/read-edition/manifest").json()["manifest"]["chapters"]
+    assert len(chapters) >= 2, chapters
+    first = chapters[0]["chapter_id"]
+    second = chapters[1]["chapter_id"]
+
+    trial = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": first},
+    )
+    assert trial.status_code == 200, trial.text
+    first_ids = {row["id"] for row in trial.json()["items"] if row.get("chapter_id") == first}
+    assert first in (trial.json().get("scanned_chapter_ids") or [])
+
+    confirm = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/confirm",
+        json={"chapter_id": first},
+    )
+    assert confirm.status_code == 200, confirm.text
+
+    other = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": second},
+    )
+    assert other.status_code == 200, other.text
+    payload = other.json()
+    assert payload["trial_confirmed"] is True
+    assert payload["trial_chapter_id"] == first
+    scanned = payload.get("scanned_chapter_ids") or []
+    assert first in scanned
+    assert second in scanned
+    kept = {row["id"] for row in payload["items"] if row.get("chapter_id") == first}
+    assert kept == first_ids
+
+    notes = client.post(
+        f"/api/works/{wid}/read-edition/hitl/footnotes/scan",
+        json={"scope": "chapter", "chapter_id": first},
+    )
+    assert notes.status_code == 200, notes.text
+    quotes = client.post(
+        f"/api/works/{wid}/read-edition/hitl/quotes/scan",
+        json={"scope": "chapter", "chapter_id": first},
+    )
+    assert quotes.status_code == 200, quotes.text
+
+    wrap = client.get(f"/api/works/{wid}/read-edition/hitl/wrap")
+    assert wrap.status_code == 200, wrap.text
+    assert first in (wrap.json().get("scanned_chapter_ids") or [])
+    assert second in (wrap.json().get("scanned_chapter_ids") or [])
+    assert {row["id"] for row in wrap.json()["items"] if row.get("chapter_id") == first} == first_ids
+
+    overview = client.get(f"/api/works/{wid}/read-edition/hitl")
+    assert overview.status_code == 200
+    kinds = overview.json()["kinds"]
+    assert first in (kinds["wrap"]["scanned_chapter_ids"] or [])
+    assert kinds["footnotes"]["status"] == "trial"
+    assert kinds["quotes"]["status"] == "trial"
+
+
+def test_hitl_unconfirmed_trial_follows_latest_chapter_scan(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from knowledgehub.catalog import build_catalog
+    from knowledgehub.hash import refresh_hashes
+    from knowledgehub.server import create_app
+
+    corpus = _two_chapter_corpus(tmp_path)
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    refresh_hashes(corpus=corpus)
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    client = TestClient(create_app())
+    wid = "grotius--freedom_of_the_seas"
+
+    macro = client.post(f"/api/works/{wid}/read-edition/macro", json={"use_llm": False})
+    assert macro.status_code == 200, macro.text
+    chapters = client.get(f"/api/works/{wid}/read-edition/manifest").json()["manifest"]["chapters"]
+    assert len(chapters) >= 2, chapters
+    first = chapters[0]["chapter_id"]
+    second = chapters[1]["chapter_id"]
+
+    first_scan = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": first},
+    )
+    assert first_scan.status_code == 200, first_scan.text
+    assert first_scan.json()["trial_chapter_id"] == first
+    assert first_scan.json()["trial_confirmed"] is False
+    first_ids = {row["id"] for row in first_scan.json()["items"] if row.get("chapter_id") == first}
+    first_accepted = next((row["id"] for row in first_scan.json()["items"] if row["suspect"]), None)
+    if first_accepted:
+        decided = client.post(
+            f"/api/works/{wid}/read-edition/hitl/wrap/decide",
+            json={"decision": "accept", "item_ids": [first_accepted]},
+        )
+        assert decided.status_code == 200
+
+    second_scan = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": second},
+    )
+    assert second_scan.status_code == 200, second_scan.text
+    payload = second_scan.json()
+    assert payload["trial_confirmed"] is False
+    assert payload["trial_chapter_id"] == second
+    scanned = payload.get("scanned_chapter_ids") or []
+    assert first in scanned
+    assert second in scanned
+    kept = {row["id"] for row in payload["items"] if row.get("chapter_id") == first}
+    assert kept == first_ids
+    if first_accepted:
+        kept_row = next(row for row in payload["items"] if row["id"] == first_accepted)
+        assert kept_row.get("decision") == "accept"
+
+    confirm = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/confirm",
+        json={"chapter_id": second},
+    )
+    assert confirm.status_code == 200, confirm.text
+    assert confirm.json()["trial_chapter_id"] == second
+    assert confirm.json()["trial_confirmed"] is True
+
+    after = client.post(
+        f"/api/works/{wid}/read-edition/hitl/wrap/scan",
+        json={"scope": "chapter", "chapter_id": first},
+    )
+    assert after.status_code == 200, after.text
+    assert after.json()["trial_chapter_id"] == second
+    assert after.json()["trial_confirmed"] is True
+    assert {row["id"] for row in after.json()["items"] if row.get("chapter_id") == first} == first_ids
