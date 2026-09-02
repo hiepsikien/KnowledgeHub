@@ -16,6 +16,7 @@ from knowledgehub.edition.toc import (
     is_body_heading_line,
     is_chapter_number_only_line,
     is_toc_list_row,
+    kind_for_toc_label,
     parse_contents_entries,
     toc_is_heading_list_map,
     toc_is_page_column_map,
@@ -1398,3 +1399,8 @@ def test_bastiat_body_headings_are_not_toc_list_rows():
     assert not is_body_heading_line(
         "I. To level and equalize the conditions of labour is not simply to cramp"
     )
+    assert not is_body_heading_line(
+        "I. YES, but then a long lowercase sentence about labour is not a heading"
+    )
+    assert kind_for_toc_label("TRANSLATOR'S PREFACE.") == "preface"
+    assert kind_for_toc_label("A Preface to Politics") == "other"

@@ -418,7 +418,11 @@ def kind_for_toc_label(label: str) -> str:
         return "chapter"
     if u.startswith("SECTION"):
         return "part"
-    if "PREFACE" in u or "FOREWORD" in u:
+    if re.search(
+        r"^(?:(?:THE\s+)?(?:AUTHOR['’]S|TRANSLATOR['’]S|EDITOR['’]S|PUBLISHER['’]S)\s+)?"
+        r"(?:PREFACE|FOREWORD)\b",
+        u,
+    ):
         return "preface"
     if u.startswith("INTRODUCTION"):
         return "introduction"
@@ -504,11 +508,10 @@ def _looks_like_numbered_heading(rest: str) -> bool:
     raw = strip_toc_page_tail(rest).strip()
     if not raw or len(raw) > 180:
         return False
-    word_m = re.match(r"[A-Za-z']+", raw)
-    if not word_m:
+    letters = [c for c in raw if c.isalpha()]
+    if not letters:
         return False
-    word = word_m.group(0)
-    if word.isupper():
+    if sum(c.isupper() for c in letters) / len(letters) >= 0.75:
         return True
     return _is_title_case_heading(raw)
 
