@@ -392,6 +392,18 @@ def run_qa(
 def edition_for_publish(work_id: str, *, corpus: Path | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
         root = corpus or corpus_root()
+        status = package_status(work_id, corpus=root)
+        if not status.get("ready"):
+            raise ValueError(status.get("error") or "edition package not ready")
+        if not status.get("publishable"):
+            parsed = int(status.get("chapters_parsed") or 0)
+            total = int(status.get("chapters_total") or 0)
+            if not status.get("macro_complete") or total <= 0:
+                raise ValueError("Publish requires macro step — run phân đoạn (LLM) first")
+            raise ValueError(
+                f"Cannot publish incomplete edition — {total - parsed}/{total} chapter(s) not Ready "
+                "(parse every chapter to micro_status=complete first)"
+            )
         package_dir, meta, work = package_dir_for_work(work_id, corpus=root)
         structure = load_structure(package_dir)
         if not structure:
@@ -405,6 +417,9 @@ def edition_for_publish(work_id: str, *, corpus: Path | None = None) -> tuple[di
             "structure": structure,
             "package_dir": str(package_dir.relative_to(root)),
             "pipeline": "two_step",
+            "publishable": True,
+            "chapters_parsed": status.get("chapters_parsed"),
+            "chapters_total": status.get("chapters_total"),
         }
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc

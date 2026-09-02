@@ -1795,9 +1795,10 @@ async function loadPublishPage(id) {
   $("pub-heading").textContent = "Đang tải…";
   $("pub-form").hidden = true;
   $("pub-gate").hidden = true;
-  const [data, options] = await Promise.all([
+  const [data, options, edition] = await Promise.all([
     api(`/api/works/${encodeURIComponent(id)}`),
     api("/api/read-options"),
+    api(`/api/works/${encodeURIComponent(id)}/read-edition`).catch(() => null),
   ]);
   const { work, summary } = data;
   $("pub-heading").textContent = work.title;
@@ -1830,20 +1831,35 @@ async function loadPublishPage(id) {
   document.querySelector(`input[name=pricing][value=${paid ? "paid" : "free"}]`).checked = true;
   $("pub-price").disabled = !paid;
   if (paid) $("pub-price").value = (cents / 100).toFixed(2);
-  const ready = summary.read_allowed && summary.has_raw && summary.has_hash;
+  const catalogReady = summary.read_allowed && summary.has_raw && summary.has_hash;
+  const parsed = Number(edition?.chapters_parsed || 0);
+  const total = Number(edition?.chapters_total || 0);
+  const editionReady = !!(edition && edition.publishable && total > 0 && parsed === total);
+  const ready = catalogReady && editionReady;
   $("pub-form").hidden = false;
   $("pub-dry").disabled = !ready;
   $("pub-apply").disabled = !ready;
-  if (!ready) {
-    $("pub-gate").hidden = false;
-    $("pub-gate").textContent =
-      "Cần Allow Read + file raw + content_hash (Hash raw trên trang tác phẩm) trước khi gửi Read. Vẫn sửa được category / split rồi lưu khi publish.";
+  const gateBits = [];
+  if (!catalogReady) {
+    gateBits.push(
+      "Cần Allow Read + file raw + content_hash (Hash raw trên trang tác phẩm) trước khi gửi Read. Vẫn sửa được category / split rồi lưu khi publish.",
+    );
+  }
+  if (!editionReady) {
+    if (!edition || !edition.macro_complete || total === 0) {
+      gateBits.push("Chế bản chưa xong — mở Chế bản, phân đoạn và parse mọi chương tới trạng thái Ready.");
+    } else {
+      gateBits.push(
+        `Còn ${Math.max(total - parsed, 0)}/${total} chương chưa Ready — parse hết trên Chế bản trước khi gửi Read.`,
+      );
+    }
   }
   if (!state.health?.read_token_set) {
+    gateBits.push(`Set READ_HUB_TOKEN (trùng HUB_SYNC_TOKEN) và READ_API_URL=${state.health?.read_api || ""}.`);
+  }
+  if (gateBits.length) {
     $("pub-gate").hidden = false;
-    $("pub-gate").textContent =
-      ($("pub-gate").textContent ? `${$("pub-gate").textContent}\n` : "") +
-      `Set READ_HUB_TOKEN (trùng HUB_SYNC_TOKEN) và READ_API_URL=${state.health?.read_api || ""}.`;
+    $("pub-gate").textContent = gateBits.join("\n");
   }
 }
 
