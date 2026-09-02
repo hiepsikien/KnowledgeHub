@@ -11,6 +11,7 @@ from knowledgehub.edition.macro_qa import detect_body_markers, extract_title_pag
 from knowledgehub.edition.pipeline import build_edition
 from knowledgehub.edition.toc import (
     _UNIT_TOC_LINE,
+    _looks_like_numbered_heading,
     chapter_number_key,
     heading_title_from_toc_match,
     is_body_heading_line,
@@ -1395,7 +1396,8 @@ def test_bastiat_body_headings_are_not_toc_list_rows():
     assert is_body_heading_line("ECONOMIC SOPHISMS. FIRST SERIES.")
     assert is_body_heading_line("I. ABUNDANCE, SCARCITY.")
     assert is_body_heading_line("SECOND SERIES.")
-    assert is_body_heading_line("CONCLUSION.")
+    # CONCLUSION is a TOC named row (parse_contents_entries), not a global body heading.
+    assert not is_body_heading_line("CONCLUSION.")
     assert not is_body_heading_line(
         "I. To level and equalize the conditions of labour is not simply to cramp"
     )
@@ -1404,3 +1406,19 @@ def test_bastiat_body_headings_are_not_toc_list_rows():
     )
     assert kind_for_toc_label("TRANSLATOR'S PREFACE.") == "preface"
     assert kind_for_toc_label("A Preface to Politics") == "other"
+    assert kind_for_toc_label("A PREFACE TO POLITICS") == "other"
+
+
+def test_numbered_toc_skips_caps_then_lowercase_prose():
+    yes_prose = "YES, but then a long lowercase sentence continues afterward."
+    assert not _looks_like_numbered_heading(yes_prose)
+    assert _looks_like_numbered_heading("ABUNDANCE, SCARCITY.")
+    assert _looks_like_numbered_heading(
+        "PROTECTION; OR, THE THREE CITY MAGISTRATES. Demonstration in Four Tableaux."
+    )
+    src = toc_source_from_excerpt(
+        f"INTRODUCTION.\nI. {yes_prose}\nI. ABUNDANCE, SCARCITY.\n"
+    )
+    labels = [e["label"] for e in parse_contents_entries(src)]
+    assert any("ABUNDANCE" in lab.upper() for lab in labels)
+    assert not any("YES" in lab.upper() for lab in labels)

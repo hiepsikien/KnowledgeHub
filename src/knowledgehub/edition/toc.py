@@ -92,7 +92,7 @@ def is_body_heading_line(line: str) -> bool:
         return True
     if re.match(
         r"^(?:(?:THE\s+)?(?:AUTHOR['’]S|TRANSLATOR['’]S|EDITOR['’]S|PUBLISHER['’]S)\s+)?"
-        r"(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX|CONCLUSION)\b",
+        r"(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b",
         s,
         re.I,
     ):
@@ -504,7 +504,11 @@ def _is_title_case_heading(line: str) -> bool:
 
 
 def _looks_like_numbered_heading(rest: str) -> bool:
-    """True for TOC/body titles after ``I.`` / ``12.``, not numbered prose."""
+    """True for TOC/body titles after ``I.`` / ``12.``, not numbered prose.
+
+    ALL-CAPS on the whole remainder (≥0.75), then title-case. A leading ``YES``
+    must not promote mixed prose into a heading.
+    """
     raw = strip_toc_page_tail(rest).strip()
     if not raw or len(raw) > 180:
         return False
