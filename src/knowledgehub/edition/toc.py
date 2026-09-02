@@ -90,9 +90,19 @@ def is_body_heading_line(line: str) -> bool:
         return False
     if is_chapter_heading_line(s) and not is_toc_list_row(s):
         return True
-    if re.match(r"^(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b", s, re.I):
+    if re.match(
+        r"^(?:(?:THE\s+)?(?:AUTHOR['’]S|TRANSLATOR['’]S|EDITOR['’]S|PUBLISHER['’]S)\s+)?"
+        r"(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX|CONCLUSION)\b",
+        s,
+        re.I,
+    ):
         return not is_toc_list_row(s)
     if _UNIT_TOC_LINE.match(s):
+        return not is_toc_list_row(s)
+    if _SERIES_TOC_LINE.match(s):
+        return not is_toc_list_row(s)
+    numbered = _BARE_NUM_TITLE.match(s)
+    if numbered and _looks_like_numbered_heading(numbered.group(2)):
         return not is_toc_list_row(s)
     return False
 
@@ -363,8 +373,17 @@ _UNIT_TOC_LINE = re.compile(
 )
 _NAMED_TOC_LINE = re.compile(
     r"^(PREFACE|INTRODUCTION|PROLOGUE|FOREWORD|APPENDIX|NOTES|INDEX|"
-    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|FOOTNOTES|"
+    r"BIBLIOGRAPHY|GLOSSARY|ERRATA|FOOTNOTES|CONCLUSION|"
     r"CATALOGUE\b.*|CATALOG\b.*)\s*(.*)$",
+    re.I,
+)
+_PREFIXED_FRONT_LINE = re.compile(
+    r"^(?:THE\s+)?(?:AUTHOR['’]S|TRANSLATOR['’]S|EDITOR['’]S|PUBLISHER['’]S)\s+"
+    r"(PREFACE|INTRODUCTION|FOREWORD|NOTE)\s*(.*)$",
+    re.I,
+)
+_SERIES_TOC_LINE = re.compile(
+    r"^(?:(.+?)\.\s+)?((?:FIRST|SECOND|THIRD|FOURTH|FIFTH|SIXTH)\s+SERIES)\.?\s*$",
     re.I,
 )
 _TITLE_CASE_SMALL = frozenset({"of", "and", "the", "or", "in", "a", "an", "to", "on", "for"})
@@ -399,7 +418,7 @@ def kind_for_toc_label(label: str) -> str:
         return "chapter"
     if u.startswith("SECTION"):
         return "part"
-    if u.startswith("PREFACE") or "FOREWORD" in u:
+    if "PREFACE" in u or "FOREWORD" in u:
         return "preface"
     if u.startswith("INTRODUCTION"):
         return "introduction"
@@ -409,6 +428,11 @@ def kind_for_toc_label(label: str) -> str:
         return "appendix"
     if u.startswith(("NOTES", "INDEX", "BIBLIOGRAPHY", "GLOSSARY", "CATALOGUE", "CATALOG", "ERRATA", "FOOTNOTES")):
         return "back_matter"
+    if re.search(r"\b(?:FIRST|SECOND|THIRD|FOURTH|FIFTH|SIXTH)\s+SERIES\b", u):
+        return "part"
+    numbered = _BARE_NUM_TITLE.match((label or "").strip())
+    if numbered and _looks_like_numbered_heading(numbered.group(2)):
+        return "chapter"
     # Named essays stay "other" (not structural). toc_match still requires them
     # when the TOC has no chapter/book/part rows; Dedication / To the Reader
     # are filtered out of that fallback so they stay optional.
@@ -475,23 +499,64 @@ def _is_title_case_heading(line: str) -> bool:
     return True
 
 
+def _looks_like_numbered_heading(rest: str) -> bool:
+    """True for TOC/body titles after ``I.`` / ``12.``, not numbered prose."""
+    raw = strip_toc_page_tail(rest).strip()
+    if not raw or len(raw) > 180:
+        return False
+    word_m = re.match(r"[A-Za-z']+", raw)
+    if not word_m:
+        return False
+    word = word_m.group(0)
+    if word.isupper():
+        return True
+    return _is_title_case_heading(raw)
+
+
+def _numbered_toc_match(line: str) -> re.Match[str] | None:
+    match = _BARE_NUM_TITLE.match(line.strip())
+    if match and _looks_like_numbered_heading(match.group(2)):
+        return match
+    return None
+
+
+def _is_new_toc_row(line: str) -> bool:
+    s = line.strip()
+    return bool(
+        _CHAPTER_TOC_LINE.match(s)
+        or _NAMED_TOC_LINE.match(s)
+        or _PREFIXED_FRONT_LINE.match(s)
+        or _BOOK_PART_TOC_LINE.match(s)
+        or _UNIT_TOC_LINE.match(s)
+        or _SERIES_TOC_LINE.match(s)
+        or _numbered_toc_match(s)
+    )
+
+
 def _following_has_toc_wrap_page(lines: list[str], index: int) -> bool:
     """True when a bare CHAPTER line is followed by a synopsis that ends in a page number."""
     for j in range(index + 1, min(index + 14, len(lines))):
         nxt = lines[j].strip()
         if not nxt:
             continue
-        if (
-            _CHAPTER_TOC_LINE.match(nxt)
-            or _NAMED_TOC_LINE.match(nxt)
-            or _BOOK_PART_TOC_LINE.match(nxt)
-            or _UNIT_TOC_LINE.match(nxt)
-        ):
-            return False
-        if _TOC_STOP.match(nxt):
+        if _is_new_toc_row(nxt) or _TOC_STOP.match(nxt):
             return False
         if toc_page_tail(nxt) or is_toc_list_row(nxt):
             return True
+    return False
+
+
+def _following_is_toc_title_wrap(lines: list[str], index: int) -> bool:
+    """True when the next TOC line continues this title (page column or short wrap)."""
+    if _following_has_toc_wrap_page(lines, index):
+        return True
+    for j in range(index + 1, min(index + 4, len(lines))):
+        nxt = lines[j].strip()
+        if not nxt:
+            continue
+        if _is_new_toc_row(nxt) or _TOC_STOP.match(nxt):
+            return False
+        return len(nxt) < 50
     return False
 
 
@@ -769,7 +834,11 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
                 flush()
             continue
 
-        named = _NAMED_TOC_LINE.match(stripped)
+        prefixed = _PREFIXED_FRONT_LINE.match(stripped)
+        if prefixed:
+            named = prefixed
+        else:
+            named = _NAMED_TOC_LINE.match(stripped)
         if named:
             full = strip_toc_page_tail(stripped)
             kind = kind_for_toc_label(full or named.group(1))
@@ -831,6 +900,36 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
                 "page": toc_page_tail(stripped),
             }
             if pending["page"] and not rest:
+                flush()
+            continue
+
+        series = _SERIES_TOC_LINE.match(stripped)
+        if series:
+            flush()
+            full = strip_toc_page_tail(stripped)
+            pending = {
+                "label": full,
+                "kind": "part",
+                "title_parts": [],
+                "page": toc_page_tail(stripped),
+            }
+            if pending["page"] or not _following_is_toc_title_wrap(lines, index):
+                flush()
+            continue
+
+        numbered = _numbered_toc_match(stripped)
+        if numbered:
+            flush()
+            full = strip_toc_page_tail(stripped)
+            page = toc_page_tail(stripped)
+            pending = {
+                "label": full,
+                "kind": "chapter",
+                "title_parts": [full],
+                "page": page,
+                "wrapped": False,
+            }
+            if page or not _following_is_toc_title_wrap(lines, index):
                 flush()
             continue
 
@@ -903,7 +1002,12 @@ def format_contents_excerpt(entries: list[dict[str, Any]], *, max_chars: int = 1
 
 def _is_titleish_line(line: str) -> bool:
     s = line.strip()
-    if not s or len(s) > 80 or is_toc_list_row(s):
+    if not s or is_toc_list_row(s):
+        return False
+    numbered = _BARE_NUM_TITLE.match(s)
+    if numbered and _looks_like_numbered_heading(numbered.group(2)) and len(s) <= 120:
+        return True
+    if len(s) > 80:
         return False
     letters = [c for c in s if c.isalpha()]
     if not letters:
