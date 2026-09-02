@@ -14,7 +14,15 @@
     "max_attempts": 2,
     "job_timeout_sec": 1800,
     "max_part_words": 1200,
-    "hard_max_part_words": 1500
+    "hard_max_part_words": 1500,
+    "llm_retries": 3,
+    "gemini_rpm": 12,
+    "deepseek_rpm": 30
   },
-  "updated_at": "2026-08-28T16:37:46+00:00"
+  "edition": {
+    "use_llm_macro": true,
+    "use_llm_relabel": false,
+    "use_llm_qa": false
+  },
+  "updated_at": "2026-09-02T11:40:31+00:00"
 }

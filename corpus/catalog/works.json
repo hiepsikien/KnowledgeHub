@@ -348,11 +348,11 @@
   },
   {
     "id": "arnold--essays_in_criticism",
-    "title": "Essays in Criticism",
+    "title": "Essays in Criticism (Arnold)",
     "author_id": "arnold",
     "language": "en",
     "year": 1865,
-    "description": "",
+    "description": "Essays in Criticism (Các tiểu luận phê bình) của Matthew Arnold, xuất bản năm 1865, là một trong những cột mốc vĩ đại và có sức ảnh hưởng sâu rộng nhất lịch sử phê bình văn học Anh thế kỷ 19. Tác phẩm tập hợp những bài viết tinh hoa nhất của Arnold, nơi ông đặt nền móng cho sứ mệnh của nhà phê bình: giữ gìn và truyền bá những giá trị tinh thần ưu tú nhất của nhân loại bằng một tâm thế khách quan, vô tư và rộng mở.\n\nVới tư tưởng cốt lõi về việc \"tìm kiếm điều tốt đẹp nhất đã được biết đến và suy ngẫm trên thế giới,\" cuốn sách vượt ra ngoài khuôn khổ phân tích văn học đơn thuần để trở thành một lời kêu gọi cải cách văn hóa. Arnold khẩn thiết đề nghị nước Anh thoát khỏi sự tự mãn tỉnh lẻ và những định kiến hẹp hòi của chủ nghĩa thực dụng bằng cách tiếp thu tinh hoa văn hóa châu Âu – đặc biệt là văn chương Pháp và cổ điển Hy Lạp. Tác phẩm gối đầu giường này không chỉ định hình lại tiêu chuẩn thưởng lãm nghệ thuật mà còn là kim chỉ nam bất hủ cho bất kỳ ai trân trọng trí tuệ, sự tinh tế và sức mạnh của tư duy tự do.",
     "license": "public_domain_usa_gutenberg",
     "license_source": "public_domain_usa_gutenberg",
     "source_url": "https://www.gutenberg.org/ebooks/77244",
@@ -375,7 +375,7 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {
@@ -658,7 +658,7 @@
     "author_id": "bach",
     "language": "en",
     "year": 1900,
-    "description": "",
+    "description": "Johann Sebastian Bach by C.F. Abdy Williams is a timeless classic from the renowned Master Musicians series, offering a vivid and comprehensive portrait of the great Baroque master. The book traces Bach's journey from his early, formative years in Eisenach through his appointments at Arnstadt, Mühlhausen, Weimar, and Cöthen, culminating in his crowning decades at Leipzig.\n\nBlending meticulous musicological insight with an engaging narrative, the author illuminates the historical context behind monumental works such as The Well-Tempered Clavier and the Brandenburg Concertos while revealing the human being behind the genius—a dedicated educator, a devoted family man, and an artist of unwavering faith. This biography is an essential companion for anyone seeking to understand the life, craftsmanship, and enduring spirit of Johann Sebastian Bach.",
     "license": "public_domain_usa_gutenberg",
     "license_source": "public_domain_usa_gutenberg",
     "source_url": "https://www.gutenberg.org/ebooks/43650",
@@ -680,11 +680,11 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {
-      "category_slug": "essays",
+      "category_slug": "memoir-biography",
       "price_cents": 0,
       "split_length": "standard"
     }
@@ -1065,11 +1065,11 @@
   },
   {
     "id": "bastiat--economic_sophisms",
-    "title": "Economic Sophisms",
+    "title": "Economic Sophisms (Bastiat)",
     "author_id": "bastiat",
     "language": "en",
     "year": 1845,
-    "description": "",
+    "description": "Economic Sophisms của Frédéric Bastiat, xuất bản năm 1845, là một trong những kiệt tác châm biếm sắc sảo và kinh điển nhất về kinh tế học tự do. Giữa thời kỳ chủ nghĩa bảo hộ và các đặc quyền thương mại bóp nghẹt nền kinh tế Pháp, Bastiat đã dùng ngòi bút sắc bén cùng sự hài hước sâu cay để lột trần những luận điệu ngụy trang tinh vi của các nhóm lợi ích luôn miệng kêu gọi đánh thuế quan cao để \"bảo vệ sản xuất trong nước.\"\n\nThông qua tập hợp các tiểu luận sắc nét—nổi bật với bức thư mỉa mai kinh điển của các nhà sản xuất nến xin chính phủ che chắn ánh sáng Mặt Trời—tác giả đã phá vỡ những lầm tưởng cốt lõi về mối quan hệ giữa sản xuất và tiêu dùng, giữa sự khan hiếm nhân tạo và sự thịnh vượng thực sự. Cuốn sách là cẩm nang bất hủ cho bất kỳ ai muốn thấu hiểu bản chất của tự do thương mại, sắc bén nhận diện những ngụy biện kinh tế vẫn còn nguyên vẹn tính thời sự cho đến tận ngày nay.",
     "license": "public_domain_usa_gutenberg",
     "license_source": "public_domain_usa_gutenberg",
     "source_url": "https://www.gutenberg.org/ebooks/44145",
@@ -1091,7 +1091,7 @@
       "basis": "public_domain",
       "consumers": {
         "think": "allowed",
-        "read": "blocked"
+        "read": "allowed"
       }
     },
     "read": {
