@@ -1,11 +1,9 @@
-"""File-backed translation job queue with a scalable background worker pool."""
+"""File-backed read-edition job queue with a scalable background worker pool."""
 
 from __future__ import annotations
 
 import json
 import logging
-import os
-import re
 import secrets
 import threading
 from collections import deque
@@ -16,13 +14,23 @@ from typing import Any
 
 from ..jsonfile import quarantine_corrupt, write_json_atomic
 from ..paths import corpus_root
-from .paths import safe_chapter, safe_work_id
+from ..translation.jobs import (
+    HARD_JOB_LIMIT_SEC,
+    JobCancelled,
+    JobGuardError,
+    desired_worker_count,
+    is_transient_error,
+    retry_delay_for,
+    worker_enabled,
+)
 
-KIND_ORDER = ("draft", "annotate", "qa")
+KIND_ORDER = ("macro", "parse", "qa", "hitl_scan")
 KINDS = KIND_ORDER
 KIND_RANK = {kind: index for index, kind in enumerate(KIND_ORDER)}
+WORK_SCOPE = "*"
 ACTIVE = frozenset({"queued", "running"})
 STOPPED = frozenset({"cancelled", "interrupted"})
+HITL_KINDS = frozenset({"wrap", "footnotes", "quotes"})
 
 _lock = threading.Lock()
 _pool_lock = threading.Lock()
@@ -32,28 +40,12 @@ _threads: list[threading.Thread] = []
 _next_worker = 0
 _requeued = False
 _cancel_flags: set[str] = set()
-_current_job_id: ContextVar[str | None] = ContextVar("kh_job_id", default=None)
+_current_job_id: ContextVar[str | None] = ContextVar("kh_edition_job_id", default=None)
 _events: deque[dict[str, Any]] = deque(maxlen=80)
-log = logging.getLogger("knowledgehub.jobs")
-
-
-def configure_job_logging() -> None:
-    root = logging.getLogger("knowledgehub")
-    root.setLevel(logging.INFO)
-    if not root.handlers:
-        handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s [kh] %(message)s"))
-        root.addHandler(handler)
-        root.propagate = False
+log = logging.getLogger("knowledgehub.edition.jobs")
 
 
 def job_log_event(event: str, **fields: Any) -> None:
-    from ..edition.jobs import current_job_id as edition_job_id
-    from ..edition.jobs import job_log_event as edition_log
-
-    if not _current_job_id.get() and edition_job_id():
-        edition_log(event, **fields)
-        return
     row: dict[str, Any] = {"at": _now(), "event": event}
     for key, value in fields.items():
         if value is not None:
@@ -67,25 +59,8 @@ def recent_job_log() -> list[dict[str, Any]]:
     return list(_events)
 
 
-class JobCancelled(Exception):
-    """Raised when a running job is cancelled or interrupted."""
-
-
-class JobGuardError(Exception):
-    """Raised when a job hits an attempt or timeout guard."""
-
-
-HARD_JOB_LIMIT_SEC = 6 * 3600
-
-TRANSIENT_ERROR = re.compile(
-    r"HTTP (?:408|409|425|429|500|502|503|504)\b"
-    r"|RESOURCE_EXHAUSTED|UNAVAILABLE|high demand|overloaded|temporarily"
-    r"|timed out|urlopen error|Connection (?:reset|refused|aborted)|Remote end closed"
-    # A model that stopped mid-word is a flake, and finished parts are already
-    # checkpointed, so another attempt only redoes the part that failed.
-    r"|stopped mid-word|hit max_tokens|hit maxOutputTokens",
-    re.I,
-)
+def current_job_id() -> str | None:
+    return _current_job_id.get()
 
 
 def _now() -> str:
@@ -108,26 +83,8 @@ def _seconds_since(stamp: Any, now: datetime) -> float | None:
     return (now - moment).total_seconds()
 
 
-def is_transient_error(message: str) -> bool:
-    """Provider hiccups worth another attempt, unlike bad input or our own guards."""
-    return bool(TRANSIENT_ERROR.search(message or ""))
-
-
-def retry_delay_for(attempt: int) -> float:
-    return min(120.0, 15.0 * max(1, attempt))
-
-
-def worker_enabled() -> bool:
-    flag = (os.environ.get("KNOWLEDGEHUB_JOB_WORKER") or "1").strip().lower()
-    return flag not in {"0", "false", "no", "off"}
-
-
 def jobs_path() -> Path:
-    return corpus_root() / ".translation-jobs.json"
-
-
-def desired_worker_count(queued: int, running: int, min_workers: int, max_workers: int) -> int:
-    return max(min_workers, min(max_workers, queued + running))
+    return corpus_root() / ".edition-jobs.json"
 
 
 def worker_alive() -> bool:
@@ -135,9 +92,9 @@ def worker_alive() -> bool:
 
 
 def worker_status() -> dict[str, int]:
-    from ..settings import worker_limits
+    from ..settings import edition_worker_limits
 
-    min_workers, max_workers = worker_limits()
+    min_workers, max_workers = edition_worker_limits()
     with _pool_lock:
         alive = sum(1 for thread in _threads if thread.is_alive())
     return {
@@ -162,7 +119,7 @@ def _empty_store() -> dict[str, Any]:
 def _discard_corrupt_store(path: Path, reason: str) -> dict[str, Any]:
     moved = quarantine_corrupt(path)
     log.error(
-        "translation job store unreadable (%s); queue reset. Saved copy: %s",
+        "edition job store unreadable (%s); queue reset. Saved copy: %s",
         reason,
         moved or "none",
     )
@@ -179,7 +136,7 @@ def _read_store() -> dict[str, Any]:
     except json.JSONDecodeError as exc:
         return _discard_corrupt_store(path, f"invalid JSON: {exc}")
     except OSError as exc:
-        log.error("cannot read translation job store: %s", exc)
+        log.error("cannot read edition job store: %s", exc)
         return _empty_store()
     if not isinstance(data, dict):
         return _discard_corrupt_store(path, "top level is not an object")
@@ -216,12 +173,17 @@ def _public(job: dict[str, Any]) -> dict[str, Any]:
         "error",
         "result",
         "duplicate_of",
+        "params",
     )
-    return {key: job.get(key) for key in keys if job.get(key) is not None}
+    payload = {key: job.get(key) for key in keys if job.get(key) is not None}
+    params = job.get("params") if isinstance(job.get("params"), dict) else {}
+    for key in ("hitl_kind", "scope", "use_llm", "force", "keep_toc"):
+        if key in params and key not in payload:
+            payload[key] = params[key]
+    return payload
 
 
-def list_jobs(source_work_id: str | None = None) -> list[dict[str, Any]]:
-    work_id = safe_work_id(source_work_id) if source_work_id else None
+def list_jobs(work_id: str | None = None) -> list[dict[str, Any]]:
     with _lock:
         jobs = list(_read_store().get("jobs") or [])
     if work_id:
@@ -229,52 +191,200 @@ def list_jobs(source_work_id: str | None = None) -> list[dict[str, Any]]:
     return [_public(job) for job in reversed(jobs)]
 
 
-def _find_active(jobs: list[dict[str, Any]], work_id: str, chapter: str, kind: str) -> dict[str, Any] | None:
+def jobs_payload(work_id: str | None = None) -> dict[str, Any]:
+    return {
+        "jobs": list_jobs(work_id),
+        "log": recent_job_log(),
+        "worker_alive": worker_alive(),
+        "workers": worker_status(),
+    }
+
+
+def _params_of(job: dict[str, Any]) -> dict[str, Any]:
+    params = job.get("params")
+    return dict(params) if isinstance(params, dict) else {}
+
+
+def _is_work_scoped(job: dict[str, Any]) -> bool:
+    if job.get("kind") == "macro":
+        return True
+    if job.get("kind") == "hitl_scan" and _params_of(job).get("scope") == "book":
+        return True
+    return str(job.get("chapter") or "") in {"", WORK_SCOPE}
+
+
+def _identity(job: dict[str, Any]) -> tuple[Any, ...]:
+    kind = str(job.get("kind") or "")
+    params = _params_of(job)
+    if kind == "macro":
+        return ("macro",)
+    if kind == "hitl_scan":
+        return (
+            "hitl_scan",
+            params.get("hitl_kind"),
+            params.get("scope") or "chapter",
+            job.get("chapter") or params.get("chapter_id") or WORK_SCOPE,
+        )
+    return (kind, job.get("chapter"))
+
+
+def _find_active(jobs: list[dict[str, Any]], candidate: dict[str, Any]) -> dict[str, Any] | None:
+    ident = _identity(candidate)
+    work_id = candidate.get("work_id")
     for job in jobs:
-        if (
-            job.get("status") in ACTIVE
-            and job.get("work_id") == work_id
-            and job.get("chapter") == chapter
-            and job.get("kind") == kind
-        ):
+        if job.get("status") not in ACTIVE:
+            continue
+        if job.get("work_id") != work_id:
+            continue
+        if _identity(job) == ident:
             return job
     return None
 
 
-def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
-    from .project import load_project
-    from .segments_io import load_segment
+def _claim_blocked(job: dict[str, Any], running: list[dict[str, Any]]) -> bool:
+    work_id = job.get("work_id")
+    on_work = [row for row in running if row.get("work_id") == work_id]
+    if not on_work:
+        return False
+    if _is_work_scoped(job) or any(_is_work_scoped(row) for row in on_work):
+        return True
+    chapter = str(job.get("chapter") or "")
+    if chapter and chapter != WORK_SCOPE:
+        if any(str(row.get("chapter") or "") == chapter for row in on_work):
+            return True
+    if job.get("kind") == "hitl_scan":
+        hitl_kind = _params_of(job).get("hitl_kind")
+        if any(
+            row.get("kind") == "hitl_scan" and _params_of(row).get("hitl_kind") == hitl_kind
+            for row in on_work
+        ):
+            return True
+    return False
 
-    work_id = safe_work_id(source_work_id)
-    ch = safe_chapter(chapter).upper()
+
+def _validate_work(work_id: str) -> str:
+    from ..catalog import get_work
+
+    text = (work_id or "").strip()
+    if not text:
+        raise ValueError("work_id required")
+    get_work(text)
+    return text
+
+
+def _validate_enqueue(work_id: str, kind: str, chapter: str, params: dict[str, Any]) -> None:
+    from .read_edition import package_dir_for_work
+    from .read_edition_steps import ReadEditionStepError, ensure_ready_to_parse, load_hitl_job, load_structure
+
+    if kind == "macro":
+        if not params.get("keep_toc"):
+            return
+        try:
+            package_dir, _meta, _work = package_dir_for_work(work_id)
+        except Exception as exc:
+            raise ValueError(str(exc)) from exc
+        structure = load_structure(package_dir)
+        if not structure:
+            raise ValueError("Run phân đoạn first, then confirm TOC")
+        toc = dict((structure.get("hitl") or {}).get("toc") or {})
+        if toc.get("status") not in {"yes", "no", "none"}:
+            raise ValueError("Confirm TOC before phân loại lại")
+        return
+    try:
+        package_dir, _meta, _work = package_dir_for_work(work_id)
+    except Exception as exc:
+        raise ValueError(str(exc)) from exc
+    structure = load_structure(package_dir)
+    if not structure:
+        raise ValueError("Run macro step first (structure.json missing)")
+    sections = {str(row.get("section_id")) for row in (structure.get("sections") or [])}
+    if kind in {"parse", "qa"}:
+        if chapter == WORK_SCOPE or not chapter:
+            raise ValueError("chapter_id required")
+        if chapter not in sections:
+            raise ValueError(f"Unknown section: {chapter}")
+        if kind == "parse":
+            try:
+                ensure_ready_to_parse(work_id)
+            except ReadEditionStepError as exc:
+                raise ValueError(str(exc)) from exc
+        if kind == "qa":
+            path = package_dir / "chapters" / f"{chapter}.json"
+            if not path.is_file():
+                raise ValueError(f"{chapter} not parsed — run micro parse first")
+        return
+    hitl_kind = str(params.get("hitl_kind") or "")
+    if hitl_kind not in HITL_KINDS:
+        raise ValueError(f"unknown HITL kind: {hitl_kind}")
+    scope = str(params.get("scope") or "chapter")
+    if scope not in {"chapter", "book"}:
+        raise ValueError("scope must be chapter or book")
+    if scope == "chapter":
+        if chapter == WORK_SCOPE or not chapter:
+            raise ValueError("chapter_id required for trial scan")
+        if chapter not in sections:
+            raise ValueError(f"Unknown section: {chapter}")
+    else:
+        existing = load_hitl_job(package_dir, hitl_kind)
+        if not existing.get("trial_confirmed"):
+            raise ValueError("Xác nhận chương thử trước khi chạy toàn văn bản")
+
+
+def enqueue_job(
+    work_id: str,
+    kind: str,
+    *,
+    chapter: str | None = None,
+    params: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if kind not in KINDS:
         raise ValueError(f"Unknown job kind: {kind!r}")
-    load_project(work_id)
-    load_segment(work_id, ch)
+    source_work_id = _validate_work(work_id)
+    payload_params = dict(params or {})
+    if kind == "hitl_scan":
+        payload_params["hitl_kind"] = str(payload_params.get("hitl_kind") or "")
+        payload_params["scope"] = str(payload_params.get("scope") or "chapter")
+    ch = WORK_SCOPE if kind == "macro" or payload_params.get("scope") == "book" else str(chapter or "").strip()
+    if kind == "hitl_scan" and payload_params.get("scope") == "chapter":
+        payload_params["chapter_id"] = ch
+    _validate_enqueue(source_work_id, kind, ch, payload_params)
+    candidate = {
+        "work_id": source_work_id,
+        "chapter": ch or WORK_SCOPE,
+        "kind": kind,
+        "params": payload_params,
+    }
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
-        existing = _find_active(jobs, work_id, ch, kind)
+        existing = _find_active(jobs, candidate)
         if existing:
             payload = _public(existing)
             payload["created"] = False
             job_log_event(
                 "enqueue_duplicate",
                 job_id=existing.get("id"),
-                work_id=work_id,
-                chapter=ch,
+                work_id=source_work_id,
+                chapter=existing.get("chapter"),
                 kind=kind,
                 status=existing.get("status"),
             )
             return payload
+        detail = {
+            "macro": "Đã xếp hàng phân đoạn",
+            "parse": f"Đã xếp hàng parse {ch}",
+            "qa": f"Đã xếp hàng QA {ch}",
+            "hitl_scan": "Đã xếp hàng quét HITL",
+        }.get(kind, "Đã xếp hàng")
         job = {
             "id": secrets.token_hex(8),
-            "work_id": work_id,
-            "chapter": ch,
+            "work_id": source_work_id,
+            "chapter": candidate["chapter"],
             "kind": kind,
+            "params": payload_params,
             "status": "queued",
             "phase": "queued",
-            "detail": "Đã xếp hàng",
+            "detail": detail,
             "attempts": 0,
             "created_at": _now(),
             "heartbeat_at": _now(),
@@ -289,8 +399,8 @@ def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
     job_log_event(
         "enqueue",
         job_id=job["id"],
-        work_id=work_id,
-        chapter=ch,
+        work_id=source_work_id,
+        chapter=job["chapter"],
         kind=kind,
         created=True,
         queued=_queue_depth()[0],
@@ -300,18 +410,27 @@ def enqueue_job(source_work_id: str, chapter: str, kind: str) -> dict[str, Any]:
     return payload
 
 
-def enqueue_missing_drafts(source_work_id: str) -> dict[str, Any]:
-    from .assemble import translation_status
-
-    work_id = safe_work_id(source_work_id)
-    missing = translation_status(work_id)["missing"]
+def enqueue_parse_chapters(
+    work_id: str,
+    chapter_ids: list[str],
+    *,
+    use_llm: bool | None = None,
+) -> dict[str, Any]:
+    ids = [str(ch).strip() for ch in chapter_ids if str(ch).strip()]
+    if not ids:
+        raise ValueError("chapter_ids required")
+    source_work_id = _validate_work(work_id)
+    params: dict[str, Any] = {}
+    if use_llm is not None:
+        params["use_llm"] = use_llm
+    for chapter in ids:
+        _validate_enqueue(source_work_id, "parse", chapter, params)
     jobs: list[dict[str, Any]] = []
-    job_log_event("enqueue_missing", work_id=work_id, missing=",".join(missing) or "-", count=len(missing))
-    for chapter in missing:
-        jobs.append(enqueue_job(work_id, chapter, "draft"))
+    for chapter in ids:
+        jobs.append(enqueue_job(source_work_id, "parse", chapter=chapter, params=params or None))
     created = sum(1 for job in jobs if job.get("created"))
     job_log_event(
-        "enqueue_missing_done",
+        "enqueue_parse_batch",
         work_id=work_id,
         enqueued=created,
         total=len(jobs),
@@ -319,17 +438,65 @@ def enqueue_missing_drafts(source_work_id: str) -> dict[str, Any]:
         running=_queue_depth()[1],
         workers=worker_status()["alive"],
     )
+    snap = jobs_payload(work_id)
     return {
         "work_id": work_id,
-        "kind": "draft",
+        "kind": "parse",
         "enqueued": created,
         "jobs": jobs,
-        "missing": missing,
+        "chapter_ids": ids,
+        "log": snap["log"],
+        "worker_alive": snap["worker_alive"],
+        "workers": snap["workers"],
     }
 
 
+def enqueue_edition_job(
+    work_id: str,
+    *,
+    kind: str,
+    chapter_id: str | None = None,
+    chapter_ids: list[str] | None = None,
+    hitl_kind: str | None = None,
+    scope: str | None = None,
+    use_llm: bool | None = None,
+    force: bool = False,
+    keep_toc: bool = False,
+) -> dict[str, Any]:
+    if kind == "parse" and chapter_ids:
+        return enqueue_parse_chapters(work_id, chapter_ids, use_llm=use_llm)
+    params: dict[str, Any] = {}
+    if kind == "macro":
+        params["force"] = bool(force)
+        params["keep_toc"] = bool(keep_toc)
+        if use_llm is not None:
+            params["use_llm"] = use_llm
+    elif kind == "parse":
+        if not chapter_id:
+            raise ValueError("Provide chapter_id or chapter_ids")
+        if use_llm is not None:
+            params["use_llm"] = use_llm
+    elif kind == "qa":
+        if not chapter_id:
+            raise ValueError("chapter_id required")
+        if use_llm is not None:
+            params["use_llm"] = use_llm
+    elif kind == "hitl_scan":
+        params["hitl_kind"] = hitl_kind
+        params["scope"] = scope or "chapter"
+        if params["scope"] == "chapter" and not chapter_id:
+            raise ValueError("chapter_id required for trial scan")
+    else:
+        raise ValueError(f"Unknown job kind: {kind!r}")
+    job = enqueue_job(work_id, kind, chapter=chapter_id, params=params or None)
+    payload = jobs_payload(work_id)
+    payload["job"] = job
+    payload["enqueued"] = 1 if job.get("created") else 0
+    payload["jobs"] = list_jobs(work_id)
+    return payload
+
+
 def interrupt_stale_running() -> int:
-    """On worker start, drop in-flight jobs instead of silently retrying (token guard)."""
     n = 0
     with _lock:
         store = _read_store()
@@ -356,12 +523,10 @@ def interrupt_stale_running() -> int:
 
 def cancel_jobs(
     *,
-    source_work_id: str | None = None,
+    work_id: str | None = None,
     chapter: str | None = None,
     job_id: str | None = None,
 ) -> dict[str, Any]:
-    work_id = safe_work_id(source_work_id) if source_work_id else None
-    ch = safe_chapter(chapter).upper() if chapter else None
     cancelled: list[dict[str, Any]] = []
     with _lock:
         store = _read_store()
@@ -373,7 +538,7 @@ def cancel_jobs(
                 continue
             if work_id and job.get("work_id") != work_id:
                 continue
-            if ch and str(job.get("chapter") or "").upper() != ch:
+            if chapter and str(job.get("chapter") or "") != chapter:
                 continue
             job["status"] = "cancelled"
             job["phase"] = "cancelled"
@@ -391,11 +556,14 @@ def cancel_jobs(
             "cancel",
             count=len(cancelled),
             work_id=work_id,
-            chapter=ch,
+            chapter=chapter,
             job_id=job_id,
             ids=",".join(str(job.get("id") or "") for job in cancelled),
         )
-    return {"cancelled": len(cancelled), "jobs": cancelled}
+    result = jobs_payload(work_id)
+    result["cancelled"] = len(cancelled)
+    result["cancelled_jobs"] = cancelled
+    return result
 
 
 def update_job_progress(job_id: str, *, phase: str, detail: str | None = None) -> None:
@@ -421,24 +589,17 @@ def report_progress(phase: str, detail: str | None = None) -> None:
     job_id = _current_job_id.get()
     if job_id:
         update_job_progress(job_id, phase=phase, detail=detail)
-        return
-    from ..edition.jobs import report_progress as edition_progress
-
-    edition_progress(phase, detail)
 
 
 def raise_if_stopped() -> None:
     job_id = _current_job_id.get()
     if not job_id:
-        from ..edition.jobs import raise_if_stopped as edition_raise
-
-        edition_raise()
         return
     if job_id in _cancel_flags:
         raise JobCancelled("job cancelled")
-    from ..settings import job_guard_limits
+    from ..settings import edition_job_guard_limits
 
-    _, timeout_sec = job_guard_limits()
+    _, timeout_sec = edition_job_guard_limits()
     with _lock:
         store = _read_store()
         job = next((row for row in (store.get("jobs") or []) if row.get("id") == job_id), None)
@@ -456,17 +617,13 @@ def raise_if_stopped() -> None:
 
 
 def claim_next() -> dict[str, Any] | None:
-    from ..settings import job_guard_limits
+    from ..settings import edition_job_guard_limits
 
-    max_attempts, _timeout = job_guard_limits()
+    max_attempts, _timeout = edition_job_guard_limits()
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
-        busy = {
-            (job.get("work_id"), str(job.get("chapter") or "").upper())
-            for job in jobs
-            if job.get("status") == "running"
-        }
+        running = [job for job in jobs if job.get("status") == "running"]
         dirty = False
         chosen: dict[str, Any] | None = None
         chosen_rank = len(KIND_ORDER)
@@ -477,9 +634,6 @@ def claim_next() -> dict[str, Any] | None:
             not_before = str(job.get("not_before") or "")
             if not_before and not_before > stamp:
                 continue
-            key = (job.get("work_id"), str(job.get("chapter") or "").upper())
-            if key in busy:
-                continue
             if int(job.get("attempts") or 0) >= max_attempts:
                 job["status"] = "error"
                 job["phase"] = "error"
@@ -488,6 +642,8 @@ def claim_next() -> dict[str, Any] | None:
                 job["finished_at"] = _now()
                 job["heartbeat_at"] = _now()
                 dirty = True
+                continue
+            if _claim_blocked(job, running):
                 continue
             rank = KIND_RANK.get(str(job.get("kind") or ""), len(KIND_ORDER))
             if chosen is None or rank < chosen_rank:
@@ -561,7 +717,6 @@ def complete_job(
 
 
 def requeue_job(job_id: str, *, delay_sec: float, error: str) -> bool:
-    """Put a job back in the queue after a transient provider failure."""
     requeued = False
     with _lock:
         store = _read_store()
@@ -588,47 +743,92 @@ def requeue_job(job_id: str, *, delay_sec: float, error: str) -> bool:
     return requeued
 
 
-def execute_job(job: dict[str, Any]) -> dict[str, Any]:
-    from .annotate import annotate_segment
-    from .draft import draft_chapter
-    from .qa import qa_segment
-
-    kind = job["kind"]
-    work_id = job["work_id"]
-    chapter = job["chapter"]
-    if kind == "draft":
-        return draft_chapter(work_id, chapter=chapter)
+def _result_summary(kind: str, result: dict[str, Any]) -> dict[str, Any]:
+    if kind == "macro":
+        manifest = result.get("manifest") if isinstance(result.get("manifest"), dict) else {}
+        return {
+            "built": result.get("built"),
+            "package_dir": result.get("package_dir"),
+            "chapter_count": manifest.get("chapter_count")
+            or len(manifest.get("chapters") or []),
+        }
+    if kind == "parse":
+        return {
+            "chapter_id": result.get("chapter_id"),
+            "block_count": result.get("block_count"),
+            "micro_status": result.get("micro_status"),
+        }
     if kind == "qa":
-        return qa_segment(work_id, chapter)
-    if kind == "annotate":
-        return annotate_segment(work_id, chapter)
+        return {
+            "chapter_id": result.get("chapter_id"),
+            "passed": result.get("passed"),
+            "summary_vi": str(result.get("summary_vi") or "")[:180] or None,
+        }
+    if kind == "hitl_scan":
+        return {
+            "kind": result.get("kind"),
+            "scope": result.get("scope"),
+            "summary": result.get("summary") or {},
+            "trial_chapter_id": result.get("trial_chapter_id"),
+            "status": result.get("status"),
+        }
+    return {}
+
+
+def execute_job(job: dict[str, Any]) -> dict[str, Any]:
+    from ..read_edition_service import parse_micro, run_macro, run_qa, scan_hitl
+
+    kind = str(job.get("kind") or "")
+    work_id = str(job.get("work_id") or "")
+    chapter = str(job.get("chapter") or "")
+    params = _params_of(job)
+    if kind == "macro":
+        report_progress("macro", "Đang phân đoạn…")
+        return run_macro(
+            work_id,
+            force=bool(params.get("force")),
+            use_llm=bool(params["use_llm"]) if "use_llm" in params else True,
+            keep_toc=bool(params.get("keep_toc")),
+        )
+    if kind == "parse":
+        report_progress("parse", f"Đang parse REF {chapter}…")
+        return parse_micro(
+            work_id,
+            chapter,
+            use_llm=params.get("use_llm"),
+        )
+    if kind == "qa":
+        report_progress("qa", f"Đang QA {chapter}…")
+        return run_qa(
+            work_id,
+            chapter_id=chapter,
+            use_llm=bool(params["use_llm"]) if "use_llm" in params else True,
+        )
+    if kind == "hitl_scan":
+        scope = str(params.get("scope") or "chapter")
+        hitl_kind = str(params.get("hitl_kind") or "")
+        report_progress("scan", f"Đang quét {hitl_kind}…")
+        return scan_hitl(
+            work_id,
+            hitl_kind,
+            chapter_id=None if scope == "book" else chapter,
+            scope=scope,
+        )
     raise ValueError(f"Unknown job kind: {kind!r}")
-
-
-def _enqueue_followups(job: dict[str, Any]) -> list[dict[str, Any]]:
-    from ..settings import followup_kinds
-
-    queued: list[dict[str, Any]] = []
-    for kind in followup_kinds(str(job.get("kind") or "")):
-        queued.append(enqueue_job(job["work_id"], job["chapter"], kind))
-    return queued
 
 
 def _fail_job(job: dict[str, Any], error: str) -> None:
     complete_job(job["id"], error=error)
     job["status"] = "error"
     job["error"] = error
-    # Annotate uses Gemini; a 429/timeout should not block DeepSeek QA on an existing draft.
-    if job.get("kind") == "annotate":
-        _enqueue_followups(job)
 
 
 def _retry_job(job: dict[str, Any], error: str) -> bool:
-    from ..settings import job_guard_limits
+    from ..settings import edition_job_guard_limits
 
     if not is_transient_error(error):
         return False
-    max_attempts, _timeout = job_guard_limits()
+    max_attempts, _timeout = edition_job_guard_limits()
     attempts = int(job.get("attempts") or 0)
     if attempts >= max_attempts:
         return False
@@ -658,10 +858,11 @@ def process_next_job() -> dict[str, Any] | None:
         raise_if_stopped()
         result = execute_job(job)
         raise_if_stopped()
-        complete_job(job["id"], result=result)
+        summary = _result_summary(str(job.get("kind") or ""), result if isinstance(result, dict) else {})
+        complete_job(job["id"], result=summary or None)
         job["status"] = "done"
         job["phase"] = "done"
-        job["result"] = result
+        job["result"] = summary
         job_log_event(
             "done",
             job_id=job["id"],
@@ -670,7 +871,6 @@ def process_next_job() -> dict[str, Any] | None:
             kind=job.get("kind"),
             thread=threading.current_thread().name,
         )
-        _enqueue_followups(job)
     except JobCancelled:
         complete_job(job["id"], status="cancelled")
         job["status"] = "cancelled"
@@ -735,11 +935,11 @@ def worker_loop(stop: threading.Event) -> None:
 
 
 def _idle_thread_should_exit() -> bool:
-    from ..settings import worker_limits
+    from ..settings import edition_worker_limits
 
     current = threading.current_thread()
     with _pool_lock:
-        min_workers, max_workers = worker_limits()
+        min_workers, max_workers = edition_worker_limits()
         queued, running = _queue_depth()
         desired = desired_worker_count(queued, running, min_workers, max_workers)
         alive = [thread for thread in _threads if thread.is_alive()]
@@ -759,11 +959,11 @@ def _idle_thread_should_exit() -> bool:
 
 def _scale_workers_locked() -> None:
     global _stop, _next_worker
-    from ..settings import worker_limits
+    from ..settings import edition_worker_limits
 
     if _stop is None or _stop.is_set():
         _stop = threading.Event()
-    min_workers, max_workers = worker_limits()
+    min_workers, max_workers = edition_worker_limits()
     queued, running = _queue_depth()
     desired = desired_worker_count(queued, running, min_workers, max_workers)
     _threads[:] = [thread for thread in _threads if thread.is_alive()]
@@ -772,7 +972,7 @@ def _scale_workers_locked() -> None:
         thread = threading.Thread(
             target=worker_loop,
             args=(_stop,),
-            name=f"kh-translate-worker-{_next_worker}",
+            name=f"kh-edition-worker-{_next_worker}",
             daemon=True,
         )
         _threads.append(thread)

@@ -1629,6 +1629,10 @@ function renderSettingsForm(data) {
   fillEdition("set-llm-macro", ed.use_llm_macro);
   fillEdition("set-llm-relabel", ed.use_llm_relabel);
   fillEdition("set-llm-qa", ed.use_llm_qa);
+  fillNumberInput("set-ed-min-workers", ed.min_workers, 1);
+  fillNumberInput("set-ed-max-workers", ed.max_workers, 2);
+  fillNumberInput("set-ed-max-attempts", ed.max_attempts, 2);
+  fillNumberInput("set-ed-job-timeout", ed.job_timeout_sec, 600);
   fillNumberInput("set-min-workers", tr.min_workers, 1);
   fillNumberInput("set-max-workers", tr.max_workers, 2);
   fillNumberInput("set-max-attempts", tr.max_attempts, 2);
@@ -1726,6 +1730,10 @@ async function saveSettings(e) {
           use_llm_macro: $("set-llm-macro").checked,
           use_llm_relabel: $("set-llm-relabel").checked,
           use_llm_qa: $("set-llm-qa").checked,
+          min_workers: readNumberInput("set-ed-min-workers", 1),
+          max_workers: readNumberInput("set-ed-max-workers", 2),
+          max_attempts: readNumberInput("set-ed-max-attempts", 2),
+          job_timeout_sec: readNumberInput("set-ed-job-timeout", 600),
         },
       },
     });

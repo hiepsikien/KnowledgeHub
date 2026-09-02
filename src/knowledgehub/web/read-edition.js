@@ -20,6 +20,10 @@
     pageLoad: 0,
     hitlJobLoad: 0,
     hitlOverviewLoad: 0,
+    jobs: [],
+    jobLog: [],
+    workers: null,
+    pollTimer: null,
   };
 
   const HITL_STEPS = {
@@ -72,6 +76,239 @@
     el._t = setTimeout(() => {
       el.hidden = true;
     }, 3200);
+  }
+
+  function activeJobs(jobs) {
+    return (jobs || []).filter((job) => job.status === "queued" || job.status === "running");
+  }
+
+  function jobKindLabel(kind, job) {
+    if (kind === "macro") return job?.keep_toc || job?.params?.keep_toc ? "phân loại lại" : "phân đoạn";
+    if (kind === "parse") return "parse REF";
+    if (kind === "qa") return "QA";
+    if (kind === "hitl_scan") {
+      const labels = { wrap: "nối dòng", footnotes: "chú thích", quotes: "trích dẫn" };
+      const hk = job?.hitl_kind || job?.params?.hitl_kind || "";
+      const scope = job?.scope || job?.params?.scope || "";
+      return `quét ${labels[hk] || hk}${scope === "book" ? " (sách)" : ""}`;
+    }
+    return kind || "job";
+  }
+
+  function jobElapsed(job) {
+    const start = job?.started_at || job?.heartbeat_at;
+    if (!start || (job.status !== "running" && job.status !== "queued")) return "";
+    const sec = Math.max(0, Math.round((Date.now() - Date.parse(start)) / 1000));
+    if (!Number.isFinite(sec)) return "";
+    if (sec < 60) return `${sec}s`;
+    return `${Math.floor(sec / 60)}p${String(sec % 60).padStart(2, "0")}s`;
+  }
+
+  function workerRangeLabel() {
+    const workers = state.workers || state.editionSettings || {};
+    const min = Number(workers.min_workers ?? 1);
+    const max = Number(workers.max_workers ?? 2);
+    if (min === max) return `Worker chế bản ${max} luồng`;
+    return `Worker chế bản ${min}–${max} luồng`;
+  }
+
+  function applyJobsPayload(data) {
+    if (!data) return;
+    if (Array.isArray(data.jobs)) state.jobs = data.jobs;
+    if (Array.isArray(data.log)) state.jobLog = data.log;
+    if (data.workers) state.workers = data.workers;
+  }
+
+  function chapterActiveJob(chapterId) {
+    if (!chapterId) return null;
+    return (
+      activeJobs(state.jobs).find(
+        (job) => job.chapter === chapterId && (job.kind === "parse" || job.kind === "qa" || job.kind === "hitl_scan"),
+      ) || null
+    );
+  }
+
+  function workScopedActive() {
+    return activeJobs(state.jobs).some(
+      (job) => job.kind === "macro" || (job.kind === "hitl_scan" && (job.scope || job.params?.scope) === "book"),
+    );
+  }
+
+  function renderJobQueue() {
+    const el = $("re-jobs");
+    if (!el) return;
+    const jobs = activeJobs(state.jobs);
+    const cancelBtn = $("re-cancel-jobs");
+    if (cancelBtn) {
+      cancelBtn.hidden = jobs.length === 0;
+      cancelBtn.disabled = jobs.length === 0;
+    }
+    if (!jobs.length) {
+      const workers = state.workers;
+      el.textContent = workers ? `${workerRangeLabel()}` : "";
+      return;
+    }
+    const running = jobs.filter((job) => job.status === "running");
+    const waiting = jobs.filter((job) => job.status === "queued");
+    const parts = [];
+    if (running.length) {
+      parts.push(
+        `Đang ${running
+          .map((job) => {
+            const phase = job.detail || job.phase || jobKindLabel(job.kind, job);
+            const elapsed = jobElapsed(job);
+            const ch = job.kind === "macro" || job.chapter === "*" ? "" : ` ${job.chapter}`;
+            return `${jobKindLabel(job.kind, job)}${ch}: ${phase}${elapsed ? ` · ${elapsed}` : ""}`;
+          })
+          .join("; ")}`,
+      );
+    }
+    if (waiting.length) {
+      parts.push(
+        `chờ ${waiting
+          .map((job) => {
+            const label = jobKindLabel(job.kind, job);
+            const ch = job.kind === "macro" || job.chapter === "*" ? "" : ` ${job.chapter}`;
+            return `${label}${ch}${job.phase === "retry" ? " (thử lại)" : ""}`;
+          })
+          .join(", ")}`,
+      );
+    }
+    const alive = Number(state.workers?.alive || 0);
+    if (alive > 1) parts.push(`${alive} luồng`);
+    el.textContent = parts.join(" · ");
+  }
+
+  function renderJobLog() {
+    const el = $("re-job-log");
+    if (!el) return;
+    const rows = (state.jobLog || []).slice(-12);
+    if (!rows.length) {
+      el.hidden = true;
+      el.textContent = "";
+      return;
+    }
+    el.hidden = false;
+    el.textContent = rows
+      .map((row) => {
+        const at = String(row.at || "").replace("T", " ").replace("+00:00", "Z");
+        const rest = Object.entries(row)
+          .filter(([key]) => key !== "at" && key !== "event")
+          .map(([key, value]) => `${key}=${value}`)
+          .join(" ");
+        return `${at} ${row.event}${rest ? ` ${rest}` : ""}`;
+      })
+      .join("\n");
+  }
+
+  function notifyJobChanges(prev, next) {
+    for (const job of next) {
+      const old = prev.find((item) => item.id === job.id);
+      if (!old) continue;
+      const label = jobKindLabel(job.kind, job);
+      const ch = job.kind === "macro" || job.chapter === "*" ? "" : ` ${job.chapter}`;
+      if (old.status !== "done" && job.status === "done") toast(`Xong ${label}${ch}`);
+      if (old.status !== "error" && job.status === "error") {
+        toast(`${label}${ch}: ${(job.error || "lỗi").slice(0, 140)}`);
+      }
+      if (old.status !== "cancelled" && job.status === "cancelled") toast(`Đã hủy ${label}${ch}`);
+      if (old.status !== "interrupted" && job.status === "interrupted") {
+        toast(`Ngắt ${label}${ch} — không tự chạy lại`);
+      }
+    }
+  }
+
+  function startJobPoll() {
+    if (state.pollTimer) return;
+    state.pollTimer = setInterval(() => void refreshEditionJobs(), 2500);
+  }
+
+  function stopJobPoll() {
+    if (state.pollTimer) {
+      clearInterval(state.pollTimer);
+      state.pollTimer = null;
+    }
+  }
+
+  async function refreshEditionJobs() {
+    const workId = state.workId;
+    if (!workId || $("view-read-edition")?.hidden || !$("re-pick")?.hidden) return;
+    try {
+      const prev = state.jobs || [];
+      const data = await api(`/api/works/${encodeURIComponent(workId)}/read-edition`);
+      if (state.workId !== workId) return;
+      const next = data.jobs || [];
+      notifyJobChanges(prev, next);
+      applyJobsPayload(data);
+      state.status = data;
+      if (data.manifest) state.manifest = data.manifest;
+      $("re-status").textContent = formatStatus(data);
+      renderJobQueue();
+      renderJobLog();
+      if (state.manifest) renderChapterList(state.manifest);
+      syncToolbar();
+      const justDone = next.filter(
+        (job) => job.status === "done" && prev.some((item) => item.id === job.id && item.status !== "done"),
+      );
+      if (justDone.some((job) => job.kind === "macro")) {
+        await loadReadEditionPage(workId);
+        return;
+      }
+      if (justDone.some((job) => job.kind === "parse" || job.kind === "qa")) {
+        await loadReview();
+        if (state.chapterId) await selectChapter(state.chapterId);
+      }
+      if (justDone.some((job) => job.kind === "hitl_scan")) {
+        await loadHitlOverview();
+        await loadHitlJob();
+      }
+      if (activeJobs(next).length) startJobPoll();
+      else stopJobPoll();
+    } catch {
+      /* keep polling; next tick retries */
+    }
+  }
+
+  async function enqueueEdition(body, queuedToast) {
+    const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/jobs`, {
+      method: "POST",
+      body,
+    });
+    if (result.workers) state.workers = result.workers;
+    if (Array.isArray(result.log)) state.jobLog = result.log;
+    const incoming = result.job ? [result.job] : result.jobs || [];
+    if (incoming.length) {
+      const byId = new Map((state.jobs || []).map((job) => [job.id, job]));
+      for (const job of incoming) byId.set(job.id, job);
+      state.jobs = [...byId.values()];
+    } else if (Array.isArray(result.jobs)) {
+      state.jobs = result.jobs;
+    }
+    renderJobQueue();
+    renderJobLog();
+    if (state.manifest) renderChapterList(state.manifest);
+    syncToolbar();
+    startJobPoll();
+    const created = result.enqueued ?? (result.job?.created ? 1 : 0);
+    toast(created ? queuedToast : "Job này đang chạy hoặc đã xếp hàng");
+    return result;
+  }
+
+  async function cancelActiveJobs() {
+    if (!state.workId) return;
+    try {
+      const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/jobs/cancel`, {
+        method: "POST",
+        body: {},
+      });
+      applyJobsPayload(result);
+      renderJobQueue();
+      renderJobLog();
+      syncToolbar();
+      toast(result.cancelled ? `Đã hủy ${result.cancelled} job` : "Không có job đang chạy");
+    } catch (err) {
+      toast(err.message);
+    }
   }
 
   function readEditionWorkFromPath() {
@@ -307,6 +544,11 @@
   }
 
   function microBadge(row) {
+    const job = chapterActiveJob(row.chapter_id);
+    if (job) {
+      const label = job.kind === "qa" ? "QA…" : job.kind === "hitl_scan" ? "quét…" : "parse…";
+      return `<span class="re-micro re-micro-running">${escapeHtml(job.status === "queued" ? "chờ" : label)}</span>`;
+    }
     const st = row.micro_status || "pending";
     return `<span class="re-micro re-micro-${st}">${escapeHtml(st === "complete" ? "parsed" : st)}</span>`;
   }
@@ -523,6 +765,27 @@
     showBtn("re-parse-ready", layoutOk && pending.length > 0 && !(onStructure && currentPending && pending.length === 1));
     showBtn("re-publish", layoutOk && parsed > 0);
     showBtn("re-more", onStructure);
+
+    const busyWork = workScopedActive();
+    const currentJob = chapterActiveJob(state.chapterId);
+    const parseLocked = busyWork || (currentJob && currentJob.kind !== "hitl_scan");
+    const setDisabled = (id, disabled, title) => {
+      const el = $(id);
+      if (!el || el.hidden) return;
+      el.disabled = !!disabled;
+      if (title) el.title = title;
+    };
+    setDisabled("re-macro", busyWork || activeJobs(state.jobs).some((job) => job.kind === "macro"), busyWork ? "Đang có job chế bản trên sách này" : "");
+    setDisabled("re-reclass", busyWork);
+    setDisabled("re-parse-ch", parseLocked);
+    setDisabled("re-parse-selected", busyWork);
+    setDisabled("re-parse-ready", busyWork);
+    setDisabled("re-qa-ch", parseLocked);
+    const hitlBusy = activeJobs(state.jobs).some(
+      (job) => job.kind === "hitl_scan" && (job.hitl_kind || job.params?.hitl_kind) === hitlKind(),
+    );
+    setDisabled("re-hitl-trial", busyWork || hitlBusy);
+    setDisabled("re-hitl-book", busyWork || hitlBusy || !state.hitlJob?.trial_confirmed);
 
     let primary = "re-macro";
     if (!macro) primary = "re-macro";
@@ -852,17 +1115,16 @@
       toast("Chọn một chương để chạy thử");
       return;
     }
-    const label = scope === "book" ? "Đang quét toàn văn bản…" : "Đang chạy thử chương…";
-    toast(label);
     try {
-      applyHitlJob(
-        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/hitl/${kind}/scan`, {
-          method: "POST",
-          body: { scope, chapter_id: state.chapterId },
-        }),
+      await enqueueEdition(
+        {
+          kind: "hitl_scan",
+          hitl_kind: kind,
+          scope,
+          chapter_id: state.chapterId,
+        },
+        scope === "book" ? "Đã xếp hàng quét toàn sách" : "Đã xếp hàng quét chương",
       );
-      toast(scope === "book" ? "Đã quét toàn sách" : "Đã chạy thử chương");
-      await loadHitlOverview();
     } catch (err) {
       toast(err.message);
     }
@@ -1129,16 +1391,12 @@
         return;
       }
     }
-    $("re-status").textContent = "Đang phân loại lại theo TOC…";
+    $("re-status").textContent = "Đã xếp hàng phân loại lại…";
     try {
-      await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
-        method: "POST",
-        body: { keep_toc: true, use_llm: useLlmMacro() },
-      });
-      toast(
-        status === "yes" ? "Đã phân loại lại — TOC đã dán được giữ" : "Đã phân loại lại — không dùng TOC máy",
+      await enqueueEdition(
+        { kind: "macro", keep_toc: true, use_llm: useLlmMacro() },
+        status === "yes" ? "Đã xếp hàng phân loại lại — TOC đã dán được giữ" : "Đã xếp hàng phân loại lại",
       );
-      await loadReadEditionPage(state.workId);
     } catch (err) {
       toast(err.message);
       $("re-status").textContent = err.message;
@@ -1194,6 +1452,9 @@
       const status = await api(`/api/works/${encodeURIComponent(workId)}/read-edition`);
       if (loadId !== state.pageLoad) return;
       state.status = status;
+      applyJobsPayload(status);
+      renderJobQueue();
+      renderJobLog();
       $("re-heading").textContent = status.title || workId;
       $("re-status").textContent = formatStatus(status);
       if (status.macro_complete && status.manifest) {
@@ -1239,6 +1500,8 @@
       }
       applyStepVisibility();
       syncToolbar();
+      if (activeJobs(state.jobs).length) startJobPoll();
+      else stopJobPoll();
     } catch (err) {
       if (loadId !== state.pageLoad) return;
       $("re-status").textContent = err.message;
@@ -1266,6 +1529,7 @@
       const reject = e.target.closest("[data-hitl-reject]");
       if (reject) void decideHitl(reject.dataset.hitlReject, "reject");
     });
+    $("re-cancel-jobs")?.addEventListener("click", () => void cancelActiveJobs());
 
     $("re-macro")?.addEventListener("click", async () => {
       if (!state.workId) return;
@@ -1273,14 +1537,11 @@
         toast("Đã có phân đoạn — xác nhận TOC rồi bấm «Phân loại lại», hoặc Reset để xóa hết");
         return;
       }
-      $("re-status").textContent = "Đang phân đoạn (macro)…";
       try {
-        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/macro`, {
-          method: "POST",
-          body: { force: false, use_llm: useLlmMacro() },
-        });
-        toast("Đã phân đoạn xong — duyệt TOC rồi bấm «Phân loại lại» nếu cần");
-        await loadReadEditionPage(state.workId);
+        await enqueueEdition(
+          { kind: "macro", force: false, use_llm: useLlmMacro() },
+          "Đã xếp hàng phân đoạn — có thể làm việc khác trong lúc chờ",
+        );
       } catch (err) {
         toast(err.message);
         $("re-status").textContent = err.message;
@@ -1300,6 +1561,10 @@
       }
       $("re-status").textContent = "Đang reset…";
       try {
+        await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/jobs/cancel`, {
+          method: "POST",
+          body: {},
+        });
         await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/reset`, {
           method: "POST",
         });
@@ -1320,18 +1585,11 @@
     $("re-parse-ch")?.addEventListener("click", async () => {
       if (!state.workId || !state.chapterId) return;
       if (!assertReadyToParse()) return;
-      toast("Đang parse REF chương…");
       try {
-        await api(
-          `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}/parse`,
-          { method: "POST", body: { use_llm: useLlmRelabel() } },
+        await enqueueEdition(
+          { kind: "parse", chapter_id: state.chapterId, use_llm: useLlmRelabel() },
+          `Đã xếp hàng parse ${state.chapterId}`,
         );
-        toast("Parse xong");
-        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
-        state.status = status;
-        $("re-status").textContent = formatStatus(status);
-        await refreshManifest();
-        await selectChapter(state.chapterId);
       } catch (err) {
         toast(err.message);
       }
@@ -1345,20 +1603,11 @@
         toast("Chọn ít nhất một chương");
         return;
       }
-      toast(`Đang parse ${ids.length} chương…`);
       try {
-        const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/parse`, {
-          method: "POST",
-          body: { chapter_ids: ids, use_llm: useLlmRelabel() },
-        });
-        const errCount = Object.keys(result.errors || {}).length;
-        toast(errCount ? `Xong ${result.count}, lỗi ${errCount}` : `Parse xong ${result.count} chương`);
-        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
-        state.status = status;
-        await loadReview();
-        $("re-status").textContent = formatStatus(status);
-        await refreshManifest();
-        if (state.chapterId) await selectChapter(state.chapterId);
+        await enqueueEdition(
+          { kind: "parse", chapter_ids: ids, use_llm: useLlmRelabel() },
+          `Đã xếp hàng parse ${ids.length} chương`,
+        );
       } catch (err) {
         toast(err.message);
       }
@@ -1393,20 +1642,11 @@
         toast("Không còn chương pending");
         return;
       }
-      toast(`Đang parse ${ids.length} chương…`);
       try {
-        const result = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/parse`, {
-          method: "POST",
-          body: { chapter_ids: ids, use_llm: useLlmRelabel() },
-        });
-        const errCount = Object.keys(result.errors || {}).length;
-        toast(errCount ? `Xong ${result.count}, lỗi ${errCount}` : `Parse xong ${result.count} chương`);
-        const status = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition`);
-        state.status = status;
-        await loadReview();
-        $("re-status").textContent = formatStatus(status);
-        await refreshManifest();
-        if (state.chapterId) await selectChapter(state.chapterId);
+        await enqueueEdition(
+          { kind: "parse", chapter_ids: ids, use_llm: useLlmRelabel() },
+          `Đã xếp hàng parse ${ids.length} chương còn lại`,
+        );
       } catch (err) {
         toast(err.message);
       }
@@ -1447,15 +1687,11 @@
         toast("Parse REF chương trước khi QA");
         return;
       }
-      toast("Đang QA chương…");
       try {
-        const qa = await api(`/api/works/${encodeURIComponent(state.workId)}/read-edition/qa`, {
-          method: "POST",
-          body: { chapter_id: state.chapterId, use_llm: useLlmQa() },
-        });
-        toast(qa.passed ? "QA pass" : "QA fail");
-        await selectChapter(state.chapterId);
-        await refreshManifest();
+        await enqueueEdition(
+          { kind: "qa", chapter_id: state.chapterId, use_llm: useLlmQa() },
+          `Đã xếp hàng QA ${state.chapterId}`,
+        );
       } catch (err) {
         toast(err.message);
       }
@@ -1550,6 +1786,7 @@
       applyReview(null);
       $("re-heading").textContent = "Chế bản";
       $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — rồi đưa sang Read.";
+      stopJobPoll();
       state.pageLoad += 1;
       state.hitlJobLoad += 1;
       state.hitlOverviewLoad += 1;
@@ -1557,6 +1794,10 @@
       state.step = "structure";
       state.hitlJob = null;
       state.hitlOverview = null;
+      state.jobs = [];
+      state.jobLog = [];
+      renderJobQueue();
+      renderJobLog();
       applyStepVisibility();
       syncToolbar();
       await loadEditionSettings();

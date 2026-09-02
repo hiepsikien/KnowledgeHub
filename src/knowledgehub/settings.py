@@ -70,6 +70,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "use_llm_macro": True,
         "use_llm_relabel": True,
         "use_llm_qa": True,
+        "min_workers": 1,
+        "max_workers": 2,
+        "max_attempts": 2,
+        "job_timeout_sec": 600,
     },
 }
 
@@ -155,12 +159,32 @@ def _merge_translation(raw: dict[str, Any] | None) -> dict[str, Any]:
     return base
 
 
+EDITION_INT_LIMITS: dict[str, tuple[int, int, int]] = {
+    "max_attempts": INT_LIMITS["max_attempts"],
+    "job_timeout_sec": INT_LIMITS["job_timeout_sec"],
+}
+
+
 def _merge_edition(raw: dict[str, Any] | None) -> dict[str, Any]:
     base = deepcopy(DEFAULT_SETTINGS["edition"])
     incoming = raw if isinstance(raw, dict) else {}
     for key in ("use_llm_macro", "use_llm_relabel", "use_llm_qa"):
         if key in incoming:
             base[key] = bool(incoming[key])
+    try:
+        base["min_workers"], base["max_workers"] = clamp_worker_limits(
+            incoming["min_workers"] if "min_workers" in incoming else base["min_workers"],
+            incoming["max_workers"] if "max_workers" in incoming else base["max_workers"],
+        )
+    except ValueError:
+        pass
+    for name, (low, high, default) in EDITION_INT_LIMITS.items():
+        value = incoming[name] if name in incoming else base[name]
+        try:
+            number = _coerce_worker_int(value, name=name, default=default)
+        except ValueError:
+            continue
+        base[name] = max(low, min(high, number))
     return base
 
 
@@ -221,6 +245,27 @@ def _validate_translation(translation: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _validate_edition(edition: dict[str, Any]) -> dict[str, Any]:
+    min_workers, max_workers = clamp_worker_limits(
+        edition.get("min_workers"),
+        edition.get("max_workers"),
+    )
+    numbers: dict[str, int] = {}
+    for name, (low, high, default) in EDITION_INT_LIMITS.items():
+        numbers[name] = max(
+            low,
+            min(high, _coerce_worker_int(edition.get(name), name=name, default=default)),
+        )
+    return {
+        "use_llm_macro": bool(edition.get("use_llm_macro")),
+        "use_llm_relabel": bool(edition.get("use_llm_relabel")),
+        "use_llm_qa": bool(edition.get("use_llm_qa")),
+        "min_workers": min_workers,
+        "max_workers": max_workers,
+        **numbers,
+    }
+
+
 def _sync_project_models(models: dict[str, str]) -> int:
     root = corpus_root() / "translations"
     if not root.is_dir():
@@ -269,6 +314,7 @@ def save_settings(payload: dict[str, Any], *, sync_projects: bool = True) -> dic
         ),
     }
     merged["translation"] = _validate_translation(merged["translation"])
+    merged["edition"] = _validate_edition(merged["edition"])
     merged["updated_at"] = _now()
     path = settings_path()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -277,9 +323,11 @@ def save_settings(payload: dict[str, Any], *, sync_projects: bool = True) -> dic
         merged["projects_updated"] = _sync_project_models(merged["translation"]["models"])
     else:
         merged["projects_updated"] = 0
+    from .edition.jobs import scale_workers as scale_edition_workers
     from .translation.jobs import scale_workers
 
     scale_workers()
+    scale_edition_workers()
     return merged
 
 
@@ -300,6 +348,11 @@ def worker_limits() -> tuple[int, int]:
     return clamp_worker_limits(tr.get("min_workers"), tr.get("max_workers"))
 
 
+def edition_worker_limits() -> tuple[int, int]:
+    ed = load_settings().get("edition") or {}
+    return clamp_worker_limits(ed.get("min_workers"), ed.get("max_workers"))
+
+
 def _clamped(translation: dict[str, Any], name: str) -> int:
     low, high, default = INT_LIMITS[name]
     value = translation.get(name)
@@ -313,6 +366,11 @@ def _clamped(translation: dict[str, Any], name: str) -> int:
 def job_guard_limits() -> tuple[int, int]:
     tr = load_settings().get("translation") or {}
     return _clamped(tr, "max_attempts"), _clamped(tr, "job_timeout_sec")
+
+
+def edition_job_guard_limits() -> tuple[int, int]:
+    ed = load_settings().get("edition") or {}
+    return _clamped(ed, "max_attempts"), _clamped(ed, "job_timeout_sec")
 
 
 def llm_call_limits() -> tuple[int, dict[str, int]]:

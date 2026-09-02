@@ -123,7 +123,11 @@ def test_cheban_ui_labels(client):
     assert js.status_code == 200
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban17' in html
+    assert 'styles.css?v=cheban18' in html
+    assert 'id="re-jobs"' in html
+    assert 'id="re-cancel-jobs"' in html
+    assert "/read-edition/jobs" in js.text
+    assert "enqueueEdition" in js.text
     assert "chưa quét chương này" in js.text
     assert "hitlItemMatchesChapter" in js.text
     assert "bấm «Chạy thử chương này» hoặc «Chạy toàn văn bản»" in js.text

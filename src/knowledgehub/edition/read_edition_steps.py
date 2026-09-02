@@ -772,8 +772,12 @@ def scan_hitl_step(
     new_items: list[dict[str, Any]] = []
     extra_keys = ("auto_join", "auto_keep", "linked", "unmatched")
     chapter_stats: dict[str, Any] = {} if scope == "book" else dict(existing.get("chapter_stats") or {})
-    for section in targets:
+    from .jobs import raise_if_stopped, report_progress
+
+    for index, section in enumerate(targets, 1):
         sid = str(section["section_id"])
+        raise_if_stopped()
+        report_progress("scan", f"Đang quét {kind} {index}/{len(targets)}…")
         slice_text = section_source_slice(text, section)
         wrap_overrides = None
         if wrap_job is not None:

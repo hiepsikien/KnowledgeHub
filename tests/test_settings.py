@@ -91,6 +91,8 @@ def test_settings_page(client: TestClient):
     assert 'value="1500"' in page.text
     assert "Chế bản (REF)" in page.text
     assert 'id="set-llm-macro"' in page.text
+    assert 'id="set-ed-min-workers"' in page.text
+    assert 'id="set-ed-max-workers"' in page.text
     assert ">Chế bản<" in page.text
 
 
@@ -117,6 +119,10 @@ def test_settings_get_defaults(client: TestClient):
     assert ed["use_llm_macro"] is True
     assert ed["use_llm_relabel"] is True
     assert ed["use_llm_qa"] is True
+    assert ed["min_workers"] == 1
+    assert ed["max_workers"] == 2
+    assert ed["max_attempts"] == 2
+    assert ed["job_timeout_sec"] == 600
 
 
 def test_settings_save_edition_llm_flags(client: TestClient, tmp_path: Path):
