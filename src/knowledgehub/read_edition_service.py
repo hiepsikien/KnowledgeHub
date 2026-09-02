@@ -124,10 +124,16 @@ def parse_micro(
     corpus: Path | None = None,
     use_llm: bool | None = None,
     require_ready: bool = True,
+    hitl_scan: bool = True,
 ) -> dict[str, Any]:
     try:
         return parse_micro_chapter(
-            work_id, chapter_id, corpus=corpus, use_llm=use_llm, require_ready=require_ready
+            work_id,
+            chapter_id,
+            corpus=corpus,
+            use_llm=use_llm,
+            require_ready=require_ready,
+            hitl_scan=hitl_scan,
         )
     except ReadEditionStepError as exc:
         raise _map_error(exc) from exc
@@ -151,7 +157,12 @@ def parse_micro_batch(
     for ch_id in chapter_ids:
         try:
             parsed[ch_id] = parse_micro_chapter(
-                work_id, ch_id, corpus=corpus, use_llm=use_llm, require_ready=False
+                work_id,
+                ch_id,
+                corpus=corpus,
+                use_llm=use_llm,
+                require_ready=False,
+                hitl_scan=True,
             )
         except ReadEditionStepError as exc:
             errors[ch_id] = str(exc)

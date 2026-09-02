@@ -108,6 +108,10 @@ def test_cheban_ui_labels(client):
     assert "Bước 1: Phân đoạn" not in html
     assert "Parse REF chương" not in html
     assert "Parse chương này" in html
+    assert html.index('id="re-detail-title"') < html.index('id="re-parse-ch"')
+    assert "Duyệt tất cả nghi ngờ" in html
+    assert "Bỏ tất cả nghi ngờ" in html
+    assert "Chấp nhận chỗ nghi ngờ" not in html
     assert "Phân loại lại" in html
     assert "Khôi phục đề xuất" in html
     assert "Đề xuất lại" not in html
@@ -122,8 +126,14 @@ def test_cheban_ui_labels(client):
     js = client.get("/read-edition.js")
     assert js.status_code == 200
     assert "chương đã parse" in js.text
+    assert "auto OK" in js.text
+    assert "Hoàn tác" in js.text
+    assert "parsedCls" in js.text
+    assert "re-hitl-reject-suspects" in js.text
+    assert "Parse nằm cạnh chương" in js.text
+    assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban19' in html
+    assert 'styles.css?v=cheban20' in html
     assert 'id="re-jobs"' in html
     assert 'id="re-cancel-jobs"' in html
     assert "/read-edition/jobs" in js.text

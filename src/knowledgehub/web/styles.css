@@ -639,6 +639,8 @@ mark.ann-context {
 .re-ch-item { flex: 1; }
 .re-micro { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
 .re-micro-pending { color: var(--muted); }
+.re-ch-row.parsed .re-ch-item { border-left: 3px solid var(--ok); }
+.re-ch-row.scanned .re-ch-item { background: #f3faf4; }
 .re-micro-complete { color: var(--ok); }
 .re-micro-running, .re-job-badge { color: var(--warn); }
 .re-preview { font-size: 13px; max-height: 840px; overflow: auto; background: #faf8f5; padding: 12px; border-radius: 6px; }
@@ -913,6 +915,10 @@ mark.ann-context {
   color: var(--accent);
 }
 .re-step.on .re-step-n { background: var(--accent); color: #fff; }
+.re-step.done { border-color: #8bbf94; }
+.re-step.done .re-step-n { background: #2a7a4b; color: #fff; }
+.re-step.on.done { border-color: var(--accent); }
+.re-step.on.done .re-step-n { background: var(--accent); color: #fff; }
 .re-step:disabled { opacity: 0.45; cursor: not-allowed; }
 .re-step .re-step-badge {
   font-size: 10px;
@@ -953,6 +959,7 @@ mark.ann-context {
 }
 .re-hitl-tag.suspect { background: #fde7c7; color: #8a4b08; }
 .re-hitl-tag.ok { background: #d8f0d8; color: #1b6b1b; }
+.re-hitl-tag.auto-ok { background: #d8f0d8; color: #1b6b1b; }
 .re-hitl-card pre {
   margin: 0 0 6px;
   white-space: pre-wrap;
