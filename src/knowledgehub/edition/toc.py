@@ -83,6 +83,12 @@ def is_all_caps_body_section_line(line: str) -> bool:
     return False
 
 
+_NAMED_BODY_HEAD = re.compile(
+    r"^(PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX|INDEX|BIBLIOGRAPHY)\b(.*)$",
+    re.I,
+)
+
+
 def is_body_heading_line(line: str) -> bool:
     """Standalone body section start — not a TOC list duplicate."""
     s = line.strip()
@@ -90,7 +96,12 @@ def is_body_heading_line(line: str) -> bool:
         return False
     if is_chapter_heading_line(s) and not is_toc_list_row(s):
         return True
-    if re.match(r"^(?:PREFACE|INTRODUCTION|PROLOGUE|EPILOGUE|APPENDIX)\b", s, re.I):
+    named = _NAMED_BODY_HEAD.match(s)
+    if named:
+        rest = named.group(2).strip(" .:")
+        # "introduction of motion…" is wrapped prose, not a heading.
+        if rest and rest[0].islower():
+            return False
         return not is_toc_list_row(s)
     if _UNIT_TOC_LINE.match(s):
         return not is_toc_list_row(s)
@@ -441,6 +452,14 @@ def _roman_to_int(token: str) -> int | None:
             total += val
             prev = val
     return total if total > 0 else None
+
+
+def _looks_like_toc_wrap_fragment(label: str) -> bool:
+    """Last wrap line of a chapter synopsis (not a standalone named essay)."""
+    s = (label or "").strip()
+    if not s:
+        return True
+    return s[0].islower()
 
 
 def _is_title_case_heading(line: str) -> bool:
@@ -846,7 +865,7 @@ def parse_contents_entries(text: str) -> list[dict[str, Any]]:
         page = toc_page_tail(stripped)
         if page and len(stripped) < 90:
             label = strip_toc_page_tail(stripped)
-            if label:
+            if label and not _looks_like_toc_wrap_fragment(label):
                 entries.append(
                     {
                         "index": len(entries) + 1,
@@ -916,6 +935,19 @@ def _is_titleish_line(line: str) -> bool:
     return False
 
 
+def _is_nested_heading_line(line: str) -> bool:
+    """Title-like reprint of a TOC synopsis, allowing small words (Form and Becoming)."""
+    if _is_titleish_line(line):
+        return True
+    s = line.strip()
+    if not s or len(s) > 70 or is_toc_list_row(s) or s[0].islower():
+        return False
+    words = re.findall(r"[A-Za-z']+", s)
+    if not (2 <= len(words) <= 10):
+        return False
+    return all(w[0].isupper() or w.lower() in _TITLE_CASE_SMALL for w in words)
+
+
 def _joined_title_window(lines: list[str], start: int, *, limit: int = 4) -> str:
     """Join a split all-caps heading such as NUMBERS; / OR, / THE MAJORITY…"""
     parts: list[str] = []
@@ -976,12 +1008,25 @@ def heading_title_from_toc_match(row: dict[str, Any]) -> str:
     return _FOOTNOTE_MARK.sub("", chosen).strip()
 
 
+def _toc_entry_is_structural_anchor(entry: dict[str, Any]) -> bool:
+    """True when this row should drive sequential body cuts (not a chapter synopsis)."""
+    kind = str(entry.get("kind") or "")
+    if kind in _STRUCTURAL_TOC_KINDS or kind == "back_matter":
+        return True
+    return bool(chapter_number_key(str(entry.get("label") or "")))
+
+
 def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Locate TOC entries on body heading lines, skipping leftover contents-list rows."""
     lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
     matched: list[dict[str, Any]] = []
     cursor = -1
+    has_numbered_chapter = any(chapter_number_key(str(e.get("label") or "")) for e in entries)
     for entry in entries:
+        # Numbered CHAPTER maps must not let synopsis leftovers ("instinct",
+        # "acquired characters") steal the cursor and skip later chapters.
+        if has_numbered_chapter and not _toc_entry_is_structural_anchor(entry):
+            continue
         chap = chapter_number_key(str(entry.get("label") or ""))
         needles = [
             key
@@ -1055,3 +1100,61 @@ def match_toc_entries_in_body(text: str, entries: list[dict[str, Any]]) -> list[
         # next entry can still see this title (token-subset false match).
         cursor = hit_line if hit_line is not None else found_line
     return matched
+
+
+def match_nested_toc_in_span(
+    text: str,
+    entries: list[dict[str, Any]],
+    *,
+    start_line: int,
+    end_line: int,
+) -> list[dict[str, Any]]:
+    """Chapter-synopsis TOC rows that reprint as heading-like lines inside a section.
+
+    Used for HITL inner-head suggestions. Does not drive top-level cuts — numbered
+    CHAPTER maps skip these rows in ``match_toc_entries_in_body``.
+    """
+    if not any(chapter_number_key(str(e.get("label") or "")) for e in entries):
+        return []
+    nested = [
+        e
+        for e in entries
+        if not _toc_entry_is_structural_anchor(e)
+        and not _looks_like_toc_wrap_fragment(str(e.get("label") or ""))
+    ]
+    if not nested:
+        return []
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    out: list[dict[str, Any]] = []
+    seen_lines: set[int] = set()
+    for entry in nested:
+        needles = {
+            key
+            for s in (entry.get("match_strings") or [entry.get("label"), entry.get("title")])
+            if s
+            for key in (_title_key(str(s)), _norm_toc_heading(str(s)))
+            if key and len(key) >= 8
+        }
+        if not needles:
+            continue
+        for line_no in range(start_line + 1, min(end_line, len(lines))):
+            if line_no in seen_lines:
+                continue
+            raw_line = lines[line_no].strip()
+            if not raw_line or not _is_nested_heading_line(raw_line):
+                continue
+            if is_toc_list_row(raw_line) or is_toc_chapter_block(lines, line_no):
+                continue
+            probes = [raw_line]
+            joined = _joined_title_window(lines, line_no)
+            if joined and joined != raw_line:
+                probes.append(joined)
+            if any(_title_key(p) in needles or _norm_toc_heading(p) in needles for p in probes):
+                seen_lines.add(line_no)
+                item = dict(entry)
+                item["line"] = line_no
+                item["text"] = raw_line
+                out.append(item)
+                break
+    out.sort(key=lambda row: int(row["line"]))
+    return out

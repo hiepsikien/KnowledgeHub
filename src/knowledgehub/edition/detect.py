@@ -330,7 +330,7 @@ def detect_toc(text: str, *, family: str) -> list[EditionSpan]:
     ]
 
 
-def detect_tail_index(text: str) -> list[EditionSpan]:
+def detect_tail_index(text: str, *, keep_heading: bool = False) -> list[EditionSpan]:
     spans: list[EditionSpan] = []
     cutoff = int(len(text) * 0.4)
     for match in INDEX_HEADING.finditer(text):
@@ -378,9 +378,16 @@ def detect_tail_index(text: str) -> list[EditionSpan]:
                 )
             )
             continue
+        drop_start = match.start()
+        if keep_heading:
+            drop_start = match.end()
+            while drop_start < len(text) and text[drop_start] in "\r\n":
+                drop_start += 1
+            if drop_start >= end:
+                continue
         spans.append(
             EditionSpan(
-                match.start(),
+                drop_start,
                 end,
                 "index",
                 "drop",
@@ -509,6 +516,7 @@ def collect_spans(
     family: str,
     work: dict[str, Any] | None = None,
     preserve_toc: bool = False,
+    keep_index_heading: bool = False,
 ) -> list[EditionSpan]:
     overrides = edition_overrides(work)
     spans: list[EditionSpan] = []
@@ -523,7 +531,7 @@ def collect_spans(
     if overrides.get("keep_index"):
         pass
     else:
-        spans.extend(detect_tail_index(text))
+        spans.extend(detect_tail_index(text, keep_heading=keep_index_heading))
     spans.extend(detect_publisher_ads(text, family=family))
     spans.extend(detect_google_scan(text, family=family))
     spans.extend(detect_library_stamp(text, family=family))

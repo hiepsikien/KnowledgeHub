@@ -15,6 +15,11 @@ from .macro import (
     scan_heading_candidates,
     section_source_slice,
 )
+from .toc import (
+    match_nested_toc_in_span,
+    parse_contents_entries,
+    toc_source_from_excerpt,
+)
 from .macro_qa import detect_body_markers, extract_toc_from_raw
 
 SHORT_WORD_THRESHOLD = 80
@@ -186,33 +191,71 @@ def coverage_report(text: str, sections: list[dict[str, Any]]) -> dict[str, Any]
     }
 
 
+def _is_immediate_subtitle(rows: list[dict[str, Any]], start_line: int, cand_line: int) -> bool:
+    """True when only blank lines sit between the section start and this heading."""
+    if cand_line <= start_line:
+        return True
+    for row in rows:
+        line = int(row["line"])
+        if start_line < line < cand_line and str(row.get("text") or "").strip():
+            return False
+    return True
+
+
 def inner_heading_candidates(
     text: str,
     section: dict[str, Any],
     *,
     language: str = "en",
     candidates: list[dict[str, Any]] | None = None,
+    toc_entries: list[dict[str, Any]] | None = None,
+    rows: list[dict[str, Any]] | None = None,
+    next_start_line: int | None = None,
 ) -> list[dict[str, Any]]:
     cands = candidates if candidates is not None else scan_heading_candidates(text, language=language)
+    line_rows = rows if rows is not None else line_map(text)
     start_line = int(section.get("start_line") or 0)
     start_c = int(section.get("start_char") or 0)
     end_c = int(section.get("end_char") or 0)
+    end_line = next_start_line if next_start_line is not None else _line_at_char(line_rows, end_c) + 1
     out: list[dict[str, Any]] = []
+    seen: set[int] = set()
     for cand in cands:
-        if int(cand.get("line") or -1) == start_line:
+        line = int(cand.get("line") or -1)
+        if line == start_line or line in seen:
             continue
         if cand.get("heuristic") not in BODY_HEAD_HEURISTICS:
             continue
         pos = int(cand.get("start") or 0)
         if pos < start_c or pos > end_c:
             continue
+        if _is_immediate_subtitle(line_rows, start_line, line):
+            continue
+        seen.add(line)
         out.append(
             {
-                "line": int(cand["line"]),
+                "line": line,
                 "text": str(cand.get("text") or ""),
                 "start": pos,
             }
         )
+    if toc_entries:
+        line_to_start = {int(r["line"]): int(r["start"]) for r in line_rows}
+        for row in match_nested_toc_in_span(
+            text, toc_entries, start_line=start_line, end_line=end_line
+        ):
+            line = int(row["line"])
+            if line in seen:
+                continue
+            seen.add(line)
+            out.append(
+                {
+                    "line": line,
+                    "text": str(row.get("text") or ""),
+                    "start": int(line_to_start.get(line, start_c)),
+                }
+            )
+    out.sort(key=lambda h: int(h["line"]))
     return out
 
 
@@ -283,6 +326,11 @@ def diagnose_sections(
     toc = (structure.get("hitl") or {}).get("toc") or {}
     toc_ok = toc.get("status") == "yes"
     toc_lines = toc_lines_from_hitl(structure) if toc_ok else []
+    toc_entries: list[dict[str, Any]] = []
+    if toc_ok:
+        excerpt = str(toc.get("excerpt") or "")
+        if excerpt.strip():
+            toc_entries = parse_contents_entries(toc_source_from_excerpt(excerpt))
     confirmed = _confirmed_starts(structure)
     total_chars = max(len(text), 1)
     out: list[dict[str, Any]] = []
@@ -293,7 +341,20 @@ def diagnose_sections(
         share = span / total_chars
         kind = str(section.get("kind") or "chapter")
         words = int(section.get("word_count") or 0)
-        inner = inner_heading_candidates(text, section, language=language, candidates=candidates)
+        next_start = (
+            int(sections[index + 1]["start_line"])
+            if index + 1 < len(sections)
+            else _line_at_char(rows, end_c) + 1
+        )
+        inner = inner_heading_candidates(
+            text,
+            section,
+            language=language,
+            candidates=candidates,
+            toc_entries=toc_entries,
+            rows=rows,
+            next_start_line=next_start,
+        )
         flags: list[str] = []
         short = words < SHORT_WORD_THRESHOLD and kind not in EXEMPT_SHORT_KINDS
         super_sec = share >= SUPER_CHAR_SHARE and len(inner) >= INNER_HEADS_FOR_SUPER

@@ -48,7 +48,13 @@ def build_edition(
     """Reading edition from a canonical manuscript. Does not rewrite the source file."""
     source_chars = len(text)
     family = detect_family(text, work=work, language=language)
-    spans = collect_spans(text, family=family, work=work, preserve_toc=preserve_toc)
+    spans = collect_spans(
+        text,
+        family=family,
+        work=work,
+        preserve_toc=preserve_toc,
+        keep_index_heading=strip_only,
+    )
     use_llm_resolved = default_use_llm_relabel() if use_llm is None else use_llm
     if use_llm_resolved:
         spans = classify_unsure_spans(text, spans, enabled=True)
