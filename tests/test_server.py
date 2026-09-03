@@ -235,7 +235,7 @@ def test_final_touch_attach_asset_without_reparse(tmp_path, monkeypatch):
     )
     assert cleared.status_code == 200
     gone = next(b for b in cleared.json()["blocks"] if b["block_id"] == bid)
-    assert not gone.get("src")
+    assert gone.get("src") == ""
     assert gone["role"] == "figure"
 
 

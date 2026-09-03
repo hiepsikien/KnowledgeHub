@@ -41,10 +41,7 @@
       lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Chỗ chắc auto OK (hoàn tác được). Ngữ cảnh lấy quanh đúng cụm. Thiếu dấu đóng chỉ ghi nhận (Đã xem). Có nút duyệt / bỏ tất cả nghi ngờ.",
     },
   };
-  const FINAL_STEP = {
-    title: "Final Touch",
-    lead: "Xem layout gần Read. Gắn ảnh từ kho đã tải vào block đã chọn — không parse lại. Ẩn, hiện, ghép, tách, đổi type.",
-  };
+  let refreshAssetPicker = () => {};
 
   async function api(path, opts = {}) {
     const res = await fetch(path, {
@@ -494,7 +491,7 @@
       el.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
     syncFinalTouchKind();
-    if (!$("re-ft-picker")?.hidden) renderAssetPicker();
+    if (!$("re-ft-picker")?.hidden) refreshAssetPicker();
   }
 
   async function openSectionFullText() {
@@ -2073,6 +2070,7 @@
         })
         .join("");
     }
+    refreshAssetPicker = renderAssetPicker;
 
     async function attachSelectedAsset(src) {
       const block = selectedBlock();

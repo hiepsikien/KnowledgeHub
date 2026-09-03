@@ -142,9 +142,10 @@ def test_cheban_ui_labels(client):
     assert "if (suspectsOnly && !it.suspect && !it.decision) return false;" not in js.text
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban26' in html
+    assert 'styles.css?v=cheban27' in html
     assert "action: \"set_src\"" in js.text
     assert "/bind-assets" in js.text
+    assert "refreshAssetPicker" in js.text
     assert "/api/works/${encodeURIComponent(state.workId)}/assets" in js.text
     assert "chưa parse hết" in client.get("/app.js").text
     assert 'id="re-jobs"' in html

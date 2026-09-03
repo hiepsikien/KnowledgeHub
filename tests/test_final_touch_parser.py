@@ -586,7 +586,7 @@ def test_set_src_promotes_paragraph_to_figure_without_reparse():
         [{"block_id": patched[0]["block_id"], "action": "set_src", "src": ""}],
     )
     assert not stale_clear
-    assert "src" not in cleared[0]
+    assert cleared[0].get("src") == ""
     assert cleared[0]["role"] == "figure"
 
 
@@ -614,6 +614,19 @@ def test_list_work_assets_and_normalize_src(tmp_path: Path):
         normalize_asset_src(BACH, "missing.png", tmp_path)
     with pytest.raises(ValueError, match="invalid asset"):
         normalize_asset_src(BACH, "notes.txt", tmp_path)
+
+
+def test_bind_skips_explicitly_cleared_src(tmp_path: Path):
+    dest = tmp_path / "assets" / BACH
+    dest.mkdir(parents=True)
+    (dest / "illoa001.png").write_bytes(PNG)
+    (dest / "_html_figures.json").write_text(
+        '[{"file": "illoa001.png", "alt": "Portrait of Bach", "caption": "Portrait of Bach"}]',
+        encoding="utf-8",
+    )
+    blocks = [{"type": "paragraph", "role": "figure", "text": "Portrait of Bach", "src": ""}]
+    bind_body_figure_src(blocks, dest, src_prefix=f"/assets/{BACH}")
+    assert blocks[0]["src"] == ""
 
 
 def test_translation_inherit_keeps_hidden_skips_lexical():

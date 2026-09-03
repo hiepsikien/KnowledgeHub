@@ -135,11 +135,7 @@ def apply_block_patches(
         if "hidden" in patch and patch["hidden"] is not None:
             block["hidden"] = bool(patch["hidden"])
         if "src" in patch:
-            src = str(patch.get("src") or "").strip()
-            if src:
-                block["src"] = src
-            else:
-                block.pop("src", None)
+            block["src"] = str(patch.get("src") or "").strip()
         if action == "set_src":
             if str(block.get("src") or "").strip():
                 block["type"] = str(patch.get("type") or "paragraph")

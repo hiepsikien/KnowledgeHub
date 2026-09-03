@@ -198,14 +198,14 @@ def _bind_positional(
         fig_hi, html_hi = right
         if html_hi < html_lo:
             continue
-        run = [i for i in range(fig_lo + 1, fig_hi) if not figures[i].get("src")]
+        run = [i for i in range(fig_lo + 1, fig_hi) if "src" not in figures[i]]
         slots = [html_order[k] for k in range(html_lo + 1, html_hi) if html_order[k] in unused_files]
         if not run or len(run) != len(slots):
             continue
         for fig_i, filename in zip(run, slots):
             unused_files.pop(filename, None)
             _set_src(figures[fig_i], filename, src_prefix)
-    leftover_figs = [fig for fig in figures if not fig.get("src")]
+    leftover_figs = [fig for fig in figures if "src" not in fig]
     leftover_files = [name for name in html_order if name in unused_files]
     if leftover_figs and leftover_files and all(_weak_bind_query(_bind_query(fig)) for fig in leftover_figs):
         for fig, filename in zip(leftover_figs, leftover_files):
@@ -232,7 +232,7 @@ def bind_figure_src(
         for p in sorted(dest_dir.iterdir())
         if p.is_file() and IMAGE_NAME.search(p.name)
     }
-    unbound = [fig for fig in figures if not fig.get("src")]
+    unbound = [fig for fig in figures if "src" not in fig]
     html_all = [row for row in _load_html_manifest(dest_dir) if row["file"] in unused_files]
 
     for fig in list(unbound):
@@ -291,7 +291,7 @@ def bind_body_figure_src(
     src_prefix: str = "",
 ) -> list[dict[str, Any]]:
     """Attach ``src`` on ``role: figure`` body blocks (caption = block text)."""
-    figs = [b for b in blocks if b.get("role") == "figure" and not b.get("src")]
+    figs = [b for b in blocks if b.get("role") == "figure" and "src" not in b]
     if figs:
         bind_figure_src(figs, dest_dir, src_prefix=src_prefix)
     return blocks
