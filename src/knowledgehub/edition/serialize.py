@@ -64,9 +64,28 @@ def detect_content_kind(blocks: list[dict[str, Any]], *, family: str = "plain") 
     return "prose"
 
 
-def edition_hash(blocks: list[dict[str, Any]]) -> str:
-    payload = json.dumps(blocks, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+def edition_hash(
+    blocks: list[dict[str, Any]],
+    *,
+    chapters: list[dict[str, Any]] | None = None,
+) -> str:
+    """Identity for Read republish. Chapter id/title are included so a remacro
+    or new split is a new book even when concatenated REF blocks match."""
+    if chapters:
+        payload: Any = {
+            "blocks": blocks,
+            "chapters": [
+                {
+                    "id": str(ch.get("chapter_id") or ch.get("id") or ""),
+                    "title": str(ch.get("title") or ""),
+                }
+                for ch in chapters
+            ],
+        }
+        raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    else:
+        raw = json.dumps(blocks, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
 def build_edition_document(

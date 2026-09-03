@@ -32,7 +32,7 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | Field | Type | Read behavior |
 |-------|------|----------------|
 | `edition_format` | `"ref/1"` | store; gate structured path |
-| `edition_hash` | sha256 hex | store; detect unchanged edition |
+| `edition_hash` | sha256 hex | store; detect unchanged edition. Hash includes REF blocks **and** chapter `id`/`title` so a remacro/resplit is a new book. |
 | `content_kind` | `prose` \| `verse` \| `scholastic` \| `mixed` \| `drama` | store; reader layout hint |
 | `reading_markdown` | string | full-book markdown; used if chapters omitted |
 | `blocks` | array | full-book blocks; store for future / TTS; chapter path preferred |

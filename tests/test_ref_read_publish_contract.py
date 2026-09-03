@@ -121,3 +121,28 @@ def test_attach_edition_sends_chapters_and_notes():
     assert payload["notes"][0]["body"] == "A note."
     assert payload["notes"][0]["chapter"] == "ch-001"
     assert _chapters_for_read_publish(edition)[0]["title"] == "Chapter I"
+    from knowledgehub.edition.serialize import edition_hash
+
+    assert payload["edition_hash"] == edition_hash(
+        list(edition["blocks"] or []),
+        chapters=list(edition["_chapters"]),
+    )
+    assert payload["edition_hash"] != "a" * 64
+
+
+def test_edition_hash_includes_chapter_id_and_title():
+    from knowledgehub.edition.serialize import edition_hash
+
+    blocks = [{"type": "paragraph", "text": "Hello"}]
+    blocks_only = edition_hash(blocks)
+    with_chapters = edition_hash(
+        blocks,
+        chapters=[{"chapter_id": "sec-001", "title": "I. THE FUNCTION OF CRITICISM AT THE PRESENT TIME."}],
+    )
+    other_title = edition_hash(
+        blocks,
+        chapters=[{"chapter_id": "sec-001", "title": "_FIRST AND SECOND SERIES COMPLETE_"}],
+    )
+    assert len(with_chapters) == 64
+    assert with_chapters != blocks_only
+    assert with_chapters != other_title

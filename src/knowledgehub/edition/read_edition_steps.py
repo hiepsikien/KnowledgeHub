@@ -691,6 +691,7 @@ def assemble_edition_from_package(
     if merged_notes:
         edition["notes"] = merged_notes
     edition["_chapters"] = chapter_docs
+    edition["edition_hash"] = edition_hash(merged_blocks, chapters=chapter_docs)
     if incomplete or missing_json:
         edition["incomplete"] = True
         edition["incomplete_sections"] = incomplete + missing_json

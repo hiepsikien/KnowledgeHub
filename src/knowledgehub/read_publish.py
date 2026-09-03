@@ -21,6 +21,7 @@ from .edition.read_edition_steps import (
     assemble_edition_from_package,
     load_structure,
 )
+from .edition.serialize import edition_hash as hash_edition_for_publish
 from .edition.ref_schema import validate_edition
 from .read_edition_service import edition_for_publish
 from .paths import corpus_root
@@ -56,6 +57,10 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     chapters = _chapters_for_read_publish(edition)
     if chapters:
         payload["chapters"] = chapters
+        payload["edition_hash"] = hash_edition_for_publish(
+            list(edition.get("blocks") or []),
+            chapters=list(edition.get("_chapters") or []),
+        )
     notes = notes_for_read_publish(edition, chapters=edition.get("_chapters") or None)
     if notes:
         payload["notes"] = notes
