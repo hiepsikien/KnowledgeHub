@@ -367,6 +367,40 @@ def create_app() -> FastAPI:
             raise HTTPException(400, str(exc)) from exc
         return result
 
+    @app.post("/api/works/{work_id}/ingest-images", dependencies=guard)
+    def ingest_work_images(work_id: str) -> dict[str, Any]:
+        from .edition.figures import IMAGE_NAME, ensure_work_assets, work_asset_dir
+
+        try:
+            work = get_work(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        if not str(work.get("gutenberg_id") or "").strip():
+            raise HTTPException(400, "work has no gutenberg_id")
+        try:
+            dest = ensure_work_assets(work, corpus_root(), fetch=True)
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(502, f"could not download Gutenberg images: {exc}") from exc
+        copied = [
+            {"file": p.name, "bytes": p.stat().st_size}
+            for p in sorted(dest.iterdir())
+            if p.is_file() and IMAGE_NAME.search(p.name)
+        ]
+        return {"work_id": work_id, "dest": str(work_asset_dir(corpus_root(), work_id)), "copied": copied}
+
+    @app.get("/assets/{work_id}/{filename}", dependencies=guard)
+    def serve_work_asset(work_id: str, filename: str) -> FileResponse:
+        from .edition.figures import IMAGE_NAME, work_asset_dir
+
+        if "/" in filename or "\\" in filename or ".." in filename:
+            raise HTTPException(404, "not found")
+        if not IMAGE_NAME.search(filename):
+            raise HTTPException(404, "not found")
+        path = work_asset_dir(corpus_root(), work_id) / filename
+        if not path.is_file():
+            raise HTTPException(404, "not found")
+        return FileResponse(path)
+
     @app.get("/api/read-editions", dependencies=guard)
     def read_edition_sessions() -> dict[str, Any]:
         sessions = list_read_edition_sessions()

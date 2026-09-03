@@ -437,7 +437,14 @@
     if (kind === "metadata") return `<p class="re-metadata">${body}</p>`;
     if (kind === "hr") return `<hr class="re-hr" />`;
     if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
-    if (block.role === "figure") return `<p class="re-figure">${body}</p>`;
+    if (block.role === "figure") {
+      const src = String(block.src || "").trim();
+      const img = src
+        ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${escapeHtml(String(block.text || "Illustration"))}" />`
+        : "";
+      const cap = body ? `<figcaption>${body}</figcaption>` : "";
+      return `<figure class="re-figure">${img}${cap}</figure>`;
+    }
     return `<p class="re-paragraph">${body}</p>`;
   }
 
@@ -1963,6 +1970,23 @@
       const type = $("re-ft-type")?.value;
       if (!type) return;
       void applyFinalTouch("set_type", { type });
+    });
+    $("re-ft-images")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      const btn = $("re-ft-images");
+      if (btn) btn.disabled = true;
+      try {
+        const data = await api(`/api/works/${encodeURIComponent(state.workId)}/ingest-images`, {
+          method: "POST",
+        });
+        const n = (data.copied || []).length;
+        toast(n ? `Đã lấy ${n} ảnh Gutenberg — reload chương để gắn minh họa` : "Không có ảnh");
+        if (state.chapterId) await selectChapter(state.chapterId);
+      } catch (err) {
+        toast(err.message || String(err));
+      } finally {
+        if (btn) btn.disabled = false;
+      }
     });
 
     $("re-publish")?.addEventListener("click", () => {

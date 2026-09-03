@@ -64,9 +64,21 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `group_label` | no | default `Chú thích` |
 | `host_block_id` | no | block that contains the marker; Read explain = host + body |
 | `host_text` | no | full host paragraph text |
-| `figures` | no | `{caption, src?}` from `[Illustration:]` in the note (Bach fn. 77); `src` is a Hub asset URL, never a Gutenberg hotlink |
+| `figures` | no | `{caption, src?}` from `[Illustration:]` in the note (Bach fn. 77); `src` is a Hub asset path. Read stores the bytes from `assets[]` and rewrites `src` to `/api/books/{id}/media/{asset}.jpg`. Never a Gutenberg hotlink. |
 
 Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES dumps left in `raw_text` — dumps are already stripped from reading flow).
+
+### `assets[]` item (illustrations)
+
+Hub copies Gutenberg HTML images into `corpus/assets/{work}/` (CLI `ingest-images --work`, CMS **Lấy minh họa Gutenberg**, or automatically on Publish). Matching uses HTML captions, not filename stems (`illoa001.png` ≠ “Bach”).
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| `filename` | yes | Original file name (`illoa002bs.jpg`) |
+| `content_type` | yes | `image/jpeg` / `image/png` / … |
+| `data` | yes | Base64 of the file bytes |
+
+Read must persist each asset with `save_media_bytes` and rewrite `role: figure` / `notes[].figures[].src` that end with that filename to `/api/books/{book_id}/media/{asset_id}.jpg`. A relative `/assets/{work}/…` path is Hub CMS only and 404s on the Read API.
 
 ## Block types Read honors (pilot)
 

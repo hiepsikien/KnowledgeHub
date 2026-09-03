@@ -76,6 +76,26 @@ def test_allow_and_dry_publish(client):
     assert dry.json()["payload"]["hub_work_id"] == wid
 
 
+def test_asset_route_serves_ingested_image(tmp_path, monkeypatch):
+    corpus = _mini_corpus(tmp_path)
+    dest = corpus / "assets" / "locke--second_treatise"
+    dest.mkdir(parents=True)
+    (dest / "plate.png").write_bytes(b"png-bytes")
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    from knowledgehub.server import create_app
+    from fastapi.testclient import TestClient
+
+    client = TestClient(create_app())
+    res = client.get("/assets/locke--second_treatise/plate.png")
+    assert res.status_code == 200
+    assert res.content == b"png-bytes"
+    missing = client.get("/assets/locke--second_treatise/nope.png")
+    assert missing.status_code == 404
+
+
 def test_publish_page_and_overrides(client):
     wid = "locke--second_treatise"
     page = client.get(f"/publish/{wid}")
