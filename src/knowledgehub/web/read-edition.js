@@ -43,7 +43,7 @@
   };
   const FINAL_STEP = {
     title: "Final Touch",
-    lead: "Xem layout gần Read. Matcher đã gắn sidenote/gia phả/synopsis; chỉ sửa chỗ còn lệch: ẩn, hiện, ghép, tách, đổi type.",
+    lead: "Xem layout gần Read. Gắn ảnh từ kho đã tải vào block đã chọn — không parse lại. Ẩn, hiện, ghép, tách, đổi type.",
   };
 
   async function api(path, opts = {}) {
@@ -494,6 +494,7 @@
       el.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
     syncFinalTouchKind();
+    if (!$("re-ft-picker")?.hidden) renderAssetPicker();
   }
 
   async function openSectionFullText() {
@@ -2019,10 +2020,133 @@
         const n = (data.copied || []).length;
         toast(n ? `Đã lấy ${n} ảnh Gutenberg` : "Không có ảnh");
         if (state.chapterId) await selectChapter(state.chapterId);
+        if (!$("re-ft-picker")?.hidden) await loadAssetPicker();
       } catch (err) {
         toast(err.message || String(err));
       } finally {
         if (btn) btn.disabled = false;
+      }
+    });
+
+    let assetCatalog = [];
+
+    async function loadAssetPicker() {
+      const grid = $("re-ft-picker-grid");
+      if (!grid || !state.workId) return;
+      try {
+        const data = await api(`/api/works/${encodeURIComponent(state.workId)}/assets`);
+        assetCatalog = data.files || [];
+        renderAssetPicker();
+      } catch (err) {
+        grid.innerHTML = `<p class="muted">${escapeHtml(err.message || String(err))}</p>`;
+      }
+    }
+
+    function renderAssetPicker() {
+      const grid = $("re-ft-picker-grid");
+      if (!grid) return;
+      const q = String($("re-ft-picker-q")?.value || "").trim().toLowerCase();
+      const used = new Set(
+        (state.chapter?.blocks || []).map((b) => String(b.src || "").trim()).filter(Boolean),
+      );
+      const current = String(selectedBlock()?.src || "").trim();
+      const rows = assetCatalog.filter((row) => {
+        if (!q) return true;
+        const hay = `${row.file || ""} ${row.caption || ""} ${row.alt || ""}`.toLowerCase();
+        return hay.includes(q);
+      });
+      if (!rows.length) {
+        grid.innerHTML = `<p class="muted">${assetCatalog.length ? "Không khớp bộ lọc" : "Chưa có ảnh — bấm Lấy minh họa Gutenberg"}</p>`;
+        return;
+      }
+      grid.innerHTML = rows
+        .map((row) => {
+          const src = String(row.src || "");
+          const label = escapeHtml(row.caption || row.alt || row.file || "");
+          const cls = ["re-ft-thumb"];
+          if (src && src === current) cls.push("is-current");
+          else if (used.has(src)) cls.push("is-used");
+          return `<button type="button" class="${cls.join(" ")}" data-src="${escapeHtml(src)}" title="${escapeHtml(row.file || "")}">
+            <img src="${escapeHtml(src)}" alt="" />
+            <span>${label}</span>
+          </button>`;
+        })
+        .join("");
+    }
+
+    async function attachSelectedAsset(src) {
+      const block = selectedBlock();
+      if (!block) {
+        toast("Chọn một block trên preview trước");
+        return;
+      }
+      try {
+        await sendBlockPatches(
+          [
+            {
+              action: "set_src",
+              block_id: block.block_id,
+              block_index: state.editIndex,
+              type: "paragraph",
+              role: "figure",
+              src,
+            },
+          ],
+          "Đã gắn ảnh",
+        );
+        renderAssetPicker();
+      } catch (err) {
+        toast(err.message || String(err));
+      }
+    }
+
+    $("re-ft-attach")?.addEventListener("click", async () => {
+      const box = $("re-ft-picker");
+      if (!box) return;
+      box.hidden = !box.hidden;
+      if (!box.hidden) await loadAssetPicker();
+    });
+    $("re-ft-detach")?.addEventListener("click", () => {
+      const block = selectedBlock();
+      if (!block) {
+        toast("Chọn một block trước");
+        return;
+      }
+      if (!String(block.src || "").trim()) {
+        toast("Block này chưa gắn ảnh");
+        return;
+      }
+      void sendBlockPatches(
+        [
+          {
+            action: "set_src",
+            block_id: block.block_id,
+            block_index: state.editIndex,
+            src: "",
+          },
+        ],
+        "Đã gỡ ảnh",
+      ).catch((err) => toast(err.message || String(err)));
+    });
+    $("re-ft-picker-q")?.addEventListener("input", () => renderAssetPicker());
+    $("re-ft-picker-grid")?.addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-src]");
+      if (!btn) return;
+      void attachSelectedAsset(btn.dataset.src);
+    });
+    $("re-ft-bind")?.addEventListener("click", async () => {
+      if (!state.workId || !state.chapterId) return;
+      try {
+        const data = await api(
+          `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}/bind-assets`,
+          { method: "POST" },
+        );
+        const n = Number(data.bound || 0);
+        toast(n ? `Đã khớp ${n} figure với ảnh đã tải` : "Không khớp thêm được — gắn tay từ kho");
+        await selectChapter(state.chapterId);
+        renderAssetPicker();
+      } catch (err) {
+        toast(err.message || String(err));
       }
     });
 

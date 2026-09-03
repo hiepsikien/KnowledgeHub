@@ -7,7 +7,14 @@ from pathlib import Path
 import pytest
 
 from knowledgehub.edition.block_ids import assign_block_ids, block_prefix, is_chapter_banner, mark_chapter_banner
-from knowledgehub.edition.figures import bind_body_figure_src, bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
+from knowledgehub.edition.figures import (
+    bind_body_figure_src,
+    bind_figure_src,
+    figures_from_text,
+    ingest_gutenberg_zip_images,
+    list_work_assets,
+    normalize_asset_src,
+)
 from knowledgehub.edition.inline_spans import annotate_inline_spans
 from knowledgehub.edition.overrides import apply_block_patches, merge_block_patches
 from knowledgehub.edition.ref import build_read_edition
@@ -552,6 +559,61 @@ def test_set_type_synopsis_role_from_dropdown():
     )
     assert cleared[0]["type"] == "heading"
     assert "role" not in cleared[0]
+
+
+def test_set_src_promotes_paragraph_to_figure_without_reparse():
+    blocks = [{"type": "paragraph", "text": "[Music]"}]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    patched, stale = apply_block_patches(
+        blocks,
+        [
+            {
+                "block_id": blocks[0]["block_id"],
+                "action": "set_src",
+                "type": "paragraph",
+                "role": "figure",
+                "src": "/assets/bach--abdy_williams/illot096a.png",
+            }
+        ],
+    )
+    assert not stale
+    assert patched[0]["type"] == "paragraph"
+    assert patched[0]["role"] == "figure"
+    assert patched[0]["src"] == "/assets/bach--abdy_williams/illot096a.png"
+    assert patched[0]["text"] == "[Music]"
+    cleared, stale_clear = apply_block_patches(
+        patched,
+        [{"block_id": patched[0]["block_id"], "action": "set_src", "src": ""}],
+    )
+    assert not stale_clear
+    assert "src" not in cleared[0]
+    assert cleared[0]["role"] == "figure"
+
+
+def test_list_work_assets_and_normalize_src(tmp_path: Path):
+    dest = tmp_path / "assets" / BACH
+    dest.mkdir(parents=True)
+    (dest / "illoa001.png").write_bytes(PNG)
+    (dest / "_html_figures.json").write_text(
+        '[{"file": "illoa001.png", "alt": "Bach", "caption": "Portrait"}]',
+        encoding="utf-8",
+    )
+    rows = list_work_assets(BACH, tmp_path)
+    assert rows == [
+        {
+            "file": "illoa001.png",
+            "src": f"/assets/{BACH}/illoa001.png",
+            "alt": "Bach",
+            "caption": "Portrait",
+            "bytes": len(PNG),
+        }
+    ]
+    assert normalize_asset_src(BACH, "illoa001.png", tmp_path) == f"/assets/{BACH}/illoa001.png"
+    assert normalize_asset_src(BACH, "", tmp_path) == ""
+    with pytest.raises(ValueError, match="asset not found"):
+        normalize_asset_src(BACH, "missing.png", tmp_path)
+    with pytest.raises(ValueError, match="invalid asset"):
+        normalize_asset_src(BACH, "notes.txt", tmp_path)
 
 
 def test_translation_inherit_keeps_hidden_skips_lexical():

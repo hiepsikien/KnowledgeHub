@@ -126,6 +126,10 @@ def test_cheban_ui_labels(client):
     assert 'data-step="footnotes"' in html
     assert 'data-step="final"' in html
     assert "Final Touch" in html
+    assert "Gắn ảnh" in html
+    assert "Gỡ ảnh" in html
+    assert 'id="re-ft-picker"' in html
+    assert "Tự khớp figure chưa có ảnh" in html
     js = client.get("/read-edition.js")
     assert js.status_code == 200
     assert "chương đã parse" in js.text
@@ -138,7 +142,10 @@ def test_cheban_ui_labels(client):
     assert "if (suspectsOnly && !it.suspect && !it.decision) return false;" not in js.text
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban25' in html
+    assert 'styles.css?v=cheban26' in html
+    assert "action: \"set_src\"" in js.text
+    assert "/bind-assets" in js.text
+    assert "/api/works/${encodeURIComponent(state.workId)}/assets" in js.text
     assert "chưa parse hết" in client.get("/app.js").text
     assert 'id="re-jobs"' in html
     assert 'id="re-cancel-jobs"' in html

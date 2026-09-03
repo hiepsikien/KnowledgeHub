@@ -43,6 +43,7 @@ from .read_edition_service import (
     parse_micro as parse_read_edition_micro,
     parse_micro_batch as parse_read_edition_micro_batch,
     patch_chapter as patch_read_edition_chapter,
+    bind_chapter_assets as bind_read_edition_chapter_assets,
     run_macro as run_read_edition_macro,
     reset_read_edition as reset_read_edition_package,
     run_qa as run_read_edition_qa,
@@ -388,6 +389,17 @@ def create_app() -> FastAPI:
         ]
         return {"work_id": work_id, "dest": str(work_asset_dir(corpus_root(), work_id)), "copied": copied}
 
+    @app.get("/api/works/{work_id}/assets", dependencies=guard)
+    def list_work_images(work_id: str) -> dict[str, Any]:
+        from .edition.figures import list_work_assets
+
+        try:
+            get_work(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        files = list_work_assets(work_id, corpus_root())
+        return {"work_id": work_id, "files": files, "total": len(files)}
+
     @app.get("/assets/{work_id}/{filename}", dependencies=guard)
     def serve_work_asset(work_id: str, filename: str) -> FileResponse:
         from .edition.figures import IMAGE_NAME, work_asset_dir
@@ -625,6 +637,15 @@ def create_app() -> FastAPI:
                 block_patches=payload.block_patches,
                 curator_note=payload.curator_note,
             )
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown work: {work_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/api/works/{work_id}/read-edition/chapters/{chapter_id}/bind-assets", dependencies=guard)
+    def read_edition_bind_assets(work_id: str, chapter_id: str) -> dict[str, Any]:
+        try:
+            return bind_read_edition_chapter_assets(work_id, chapter_id)
         except KeyError as exc:
             raise HTTPException(404, f"unknown work: {work_id}") from exc
         except ValueError as exc:

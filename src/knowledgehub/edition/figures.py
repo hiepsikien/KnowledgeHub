@@ -326,6 +326,45 @@ def work_src_prefix(work_id: str) -> str:
     return f"/assets/{str(work_id).replace('/', '_')}"
 
 
+def normalize_asset_src(work_id: str, src: str, corpus: Path) -> str:
+    """Return Hub ``/assets/{work}/{file}`` if the file exists, else ``""`` to clear."""
+    raw = str(src or "").strip()
+    if not raw:
+        return ""
+    name = Path(raw.replace("\\", "/")).name
+    if not name or not IMAGE_NAME.search(name) or ".." in name:
+        raise ValueError(f"invalid asset: {raw}")
+    dest = work_asset_dir(corpus, work_id)
+    path = dest / name
+    if not path.is_file():
+        raise ValueError(f"asset not found: {name}")
+    return f"{work_src_prefix(work_id)}/{name}"
+
+
+def list_work_assets(work_id: str, corpus: Path) -> list[dict[str, Any]]:
+    """Downloaded images for Final Touch picker (no Gutenberg fetch)."""
+    dest = work_asset_dir(corpus, work_id)
+    prefix = work_src_prefix(work_id)
+    by_name = {row["file"]: row for row in _load_html_manifest(dest)} if dest.is_dir() else {}
+    if not dest.is_dir():
+        return []
+    out: list[dict[str, Any]] = []
+    for path in sorted(dest.iterdir()):
+        if not path.is_file() or not IMAGE_NAME.search(path.name):
+            continue
+        meta = by_name.get(path.name) or {}
+        out.append(
+            {
+                "file": path.name,
+                "src": f"{prefix}/{path.name}",
+                "alt": str(meta.get("alt") or ""),
+                "caption": str(meta.get("caption") or ""),
+                "bytes": path.stat().st_size,
+            }
+        )
+    return out
+
+
 def ingest_gutenberg_zip_images(
     zip_path: Path,
     dest_dir: Path,
