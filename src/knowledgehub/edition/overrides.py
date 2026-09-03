@@ -137,6 +137,8 @@ def apply_block_patches(
         if action == "set_type" or ("type" in patch and patch["type"] and action not in STRUCTURAL_ACTIONS):
             if patch.get("type"):
                 block["type"] = patch["type"]
+                if patch.get("type") != "paragraph" and "role" not in patch:
+                    block.pop("role", None)
         if action == "set_text":
             if "text" in patch and patch["text"] is not None:
                 block["text"] = str(patch["text"])
@@ -151,8 +153,12 @@ def apply_block_patches(
         _ensure_heading_level(block, patch)
         if block.get("type") == "dialogue" and "speaker" in patch:
             block["speaker"] = patch["speaker"]
-        if "role" in patch and patch["role"] is not None:
-            block["role"] = patch["role"]
+        if "role" in patch:
+            role = str(patch.get("role") or "").strip()
+            if role:
+                block["role"] = role
+            else:
+                block.pop("role", None)
         _restamp_ids(out)
     _restamp_ids(out)
     annotated, _profile = annotate_blocks(out)

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from knowledgehub.edition.block_ids import assign_block_ids, block_prefix
+from knowledgehub.edition.block_ids import assign_block_ids, block_prefix, is_chapter_banner, mark_chapter_banner
 from knowledgehub.edition.figures import bind_body_figure_src, bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
 from knowledgehub.edition.inline_spans import annotate_inline_spans
 from knowledgehub.edition.overrides import apply_block_patches, merge_block_patches
@@ -106,6 +106,39 @@ def test_chapter_banner_suppressed_from_markdown():
     md = blocks_to_markdown(edition["blocks"])
     assert "Bach went to Weimar" in md
     assert not md.startswith("CHAPTER III")
+
+
+def test_chapter_banner_bare_number_vs_toc_title():
+    """Abdy-style: chrome title is the TOC row, body heading is CHAPTER III."""
+    raw = "CHAPTER III\n\nBach went to Weimar for a longer stay than the last visit.\n"
+    edition, _ = _parse(raw, title="III. Early years at Weimar")
+    banners = [b for b in edition["blocks"] if b.get("suppress_in_reader")]
+    assert banners
+    md = blocks_to_markdown(edition["blocks"])
+    assert "Bach went to Weimar" in md
+    assert not md.startswith("CHAPTER III")
+
+
+def test_chapter_banner_title_case_matches_allcaps_title():
+    raw = "Chapter III\n\nBach went to Weimar for a longer stay than the last visit.\n"
+    edition, _ = _parse(raw, title="Chapter III")
+    assert any(b.get("suppress_in_reader") for b in edition["blocks"])
+    assert not blocks_to_markdown(edition["blocks"]).startswith("Chapter III")
+
+
+def test_is_chapter_banner_number_boundaries():
+    assert is_chapter_banner("CHAPTER III", "Chapter III")
+    assert is_chapter_banner("Chapter III", "III. Early years at Weimar")
+    assert is_chapter_banner("CHAPTER III", "III")
+    assert not is_chapter_banner("CHAPTER I", "CHAPTER II")
+    assert not is_chapter_banner("CHAPTER I", "CHAPTER IX")
+    assert not is_chapter_banner("CHAPTER IV", "CHAPTER III")
+    marked = mark_chapter_banner(
+        [{"type": "paragraph", "text": "CHAPTER III"}, {"type": "paragraph", "text": "Bach went."}],
+        "Chapter III",
+    )
+    assert marked[0].get("suppress_in_reader") is True
+    assert reader_visible_blocks(marked)[0]["text"].startswith("Bach went")
 
 
 def test_notes_carry_host_block_id():
@@ -446,6 +479,40 @@ def test_set_type_heading_defaults_level():
     assert patched[0]["type"] == "heading"
     assert patched[0]["level"] == 2
     assert validate_block(patched[0], index=0) == []
+
+
+def test_set_type_synopsis_role_from_dropdown():
+    blocks = [{"type": "paragraph", "text": "Early years at Weimar—the duke—the organ—return."}]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    patched, stale = apply_block_patches(
+        blocks,
+        [
+            {
+                "block_id": blocks[0]["block_id"],
+                "block_index": 0,
+                "action": "set_type",
+                "type": "paragraph",
+                "role": "synopsis",
+            }
+        ],
+    )
+    assert not stale
+    assert patched[0]["type"] == "paragraph"
+    assert patched[0]["role"] == "synopsis"
+    cleared, _ = apply_block_patches(
+        patched,
+        [
+            {
+                "block_id": patched[0]["block_id"],
+                "block_index": 0,
+                "action": "set_type",
+                "type": "heading",
+                "role": "",
+            }
+        ],
+    )
+    assert cleared[0]["type"] == "heading"
+    assert "role" not in cleared[0]
 
 
 def test_translation_inherit_keeps_hidden_skips_lexical():
