@@ -150,6 +150,18 @@ def test_bastiat_italic_series_title_stays_heading():
     )
 
 
+def test_letter_dedication_italic_stays_heading():
+    raw = (
+        "_To Mrs. Saville, England._\n\n"
+        "You will rejoice to hear that no disaster has accompanied the commencement of an enterprise.\n"
+    )
+    edition, _ = _parse(raw, work_id="shelley--frankenstein")
+    assert any(
+        b["type"] == "heading" and "Saville" in b.get("text", "")
+        for b in edition["blocks"]
+    )
+
+
 def test_sons_of_johann_not_heading():
     raw = (
         "THE BACH FAMILY\n\n"

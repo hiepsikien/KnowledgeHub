@@ -110,6 +110,9 @@ def is_italic_title_line(line: str) -> bool:
         return False
     if re.search(r"\(No\.?\s*\d+", inner, re.I):
         return False
+    # Letter / dedication: "_To Mrs. Saville, England._" — not "_To be continued._"
+    if re.match(r"^To\s+[A-Z]", inner):
+        return True
     letters = [c for c in inner if c.isalpha()]
     if len(letters) < 8:
         return False
