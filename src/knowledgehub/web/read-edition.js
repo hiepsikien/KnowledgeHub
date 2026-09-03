@@ -387,6 +387,10 @@
     return `<section class="re-notes"><h3>Chú thích (${notes.length})</h3><ol>${items}</ol></section>`;
   }
 
+  function wrapBlockText(html) {
+    return `<span class="re-block-text">${html}</span>`;
+  }
+
   function renderBlock(block) {
     const kind = block.type || "paragraph";
     const text = String(block.text || "");
@@ -417,23 +421,24 @@
       if (cursor < text.length) parts.push(escapeHtml(text.slice(cursor)));
       inner = parts.join("");
     }
+    const body = wrapBlockText(inner);
     if (kind === "heading") {
       const lvl = Math.min(4, Math.max(1, block.level || 1));
       const extra = block.suppress_in_reader ? " re-banner" : "";
-      return `<h${lvl + 1} class="re-heading${extra}">${inner}</h${lvl + 1}>`;
+      return `<h${lvl + 1} class="re-heading${extra}">${body}</h${lvl + 1}>`;
     }
-    if (kind === "blockquote") return `<blockquote class="re-blockquote">${inner}</blockquote>`;
+    if (kind === "blockquote") return `<blockquote class="re-blockquote">${body}</blockquote>`;
     if (kind === "dialogue") {
       const sp = block.speaker ? `<strong class="re-speaker">${escapeHtml(block.speaker)}.</strong> ` : "";
-      return `<p class="re-dialogue">${sp}${inner}</p>`;
+      return `<p class="re-dialogue">${sp}${body}</p>`;
     }
-    if (kind === "stage_direction") return `<p class="re-stage">[${inner}]</p>`;
-    if (kind === "verse_line" || kind === "stanza") return `<p class="re-verse">${inner}</p>`;
-    if (kind === "metadata") return `<p class="re-metadata">${inner}</p>`;
+    if (kind === "stage_direction") return `<p class="re-stage">[${body}]</p>`;
+    if (kind === "verse_line" || kind === "stanza") return `<p class="re-verse">${body}</p>`;
+    if (kind === "metadata") return `<p class="re-metadata">${body}</p>`;
     if (kind === "hr") return `<hr class="re-hr" />`;
-    if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${inner}</p>`;
-    if (block.role === "figure") return `<p class="re-figure">${inner}</p>`;
-    return `<p class="re-paragraph">${inner}</p>`;
+    if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
+    if (block.role === "figure") return `<p class="re-figure">${body}</p>`;
+    return `<p class="re-paragraph">${body}</p>`;
   }
 
   function setEditJson(value) {
@@ -673,9 +678,10 @@
     const sel = window.getSelection();
     if (!blockEl || !sel || !sel.rangeCount) return null;
     const range = sel.getRangeAt(0);
-    if (!blockEl.contains(range.startContainer)) return null;
+    const textEl = blockEl.querySelector(".re-block-text") || blockEl;
+    if (!textEl.contains(range.startContainer)) return null;
     const pre = range.cloneRange();
-    pre.selectNodeContents(blockEl);
+    pre.selectNodeContents(textEl);
     pre.setEnd(range.startContainer, range.startOffset);
     return pre.toString().length;
   }
@@ -1888,36 +1894,33 @@
       }
       const origBlocks = state.chapter?.blocks || [];
       let patches = [];
+      function jsonBlockPatch(orig, block, index) {
+        const patch = {
+          block_id: orig.block_id || block.block_id,
+          block_index: index,
+          type: block.type,
+          text: block.text,
+          level: block.level,
+          speaker: block.speaker,
+          hidden: block.hidden,
+        };
+        if (block.text != null && String(block.text) !== String(orig.text || "")) {
+          patch.lexical = true;
+        }
+        return patch;
+      }
       if (Array.isArray(parsed)) {
         patches = parsed
           .map((block, index) => {
             const orig = origBlocks[index] || {};
             if (JSON.stringify(orig) === JSON.stringify(block)) return null;
-            return {
-              block_id: orig.block_id || block.block_id,
-              block_index: index,
-              type: block.type,
-              text: block.text,
-              level: block.level,
-              speaker: block.speaker,
-              hidden: block.hidden,
-            };
+            return jsonBlockPatch(orig, block, index);
           })
           .filter(Boolean);
       } else if (parsed && typeof parsed === "object" && state.editIndex != null) {
         const orig = origBlocks[state.editIndex] || {};
         if (JSON.stringify(orig) !== JSON.stringify(parsed)) {
-          patches = [
-            {
-              block_id: orig.block_id || parsed.block_id,
-              block_index: state.editIndex,
-              type: parsed.type,
-              text: parsed.text,
-              level: parsed.level,
-              speaker: parsed.speaker,
-              hidden: parsed.hidden,
-            },
-          ];
+          patches = [jsonBlockPatch(orig, parsed, state.editIndex)];
         }
       } else {
         toast("Chọn một block hoặc dán mảng blocks JSON");

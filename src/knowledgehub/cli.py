@@ -127,6 +127,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     re_exp.add_argument("--parse-llm", action="store_true", help="Use LLM relabel during micro parse")
 
+    ingest = sub.add_parser(
+        "ingest-images",
+        help="Copy Gutenberg HTML zip images into corpus/assets/{work}/ (no hotlink)",
+    )
+    ingest.add_argument("--work", required=True, help="Work id, e.g. bach--abdy_williams")
+    ingest.add_argument("--zip", required=True, type=Path, help="Gutenberg *-h.zip")
+
     args = parser.parse_args(argv)
 
     if args.cmd == "build-catalog":
@@ -409,6 +416,29 @@ def main(argv: list[str] | None = None) -> int:
             print(str(exc), file=sys.stderr)
             return 1
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if args.cmd == "ingest-images":
+        from .edition.figures import ingest_gutenberg_zip_images, work_asset_dir
+        from .paths import corpus_root
+
+        try:
+            get_work(args.work)
+        except KeyError as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        zip_path = args.zip.expanduser().resolve()
+        if not zip_path.is_file():
+            print(f"zip not found: {zip_path}", file=sys.stderr)
+            return 1
+        dest = work_asset_dir(corpus_root(), args.work)
+        copied = ingest_gutenberg_zip_images(zip_path, dest)
+        print(
+            json.dumps(
+                {"work_id": args.work, "dest": str(dest), "copied": copied},
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
         return 0
     if args.cmd == "serve":
         try:

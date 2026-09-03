@@ -35,8 +35,8 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `edition_hash` | sha256 hex | store; detect unchanged edition. Hash includes REF blocks **and** chapter `id`/`title` so a remacro/resplit is a new book. |
 | `content_kind` | `prose` \| `verse` \| `scholastic` \| `mixed` \| `drama` | store; reader layout hint |
 | `reading_markdown` | string | full-book markdown; used if chapters omitted |
-| `blocks` | array | full-book blocks; store for future / TTS; chapter path preferred |
-| `split_hints` | array? | heading indices; used only if `chapters` omitted |
+| `blocks` | array | full-book blocks **after** the same hidden/`suppress_in_reader` filter as `chapters[].blocks` (so a Read fallback that uses book-level `blocks` does not resurrect sidenotes). Hub chapter JSON on disk still keeps the full graph. |
+| `split_hints` | array? | heading indices into the published `blocks` (visible only); used only if `chapters` omitted |
 | `quotation_profile` | object? | ignored in pilot UI |
 | `chapters` | array? | **preferred split** — do **not** re-run `split_into_chapters` when present |
 
@@ -81,7 +81,7 @@ Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES 
 | `metadata` | skip in reader (apparatus) |
 | `list_item`, `dialogue`, `stage_direction` | render as paragraph for pilot |
 
-Hub may omit `hidden` and `suppress_in_reader` blocks from the published `chapters[].blocks` / `reading_markdown` so an older Read still looks right. Hub chapter JSON keeps the full graph (including hidden sidenotes) for translation and Final Touch.
+Hub omits `hidden` and `suppress_in_reader` blocks from the published `payload.blocks`, `chapters[].blocks`, and `reading_markdown` so an older Read still looks right. Hub chapter JSON keeps the full graph (including hidden sidenotes) for translation and Final Touch.
 
 Identity: each block has `block_id` = `{chapter_id}:{type}:{prefix}` with `-N` on collision.
 

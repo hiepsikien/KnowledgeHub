@@ -5,10 +5,11 @@ from __future__ import annotations
 from pathlib import Path
 
 from knowledgehub.edition.block_ids import assign_block_ids, block_prefix
-from knowledgehub.edition.figures import figures_from_text, ingest_gutenberg_zip_images
+from knowledgehub.edition.figures import bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
 from knowledgehub.edition.inline_spans import annotate_inline_spans
 from knowledgehub.edition.overrides import apply_block_patches, merge_block_patches
 from knowledgehub.edition.ref import build_read_edition
+from knowledgehub.edition.ref_schema import validate_block
 from knowledgehub.edition.serialize import blocks_to_markdown, reader_visible_blocks
 from knowledgehub.translation.ref_chapters import inherit_translated_blocks, ref_blocks_for_translation
 
@@ -59,6 +60,19 @@ def test_wasserflussen_stays_in_paragraph():
     joined = " ".join(b.get("text", "") for b in edition["blocks"] if b["type"] == "paragraph")
     assert "Wasserflüssen" in joined
     assert "toccata" in joined
+
+
+def test_wasserflussen_wrapped_quote_stays_in_paragraph():
+    raw = (
+        "He wrote a chorale prelude on “An Wasserflüssen Babylon”;[12] and a\n"
+        "toccata on the same melody in the following year.\n"
+    )
+    edition, _ = _parse(raw)
+    assert not any(b["type"] == "blockquote" for b in edition["blocks"])
+    joined = " ".join(b.get("text", "") for b in edition["blocks"] if b["type"] == "paragraph")
+    assert "Wasserflüssen" in joined
+    assert "toccata" in joined
+    assert joined.count("toccata") == 1
 
 
 def test_gutenberg_tilde_is_strong_not_strike():
@@ -209,6 +223,16 @@ def test_chapter_synopsis_role():
     assert "Weimar" in syn[0]["text"]
 
 
+def test_synopsis_matcher_ignores_master_substring():
+    raw = (
+        "CHAPTER III\n\n"
+        "Early years at Weimar—the duke—the organ—Italian influence—return.\n\n"
+        "The body of the chapter starts here with a long enough paragraph about the court.\n"
+    )
+    edition, _ = _parse(raw, work_id="smith--masterpiece_essays", title="CHAPTER III")
+    assert not any(b.get("role") == "synopsis" for b in edition["blocks"])
+
+
 def test_illustration_becomes_figure_role():
     raw = (
         "A page of music follows. [Illustration: Autograph of a prelude] "
@@ -248,6 +272,70 @@ def test_hide_patch_by_block_id_and_stale_after_mismatch():
     assert stale2[0]["stale"] is True
 
 
+def test_stale_block_id_does_not_fall_back_to_index():
+    """Chế bản always sends block_id + block_index. A type change after re-parse
+    must report stale, not hide whatever now sits at that index."""
+    blocks = [
+        {"type": "list_item", "text": "JOHANN NICOLAUS, 1653-1682."},
+        {"type": "paragraph", "text": "Keep this body paragraph visible."},
+    ]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    old_heading_id = "ch-001:heading:johann-nicolaus-1653-1682"
+    patched, stale = apply_block_patches(
+        blocks,
+        [
+            {
+                "action": "hide",
+                "block_id": old_heading_id,
+                "block_index": 0,
+            }
+        ],
+    )
+    assert stale
+    assert patched[0].get("hidden") is not True
+    assert patched[1].get("hidden") is not True
+
+
+def test_index_used_only_without_block_id():
+    blocks = [
+        {"type": "paragraph", "text": "Alpha block remains visible."},
+        {"type": "paragraph", "text": "Beta block should hide."},
+    ]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    patched, stale = apply_block_patches(blocks, [{"block_index": 1, "action": "hide"}])
+    assert not stale
+    assert patched[1]["hidden"] is True
+    assert patched[0].get("hidden") is not True
+
+
+def test_split_then_hide_right_half_replays_on_reparse():
+    blocks = [
+        {"type": "paragraph", "text": "Left half. Right half stays."},
+        {"type": "paragraph", "text": "Later sidenote to keep."},
+    ]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    original_id = blocks[0]["block_id"]
+    at = blocks[0]["text"].index("Right")
+    first, stale_split = apply_block_patches(
+        blocks,
+        [{"block_id": original_id, "block_index": 0, "action": "split", "at": at}],
+    )
+    assert not stale_split
+    right_id = first[1]["block_id"]
+    assert right_id
+    replayed, stale = apply_block_patches(
+        blocks,
+        [
+            {"block_id": original_id, "block_index": 0, "action": "split", "at": at},
+            {"block_id": right_id, "block_index": 1, "action": "hide"},
+        ],
+    )
+    assert not stale
+    assert replayed[1]["hidden"] is True
+    assert "Right half" in replayed[1]["text"]
+    assert replayed[2].get("hidden") is not True
+
+
 def test_split_and_merge_patches():
     blocks = [{"type": "paragraph", "text": "Left half. Right half stays."}]
     assign_block_ids(blocks, chapter_id="ch-001")
@@ -279,6 +367,44 @@ def test_set_text_is_lexical():
     )
     assert patched[0]["text"] == "Curator rewrite."
     assert patched[0]["lexical"] is True
+
+
+def test_json_editor_text_patch_is_lexical():
+    blocks = [{"type": "paragraph", "text": "Original wording here."}]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    patched, _ = apply_block_patches(
+        blocks,
+        [
+            {
+                "block_id": blocks[0]["block_id"],
+                "block_index": 0,
+                "type": "paragraph",
+                "text": "Curator rewrite from JSON.",
+            }
+        ],
+    )
+    assert patched[0]["text"] == "Curator rewrite from JSON."
+    assert patched[0]["lexical"] is True
+
+
+def test_set_type_heading_defaults_level():
+    blocks = [{"type": "paragraph", "text": "A section title that should be a heading."}]
+    assign_block_ids(blocks, chapter_id="ch-001")
+    patched, stale = apply_block_patches(
+        blocks,
+        [
+            {
+                "block_id": blocks[0]["block_id"],
+                "block_index": 0,
+                "action": "set_type",
+                "type": "heading",
+            }
+        ],
+    )
+    assert not stale
+    assert patched[0]["type"] == "heading"
+    assert patched[0]["level"] == 2
+    assert validate_block(patched[0], index=0) == []
 
 
 def test_translation_inherit_keeps_hidden_skips_lexical():
@@ -335,3 +461,12 @@ def test_ingest_zip_images(tmp_path: Path):
     copied = ingest_gutenberg_zip_images(zip_path, dest)
     assert copied
     assert (dest / "cover.jpg").is_file()
+
+
+def test_bind_figure_src_matches_caption(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "autograph.jpg").write_bytes(b"x")
+    figures = figures_from_text("[Illustration: Autograph of the prelude]")
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/bach--abdy_williams")
+    assert bound[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"

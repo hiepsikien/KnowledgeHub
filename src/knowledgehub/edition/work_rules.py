@@ -43,7 +43,10 @@ def apply_work_rules(
 def _uses_synopsis(work_id: str, family: str) -> bool:
     if work_id.startswith("bach--"):
         return True
-    return family == "gutenberg" and "master" in work_id
+    if family != "gutenberg":
+        return False
+    # Master Musicians series — not any id that merely contains "master".
+    return "master_musician" in work_id or "master--" in work_id
 
 
 def _uses_genealogy(work_id: str) -> bool:

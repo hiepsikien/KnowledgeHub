@@ -22,10 +22,54 @@ def figures_from_text(text: str, *, src: str = "") -> list[dict[str, Any]]:
     return out
 
 
-def attach_note_figures(notes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _slug(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", (text or "").casefold()).strip("-")
+
+
+def bind_figure_src(
+    figures: list[dict[str, Any]],
+    dest_dir: Path | None,
+    *,
+    src_prefix: str = "",
+) -> list[dict[str, Any]]:
+    """Attach ``src`` from ingested files when a figure has only a caption.
+
+    Does not download Gutenberg. ``src`` is a Hub path (``/assets/{work}/file``);
+    serving that route is still Read/Hub lockstep.
+    """
+    if not figures or dest_dir is None or not dest_dir.is_dir():
+        return figures
+    unused = [p for p in sorted(dest_dir.iterdir()) if p.is_file() and IMAGE_NAME.search(p.name)]
+    unbound = [fig for fig in figures if not fig.get("src")]
+    for fig in unbound:
+        cap = _slug(str(fig.get("caption") or ""))
+        match: Path | None = None
+        for path in unused:
+            stem = _slug(path.stem)
+            if cap and stem and (cap in stem or stem in cap):
+                match = path
+                break
+        if match is None and len(unbound) == 1 and len(unused) == 1:
+            match = unused[0]
+        if match is None:
+            continue
+        unused.remove(match)
+        prefix = src_prefix.rstrip("/")
+        fig["src"] = f"{prefix}/{match.name}" if prefix else match.name
+    return figures
+
+
+def attach_note_figures(
+    notes: list[dict[str, Any]],
+    *,
+    asset_dir: Path | None = None,
+    src_prefix: str = "",
+) -> list[dict[str, Any]]:
     for note in notes:
         body = str(note.get("body") or "")
         figures = figures_from_text(body)
+        if asset_dir is not None:
+            figures = bind_figure_src(figures, asset_dir, src_prefix=src_prefix)
         if figures:
             note["figures"] = figures
     return notes

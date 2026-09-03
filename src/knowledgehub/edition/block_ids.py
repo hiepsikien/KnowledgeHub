@@ -39,11 +39,18 @@ def match_block_index(
     prefix: str | None = None,
     block_index: int | None = None,
 ) -> int | None:
-    """Resolve a patch to an index. Prefer exact ``block_id``, then (type, prefix)."""
+    """Resolve a patch to an index.
+
+    If ``block_id`` is set it must match exactly. Never fall back to ``block_index``
+    in that case — Chế bản always sends both, and a type change after re-parse
+    must report stale rather than hide/retarget the row now at that index.
+    ``block_index`` is used only when ``block_id`` is omitted.
+    """
     if block_id:
         for index, block in enumerate(blocks):
             if block.get("block_id") == block_id:
                 return index
+        return None
     want_prefix = block_prefix(prefix) if prefix else ""
     if kind and want_prefix:
         hits = [

@@ -55,21 +55,52 @@ def _split_block(blocks: list[dict[str, Any]], index: int, at: int) -> None:
     blocks.insert(index + 1, right)
 
 
+def _chapter_id_from_blocks(blocks: list[dict[str, Any]]) -> str:
+    for block in blocks:
+        bid = block.get("block_id")
+        if isinstance(bid, str) and ":" in bid:
+            return bid.split(":", 1)[0]
+    return "book"
+
+
 def _resolve_index(blocks: list[dict[str, Any]], patch: dict[str, Any]) -> int | None:
+    """``type`` on the patch is the mutation (set_type), not a matcher."""
     return match_block_index(
         blocks,
         block_id=str(patch.get("block_id") or "") or None,
-        kind=str(patch.get("type") or patch.get("match_type") or "") or None,
+        kind=str(patch.get("match_type") or "") or None,
         prefix=str(patch.get("prefix") or "") or None,
         block_index=patch.get("block_index") if isinstance(patch.get("block_index"), int) else None,
     )
+
+
+def _ensure_heading_level(block: dict[str, Any], patch: dict[str, Any]) -> None:
+    if block.get("type") != "heading":
+        return
+    if "level" in patch and patch["level"] is not None:
+        try:
+            block["level"] = int(patch["level"])
+        except (TypeError, ValueError):
+            block["level"] = 2
+    level = block.get("level")
+    if not isinstance(level, int) or not 1 <= level <= 4:
+        block["level"] = 2
+
+
+def _restamp_ids(blocks: list[dict[str, Any]]) -> None:
+    assign_block_ids(blocks, chapter_id=_chapter_id_from_blocks(blocks))
 
 
 def apply_block_patches(
     blocks: list[dict[str, Any]],
     patches: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Apply Final Touch patches by ``block_id`` (index is fallback). Returns (blocks, stale)."""
+    """Apply Final Touch patches by ``block_id``.
+
+    Index is used only when ``block_id`` is omitted. Ids are restamped after
+    each successful patch so a later hide/type can match a split half.
+    Returns (blocks, stale).
+    """
     out = copy.deepcopy(blocks)
     stale: list[dict[str, Any]] = []
     for patch in patches:
@@ -82,6 +113,7 @@ def apply_block_patches(
             continue
         if action in {"merge_with_next", "merge"}:
             _merge_block_with_next(out, index)
+            _restamp_ids(out)
             continue
         if action == "split":
             at = patch.get("at")
@@ -89,17 +121,20 @@ def apply_block_patches(
                 stale.append({**dict(patch), "stale": True, "reason": "split requires integer at"})
                 continue
             _split_block(out, index, at)
+            _restamp_ids(out)
             continue
         block = out[index]
         if action == "hide":
             block["hidden"] = True
+            _restamp_ids(out)
             continue
         if action == "show":
             block["hidden"] = False
+            _restamp_ids(out)
             continue
         if "hidden" in patch and patch["hidden"] is not None:
             block["hidden"] = bool(patch["hidden"])
-        if action == "set_type" or ("type" in patch and patch["type"] and action != "split"):
+        if action == "set_type" or ("type" in patch and patch["type"] and action not in STRUCTURAL_ACTIONS):
             if patch.get("type"):
                 block["type"] = patch["type"]
         if action == "set_text":
@@ -112,18 +147,14 @@ def apply_block_patches(
             if new_text != str(block.get("text") or ""):
                 block["text"] = new_text
                 block.pop("spans", None)
-                if patch.get("lexical"):
-                    block["lexical"] = True
-        if block.get("type") == "heading" and "level" in patch and patch["level"] is not None:
-            block["level"] = int(patch["level"])
+                block["lexical"] = True
+        _ensure_heading_level(block, patch)
         if block.get("type") == "dialogue" and "speaker" in patch:
             block["speaker"] = patch["speaker"]
         if "role" in patch and patch["role"] is not None:
             block["role"] = patch["role"]
-    chapter_id = "book"
-    if out and isinstance(out[0].get("block_id"), str) and ":" in str(out[0]["block_id"]):
-        chapter_id = str(out[0]["block_id"]).split(":", 1)[0]
-    assign_block_ids(out, chapter_id=chapter_id)
+        _restamp_ids(out)
+    _restamp_ids(out)
     annotated, _profile = annotate_blocks(out)
     return annotated, stale
 
