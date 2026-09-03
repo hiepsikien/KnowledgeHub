@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=cheban27" />
+    <link rel="stylesheet" href="/styles.css?v=tr-list1" />
   </head>
   <body>
     <div class="shell">
@@ -451,16 +451,33 @@
         <section id="view-translation" hidden>
           <header class="page-head">
             <div>
-              <h1>Dịch thuật</h1>
-              <p class="lead">Chọn sách từ kho tác phẩm, chọn một cách dịch, rồi QA / chú thích theo chương.</p>
-            </div>
-            <div class="page-actions">
-              <button type="button" class="btn" id="tr-pick-work">Dịch sách khác</button>
+              <p class="crumb" id="tr-crumb" hidden><a href="/translation">← Đang làm</a></p>
+              <h1 id="tr-heading">Dịch thuật</h1>
+              <p class="lead" id="tr-lead">Sách đang dịch dở và trạng thái. Chọn một cuốn để vào bàn dịch, hoặc bắt đầu sách khác.</p>
             </div>
           </header>
-          <section class="tr-start" id="tr-start" hidden>
-            <h2>Chọn tác phẩm</h2>
-            <p class="muted">Bản tiếng Anh có file raw. Sách đã có dự án thì mở luôn; sách mới thì chọn 1 trong 3 cách dịch.</p>
+          <section id="tr-pick" hidden>
+            <section id="tr-sessions" class="re-sessions" hidden>
+              <h2>Đang làm</h2>
+              <p class="muted">Sách đã có dự án dịch — chọn để làm tiếp. Trạng thái là số chương đã có bản dịch / QA.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Tác phẩm</th>
+                      <th>Trạng thái</th>
+                      <th>Dịch</th>
+                      <th>QA</th>
+                      <th>Cách dịch</th>
+                      <th>Cập nhật</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tr-session-rows"></tbody>
+                </table>
+              </div>
+            </section>
+            <h2 id="tr-catalog-heading">Bắt đầu sách khác</h2>
+            <p class="muted">Bản tiếng Anh có file raw. Chọn sách, chọn cách dịch, rồi vào trang chi tiết.</p>
             <div class="toolbar">
               <input id="tr-work-q" type="search" placeholder="Tìm title, id, author…" />
             </div>
@@ -471,7 +488,7 @@
                   <tr>
                     <th>Tác phẩm</th>
                     <th>Author</th>
-                    <th>Trạng thái</th>
+                    <th>Lang</th>
                   </tr>
                 </thead>
                 <tbody id="tr-work-rows"></tbody>
@@ -480,20 +497,19 @@
             <div id="tr-mode-wrap" hidden>
               <fieldset class="split-set">
                 <legend>Cách dịch</legend>
-                <p class="muted">Khóa trước khi dịch. Không cần dịch thử một đoạn mẫu.</p>
+                <p class="muted">Khóa trước khi vào bàn dịch. Không cần dịch thử một đoạn mẫu.</p>
                 <div class="split-opts" id="tr-mode-opts"></div>
               </fieldset>
               <div class="row">
                 <button type="button" class="btn primary" id="tr-start-go" disabled>Bắt đầu dịch</button>
-                <button type="button" class="btn ghost" id="tr-start-cancel">Hủy</button>
               </div>
               <p class="err" id="tr-start-err"></p>
             </div>
           </section>
-          <div id="tr-desk">
+          <div id="tr-desk" hidden>
+          <p class="muted" id="tr-desk-status" hidden></p>
           <div class="stats" id="tr-stats"></div>
-          <div class="toolbar">
-            <select id="tr-project"></select>
+          <div class="toolbar" id="tr-desk-toolbar">
             <button type="button" class="btn" id="tr-draft-missing">Dịch chương còn thiếu</button>
             <button type="button" class="btn ghost" id="tr-sync-ref" title="Tách lại segments theo REF split_hints">Sync REF chapters</button>
             <button type="button" class="btn ghost" id="tr-cancel-jobs" hidden>Hủy job đang chạy</button>
@@ -585,7 +601,7 @@
       </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <script src="/app.js?v=cheban21"></script>
+    <script src="/app.js?v=tr-list1"></script>
     <script src="/read-edition.js?v=cheban27"></script>
   </body>
 </html>

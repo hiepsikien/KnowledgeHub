@@ -74,6 +74,18 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     return TestClient(create_app())
 
 
+def test_translation_page_route(client: TestClient):
+    page = client.get("/translation/grotius--freedom_of_the_seas/I")
+    assert page.status_code == 200
+    assert "Dịch thuật" in page.text
+    assert 'id="tr-sessions"' in page.text
+    assert 'id="tr-pick"' in page.text
+    list_page = client.get("/translation")
+    assert list_page.status_code == 200
+    assert "Đang làm" in list_page.text
+    assert "Bắt đầu sách khác" in list_page.text
+
+
 def test_translation_list_and_project(client: TestClient):
     listed = client.get("/api/translations").json()
     assert listed["total"] == 1
@@ -82,6 +94,7 @@ def test_translation_list_and_project(client: TestClient):
     assert listed["projects"][0]["source_work_id"] == "grotius--freedom_of_the_seas"
     assert listed["projects"][0]["translation_work_id"] == "grotius--freedom_of_the_seas_vi"
     assert listed["projects"][0]["ready_to_promote"] is False
+    assert listed["projects"][0]["mode_label"] == "Sát nguyên bản"
     project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
     assert project["project"]["translation_mode"] == "tight"
     assert len(project["chapters"]) == 2
@@ -100,12 +113,6 @@ def test_translation_segment_and_annotations(client: TestClient):
     ann = client.get("/api/translations/grotius--freedom_of_the_seas/annotations?chapter=I").json()
     assert ann["total"] == 1
     assert ann["annotations"][0]["marker"] == "[1]"
-
-
-def test_translation_page_route(client: TestClient):
-    page = client.get("/translation/grotius--freedom_of_the_seas/I")
-    assert page.status_code == 200
-    assert "Dịch thuật" in page.text
 
 
 def test_translation_qa_endpoint(client: TestClient):
@@ -572,5 +579,6 @@ def test_create_translation_from_catalog(client: TestClient, tmp_path: Path):
     assert not (tmp_path / "translations/locke--second_treatise/segments/chi-sample.json").exists()
 
     page = client.get("/")
-    assert "Dịch sách khác" in page.text
+    assert "Đang làm" in page.text
+    assert "Bắt đầu sách khác" in page.text
     assert "Pilot: Grotius" not in page.text
