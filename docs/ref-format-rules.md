@@ -2,6 +2,8 @@
 
 This document is the rule reference for `parse_manuscript_to_ref()`. Rendering in Read is out of scope here — Hub only produces validated REF/1 JSON.
 
+Author-facing manuscript conventions (Vietnamese): [ref-author-guide.md](./ref-author-guide.md).
+
 ## Pipeline
 
 ```
@@ -54,11 +56,14 @@ Scholastic markers (case-sensitive line starts):
 | Line pattern | Role | Block |
 |--------------|------|-------|
 | `CHAPTER I`, `BOOK II`, `PART 1`, `VOLUME 2` | `heading` L1 | `heading` |
-| `Scene I.`, `ACT II`, short title case | `heading` L2–3 | `heading` |
-| `_Gutenberg italic line_` | `heading` L2 | `heading` |
-| ALL CAPS ≤60 chars, no sentence end | `heading` L2 | `heading` |
-| `-----` (≥8 rule chars) | `hr` | `hr` |
-| Indented poetry / short lines | `verse_line` | `verse_line` |
+| `PREFACE`, `INTRODUCTION`, `APPENDIX`, … (`HARD_GUTENBERG`) | `heading` | `heading` |
+| `CHƯƠNG` / `PHẦN` | **macro** chapter split only — not `HARD_GUTENBERG`; becomes `heading` only via ALL-CAPS heuristic | often `paragraph` when short (`CHƯƠNG I` = 7 letters) |
+| `Scene I.`, `ACT II` | `heading` L2–3 (play mode) | `heading` |
+| Full-line `_italic_` that looks like a title (incl. inner length ≥ 40) | `heading` L2 | `heading` |
+| Other full-line `_italic_` | `prose` | `paragraph` |
+| ALL CAPS, ≥ 8 letters, **< 90** chars, ≥ ~85% uppercase | `heading` L2 | `heading` |
+| `-----` (≥8 rule chars; short rules 3–7 also) | `hr` | `hr` |
+| Indented poetry / VI verse (comma/semicolon end) | `verse_line` | `verse_line` / `stanza` |
 | default | `prose` | `paragraph` after merge |
 
 ### Join rules (v1.2)
@@ -80,11 +85,11 @@ When `work_id` starts with `grotius--`, blocks between two `hr` lines containing
 
 Applied to `paragraph`, `blockquote`, `heading`, `verse_line`. Offsets are into block `text` after merge; `text` field on span duplicates the matched substring.
 
-Scan order: `_em_` → straight/curly quotes → guillemets `«»` → corner quotes `「」` → `[brackets]` → `(parens)`.
+Scan order: `_em_` → `~strong~` → straight/curly quotes → guillemets `«»` → corner quotes `「」` → `[brackets]` → `(parens)`.
 
 | `style` | Pattern | Classifier |
 |---------|---------|------------|
-| `footnote` | `[178]`, `[1, 2]` | digits only inside `[]`; optional `note` is the dump body from a chapter-end `FOOTNOTES:` section |
+| `footnote` | `[178]`, `[1, 2]` | digits only inside `[]`; optional `note` is the dump body from a chapter-end `FOOTNOTES:` section (heading must be exactly `FOOTNOTES`; dump ends at `CHAPTER`/`BOOK`/`VOLUME`/`PART`, not `CHƯƠNG`) |
 | `bracket_note` | `[The Cambridge Modern History, …]` | ≥18 chars or ≥3 spaces or long proper noun |
 | `bracket_cite` | `[Pol.]` | short alphabetic cite |
 | `bracket_other` | other `[…]` | fallback |
@@ -95,6 +100,7 @@ Scan order: `_em_` → straight/curly quotes → guillemets `«»` → corner qu
 | `paren_aside` | other `(…)` | fallback |
 | `quote` | `"…"`, `«…»`, `「…」` | matched pair |
 | `em` | `_word_` | Gutenberg underscore emphasis |
+| `strong` | `~word~` | Gutenberg tilde emphasis (not Markdown `~~`) |
 
 Nested markers: bracket spans suppress re-parsing of inner parens. Overlaps: prefer narrower `footnote` over wide bracket note.
 
@@ -200,7 +206,7 @@ CI: `.github/workflows/ref-corpus.yml` runs corpus tests + rule QA on each PR.
 
 ## REF/1 v1.4 — PG table of contents
 
-- **TOC detection** — runs of 3+ `CHAPTER`/`BOOK`/`SECT` list lines → single `metadata` block (not `heading`).
+- **TOC detection** — runs of 3+ `CHAPTER`/`BOOK`/`SECT` list lines → single `metadata` block (not `heading`). `CHƯƠNG …` rows are not `is_toc_entry_line`; `MỤC LỤC` is a valid opener but does not by itself merge Vietnamese chapter rows.
 - **Split chapter titles** — `CHAPTER III. OF THE RISE…` + continuation line merged before labeling.
 - **False heading fix** — `PART`/`BOOK` patterns require numerals (`PART IV` ok; “part of his property” no longer matches).
 - **Strip path** — `strip_only` + `preserve_toc` in REF parser; explicit `family=` is no longer overwritten by strip detection.
