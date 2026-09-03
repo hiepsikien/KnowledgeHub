@@ -12,9 +12,7 @@ def reader_visible_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Blocks that belong in reading_markdown / the Read payload."""
     out: list[dict[str, Any]] = []
     for block in blocks:
-        if block.get("hidden"):
-            continue
-        if block.get("type") == "heading" and block.get("suppress_in_reader"):
+        if block.get("hidden") or block.get("suppress_in_reader"):
             continue
         out.append(block)
     return out

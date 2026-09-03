@@ -438,6 +438,7 @@
     if (kind === "hr") return `<hr class="re-hr" />`;
     if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
     if (block.role === "figure") return `<p class="re-figure">${body}</p>`;
+    if (block.role === "aside") return `<p class="re-paragraph re-aside">${body}</p>`;
     return `<p class="re-paragraph">${body}</p>`;
   }
 
@@ -473,6 +474,7 @@
       el.classList.add("on");
       el.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
+    syncFinalTouchKind();
   }
 
   async function openSectionFullText() {
@@ -669,6 +671,29 @@
     const blocks = state.chapter?.blocks || [];
     if (state.editIndex == null || state.editIndex < 0 || state.editIndex >= blocks.length) return null;
     return blocks[state.editIndex];
+  }
+
+  const ROLE_KINDS = new Set(["synopsis", "figure", "aside"]);
+
+  function syncFinalTouchKind() {
+    const sel = $("re-ft-type");
+    const block = selectedBlock();
+    if (!sel || !block) return;
+    const role = String(block.role || "");
+    if (ROLE_KINDS.has(role)) {
+      sel.value = `role:${role}`;
+      return;
+    }
+    const type = String(block.type || "paragraph");
+    const opt = Array.from(sel.options).find((row) => row.value === type);
+    sel.value = opt ? type : "paragraph";
+  }
+
+  function patchForKind(value) {
+    if (String(value || "").startsWith("role:")) {
+      return { type: "paragraph", role: value.slice(5) };
+    }
+    return { type: value, role: "" };
   }
 
   function caretOffsetInSelectedBlock() {
@@ -1962,7 +1987,7 @@
     $("re-ft-type-apply")?.addEventListener("click", () => {
       const type = $("re-ft-type")?.value;
       if (!type) return;
-      void applyFinalTouch("set_type", { type });
+      void applyFinalTouch("set_type", patchForKind(type));
     });
 
     $("re-publish")?.addEventListener("click", () => {

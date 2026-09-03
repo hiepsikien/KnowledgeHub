@@ -65,12 +65,51 @@ def match_block_index(
     return None
 
 
-def same_heading(left: str, right: str) -> bool:
-    def norm(value: str) -> str:
-        return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+_STRUCT_MARK = re.compile(r"^(?:chapter|chap|book|part|volume)\s+([ivxlcdm]+|\d+)$", re.I)
+_STRUCT_KINDS = ("chapter", "chap", "book", "part", "volume")
 
-    a, b = norm(left), norm(right)
+
+def heading_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+
+
+def same_heading(left: str, right: str) -> bool:
+    a, b = heading_key(left), heading_key(right)
     return bool(a) and a == b
+
+
+def _title_has_chapter_number(title_key: str, number: str) -> bool:
+    if title_key == number or title_key.startswith(number + " "):
+        return True
+    for kind in _STRUCT_KINDS:
+        token = f"{kind} {number}"
+        if title_key == token or title_key.startswith(token + " "):
+            return True
+    return False
+
+
+def is_chapter_banner(heading: str, title: str) -> bool:
+    """Chrome already prints ``title``; hide a matching CHAPTER/BOOK/PART line.
+
+    Exact match after normalize, or a bare ``CHAPTER III`` whose number is
+    the start of a longer TOC title (``III. Early years at Weimar``).
+    ``CHAPTER I`` does not match ``CHAPTER II``.
+    """
+    if same_heading(heading, title):
+        return True
+    head = heading_key(heading)
+    mark = _STRUCT_MARK.match(head)
+    if not mark:
+        return False
+    return _title_has_chapter_number(heading_key(title), mark.group(1))
+
+
+def _is_banner_candidate(block: dict[str, Any]) -> bool:
+    kind = str(block.get("type") or "")
+    text = str(block.get("text") or "")
+    if kind == "heading":
+        return True
+    return kind == "paragraph" and bool(_STRUCT_MARK.match(heading_key(text)))
 
 
 def mark_chapter_banner(blocks: list[dict[str, Any]], title: str | None) -> list[dict[str, Any]]:
@@ -78,9 +117,9 @@ def mark_chapter_banner(blocks: list[dict[str, Any]], title: str | None) -> list
     if not title:
         return blocks
     for block in blocks:
-        if block.get("type") != "heading":
+        if not _is_banner_candidate(block):
             continue
-        if same_heading(str(block.get("text") or ""), title):
+        if is_chapter_banner(str(block.get("text") or ""), title):
             block["suppress_in_reader"] = True
             break
     return blocks

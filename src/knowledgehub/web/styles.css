@@ -860,6 +860,7 @@ mark.ann-context {
   margin-right: 8px;
 }
 .re-synopsis { font-style: italic; color: #4a433c; }
+.re-aside { color: var(--muted); font-size: 14px; border-left: 2px solid var(--line); padding-left: 8px; }
 .re-figure { color: var(--muted); font-size: 15px; }
 .re-banner { color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
 .re-stale {
