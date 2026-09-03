@@ -26,6 +26,10 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (text or "").casefold()).strip("-")
 
 
+def _figure_caption(fig: dict[str, Any]) -> str:
+    return _slug(str(fig.get("caption") or fig.get("text") or ""))
+
+
 def bind_figure_src(
     figures: list[dict[str, Any]],
     dest_dir: Path | None,
@@ -36,19 +40,30 @@ def bind_figure_src(
 
     Does not download Gutenberg. ``src`` is a Hub path (``/assets/{work}/file``);
     serving that route is still Read/Hub lockstep.
+
+    Matching is unique-only: exact stem, else exactly one unused stem contained
+    in the caption (or vice versa). Ambiguous substring hits are left unbound.
+    A lone figure + one leftover file still binds 1:1.
     """
     if not figures or dest_dir is None or not dest_dir.is_dir():
         return figures
     unused = [p for p in sorted(dest_dir.iterdir()) if p.is_file() and IMAGE_NAME.search(p.name)]
     unbound = [fig for fig in figures if not fig.get("src")]
     for fig in unbound:
-        cap = _slug(str(fig.get("caption") or ""))
+        cap = _figure_caption(fig)
         match: Path | None = None
-        for path in unused:
-            stem = _slug(path.stem)
-            if cap and stem and (cap in stem or stem in cap):
-                match = path
-                break
+        if cap:
+            exact = [p for p in unused if _slug(p.stem) == cap]
+            if len(exact) == 1:
+                match = exact[0]
+            else:
+                contained = [
+                    p
+                    for p in unused
+                    if (stem := _slug(p.stem)) and (cap in stem or stem in cap)
+                ]
+                if len(contained) == 1:
+                    match = contained[0]
         if match is None and len(unbound) == 1 and len(unused) == 1:
             match = unused[0]
         if match is None:
@@ -57,6 +72,19 @@ def bind_figure_src(
         prefix = src_prefix.rstrip("/")
         fig["src"] = f"{prefix}/{match.name}" if prefix else match.name
     return figures
+
+
+def bind_body_figure_src(
+    blocks: list[dict[str, Any]],
+    dest_dir: Path | None,
+    *,
+    src_prefix: str = "",
+) -> list[dict[str, Any]]:
+    """Attach ``src`` on ``role: figure`` body blocks (caption = block text)."""
+    figs = [b for b in blocks if b.get("role") == "figure" and not b.get("src")]
+    if figs:
+        bind_figure_src(figs, dest_dir, src_prefix=src_prefix)
+    return blocks
 
 
 def attach_note_figures(

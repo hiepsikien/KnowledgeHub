@@ -4,7 +4,7 @@ from typing import Any
 
 from .block_ids import assign_block_ids, mark_chapter_banner
 from .footnotes import attach_footnote_bodies, attach_note_hosts
-from .figures import attach_note_figures, work_asset_dir
+from .figures import attach_note_figures, bind_body_figure_src, work_asset_dir
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
 from .lines import iter_lines, normalize_wiki_source
@@ -113,6 +113,8 @@ def stamp_edition_blocks(
         asset_dir = work_asset_dir(corpus_root(), work_id)
         src_prefix = f"/assets/{str(work_id).replace('/', '_')}"
     notes = attach_note_figures(notes, asset_dir=asset_dir, src_prefix=src_prefix)
+    if asset_dir is not None:
+        bind_body_figure_src(blocks, asset_dir, src_prefix=src_prefix)
     return blocks, notes
 
 

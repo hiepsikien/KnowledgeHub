@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from knowledgehub.edition.block_ids import assign_block_ids, block_prefix
-from knowledgehub.edition.figures import bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
+from knowledgehub.edition.figures import bind_body_figure_src, bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
 from knowledgehub.edition.inline_spans import annotate_inline_spans
 from knowledgehub.edition.overrides import apply_block_patches, merge_block_patches
 from knowledgehub.edition.ref import build_read_edition
@@ -73,6 +73,22 @@ def test_wasserflussen_wrapped_quote_stays_in_paragraph():
     assert "Wasserflüssen" in joined
     assert "toccata" in joined
     assert joined.count("toccata") == 1
+
+
+def test_wasserflussen_quote_on_own_line_stays_in_paragraph():
+    """Quoted chorale title starts the line — the original verse/blockquote mislabel."""
+    raw = (
+        "He wrote a chorale prelude on\n"
+        "“An Wasserflüssen Babylon”;[12] and a\n"
+        "toccata on the same melody in the following year.\n"
+    )
+    edition, _ = _parse(raw)
+    assert not any(b["type"] == "blockquote" for b in edition["blocks"])
+    paras = [b for b in edition["blocks"] if b["type"] == "paragraph"]
+    joined = " ".join(b.get("text", "") for b in paras)
+    assert "Wasserflüssen" in joined
+    assert "toccata" in joined
+    assert any("Wasserflüssen" in (b.get("text") or "") and "toccata" in (b.get("text") or "") for b in paras)
 
 
 def test_gutenberg_tilde_is_strong_not_strike():
@@ -495,3 +511,37 @@ def test_bind_figure_src_matches_caption(tmp_path: Path):
     figures = figures_from_text("[Illustration: Autograph of the prelude]")
     bound = bind_figure_src(figures, dest, src_prefix="/assets/bach--abdy_williams")
     assert bound[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"
+
+
+def test_bind_figure_src_skips_ambiguous_substring(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "autograph.jpg").write_bytes(b"x")
+    (dest / "prelude.jpg").write_bytes(b"y")
+    figures = figures_from_text("[Illustration: Autograph of the prelude]")
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/bach--abdy_williams")
+    assert "src" not in bound[0]
+
+
+def test_body_figure_block_gets_src(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "autograph.jpg").write_bytes(b"x")
+    blocks = [{"type": "paragraph", "role": "figure", "text": "Autograph of a prelude"}]
+    bind_body_figure_src(blocks, dest, src_prefix="/assets/bach--abdy_williams")
+    assert blocks[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"
+
+
+def test_parse_binds_src_on_body_figure(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(tmp_path))
+    dest = tmp_path / "assets" / "bach--abdy_williams"
+    dest.mkdir(parents=True)
+    (dest / "autograph.jpg").write_bytes(b"x")
+    raw = (
+        "A page of music follows. [Illustration: Autograph of a prelude] "
+        "Then the prose continues at some length after the plate.\n"
+    )
+    edition, _ = _parse(raw)
+    figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
+    assert figs
+    assert figs[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"
