@@ -62,6 +62,9 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `chapter` | no | Hub chapter label / id |
 | `body` | yes | note text |
 | `group_label` | no | default `Chú thích` |
+| `host_block_id` | no | block that contains the marker; Read explain = host + body |
+| `host_text` | no | full host paragraph text |
+| `figures` | no | `{caption, src?}` from `[Illustration:]` in the note (Bach fn. 77); `src` is a Hub asset URL, never a Gutenberg hotlink |
 
 Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES dumps left in `raw_text` — dumps are already stripped from reading flow).
 
@@ -69,8 +72,8 @@ Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES 
 
 | `type` | Render |
 |--------|--------|
-| `heading` | `<h{level}>` (1–4) |
-| `paragraph` | `<p>` + inline spans |
+| `heading` | `<h{level}>` (1–4). Skip when `suppress_in_reader` is true (duplicate chapter banner). |
+| `paragraph` | `<p>` + inline spans. `role: synopsis` → italic paragraph. `role: aside` / `hidden: true` → skip. `role: figure` → caption (image `src` when present). |
 | `blockquote` | `<blockquote>` |
 | `verse_line` | line in verse block (no reflow) |
 | `stanza` | verse group; lines separated by `\n` |
@@ -78,16 +81,27 @@ Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES 
 | `metadata` | skip in reader (apparatus) |
 | `list_item`, `dialogue`, `stage_direction` | render as paragraph for pilot |
 
+Hub may omit `hidden` and `suppress_in_reader` blocks from the published `chapters[].blocks` / `reading_markdown` so an older Read still looks right. Hub chapter JSON keeps the full graph (including hidden sidenotes) for translation and Final Touch.
+
+Identity: each block has `block_id` = `{chapter_id}:{type}:{prefix}` with `-N` on collision.
+
 ## Inline span styles Read honors (pilot)
 
 | `style` | Render |
 |---------|--------|
 | `em` | italic |
+| `strong` | bold (`~Adlung~` in Gutenberg, not Markdown `~~`) |
 | `footnote` | tappable marker → note body (`span.note` or `notes[]`) |
 | `quote` | keep glyphs; optional subtle style |
 | `bracket_note`, `paren_cite`, `paren_quote`, `paren_aside`, `paren_page`, `bracket_cite`, `bracket_other`, `list_marker` | keep text; no special chrome in pilot |
 
 Offsets are into the block `text` after Hub merge. Read must not re-parse markers when `blocks` are present.
+
+## Read-only work (not this repo)
+
+- Default “Giải thích thêm” language = `book.language` (EN for the three pilots); persist the dropdown.
+- Explain = `host_text` + note `body`, not the currently highlighted paragraph if it drifted.
+- Skip `hidden` / `suppress_in_reader` once Read is updated; until then Hub already drops them from the published payload.
 
 ## Split rules
 

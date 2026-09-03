@@ -5,7 +5,11 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-from .serialize import blocks_to_markdown, build_edition_document, edition_hash
+from .block_ids import assign_block_ids, block_prefix, match_block_index
+from .inline_spans import annotate_blocks
+from .serialize import build_edition_document
+
+STRUCTURAL_ACTIONS = frozenset({"merge_with_next", "merge", "split"})
 
 
 def _merge_block_with_next(blocks: list[dict[str, Any]], index: int) -> None:
@@ -13,9 +17,9 @@ def _merge_block_with_next(blocks: list[dict[str, Any]], index: int) -> None:
         return
     left = blocks[index]
     right = blocks[index + 1]
-    if left.get("type") not in {"paragraph", "blockquote", "dialogue", "metadata"}:
+    if left.get("type") not in {"paragraph", "blockquote", "dialogue", "metadata", "list_item"}:
         return
-    if right.get("type") not in {"paragraph", "blockquote", "dialogue", "metadata"}:
+    if right.get("type") not in {"paragraph", "blockquote", "dialogue", "metadata", "list_item"}:
         return
     left_text = str(left.get("text") or "").rstrip()
     right_text = str(right.get("text") or "").lstrip()
@@ -29,28 +33,115 @@ def _merge_block_with_next(blocks: list[dict[str, Any]], index: int) -> None:
     blocks.pop(index + 1)
 
 
-def apply_block_patches(blocks: list[dict[str, Any]], patches: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _split_block(blocks: list[dict[str, Any]], index: int, at: int) -> None:
+    if index < 0 or index >= len(blocks):
+        return
+    block = blocks[index]
+    text = str(block.get("text") or "")
+    if at <= 0 or at >= len(text):
+        return
+    left_text = text[:at].rstrip()
+    right_text = text[at:].lstrip()
+    if not left_text or not right_text:
+        return
+    left = dict(block)
+    left["text"] = left_text
+    left.pop("spans", None)
+    right = dict(block)
+    right["text"] = right_text
+    right.pop("spans", None)
+    right.pop("block_id", None)
+    blocks[index] = left
+    blocks.insert(index + 1, right)
+
+
+def _resolve_index(blocks: list[dict[str, Any]], patch: dict[str, Any]) -> int | None:
+    return match_block_index(
+        blocks,
+        block_id=str(patch.get("block_id") or "") or None,
+        kind=str(patch.get("type") or patch.get("match_type") or "") or None,
+        prefix=str(patch.get("prefix") or "") or None,
+        block_index=patch.get("block_index") if isinstance(patch.get("block_index"), int) else None,
+    )
+
+
+def apply_block_patches(
+    blocks: list[dict[str, Any]],
+    patches: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Apply Final Touch patches by ``block_id`` (index is fallback). Returns (blocks, stale)."""
     out = copy.deepcopy(blocks)
+    stale: list[dict[str, Any]] = []
     for patch in patches:
-        action = patch.get("action")
-        index = patch.get("block_index")
-        if action == "merge_with_next":
-            if isinstance(index, int):
-                _merge_block_with_next(out, index)
+        if not isinstance(patch, dict):
             continue
-        if not isinstance(index, int) or index < 0 or index >= len(out):
+        action = str(patch.get("action") or "").strip()
+        index = _resolve_index(out, patch)
+        if index is None:
+            stale.append({**dict(patch), "stale": True, "reason": "block_id not found after re-parse"})
+            continue
+        if action in {"merge_with_next", "merge"}:
+            _merge_block_with_next(out, index)
+            continue
+        if action == "split":
+            at = patch.get("at")
+            if not isinstance(at, int):
+                stale.append({**dict(patch), "stale": True, "reason": "split requires integer at"})
+                continue
+            _split_block(out, index, at)
             continue
         block = out[index]
-        if "type" in patch and patch["type"]:
-            block["type"] = patch["type"]
-        if "text" in patch and patch["text"] is not None:
-            block["text"] = str(patch["text"])
-            block.pop("spans", None)
-        if block.get("type") == "heading" and "level" in patch:
+        if action == "hide":
+            block["hidden"] = True
+            continue
+        if action == "show":
+            block["hidden"] = False
+            continue
+        if "hidden" in patch and patch["hidden"] is not None:
+            block["hidden"] = bool(patch["hidden"])
+        if action == "set_type" or ("type" in patch and patch["type"] and action != "split"):
+            if patch.get("type"):
+                block["type"] = patch["type"]
+        if action == "set_text":
+            if "text" in patch and patch["text"] is not None:
+                block["text"] = str(patch["text"])
+                block.pop("spans", None)
+                block["lexical"] = True
+        elif "text" in patch and patch["text"] is not None and action not in STRUCTURAL_ACTIONS | {"hide", "show"}:
+            new_text = str(patch["text"])
+            if new_text != str(block.get("text") or ""):
+                block["text"] = new_text
+                block.pop("spans", None)
+                if patch.get("lexical"):
+                    block["lexical"] = True
+        if block.get("type") == "heading" and "level" in patch and patch["level"] is not None:
             block["level"] = int(patch["level"])
         if block.get("type") == "dialogue" and "speaker" in patch:
             block["speaker"] = patch["speaker"]
-    return out
+        if "role" in patch and patch["role"] is not None:
+            block["role"] = patch["role"]
+    chapter_id = "book"
+    if out and isinstance(out[0].get("block_id"), str) and ":" in str(out[0]["block_id"]):
+        chapter_id = str(out[0]["block_id"]).split(":", 1)[0]
+    assign_block_ids(out, chapter_id=chapter_id)
+    annotated, _profile = annotate_blocks(out)
+    return annotated, stale
+
+
+def _coalesce_key(patch: dict[str, Any]) -> str | None:
+    action = str(patch.get("action") or "")
+    if action in STRUCTURAL_ACTIONS:
+        return None
+    if patch.get("block_id"):
+        return f"id:{patch['block_id']}"
+    index = patch.get("block_index")
+    if isinstance(index, int):
+        return f"idx:{index}"
+    kind = str(patch.get("match_type") or patch.get("type") or "")
+    prefix = str(patch.get("prefix") or "")
+    if kind and prefix:
+        return f"pfx:{kind}:{block_prefix(prefix)}"
+    return None
 
 
 def merge_block_patches(
@@ -59,31 +150,33 @@ def merge_block_patches(
 ) -> list[dict[str, Any]]:
     """Accumulate curator patches across saves.
 
-    Field edits for the same ``block_index`` coalesce (last wins).
-    ``merge_with_next`` actions append in order and are not collapsed.
+    Field edits for the same ``block_id`` (else ``block_index``) coalesce (last wins).
+    ``merge_with_next`` / ``split`` append in order and are not collapsed.
     """
     combined = list(existing or []) + list(incoming or [])
     result: list[dict[str, Any]] = []
-    last_pos: dict[int, int] = {}
+    last_pos: dict[str, int] = {}
     for patch in combined:
         if not isinstance(patch, dict):
             continue
-        if patch.get("action") == "merge_with_next":
+        key = _coalesce_key(patch)
+        if key is None:
             result.append(dict(patch))
             continue
-        index = patch.get("block_index")
-        if not isinstance(index, int):
-            result.append(dict(patch))
-            continue
-        if index in last_pos:
-            prev = result[last_pos[index]]
+        if key in last_pos:
+            prev = result[last_pos[key]]
             merged = dict(prev)
-            for key, value in patch.items():
+            for field, value in patch.items():
                 if value is not None:
-                    merged[key] = value
-            result[last_pos[index]] = merged
+                    merged[field] = value
+            incoming_action = str(patch.get("action") or "")
+            if incoming_action == "hide":
+                merged["hidden"] = True
+            elif incoming_action == "show":
+                merged["hidden"] = False
+            result[last_pos[key]] = merged
         else:
-            last_pos[index] = len(result)
+            last_pos[key] = len(result)
             result.append(dict(patch))
     return result
 
@@ -105,7 +198,7 @@ def apply_chapter_overrides(
         start = int(spec["block_start"])
         end = int(spec["block_end"])
         slice_blocks = blocks[start : end + 1]
-        patched = apply_block_patches(slice_blocks, patches)
+        patched, _stale = apply_block_patches(slice_blocks, patches)
         blocks[start : end + 1] = patched
         delta = len(patched) - len(slice_blocks)
         if delta:

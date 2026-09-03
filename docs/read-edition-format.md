@@ -4,7 +4,7 @@ Hub produces REF/1 at publish time; Read consumes it for split, render, and TTS.
 
 **Pilot contract (frozen):** see [ref-read-contract.md](./ref-read-contract.md) for the Hub→Read payload Read must honor on the first three English pilots (`arnold--essays_in_criticism`, `bastiat--economic_sophisms`, `bach--abdy_williams`).
 
-**Final Touch / custom rules (plan):** see [final-touch-plan.md](./final-touch-plan.md) — first Hub sprint is parser + Bach matchers (`block_id` included); Final Touch / figures / translation rewrite come later. Not implemented yet.
+**Final Touch / custom rules:** see [final-touch-plan.md](./final-touch-plan.md). Hub implements parser + Bach matchers + Chế bản step 5 + `block_id` inherit for translation. Figures: ingest Gutenberg zip into `corpus/assets/` (gitignored binaries); do not hotlink. Read-app lockstep is documented in the contract, not this repo.
 
 **Rule reference:** see [ref-format-rules.md](./ref-format-rules.md) for parser pipeline, join rules, inline span classifiers, and corpus fixtures.
 

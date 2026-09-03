@@ -124,6 +124,8 @@ def test_cheban_ui_labels(client):
     assert "Chạy thử chương này" in html
     assert "Chạy toàn văn bản" in html
     assert 'data-step="footnotes"' in html
+    assert 'data-step="final"' in html
+    assert "Final Touch" in html
     js = client.get("/read-edition.js")
     assert js.status_code == 200
     assert "chương đã parse" in js.text
@@ -136,7 +138,7 @@ def test_cheban_ui_labels(client):
     assert "if (suspectsOnly && !it.suspect && !it.decision) return false;" not in js.text
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban21' in html
+    assert 'styles.css?v=cheban22' in html
     assert "chưa parse hết" in client.get("/app.js").text
     assert 'id="re-jobs"' in html
     assert 'id="re-cancel-jobs"' in html

@@ -15,6 +15,7 @@ corpus/sources/*/raw/
 corpus/sources/*/chunks/
 corpus/editions/
 corpus/read-editions/
+corpus/assets/
 corpus/.translation-jobs.json
 .translation-jobs.json
 corpus/.edition-jobs.json

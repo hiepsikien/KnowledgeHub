@@ -1,6 +1,6 @@
 # Kế hoạch: Final Touch + custom rules (pilot 3 cuốn)
 
-Checklist đọc thử Bach (Abdy Williams) trên Read, cộng `arnold--essays_in_criticism` và `bastiat--economic_sophisms`. Đây là kế hoạch kỹ thuật đã thu hẹp theo feedback — **chưa implement**.
+Checklist đọc thử Bach (Abdy Williams) trên Read, cộng `arnold--essays_in_criticism` và `bastiat--economic_sophisms`. Kế hoạch đã implement trên Hub (parser 1.10, matchers, Final Touch bước 5, inherit dịch). Read-app lockstep vẫn nằm ở repo Read.
 
 ## Kết luận
 

@@ -475,6 +475,8 @@ def notes_for_chapter_blocks(
                     "body": str(span.get("note") or "")[:8000],
                     "anchor": "",
                     "chapter": str(span.get("chapter") or ""),
+                    "host_block_id": str(block.get("block_id") or ""),
+                    "host_text": str(block.get("text") or ""),
                 }
     if from_spans:
         return [from_spans[key] for key in sorted(from_spans, key=lambda marker: _span_numbers(marker) or [0])]
@@ -594,6 +596,15 @@ def notes_for_read_publish(
                 "group_label": str(row.get("group_label") or "Chú thích"),
             }
         )
+        host_id = str(row.get("host_block_id") or "").strip()
+        host_text = str(row.get("host_text") or "").strip()
+        if host_id:
+            out[-1]["host_block_id"] = host_id
+        if host_text:
+            out[-1]["host_text"] = host_text[:4000]
+        figures = row.get("figures")
+        if isinstance(figures, list) and figures:
+            out[-1]["figures"] = figures
 
     for chapter in chapters or []:
         chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "").strip()
@@ -609,6 +620,8 @@ def notes_for_read_publish(
                     "marker": marker,
                     "body": span.get("note") or "",
                     "kind": "footnote",
+                    "host_block_id": str(block.get("block_id") or ""),
+                    "host_text": str(block.get("text") or ""),
                 }
         for marker in sorted(from_spans, key=lambda item: _span_numbers(item) or [0]):
             add(from_spans[marker], chapter=chapter_id, force_chapter=True)
@@ -636,6 +649,26 @@ def notes_for_read_publish(
                 }
             )
     return out
+
+
+def attach_note_hosts(
+    notes: list[dict[str, Any]],
+    blocks: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Stamp ``host_block_id`` / ``host_text`` from the paragraph that contains the marker."""
+    for note in notes:
+        marker = str(note.get("marker") or "").strip()
+        if not marker:
+            continue
+        if note.get("host_block_id") and note.get("host_text"):
+            continue
+        for block in blocks:
+            text = str(block.get("text") or "")
+            if marker and marker in text:
+                note["host_block_id"] = str(block.get("block_id") or "")
+                note["host_text"] = text
+                break
+    return notes
 
 
 def glossary_from_footnotes(text: str) -> tuple[str, list[dict[str, Any]]]:
