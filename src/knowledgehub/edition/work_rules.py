@@ -90,7 +90,9 @@ def apply_pg_illustration(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if OBJECT_REPLACEMENT in text and not ILLUSTRATION_RE.search(text):
             row = dict(block)
             row["role"] = "figure"
-            row["text"] = "[Music example]"
+            cleaned = text.replace(OBJECT_REPLACEMENT, "").strip()
+            # Keep a source glyph — do not invent "[Music example]" (breaks fidelity).
+            row["text"] = cleaned or OBJECT_REPLACEMENT
             row.pop("spans", None)
             out.append(row)
             continue
@@ -99,8 +101,8 @@ def apply_pg_illustration(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         remainder = text
         for match in ILLUSTRATION_RE.finditer(text):
-            caption = (match.group(1) or "").strip() or "[Music example]"
-            caption = caption.replace(OBJECT_REPLACEMENT, "").strip() or "[Music example]"
+            caption = (match.group(1) or "").strip()
+            caption = caption.replace(OBJECT_REPLACEMENT, "").strip() or match.group(0).strip()
             out.append(
                 {
                     "type": "paragraph",

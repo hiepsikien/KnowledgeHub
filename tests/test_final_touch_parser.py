@@ -257,6 +257,19 @@ def test_illustration_becomes_figure_role():
     assert "[Illustration:" not in " ".join(b.get("text", "") for b in edition["blocks"])
 
 
+def test_object_replacement_figure_does_not_invent_caption():
+    raw = "A plate follows.\n\n\ufffc\n\nThen the prose continues at some length after the plate.\n"
+    edition, _ = _parse(raw)
+    figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
+    assert figs
+    joined = "".join(b.get("text", "") for b in edition["blocks"])
+    assert "[Music example]" not in joined
+    from knowledgehub.edition.fidelity import run_fidelity_checks
+
+    fid = run_fidelity_checks(raw, edition)
+    assert fid["passed"], [c for c in fid["checks"] if not c["passed"]]
+
+
 def test_hidden_blocks_dropped_from_reader_payload():
     blocks = [
         {"type": "heading", "text": "CHAPTER III", "level": 1, "suppress_in_reader": True},
