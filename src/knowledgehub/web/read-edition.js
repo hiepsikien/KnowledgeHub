@@ -381,7 +381,19 @@
         const marker = escapeHtml(note.marker || "");
         const anchor = note.anchor ? `<span class="re-note-anchor">${escapeHtml(note.anchor)}</span> ` : "";
         const id = noteElementId(note.marker);
-        return `<li id="${id}"><strong>${anchor}${marker}</strong> ${escapeHtml(note.body)}</li>`;
+        const body = escapeHtml(note.body);
+        const figs = (note.figures || [])
+          .map((fig) => {
+            const src = String(fig.src || "").trim();
+            const cap = escapeHtml(String(fig.caption || fig.text || ""));
+            const img = src
+              ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${cap || "Illustration"}" />`
+              : "";
+            const capEl = cap ? `<figcaption>${cap}</figcaption>` : "";
+            return `<figure class="re-figure re-note-figure">${img}${capEl}</figure>`;
+          })
+          .join("");
+        return `<li id="${id}"><strong>${anchor}${marker}</strong> ${body}${figs}</li>`;
       })
       .join("");
     return `<section class="re-notes"><h3>Chú thích (${notes.length})</h3><ol>${items}</ol></section>`;
@@ -437,7 +449,14 @@
     if (kind === "metadata") return `<p class="re-metadata">${body}</p>`;
     if (kind === "hr") return `<hr class="re-hr" />`;
     if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
-    if (block.role === "figure") return `<p class="re-figure">${body}</p>`;
+    if (block.role === "figure") {
+      const src = String(block.src || "").trim();
+      const img = src
+        ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${escapeHtml(String(block.text || "Illustration"))}" />`
+        : "";
+      const cap = body ? `<figcaption>${body}</figcaption>` : "";
+      return `<figure class="re-figure">${img}${cap}</figure>`;
+    }
     if (block.role === "aside") return `<p class="re-paragraph re-aside">${body}</p>`;
     return `<p class="re-paragraph">${body}</p>`;
   }
@@ -1988,6 +2007,23 @@
       const type = $("re-ft-type")?.value;
       if (!type) return;
       void applyFinalTouch("set_type", patchForKind(type));
+    });
+    $("re-ft-images")?.addEventListener("click", async () => {
+      if (!state.workId) return;
+      const btn = $("re-ft-images");
+      if (btn) btn.disabled = true;
+      try {
+        const data = await api(`/api/works/${encodeURIComponent(state.workId)}/ingest-images`, {
+          method: "POST",
+        });
+        const n = (data.copied || []).length;
+        toast(n ? `Đã lấy ${n} ảnh Gutenberg` : "Không có ảnh");
+        if (state.chapterId) await selectChapter(state.chapterId);
+      } catch (err) {
+        toast(err.message || String(err));
+      } finally {
+        if (btn) btn.disabled = false;
+      }
     });
 
     $("re-publish")?.addEventListener("click", () => {

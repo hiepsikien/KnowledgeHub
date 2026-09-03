@@ -179,3 +179,37 @@ def test_edition_hash_includes_chapter_id_and_title():
     assert len(with_chapters) == 64
     assert with_chapters != blocks_only
     assert with_chapters != other_title
+
+
+def test_attach_edition_includes_figure_assets(tmp_path, monkeypatch):
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(tmp_path))
+    dest = tmp_path / "assets" / "bach--abdy_williams"
+    dest.mkdir(parents=True)
+    (dest / "illoa001.png").write_bytes(b"png-bytes")
+    figure = {
+        "type": "paragraph",
+        "role": "figure",
+        "text": "Bach",
+        "src": "/assets/bach--abdy_williams/illoa001.png",
+    }
+    edition = {
+        "edition_format": "ref/1",
+        "edition_hash": "a" * 64,
+        "content_kind": "prose",
+        "reading_markdown": "Bach",
+        "blocks": [figure],
+        "_chapters": [
+            {
+                "chapter_id": "ch-001",
+                "title": "Front matter",
+                "reading_markdown": "Bach",
+                "blocks": [figure],
+            }
+        ],
+    }
+    payload: dict = {"hub_work_id": "bach--abdy_williams", "raw_text": "x"}
+    _attach_edition(payload, {"edition": edition})
+    assert payload["assets"]
+    assert payload["assets"][0]["filename"] == "illoa001.png"
+    assert payload["assets"][0]["content_type"] == "image/png"
+    assert payload["chapters"][0]["blocks"][0]["src"].endswith("illoa001.png")

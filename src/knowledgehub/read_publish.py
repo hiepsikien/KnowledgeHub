@@ -21,6 +21,7 @@ from .edition.read_edition_steps import (
     assemble_edition_from_package,
     load_structure,
 )
+from .edition.figures import collect_publish_assets, work_asset_dir
 from .edition.serialize import (
     edition_hash as hash_edition_for_publish,
     reader_visible_blocks,
@@ -69,6 +70,15 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     notes = notes_for_read_publish(edition, chapters=edition.get("_chapters") or None)
     if notes:
         payload["notes"] = notes
+    work_id = str(payload.get("hub_work_id") or "")
+    if work_id:
+        dest = work_asset_dir(corpus_root(), work_id)
+        figure_blocks: list[dict[str, Any]] = list(visible)
+        for chapter in payload.get("chapters") or []:
+            figure_blocks.extend(chapter.get("blocks") or [])
+        assets = collect_publish_assets(figure_blocks, notes, dest)
+        if assets:
+            payload["assets"] = assets
 
 
 def _chapters_for_read_publish(edition: dict[str, Any]) -> list[dict[str, Any]]:

@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .catalog import get_work
+from .edition.figures import apply_work_assets, bind_edition_assets, edition_has_unbound_figures
 from .edition.overrides import apply_block_patches, merge_block_patches
 from .edition.read_edition import (
     ReadEditionError,
@@ -257,6 +259,15 @@ def _get_chapter(work_id: str, chapter_id: str, *, corpus: Path | None = None) -
     structure = load_structure(package_dir)
     if ch_path.is_file():
         chapter = load_chapter(package_dir, chapter_id)
+        work = get_work(work_id, corpus=root)
+        apply_work_assets(
+            work_id,
+            list(chapter.get("blocks") or []),
+            list(chapter.get("notes") or []),
+            corpus=root,
+            work=work,
+            fetch=False,
+        )
     else:
         if not structure:
             raise ValueError("Chapter not parsed — run macro then micro parse")
@@ -415,6 +426,12 @@ def edition_for_publish(work_id: str, *, corpus: Path | None = None) -> tuple[di
         language = str(work.get("language") or "en")
         family = str(structure.get("source_family") or meta.get("family") or "plain")
         edition = assemble_edition_from_package(package_dir, language=language, source_family=family)
+        bind_edition_assets(
+            edition,
+            work,
+            root,
+            fetch=edition_has_unbound_figures(edition),
+        )
         manifest = load_manifest(package_dir)
         return edition, {
             "manifest": manifest,

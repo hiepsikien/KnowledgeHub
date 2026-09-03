@@ -129,10 +129,15 @@ def main(argv: list[str] | None = None) -> int:
 
     ingest = sub.add_parser(
         "ingest-images",
-        help="Copy Gutenberg HTML zip images into corpus/assets/{work}/ (no hotlink)",
+        help="Copy Gutenberg HTML images into corpus/assets/{work}/ (no hotlink)",
     )
     ingest.add_argument("--work", required=True, help="Work id, e.g. bach--abdy_williams")
-    ingest.add_argument("--zip", required=True, type=Path, help="Gutenberg *-h.zip")
+    ingest.add_argument(
+        "--zip",
+        type=Path,
+        default=None,
+        help="Optional Gutenberg *-h.zip; omit to download from gutenberg_id",
+    )
 
     args = parser.parse_args(argv)
 
@@ -418,20 +423,35 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     if args.cmd == "ingest-images":
-        from .edition.figures import ingest_gutenberg_zip_images, work_asset_dir
+        from .edition.figures import (
+            ensure_work_assets,
+            ingest_gutenberg_zip_images,
+            work_asset_dir,
+        )
         from .paths import corpus_root
 
         try:
-            get_work(args.work)
+            work = get_work(args.work)
         except KeyError as exc:
             print(str(exc), file=sys.stderr)
             return 1
-        zip_path = args.zip.expanduser().resolve()
-        if not zip_path.is_file():
-            print(f"zip not found: {zip_path}", file=sys.stderr)
-            return 1
         dest = work_asset_dir(corpus_root(), args.work)
-        copied = ingest_gutenberg_zip_images(zip_path, dest)
+        if args.zip:
+            zip_path = args.zip.expanduser().resolve()
+            if not zip_path.is_file():
+                print(f"zip not found: {zip_path}", file=sys.stderr)
+                return 1
+            copied = ingest_gutenberg_zip_images(zip_path, dest)
+        else:
+            if not str(work.get("gutenberg_id") or "").strip():
+                print("work has no gutenberg_id; pass --zip", file=sys.stderr)
+                return 1
+            dest = ensure_work_assets(work, corpus_root(), fetch=True)
+            copied = [
+                {"file": p.name, "bytes": p.stat().st_size}
+                for p in sorted(dest.iterdir())
+                if p.is_file() and p.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
+            ]
         print(
             json.dumps(
                 {"work_id": args.work, "dest": str(dest), "copied": copied},

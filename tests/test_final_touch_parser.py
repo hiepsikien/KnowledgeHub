@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from knowledgehub.edition.block_ids import assign_block_ids, block_prefix, is_chapter_banner, mark_chapter_banner
 from knowledgehub.edition.figures import bind_body_figure_src, bind_figure_src, figures_from_text, ingest_gutenberg_zip_images
 from knowledgehub.edition.inline_spans import annotate_inline_spans
@@ -553,6 +555,9 @@ def test_translation_inherit_keeps_hidden_skips_lexical():
     assert copied[0]["hidden"] is True
 
 
+PNG = b"\x89PNG\r\n\x1a\n" + b"\x00" * 16
+
+
 def test_figures_from_footnote_body():
     figures = figures_from_text("[Illustration: Autograph of the prelude, 1722]")
     assert figures[0]["caption"].startswith("Autograph")
@@ -599,16 +604,212 @@ def test_body_figure_block_gets_src(tmp_path: Path):
     assert blocks[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"
 
 
-def test_parse_binds_src_on_body_figure(tmp_path: Path, monkeypatch):
+def test_bind_does_not_pair_single_leftover_file(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "random.jpg").write_bytes(b"x")
+    figures = figures_from_text("[Illustration: Autograph of the prelude]")
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/other")
+    assert "src" not in bound[0]
+
+
+def test_html_caption_binds_gutenberg_filenames(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(tmp_path))
     dest = tmp_path / "assets" / "bach--abdy_williams"
     dest.mkdir(parents=True)
-    (dest / "autograph.jpg").write_bytes(b"x")
+    (dest / "illoa001.png").write_bytes(b"x")
+    (dest / "illot020bs.jpg").write_bytes(b"y")
+    (dest / "music095.png").write_bytes(b"z")
+    html = """
+    <div class="figcenter"><img src="images/illoa001.png" alt="Bach" /></div>
+    <div class="figcenter">
+      <img src="images/illot020bs.jpg" alt="" />
+      <div class="caption"><div>The House at Eisenach in which J. S. Bach was born</div></div>
+    </div>
+    <div class="figcenter"><img src="images/music095.png" alt="A stronghold sure" /></div>
+    """
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    (dest / "_html_figures.json").write_text(
+        __import__("json").dumps(parse_gutenberg_html_figures(html)),
+        encoding="utf-8",
+    )
     raw = (
-        "A page of music follows. [Illustration: Autograph of a prelude] "
-        "Then the prose continues at some length after the plate.\n"
+        "[Illustration: Bach]\n\n"
+        "A long paragraph about the family of musicians in Thuringia follows here.\n\n"
+        "[Illustration: The House at Eisenach in which J. S. Bach was born]\n\n"
+        "He was born on or about March 31st, 1685 at Eisenach in Thuringia.\n"
     )
     edition, _ = _parse(raw)
     figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
-    assert figs
-    assert figs[0]["src"] == "/assets/bach--abdy_williams/autograph.jpg"
+    assert [Path(f["src"]).name for f in figs] == ["illoa001.png", "illot020bs.jpg"]
+
+
+def test_caption_class_with_extra_tokens():
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    html = """
+    <div class="figcenter"><img src="images/illoa001.png" alt="" />
+    <div class="caption center"><div>Bach</div></div></div>
+    <div class="figcenter"><img src="images/house.jpg" alt="" />
+    <div class='caption'><div>The House at Eisenach</div></div></div>
+    """
+    figs = parse_gutenberg_html_figures(html)
+    assert [row["caption"] for row in figs] == ["Bach", "The House at Eisenach"]
+    assert figs[0]["src"] == "images/illoa001.png"
+
+
+def test_ingest_html_images_writes_manifest(tmp_path: Path):
+    dest = tmp_path / "assets"
+    html = '<div class="figcenter"><img src="images/illoa001.png" alt="Bach" /></div>'
+    from knowledgehub.edition.figures import ingest_gutenberg_html_images
+
+    urls: list[str] = []
+
+    def fetch_image(url: str) -> bytes:
+        urls.append(url)
+        return PNG
+
+    copied = ingest_gutenberg_html_images(
+        "43650",
+        dest,
+        html_text=html,
+        fetch_image=fetch_image,
+    )
+    assert copied[0]["file"] == "illoa001.png"
+    assert (dest / "illoa001.png").read_bytes() == PNG
+    assert (dest / "_html_figures.json").is_file()
+    assert urls == ["https://www.gutenberg.org/files/43650/43650-h/images/illoa001.png"]
+
+
+def test_ingest_html_resolves_src_beside_html(tmp_path: Path):
+    dest = tmp_path / "assets"
+    from knowledgehub.edition.figures import ingest_gutenberg_html_images
+
+    urls: list[str] = []
+    copied = ingest_gutenberg_html_images(
+        "43650",
+        dest,
+        html_text='<img src="cover.jpg" alt="Cover" />',
+        fetch_image=lambda url: urls.append(url) or PNG,
+    )
+    assert copied[0]["file"] == "cover.jpg"
+    assert urls == ["https://www.gutenberg.org/files/43650/43650-h/cover.jpg"]
+
+
+def test_ingest_html_rejects_html_error_body(tmp_path: Path):
+    dest = tmp_path / "assets"
+    from knowledgehub.edition.figures import ingest_gutenberg_html_images
+
+    with pytest.raises(RuntimeError, match="not an image"):
+        ingest_gutenberg_html_images(
+            "43650",
+            dest,
+            html_text='<img src="images/illoa001.png" alt="Bach" />',
+            fetch_image=lambda url: b"<!DOCTYPE html><html>404</html>",
+        )
+    assert not (dest / "illoa001.png").exists()
+
+
+def test_incomplete_html_ingest_resumes(tmp_path: Path):
+    dest = tmp_path / "assets" / "bach--abdy_williams"
+    html = (
+        '<img src="images/a.png" alt="A" />'
+        '<img src="images/b.png" alt="B" />'
+    )
+    attempts = {"b": 0}
+    from knowledgehub.edition.figures import ensure_work_assets, ingest_gutenberg_html_images
+
+    def fetch_image(url: str) -> bytes:
+        if url.endswith("b.png"):
+            attempts["b"] += 1
+            if attempts["b"] == 1:
+                raise TimeoutError("fail b")
+        return PNG
+
+    with pytest.raises(RuntimeError, match="incomplete"):
+        ingest_gutenberg_html_images("43650", dest, html_text=html, fetch_image=fetch_image)
+    assert (dest / "a.png").is_file()
+    assert not (dest / "b.png").exists()
+    assert (dest / "_html_figures.json").is_file()
+
+    ensure_work_assets(
+        {"id": "bach--abdy_williams", "gutenberg_id": "43650"},
+        tmp_path,
+        fetch=True,
+        fetch_html=lambda url: html,
+        fetch_image=fetch_image,
+    )
+    assert (dest / "b.png").is_file()
+    assert attempts["b"] == 2
+
+
+def test_ensure_work_assets_does_not_refetch_complete_set(tmp_path: Path):
+    dest = tmp_path / "assets" / "bach--abdy_williams"
+    dest.mkdir(parents=True)
+    (dest / "a.png").write_bytes(PNG)
+    (dest / "_html_figures.json").write_text(
+        '[{"file": "a.png", "alt": "A", "caption": "A"}]',
+        encoding="utf-8",
+    )
+    from knowledgehub.edition.figures import ensure_work_assets
+
+    def boom(*_a, **_k):
+        raise AssertionError("should not fetch")
+
+    ensure_work_assets(
+        {"id": "bach--abdy_williams", "gutenberg_id": "43650"},
+        tmp_path,
+        fetch=True,
+        fetch_html=boom,
+        fetch_image=boom,
+    )
+
+
+def test_edition_has_unbound_figures():
+    from knowledgehub.edition.figures import edition_has_unbound_figures
+
+    assert not edition_has_unbound_figures({"blocks": [{"type": "paragraph", "text": "hi"}]})
+    assert edition_has_unbound_figures(
+        {"blocks": [{"type": "paragraph", "role": "figure", "text": "Bach"}]}
+    )
+    assert not edition_has_unbound_figures(
+        {"blocks": [{"type": "paragraph", "role": "figure", "text": "Bach", "src": "/assets/x/a.png"}]}
+    )
+    assert edition_has_unbound_figures(
+        {"blocks": [], "notes": [{"figures": [{"caption": "Autograph"}]}]}
+    )
+
+
+def test_bind_edition_skips_fetch_when_no_unbound_figures(tmp_path: Path, monkeypatch):
+    called: list[str] = []
+    monkeypatch.setattr(
+        "knowledgehub.edition.figures.ingest_gutenberg_html_images",
+        lambda *a, **k: called.append("ingest") or [],
+    )
+    from knowledgehub.edition.figures import bind_edition_assets, edition_has_unbound_figures
+
+    edition = {"blocks": [{"type": "paragraph", "text": "hi"}], "notes": [], "_chapters": []}
+    work = {"id": "arnold--essays_in_criticism", "gutenberg_id": "7700"}
+    bind_edition_assets(edition, work, tmp_path, fetch=edition_has_unbound_figures(edition))
+    assert called == []
+
+
+def test_collect_publish_assets_encodes_bound_files(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "illoa001.png").write_bytes(b"png-bytes")
+    from knowledgehub.edition.figures import collect_publish_assets
+
+    blocks = [
+        {
+            "type": "paragraph",
+            "role": "figure",
+            "text": "Bach",
+            "src": "/assets/bach--abdy_williams/illoa001.png",
+        }
+    ]
+    assets = collect_publish_assets(blocks, [], dest)
+    assert assets[0]["filename"] == "illoa001.png"
+    assert assets[0]["content_type"] == "image/png"
+    assert assets[0]["data"] == __import__("base64").b64encode(b"png-bytes").decode("ascii")
