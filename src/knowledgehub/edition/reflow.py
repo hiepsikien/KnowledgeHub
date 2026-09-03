@@ -34,11 +34,25 @@ SCHOLASTIC_BODY = re.compile(
 )
 
 
+ALLCAPS_YEAR_LINE = re.compile(
+    r"^[A-ZÀ-ÿÆŒ][A-ZÀ-ÿÆŒ .''’-]{1,80},\s*(?:d\.\s*)?\d{3,4}"
+    r"(?:\s*[-–—]\s*(?:\d{2,4}|[.]{2,}))?\s*\.?$"
+)
+
+
+def is_caps_year_line(line: str) -> bool:
+    """ALLCAPS name + year (Bach genealogy rows), not a section heading."""
+    return bool(ALLCAPS_YEAR_LINE.match(line.strip()))
+
+
 def is_all_caps_heading(line: str) -> bool:
-    letters = [c for c in line if c.isalpha()]
-    if len(letters) < 8 or len(line) >= 90:
+    stripped = line.strip()
+    if is_caps_year_line(stripped):
         return False
-    if line.count(",") >= 2:
+    letters = [c for c in stripped if c.isalpha()]
+    if len(letters) < 8 or len(stripped) >= 90:
+        return False
+    if stripped.count(",") >= 2:
         return False
     return sum(1 for c in letters if c.isupper()) / len(letters) >= 0.85
 

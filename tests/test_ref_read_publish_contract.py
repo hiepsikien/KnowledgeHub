@@ -130,6 +130,39 @@ def test_attach_edition_sends_chapters_and_notes():
     assert payload["edition_hash"] != "a" * 64
 
 
+def test_attach_edition_filters_book_level_hidden_blocks():
+    edition = {
+        "edition_format": "ref/1",
+        "edition_hash": "a" * 64,
+        "content_kind": "prose",
+        "reading_markdown": "Visible body.",
+        "blocks": [
+            {"type": "paragraph", "text": "Weimar", "hidden": True, "role": "aside"},
+            {"type": "heading", "text": "CHAPTER III", "level": 1, "suppress_in_reader": True},
+            {"type": "paragraph", "text": "Visible body."},
+        ],
+        "split_hints": [
+            {"type": "heading", "level": 1, "block_index": 1, "text": "CHAPTER III"},
+        ],
+        "_chapters": [
+            {
+                "chapter_id": "ch-001",
+                "title": "Chapter III",
+                "reading_markdown": "Visible body.",
+                "blocks": [
+                    {"type": "paragraph", "text": "Weimar", "hidden": True, "role": "aside"},
+                    {"type": "paragraph", "text": "Visible body."},
+                ],
+            }
+        ],
+    }
+    payload: dict = {"raw_text": "x"}
+    _attach_edition(payload, {"edition": edition})
+    assert [b["text"] for b in payload["blocks"]] == ["Visible body."]
+    assert payload["chapters"][0]["blocks"][0]["text"] == "Visible body."
+    assert not any(h.get("text") == "CHAPTER III" for h in payload["split_hints"])
+
+
 def test_edition_hash_includes_chapter_id_and_title():
     from knowledgehub.edition.serialize import edition_hash
 

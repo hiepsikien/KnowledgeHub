@@ -41,6 +41,10 @@
       lead: "Đánh dấu blockquote, ngoặc kép, và in nghiêng (_…_). Chỗ chắc auto OK (hoàn tác được). Ngữ cảnh lấy quanh đúng cụm. Thiếu dấu đóng chỉ ghi nhận (Đã xem). Có nút duyệt / bỏ tất cả nghi ngờ.",
     },
   };
+  const FINAL_STEP = {
+    title: "Final Touch",
+    lead: "Xem layout gần Read. Matcher đã gắn sidenote/gia phả/synopsis; chỉ sửa chỗ còn lệch: ẩn, hiện, ghép, tách, đổi type.",
+  };
 
   async function api(path, opts = {}) {
     const res = await fetch(path, {
@@ -383,6 +387,10 @@
     return `<section class="re-notes"><h3>Chú thích (${notes.length})</h3><ol>${items}</ol></section>`;
   }
 
+  function wrapBlockText(html) {
+    return `<span class="re-block-text">${html}</span>`;
+  }
+
   function renderBlock(block) {
     const kind = block.type || "paragraph";
     const text = String(block.text || "");
@@ -413,20 +421,24 @@
       if (cursor < text.length) parts.push(escapeHtml(text.slice(cursor)));
       inner = parts.join("");
     }
+    const body = wrapBlockText(inner);
     if (kind === "heading") {
       const lvl = Math.min(4, Math.max(1, block.level || 1));
-      return `<h${lvl + 1} class="re-heading">${inner}</h${lvl + 1}>`;
+      const extra = block.suppress_in_reader ? " re-banner" : "";
+      return `<h${lvl + 1} class="re-heading${extra}">${body}</h${lvl + 1}>`;
     }
-    if (kind === "blockquote") return `<blockquote class="re-blockquote">${inner}</blockquote>`;
+    if (kind === "blockquote") return `<blockquote class="re-blockquote">${body}</blockquote>`;
     if (kind === "dialogue") {
       const sp = block.speaker ? `<strong class="re-speaker">${escapeHtml(block.speaker)}.</strong> ` : "";
-      return `<p class="re-dialogue">${sp}${inner}</p>`;
+      return `<p class="re-dialogue">${sp}${body}</p>`;
     }
-    if (kind === "stage_direction") return `<p class="re-stage">[${inner}]</p>`;
-    if (kind === "verse_line" || kind === "stanza") return `<p class="re-verse">${inner}</p>`;
-    if (kind === "metadata") return `<p class="re-metadata">${inner}</p>`;
+    if (kind === "stage_direction") return `<p class="re-stage">[${body}]</p>`;
+    if (kind === "verse_line" || kind === "stanza") return `<p class="re-verse">${body}</p>`;
+    if (kind === "metadata") return `<p class="re-metadata">${body}</p>`;
     if (kind === "hr") return `<hr class="re-hr" />`;
-    return `<p class="re-paragraph">${inner}</p>`;
+    if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
+    if (block.role === "figure") return `<p class="re-figure">${body}</p>`;
+    return `<p class="re-paragraph">${body}</p>`;
   }
 
   function setEditJson(value) {
@@ -514,12 +526,25 @@
       };
       return;
     }
+    const staleBox = $("re-stale");
+    if (staleBox) {
+      const stale = chapter.stale_patches || [];
+      if (stale.length) {
+        staleBox.hidden = false;
+        staleBox.textContent = `${stale.length} patch Final Touch không khớp block_id sau re-parse — xem lại ẩn/type.`;
+      } else {
+        staleBox.hidden = true;
+        staleBox.textContent = "";
+      }
+    }
     box.innerHTML =
       blocks
-        .map(
-          (b, i) =>
-            `<div class="re-block${state.editIndex === i ? " on" : ""}" data-index="${i}" tabindex="0" role="button">${renderBlock(b)}</div>`,
-        )
+        .map((b, i) => {
+          const hidden = b.hidden ? " is-hidden" : "";
+          const on = state.editIndex === i ? " on" : "";
+          const bid = b.block_id ? ` data-block-id="${escapeHtml(b.block_id)}"` : "";
+          return `<div class="re-block${hidden}${on}" data-index="${i}"${bid} tabindex="0" role="button">${renderBlock(b)}</div>`;
+        })
         .join("") + renderNotes(chapter);
     box.onclick = (e) => {
       const mark = e.target.closest("mark[data-fn]");
@@ -541,7 +566,9 @@
       state.editIndex = Number(hit.dataset.index);
       highlightSelectedBlock();
       fillEditorForSelection();
-      document.querySelector("details.re-edit")?.setAttribute("open", "");
+      if (state.step !== "final") {
+        document.querySelector("details.re-edit")?.setAttribute("open", "");
+      }
     };
   }
 
@@ -638,6 +665,65 @@
     renderChapterList(state.manifest);
   }
 
+  function selectedBlock() {
+    const blocks = state.chapter?.blocks || [];
+    if (state.editIndex == null || state.editIndex < 0 || state.editIndex >= blocks.length) return null;
+    return blocks[state.editIndex];
+  }
+
+  function caretOffsetInSelectedBlock() {
+    const box = $("re-body");
+    if (!box || state.editIndex == null) return null;
+    const blockEl = box.querySelector(`.re-block[data-index="${state.editIndex}"]`);
+    const sel = window.getSelection();
+    if (!blockEl || !sel || !sel.rangeCount) return null;
+    const range = sel.getRangeAt(0);
+    const textEl = blockEl.querySelector(".re-block-text") || blockEl;
+    if (!textEl.contains(range.startContainer)) return null;
+    const pre = range.cloneRange();
+    pre.selectNodeContents(textEl);
+    pre.setEnd(range.startContainer, range.startOffset);
+    return pre.toString().length;
+  }
+
+  async function sendBlockPatches(patches, okMsg) {
+    if (!state.workId || !state.chapterId || !patches.length) return;
+    await api(
+      `/api/works/${encodeURIComponent(state.workId)}/read-edition/chapters/${encodeURIComponent(state.chapterId)}`,
+      { method: "PATCH", body: { block_patches: patches } },
+    );
+    toast(okMsg || "Đã lưu");
+    const keepIndex = state.editIndex;
+    await selectChapter(state.chapterId);
+    if (keepIndex != null) {
+      state.editIndex = keepIndex;
+      highlightSelectedBlock();
+      fillEditorForSelection();
+    }
+    if (state.chapter?.stale_patches?.length) {
+      toast(`${state.chapter.stale_patches.length} patch stale — block_id không còn`);
+    }
+  }
+
+  async function applyFinalTouch(action, extra) {
+    const block = selectedBlock();
+    if (!block) {
+      toast("Chọn một block trước");
+      return;
+    }
+    const patch = {
+      action,
+      block_id: block.block_id,
+      block_index: state.editIndex,
+      ...extra,
+    };
+    try {
+      await sendBlockPatches([patch], action === "hide" ? "Đã ẩn" : "Đã lưu");
+    } catch (err) {
+      toast(err.message);
+    }
+  }
+
   async function selectChapter(chapterId) {
     if (!state.workId) return;
     const loadId = ++state.chapterLoad;
@@ -649,7 +735,7 @@
     if (state.manifest) renderChapterList(state.manifest);
     const row = (state.manifest?.chapters || []).find((c) => c.chapter_id === chapterId);
     if (row && $("re-detail-title")) $("re-detail-title").textContent = row.title || chapterId;
-    if (state.step !== "structure") renderHitlList();
+    if (HITL_STEPS[state.step]) renderHitlList();
     const meta = $("re-detail-meta");
     if (meta) meta.textContent = "Đang tải…";
     try {
@@ -690,7 +776,7 @@
       renderStructTools(chapter);
       renderCompare(chapter);
       applyStepVisibility();
-      if (state.step !== "structure") renderHitlList();
+      if (HITL_STEPS[state.step]) renderHitlList();
       syncToolbar();
     } catch (err) {
       if (loadId !== state.chapterLoad || err.name === "AbortError") return;
@@ -860,6 +946,7 @@
 
   function applyStepVisibility() {
     const onStruct = state.step === "structure";
+    const onFinal = state.step === "final";
     const hasMacro = !!(state.status?.macro_complete || state.review);
     const steps = $("re-steps");
     const onDesk = !!state.workId && $("re-pick")?.hidden;
@@ -872,7 +959,9 @@
       const scannedIds = ov?.scanned_chapter_ids || [];
       const chapterScanned = !!(state.chapterId && scannedIds.includes(state.chapterId));
       const structureDone = step === "structure" && layoutConfirmed();
-      btn.classList.toggle("done", structureDone || (step !== "structure" && chapterScanned));
+      const chapterParsed = state.chapter?.micro_status === "complete";
+      const finalDone = step === "final" && chapterParsed;
+      btn.classList.toggle("done", structureDone || (step !== "structure" && step !== "final" && chapterScanned) || finalDone);
       let badge = btn.querySelector(".re-step-badge");
       let pending = ov?.summary?.pending || 0;
       if (state.chapterId && chapterScanned && state.hitlJob?.kind === step) {
@@ -880,7 +969,7 @@
           (it) => it.chapter_id === state.chapterId && it.suspect && !it.decision,
         ).length;
       }
-      if (step !== "structure" && pending && (chapterScanned || !state.chapterId)) {
+      if (step !== "structure" && step !== "final" && pending && (chapterScanned || !state.chapterId)) {
         if (!badge) {
           badge = document.createElement("span");
           badge.className = "re-step-badge";
@@ -893,17 +982,19 @@
       }
     });
     const hitl = $("re-hitl");
-    if (hitl) hitl.hidden = onStruct;
-    if ($("re-body")) $("re-body").hidden = !onStruct;
+    if (hitl) hitl.hidden = onStruct || onFinal;
+    if ($("re-body")) $("re-body").hidden = !onStruct && !onFinal;
     const edit = document.querySelector("details.re-edit");
-    if (edit) edit.hidden = !onStruct;
+    if (edit) edit.hidden = !onStruct && !onFinal;
+    if ($("re-final-tools")) $("re-final-tools").hidden = !onFinal;
+    if ($("re-stale") && !onFinal && !onStruct) $("re-stale").hidden = true;
     if ($("re-qa-ch")) $("re-qa-ch").hidden = !onStruct;
     if ($("re-qa-panel")) $("re-qa-panel").hidden = !onStruct || !state.chapter?.qa;
     if ($("re-toc")) $("re-toc").hidden = !onStruct || !state.review;
     if (!onStruct && $("re-struct-tools")) $("re-struct-tools").hidden = true;
     if (!onStruct && $("re-compare")) $("re-compare").hidden = true;
     if ($("re-section-full")) $("re-section-full").hidden = !state.chapterId;
-    if (!onStruct) {
+    if (!onStruct && !onFinal) {
       const meta = HITL_STEPS[state.step];
       if (meta) {
         if ($("re-hitl-title")) $("re-hitl-title").textContent = meta.title;
@@ -1163,7 +1254,7 @@
   function rememberedStep(workId) {
     try {
       const saved = workId ? localStorage.getItem(lastStepKey(workId)) : null;
-      if (saved === "structure" || HITL_STEPS[saved]) return saved;
+      if (saved === "structure" || saved === "final" || HITL_STEPS[saved]) return saved;
     } catch {
       /* ignore */
     }
@@ -1178,10 +1269,12 @@
     applyStepVisibility();
     syncToolbar();
     if (state.manifest) renderChapterList(state.manifest);
-    if (step === "structure") {
+    if (step === "structure" || step === "final") {
       if (state.chapter) {
-        renderStructTools(state.chapter);
-        renderCompare(state.chapter);
+        if (step === "structure") {
+          renderStructTools(state.chapter);
+          renderCompare(state.chapter);
+        }
         renderChapterBody(state.chapter);
       }
       return;
@@ -1801,32 +1894,33 @@
       }
       const origBlocks = state.chapter?.blocks || [];
       let patches = [];
+      function jsonBlockPatch(orig, block, index) {
+        const patch = {
+          block_id: orig.block_id || block.block_id,
+          block_index: index,
+          type: block.type,
+          text: block.text,
+          level: block.level,
+          speaker: block.speaker,
+          hidden: block.hidden,
+        };
+        if (block.text != null && String(block.text) !== String(orig.text || "")) {
+          patch.lexical = true;
+        }
+        return patch;
+      }
       if (Array.isArray(parsed)) {
         patches = parsed
           .map((block, index) => {
             const orig = origBlocks[index] || {};
             if (JSON.stringify(orig) === JSON.stringify(block)) return null;
-            return {
-              block_index: index,
-              type: block.type,
-              text: block.text,
-              level: block.level,
-              speaker: block.speaker,
-            };
+            return jsonBlockPatch(orig, block, index);
           })
           .filter(Boolean);
       } else if (parsed && typeof parsed === "object" && state.editIndex != null) {
         const orig = origBlocks[state.editIndex] || {};
         if (JSON.stringify(orig) !== JSON.stringify(parsed)) {
-          patches = [
-            {
-              block_index: state.editIndex,
-              type: parsed.type,
-              text: parsed.text,
-              level: parsed.level,
-              speaker: parsed.speaker,
-            },
-          ];
+          patches = [jsonBlockPatch(orig, parsed, state.editIndex)];
         }
       } else {
         toast("Chọn một block hoặc dán mảng blocks JSON");
@@ -1852,6 +1946,23 @@
       } catch (err) {
         toast(err.message);
       }
+    });
+
+    $("re-ft-hide")?.addEventListener("click", () => void applyFinalTouch("hide"));
+    $("re-ft-show")?.addEventListener("click", () => void applyFinalTouch("show"));
+    $("re-ft-merge")?.addEventListener("click", () => void applyFinalTouch("merge_with_next"));
+    $("re-ft-split")?.addEventListener("click", () => {
+      const at = caretOffsetInSelectedBlock();
+      if (at == null) {
+        toast("Đặt caret trong block rồi bấm Tách");
+        return;
+      }
+      void applyFinalTouch("split", { at });
+    });
+    $("re-ft-type-apply")?.addEventListener("click", () => {
+      const type = $("re-ft-type")?.value;
+      if (!type) return;
+      void applyFinalTouch("set_type", { type });
     });
 
     $("re-publish")?.addEventListener("click", () => {
@@ -1893,7 +2004,7 @@
       }
       applyReview(null);
       $("re-heading").textContent = "Chế bản";
-      $("re-status").textContent = "Bốn bước: phân đoạn, nối dòng, chú thích, trích dẫn — Parse nằm cạnh chương, rồi đưa sang Read.";
+      $("re-status").textContent = "Năm bước: phân đoạn, nối dòng, chú thích, trích dẫn, Final Touch — Parse nằm cạnh chương, rồi đưa sang Read.";
       stopJobPoll();
       state.pageLoad += 1;
       state.hitlJobLoad += 1;

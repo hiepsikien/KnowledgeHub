@@ -21,7 +21,11 @@ from .edition.read_edition_steps import (
     assemble_edition_from_package,
     load_structure,
 )
-from .edition.serialize import edition_hash as hash_edition_for_publish
+from .edition.serialize import (
+    edition_hash as hash_edition_for_publish,
+    reader_visible_blocks,
+    split_hints_from_blocks,
+)
 from .edition.ref_schema import validate_edition
 from .read_edition_service import edition_for_publish
 from .paths import corpus_root
@@ -48,8 +52,9 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     payload["edition_hash"] = edition.get("edition_hash")
     payload["content_kind"] = edition.get("content_kind")
     payload["reading_markdown"] = edition.get("reading_markdown")
-    payload["blocks"] = edition.get("blocks")
-    payload["split_hints"] = edition.get("split_hints")
+    visible = reader_visible_blocks(list(edition.get("blocks") or []))
+    payload["blocks"] = visible
+    payload["split_hints"] = split_hints_from_blocks(visible)
     if edition.get("quotation_profile"):
         payload["quotation_profile"] = edition["quotation_profile"]
     if edition.get("reading_markdown"):
@@ -81,7 +86,7 @@ def _chapters_for_read_publish(edition: dict[str, Any]) -> list[dict[str, Any]]:
         }
         blocks = chapter.get("blocks") or []
         if blocks:
-            row["blocks"] = blocks
+            row["blocks"] = reader_visible_blocks(blocks)
         word_count = chapter.get("word_count")
         if word_count is not None:
             row["word_count"] = word_count

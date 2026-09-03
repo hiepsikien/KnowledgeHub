@@ -844,7 +844,39 @@ mark.ann-context {
 }
 .re-note-anchor { color: var(--muted); }
 .re-span-em { font-style: italic; }
+.re-span-strong { font-weight: 700; }
 .re-span-paren_cite, .re-span-bracket_cite { color: #4a5a7a; }
+.re-block.is-hidden {
+  opacity: 0.45;
+  outline: 1px dashed var(--line);
+}
+.re-block.is-hidden::before {
+  content: "ẩn";
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 8px;
+}
+.re-synopsis { font-style: italic; color: #4a433c; }
+.re-figure { color: var(--muted); font-size: 15px; }
+.re-banner { color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+.re-stale {
+  background: #fff4e5;
+  border: 1px solid #e6c27a;
+  color: #6a4b12;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.re-final-tools {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #faf8f5;
+}
 .re-qa { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
 .re-qa-pass { color: var(--ok); }
 .re-qa-fail { color: var(--bad); }

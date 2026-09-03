@@ -8,9 +8,21 @@ from typing import Any
 REF_FORMAT = "ref/1"
 
 
+def reader_visible_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Blocks that belong in reading_markdown / the Read payload."""
+    out: list[dict[str, Any]] = []
+    for block in blocks:
+        if block.get("hidden"):
+            continue
+        if block.get("type") == "heading" and block.get("suppress_in_reader"):
+            continue
+        out.append(block)
+    return out
+
+
 def blocks_to_markdown(blocks: list[dict[str, Any]]) -> str:
     parts: list[str] = []
-    for block in blocks:
+    for block in reader_visible_blocks(blocks):
         kind = block.get("type")
         text = str(block.get("text") or "").strip()
         if kind == "hr":

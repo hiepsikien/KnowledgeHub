@@ -7,6 +7,7 @@ from typing import Any, Iterable
 
 FOOTNOTE_INNER = re.compile(r"^\d{1,4}(?:,\s*\d{1,4})*$")
 GUTENBERG_EM = re.compile(r"(?<![A-Za-z0-9])_([^_\n]+?)_(?![A-Za-z0-9])")
+GUTENBERG_STRONG = re.compile(r"(?<![~A-Za-z0-9])~([^~\n]+?)~(?![~A-Za-z0-9])")
 FULL_LINE_EM = re.compile(r"^_([^_\n]+?)_$")
 DQUOTE = re.compile(r'(?<!\w)"([^"\n]{2,}?)"(?!\w)|“([^”\n]{2,}?)”')
 GUILLEMET = re.compile(r"«([^»\n]{2,}?)»")
@@ -114,12 +115,18 @@ def _scan_em(text: str, spans: list[InlineSpan]) -> None:
         _add_span(spans, match.start(), match.end(), "em", match.group(0))
 
 
+def _scan_strong(text: str, spans: list[InlineSpan]) -> None:
+    for match in GUTENBERG_STRONG.finditer(text):
+        _add_span(spans, match.start(), match.end(), "strong", match.group(0))
+
+
 def annotate_inline_spans(text: str) -> list[InlineSpan]:
     """Rule-only inline span detector. Does not rewrite text."""
     if not text or not text.strip():
         return []
     spans: list[InlineSpan] = []
     _scan_em(text, spans)
+    _scan_strong(text, spans)
     for match in DQUOTE.finditer(text):
         _add_span(spans, match.start(), match.end(), "quote", match.group(0))
     for match in GUILLEMET.finditer(text):
@@ -169,6 +176,7 @@ def detect_quotation_profile(texts: Iterable[str]) -> dict[str, Any]:
         "paren_asides": counts.get("paren_aside", 0),
         "inline_quotes": counts.get("quote", 0),
         "italic_spans": counts.get("em", 0),
+        "strong_spans": counts.get("strong", 0),
         "list_markers": counts.get("list_marker", 0),
         "detector": "rule",
     }
@@ -199,9 +207,23 @@ def annotate_blocks(blocks: list[dict[str, Any]]) -> tuple[list[dict[str, Any]],
             text = str(row.get("text") or "")
             if text:
                 texts.append(text)
+                prior = {
+                    (int(s.get("start") or 0), int(s.get("end") or 0), str(s.get("style") or "")): s
+                    for s in (row.get("spans") or [])
+                    if isinstance(s, dict)
+                }
                 span_list = annotate_inline_spans(text)
                 if span_list:
-                    row["spans"] = [s.to_dict() for s in span_list]
+                    spans = [s.to_dict() for s in span_list]
+                    for span in spans:
+                        old = prior.get((span["start"], span["end"], span["style"]))
+                        if old and old.get("note"):
+                            span["note"] = old["note"]
+                        if old and old.get("chapter"):
+                            span["chapter"] = old["chapter"]
+                    row["spans"] = spans
+                elif row.get("spans"):
+                    row.pop("spans", None)
         out.append(row)
     profile = detect_quotation_profile(texts)
     return out, profile

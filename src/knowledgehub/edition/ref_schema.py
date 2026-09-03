@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 REF_FORMAT = "ref/1"
-REF_PARSER_VERSION = "1.9"
+REF_PARSER_VERSION = "1.10"
 DEFAULT_REF_QA_MODEL = "gemini-3.1-flash-lite"
 
 BLOCK_TYPES = frozenset(
@@ -35,6 +35,7 @@ INLINE_STYLES = frozenset(
         "list_marker",
         "quote",
         "em",
+        "strong",
     }
 )
 CONTENT_KINDS = frozenset({"prose", "verse", "scholastic", "mixed", "drama"})

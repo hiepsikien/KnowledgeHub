@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from .footnotes import attach_footnote_bodies
+from .block_ids import assign_block_ids, mark_chapter_banner
+from .footnotes import attach_footnote_bodies, attach_note_hosts
+from .figures import attach_note_figures, bind_body_figure_src, work_asset_dir
 from .inline_spans import annotate_blocks
 from .label_rules import label_lines_rules
 from .lines import iter_lines, normalize_wiki_source
@@ -12,6 +14,7 @@ from .merge_blocks import labels_to_blocks
 from .reflow import unwrap_hard_wrap
 from .serialize import build_edition_document, grotius_latin_to_blockquote
 from .structure import group_dramatis_blocks, group_stanzas, merge_adjacent_blockquotes, merge_adjacent_headings, merge_adjacent_metadata
+from .work_rules import apply_work_rules
 
 CJK_LANG = {"ja", "zh", "ko"}
 
@@ -86,6 +89,35 @@ def blocks_from_labels(
     return annotate_blocks(blocks)
 
 
+def stamp_edition_blocks(
+    blocks: list[dict[str, Any]],
+    notes: list[dict[str, Any]] | None = None,
+    *,
+    work_id: str | None = None,
+    family: str = "plain",
+    chapter_id: str | None = None,
+    chapter_title: str | None = None,
+    apply_matchers: bool = True,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Matchers → stable block_id → chapter-banner flag → note hosts."""
+    if apply_matchers:
+        blocks = apply_work_rules(blocks, work_id=work_id, family=family)
+    blocks = assign_block_ids(blocks, chapter_id=chapter_id or "book")
+    blocks = mark_chapter_banner(blocks, chapter_title)
+    notes = attach_note_hosts(list(notes or []), blocks)
+    asset_dir = None
+    src_prefix = ""
+    if work_id:
+        from ..paths import corpus_root
+
+        asset_dir = work_asset_dir(corpus_root(), work_id)
+        src_prefix = f"/assets/{str(work_id).replace('/', '_')}"
+    notes = attach_note_figures(notes, asset_dir=asset_dir, src_prefix=src_prefix)
+    if asset_dir is not None:
+        bind_body_figure_src(blocks, asset_dir, src_prefix=src_prefix)
+    return blocks, notes
+
+
 def build_read_edition(
     text: str,
     *,
@@ -94,6 +126,8 @@ def build_read_edition(
     use_llm: bool | None = None,
     work_id: str | None = None,
     wrap_overrides: dict[int, bool] | None = None,
+    chapter_id: str | None = None,
+    chapter_title: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Structured REF/1 edition from stripped manuscript text."""
     llm_enabled = default_use_llm_relabel() if use_llm is None else use_llm
@@ -109,6 +143,14 @@ def build_read_edition(
     )
     blocks, quotation_profile = blocks_from_labels(lines, labels, work_id=work_id, language=language)
     blocks, notes = attach_footnote_bodies(blocks, body)
+    blocks, notes = stamp_edition_blocks(
+        blocks,
+        notes,
+        work_id=work_id,
+        family=family,
+        chapter_id=chapter_id,
+        chapter_title=chapter_title,
+    )
     joined = any(label.join_next for label in labels) or unwrapped
     edition = build_edition_document(
         blocks,

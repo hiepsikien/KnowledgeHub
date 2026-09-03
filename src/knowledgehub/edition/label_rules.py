@@ -4,7 +4,14 @@ import re
 from dataclasses import dataclass
 
 from .toc import merge_split_chapter_titles, relabel_toc_runs
-from .reflow import ORDINAL_WRAP, is_all_caps_heading, is_hard_structural, is_scholastic_body_marker, is_soft_structural
+from .reflow import (
+    ORDINAL_WRAP,
+    is_all_caps_heading,
+    is_caps_year_line,
+    is_hard_structural,
+    is_scholastic_body_marker,
+    is_soft_structural,
+)
 from .structure import (
     is_heroic_verse_line,
     is_indented_verse,
@@ -91,12 +98,57 @@ def _continues_quoted_line(prev: str, nxt: str) -> bool:
     return False
 
 
+def is_italic_title_line(line: str) -> bool:
+    """Italic wrapper is a heading only for title-like lines (Arnold/Bastiat essays)."""
+    match = ITALIC_LINE.match(line.strip())
+    if not match:
+        return False
+    inner = match.group(1).strip()
+    if re.match(r"^(?:CHAPTER|BOOK|PART|VOLUME|PREFACE|INTRODUCTION|CONTENTS|APPENDIX)\b", inner, re.I):
+        return True
+    if re.match(r"^(?:Sons|Daughters|Children)\s+of\b", inner, re.I):
+        return False
+    if re.search(r"\(No\.?\s*\d+", inner, re.I):
+        return False
+    # Letter / dedication: "_To Mrs. Saville, England._" — not "_To be continued._"
+    if re.match(r"^To\s+[A-Z]", inner):
+        return True
+    letters = [c for c in inner if c.isalpha()]
+    if len(letters) < 8:
+        return False
+    upper = sum(c.isupper() for c in letters) / len(letters)
+    if upper >= 0.72 and len(inner) >= 12:
+        return True
+    # Long italic motto / subtitle (Grotius), not a short caption.
+    if len(inner) >= 40:
+        return True
+    return False
+
+
+def is_quoted_prose_fragment(line: str) -> bool:
+    """Quoted title/phrase mid-sentence — not a standalone verse/blockquote."""
+    stripped = line.strip()
+    if not QUOTE_LINE.match(stripped):
+        return False
+    if re.search(r'[”"»\']\s*[;:]', stripped):
+        return True
+    if re.search(r'[”"»\'][.,]?\s*\[\d+\]\s+\S', stripped):
+        return True
+    return False
+
+
+def _next_starts_quote(next_line: str) -> bool:
+    s = (next_line or "").strip()
+    return bool(s) and s[0] in {'"', "“", "‘", "«"}
+
+
 def _role_for_line(
     line: str,
     *,
     family: str,
     row: TextLine | None = None,
     play_mode: bool = False,
+    next_line: str = "",
 ) -> tuple[str, int, float]:
     if is_metadata_line(line):
         return "metadata", 0, 0.99
@@ -106,8 +158,12 @@ def _role_for_line(
         return "prose", 0, 0.9
     if play_mode and is_stage_direction(line):
         return "stage_direction", 0, 0.94
+    if is_caps_year_line(line):
+        return "list_item", 0, 0.93
     if play_mode and is_speaker_cue(line):
         return "speaker_cue", 0, 0.96
+    if not play_mode and is_speaker_cue(line) and _next_starts_quote(next_line):
+        return "speaker_cue", 0, 0.9
     if is_scholastic_list_item(line):
         return "list_item", 0, 0.95
     if family == "scholastic" and is_scholastic_body_marker(line):
@@ -121,8 +177,10 @@ def _role_for_line(
         return "heading", level, 0.95
     if is_soft_structural(line, family=family):
         return "heading", 3, 0.9
-    if ITALIC_LINE.match(line):
+    if is_italic_title_line(line):
         return "heading", 2, 0.88
+    if ITALIC_LINE.match(line.strip()):
+        return "prose", 0, 0.88
     if is_all_caps_heading(line):
         return "heading", 2, 0.82
     if family == "gutenberg" and row and is_indented_verse(indent=row.indent, line=line):
@@ -130,6 +188,8 @@ def _role_for_line(
     if family == "plain" and is_vi_verse_line(line):
         return "verse_line", 0, 0.85
     stripped = line.strip()
+    if is_quoted_prose_fragment(stripped):
+        return "prose", 0, 0.9
     if (
         not play_mode
         and QUOTE_LINE.match(stripped)
@@ -327,8 +387,6 @@ def _relabel_heroic_verse_runs(lines: list[TextLine], labels: list[LineLabel], *
 
 
 def _relabel_play_dialogue(lines: list[TextLine], labels: list[LineLabel], *, play_mode: bool) -> None:
-    if not play_mode:
-        return
     i = 0
     while i < len(labels):
         if labels[i].role != "speaker_cue":
@@ -345,8 +403,15 @@ def _relabel_play_dialogue(lines: list[TextLine], labels: list[LineLabel], *, pl
 def label_lines_rules(lines: list[TextLine], *, family: str = "gutenberg", source_text: str = "") -> list[LineLabel]:
     play_mode = looks_like_play(source_text) if source_text else False
     labels: list[LineLabel] = []
-    for row in lines:
-        role, level, confidence = _role_for_line(row.text, family=family, row=row, play_mode=play_mode)
+    for index, row in enumerate(lines):
+        next_line = ""
+        for later in lines[index + 1 :]:
+            if later.text.strip():
+                next_line = later.text
+                break
+        role, level, confidence = _role_for_line(
+            row.text, family=family, row=row, play_mode=play_mode, next_line=next_line
+        )
         labels.append(
             LineLabel(index=row.index, role=role, level=level, confidence=confidence)
         )

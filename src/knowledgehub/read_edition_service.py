@@ -358,9 +358,13 @@ def _patch_chapter(
     entry = dict(overrides.get(chapter_id) or {})
     if block_patches:
         accumulated = merge_block_patches(entry.get("block_patches"), block_patches)
-        patched = apply_block_patches(chapter["blocks"], block_patches)
+        patched, stale = apply_block_patches(chapter["blocks"], block_patches)
         chapter["blocks"] = patched
         chapter["reading_markdown"] = blocks_to_markdown(patched)
+        if stale:
+            chapter["stale_patches"] = stale
+        else:
+            chapter.pop("stale_patches", None)
         entry["block_patches"] = accumulated
     if curator_note is not None:
         entry["curator_note"] = curator_note

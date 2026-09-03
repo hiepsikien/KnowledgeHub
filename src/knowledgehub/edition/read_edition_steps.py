@@ -578,12 +578,45 @@ def parse_micro_chapter(
         use_llm=use_llm_resolved,
         work_id=work_id,
         wrap_overrides=wrap_overrides or None,
+        chapter_id=chapter_id,
+        chapter_title=str(section.get("title") or ""),
     )
     blocks = edition.get("blocks") or []
     footnote_records = footnote_records_from_items(footnote_job.get("items") or [], chapter_id=chapter_id)
     if footnote_records:
         apply_footnote_links(blocks, footnote_records)
     apply_quote_decisions(blocks, quote_job.get("items") or [], chapter_id=chapter_id)
+    from .overrides import apply_block_patches
+    from .ref import stamp_edition_blocks
+
+    blocks, notes = stamp_edition_blocks(
+        blocks,
+        edition.get("notes") or [],
+        work_id=work_id,
+        family=family,
+        chapter_id=chapter_id,
+        chapter_title=str(section.get("title") or ""),
+        apply_matchers=False,
+    )
+    stale: list[dict[str, Any]] = []
+    overrides_path = package_dir / "qa" / "overrides.json"
+    if overrides_path.is_file():
+        try:
+            override_doc = json.loads(overrides_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            override_doc = {}
+        patches = ((override_doc.get("chapters") or {}).get(chapter_id) or {}).get("block_patches") or []
+        if patches:
+            blocks, stale = apply_block_patches(blocks, patches)
+            blocks, notes = stamp_edition_blocks(
+                blocks,
+                notes,
+                work_id=work_id,
+                family=family,
+                chapter_id=chapter_id,
+                chapter_title=str(section.get("title") or ""),
+                apply_matchers=False,
+            )
     reading_markdown = blocks_to_markdown(blocks)
     hashed = edition_hash(blocks)
     chapter_doc = {
@@ -599,12 +632,14 @@ def parse_micro_chapter(
         "content_kind": detect_content_kind(blocks, family=family),
         "ref_mode": ref_report.get("ref_mode"),
         "llm_segments": ref_report.get("llm_segments") or [],
-        "notes": edition.get("notes") or [],
+        "notes": notes,
         "block_count": len(blocks),
         "word_count": section.get("word_count"),
         "micro_status": "complete",
         "parsed_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
     }
+    if stale:
+        chapter_doc["stale_patches"] = stale
     chapters_dir = package_dir / "chapters"
     chapters_dir.mkdir(parents=True, exist_ok=True)
     with package_lock(package_dir):
