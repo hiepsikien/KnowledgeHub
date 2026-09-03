@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=cheban24" />
+    <link rel="stylesheet" href="/styles.css?v=cheban27" />
   </head>
   <body>
     <div class="shell">
@@ -269,9 +269,11 @@
               </section>
               <p class="re-stale" id="re-stale" hidden></p>
               <div id="re-final-tools" class="re-final-tools" hidden>
-                <p class="muted">Preview sát Read. Ẩn mặc định sidenote; minh họa Gutenberg hiện nếu đã lấy ảnh. Gỡ ẩn / ghép / tách / đổi type hoặc role. JSON phía dưới chỉ để debug.</p>
+                <p class="muted">Preview sát Read. Chọn block → Gắn ảnh từ kho đã tải (không parse lại). Ẩn / ghép / tách / đổi type hoặc role.</p>
                 <div class="row">
                   <button type="button" class="btn ghost" id="re-ft-images">Lấy minh họa Gutenberg</button>
+                  <button type="button" class="btn ghost" id="re-ft-attach">Gắn ảnh…</button>
+                  <button type="button" class="btn ghost" id="re-ft-detach">Gỡ ảnh</button>
                   <button type="button" class="btn" id="re-ft-hide">Ẩn</button>
                   <button type="button" class="btn ghost" id="re-ft-show">Hiện</button>
                   <button type="button" class="btn ghost" id="re-ft-merge">Ghép với sau</button>
@@ -296,6 +298,14 @@
                     </select>
                   </label>
                   <button type="button" class="btn" id="re-ft-type-apply">Đổi</button>
+                </div>
+                <div id="re-ft-picker" class="re-ft-picker" hidden>
+                  <div class="row">
+                    <input id="re-ft-picker-q" type="search" placeholder="Lọc file, caption, alt…" />
+                    <button type="button" class="btn ghost" id="re-ft-bind">Tự khớp figure chưa có ảnh</button>
+                  </div>
+                  <p class="muted" id="re-ft-picker-hint">Chọn một block trên preview, rồi bấm ảnh trong kho. Không parse lại chương.</p>
+                  <div id="re-ft-picker-grid" class="re-ft-picker-grid"></div>
                 </div>
               </div>
               <article class="re-render" id="re-body"></article>
@@ -576,6 +586,6 @@
     </div>
     <div id="toast" class="toast" hidden></div>
     <script src="/app.js?v=cheban21"></script>
-    <script src="/read-edition.js?v=cheban24"></script>
+    <script src="/read-edition.js?v=cheban27"></script>
   </body>
 </html>

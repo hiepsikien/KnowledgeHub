@@ -877,6 +877,53 @@ mark.ann-context {
 .re-figure figcaption {
   font-style: italic;
 }
+.re-ft-picker {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.re-ft-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  margin-top: 8px;
+}
+.re-ft-thumb {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+.re-ft-thumb img {
+  display: block;
+  width: 100%;
+  height: 72px;
+  object-fit: contain;
+  background: #f4efe6;
+  border-radius: 4px;
+}
+.re-ft-thumb span {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.3;
+  max-height: 2.6em;
+  overflow: hidden;
+}
+.re-ft-thumb.is-used { opacity: 0.55; }
+.re-ft-thumb.is-current {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
 .re-banner { color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
 .re-stale {
   background: #fff4e5;

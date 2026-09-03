@@ -140,6 +140,105 @@ def test_ingest_images_endpoint_downloads(tmp_path, monkeypatch):
     assert dest.read_bytes() == png
 
 
+def test_list_work_assets_empty_when_none_downloaded(client):
+    res = client.get("/api/works/locke--second_treatise/assets")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["work_id"] == "locke--second_treatise"
+    assert body["files"] == []
+    assert body["total"] == 0
+    missing = client.get("/api/works/nope--missing/assets")
+    assert missing.status_code == 404
+
+
+def test_final_touch_attach_asset_without_reparse(tmp_path, monkeypatch):
+    corpus = _mini_corpus(tmp_path)
+    dest = corpus / "assets" / "locke--second_treatise"
+    dest.mkdir(parents=True)
+    png = b"\x89PNG\r\n\x1a\n" + b"\x00" * 16
+    (dest / "plate.png").write_bytes(png)
+    (dest / "_html_figures.json").write_text(
+        '[{"file": "plate.png", "alt": "Plate", "caption": "Frontispiece"}]',
+        encoding="utf-8",
+    )
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    monkeypatch.setenv("KNOWLEDGEHUB_REF_LLM_DEFAULT", "0")
+    bootstrap_read_edition("locke--second_treatise", corpus=corpus)
+    from knowledgehub.server import create_app
+    from fastapi.testclient import TestClient
+
+    client = TestClient(create_app())
+    listed = client.get("/api/works/locke--second_treatise/assets")
+    assert listed.status_code == 200
+    files = listed.json()["files"]
+    assert files[0]["file"] == "plate.png"
+    assert files[0]["src"] == "/assets/locke--second_treatise/plate.png"
+
+    manifest = client.get("/api/works/locke--second_treatise/read-edition/manifest")
+    assert manifest.status_code == 200
+    ch_id = manifest.json()["manifest"]["chapters"][0]["chapter_id"]
+    chapter = client.get(f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}")
+    assert chapter.status_code == 200
+    block = next(b for b in chapter.json()["blocks"] if b.get("type") == "paragraph" and b.get("text"))
+    bid = block["block_id"]
+    original_text = block["text"]
+
+    missing = client.patch(
+        f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}",
+        json={
+            "block_patches": [
+                {"action": "set_src", "block_id": bid, "src": "missing.png"},
+            ]
+        },
+    )
+    assert missing.status_code == 400
+
+    patched = client.patch(
+        f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}",
+        json={
+            "block_patches": [
+                {
+                    "action": "set_src",
+                    "block_id": bid,
+                    "type": "paragraph",
+                    "role": "figure",
+                    "src": "/assets/locke--second_treatise/plate.png",
+                }
+            ]
+        },
+    )
+    assert patched.status_code == 200, patched.text
+    fig = next(b for b in patched.json()["blocks"] if b["block_id"] == bid)
+    assert fig["role"] == "figure"
+    assert fig["src"] == "/assets/locke--second_treatise/plate.png"
+    assert fig["text"] == original_text
+
+    reloaded = client.get(f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}")
+    fig2 = next(b for b in reloaded.json()["blocks"] if b["block_id"] == bid)
+    assert fig2["src"] == "/assets/locke--second_treatise/plate.png"
+    assert fig2["role"] == "figure"
+
+    bound = client.post(
+        f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}/bind-assets"
+    )
+    assert bound.status_code == 200
+    assert bound.json()["bound"] == 0
+    still = next(b for b in bound.json()["blocks"] if b["block_id"] == bid)
+    assert still["src"] == "/assets/locke--second_treatise/plate.png"
+
+    cleared = client.patch(
+        f"/api/works/locke--second_treatise/read-edition/chapters/{ch_id}",
+        json={"block_patches": [{"action": "set_src", "block_id": bid, "src": ""}]},
+    )
+    assert cleared.status_code == 200
+    gone = next(b for b in cleared.json()["blocks"] if b["block_id"] == bid)
+    assert gone.get("src") == ""
+    assert gone["role"] == "figure"
+
+
 def test_work_asset_dir_rejects_traversal(tmp_path):
     from knowledgehub.edition.figures import work_asset_dir
 

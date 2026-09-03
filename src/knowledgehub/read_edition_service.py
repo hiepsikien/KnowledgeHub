@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import get_work
-from .edition.figures import apply_work_assets, bind_edition_assets, edition_has_unbound_figures
+from .edition.figures import apply_work_assets, bind_edition_assets, edition_has_unbound_figures, normalize_asset_src
 from .edition.overrides import apply_block_patches, merge_block_patches
 from .edition.read_edition import (
     ReadEditionError,
@@ -368,8 +368,14 @@ def _patch_chapter(
     overrides = load_overrides(package_dir)
     entry = dict(overrides.get(chapter_id) or {})
     if block_patches:
-        accumulated = merge_block_patches(entry.get("block_patches"), block_patches)
-        patched, stale = apply_block_patches(chapter["blocks"], block_patches)
+        sanitized: list[dict[str, Any]] = []
+        for patch in block_patches:
+            row = dict(patch)
+            if "src" in row:
+                row["src"] = normalize_asset_src(work_id, str(row.get("src") or ""), root)
+            sanitized.append(row)
+        accumulated = merge_block_patches(entry.get("block_patches"), sanitized)
+        patched, stale = apply_block_patches(chapter["blocks"], sanitized)
         chapter["blocks"] = patched
         chapter["reading_markdown"] = blocks_to_markdown(patched)
         if stale:
@@ -387,6 +393,49 @@ def _patch_chapter(
         encoding="utf-8",
     )
     return chapter
+
+
+def bind_chapter_assets(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    """Attach downloaded images onto existing figure blocks. Does not re-parse."""
+    try:
+        return _bind_chapter_assets(work_id, chapter_id, corpus=corpus)
+    except (ReadEditionError, ReadEditionStepError) as exc:
+        raise _map_error(exc) from exc
+
+
+def _bind_chapter_assets(work_id: str, chapter_id: str, *, corpus: Path | None = None) -> dict[str, Any]:
+    root = corpus or corpus_root()
+    package_dir, _, work = package_dir_for_work(work_id, corpus=root)
+    chapter = load_chapter(package_dir, chapter_id)
+    before = {str(b.get("block_id") or ""): str(b.get("src") or "") for b in chapter.get("blocks") or []}
+    apply_work_assets(
+        work_id,
+        list(chapter.get("blocks") or []),
+        list(chapter.get("notes") or []),
+        corpus=root,
+        work=work,
+        fetch=False,
+    )
+    patches: list[dict[str, Any]] = []
+    for block in chapter.get("blocks") or []:
+        bid = str(block.get("block_id") or "")
+        src = str(block.get("src") or "").strip()
+        if block.get("role") != "figure" or not src or before.get(bid) == src:
+            continue
+        patches.append(
+            {
+                "action": "set_src",
+                "block_id": bid,
+                "type": "paragraph",
+                "role": "figure",
+                "src": src,
+            }
+        )
+    if not patches:
+        return {**chapter, "bound": 0}
+    updated = _patch_chapter(work_id, chapter_id, block_patches=patches, corpus=root)
+    updated["bound"] = len(patches)
+    return updated
 
 
 def run_qa(
