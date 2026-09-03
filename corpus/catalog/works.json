@@ -348,7 +348,7 @@
   },
   {
     "id": "arnold--essays_in_criticism",
-    "title": "Essays in Criticism (Arnold)",
+    "title": "NEW 2: Essays in Criticism (Arnold)",
     "author_id": "arnold",
     "language": "en",
     "year": 1865,
@@ -654,11 +654,11 @@
   },
   {
     "id": "bach--abdy_williams",
-    "title": "Bach (Abdy Williams)",
+    "title": "NEW 3: Bach (Abdy Williams)",
     "author_id": "bach",
     "language": "en",
     "year": 1900,
-    "description": "Johann Sebastian Bach by C.F. Abdy Williams is a timeless classic from the renowned Master Musicians series, offering a vivid and comprehensive portrait of the great Baroque master. The book traces Bach's journey from his early, formative years in Eisenach through his appointments at Arnstadt, Mühlhausen, Weimar, and Cöthen, culminating in his crowning decades at Leipzig.\n\nBlending meticulous musicological insight with an engaging narrative, the author illuminates the historical context behind monumental works such as The Well-Tempered Clavier and the Brandenburg Concertos while revealing the human being behind the genius—a dedicated educator, a devoted family man, and an artist of unwavering faith. This biography is an essential companion for anyone seeking to understand the life, craftsmanship, and enduring spirit of Johann Sebastian Bach.",
+    "description": "Johann Sebastian Bach của C.F. Abdy Williams là một trong những cuốn tiểu sử kinh điển thuộc dòng Master Musicians, khắc họa bức chân dung trọn vẹn và sống động về nhà đại tài âm nhạc baroque. Cuốn sách dẫn dắt người đọc bước vào hành trình từ những năm tháng tuổi thơ nhiều mất mát ở Eisenach, qua các quãng đời gắn bó với các tòa án phong kiến và nhà thờ lớn tại Arnstadt, Mühlhausen, Weimar, Cöthen, cho đến đỉnh cao sự nghiệp tại Leipzig.\n\nBằng ngòi bút trân trọng và sự thấu hiểu sâu sắc về lịch sử âm nhạc, tác giả không chỉ tái hiện hoàn cảnh ra đời của những kiệt tác bất hủ như Well-Tempered Clavier, các bản Brandenburg Concertos hay tác phẩm thánh nhạc vĩ đại, mà còn phác họa chân dung một con người bình dị: một người thầy tận tụy, một người cha hết lòng vì gia đình, và một nghệ sĩ có đức tin mãnh liệt. Đây là cuốn sách gối đầu giường không thể thiếu cho bất kỳ ai yêu mến âm nhạc cổ điển và muốn thấu hiểu tinh thần vĩnh cửu của Bach.",
     "license": "public_domain_usa_gutenberg",
     "license_source": "public_domain_usa_gutenberg",
     "source_url": "https://www.gutenberg.org/ebooks/43650",
@@ -1065,7 +1065,7 @@
   },
   {
     "id": "bastiat--economic_sophisms",
-    "title": "Economic Sophisms (Bastiat)",
+    "title": "NEW 2: Economic Sophisms (Bastiat)",
     "author_id": "bastiat",
     "language": "en",
     "year": 1845,
