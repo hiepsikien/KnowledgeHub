@@ -308,6 +308,43 @@ def test_illustration_becomes_figure_role():
     assert "[Illustration:" not in " ".join(b.get("text", "") for b in edition["blocks"])
 
 
+def test_music_tag_becomes_figure_role():
+    raw = (
+        "The chorus opens with this subject.\n\n"
+        "[Music: A stronghold sure our God re-]\n\n"
+        "This is worked in bold fugato for thirty-six bars.\n"
+    )
+    edition, _ = _parse(raw)
+    figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
+    assert figs
+    assert figs[0]["text"] == "A stronghold sure our God re-"
+    assert "[Music" not in " ".join(b.get("text", "") for b in edition["blocks"])
+
+
+def test_multiline_music_joins_into_one_figure():
+    raw = (
+        "Then\n\n"
+        "[Music:\n\n"
+        "  Would fain work us woe\n"
+        "  would fain]\n\n"
+        "treated fugato for twenty bars.\n"
+    )
+    edition, _ = _parse(raw)
+    figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
+    assert len(figs) == 1
+    assert "Would fain work us woe" in figs[0]["text"]
+    assert "would fain" in figs[0]["text"]
+    assert not any(str(b.get("text") or "").startswith("[Music") for b in edition["blocks"])
+
+
+def test_bare_music_becomes_figure():
+    raw = "The cantus firmus is given out by the organ.\n\n[Music]\n\nand there is no further reference to it.\n"
+    edition, _ = _parse(raw)
+    figs = [b for b in edition["blocks"] if b.get("role") == "figure"]
+    assert figs
+    assert figs[0]["text"] == "Music"
+
+
 def test_object_replacement_figure_does_not_invent_caption():
     raw = "A plate follows.\n\n\ufffc\n\nThen the prose continues at some length after the plate.\n"
     edition, _ = _parse(raw)
@@ -645,6 +682,86 @@ def test_html_caption_binds_gutenberg_filenames(tmp_path: Path, monkeypatch):
     assert [Path(f["src"]).name for f in figs] == ["illoa001.png", "illot020bs.jpg"]
 
 
+def test_poem_under_img_becomes_caption():
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    html = """
+    <div class="figcenter" style="width: 500px;">
+    <img src="images/illot096a.png" alt="" />
+    <div class="poem"><div class="stanza">
+    <span class="i0">A stronghold sure our God remains,<br /></span>
+    <span class="i0">A shield and hope unfailing<br /></span>
+    </div></div>
+    </div>
+    """
+    figs = parse_gutenberg_html_figures(html)
+    assert figs[0]["file"] == "illot096a.png"
+    assert "stronghold sure" in figs[0]["caption"].casefold()
+
+
+def test_music_figure_binds_poem_image(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "illot096a.png").write_bytes(b"x")
+    html = """
+    <div class="figcenter">
+    <img src="images/illot096a.png" alt="" />
+    <div class="poem"><div class="stanza"><span>A stronghold sure our God remains,</span></div></div>
+    </div>
+    """
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    (dest / "_html_figures.json").write_text(
+        __import__("json").dumps(parse_gutenberg_html_figures(html)),
+        encoding="utf-8",
+    )
+    figures = [{"text": "[Music: A stronghold sure our God remains, A shield and hope unfailing]"}]
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/bach--abdy_williams")
+    assert bound[0]["src"] == "/assets/bach--abdy_williams/illot096a.png"
+
+
+def test_duplicate_alt_binds_in_html_order(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "illot126a.png").write_bytes(b"a")
+    (dest / "illot126b.png").write_bytes(b"b")
+    html = """
+    <img src="images/illot126a.png" alt="Kyrie eleison" />
+    <img src="images/illot126b.png" alt="Kyrie eleison" />
+    """
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    (dest / "_html_figures.json").write_text(
+        __import__("json").dumps(parse_gutenberg_html_figures(html)),
+        encoding="utf-8",
+    )
+    figures = [{"text": "Kyrie eleison"}, {"text": "Kyrie eleison"}]
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/x")
+    assert [Path(f["src"]).name for f in bound] == ["illot126a.png", "illot126b.png"]
+
+
+def test_bare_music_fills_gap_between_bound_plates(tmp_path: Path):
+    dest = tmp_path / "assets"
+    dest.mkdir()
+    (dest / "illoa001.png").write_bytes(b"a")
+    (dest / "illot108.png").write_bytes(b"m")
+    (dest / "illot110.png").write_bytes(b"b")
+    html = """
+    <img src="images/illoa001.png" alt="Bach" />
+    <img src="images/illot108.png" alt="" />
+    <img src="images/illot110.png" alt="meinem Leibe" />
+    """
+    from knowledgehub.edition.figures import parse_gutenberg_html_figures
+
+    (dest / "_html_figures.json").write_text(
+        __import__("json").dumps(parse_gutenberg_html_figures(html)),
+        encoding="utf-8",
+    )
+    figures = [{"text": "Bach"}, {"text": "Music"}, {"text": "meinem Leibe"}]
+    bound = bind_figure_src(figures, dest, src_prefix="/assets/x")
+    assert [Path(f["src"]).name for f in bound] == ["illoa001.png", "illot108.png", "illot110.png"]
+
+
 def test_caption_class_with_extra_tokens():
     from knowledgehub.edition.figures import parse_gutenberg_html_figures
 
@@ -744,26 +861,23 @@ def test_incomplete_html_ingest_resumes(tmp_path: Path):
     assert attempts["b"] == 2
 
 
-def test_ensure_work_assets_does_not_refetch_complete_set(tmp_path: Path):
+def test_ensure_work_assets_skips_existing_valid_images(tmp_path: Path):
     dest = tmp_path / "assets" / "bach--abdy_williams"
     dest.mkdir(parents=True)
     (dest / "a.png").write_bytes(PNG)
-    (dest / "_html_figures.json").write_text(
-        '[{"file": "a.png", "alt": "A", "caption": "A"}]',
-        encoding="utf-8",
-    )
+    html = '<img src="images/a.png" alt="A" />'
     from knowledgehub.edition.figures import ensure_work_assets
 
-    def boom(*_a, **_k):
-        raise AssertionError("should not fetch")
-
+    img_calls: list[str] = []
     ensure_work_assets(
         {"id": "bach--abdy_williams", "gutenberg_id": "43650"},
         tmp_path,
         fetch=True,
-        fetch_html=boom,
-        fetch_image=boom,
+        fetch_html=lambda url: html,
+        fetch_image=lambda url: img_calls.append(url) or PNG,
     )
+    assert img_calls == []
+    assert (dest / "_html_figures.json").is_file()
 
 
 def test_edition_has_unbound_figures():

@@ -6,9 +6,9 @@ import re
 from typing import Any
 
 from .inline_spans import annotate_blocks
+from .figures import FIGURE_MARKER_RE, FIGURE_OPEN_RE
 
 SIDENOTE_RE = re.compile(r"\[Sidenote:\s*(.*?)\]", re.I | re.S)
-ILLUSTRATION_RE = re.compile(r"\[Illustration(?:\s*:\s*(.*?))?\]", re.I | re.S)
 OBJECT_REPLACEMENT = "\ufffc"
 PERSON_ITEM = re.compile(
     r"(\d+)\.\s+"
@@ -83,40 +83,69 @@ def apply_pg_sidenote(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def _figure_unclosed(text: str) -> bool:
+    last = None
+    for match in FIGURE_OPEN_RE.finditer(text or ""):
+        last = match
+    if last is None:
+        return False
+    return "]" not in (text or "")[last.end() :]
+
+
+def _split_figure_block(block: dict[str, Any], text: str) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    remainder = text
+    for match in FIGURE_MARKER_RE.finditer(text):
+        kind = (match.group(1) or "Illustration").strip()
+        caption = (match.group(2) or "").strip()
+        caption = caption.replace(OBJECT_REPLACEMENT, "").strip()
+        if not caption:
+            caption = "Music" if kind.lower() == "music" else "Illustration"
+        out.append({"type": "paragraph", "role": "figure", "text": caption})
+        remainder = FIGURE_MARKER_RE.sub("", remainder, count=1)
+    remainder = re.sub(r"[ \t]{2,}", " ", remainder).replace(OBJECT_REPLACEMENT, "").strip()
+    if remainder:
+        row = dict(block)
+        row["text"] = remainder
+        row.pop("spans", None)
+        if row.get("role") == "figure":
+            row.pop("role", None)
+        out.append(row)
+    return out
+
+
 def apply_pg_illustration(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
-    for block in blocks:
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
         text = str(block.get("text") or "")
-        if OBJECT_REPLACEMENT in text and not ILLUSTRATION_RE.search(text):
+        if OBJECT_REPLACEMENT in text and not FIGURE_OPEN_RE.search(text):
             row = dict(block)
             row["role"] = "figure"
             cleaned = text.replace(OBJECT_REPLACEMENT, "").strip()
-            # Keep a source glyph — do not invent "[Music example]" (breaks fidelity).
             row["text"] = cleaned or OBJECT_REPLACEMENT
             row.pop("spans", None)
             out.append(row)
+            i += 1
             continue
-        if not ILLUSTRATION_RE.search(text):
-            out.append(block)
+        if _figure_unclosed(text):
+            parts = [text]
+            j = i + 1
+            while j < len(blocks) and _figure_unclosed(" ".join(parts)) and (j - i) < 40:
+                parts.append(str(blocks[j].get("text") or ""))
+                j += 1
+            joined = " ".join(parts)
+            if FIGURE_MARKER_RE.search(joined):
+                out.extend(_split_figure_block(block, joined))
+                i = j
+                continue
+        if FIGURE_MARKER_RE.search(text):
+            out.extend(_split_figure_block(block, text))
+            i += 1
             continue
-        remainder = text
-        for match in ILLUSTRATION_RE.finditer(text):
-            caption = (match.group(1) or "").strip()
-            caption = caption.replace(OBJECT_REPLACEMENT, "").strip() or match.group(0).strip()
-            out.append(
-                {
-                    "type": "paragraph",
-                    "role": "figure",
-                    "text": caption,
-                }
-            )
-            remainder = ILLUSTRATION_RE.sub("", remainder, count=1)
-        remainder = re.sub(r"[ \t]{2,}", " ", remainder).replace(OBJECT_REPLACEMENT, "").strip()
-        if remainder:
-            row = dict(block)
-            row["text"] = remainder
-            row.pop("spans", None)
-            out.append(row)
+        out.append(block)
+        i += 1
     return out
 
 

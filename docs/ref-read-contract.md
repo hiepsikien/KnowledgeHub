@@ -70,7 +70,7 @@ Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES 
 
 ### `assets[]` item (illustrations)
 
-Hub copies Gutenberg HTML images into `corpus/assets/{work}/` (CLI `ingest-images --work`, or CMS **Lấy minh họa Gutenberg**). Publish binds already-ingested files onto unbound figures and may fetch only when a figure still lacks `src`. Matching uses HTML captions, not filename stems (`illoa001.png` ≠ “Bach”).
+Hub copies Gutenberg HTML images into `corpus/assets/{work}/` (CLI `ingest-images --work`, or CMS **Lấy minh họa Gutenberg**). Publish binds already-ingested files onto unbound figures and may fetch only when a figure still lacks `src`. Matching uses HTML `alt` / `caption` / poem text under the image, not filename stems (`illot095.png` ≠ “A stronghold sure”). `[Illustration]` and `[Music]` in the TXT both become `role: figure`.
 
 | Field | Required | Notes |
 |-------|----------|-------|

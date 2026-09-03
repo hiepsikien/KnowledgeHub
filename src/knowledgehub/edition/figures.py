@@ -13,7 +13,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin
 
-ILLUSTRATION_RE = re.compile(r"\[Illustration(?:\s*:\s*(.*?))?\]", re.I | re.S)
+FIGURE_MARKER_RE = re.compile(r"\[(Illustration|Music)(?:\s*:\s*(.*?))?\]", re.I | re.S)
+FIGURE_OPEN_RE = re.compile(r"\[(Illustration|Music)\b", re.I)
 IMAGE_NAME = re.compile(r"\.(?:png|jpe?g|gif|svg|webp)\s*$", re.I)
 IMG_TAG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 ATTR_RE = re.compile(r"""(\w+)\s*=\s*(['"])(.*?)\2""", re.I | re.S)
@@ -21,6 +22,8 @@ CAPTION_RE = re.compile(
     r'<div[^>]*\bclass=["\'][^"\']*\bcaption\b[^"\']*["\'][^>]*>(.*?)</div>',
     re.I | re.S,
 )
+POEM_RE = re.compile(r'<div class="poem">(.*?)</div>', re.I | re.S)
+CENTER_RE = re.compile(r'<p[^>]*class=["\']center["\'][^>]*>(.*?)</p>', re.I | re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 HTML_MANIFEST = "_html_figures.json"
 USER_AGENT = "KnowledgeHub/1.0 (illustration ingest; https://github.com/hiepsikien/KnowledgeHub)"
@@ -30,8 +33,9 @@ MAX_HTML_BYTES = 8 * 1024 * 1024
 
 def figures_from_text(text: str, *, src: str = "") -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
-    for match in ILLUSTRATION_RE.finditer(text or ""):
-        caption = (match.group(1) or "").strip() or "Illustration"
+    for match in FIGURE_MARKER_RE.finditer(text or ""):
+        kind = (match.group(1) or "Illustration").strip()
+        caption = (match.group(2) or "").strip() or kind
         row: dict[str, Any] = {"caption": caption[:500]}
         if src:
             row["src"] = src
@@ -51,6 +55,18 @@ def _figure_caption(fig: dict[str, Any]) -> str:
     return _slug(str(fig.get("caption") or fig.get("text") or ""))
 
 
+def _bind_query(fig: dict[str, Any]) -> str:
+    raw = str(fig.get("caption") or fig.get("text") or "")
+    raw = FIGURE_MARKER_RE.sub(lambda m: (m.group(2) or "").strip() or (m.group(1) or ""), raw)
+    q = _fold(raw)
+    stripped = re.sub(r"^(illustration|music)\s*:?\s*", "", q).strip()
+    return stripped or q
+
+
+def _weak_bind_query(query: str) -> bool:
+    return not query or query in {"illustration", "music"}
+
+
 def _strip_tags(raw: str) -> str:
     text = TAG_RE.sub(" ", html_lib.unescape(raw or ""))
     return re.sub(r"\s+", " ", text).strip()
@@ -68,16 +84,18 @@ def parse_gutenberg_html_figures(html: str) -> list[dict[str, Any]]:
             continue
         seen.add(name)
         alt = html_lib.unescape(attrs.get("alt") or "").strip()
-        rest = (html or "")[match.end() :]
-        stop = min(len(rest), 1800)
-        lower = rest.lower()
-        for token in ("<img", 'class="figcenter"', "class='figcenter'"):
-            idx = lower.find(token)
-            if idx >= 0:
-                stop = min(stop, idx)
-        window = rest[:stop]
-        cap_match = CAPTION_RE.search(window)
+        after = _html_after_img(html or "", match.end())
+        before = _html_before_img(html or "", match.start())
+        cap_match = CAPTION_RE.search(after)
         caption = _strip_tags(cap_match.group(1)) if cap_match else ""
+        if not caption:
+            poem = POEM_RE.search(after)
+            if poem:
+                caption = _strip_tags(poem.group(1))
+        if not caption:
+            centers = CENTER_RE.findall(before)
+            if centers:
+                caption = _strip_tags(" ".join(centers))
         out.append(
             {
                 "file": name,
@@ -89,12 +107,37 @@ def parse_gutenberg_html_figures(html: str) -> list[dict[str, Any]]:
     return out
 
 
+def _html_after_img(html: str, end: int) -> str:
+    rest = html[end:]
+    stop = min(len(rest), 1800)
+    lower = rest.lower()
+    for token in ("<img", 'class="figcenter"', "class='figcenter'", 'class="inline"', "class='inline'"):
+        idx = lower.find(token)
+        if idx >= 0:
+            stop = min(stop, idx)
+    return rest[:stop]
+
+
+def _html_before_img(html: str, start: int) -> str:
+    back = html[max(0, start - 1000) : start]
+    lower = back.lower()
+    cut = max(
+        lower.rfind('class="figcenter"'),
+        lower.rfind("class='figcenter'"),
+        lower.rfind('class="inline"'),
+        lower.rfind("class='inline'"),
+    )
+    return back[cut:] if cut >= 0 else back[-400:]
+
+
 def _caption_score(query: str, fig: dict[str, Any]) -> float:
     q = _fold(query)
     if not q or q == "illustration":
         hay = _fold(f"{fig.get('alt') or ''} {fig.get('caption') or ''}")
         if "colophon" in hay:
             return 0.7
+        return 0.0
+    if q == "music":
         return 0.0
     hay = _fold(f"{fig.get('caption') or ''} {fig.get('alt') or ''}")
     if not hay:
@@ -135,6 +178,41 @@ def _load_html_manifest(dest_dir: Path) -> list[dict[str, Any]]:
     return [row for row in data if isinstance(row, dict) and row.get("file")]
 
 
+def _bind_positional(
+    figures: list[dict[str, Any]],
+    html_all: list[dict[str, Any]],
+    unused_files: dict[str, Path],
+    src_prefix: str,
+) -> None:
+    """Fill leftover figures from leftover HTML images in document order."""
+    html_order = [row["file"] for row in html_all]
+    file_pos = {name: index for index, name in enumerate(html_order)}
+    anchors: list[tuple[int, int]] = [(-1, -1)]
+    for index, fig in enumerate(figures):
+        name = Path(str(fig.get("src") or "")).name
+        if name and name in file_pos:
+            anchors.append((index, file_pos[name]))
+    anchors.append((len(figures), len(html_order)))
+    for left, right in zip(anchors, anchors[1:]):
+        fig_lo, html_lo = left
+        fig_hi, html_hi = right
+        if html_hi < html_lo:
+            continue
+        run = [i for i in range(fig_lo + 1, fig_hi) if not figures[i].get("src")]
+        slots = [html_order[k] for k in range(html_lo + 1, html_hi) if html_order[k] in unused_files]
+        if not run or len(run) != len(slots):
+            continue
+        for fig_i, filename in zip(run, slots):
+            unused_files.pop(filename, None)
+            _set_src(figures[fig_i], filename, src_prefix)
+    leftover_figs = [fig for fig in figures if not fig.get("src")]
+    leftover_files = [name for name in html_order if name in unused_files]
+    if leftover_figs and leftover_files and all(_weak_bind_query(_bind_query(fig)) for fig in leftover_figs):
+        for fig, filename in zip(leftover_figs, leftover_files):
+            unused_files.pop(filename, None)
+            _set_src(fig, filename, src_prefix)
+
+
 def bind_figure_src(
     figures: list[dict[str, Any]],
     dest_dir: Path | None,
@@ -155,12 +233,12 @@ def bind_figure_src(
         if p.is_file() and IMAGE_NAME.search(p.name)
     }
     unbound = [fig for fig in figures if not fig.get("src")]
-    html_figs = [row for row in _load_html_manifest(dest_dir) if row["file"] in unused_files]
+    html_all = [row for row in _load_html_manifest(dest_dir) if row["file"] in unused_files]
 
     for fig in list(unbound):
-        query = str(fig.get("caption") or fig.get("text") or "")
+        query = _bind_query(fig)
         scored: list[tuple[float, dict[str, Any]]] = []
-        for html_fig in html_figs:
+        for html_fig in html_all:
             if html_fig["file"] not in unused_files:
                 continue
             score = _caption_score(query, html_fig)
@@ -172,7 +250,11 @@ def bind_figure_src(
         best_score, best = scored[0]
         tied = [row for score, row in scored if abs(score - best_score) < 0.02]
         if len(tied) != 1:
-            continue
+            keys = {_fold(f"{row.get('alt') or ''} {row.get('caption') or ''}") for row in tied}
+            if len(keys) != 1:
+                continue
+            tied_names = {row["file"] for row in tied}
+            best = next(row for row in html_all if row["file"] in tied_names and row["file"] in unused_files)
         unused_files.pop(best["file"], None)
         unbound.remove(fig)
         _set_src(fig, best["file"], src_prefix)
@@ -198,6 +280,7 @@ def bind_figure_src(
         unused_files.pop(match.name, None)
         unbound.remove(fig)
         _set_src(fig, match.name, src_prefix)
+    _bind_positional(figures, html_all, unused_files, src_prefix)
     return figures
 
 
@@ -342,17 +425,6 @@ def _is_image_file(path: Path) -> bool:
     return _is_image_bytes(head)
 
 
-def _html_ingest_complete(dest_dir: Path) -> bool:
-    if not dest_dir.is_dir() or not (dest_dir / HTML_MANIFEST).is_file():
-        return False
-    rows = _load_html_manifest(dest_dir)
-    for row in rows:
-        name = str(row.get("file") or "")
-        if name and IMAGE_NAME.search(name) and not _is_image_file(dest_dir / name):
-            return False
-    return True
-
-
 def _wanted_image_files(figures: list[dict[str, Any]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -428,8 +500,6 @@ def ensure_work_assets(
         if flag in {"0", "false", "no"}:
             fetch = False
     if not fetch:
-        return dest
-    if _html_ingest_complete(dest):
         return dest
     gid = str(work.get("gutenberg_id") or "").strip()
     if not gid:

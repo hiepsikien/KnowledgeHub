@@ -439,6 +439,14 @@
       const extra = block.suppress_in_reader ? " re-banner" : "";
       return `<h${lvl + 1} class="re-heading${extra}">${body}</h${lvl + 1}>`;
     }
+    if (block.role === "figure") {
+      const src = String(block.src || "").trim();
+      const img = src
+        ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${escapeHtml(String(block.text || "Illustration"))}" />`
+        : "";
+      const cap = body ? `<figcaption>${body}</figcaption>` : "";
+      return `<figure class="re-figure">${img}${cap}</figure>`;
+    }
     if (kind === "blockquote") return `<blockquote class="re-blockquote">${body}</blockquote>`;
     if (kind === "dialogue") {
       const sp = block.speaker ? `<strong class="re-speaker">${escapeHtml(block.speaker)}.</strong> ` : "";
@@ -449,14 +457,6 @@
     if (kind === "metadata") return `<p class="re-metadata">${body}</p>`;
     if (kind === "hr") return `<hr class="re-hr" />`;
     if (block.role === "synopsis") return `<p class="re-paragraph re-synopsis">${body}</p>`;
-    if (block.role === "figure") {
-      const src = String(block.src || "").trim();
-      const img = src
-        ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${escapeHtml(String(block.text || "Illustration"))}" />`
-        : "";
-      const cap = body ? `<figcaption>${body}</figcaption>` : "";
-      return `<figure class="re-figure">${img}${cap}</figure>`;
-    }
     if (block.role === "aside") return `<p class="re-paragraph re-aside">${body}</p>`;
     return `<p class="re-paragraph">${body}</p>`;
   }
