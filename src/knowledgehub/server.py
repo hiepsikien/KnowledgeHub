@@ -392,12 +392,22 @@ def create_app() -> FastAPI:
     def serve_work_asset(work_id: str, filename: str) -> FileResponse:
         from .edition.figures import IMAGE_NAME, work_asset_dir
 
+        try:
+            get_work(work_id)
+        except KeyError as exc:
+            raise HTTPException(404, "not found") from exc
         if "/" in filename or "\\" in filename or ".." in filename:
+            raise HTTPException(404, "not found")
+        if ".." in work_id or "/" in work_id or "\\" in work_id:
             raise HTTPException(404, "not found")
         if not IMAGE_NAME.search(filename):
             raise HTTPException(404, "not found")
-        path = work_asset_dir(corpus_root(), work_id) / filename
-        if not path.is_file():
+        try:
+            dest = work_asset_dir(corpus_root(), work_id).resolve()
+        except ValueError as exc:
+            raise HTTPException(404, "not found") from exc
+        path = (dest / filename).resolve()
+        if not path.is_relative_to(dest) or not path.is_file():
             raise HTTPException(404, "not found")
         return FileResponse(path)
 

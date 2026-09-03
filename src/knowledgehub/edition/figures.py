@@ -11,15 +11,21 @@ import urllib.request
 import zipfile
 from pathlib import Path
 from typing import Any
+from urllib.parse import urljoin
 
 ILLUSTRATION_RE = re.compile(r"\[Illustration(?:\s*:\s*(.*?))?\]", re.I | re.S)
 IMAGE_NAME = re.compile(r"\.(?:png|jpe?g|gif|svg|webp)\s*$", re.I)
 IMG_TAG_RE = re.compile(r"<img\b([^>]*)>", re.I)
 ATTR_RE = re.compile(r"""(\w+)\s*=\s*(['"])(.*?)\2""", re.I | re.S)
-CAPTION_RE = re.compile(r'<div class="caption">(.*?)</div>', re.I | re.S)
+CAPTION_RE = re.compile(
+    r'<div[^>]*\bclass=["\'][^"\']*\bcaption\b[^"\']*["\'][^>]*>(.*?)</div>',
+    re.I | re.S,
+)
 TAG_RE = re.compile(r"<[^>]+>")
 HTML_MANIFEST = "_html_figures.json"
 USER_AGENT = "KnowledgeHub/1.0 (illustration ingest; https://github.com/hiepsikien/KnowledgeHub)"
+MAX_IMAGE_BYTES = 12 * 1024 * 1024
+MAX_HTML_BYTES = 8 * 1024 * 1024
 
 
 def figures_from_text(text: str, *, src: str = "") -> list[dict[str, Any]]:
@@ -72,7 +78,14 @@ def parse_gutenberg_html_figures(html: str) -> list[dict[str, Any]]:
         window = rest[:stop]
         cap_match = CAPTION_RE.search(window)
         caption = _strip_tags(cap_match.group(1)) if cap_match else ""
-        out.append({"file": name, "alt": alt[:500], "caption": (caption or alt)[:500]})
+        out.append(
+            {
+                "file": name,
+                "src": src,
+                "alt": alt[:500],
+                "caption": (caption or alt)[:500],
+            }
+        )
     return out
 
 
@@ -180,8 +193,6 @@ def bind_figure_src(
                 ]
                 if len(contained) == 1:
                     match = contained[0]
-        if match is None and len(unbound) == 1 and len(leftover) == 1:
-            match = leftover[0]
         if match is None:
             continue
         unused_files.pop(match.name, None)
@@ -220,8 +231,12 @@ def attach_note_figures(
 
 
 def work_asset_dir(corpus: Path, work_id: str) -> Path:
-    safe = str(work_id).replace("/", "_")
-    return corpus / "assets" / safe
+    safe = str(work_id).replace("/", "_").replace("\\", "_")
+    dest = (corpus / "assets" / safe).resolve()
+    root = (corpus / "assets").resolve()
+    if dest == root or not dest.is_relative_to(root):
+        raise ValueError(f"unsafe work_id: {work_id}")
+    return dest
 
 
 def work_src_prefix(work_id: str) -> str:
@@ -272,10 +287,82 @@ def gutenberg_html_url(gutenberg_id: str) -> str:
     return f"https://www.gutenberg.org/files/{gid}/{gid}-h/{gid}-h.htm"
 
 
-def _fetch_bytes(url: str, *, timeout: int = 60) -> bytes:
+def gutenberg_image_url(gutenberg_id: str, src: str, *, filename: str = "") -> str:
+    """Resolve an HTML ``<img src>`` against the ``*-h.htm`` page URL."""
+    rel = (src or "").replace("\\", "/").strip()
+    if not rel:
+        rel = f"images/{filename}" if filename else ""
+    if not rel:
+        raise ValueError("missing image src")
+    return urljoin(gutenberg_html_url(gutenberg_id), rel)
+
+
+def _fetch_bytes(url: str, *, timeout: int = 60, max_bytes: int = MAX_IMAGE_BYTES) -> bytes:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=timeout) as response:
-        return response.read()
+        length = response.headers.get("Content-Length")
+        if length and int(length) > max_bytes:
+            raise ValueError(f"response too large ({length} bytes)")
+        chunks: list[bytes] = []
+        total = 0
+        while True:
+            chunk = response.read(64 * 1024)
+            if not chunk:
+                break
+            total += len(chunk)
+            if total > max_bytes:
+                raise ValueError(f"response too large (>{max_bytes} bytes)")
+            chunks.append(chunk)
+        return b"".join(chunks)
+
+
+def _is_image_bytes(raw: bytes) -> bool:
+    if not raw or len(raw) < 8:
+        return False
+    if raw.startswith(b"\x89PNG\r\n\x1a\n"):
+        return True
+    if raw.startswith(b"\xff\xd8\xff"):
+        return True
+    if raw.startswith((b"GIF87a", b"GIF89a")):
+        return True
+    if raw.startswith(b"RIFF") and raw[8:12] == b"WEBP":
+        return True
+    head = raw.lstrip()[:240].lower()
+    if head.startswith(b"<svg") or (head.startswith(b"<?xml") and b"<svg" in head):
+        return True
+    return False
+
+
+def _is_image_file(path: Path) -> bool:
+    try:
+        with path.open("rb") as fh:
+            head = fh.read(1024)
+    except OSError:
+        return False
+    return _is_image_bytes(head)
+
+
+def _html_ingest_complete(dest_dir: Path) -> bool:
+    if not dest_dir.is_dir() or not (dest_dir / HTML_MANIFEST).is_file():
+        return False
+    rows = _load_html_manifest(dest_dir)
+    for row in rows:
+        name = str(row.get("file") or "")
+        if name and IMAGE_NAME.search(name) and not _is_image_file(dest_dir / name):
+            return False
+    return True
+
+
+def _wanted_image_files(figures: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for fig in figures:
+        name = str(fig.get("file") or "")
+        if not name or not IMAGE_NAME.search(name) or name in seen:
+            continue
+        seen.add(name)
+        out.append(fig)
+    return out
 
 
 def ingest_gutenberg_html_images(
@@ -293,22 +380,35 @@ def ingest_gutenberg_html_images(
         return []
     html = html_text
     if html is None:
-        getter = fetch_html or (lambda url: _fetch_bytes(url).decode("utf-8", errors="replace"))
+        getter = fetch_html or (
+            lambda url: _fetch_bytes(url, max_bytes=MAX_HTML_BYTES).decode("utf-8", errors="replace")
+        )
         html = getter(gutenberg_html_url(gid))
     figures = parse_gutenberg_html_figures(html or "")
-    _write_html_manifest(dest_dir, figures)
+    wanted = _wanted_image_files(figures)
     copied: list[dict[str, Any]] = []
-    image_getter = fetch_image or (lambda url: _fetch_bytes(url))
-    base = f"https://www.gutenberg.org/files/{gid}/{gid}-h/images/"
-    for fig in figures:
+    errors: list[str] = []
+    image_getter = fetch_image or (lambda url: _fetch_bytes(url, max_bytes=MAX_IMAGE_BYTES))
+    for fig in wanted:
         name = str(fig.get("file") or "")
-        if not name or not IMAGE_NAME.search(name):
-            continue
         target = dest_dir / name
-        if not target.is_file():
-            raw = image_getter(base + name)
+        if _is_image_file(target):
+            copied.append({"file": name, "bytes": target.stat().st_size})
+            continue
+        try:
+            url = gutenberg_image_url(gid, str(fig.get("src") or ""), filename=name)
+            raw = image_getter(url)
+            if len(raw) > MAX_IMAGE_BYTES:
+                raise ValueError(f"{name} too large ({len(raw)} bytes)")
+            if not _is_image_bytes(raw):
+                raise ValueError(f"{name} is not an image")
             target.write_bytes(raw)
-        copied.append({"file": name, "bytes": target.stat().st_size})
+            copied.append({"file": name, "bytes": target.stat().st_size})
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{name}: {exc}")
+    _write_html_manifest(dest_dir, figures)
+    if errors:
+        raise RuntimeError("image download incomplete: " + "; ".join(errors))
     return copied
 
 
@@ -329,13 +429,7 @@ def ensure_work_assets(
             fetch = False
     if not fetch:
         return dest
-    images = [
-        p
-        for p in dest.iterdir()
-        if dest.is_dir() and p.is_file() and IMAGE_NAME.search(p.name)
-    ] if dest.is_dir() else []
-    manifest = dest / HTML_MANIFEST if dest.is_dir() else Path()
-    if images and manifest.is_file():
+    if _html_ingest_complete(dest):
         return dest
     gid = str(work.get("gutenberg_id") or "").strip()
     if not gid:
@@ -368,6 +462,35 @@ def apply_work_assets(
     bind_body_figure_src(blocks, dest if dest.is_dir() else None, src_prefix=prefix)
     attach_note_figures(notes, asset_dir=dest if dest.is_dir() else None, src_prefix=prefix)
     return blocks, notes
+
+
+def edition_has_unbound_figures(edition: dict[str, Any]) -> bool:
+    """True when a figure block or note figure still lacks ``src``."""
+
+    def unbound_block(block: dict[str, Any]) -> bool:
+        return block.get("role") == "figure" and not str(block.get("src") or "").strip()
+
+    def unbound_notes(notes: list[Any] | None) -> bool:
+        for note in notes or []:
+            if not isinstance(note, dict):
+                continue
+            for fig in note.get("figures") or []:
+                if isinstance(fig, dict) and not str(fig.get("src") or "").strip():
+                    return True
+        return False
+
+    if any(unbound_block(b) for b in edition.get("blocks") or [] if isinstance(b, dict)):
+        return True
+    if unbound_notes(edition.get("notes")):
+        return True
+    for chapter in edition.get("_chapters") or []:
+        if not isinstance(chapter, dict):
+            continue
+        if any(unbound_block(b) for b in chapter.get("blocks") or [] if isinstance(b, dict)):
+            return True
+        if unbound_notes(chapter.get("notes")):
+            return True
+    return False
 
 
 def bind_edition_assets(

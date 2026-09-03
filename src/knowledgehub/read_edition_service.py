@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .catalog import get_work
-from .edition.figures import apply_work_assets, bind_edition_assets
+from .edition.figures import apply_work_assets, bind_edition_assets, edition_has_unbound_figures
 from .edition.overrides import apply_block_patches, merge_block_patches
 from .edition.read_edition import (
     ReadEditionError,
@@ -426,7 +426,12 @@ def edition_for_publish(work_id: str, *, corpus: Path | None = None) -> tuple[di
         language = str(work.get("language") or "en")
         family = str(structure.get("source_family") or meta.get("family") or "plain")
         edition = assemble_edition_from_package(package_dir, language=language, source_family=family)
-        bind_edition_assets(edition, work, root, fetch=True)
+        bind_edition_assets(
+            edition,
+            work,
+            root,
+            fetch=edition_has_unbound_figures(edition),
+        )
         manifest = load_manifest(package_dir)
         return edition, {
             "manifest": manifest,

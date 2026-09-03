@@ -138,7 +138,7 @@ def test_cheban_ui_labels(client):
     assert "if (suspectsOnly && !it.suspect && !it.decision) return false;" not in js.text
     assert "chương đã parse" in js.text
     assert "Đã xem" in js.text
-    assert 'styles.css?v=cheban22' in html
+    assert 'styles.css?v=cheban24' in html
     assert "chưa parse hết" in client.get("/app.js").text
     assert 'id="re-jobs"' in html
     assert 'id="re-cancel-jobs"' in html

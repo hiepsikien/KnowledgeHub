@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -94,6 +96,57 @@ def test_asset_route_serves_ingested_image(tmp_path, monkeypatch):
     assert res.content == b"png-bytes"
     missing = client.get("/assets/locke--second_treatise/nope.png")
     assert missing.status_code == 404
+    assert client.get("/assets/missing--work/plate.png").status_code == 404
+    assert client.get("/assets/locke--second_treatise/..png").status_code == 404
+    assert client.get("/assets/locke--second_treatise/notes.txt").status_code == 404
+
+
+def test_ingest_images_requires_gutenberg_id(client):
+    res = client.post("/api/works/locke--second_treatise/ingest-images")
+    assert res.status_code == 400
+    assert "gutenberg_id" in res.json()["detail"]
+    missing = client.post("/api/works/nope--missing/ingest-images")
+    assert missing.status_code == 404
+
+
+def test_ingest_images_endpoint_downloads(tmp_path, monkeypatch):
+    corpus = _mini_corpus(tmp_path)
+    src = corpus / "sources" / "locke" / "works.json"
+    rows = json.loads(src.read_text(encoding="utf-8"))
+    rows[0]["gutenberg_id"] = "43650"
+    src.write_text(json.dumps(rows), encoding="utf-8")
+    build_catalog(src=corpus / "sources", dest=corpus / "catalog")
+    monkeypatch.setenv("KNOWLEDGEHUB_CORPUS", str(corpus))
+    monkeypatch.delenv("KNOWLEDGEHUB_OPS_SECRET", raising=False)
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "0")
+    png = b"\x89PNG\r\n\x1a\n" + b"\x00" * 16
+    html = b'<img src="images/illoa001.png" alt="Bach" />'
+
+    def fake_fetch(url: str, **_kwargs) -> bytes:
+        if url.endswith(".htm"):
+            return html
+        return png
+
+    monkeypatch.setattr("knowledgehub.edition.figures._fetch_bytes", fake_fetch)
+    from knowledgehub.server import create_app
+    from fastapi.testclient import TestClient
+
+    client = TestClient(create_app())
+    res = client.post("/api/works/locke--second_treatise/ingest-images")
+    assert res.status_code == 200, res.text
+    body = res.json()
+    assert body["copied"][0]["file"] == "illoa001.png"
+    dest = corpus / "assets" / "locke--second_treatise" / "illoa001.png"
+    assert dest.read_bytes() == png
+
+
+def test_work_asset_dir_rejects_traversal(tmp_path):
+    from knowledgehub.edition.figures import work_asset_dir
+
+    with pytest.raises(ValueError):
+        work_asset_dir(tmp_path, "..")
+    with pytest.raises(ValueError):
+        work_asset_dir(tmp_path, ".")
 
 
 def test_publish_page_and_overrides(client):

@@ -381,7 +381,19 @@
         const marker = escapeHtml(note.marker || "");
         const anchor = note.anchor ? `<span class="re-note-anchor">${escapeHtml(note.anchor)}</span> ` : "";
         const id = noteElementId(note.marker);
-        return `<li id="${id}"><strong>${anchor}${marker}</strong> ${escapeHtml(note.body)}</li>`;
+        const body = escapeHtml(note.body);
+        const figs = (note.figures || [])
+          .map((fig) => {
+            const src = String(fig.src || "").trim();
+            const cap = escapeHtml(String(fig.caption || fig.text || ""));
+            const img = src
+              ? `<img class="re-figure-img" src="${escapeHtml(src)}" alt="${cap || "Illustration"}" />`
+              : "";
+            const capEl = cap ? `<figcaption>${cap}</figcaption>` : "";
+            return `<figure class="re-figure re-note-figure">${img}${capEl}</figure>`;
+          })
+          .join("");
+        return `<li id="${id}"><strong>${anchor}${marker}</strong> ${body}${figs}</li>`;
       })
       .join("");
     return `<section class="re-notes"><h3>Chú thích (${notes.length})</h3><ol>${items}</ol></section>`;
@@ -2005,7 +2017,7 @@
           method: "POST",
         });
         const n = (data.copied || []).length;
-        toast(n ? `Đã lấy ${n} ảnh Gutenberg — reload chương để gắn minh họa` : "Không có ảnh");
+        toast(n ? `Đã lấy ${n} ảnh Gutenberg` : "Không có ảnh");
         if (state.chapterId) await selectChapter(state.chapterId);
       } catch (err) {
         toast(err.message || String(err));
