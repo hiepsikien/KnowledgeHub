@@ -2,15 +2,15 @@
   "translation": {
     "models": {
       "draft": "deepseek-v4-flash",
-      "polish": "gemini-3.6-flash",
-      "qa": "deepseek-v4-pro",
-      "annotations": "gemini-3.6-flash"
+      "polish": "gemini-3.1-flash-lite",
+      "qa": "deepseek-v4-flash",
+      "annotations": "gemini-3.1-flash-lite"
     },
-    "auto_annotate": true,
+    "auto_annotate": false,
     "auto_qa": true,
-    "default_mode": "tight",
+    "default_mode": "normal",
     "min_workers": 1,
-    "max_workers": 4,
+    "max_workers": 2,
     "max_attempts": 2,
     "job_timeout_sec": 1800,
     "max_part_words": 1200,
@@ -22,7 +22,11 @@
   "edition": {
     "use_llm_macro": true,
     "use_llm_relabel": false,
-    "use_llm_qa": false
+    "use_llm_qa": false,
+    "min_workers": 1,
+    "max_workers": 2,
+    "max_attempts": 2,
+    "job_timeout_sec": 600
   },
-  "updated_at": "2026-09-02T11:40:31+00:00"
+  "updated_at": "2026-09-04T19:07:06+00:00"
 }

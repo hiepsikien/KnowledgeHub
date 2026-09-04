@@ -97,15 +97,20 @@ def segment_payload_from_ref_row(
     payload: dict[str, Any] = {
         "id": f"{source_work_id}--{seg_id}",
         "chapter": ch,
-        "words": row["words"],
-        "source_text": row["text"],
-        "source_text_kind": row.get("source_kind") or "raw_slice",
-        "drafts": {"tight": None, "normal": None, "loose": None},
-        "final": None,
-        "status": "pending",
+        "source_order": int(row.get("source_order") or 0),
     }
     if row.get("ref_chapter_id"):
         payload["ref_chapter_id"] = row["ref_chapter_id"]
+    payload.update(
+        {
+            "words": row["words"],
+            "source_text": row["text"],
+            "source_text_kind": row.get("source_kind") or "raw_slice",
+            "drafts": {"tight": None, "normal": None, "loose": None},
+            "final": None,
+            "status": "pending",
+        }
+    )
     if row.get("title"):
         payload["ref_title"] = row["title"]
     blocks = row.get("blocks") or []
@@ -207,7 +212,8 @@ def sync_translation_chapters_from_ref(
     keep_paths: set[Path] = set()
     consumed: set[Path] = set()
 
-    for row in ref_chapters:
+    for index, row in enumerate(ref_chapters):
+        row = {**row, "source_order": index}
         ch = str(row["chapter"])
         seg_id = f"ch{ch.lower()}"
         seg_path = seg_dir / f"{seg_id}.json"
@@ -218,6 +224,7 @@ def sync_translation_chapters_from_ref(
             payload = dict(old)
             payload["chapter"] = ch
             payload["id"] = f"{source_work_id}--{seg_id}"
+            payload["source_order"] = index
             if row.get("ref_chapter_id"):
                 payload["ref_chapter_id"] = row["ref_chapter_id"]
             if row.get("title"):

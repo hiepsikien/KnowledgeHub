@@ -173,6 +173,36 @@ def test_split_arabic_and_plain_text():
     assert chapter_sort_key("ChapterIX") < chapter_sort_key("ChapterX")
     assert chapter_sort_key("preface") < chapter_sort_key("ChapterI")
     assert chapter_sort_key("ChapterXIV") < chapter_sort_key("CatalogueofBachs")
+    assert chapter_sort_key("ChapterXIX") < chapter_sort_key("ChapterXX")
+
+
+def test_segment_files_follow_ref_structure_order(corpus: Path):
+    from knowledgehub.translation.assemble import segment_files
+
+    work = "arnold--essays"
+    seg_dir = corpus / "translations" / work / "segments"
+    seg_dir.mkdir(parents=True)
+    rows = [
+        ("chiiimauricedeguri", "IIIMAURICEDEGURI", "sec-003"),
+        ("chiitheliteraryinf", "IITHELITERARYINF", "sec-002"),
+        ("chithefunctionofcr", "ITHEFUNCTIONOFCR", "sec-001"),
+    ]
+    for stem, chapter, ref_id in rows:
+        (seg_dir / f"{stem}.json").write_text(
+            json.dumps(
+                {
+                    "chapter": chapter,
+                    "source_text": "body",
+                    "ref_chapter_id": ref_id,
+                }
+            ),
+            encoding="utf-8",
+        )
+    assert [p.stem for p in segment_files(work)] == [
+        "chithefunctionofcr",
+        "chiitheliteraryinf",
+        "chiiimauricedeguri",
+    ]
 
 
 def test_fallback_title_vi_is_vietnamese():

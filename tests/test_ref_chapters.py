@@ -187,6 +187,8 @@ def test_init_uses_parsed_chapter_source(tmp_path: Path, monkeypatch: pytest.Mon
     assert result["project"]["source_text_kind"] == "parsed"
     chi = json.loads((tmp_path / "translations" / WORK / "segments/chchapteri.json").read_text(encoding="utf-8"))
     assert chi["source_text_kind"] == "parsed"
+    assert chi["source_order"] == 0
+    assert chi["ref_chapter_id"] == "sec-001"
     assert "[Sidenote:" not in chi["source_text"]
     assert any(b.get("role") == "genealogy" for b in chi["ref_blocks"])
     assert any(b.get("hidden") for b in chi["ref_blocks"])

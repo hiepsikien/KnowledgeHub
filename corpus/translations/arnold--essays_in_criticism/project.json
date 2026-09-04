@@ -1,0 +1,30 @@
+{
+  "source_work_id": "arnold--essays_in_criticism",
+  "translation_work_id": "arnold--essays_in_criticism_vi",
+  "target_language": "vi",
+  "translation_mode": "normal",
+  "translation_modes_available": [
+    "tight",
+    "normal",
+    "loose"
+  ],
+  "status": "mode_locked",
+  "created_at": "2026-09-04T19:59:03+00:00",
+  "updated_at": "2026-09-04T21:00:37+00:00",
+  "split_version": 2,
+  "models": {
+    "draft": "deepseek-v4-flash",
+    "polish": "gemini-3.1-flash-lite",
+    "qa": "deepseek-v4-flash",
+    "annotations": "gemini-3.1-flash-lite"
+  },
+  "source": {
+    "title": "NEW 2: Essays in Criticism (Arnold)",
+    "language": "en",
+    "words": 164087,
+    "chapters": 19
+  },
+  "segments_total": 19,
+  "chapter_source": "ref",
+  "source_text_kind": "parsed"
+}

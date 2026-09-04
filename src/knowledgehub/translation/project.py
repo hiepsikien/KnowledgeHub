@@ -256,6 +256,7 @@ def init_translation_project(
         payload = {
             "id": f"{source_work_id}--{seg_id}",
             "chapter": row["chapter"],
+            "source_order": index,
             "words": row["words"],
             "source_text": row["text"],
             "drafts": {"tight": None, "normal": None, "loose": None},

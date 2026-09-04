@@ -1,3 +1,101 @@
 {
-  "annotations": []
+  "annotations": [
+    {
+      "id": "bach--abdy_williams--chchapteri--context-1",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "kind": "context",
+      "anchor_text": "quodlibet",
+      "title_vi": "Quodlibet",
+      "body_vi": "Một hình thức âm nhạc giải trí trong đó các giai điệu hoặc bài hát quen thuộc được kết hợp lại với nhau một cách hài hước, thường được trình diễn ngẫu hứng trong các buổi tụ họp gia đình.",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--context-2",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "kind": "context",
+      "anchor_text": "Kunstpfeifer",
+      "title_vi": "Kunstpfeifer",
+      "body_vi": "Danh từ tiếng Đức chỉ những nhạc sĩ chuyên nghiệp được thành phố thuê, thường chơi các nhạc cụ hơi (kèn) và nhạc cụ dây trong các dịp lễ hội hoặc sự kiện công cộng.",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--context-3",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "kind": "context",
+      "anchor_text": "Capellmeister",
+      "title_vi": "Capellmeister",
+      "body_vi": "Chức danh chỉ người đứng đầu dàn nhạc hoặc nhóm nhạc công phục vụ tại cung đình hoặc nhà thờ, chịu trách nhiệm chỉ huy và sáng tác âm nhạc cho các dịp lễ nghi.",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-1",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[1]",
+      "kind": "footnote",
+      "anchor_text": "Hoàng đế Ferdinand III phê chuẩn",
+      "title_vi": "Hoàng đế Ferdinand III phê chuẩn [1]",
+      "body_vi": "Ferdinand III (1608–1657) là Hoàng đế La Mã Thần thánh, người đã phê chuẩn bộ điều lệ nhằm củng cố vị thế pháp lý và tổ chức cho các hội nhạc sĩ chuyên nghiệp trong thời kỳ hậu Chiến tranh Ba Mươi Năm.",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-2",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[2]",
+      "anchor_text": "alto-viola",
+      "title_vi": "alto-viola [2]",
+      "body_vi": "Đây là loại đàn thuộc họ viola cổ (viola da braccio), có âm vực trung cao, đóng vai trò quan trọng trong các dàn nhạc dây thời kỳ Baroque trước khi đàn viola hiện đại trở nên phổ biến.",
+      "kind": "footnote",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-3",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[3]",
+      "anchor_text": "Consistory",
+      "title_vi": "Consistory [3]",
+      "body_vi": "Consistory là tòa án giáo hội trong các nhà thờ Tin lành thời bấy giờ, có thẩm quyền xét xử các vấn đề đạo đức, hôn nhân và kỷ luật tôn giáo trong cộng đồng.",
+      "kind": "footnote",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-4",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[4]",
+      "anchor_text": "cantata",
+      "title_vi": "cantata [4]",
+      "body_vi": "Một thể loại âm nhạc thanh nhạc gồm nhiều chương, thường bao gồm các bản aria, recitativo và hợp xướng, được trình diễn cùng dàn nhạc, rất phổ biến trong phụng vụ nhà thờ Lutheran.",
+      "kind": "footnote",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-5",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[5]",
+      "anchor_text": "motet",
+      "title_vi": "motet [5]",
+      "body_vi": "Motet là một thể loại nhạc hợp xướng đa bè (polyphonic) thường dựa trên văn bản kinh thánh, phát triển mạnh mẽ từ thời kỳ Phục hưng đến thời kỳ Baroque.",
+      "kind": "footnote",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    },
+    {
+      "id": "bach--abdy_williams--chchapteri--fn-6",
+      "segment_id": "bach--abdy_williams--chchapteri",
+      "chapter": "CHAPTERI",
+      "marker": "[6]",
+      "anchor_text": "Pachelbel",
+      "title_vi": "Pachelbel [6]",
+      "body_vi": "Johann Pachelbel (1653–1706) là nhà soạn nhạc và nghệ sĩ organ người Đức nổi tiếng, có ảnh hưởng lớn đến phong cách sáng tác của gia đình Bach, đặc biệt là trong các tác phẩm cho organ.",
+      "kind": "footnote",
+      "generated_at": "2026-09-04T19:38:10+00:00"
+    }
+  ],
+  "updated_at": "2026-09-04T20:05:02+00:00"
 }

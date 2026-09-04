@@ -13,23 +13,7 @@ from .paths import segments_dir
 from .project import load_project
 from .segments_io import final_text
 
-_ROMAN = {
-    "i": 1,
-    "ii": 2,
-    "iii": 3,
-    "iv": 4,
-    "v": 5,
-    "vi": 6,
-    "vii": 7,
-    "viii": 8,
-    "ix": 9,
-    "x": 10,
-    "xi": 11,
-    "xii": 12,
-    "xiii": 13,
-    "xiv": 14,
-    "xv": 15,
-}
+_ROMAN_VALUES = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100, "d": 500, "m": 1000}
 _NAMED = {
     "preface": 0,
     "foreword": 0,
@@ -38,7 +22,26 @@ _NAMED = {
     "epilogue": 10_000,
     "appendix": 10_001,
 }
-_COMPACT_CHAPTER = re.compile(r"^(?:chapter|chap)?([ivxlc]+|\d+)$")
+_COMPACT_CHAPTER = re.compile(r"^(?:chapter|chap)?([ivxlcdm]+|\d+)$")
+_SOURCE_ORDER = re.compile(rb'"source_order"\s*:\s*(-?\d+)')
+_REF_CHAPTER_ID = re.compile(rb'"ref_chapter_id"\s*:\s*"([^"]+)"')
+_SEC_NUM = re.compile(r"sec-(\d+)")
+
+
+def roman_to_int(token: str) -> int | None:
+    text = token.strip().lower()
+    if not text or any(ch not in _ROMAN_VALUES for ch in text):
+        return None
+    total = 0
+    prev = 0
+    for ch in reversed(text):
+        val = _ROMAN_VALUES[ch]
+        if val < prev:
+            total -= val
+        else:
+            total += val
+            prev = val
+    return total if total > 0 else None
 
 
 class IncompleteTranslation(ValueError):
@@ -63,15 +66,44 @@ def chapter_sort_key(chapter: str) -> tuple[int, str]:
         token = match.group(1)
         if token.isdigit():
             return (int(token), chapter)
-        if token in _ROMAN:
-            return (_ROMAN[token], chapter)
+        parsed = roman_to_int(token)
+        if parsed is not None:
+            return (parsed, chapter)
     if compact.startswith("catalogue") or compact.startswith("catalog"):
         return (10_002, compact)
     if compact.startswith("bibliograph"):
         return (10_003, compact)
     if compact.startswith("glossary"):
         return (10_004, compact)
-    return (_ROMAN.get(key, 999), compact or chapter)
+    return (roman_to_int(key) or roman_to_int(compact) or 999, compact or chapter)
+
+
+def _ref_section_rank(ref_chapter_id: str) -> int | None:
+    sid = ref_chapter_id.strip().lower()
+    if not sid:
+        return None
+    if "front" in sid:
+        return -1
+    match = _SEC_NUM.search(sid)
+    return int(match.group(1)) if match else None
+
+
+def segment_sort_key(path: Path) -> tuple[int, int, str]:
+    """Prefer chế bản order (source_order / ref_chapter_id) over filename slugs."""
+    try:
+        raw = path.read_bytes()
+    except OSError:
+        raw = b""
+    order = _SOURCE_ORDER.search(raw)
+    if order:
+        return (0, int(order.group(1)), path.name)
+    ref = _REF_CHAPTER_ID.search(raw)
+    if ref:
+        rank = _ref_section_rank(ref.group(1).decode("utf-8", errors="replace"))
+        if rank is not None:
+            return (0, rank, path.name)
+    n, rest = chapter_sort_key(path.stem.removeprefix("ch"))
+    return (1, n, rest)
 
 
 def segment_files(source_work_id: str) -> list[Path]:
@@ -80,7 +112,7 @@ def segment_files(source_work_id: str) -> list[Path]:
         return []
     return sorted(
         (p for p in seg_dir.glob("ch*.json") if not p.name.endswith("-sample.json")),
-        key=lambda p: chapter_sort_key(p.stem.removeprefix("ch")),
+        key=segment_sort_key,
     )
 
 
