@@ -24,8 +24,8 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `title`, `description`, `language`, `license`, `category_slug`, `price_cents`, `status` | — | catalog |
 | `raw_text` | string | **fallback** body if `chapters` absent; still required (≥1 char) |
 | `credits` | object? | author / translator lines |
-| `glossary` | list? | cast / term entries |
-| `notes` | list? | footnote cards (preferred over scraping `raw_text`) |
+| `glossary` | list? | term cards (`kind: glossary`, group `Thuật ngữ`) plus any leftover cast entries. Hub parses a Glossary / Bảng chú giải chapter at publish (name, aliases, summary). Read shows a card when the reader taps a paragraph that contains the name or an alias. Do **not** expect inline `span.style: glossary` on every occurrence. |
+| `notes` | list? | footnote cards (preferred over scraping `raw_text`). If the printed note was only `See Glossary, "…"` / `Xem Bảng chú giải`, Hub replaces that pointer with the glossary entry body so tap `[n]` shows the definition. |
 
 ### REF/1 (required for pilots)
 
@@ -66,7 +66,17 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `host_text` | no | full host paragraph text |
 | `figures` | no | `{caption, src?}` from `[Illustration:]` in the note (Bach fn. 77); `src` is a Hub asset path. Read stores the bytes from `assets[]` and rewrites `src` to `/api/books/{id}/media/{asset}.jpg`. Never a Gutenberg hotlink. |
 
-Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES dumps left in `raw_text` — dumps are already stripped from reading flow).
+Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES dumps left in `raw_text` — dumps are already stripped from reading flow). Glossary pointers are resolved onto `span.note` and `notes[].body` at publish; the Glossary chapter stays in `chapters[]` as back matter.
+
+### `glossary[]` item (term)
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| `name` | yes | headword, e.g. `Cembalo` |
+| `aliases` | no | `clavicymbal`, `Basso Continuo`, … — Read matches these in the tapped paragraph |
+| `summary` | yes | definition body (tildes already stripped) |
+| `kind` | yes | `glossary` |
+| `group_label` | no | default `Thuật ngữ` |
 
 ### `assets[]` item (illustrations)
 
@@ -127,12 +137,14 @@ Offsets are into the block `text` after Hub merge. Read must not re-parse marker
 - Dual package layouts / override re-apply
 - OCR column repair
 - Full chrome for every span style
+- Inline glossary spans on every term occurrence (pilot uses footnote markers + `glossary[]`)
 - TTS SSML from spans (plain chapter text still used)
 
 ## Acceptance (per pilot book)
 
 1. Chế bản: all chapters Ready → Publish unlocked.
 2. Read library shows one book; chapter list matches Hub macro sections.
-3. Footnote markers open the Hub note body (Bach / Arnold where present).
+3. Footnote markers open the Hub note body (Bach / Arnold where present). `See Glossary` / `Xem Bảng chú giải` pointers are already replaced with the term definition.
 4. `_italic_` / `em` spans render italic.
 5. Re-publish with same `edition_hash` is a no-op (or updates metadata only).
+6. Glossary chapter remains in the chapter list. `glossary[]` has term cards (`kind: glossary`); tapping a paragraph that contains `Cembalo` / `Buxtehude` / an alias shows that card. No inline glossary spans.

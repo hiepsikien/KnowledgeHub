@@ -14,6 +14,7 @@ from .edition.footnotes import (
     notes_for_read_publish,
     notes_from_annotations,
 )
+from .edition.glossary import attach_published_glossary, resolve_glossary_in_edition
 from .edition.pipeline import build_edition
 from .edition.read_edition import ReadEditionError, package_dir_for_work
 from .edition.read_edition_steps import (
@@ -49,6 +50,7 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     edition = report.get("edition") or {}
     if not edition.get("edition_format"):
         return
+    resolve_glossary_in_edition(edition)
     payload["edition_format"] = edition["edition_format"]
     payload["edition_hash"] = edition.get("edition_hash")
     payload["content_kind"] = edition.get("content_kind")
@@ -79,6 +81,7 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
         assets = collect_publish_assets(figure_blocks, notes, dest)
         if assets:
             payload["assets"] = assets
+    attach_published_glossary(payload, edition)
 
 
 def _chapters_for_read_publish(edition: dict[str, Any]) -> list[dict[str, Any]]:
@@ -212,6 +215,8 @@ def prepare_publish(
         payload["glossary"] = [
             row for row in footnote_glossary if str(row.get("kind") or "") != "footnote"
         ]
+    attach_published_glossary(payload, edition)
+    report["glossary_count"] = len(payload.get("glossary") or [])
     _apply_publish_overrides(
         payload,
         title=title,
@@ -279,6 +284,7 @@ def _prepare_translation_publish(
         ]
     if glossary:
         payload["glossary"] = glossary
+    attach_published_glossary(payload, edition)
     _apply_publish_overrides(
         payload,
         title=title,
@@ -292,7 +298,7 @@ def _prepare_translation_publish(
         "source_work_id": source_id,
         "chapters": meta["chapters"],
         "assembled_chars": meta["chars"],
-        "glossary_count": len(glossary),
+        "glossary_count": len(payload.get("glossary") or []),
         "stripped_footnotes": False,
     }
     return payload

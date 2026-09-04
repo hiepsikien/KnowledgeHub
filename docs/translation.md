@@ -103,7 +103,7 @@ Hub keeps **two Works**, Read gets **two books** (`hub_work_id` is unique).
 | `rights.basis` | `public_domain` | `editorial_derivative` |
 | `license` | source PD id | `hub_editorial_vi` |
 | Body | edition from `raw/` | `segments/*/final` assembled at publish |
-| Glossary | numbered `FOOTNOTES:` | `annotations.json` |
+| Glossary | Glossary chapter → `glossary[]`; `See Glossary` footnotes resolved at publish | `annotations.json` (`kind: glossary`) plus the same chapter overlay when present |
 
 Do not write the translation into `sources/*/raw/`. Promote after every chapter has `final`:
 
