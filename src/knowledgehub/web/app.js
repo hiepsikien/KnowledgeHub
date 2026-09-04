@@ -1425,6 +1425,35 @@ async function runTranslationAction(kind) {
 async function enqueueMissingDrafts() {
   const workId = state.translation.projectId;
   if (!workId) return;
+  await refreshTranslationJobs();
+  const preview = state.translation.project?.missing_preview || {};
+  const missing = Number(preview.count || (state.translation.project?.missing_chapters || []).length);
+  if (!missing) {
+    toast("Không còn chương nào để dịch");
+    return;
+  }
+  const lines = [
+    `Xếp hàng dịch ${missing} chương chưa có bản dịch đủ?`,
+    "",
+    "Đây không chỉ là chương trống. Cũng gồm bản cụt, thiếu phần, và chờ polish — có thể ghi đè nháp dở.",
+  ];
+  for (const row of preview.by_reason || []) {
+    if (row.count) lines.push(`· ${row.label}: ${row.count}`);
+  }
+  if (preview.est_tokens_label) {
+    lines.push("");
+    lines.push(`Ước lượng ${preview.est_tokens_label} token (draft+polish`);
+    const extras = [];
+    if (preview.auto_annotate) extras.push("annotate");
+    if (preview.auto_qa) extras.push("QA");
+    lines[lines.length - 1] += extras.length ? ` + ${extras.join("/")}` : "";
+    lines[lines.length - 1] += "). Heuristic thô, không phải billing.";
+  }
+  lines.push("");
+  lines.push("Việc này gọi LLM. Reload trang không dịch — chỉ nút này (hoặc Dịch chương) mới xếp hàng.");
+  if (!confirm(lines.join("\n"))) {
+    return;
+  }
   try {
     const result = await api(`/api/translations/${encodeURIComponent(workId)}/jobs`, {
       method: "POST",
@@ -1570,14 +1599,14 @@ async function syncTranslationRefChapters() {
   const overwrite = confirm(
     "Lấy lại source từ chương đã parse (chế bản: sidenote ẩn, gia phả tách dòng, wrap đã nối)?\n\n"
       + "Chương đã duyệt (status = approved) giữ nguyên bản dịch.\n"
-      + "Chương chưa duyệt sẽ xoá nháp và ghi source mới.",
+      + "Chương chưa duyệt sẽ xoá nháp và ghi source mới.\n\n"
+      + "Không tự dịch. Khi sẵn sàng, bấm «Dịch chương còn thiếu».",
   );
   if (!overwrite) return;
-  const enqueue = confirm("Xếp hàng dịch lại các chương chưa duyệt?");
   try {
     const result = await api(`/api/translations/${encodeURIComponent(workId)}/sync-ref-chapters`, {
       method: "POST",
-      body: { overwrite: true, keep_approved: true, enqueue },
+      body: { overwrite: true, keep_approved: true, enqueue: false },
     });
     const rewritten = (result.rewritten || []).length;
     const kept = (result.kept_approved || []).length;

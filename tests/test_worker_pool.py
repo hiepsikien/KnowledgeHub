@@ -132,11 +132,10 @@ def test_four_workers_run_drafts_in_parallel(pool_corpus: Path, monkeypatch: pyt
         }
     )
     stats = _install_fake_executor(monkeypatch, parties=4, hold=0.2)
-    for chapter in CHAPTERS:
-        enqueue_job(WORK_ID, chapter, "draft")
-
     monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
     start_worker()
+    for chapter in CHAPTERS:
+        enqueue_job(WORK_ID, chapter, "draft")
     assert worker_status()["max_workers"] == 4
     alive = worker_status()["alive"]
     assert alive == 4, f"expected 4 live workers after enqueue, got {alive}"
@@ -167,11 +166,10 @@ def test_four_workers_pipeline_keeps_chapter_exclusive(pool_corpus: Path, monkey
         }
     )
     stats = _install_fake_executor(monkeypatch, parties=4, hold=0.12)
-    for chapter in CHAPTERS[:4]:
-        enqueue_job(WORK_ID, chapter, "draft")
-
     monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
     start_worker()
+    for chapter in CHAPTERS[:4]:
+        enqueue_job(WORK_ID, chapter, "draft")
     jobs = _wait_idle()
     stop_worker()
 

@@ -496,13 +496,16 @@ def enqueue_edition_job(
     return payload
 
 
-def interrupt_stale_running() -> int:
+def interrupt_stale_running(*, include_queued: bool = False) -> int:
+    stale = {"running"}
+    if include_queued:
+        stale.add("queued")
     n = 0
     with _lock:
         store = _read_store()
         jobs = list(store.get("jobs") or [])
         for job in jobs:
-            if job.get("status") != "running":
+            if job.get("status") not in stale:
                 continue
             job_id = str(job.get("id") or "")
             job["status"] = "interrupted"
@@ -517,7 +520,7 @@ def interrupt_stale_running() -> int:
         if n:
             store["jobs"] = jobs
             _write_store(store)
-            job_log_event("interrupt_stale", count=n)
+            job_log_event("interrupt_stale", count=n, include_queued=include_queued)
     return n
 
 
@@ -1006,13 +1009,14 @@ def start_worker() -> None:
         first = not _requeued
         _requeued = True
     if first:
-        n = interrupt_stale_running()
-        job_log_event("worker_boot", interrupted=n, enabled=True)
+        n = interrupt_stale_running(include_queued=True)
+        job_log_event("worker_boot", interrupted=n, enabled=True, include_queued=True)
     scale_workers()
 
 
 def stop_worker() -> None:
     global _stop, _threads, _requeued
+    dropped = interrupt_stale_running(include_queued=True)
     if _stop is not None:
         _stop.set()
         _wake.set()
@@ -1020,7 +1024,12 @@ def stop_worker() -> None:
     for thread in threads:
         if thread.is_alive():
             thread.join(timeout=2.0)
-    job_log_event("worker_stop", alive=sum(1 for thread in threads if thread.is_alive()))
+    dropped += interrupt_stale_running(include_queued=True)
+    job_log_event(
+        "worker_stop",
+        alive=sum(1 for thread in threads if thread.is_alive()),
+        interrupted=dropped,
+    )
     _threads = []
     _stop = None
     _requeued = False

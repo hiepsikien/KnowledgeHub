@@ -18,6 +18,7 @@ from .jobs import (
     worker_alive,
     worker_status,
 )
+from .estimate import missing_draft_preview
 from .parts import completeness_status
 from .paths import annotations_file, translation_catalog_id
 from .project import init_translation_project, list_project_ids, load_project, translation_project_ready
@@ -209,6 +210,7 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
             if last_error_status.get(chapter):
                 row["last_error_status"] = last_error_status[chapter]
     status = translation_status(source_work_id)
+    pipe = translation_pipeline()
     return {
         "project": project,
         "chapters": chapters,
@@ -218,11 +220,16 @@ def get_translation_project(source_work_id: str) -> dict[str, Any]:
         ),
         "ready_to_promote": status["complete"],
         "missing_chapters": status["missing"],
+        "missing_preview": missing_draft_preview(
+            chapters,
+            auto_annotate=bool(pipe.get("auto_annotate")),
+            auto_qa=bool(pipe.get("auto_qa")),
+        ),
         "jobs": jobs,
         "log": recent_job_log(),
         "worker_alive": worker_alive(),
         "workers": worker_status(),
-        "pipeline": translation_pipeline(),
+        "pipeline": pipe,
     }
 
 

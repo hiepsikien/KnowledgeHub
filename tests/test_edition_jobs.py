@@ -201,6 +201,21 @@ def test_cancel_jobs_api(client: TestClient):
     assert not any(job["status"] in {"queued", "running"} for job in listed["jobs"])
 
 
+def test_edition_stop_and_boot_drop_queued(client: TestClient, monkeypatch: pytest.MonkeyPatch):
+    from knowledgehub.edition.jobs import enqueue_job, list_jobs, start_worker, stop_worker
+
+    ids = _ready_to_parse(client)
+    enqueue_job(WORK_ID, "parse", chapter=ids[0], params={"use_llm": False})
+    stop_worker()
+    assert list_jobs(WORK_ID)[0]["status"] == "interrupted"
+    enqueue_job(WORK_ID, "parse", chapter=ids[1], params={"use_llm": False})
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
+    start_worker()
+    leftover = [job for job in list_jobs(WORK_ID) if job["chapter"] == ids[1]]
+    assert leftover and leftover[0]["status"] == "interrupted"
+    stop_worker()
+
+
 def test_sync_macro_endpoint_still_runs(client: TestClient):
     macro = client.post(f"/api/works/{WORK_ID}/read-edition/macro", json={"use_llm": False})
     assert macro.status_code == 200, macro.text
@@ -232,10 +247,10 @@ def test_two_edition_workers_run_parses_in_parallel(client: TestClient, monkeypa
                 current -= 1
 
     monkeypatch.setattr("knowledgehub.edition.jobs.execute_job", fake_execute)
-    for chapter in ids[:2]:
-        enqueue_job(WORK_ID, "parse", chapter=chapter, params={"use_llm": False})
     monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
     start_worker()
+    for chapter in ids[:2]:
+        enqueue_job(WORK_ID, "parse", chapter=chapter, params={"use_llm": False})
     assert worker_status()["max_workers"] == 2
     deadline = time.monotonic() + 8
     last = []
@@ -343,10 +358,10 @@ def test_two_edition_workers_write_both_parse_statuses(client, monkeypatch: pyte
         return real_build(*args, **kwargs)
 
     monkeypatch.setattr("knowledgehub.edition.read_edition_steps.build_read_edition", slow_build)
-    for chapter in ids[:2]:
-        enqueue_job(WORK_ID, "parse", chapter=chapter, params={"use_llm": False})
     monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
     start_worker()
+    for chapter in ids[:2]:
+        enqueue_job(WORK_ID, "parse", chapter=chapter, params={"use_llm": False})
     deadline = time.monotonic() + 20
     last = []
     while time.monotonic() < deadline:

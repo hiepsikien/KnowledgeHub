@@ -274,6 +274,11 @@ def test_truncated_final_is_not_ready(client: TestClient):
     assert ch_ii["completeness"] == "truncated"
     assert ch_ii["has_final"] is False
     assert "II" in project["missing_chapters"]
+    preview = project["missing_preview"]
+    assert preview["count"] >= 1
+    assert preview["est_tokens"] > 0
+    assert preview["est_tokens_label"].startswith("~")
+    assert any(row["reason"] == "truncated" for row in preview["by_reason"])
     seg = client.get("/api/translations/grotius--freedom_of_the_seas/segments/II").json()
     assert "bị cắt" in seg["translation"]
     assert "draft_raw_text" in seg
@@ -494,6 +499,57 @@ def test_interrupt_stale_running_does_not_requeue(client: TestClient, tmp_path: 
     job = store["jobs"][0]
     assert job["status"] == "interrupted"
     assert claim_next() is None
+
+
+def test_stop_worker_drops_queued_jobs_so_restart_cannot_spend_tokens(
+    client: TestClient, tmp_path: Path
+):
+    from knowledgehub.translation.jobs import claim_next, enqueue_job, stop_worker
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    stop_worker()
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    assert store["jobs"][0]["status"] == "interrupted"
+    assert claim_next() is None
+
+
+def test_start_worker_drops_queued_leftover_after_crash(
+    client: TestClient, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    from knowledgehub.translation.jobs import claim_next, enqueue_job, start_worker, stop_worker
+
+    enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    monkeypatch.setenv("KNOWLEDGEHUB_JOB_WORKER", "1")
+    start_worker()
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    assert store["jobs"][0]["status"] == "interrupted"
+    assert claim_next() is None
+    stop_worker()
+
+
+def test_stop_worker_second_sweep_drops_followup_after_join(
+    client: TestClient, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    from knowledgehub.translation import jobs as jobs_mod
+
+    jobs_mod.enqueue_job("grotius--freedom_of_the_seas", "II", "draft")
+    sweeps = {"n": 0}
+    real = jobs_mod.interrupt_stale_running
+
+    def wrapped(*, include_queued: bool = False) -> int:
+        dropped = real(include_queued=include_queued)
+        sweeps["n"] += 1
+        if include_queued and sweeps["n"] == 1:
+            jobs_mod.enqueue_job("grotius--freedom_of_the_seas", "I", "qa")
+        return dropped
+
+    monkeypatch.setattr(jobs_mod, "interrupt_stale_running", wrapped)
+    jobs_mod.stop_worker()
+    store = json.loads((tmp_path / ".translation-jobs.json").read_text(encoding="utf-8"))
+    by_chapter = {job["chapter"]: job["status"] for job in store["jobs"]}
+    assert by_chapter["II"] == "interrupted"
+    assert by_chapter["I"] == "interrupted"
+    assert sweeps["n"] >= 2
 
 
 def test_cancel_jobs_api(client: TestClient):

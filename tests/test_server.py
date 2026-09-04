@@ -309,3 +309,7 @@ def test_static_rejects_path_traversal(client):
     assert js.status_code == 200
     assert "boot()" in js.text
     assert js.headers.get("cache-control") == "no-store"
+    assert "enqueue: false" in js.text
+    assert "Xếp hàng dịch lại các chương chưa duyệt" not in js.text
+    assert "Reload trang không dịch" in js.text
+    assert "missing_preview" in js.text or "est_tokens_label" in js.text
