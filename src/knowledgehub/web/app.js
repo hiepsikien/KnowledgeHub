@@ -372,6 +372,19 @@ function goTranslationDesk(workId, { mode, chapter } = {}) {
   location.href = next;
 }
 
+function chapterLabel(rowOrId) {
+  if (rowOrId && typeof rowOrId === "object") {
+    if (rowOrId.title_vi) return rowOrId.title_vi;
+    return chapterLabel(rowOrId.chapter);
+  }
+  const id = String(rowOrId || "");
+  const found = (state.translation.chapters || []).find((c) => c.chapter === id);
+  if (found?.title_vi) return found.title_vi;
+  const seg = state.translation.segment;
+  if (seg?.title_vi && String(seg.chapter || "") === id) return seg.title_vi;
+  return id ? `Chương ${id}` : "Chương";
+}
+
 function scoreBar(label, value) {
   const n = Number(value) || 0;
   const pct = Math.max(0, Math.min(100, n * 10));
@@ -748,7 +761,7 @@ function renderTranslationRows() {
           ? `<div class="sub">${escapeHtml(shortJobError(c.last_error))}</div>`
           : "";
       return `<tr class="pick ${on}" data-chapter="${escapeHtml(c.chapter)}">
-        <td><div class="title">Chương ${escapeHtml(c.chapter)}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ${
+        <td><div class="title">${escapeHtml(chapterLabel(c))}</div><div class="sub">${escapeHtml(String(c.words || "—"))} từ${
           c.part_count ? ` · ${c.parts_ready || 0}/${c.part_count} phần` : ""
         }</div></td>
         <td><div class="tr-status">${statusBadge(c)}${jobBadge}${errBadge}${errSub}</div></td>
@@ -770,7 +783,7 @@ function renderTranslationDetail() {
     return;
   }
   if (!seg) {
-    box.innerHTML = `<p class="muted">Đang tải chương ${escapeHtml(chapter)}…</p>`;
+    box.innerHTML = `<p class="muted">Đang tải ${escapeHtml(chapterLabel(chapter))}…</p>`;
     return;
   }
   const qa = seg.qa || {};
@@ -874,7 +887,7 @@ function renderTranslationDetail() {
       }
     </div>`;
   box.innerHTML = `
-    <h2>Chương ${escapeHtml(chapter)}</h2>
+    <h2>${escapeHtml(chapterLabel(chapterRow || chapter))}</h2>
     <p class="sub">${escapeHtml(chapterStatusLabel(chapterRow || { has_final: hasTranslation, status: seg.status }))} · ${escapeHtml(String(seg.words || "—"))} từ</p>
     ${
       lastError
@@ -951,7 +964,7 @@ function compareSlice() {
     const part = parts.find((row) => String(row.id) === String(pick));
     if (part) {
       return {
-        title: `Chương ${seg.chapter} · phần ${part.id}`,
+        title: `${chapterLabel(seg)} · phần ${part.id}`,
         source: part.source_text || "",
         draft: part.draft_raw_text || "",
         polish: part.translation || "",
@@ -959,7 +972,7 @@ function compareSlice() {
     }
   }
   return {
-    title: `Chương ${seg.chapter || ""}`,
+    title: chapterLabel(seg),
     source: seg.source_text || "",
     draft: seg.draft_raw_text || "",
     polish: seg.translation || "",
@@ -1329,7 +1342,7 @@ async function loadTranslationDesk(workId, chapter, modeHint) {
         });
         toast(`Đã tạo dự án · ${modeLabel(modeHint)}`);
       } catch (createErr) {
-        if (!/exists/i.test(createErr.message || "")) throw createErr;
+        if (!/translation project exists/i.test(createErr.message || "")) throw createErr;
         data = await api(`/api/translations/${encodeURIComponent(workId)}`);
       }
     }

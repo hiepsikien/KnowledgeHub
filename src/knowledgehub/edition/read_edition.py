@@ -18,6 +18,7 @@ from .overrides import apply_chapter_overrides, overrides_digest
 from .ref import build_read_edition
 from .ref_schema import REF_PARSER_VERSION, validate_edition
 from .serialize import blocks_to_markdown
+from .toc import trim_trailing_wrap_toc
 from .ref_qa import qa_read_edition
 from .read_edition_steps import (
     ReadEditionStepError,
@@ -583,7 +584,7 @@ def chapters_for_translation(work_id: str, *, corpus: Path | None = None) -> lis
     for section in structure.get("sections") or []:
         if section.get("kind") == "front_matter":
             continue
-        slice_text = section_source_slice(text, section)
+        slice_text = trim_trailing_wrap_toc(section_source_slice(text, section))
         raw_label = str(section.get("title") or section["section_id"]).strip()
         label = re.sub(r"[^A-Za-z0-9]", "", raw_label)[:16] or section["section_id"].replace("sec-", "")
         count = used.get(label, 0) + 1
@@ -594,7 +595,7 @@ def chapters_for_translation(work_id: str, *, corpus: Path | None = None) -> lis
                 "chapter": chapter_label,
                 "title": section.get("title"),
                 "text": slice_text,
-                "words": section.get("word_count") or _word_count(slice_text),
+                "words": _word_count(slice_text),
                 "ref_chapter_id": section["section_id"],
             }
         )

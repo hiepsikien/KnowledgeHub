@@ -24,6 +24,7 @@ from knowledgehub.edition.toc import (
     is_chapter_number_only_line,
     is_toc_chapter_block,
     is_toc_list_row,
+    trim_trailing_wrap_toc,
     kind_for_toc_label,
     parse_contents_entries,
     toc_is_heading_list_map,
@@ -348,6 +349,28 @@ def test_leftover_toc_without_page_column_is_not_body():
     assert any(t == "Chapter III" or t.endswith(" III") for t in titles)
     assert any(t == "Chapter XIV" or t.endswith(" XIV") for t in titles)
     assert not any(t.startswith("CHAPTER III") for t in titles)
+
+
+def test_trim_trailing_wrap_toc_drops_contents_after_preface():
+    preface = (
+        "Preface\n\n"
+        "The position of Johann Sebastian Bach as one of a numerous family of musicians "
+        "is unique. Of no other composer can it be said that his forefathers were musicians.\n\n"
+        "C. F. Abdy Williams.\n\n"
+        "CHAPTER III\n\n"
+        "Early years at Ohrdruf--The church and the organ of the time\n\n"
+        "CHAPTER IV\n\n"
+        "The choir at Luneburg--Journeys and the first independent posts\n\n"
+        "CATALOGUE OF VOCAL WORKS\n\n"
+        "BIBLIOGRAPHY\n\n"
+        "GLOSSARY\n\n"
+        "List of Illustrations\n"
+    )
+    trimmed = trim_trailing_wrap_toc(preface)
+    assert "Abdy Williams" in trimmed
+    assert "CHAPTER III" not in trimmed
+    assert "CATALOGUE OF" not in trimmed
+    assert "List of Illustrations" not in trimmed
 
 
 def test_bare_chapter_stack_is_toc_list():

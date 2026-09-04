@@ -20,10 +20,11 @@ from .jobs import (
 )
 from .parts import completeness_status
 from .paths import annotations_file, translation_catalog_id
-from .project import init_translation_project, list_project_ids, load_project
+from .project import init_translation_project, list_project_ids, load_project, translation_project_ready
 from .promote import promote_translation
 from .qa import qa_segment, approve_qa_issues, reopen_qa_issues
 from .segments_io import final_text, load_segment
+from .titles import display_title_vi
 
 
 def _list_project_ids() -> list[str]:
@@ -65,6 +66,8 @@ def _chapter_summary(source_work_id: str, path: Path, project: dict[str, Any]) -
         "open_issue_count": sum(1 for issue in issues if not issue.get("approved")),
         "annotation_count": 0,
         "annotations_generated_at": segment.get("annotations_generated_at"),
+        "title": segment.get("ref_title") or segment.get("title"),
+        "title_vi": display_title_vi(segment),
     }
 
 
@@ -130,6 +133,8 @@ def list_translation_projects() -> dict[str, Any]:
 
 
 def get_translation_project(source_work_id: str) -> dict[str, Any]:
+    if not translation_project_ready(source_work_id):
+        raise FileNotFoundError(f"No translation project: {source_work_id}")
     project = load_project(source_work_id)
     chapters = [
         _chapter_summary(source_work_id, path, project) for path in _segment_files(source_work_id)
@@ -263,6 +268,8 @@ def get_segment_detail(source_work_id: str, chapter: str, *, include_drafts: boo
         "parts": part_rows,
         "legacy_final": str(segment.get("legacy_final") or "").strip() or None,
         "legacy_draft_raw": str(segment.get("legacy_draft_raw") or "").strip() or None,
+        "title": segment.get("ref_title") or segment.get("title"),
+        "title_vi": display_title_vi(segment),
         "file": str(path.relative_to(corpus_root())),
     }
     if include_drafts:

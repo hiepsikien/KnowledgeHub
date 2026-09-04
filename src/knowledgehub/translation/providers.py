@@ -223,6 +223,8 @@ def _request_json(
             body = exc.read().decode("utf-8", errors="replace")
             message = f"HTTP {exc.code}: {body[:800]}"
             transient = exc.code in RETRY_HTTP_STATUS
+            if exc.code == 429 and re.search(r"credits are depleted|prepayment", body, re.I):
+                transient = False
             hinted = _retry_after_seconds(getattr(exc, "headers", None), body)
         except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
             message = str(exc)

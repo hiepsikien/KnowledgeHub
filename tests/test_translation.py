@@ -9,6 +9,7 @@ from knowledgehub.translation.assemble import chapter_sort_key
 from knowledgehub.translation.fetch import fetch_grotius_freedom_of_seas
 from knowledgehub.translation.project import init_translation_project, select_translation_mode
 from knowledgehub.translation.segment import split_chapters
+from knowledgehub.translation.titles import fallback_title_vi, translate_chapter_titles
 
 
 @pytest.fixture
@@ -47,17 +48,56 @@ def test_init_translation_project(corpus: Path):
     payload = json.loads(sample.read_text(encoding="utf-8"))
     assert payload["chapter"] == "I"
     assert "English paragraph one" in payload["source_text"]
+    chi = json.loads((corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json").read_text())
+    assert chi["title_vi"] == "Chương 1"
 
 
 def test_init_locks_mode_without_sample(corpus: Path):
     result = init_translation_project("grotius--freedom_of_the_seas", translation_mode="normal")
     assert result["project"]["translation_mode"] == "normal"
     assert result["project"]["status"] == "mode_locked"
+    assert result["project"]["chapter_source"] == "split"
     assert "sample" not in result["paths"]
     sample = corpus / "translations/grotius--freedom_of_the_seas/segments/chi-sample.json"
     assert not sample.exists()
     project = json.loads((corpus / "translations/grotius--freedom_of_the_seas/project.json").read_text())
     assert "sample_segment" not in project
+
+
+def test_init_does_not_split_with_llm_and_survives_title_timeout(
+    corpus: Path, monkeypatch: pytest.MonkeyPatch
+):
+    monkeypatch.setenv("GEMINI_API_KEY", "fake-key")
+
+    def boom_gemini(*_args, **_kwargs):
+        raise AssertionError("creating a translation project must not split with Gemini")
+
+    from knowledgehub.translation import titles as titles_mod
+    from knowledgehub.translation.providers import ProviderError
+
+    real_translate = titles_mod.translate_chapter_titles
+
+    def translate_force(titles, *, model=None, use_llm=None):
+        if use_llm is False:
+            return real_translate(titles, model=model, use_llm=False)
+        root = corpus / "translations/grotius--freedom_of_the_seas"
+        assert (root / "project.json").is_file()
+        assert (root / "segments/chi.json").is_file()
+        return real_translate(titles, model=model, use_llm=True)
+
+    def boom_prompt(*_args, **_kwargs):
+        raise ProviderError("timeout")
+
+    monkeypatch.setattr("knowledgehub.translation.providers.gemini_generate", boom_gemini)
+    monkeypatch.setattr("knowledgehub.translation.titles.translate_chapter_titles", translate_force)
+    monkeypatch.setattr("knowledgehub.translation.titles.complete_prompt", boom_prompt)
+    result = init_translation_project("grotius--freedom_of_the_seas", translation_mode="normal")
+    assert result["project"]["source"]["chapters"] == 2
+    chi = json.loads(
+        (corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json").read_text(encoding="utf-8")
+    )
+    assert chi["title_vi"] == "Chương 1"
+    assert "English paragraph one" in chi["source_text"]
 
 
 def test_select_mode_without_sample_draft(corpus: Path):
@@ -85,6 +125,29 @@ def test_select_translation_mode(corpus: Path):
     assert chi["final"] == "Bản dịch tight."
 
 
+def test_init_recreates_incomplete_project_dir(corpus: Path):
+    leftover = corpus / "translations/grotius--freedom_of_the_seas"
+    (leftover / "segments").mkdir(parents=True)
+    (leftover / "segments/stale.json").write_text("{}", encoding="utf-8")
+    assert not (leftover / "project.json").is_file()
+    result = init_translation_project("grotius--freedom_of_the_seas", translation_mode="normal")
+    assert result["project"]["translation_mode"] == "normal"
+    assert result["project"]["source"]["chapters"] == 2
+    assert (leftover / "project.json").is_file()
+    assert (leftover / "segments/chi.json").is_file()
+    assert not (leftover / "segments/stale.json").is_file()
+
+
+def test_init_recreates_project_json_without_chapters(corpus: Path):
+    leftover = corpus / "translations/grotius--freedom_of_the_seas"
+    leftover.mkdir(parents=True)
+    (leftover / "project.json").write_text('{"source_work_id": "grotius--freedom_of_the_seas"}\n', encoding="utf-8")
+    (leftover / "segments").mkdir()
+    result = init_translation_project("grotius--freedom_of_the_seas", translation_mode="normal")
+    assert result["project"]["source"]["chapters"] == 2
+    assert (leftover / "segments/chi.json").is_file()
+
+
 def test_overwrite_rewrites_chapter_source(corpus: Path):
     init_translation_project("grotius--freedom_of_the_seas")
     chi = corpus / "translations/grotius--freedom_of_the_seas/segments/chi.json"
@@ -106,6 +169,32 @@ def test_split_arabic_and_plain_text():
     assert plain[0]["chapter"] == "1"
     assert chapter_sort_key("2") < chapter_sort_key("10")
     assert chapter_sort_key("preface") < chapter_sort_key("I")
+    assert chapter_sort_key("ChapterV") < chapter_sort_key("ChapterIX")
+    assert chapter_sort_key("ChapterIX") < chapter_sort_key("ChapterX")
+    assert chapter_sort_key("preface") < chapter_sort_key("ChapterI")
+    assert chapter_sort_key("ChapterXIV") < chapter_sort_key("CatalogueofBachs")
+
+
+def test_fallback_title_vi_is_vietnamese():
+    assert fallback_title_vi("Chapter I") == "Chương 1"
+    assert fallback_title_vi("ChapterI") == "Chương 1"
+    assert fallback_title_vi("CHAPTER XIV") == "Chương 14"
+    assert fallback_title_vi("I") == "Chương 1"
+    assert fallback_title_vi("Preface") == "Lời nói đầu"
+    assert fallback_title_vi("Bibliography") == "Thư mục"
+    assert fallback_title_vi("Glossary") == "Bảng chú giải"
+    assert fallback_title_vi("Catalogue of Bach’s Vocal Works").startswith("Mục lục")
+
+
+def test_translate_titles_uses_llm(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        "knowledgehub.translation.titles.complete_prompt",
+        lambda *_args, **_kwargs: '{"titles": ["Chương 1", "Lời nói đầu"]}',
+    )
+    assert translate_chapter_titles(["Chapter I", "Preface"], use_llm=True) == [
+        "Chương 1",
+        "Lời nói đầu",
+    ]
 
 
 def test_fetch_grotius_writes_english_raw(corpus: Path, monkeypatch: pytest.MonkeyPatch):

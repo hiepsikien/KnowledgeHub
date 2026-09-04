@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -31,11 +32,13 @@ _ROMAN = {
 }
 _NAMED = {
     "preface": 0,
+    "foreword": 0,
     "introduction": 0,
     "prologue": 0,
     "epilogue": 10_000,
     "appendix": 10_001,
 }
+_COMPACT_CHAPTER = re.compile(r"^(?:chapter|chap)?([ivxlc]+|\d+)$")
 
 
 class IncompleteTranslation(ValueError):
@@ -48,11 +51,27 @@ class IncompleteTranslation(ValueError):
 
 def chapter_sort_key(chapter: str) -> tuple[int, str]:
     key = chapter.strip().lower()
-    if key.isdigit():
-        return (int(key), chapter)
+    compact = re.sub(r"[^a-z0-9]", "", key)
+    if key.isdigit() or compact.isdigit():
+        return (int(compact or key), chapter)
     if key in _NAMED:
         return (_NAMED[key], chapter)
-    return (_ROMAN.get(key, 999), chapter)
+    if compact in _NAMED:
+        return (_NAMED[compact], chapter)
+    match = _COMPACT_CHAPTER.fullmatch(compact)
+    if match:
+        token = match.group(1)
+        if token.isdigit():
+            return (int(token), chapter)
+        if token in _ROMAN:
+            return (_ROMAN[token], chapter)
+    if compact.startswith("catalogue") or compact.startswith("catalog"):
+        return (10_002, compact)
+    if compact.startswith("bibliograph"):
+        return (10_003, compact)
+    if compact.startswith("glossary"):
+        return (10_004, compact)
+    return (_ROMAN.get(key, 999), compact or chapter)
 
 
 def segment_files(source_work_id: str) -> list[Path]:

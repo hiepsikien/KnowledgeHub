@@ -28,6 +28,17 @@ def _now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
 
 
+def translation_project_ready(source_work_id: str) -> bool:
+    if not project_file(source_work_id).is_file():
+        return False
+    seg_dir = segments_dir(source_work_id)
+    if not seg_dir.is_dir():
+        return False
+    return any(
+        path.name.endswith(".json") and "-sample" not in path.name for path in seg_dir.glob("ch*.json")
+    )
+
+
 def list_project_ids() -> list[str]:
     root = corpus_root() / "translations"
     if not root.is_dir():
@@ -35,7 +46,7 @@ def list_project_ids() -> list[str]:
     return sorted(
         path.name
         for path in root.iterdir()
-        if path.is_dir() and (path / "project.json").is_file()
+        if path.is_dir() and translation_project_ready(path.name)
     )
 
 
@@ -102,12 +113,29 @@ def _style_brief(work: dict[str, Any], mode: str | None) -> str:
 
 
 def _manuscript_text(work: dict[str, Any], raw_path: Path) -> str:
-    from ..normalize import normalize_manuscript
+    from ..edition.pipeline import build_edition
 
     raw = raw_path.read_text(encoding="utf-8")
     language = str(work.get("language") or "en")
-    text, _report = normalize_manuscript(raw, language=language, work=work)
+    text, _report = build_edition(
+        raw, language=language, work=work, use_llm=False, strip_only=True
+    )
     return text if text.strip() else raw
+
+
+def _chapters_for_init(work: dict[str, Any], raw_path: Path) -> tuple[list[dict[str, Any]], str]:
+    """Chapter list for a new project. Never calls an LLM — draft/QA stay on the desk."""
+    work_id = str(work.get("id") or "")
+    try:
+        from ..edition.read_edition import ReadEditionError, chapters_for_translation
+        from ..edition.read_edition_steps import ReadEditionStepError
+
+        rows = chapters_for_translation(work_id)
+        if rows:
+            return rows, "ref"
+    except (ReadEditionError, ReadEditionStepError, FileNotFoundError, OSError, KeyError, ValueError):
+        pass
+    return split_chapters(_manuscript_text(work, raw_path)), "split"
 
 
 def _write_sample(source_work_id: str, chapter: dict[str, str | int]) -> Path:
@@ -155,20 +183,24 @@ def init_translation_project(
         )
 
     root = translation_dir(source_work_id)
-    if root.exists() and not overwrite:
+    ready = translation_project_ready(source_work_id)
+    if ready and not overwrite:
         raise FileExistsError(
             f"Translation project exists: {root}\nUse --overwrite to recreate."
         )
+
+    # Split before creating the dest dir so a failed/hung split cannot leave
+    # an empty folder that 409s on retry while GET still 404s (no project.json).
+    chapters, chapter_source = _chapters_for_init(work, raw_path)
+    if not chapters:
+        raise ValueError(f"{source_work_id} produced no chapters")
+
     root.mkdir(parents=True, exist_ok=True)
     seg_dir = segments_dir(source_work_id)
     seg_dir.mkdir(parents=True, exist_ok=True)
-    if overwrite:
+    if overwrite or not ready:
         for leftover in seg_dir.glob("*.json"):
             leftover.unlink()
-
-    chapters = split_chapters(_manuscript_text(work, raw_path))
-    if not chapters:
-        raise ValueError(f"{source_work_id} produced no chapters")
 
     translation_work_id = translation_work_id or translation_catalog_id(
         source_work_id, target_language
@@ -192,6 +224,7 @@ def init_translation_project(
             "chapters": len(chapters),
         },
         "segments_total": len(chapters),
+        "chapter_source": chapter_source,
     }
 
     sample_path: Path | None = None
@@ -205,21 +238,12 @@ def init_translation_project(
             "file": f"segments/ch{str(first['chapter']).lower()}-sample.json",
         }
 
-    project_file(source_work_id).write_text(
-        json.dumps(project, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    glossary_file(source_work_id).write_text(
-        json.dumps(DEFAULT_GLOSSARY, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    annotations_file(source_work_id).write_text(
-        json.dumps({"annotations": []}, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    style_brief_file(source_work_id).write_text(_style_brief(work, translation_mode if locked else None), encoding="utf-8")
+    from .titles import merge_segment_title_vi, translate_chapter_titles
 
-    for row in chapters:
+    en_titles = [str(row.get("title") or row["chapter"]) for row in chapters]
+    vi_titles = translate_chapter_titles(en_titles, use_llm=False)
+
+    for index, row in enumerate(chapters):
         seg_id = f"ch{str(row['chapter']).lower()}"
         seg_path = segments_dir(source_work_id) / f"{seg_id}.json"
         payload = {
@@ -230,8 +254,34 @@ def init_translation_project(
             "drafts": {"tight": None, "normal": None, "loose": None},
             "final": None,
             "status": "pending",
+            "title_vi": vi_titles[index],
         }
+        if row.get("ref_chapter_id"):
+            payload["ref_chapter_id"] = row["ref_chapter_id"]
+        if row.get("title"):
+            payload["ref_title"] = row["title"]
         seg_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    glossary_file(source_work_id).write_text(
+        json.dumps(DEFAULT_GLOSSARY, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    annotations_file(source_work_id).write_text(
+        json.dumps({"annotations": []}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    style_brief_file(source_work_id).write_text(_style_brief(work, translation_mode if locked else None), encoding="utf-8")
+    project_file(source_work_id).write_text(
+        json.dumps(project, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    llm_titles = translate_chapter_titles(en_titles)
+    for index, title_vi in enumerate(llm_titles):
+        if title_vi == vi_titles[index]:
+            continue
+        seg_id = f"ch{str(chapters[index]['chapter']).lower()}"
+        merge_segment_title_vi(segments_dir(source_work_id) / f"{seg_id}.json", title_vi)
 
     paths = {"root": str(root.relative_to(corpus_root()))}
     if sample_path is not None:

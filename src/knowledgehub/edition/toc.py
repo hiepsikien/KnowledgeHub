@@ -755,6 +755,30 @@ def is_toc_chapter_block(lines: list[str], index: int) -> bool:
     return False
 
 
+_TRAILING_TOC_HEAD = re.compile(
+    r"^(List of Illustrations|CATALOGUE OF\b|BIBLIOGRAPHY\b|GLOSSARY\b)\b",
+    re.I,
+)
+
+
+def trim_trailing_wrap_toc(text: str) -> str:
+    """Drop a leftover Contents listing that landed inside the previous section."""
+    lines = str(text or "").splitlines()
+    cut: int | None = None
+    for index, line in enumerate(lines):
+        if is_toc_chapter_block(lines, index):
+            cut = index
+            break
+        stripped = line.strip()
+        if index >= 4 and _TRAILING_TOC_HEAD.match(stripped):
+            cut = index
+            break
+    if cut is None or cut < 3:
+        return text
+    trimmed = "\n".join(lines[:cut]).rstrip()
+    return trimmed if trimmed.strip() else text
+
+
 _FOOTNOTE_MARK = re.compile(r"\[\d+\]")
 _BARE_NUM_TITLE = re.compile(r"^([IVXLC]{1,8}|\d+)\.\s+(.+)$")
 _BARE_NUM_ONLY = re.compile(r"^[IVXLC]{1,8}\.$")

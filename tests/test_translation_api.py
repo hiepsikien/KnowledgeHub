@@ -103,6 +103,7 @@ def test_translation_list_and_project(client: TestClient):
     assert ch_i["has_final"] is True
     assert ch_i["has_draft_raw"] is False
     assert ch_i["annotation_count"] == 1
+    assert ch_i["title_vi"] == "Chương 1"
 
 
 def test_translation_segment_and_annotations(client: TestClient):
@@ -582,3 +583,52 @@ def test_create_translation_from_catalog(client: TestClient, tmp_path: Path):
     assert "Đang làm" in page.text
     assert "Bắt đầu sách khác" in page.text
     assert "Pilot: Grotius" not in page.text
+
+
+def test_create_recovers_incomplete_translation_dir(client: TestClient, tmp_path: Path):
+    project = tmp_path / "translations/grotius--freedom_of_the_seas/project.json"
+    project.unlink()
+    listed = client.get("/api/translations").json()
+    assert listed["total"] == 0
+    missing = client.get("/api/translations/grotius--freedom_of_the_seas")
+    assert missing.status_code == 404
+    created = client.post(
+        "/api/translations",
+        json={"source_work_id": "grotius--freedom_of_the_seas", "mode": "normal"},
+    )
+    assert created.status_code == 200
+    assert created.json()["project"]["translation_mode"] == "normal"
+    assert created.json()["project"]["status"] == "mode_locked"
+
+
+def test_create_recovers_project_json_without_chapters(client: TestClient, tmp_path: Path):
+    root = tmp_path / "translations/grotius--freedom_of_the_seas"
+    for path in (root / "segments").glob("ch*.json"):
+        path.unlink()
+    listed = client.get("/api/translations").json()
+    assert listed["total"] == 0
+    missing = client.get("/api/translations/grotius--freedom_of_the_seas")
+    assert missing.status_code == 404
+    created = client.post(
+        "/api/translations",
+        json={"source_work_id": "grotius--freedom_of_the_seas", "mode": "normal"},
+    )
+    assert created.status_code == 200
+    assert created.json()["created"] is True
+    assert (root / "segments/chi.json").is_file()
+
+
+def test_get_translation_does_not_write_titles(client: TestClient, tmp_path: Path):
+    chi = tmp_path / "translations/grotius--freedom_of_the_seas/segments/chi.json"
+    payload = json.loads(chi.read_text(encoding="utf-8"))
+    payload.pop("title_vi", None)
+    payload["final"] = "Bản nháp đang chạy."
+    chi.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    before = chi.read_text(encoding="utf-8")
+    project = client.get("/api/translations/grotius--freedom_of_the_seas").json()
+    ch_i = next(c for c in project["chapters"] if c["chapter"] == "I")
+    assert ch_i["title_vi"] == "Chương 1"
+    after = json.loads(chi.read_text(encoding="utf-8"))
+    assert chi.read_text(encoding="utf-8") == before
+    assert "title_vi" not in after
+    assert after["final"] == "Bản nháp đang chạy."
