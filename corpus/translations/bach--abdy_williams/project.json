@@ -10,7 +10,7 @@
   ],
   "status": "mode_locked",
   "created_at": "2026-09-04T15:22:45+00:00",
-  "updated_at": "2026-09-04T19:07:06+00:00",
+  "updated_at": "2026-09-04T19:44:36+00:00",
   "split_version": 2,
   "models": {
     "draft": "deepseek-v4-flash",
@@ -21,9 +21,10 @@
   "source": {
     "title": "Final 2: Bach (Abdy Williams)",
     "language": "en",
-    "words": 56336,
+    "words": 55128,
     "chapters": 19
   },
   "segments_total": 19,
-  "chapter_source": "ref"
+  "chapter_source": "ref",
+  "source_text_kind": "parsed"
 }

@@ -70,6 +70,20 @@ def main(argv: list[str] | None = None) -> int:
     tr_init.add_argument("--lang", default="vi", help="Target language (default: vi)")
     tr_init.add_argument("--mode", default=None, choices=["tight", "normal", "loose"])
     tr_init.add_argument("--overwrite", action="store_true", help="Recreate existing project")
+    tr_sync = tr_sub.add_parser(
+        "sync-ref",
+        help="Rewrite segment source from parsed REF chapters",
+    )
+    tr_sync.add_argument("--work", required=True, help="Source work id")
+    tr_sync.add_argument("--overwrite", action="store_true", help="Replace existing segments")
+    tr_sync.add_argument(
+        "--keep-approved",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Keep chapters with status=approved (default)",
+    )
+    tr_sync.add_argument("--enqueue", action="store_true", help="Queue drafts for rewritten chapters")
+    tr_sync.add_argument("--front-matter", action="store_true", help="Include front matter sections")
     tr_draft = tr_sub.add_parser("draft-sample", help="AI draft the sample segment (default: normal)")
     tr_draft.add_argument("--work", required=True, help="Source work id")
     tr_draft.add_argument("--mode", default=None, choices=["tight", "normal", "loose"])
@@ -330,6 +344,22 @@ def main(argv: list[str] | None = None) -> int:
                     target_language=args.lang,
                     translation_mode=args.mode,
                     overwrite=args.overwrite,
+                )
+            except (FileExistsError, FileNotFoundError, KeyError, ValueError) as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.translate_cmd == "sync-ref":
+            from .translation.ref_chapters import sync_translation_chapters_from_ref
+
+            try:
+                result = sync_translation_chapters_from_ref(
+                    args.work,
+                    overwrite=args.overwrite,
+                    include_front_matter=args.front_matter,
+                    keep_approved=args.keep_approved,
+                    enqueue=args.enqueue,
                 )
             except (FileExistsError, FileNotFoundError, KeyError, ValueError) as exc:
                 print(str(exc), file=sys.stderr)

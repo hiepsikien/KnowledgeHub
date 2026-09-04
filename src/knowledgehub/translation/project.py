@@ -226,6 +226,13 @@ def init_translation_project(
         "segments_total": len(chapters),
         "chapter_source": chapter_source,
     }
+    kinds = {str(row.get("source_kind") or "") for row in chapters if row.get("source_kind")}
+    if kinds == {"parsed"}:
+        project["source_text_kind"] = "parsed"
+    elif kinds == {"raw_slice"}:
+        project["source_text_kind"] = "raw_slice"
+    elif len(kinds) > 1:
+        project["source_text_kind"] = "mixed"
 
     sample_path: Path | None = None
     if not locked:
@@ -256,10 +263,16 @@ def init_translation_project(
             "status": "pending",
             "title_vi": vi_titles[index],
         }
+        if row.get("source_kind"):
+            payload["source_text_kind"] = row["source_kind"]
         if row.get("ref_chapter_id"):
             payload["ref_chapter_id"] = row["ref_chapter_id"]
         if row.get("title"):
             payload["ref_title"] = row["title"]
+        if row.get("blocks"):
+            from .ref_chapters import ref_blocks_for_translation
+
+            payload["ref_blocks"] = ref_blocks_for_translation(list(row.get("blocks") or []))
         seg_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     glossary_file(source_work_id).write_text(
