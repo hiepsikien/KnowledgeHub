@@ -20,6 +20,7 @@ const state = {
     busy: false,
     lastError: "",
     selectGen: 0,
+    pageLoad: 0,
     modes: [],
     defaultMode: "normal",
     startOpen: false,
@@ -328,21 +329,47 @@ function readEditionFromPath() {
 
 function translationFromPath() {
   const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
-  if (parts[0] !== "translation" || !parts[1]) return null;
+  if (parts[0] !== "translation") return null;
   return {
-    workId: decodeURIComponent(parts[1]),
+    workId: parts[1] ? decodeURIComponent(parts[1]) : "",
     chapter: parts[2] ? decodeURIComponent(parts[2]) : null,
   };
 }
 
+function translationModeFromQuery() {
+  const mode = new URLSearchParams(location.search).get("mode");
+  if (!mode) return null;
+  return translationModes().some((opt) => opt.id === mode) ? mode : null;
+}
+
 function setTranslationPath(workId, chapter) {
+  if (!workId) {
+    if (location.pathname !== "/translation" || location.search) {
+      history.replaceState({ view: "translation" }, "", "/translation");
+    }
+    return;
+  }
+  const path = chapter
+    ? `/translation/${encodeURIComponent(workId)}/${encodeURIComponent(chapter)}`
+    : `/translation/${encodeURIComponent(workId)}`;
+  if (location.pathname !== path || location.search) {
+    history.replaceState({ view: "translation", workId, chapter }, "", path);
+  }
+}
+
+function goTranslationDesk(workId, { mode, chapter } = {}) {
   if (!workId) return;
   const path = chapter
     ? `/translation/${encodeURIComponent(workId)}/${encodeURIComponent(chapter)}`
     : `/translation/${encodeURIComponent(workId)}`;
-  if (location.pathname !== path) {
-    history.replaceState({ view: "translation", workId, chapter }, "", path);
+  const query = mode && !chapter ? `?mode=${encodeURIComponent(mode)}` : "";
+  const next = `${path}${query}`;
+  const current = `${location.pathname}${location.search}`;
+  if (current === next || (location.pathname === path && !query)) {
+    void loadTranslationDesk(workId, chapter, mode);
+    return;
   }
+  location.href = next;
 }
 
 function scoreBar(label, value) {
@@ -1016,9 +1043,7 @@ function wireWorkTranslate(work, summary) {
   const openId = summary.translation_source_id || work.id;
   const openBtn = $("btn-translate-open");
   if (openBtn) {
-    openBtn.onclick = () => {
-      void loadTranslationView(openId, null);
-    };
+    openBtn.onclick = () => goTranslationDesk(openId);
   }
   const opts = $("work-mode-opts");
   if (opts) {
@@ -1031,29 +1056,64 @@ function wireWorkTranslate(work, summary) {
   }
   const startBtn = $("btn-translate-start");
   if (startBtn) {
-    startBtn.onclick = async () => {
-      const err = $("work-translate-err");
-      startBtn.disabled = true;
-      if (err) err.textContent = "";
-      try {
-        await beginTranslation(work.id, state.workMode || state.translation.defaultMode || "normal");
-      } catch (error) {
-        if (err) err.textContent = error.message;
-      } finally {
-        startBtn.disabled = false;
-      }
+    startBtn.onclick = () => {
+      goTranslationDesk(work.id, { mode: state.workMode || state.translation.defaultMode || "normal" });
     };
   }
 }
 
-function setTranslationStartVisible(open) {
-  const start = $("tr-start");
+function modeLabel(id) {
+  if (!id) return "—";
+  return translationModes().find((opt) => opt.id === id)?.label || id;
+}
+
+function projectPhase(project) {
+  const total = Number(project.chapters_total || 0);
+  const done = Number(project.chapters_with_final || 0);
+  if (project.ready_to_promote) return "ready";
+  if (done > 0 && total && done >= total) return "done";
+  if (done > 0) return "translating";
+  return "queued";
+}
+
+function projectPhaseLabel(phase) {
+  return (
+    {
+      queued: "chưa dịch",
+      translating: "đang dịch",
+      done: "đã dịch xong",
+      ready: "sẵn sàng catalog",
+    }[phase] || phase || "—"
+  );
+}
+
+function formatStamp(value) {
+  if (!value) return "—";
+  return String(value).replace("T", " ").slice(0, 16);
+}
+
+function showTranslationView() {
+  document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
+  document.querySelector('.nav-link[data-view="translation"]')?.classList.add("active");
+  hideAllViews();
+  $("view-translation").hidden = false;
+}
+
+function setTranslationDeskVisible(onDesk) {
+  const pick = $("tr-pick");
   const desk = $("tr-desk");
-  const pick = $("tr-pick-work");
-  state.translation.startOpen = open;
-  if (start) start.hidden = !open;
-  if (desk) desk.hidden = open || !state.translation.projectId;
-  if (pick) pick.hidden = open;
+  const crumb = $("tr-crumb");
+  state.translation.startOpen = !onDesk;
+  if (pick) pick.hidden = onDesk;
+  if (desk) desk.hidden = !onDesk;
+  if (crumb) crumb.hidden = !onDesk;
+}
+
+function setDeskStatus(text) {
+  const el = $("tr-desk-status");
+  if (!el) return;
+  el.hidden = !text;
+  el.textContent = text || "";
 }
 
 async function ensureStartWorks() {
@@ -1066,13 +1126,44 @@ async function ensureStartWorks() {
 
 function startWorkRows() {
   const q = ($("tr-work-q")?.value || "").trim().toLowerCase();
+  const taken = new Set((state.translation.projects || []).map((p) => p.source_work_id));
   return (state.translation.startWorks || []).filter((work) => {
     if (work.translate_block === "hub_translation") return false;
-    if (!work.can_translate && !work.has_translation_project) return false;
+    if (!work.can_translate) return false;
+    if (taken.has(work.id) || work.has_translation_project) return false;
     if (!q) return true;
     const hay = `${work.title} ${work.id} ${work.author_id}`.toLowerCase();
     return hay.includes(q);
   });
+}
+
+function renderTranslationSessions() {
+  const box = $("tr-sessions");
+  const body = $("tr-session-rows");
+  const projects = [...(state.translation.projects || [])].sort((a, b) =>
+    String(b.updated_at || "").localeCompare(String(a.updated_at || "")),
+  );
+  if (box) box.hidden = !projects.length;
+  if (body) {
+    body.innerHTML = projects
+      .map((p) => {
+        const phase = projectPhase(p);
+        const total = Number(p.chapters_total || 0);
+        const done = Number(p.chapters_with_final || 0);
+        const qa = Number(p.chapters_with_qa || 0);
+        return `<tr class="pick" data-id="${escapeHtml(p.source_work_id)}">
+          <td><div class="title">${escapeHtml(p.source_title || p.source_work_id)}</div><div class="sub">${escapeHtml(p.source_work_id)}</div></td>
+          <td><span class="re-phase tr-phase-${escapeHtml(phase)}">${escapeHtml(projectPhaseLabel(phase))}</span></td>
+          <td>${done}/${total}</td>
+          <td>${qa}/${total}</td>
+          <td>${escapeHtml(modeLabel(p.translation_mode))}</td>
+          <td class="muted">${escapeHtml(formatStamp(p.updated_at))}</td>
+        </tr>`;
+      })
+      .join("");
+  }
+  const catalogHead = $("tr-catalog-heading");
+  if (catalogHead) catalogHead.textContent = projects.length ? "Bắt đầu sách khác" : "Chọn tác phẩm";
 }
 
 function renderStartWorks() {
@@ -1085,20 +1176,19 @@ function renderStartWorks() {
     body.innerHTML = rows
       .map((work) => {
         const on = selected === work.id ? "on" : "";
-        const status = work.has_translation_project ? "Đã có dự án" : "Chưa dịch";
         return `<tr class="pick ${on}" data-id="${escapeHtml(work.id)}">
           <td><div class="title">${escapeHtml(work.title)}</div><div class="sub">${escapeHtml(work.id)}</div></td>
           <td>${escapeHtml(work.author_id)}</td>
-          <td>${escapeHtml(status)}</td>
+          <td>${escapeHtml(work.language || "")}</td>
         </tr>`;
       })
       .join("");
   }
   const chosen = rows.find((work) => work.id === selected);
   const wrap = $("tr-mode-wrap");
-  if (wrap) wrap.hidden = !chosen || chosen.has_translation_project;
+  if (wrap) wrap.hidden = !chosen;
   const go = $("tr-start-go");
-  if (go) go.disabled = !chosen || chosen.has_translation_project || !state.translation.startMode;
+  if (go) go.disabled = !chosen || !state.translation.startMode;
 }
 
 function renderStartModes() {
@@ -1108,61 +1198,58 @@ function renderStartModes() {
   box.innerHTML = modeOptionsHtml(current);
 }
 
-async function openTranslationStart() {
-  await ensureStartWorks();
-  state.translation.startWorkId = null;
-  state.translation.startMode = state.translation.defaultMode || "normal";
+async function openTranslationPick(opts = {}) {
+  const loadId = ++state.translation.pageLoad;
+  showTranslationView();
+  setTranslationDeskVisible(false);
+  setTranslationPath("");
+  stopJobPoll();
+  state.translation.projectId = null;
+  state.translation.project = null;
+  state.translation.selectedChapter = null;
+  state.translation.startWorkId = opts.selectWorkId || null;
+  state.translation.startMode = opts.mode || state.translation.defaultMode || "normal";
+  const heading = $("tr-heading");
+  const lead = $("tr-lead");
+  if (heading) heading.textContent = "Dịch thuật";
+  if (lead) {
+    lead.textContent =
+      "Sách đang dịch dở và trạng thái. Chọn một cuốn để vào bàn dịch, hoặc bắt đầu sách khác.";
+  }
   const err = $("tr-start-err");
-  if (err) err.textContent = "";
-  setTranslationStartVisible(true);
+  if (err) err.textContent = opts.message || "";
+  await Promise.all([loadTranslationProjects(), ensureStartWorks()]);
+  if (loadId !== state.translation.pageLoad) return;
+  renderTranslationSessions();
   renderStartWorks();
   renderStartModes();
 }
 
-async function pickStartWork(id) {
-  const work = (state.translation.startWorks || []).find((row) => row.id === id);
+function pickStartWork(id) {
+  const work =
+    startWorkRows().find((row) => row.id === id) ||
+    (state.translation.startWorks || []).find((row) => row.id === id);
   if (!work) return;
   if (work.has_translation_project) {
-    await loadTranslationProject(id, null);
-    setTranslationStartVisible(false);
-    if (state.translation.projectId) {
-      setTranslationPath(id, state.translation.selectedChapter);
-    }
+    goTranslationDesk(id);
     return;
   }
   state.translation.startWorkId = id;
+  const errEl = $("tr-start-err");
+  if (errEl) errEl.textContent = "";
   renderStartWorks();
   renderStartModes();
 }
 
-async function beginTranslation(workId, mode) {
-  try {
-    await api("/api/translations", {
-      method: "POST",
-      body: { source_work_id: workId, mode },
-    });
-    toast(`Đã tạo dự án · ${mode}`);
-  } catch (err) {
-    if (!/exists/i.test(err.message || "")) throw err;
-  }
-  await loadTranslationView(workId, null);
+function beginTranslation(workId, mode) {
+  goTranslationDesk(workId, { mode });
 }
 
-async function confirmStartTranslation() {
+function confirmStartTranslation() {
   const workId = state.translation.startWorkId;
   const mode = state.translation.startMode;
-  const err = $("tr-start-err");
-  const go = $("tr-start-go");
   if (!workId || !mode) return;
-  if (go) go.disabled = true;
-  if (err) err.textContent = "";
-  try {
-    await beginTranslation(workId, mode);
-  } catch (error) {
-    if (err) err.textContent = error.message;
-  } finally {
-    if (go) go.disabled = false;
-  }
+  beginTranslation(workId, mode);
 }
 
 async function loadTranslationProjects() {
@@ -1173,26 +1260,10 @@ async function loadTranslationProjects() {
   if (!state.translation.startMode) {
     state.translation.startMode = state.translation.defaultMode;
   }
-  const select = $("tr-project");
-  select.innerHTML = (data.projects || [])
-    .map(
-      (p) =>
-        `<option value="${escapeHtml(p.source_work_id)}" ${p.source_work_id === state.translation.projectId ? "selected" : ""}>${escapeHtml(p.source_title || p.source_work_id)} (${escapeHtml(p.target_language || "vi")})</option>`,
-    )
-    .join("");
-  if (!data.projects?.length) {
-    state.translation.projectId = null;
-    return;
-  }
-  if (!state.translation.projectId && data.projects?.length) {
-    state.translation.projectId = data.projects[0].source_work_id;
-    select.value = state.translation.projectId;
-  }
 }
 
-async function loadTranslationProject(workId, chapterHint) {
+function applyTranslationProject(workId, data, chapterHint) {
   state.translation.projectId = workId;
-  const data = await api(`/api/translations/${encodeURIComponent(workId)}`);
   state.translation.project = data;
   state.translation.chapters = data.chapters || [];
   state.translation.jobs = data.jobs || [];
@@ -1208,12 +1279,73 @@ async function loadTranslationProject(workId, chapterHint) {
     chapterHint && data.chapters.some((c) => c.chapter === chapterHint)
       ? chapterHint
       : data.chapters.find((c) => c.has_final)?.chapter || data.chapters[0]?.chapter || null;
-  if (pick) await selectTranslationChapter(pick, true);
+  if (pick) void selectTranslationChapter(pick, true);
   else {
     state.translation.selectedChapter = null;
     state.translation.segment = null;
     renderTranslationDetail();
     showTranslationSegment(false);
+  }
+}
+
+async function loadTranslationProject(workId, chapterHint) {
+  const data = await api(`/api/translations/${encodeURIComponent(workId)}`);
+  applyTranslationProject(workId, data, chapterHint);
+}
+
+function missingTranslationProject(err) {
+  const msg = String(err?.message || "");
+  return /no translation project/i.test(msg);
+}
+
+async function loadTranslationDesk(workId, chapter, modeHint) {
+  const loadId = ++state.translation.pageLoad;
+  showTranslationView();
+  setTranslationDeskVisible(true);
+  if (!modeHint) setTranslationPath(workId, chapter);
+  const heading = $("tr-heading");
+  const lead = $("tr-lead");
+  if (heading) heading.textContent = workId;
+  if (lead) lead.textContent = "QA / chú thích theo chương. Quay lại danh sách bằng «Đang làm».";
+  setDeskStatus("Đang tải…");
+  try {
+    let data;
+    try {
+      data = await api(`/api/translations/${encodeURIComponent(workId)}`);
+    } catch (err) {
+      if (!missingTranslationProject(err)) throw err;
+      if (!modeHint) {
+        await openTranslationPick({
+          selectWorkId: workId,
+          message: "Chọn cách dịch rồi bấm Bắt đầu dịch.",
+        });
+        return;
+      }
+      setDeskStatus("Đang tạo dự án dịch… tách chương từ bản thảo. Giữ trang này.");
+      try {
+        data = await api("/api/translations", {
+          method: "POST",
+          body: { source_work_id: workId, mode: modeHint },
+        });
+        toast(`Đã tạo dự án · ${modeLabel(modeHint)}`);
+      } catch (createErr) {
+        if (!/exists/i.test(createErr.message || "")) throw createErr;
+        data = await api(`/api/translations/${encodeURIComponent(workId)}`);
+      }
+    }
+    if (loadId !== state.translation.pageLoad) return;
+    applyTranslationProject(workId, data, chapter);
+    setTranslationPath(workId, state.translation.selectedChapter);
+    const title = data.project?.source?.title || workId;
+    if (heading) heading.textContent = title;
+    if (lead) lead.textContent = `Cách dịch: ${modeLabel(data.project?.translation_mode)}. QA / chú thích theo chương.`;
+    setDeskStatus("");
+  } catch (err) {
+    if (loadId !== state.translation.pageLoad) return;
+    setDeskStatus("");
+    if ($("tr-stats")) $("tr-stats").innerHTML = "";
+    if ($("tr-rows")) $("tr-rows").innerHTML = "";
+    if ($("tr-detail")) $("tr-detail").innerHTML = `<p class="err">${escapeHtml(err.message)}</p>`;
   }
 }
 
@@ -1415,33 +1547,8 @@ async function reopenQaIssue(index) {
 }
 
 async function loadTranslationView(workId, chapter) {
-  document.querySelectorAll(".nav-link").forEach((b) => b.classList.remove("active"));
-  document.querySelector('.nav-link[data-view="translation"]')?.classList.add("active");
-  hideAllViews();
-  $("view-translation").hidden = false;
-  await loadTranslationProjects();
-  if (workId) {
-    try {
-      $("tr-project").value = workId;
-      await loadTranslationProject(workId, chapter);
-      setTranslationStartVisible(false);
-    } catch {
-      await openTranslationStart();
-      state.translation.startWorkId = workId;
-      renderStartWorks();
-      renderStartModes();
-      return;
-    }
-  } else if (state.translation.projectId) {
-    await loadTranslationProject(state.translation.projectId, chapter);
-    setTranslationStartVisible(false);
-  } else {
-    await openTranslationStart();
-    return;
-  }
-  if (state.translation.projectId) {
-    setTranslationPath(state.translation.projectId, state.translation.selectedChapter);
-  }
+  if (workId) await loadTranslationDesk(workId, chapter, translationModeFromQuery());
+  else await openTranslationPick();
 }
 
 async function syncTranslationRefChapters() {
@@ -1457,7 +1564,7 @@ async function syncTranslationRefChapters() {
       body: { overwrite: true },
     });
     toast(`Đã sync ${result.segments_written} segments từ REF`);
-    await loadTranslationView(workId, null);
+    await loadTranslationDesk(workId, null);
   } catch (err) {
     toast(err.message);
   }
@@ -1483,32 +1590,23 @@ async function runTranslationPromote() {
 }
 
 function wireTranslation() {
-  $("tr-pick-work").onclick = () => void openTranslationStart();
-  $("tr-start-cancel").onclick = () => {
-    if (state.translation.projectId) {
-      setTranslationStartVisible(false);
-      return;
-    }
-    state.translation.startWorkId = null;
-    renderStartWorks();
-  };
-  $("tr-work-q").oninput = renderStartWorks;
-  $("tr-work-rows").onclick = (event) => {
+  $("tr-session-rows")?.addEventListener("click", (event) => {
     const row = event.target.closest("tr[data-id]");
-    if (row) void pickStartWork(row.dataset.id);
-  };
-  $("tr-mode-opts").onclick = (event) => {
+    if (row) goTranslationDesk(row.dataset.id);
+  });
+  $("tr-work-q")?.addEventListener("input", renderStartWorks);
+  $("tr-work-rows")?.addEventListener("click", (event) => {
+    const row = event.target.closest("tr[data-id]");
+    if (row) pickStartWork(row.dataset.id);
+  });
+  $("tr-mode-opts")?.addEventListener("click", (event) => {
     const btn = event.target.closest("[data-mode]");
     if (!btn) return;
     state.translation.startMode = btn.dataset.mode;
     renderStartModes();
     renderStartWorks();
-  };
-  $("tr-start-go").onclick = () => void confirmStartTranslation();
-  $("tr-project").onchange = async () => {
-    const workId = $("tr-project").value;
-    if (workId) await loadTranslationProject(workId, null);
-  };
+  });
+  $("tr-start-go")?.addEventListener("click", () => confirmStartTranslation());
   $("tr-rows").onclick = (e) => {
     const tr = e.target.closest("tr[data-chapter]");
     if (tr) selectTranslationChapter(tr.dataset.chapter, true);
@@ -1915,8 +2013,8 @@ function wireNav() {
       $("view-works").hidden = view !== "works";
       $("view-licenses").hidden = view !== "licenses";
       if (view === "translation") {
-        $("view-translation").hidden = false;
-        void loadTranslationView(null, null);
+        void openTranslationPick();
+        return;
       }
       if (view === "read-edition") {
         // Nav always opens Đang làm, even when already on /read-edition/<work>.
@@ -2020,7 +2118,8 @@ async function afterAuth() {
   }
   const tr = translationFromPath();
   if (tr) {
-    await loadTranslationView(tr.workId, tr.chapter);
+    if (tr.workId) await loadTranslationDesk(tr.workId, tr.chapter, translationModeFromQuery());
+    else await openTranslationPick();
     return;
   }
   if (settingsFromPath()) {

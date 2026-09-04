@@ -99,6 +99,8 @@ def list_translation_projects() -> dict[str, Any]:
                 with_final += 1
             if (seg.get("qa") or {}).get("scores"):
                 with_qa += 1
+        mode = project.get("translation_mode")
+        mode_meta = next((item for item in MODE_OPTIONS if item["id"] == mode), None)
         rows.append(
             {
                 "source_work_id": work_id,
@@ -106,7 +108,8 @@ def list_translation_projects() -> dict[str, Any]:
                     work_id, str(project.get("target_language") or "vi")
                 ),
                 "target_language": project.get("target_language"),
-                "translation_mode": project.get("translation_mode"),
+                "translation_mode": mode,
+                "mode_label": (mode_meta or {}).get("label") or mode,
                 "status": project.get("status"),
                 "source_title": (project.get("source") or {}).get("title"),
                 "chapters_total": len(chapters),
@@ -116,6 +119,7 @@ def list_translation_projects() -> dict[str, Any]:
                 "updated_at": project.get("updated_at"),
             }
         )
+    rows.sort(key=lambda row: str(row.get("updated_at") or ""), reverse=True)
     pipe = translation_pipeline()
     return {
         "projects": rows,

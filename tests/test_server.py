@@ -34,7 +34,8 @@ def test_ui_and_list(client):
     assert works[0]["read_allowed"] is False
     assert works[0]["can_translate"] is True
     assert works[0]["has_translation_project"] is False
-    assert "Dịch sách khác" in home.text
+    assert "Đang làm" in home.text
+    assert "Bắt đầu sách khác" in home.text
     assert "Pilot: Grotius" not in home.text
 
 
