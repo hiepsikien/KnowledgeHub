@@ -24,7 +24,7 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `title`, `description`, `language`, `license`, `category_slug`, `price_cents`, `status` | — | catalog |
 | `raw_text` | string | **fallback** body if `chapters` absent; still required (≥1 char) |
 | `credits` | object? | author / translator lines |
-| `glossary` | list? | cast / term entries |
+| `glossary` | list? | term cards from a book **Glossary** chapter (`kind: glossary`) and/or translation annotations. Read matches `name` / `aliases` for tap-on-paragraph. |
 | `notes` | list? | footnote cards (preferred over scraping `raw_text`) |
 
 ### REF/1 (required for pilots)
@@ -55,7 +55,7 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | Field | Required | Notes |
 |-------|----------|-------|
 | `id` | no | Hub id if any |
-| `kind` | yes | `footnote` for pilot |
+| `kind` | yes | `footnote` for numbered markers. Hub may also send `glossary` / `context` on translation editions. |
 | `label` | yes | display name, e.g. `Seneca [4]` |
 | `marker` | yes | in-text marker, e.g. `[4]` |
 | `anchor` | no | nearby phrase |
@@ -67,6 +67,8 @@ Re-publish only after every Chế bản chapter is **Ready** (`micro_status=comp
 | `figures` | no | `{caption, src?}` from `[Illustration:]` in the note (Bach fn. 77); `src` is a Hub asset path. Read stores the bytes from `assets[]` and rewrites `src` to `/api/books/{id}/media/{asset}.jpg`. Never a Gutenberg hotlink. |
 
 Hub builds `notes` from REF `span.note` / chapter `notes[]` (not from FOOTNOTES dumps left in `raw_text` — dumps are already stripped from reading flow).
+
+When a numbered note is only a pointer (`See Glossary, "College of Instrumental Musicians."` / `Xem Bảng chú giải, "…"`), Hub copies the matching Glossary entry into `notes[].body` and `span.note` at publish. The Glossary chapter itself stays in the chapter list. Term cards also go out on `glossary[]` (`group_label: Thuật ngữ`) so Read can surface the same definition without jumping to back matter.
 
 ### `assets[]` item (illustrations)
 
@@ -133,6 +135,7 @@ Offsets are into the block `text` after Hub merge. Read must not re-parse marker
 
 1. Chế bản: all chapters Ready → Publish unlocked.
 2. Read library shows one book; chapter list matches Hub macro sections.
-3. Footnote markers open the Hub note body (Bach / Arnold where present).
+3. Footnote markers open the Hub note body (Bach / Arnold where present). A Bach `See Glossary, "…"` marker shows the Glossary entry, not the pointer.
 4. `_italic_` / `em` spans render italic.
 5. Re-publish with same `edition_hash` is a no-op (or updates metadata only).
+6. A Glossary chapter stays in the chapter list; its `~Term~` entries are also published on `glossary[]` for tap-on-paragraph.

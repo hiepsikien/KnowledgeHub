@@ -14,6 +14,7 @@ from .edition.footnotes import (
     notes_for_read_publish,
     notes_from_annotations,
 )
+from .edition.glossary import attach_book_glossary
 from .edition.pipeline import build_edition
 from .edition.read_edition import ReadEditionError, package_dir_for_work
 from .edition.read_edition_steps import (
@@ -70,6 +71,8 @@ def _attach_edition(payload: dict[str, Any], report: dict[str, Any]) -> None:
     notes = notes_for_read_publish(edition, chapters=edition.get("_chapters") or None)
     if notes:
         payload["notes"] = notes
+    attach_book_glossary(payload, edition)
+    notes = list(payload.get("notes") or notes)
     work_id = str(payload.get("hub_work_id") or "")
     if work_id:
         dest = work_asset_dir(corpus_root(), work_id)
@@ -279,6 +282,7 @@ def _prepare_translation_publish(
         ]
     if glossary:
         payload["glossary"] = glossary
+    attach_book_glossary(payload, edition)
     _apply_publish_overrides(
         payload,
         title=title,

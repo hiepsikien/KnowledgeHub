@@ -246,7 +246,7 @@ Gutenberg chapters often end with a `FOOTNOTES:` dump. Inline `[n]` spans now co
 
 | Source form | Example |
 |-------------|---------|
-| Numbered dump (Abdy Williams) | `[1] See Glossary, "College of Instrumental Musicians."` |
+| Numbered dump (Abdy Williams) | `[1] See Glossary, "College of Instrumental Musicians."` — publish resolves the quoted headword against the Glossary chapter and sends the entry body on the note |
 | Gutenberg bracket (Bergson) | `[Footnote 3: _Matière et mémoire_, Paris, 1896.]` |
 
 Every `FOOTNOTES:` heading followed by those items is a dump (item run only — not until the next `CHAPTER` line, so wrap like `CHAPTER III of the later volume.` stays inside the note, and mid-chapter prose after the dump is kept). Numbering is **per dump**: a later chapter’s `[1]` does not replace an earlier chapter’s `[1]`. Dump blocks are dropped from REF reading flow after the bodies are copied onto inline markers. `NOTES TO …` essays are still kept as body text. CMS Chế bản shows the note body on hover (tooltip truncated) and in a list at the end of the chapter.
