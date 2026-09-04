@@ -1,0 +1,29 @@
+{
+  "source_work_id": "bach--abdy_williams",
+  "translation_work_id": "bach--abdy_williams_vi",
+  "target_language": "vi",
+  "translation_mode": "normal",
+  "translation_modes_available": [
+    "tight",
+    "normal",
+    "loose"
+  ],
+  "status": "mode_locked",
+  "created_at": "2026-09-04T15:22:45+00:00",
+  "updated_at": "2026-09-04T19:07:06+00:00",
+  "split_version": 2,
+  "models": {
+    "draft": "deepseek-v4-flash",
+    "polish": "gemini-3.1-flash-lite",
+    "qa": "deepseek-v4-flash",
+    "annotations": "gemini-3.1-flash-lite"
+  },
+  "source": {
+    "title": "Final 2: Bach (Abdy Williams)",
+    "language": "en",
+    "words": 56336,
+    "chapters": 19
+  },
+  "segments_total": 19,
+  "chapter_source": "ref"
+}
