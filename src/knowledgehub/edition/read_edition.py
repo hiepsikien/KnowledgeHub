@@ -17,7 +17,7 @@ from .llm_defaults import default_use_llm_relabel, gemini_available
 from .overrides import apply_chapter_overrides, overrides_digest
 from .ref import build_read_edition
 from .ref_schema import REF_PARSER_VERSION, validate_edition
-from .serialize import blocks_to_markdown
+from .serialize import blocks_to_markdown, translation_source_from_blocks
 from .toc import trim_trailing_wrap_toc
 from .ref_qa import qa_read_edition
 from .read_edition_steps import (
@@ -571,32 +571,81 @@ def qa_all_chapters(
     }
 
 
-def chapters_for_translation(work_id: str, *, corpus: Path | None = None) -> list[dict[str, str | int]]:
-    """Chapter plain texts from macro structure (step 1 boundaries)."""
+def _chapter_label(section: dict[str, Any], used: dict[str, int]) -> str:
+    raw_label = str(section.get("title") or section["section_id"]).strip()
+    label = re.sub(r"[^A-Za-z0-9]", "", raw_label)[:16] or section["section_id"].replace("sec-", "")
+    count = used.get(label, 0) + 1
+    used[label] = count
+    return label if count == 1 else f"{label[:12]}{count}"
+
+
+def parsed_chapter_source(chapter: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
+    """Visible parsed text (matcher + Final Touch) plus the block graph."""
+    blocks = list(chapter.get("blocks") or [])
+    text = translation_source_from_blocks(blocks)
+    if not text:
+        text = str(chapter.get("reading_markdown") or "").strip()
+    return text, blocks
+
+
+def chapters_for_translation(
+    work_id: str,
+    *,
+    corpus: Path | None = None,
+    include_front_matter: bool = False,
+    require_parsed: bool = False,
+) -> list[dict[str, Any]]:
+    """Chapter texts for translation.
+
+    Prefer parsed ``reading_markdown`` / blocks (sidenotes hidden, genealogy
+    split, wrap reflowed). Fall back to a Gutenberg slice by macro offsets
+    when a chapter has not been micro-parsed yet.
+    """
     root = corpus or corpus_root()
-    text, meta, _work = resolve_stripped_source(work_id, corpus=root)
-    package_dir = package_root(work_id, str(meta["content_hash"]), corpus=root)
+    try:
+        package_dir, _meta, _work = package_dir_for_work(work_id, corpus=root)
+    except ReadEditionStepError as exc:
+        raise ReadEditionError(str(exc)) from exc
     structure = load_structure(package_dir)
     if not structure:
         raise ReadEditionError("Run macro step before translation sync")
     used: dict[str, int] = {}
-    out: list[dict[str, str | int]] = []
+    out: list[dict[str, Any]] = []
+    stripped_text: str | None = None
     for section in structure.get("sections") or []:
-        if section.get("kind") == "front_matter":
+        if section.get("kind") == "front_matter" and not include_front_matter:
             continue
-        slice_text = trim_trailing_wrap_toc(section_source_slice(text, section))
-        raw_label = str(section.get("title") or section["section_id"]).strip()
-        label = re.sub(r"[^A-Za-z0-9]", "", raw_label)[:16] or section["section_id"].replace("sec-", "")
-        count = used.get(label, 0) + 1
-        used[label] = count
-        chapter_label = label if count == 1 else f"{label[:12]}{count}"
+        chapter_label = _chapter_label(section, used)
+        parsed: dict[str, Any] | None = None
+        try:
+            parsed = load_chapter(package_dir, section["section_id"])
+        except (ReadEditionError, FileNotFoundError, OSError):
+            parsed = None
+        blocks: list[dict[str, Any]] = []
+        source_kind = "raw_slice"
+        if parsed:
+            text, blocks = parsed_chapter_source(parsed)
+            if text:
+                source_kind = "parsed"
+        if source_kind != "parsed":
+            if require_parsed:
+                raise ReadEditionError(
+                    f"{section['section_id']} not parsed — run micro parse before translation sync"
+                )
+            if stripped_text is None:
+                stripped_text, _, _ = resolve_stripped_source(work_id, corpus=root)
+            text = trim_trailing_wrap_toc(section_source_slice(stripped_text, section))
+            blocks = []
+            source_kind = "raw_slice"
         out.append(
             {
                 "chapter": chapter_label,
                 "title": section.get("title"),
-                "text": slice_text,
-                "words": _word_count(slice_text),
+                "text": text,
+                "words": _word_count(text),
                 "ref_chapter_id": section["section_id"],
+                "source_kind": source_kind,
+                "blocks": blocks,
             }
         )
     return out

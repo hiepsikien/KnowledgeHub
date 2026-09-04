@@ -1,8 +1,8 @@
 {
   "id": "bach--abdy_williams--chpreface",
   "chapter": "Preface",
-  "words": 397,
-  "source_text": "Preface\n\nThe position of Johann Sebastian Bach as one of a numerous family\nof musicians is unique. Of no other composer can it be said that\nhis forefathers, contemporary relations, and descendants were all\nmusicians, and not only musicians, but holders of very important\noffices as such. All his biographers have therefore given some account\nof his family antecedents before proceeding to the history of his\nlife; and I have found myself obliged to follow the same course.\nIn other respects I have adopted the plan made use of by the older\nbiographers, of keeping the account of his life distinct from that of\nhis compositions.\n\nEvery biography is necessarily based on that written by his two sons,\nfour years after his death, published by Mizler, and the one published\nin 1802 by Forkel, who was intimate with the sons. Hilgenfeldt’s\naccount follows these, and in later years further information has been\nacquired from the searches into archives, and other ancient documents,\nby C. H. Bitter and Philipp Spitta. Any details concerning the life\nand works of this remarkable man are interesting; and it is probable\nthat researches will be continued for some time to come. Thus, last\nyear (1898) a “celebration” took place at Ohrdruf in memory of Bach’s\nschool career there; and Dr Friedrich Thomas took the opportunity of\npublishing some details of the Bach family which had escaped Spitta.\n\nThe name of Bach is reverenced by Thuringian organists, and I this\nyear had interesting conversations with his successors at Arnstadt and\nMühlhausen, Herr Kellermann and Herr Möller. But the chief music-seller\nat Arnstadt told me that “Bach’s music is out of date; no one has now\nany interest in such old-fashioned compositions.”\n\nThe two recent important accounts of Bach’s life are those of C. H.\nBitter, 1865, 2 vols.; second edition 1880, 4 vols.; and Philipp\nSpitta, 2 vols, a translation of which by Mrs Clara Bell and Mr\nFuller-Maitland was published by Messrs Novello in 1884. With regard\nto the last, I have to thank Messrs Novello for kindly allowing me the\nuse of the book at a time when it was out of print. I understand that a\nsecond edition has since been published.\n\nReferences to Spitta apply to the first edition of the translation; all\nothers to the original German.\n\n  C. F. ABDY WILLIAMS.\n\n  BRADFIELD,\n  _December 1899_.",
+  "words": 396,
+  "source_text": "The position of Johann Sebastian Bach as one of a numerous family of musicians is unique. Of no other composer can it be said that his forefathers, contemporary relations, and descendants were all musicians, and not only musicians, but holders of very important offices as such. All his biographers have therefore given some account of his family antecedents before proceeding to the history of his life; and I have found myself obliged to follow the same course. In other respects I have adopted the plan made use of by the older biographers, of keeping the account of his life distinct from that of his compositions.\n\nEvery biography is necessarily based on that written by his two sons, four years after his death, published by Mizler, and the one published in 1802 by Forkel, who was intimate with the sons. Hilgenfeldt’s account follows these, and in later years further information has been acquired from the searches into archives, and other ancient documents, by C. H. Bitter and Philipp Spitta. Any details concerning the life and works of this remarkable man are interesting; and it is probable that researches will be continued for some time to come. Thus, last year (1898) a “celebration” took place at Ohrdruf in memory of Bach’s school career there; and Dr Friedrich Thomas took the opportunity of publishing some details of the Bach family which had escaped Spitta.\n\nThe name of Bach is reverenced by Thuringian organists, and I this year had interesting conversations with his successors at Arnstadt and Mühlhausen, Herr Kellermann and Herr Möller. But the chief music-seller at Arnstadt told me that “Bach’s music is out of date; no one has now any interest in such old-fashioned compositions.”\n\nThe two recent important accounts of Bach’s life are those of C. H. Bitter, 1865, 2 vols.; second edition 1880, 4 vols.; and Philipp Spitta, 2 vols, a translation of which by Mrs Clara Bell and Mr Fuller-Maitland was published by Messrs Novello in 1884. With regard to the last, I have to thank Messrs Novello for kindly allowing me the use of the book at a time when it was out of print. I understand that a second edition has since been published.\n\nReferences to Spitta apply to the first edition of the translation; all others to the original German.\n\nC. F. ABDY WILLIAMS. BRADFIELD,\n\n> _December 1899_.",
   "drafts": {
     "tight": null,
     "normal": null,
@@ -12,5 +12,89 @@
   "status": "pending",
   "ref_chapter_id": "sec-001",
   "ref_title": "Preface",
-  "title_vi": "Lời nói đầu"
+  "title_vi": "Lời nói đầu",
+  "source_text_kind": "parsed",
+  "ref_blocks": [
+    {
+      "block_id": "sec-001:heading:preface",
+      "type": "heading",
+      "hidden": false,
+      "text": "Preface",
+      "suppress_in_reader": true,
+      "level": 2
+    },
+    {
+      "block_id": "sec-001:paragraph:the-position-of-johann-sebastian-bach-as-one-of-",
+      "type": "paragraph",
+      "hidden": false,
+      "text": "The position of Johann Sebastian Bach as one of a numerous family of musicians is unique. Of no other composer can it be said that his forefathers, contemporary relations, and descendants were all musicians, and not only musicians, but holders of very important offices as such. All his biographers have therefore given some account of his family antecedents before proceeding to the history of his life; and I have found myself obliged to follow the same course. In other respects I have adopted the plan made use of by the older biographers, of keeping the account of his life distinct from that of his compositions."
+    },
+    {
+      "block_id": "sec-001:paragraph:every-biography-is-necessarily-based-on-that-wri",
+      "type": "paragraph",
+      "hidden": false,
+      "text": "Every biography is necessarily based on that written by his two sons, four years after his death, published by Mizler, and the one published in 1802 by Forkel, who was intimate with the sons. Hilgenfeldt’s account follows these, and in later years further information has been acquired from the searches into archives, and other ancient documents, by C. H. Bitter and Philipp Spitta. Any details concerning the life and works of this remarkable man are interesting; and it is probable that researches will be continued for some time to come. Thus, last year (1898) a “celebration” took place at Ohrdruf in memory of Bach’s school career there; and Dr Friedrich Thomas took the opportunity of publishing some details of the Bach family which had escaped Spitta.",
+      "spans": [
+        {
+          "start": 558,
+          "end": 564,
+          "style": "paren_aside",
+          "text": "(1898)"
+        },
+        {
+          "start": 567,
+          "end": 580,
+          "style": "quote",
+          "text": "“celebration”"
+        }
+      ]
+    },
+    {
+      "block_id": "sec-001:paragraph:the-name-of-bach-is-reverenced-by-thuringian-org",
+      "type": "paragraph",
+      "hidden": false,
+      "text": "The name of Bach is reverenced by Thuringian organists, and I this year had interesting conversations with his successors at Arnstadt and Mühlhausen, Herr Kellermann and Herr Möller. But the chief music-seller at Arnstadt told me that “Bach’s music is out of date; no one has now any interest in such old-fashioned compositions.”",
+      "spans": [
+        {
+          "start": 235,
+          "end": 329,
+          "style": "quote",
+          "text": "“Bach’s music is out of date; no one has now any interest in such old-fashioned compositions.”"
+        }
+      ]
+    },
+    {
+      "block_id": "sec-001:paragraph:the-two-recent-important-accounts-of-bach-s-life",
+      "type": "paragraph",
+      "hidden": false,
+      "text": "The two recent important accounts of Bach’s life are those of C. H. Bitter, 1865, 2 vols.; second edition 1880, 4 vols.; and Philipp Spitta, 2 vols, a translation of which by Mrs Clara Bell and Mr Fuller-Maitland was published by Messrs Novello in 1884. With regard to the last, I have to thank Messrs Novello for kindly allowing me the use of the book at a time when it was out of print. I understand that a second edition has since been published."
+    },
+    {
+      "block_id": "sec-001:paragraph:references-to-spitta-apply-to-the-first-edition-",
+      "type": "paragraph",
+      "hidden": false,
+      "text": "References to Spitta apply to the first edition of the translation; all others to the original German."
+    },
+    {
+      "block_id": "sec-001:heading:c-f-abdy-williams-bradfield",
+      "type": "heading",
+      "hidden": false,
+      "text": "C. F. ABDY WILLIAMS. BRADFIELD,",
+      "level": 2
+    },
+    {
+      "block_id": "sec-001:blockquote:december-1899",
+      "type": "blockquote",
+      "hidden": false,
+      "text": "_December 1899_.",
+      "spans": [
+        {
+          "start": 0,
+          "end": 15,
+          "style": "em",
+          "text": "_December 1899_"
+        }
+      ]
+    }
+  ]
 }

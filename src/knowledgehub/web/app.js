@@ -1568,15 +1568,22 @@ async function syncTranslationRefChapters() {
   const workId = state.translation.projectId;
   if (!workId) return;
   const overwrite = confirm(
-    "Tách lại segments theo REF split_hints?\nCần overwrite=true nếu đã có segment — bản dịch cũ sẽ mất.",
+    "Lấy lại source từ chương đã parse (chế bản: sidenote ẩn, gia phả tách dòng, wrap đã nối)?\n\n"
+      + "Chương đã duyệt (status = approved) giữ nguyên bản dịch.\n"
+      + "Chương chưa duyệt sẽ xoá nháp và ghi source mới.",
   );
   if (!overwrite) return;
+  const enqueue = confirm("Xếp hàng dịch lại các chương chưa duyệt?");
   try {
     const result = await api(`/api/translations/${encodeURIComponent(workId)}/sync-ref-chapters`, {
       method: "POST",
-      body: { overwrite: true },
+      body: { overwrite: true, keep_approved: true, enqueue },
     });
-    toast(`Đã sync ${result.segments_written} segments từ REF`);
+    const rewritten = (result.rewritten || []).length;
+    const kept = (result.kept_approved || []).length;
+    toast(
+      `Source chế bản: ${result.parsed || 0} chương đã parse · ghi lại ${rewritten} · giữ ${kept} đã duyệt`,
+    );
     await loadTranslationDesk(workId, null);
   } catch (err) {
     toast(err.message);

@@ -48,6 +48,30 @@ def blocks_to_markdown(blocks: list[dict[str, Any]]) -> str:
     return "\n\n".join(parts).strip()
 
 
+def translation_source_from_blocks(blocks: list[dict[str, Any]]) -> str:
+    """Reader-visible parsed text for the draft LLM (hidden sidenotes omitted)."""
+    parts: list[str] = []
+    for block in reader_visible_blocks(blocks):
+        kind = block.get("type")
+        text = str(block.get("text") or "").strip()
+        if kind == "hr":
+            parts.append("---")
+            continue
+        if kind == "blockquote" and text:
+            parts.append("> " + text)
+            continue
+        if kind == "dialogue":
+            speaker = block.get("speaker") or ""
+            parts.append(f"{speaker}. {text}" if speaker and text else text)
+            continue
+        if kind == "stage_direction" and text:
+            parts.append(f"[{text.strip('[]')}]" if not text.startswith("[") else text)
+            continue
+        if text:
+            parts.append(text)
+    return "\n\n".join(parts).strip()
+
+
 def split_hints_from_blocks(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
     hints: list[dict[str, Any]] = []
     for index, block in enumerate(blocks):

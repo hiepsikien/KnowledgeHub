@@ -247,6 +247,8 @@ class ReadEditionHitlConfirmBody(BaseModel):
 class SyncRefChaptersBody(BaseModel):
     overwrite: bool = False
     include_front_matter: bool = False
+    keep_approved: bool = True
+    enqueue: bool = False
 
 
 def _ops_secret() -> str:
@@ -711,6 +713,8 @@ def create_app() -> FastAPI:
                 source_work_id,
                 overwrite=body.overwrite,
                 include_front_matter=body.include_front_matter,
+                keep_approved=body.keep_approved,
+                enqueue=body.enqueue,
             )
         except FileNotFoundError as exc:
             raise HTTPException(404, str(exc)) from exc
