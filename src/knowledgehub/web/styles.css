@@ -34,10 +34,21 @@ a { color: var(--accent); }
   border-right: 1px solid var(--line);
   background: rgba(255, 253, 248, 0.72);
 }
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4px;
+  text-decoration: none;
+  color: inherit;
+}
+.brand-lockup:hover .brand span { color: #5f2424; }
+.brand-icon { flex: 0 0 auto; display: block; }
 .brand {
   font-family: var(--serif);
   font-size: 22px;
-  margin: 0 0 4px;
+  margin: 0;
+  line-height: 1.1;
 }
 .brand span { color: var(--accent); }
 .tagline { color: var(--muted); font-size: 13px; margin: 0 0 28px; }
